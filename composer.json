@@ -1,0 +1,35 @@
+{
+  "name": "geminilabs/site-reviews",
+  "type": "wordpress-plugin",
+  "description": "Receive and display site reviews",
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "reviews"
+  ],
+  "license": "GPLv3",
+  "authors": [
+    {
+      "name": "Paul Ryley",
+      "email": "paul@geminilabs.io"
+    }
+  ],
+  "archive": {
+    "exclude": [
+      "/tests",
+      "/.*"
+    ]
+  },
+  "config": {
+    "preferred-install": "dist"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "php": ">=5.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "5.5.*",
+    "sinergi/browser-detector": "^6.0"
+  }
+}

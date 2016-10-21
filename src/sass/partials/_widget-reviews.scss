@@ -1,0 +1,64 @@
+[id^=geminilabs-site-reviews].widget {
+	ul.glsr-reviews {
+		list-style: none;
+		margin-left: 0;
+	}
+
+	.glsr-review-title {
+		margin-bottom: 1em;
+	}
+
+	p {
+		margin-bottom: 1em;
+	}
+}
+
+.glsr-reviews-wrap {}
+
+.glsr-review {
+	margin-bottom: 2em;
+
+	a {}
+	p {
+		margin: 0;
+	}
+	&-author {}
+	&-date {
+		font-style: italic;
+	}
+	&-excerpt {}
+	&-meta {
+		> span:not(:last-child) {
+			margin-right: 0.5em;
+		}
+	}
+	&-link {
+		white-space: nowrap;
+	}
+	&-rating {}
+	&-title {}
+}
+
+.glsr-star {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	font-size: 16px;
+	vertical-align: text-top;
+	background-repeat: no-repeat;
+	background-size: 16px;
+
+	&.star-empty {
+		// PNG fallback
+		// background: url(fallback.png);
+		// background-image: url(image.svg), none;
+		background-image: url(../img/star-empty.svg);
+	}
+	&.star-full {
+		background-image: url(../img/star-filled.svg);
+	}
+	&.star-half {
+		background-image: url(../img/star-half.svg);
+	}
+}
+

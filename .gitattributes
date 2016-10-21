@@ -1,0 +1,10 @@
+*       text=auto
+/.*     export-ignore
+/*.js   export-ignore
+/*.json export-ignore
+/*.lock export-ignore
+/*.log  export-ignore
+/*.md   export-ignore
+/*.xml  export-ignore
+/src    export-ignore
+/tests  export-ignore

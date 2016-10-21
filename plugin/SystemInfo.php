@@ -1,0 +1,455 @@
+<?php
+
+/**
+ * @package   GeminiLabs\SiteReviews
+ * @copyright Copyright (c) 2016, Paul Ryley
+ * @license   GPLv2 or later
+ * @since     1.0.0
+ * -------------------------------------------------------------------------------------------------
+ */
+
+namespace GeminiLabs\SiteReviews;
+
+use GeminiLabs\SiteReviews\App;
+use Sinergi\BrowserDetector\Browser;
+
+class SystemInfo
+{
+	/**
+	 * @var int
+	 */
+	public $pad = 30;
+
+	/**
+	 * @var App
+	 */
+	protected $app;
+
+	/**
+	 * @var array
+	 */
+	protected $sysinfo = [];
+
+	public function __construct( App $app )
+	{
+		$this->app = $app;
+	}
+
+	/**
+	 * Downloads the system info as a text file
+	 *
+	 * @param string $system_info
+	 *
+	 * @return void
+	 */
+	public function download( $system_info )
+	{
+		if( !current_user_can( 'install_plugins' ) )return;
+
+		nocache_headers();
+
+		header( 'Content-Type: text/plain' );
+		header( 'Content-Disposition: attachment; filename="system-info.txt"' );
+
+		echo wp_strip_all_tags( $system_info );
+
+		exit;
+	}
+
+	/**
+	 * Get all system info
+	 *
+	 * @return string
+	 */
+	public function getAll()
+	{
+		return trim(
+			$this->getPlugin() .
+			$this->getBrowser() .
+			$this->getWebserver() .
+			$this->getPHPConfig() .
+			$this->getPHPExtensions() .
+			$this->getWordpress() .
+			$this->getWordpressMuplugins() .
+			$this->getWordpressPlugins() .
+			$this->getWordpressMultisitePlugins()
+		);
+	}
+
+	/**
+	 * Get browser info
+	 *
+	 * @param string $title
+	 *
+	 * @return string
+	 */
+	public function getBrowser( $title = 'Browser Details' )
+	{
+		if( !$this->title( $title ) )return;
+
+		$browser = new Browser;
+		$userAgent = $browser->getUserAgent();
+
+		$this->sysinfo[ $title ]['Browser Name'] = sprintf( '%s v%s', $browser->getName(), $browser->getVersion() );
+		$this->sysinfo[ $title ]['Browser UA'] = $userAgent->getUserAgentString();
+
+		return $this->implode( $title );
+	}
+
+	/**
+	 * Get plugin info
+	 *
+	 * @param string $title
+	 *
+	 * @return string
+	 */
+	public function getPlugin( $title = 'Plugin Details' )
+	{
+		if( !$this->title( $title ) )return;
+
+		$this->sysinfo[ $title ]['Current version'] = $this->app->version;
+		$this->sysinfo[ $title ]['Previous version'] = 'None';
+
+		return $this->implode( $title );
+	}
+
+	/**
+	 * Get WordPress configuration info
+	 *
+	 * @param string $title
+	 *
+	 * @return string
+	 */
+	public function getWordpress( $title = 'WordPress Configuration' )
+	{
+		if( !$this->title( $title ) )return;
+
+		global $wpdb;
+
+		$theme    = wp_get_theme();
+		$response = wp_remote_post( 'https://api.wordpress.org/stats/php/1.0/' );
+
+		$wp_prefix_status = strlen( $wpdb->prefix ) > 16 ? 'ERROR: Too long' : 'Acceptable';
+
+		$wp_remote_post = !is_wp_error( $response )
+			&& $response['response']['code'] >= 200
+			&& $response['response']['code'] < 300;
+
+		$this->sysinfo[ $title ]['Active Theme'] = sprintf( '%s v%s', $theme->Name, $theme->Version );
+		// $this->sysinfo[ $title ]['Admin AJAX'] = this->testAjax() ? 'Accessible' : 'Inaccessible';
+		$this->sysinfo[ $title ]['Home URL'] = home_url();
+		$this->sysinfo[ $title ]['Language'] = ( defined( 'WPLANG' ) && WPLANG ) ? WPLANG : 'en_US';
+		$this->sysinfo[ $title ]['Memory Limit'] = WP_MEMORY_LIMIT;
+		$this->sysinfo[ $title ]['Multisite'] = is_multisite() ? 'Yes' : 'No';
+		$this->sysinfo[ $title ]['Page For Posts ID'] = get_option( 'page_for_posts' );
+		$this->sysinfo[ $title ]['Page On Front ID'] = get_option( 'page_on_front' );
+		$this->sysinfo[ $title ]['Permalink Structure'] = get_option( 'permalink_structure', 'Default' );
+		$this->sysinfo[ $title ]['Post Stati'] = implode( ', ', get_post_stati() );
+		$this->sysinfo[ $title ]['Remote Post'] = $wp_remote_post ? 'Works' : 'Does not work';
+		$this->sysinfo[ $title ]['Show On Front'] = get_option( 'show_on_front' );
+		$this->sysinfo[ $title ]['Site URL'] = site_url();
+		$this->sysinfo[ $title ]['Table Prefix'] = sprintf( '%s (%d)', $wp_prefix_status, strlen( $wpdb->prefix ) );
+		$this->sysinfo[ $title ]['Timezone'] = get_option( 'timezone_string' );
+		$this->sysinfo[ $title ]['Version'] = get_bloginfo( 'version' );
+		$this->sysinfo[ $title ]['WP Debug'] = defined( 'WP_DEBUG' ) ? WP_DEBUG ? 'Enabled' : 'Disabled' : 'Not set';
+		$this->sysinfo[ $title ]['WP Max Upload Size'] = size_format( wp_max_upload_size() );
+		$this->sysinfo[ $title ]['WP Memory Limit'] = WP_MEMORY_LIMIT;
+
+		return $this->implode( $title );
+	}
+
+	/**
+	 * Get all active WordPress multisite plugins
+	 *
+	 * @param string $title
+	 *
+	 * @return string
+	 */
+	public function getWordpressMultisitePlugins( $title = 'Network Active Plugins' )
+	{
+		if( !is_multisite() )return;
+
+		$active = get_site_option( 'active_sitewide_plugins', [] );
+
+		if( !$this->title( $title ) || !count( $active ) )return;
+
+		$plugins = wp_get_active_network_plugins();
+
+		foreach( $plugins as $plugin_path ) {
+
+			if( !in_array( plugin_basename( $plugin_path ), $active ) )continue;
+
+			$plugin = get_plugin_data( $plugin_path );
+
+			$this->sysinfo[ $title ][] = sprintf( '%s v%s', $plugin['Name'], $plugin['Version'] );
+		}
+
+		return $this->implode( $title );
+	}
+
+	/**
+	 * Get all WordPress mu-plugins
+	 *
+	 * @param string $title
+	 *
+	 * @return string
+	 */
+	public function getWordpressMuplugins( $title = 'Must-Use Plugins' )
+	{
+		$auto_plugins = get_plugins( '/../' . basename( WPMU_PLUGIN_DIR ) );
+		$mu_plugins   = get_mu_plugins();
+
+        $plugins = $this->formatPlugins( array_merge( $mu_plugins, $auto_plugins ) );
+
+		if( !$this->title( $title ) || !count( $plugins ) )return;
+
+		$pad = max( array_map( 'strlen', $plugins ) );
+
+		foreach( $plugins as $path => $plugin ) {
+			$this->sysinfo[ $title ][] = sprintf( '%s : %s', $this->pad( $plugin, $pad ), $path );
+		}
+
+		return $this->implode( $title );
+	}
+
+	/**
+	 * Get all active/inactive WordPress plugins
+	 *
+	 * @param string $active_title
+	 * @param string $inactive_title
+	 *
+	 * @return string
+	 */
+	public function getWordpressPlugins( $active_title = 'Active Plugins', $inactive_title = 'Inactive Plugins' )
+	{
+		$plugins = get_plugins();
+
+		if( !count( $plugins ) )return;
+
+		$active_plugins = get_option( 'active_plugins', [] );
+
+		$inactive = $this->formatPlugins( array_diff_key( $plugins, array_flip( $active_plugins ) ) );
+		$active   = $this->formatPlugins( array_diff_key( $plugins, $inactive ) );
+
+		if( !!count( $active ) && $this->title( $active_title ) ) {
+			$pad = max( array_map( 'strlen', $active ) );
+			foreach( $active as $path => $plugin ) {
+				$this->sysinfo[ $active_title ][] = sprintf( '%s : %s', $this->pad( $plugin, $pad ), $path );
+			}
+		}
+
+		if( !!count( $inactive ) && $this->title( $inactive_title ) ) {
+			$pad = max( array_map( 'strlen', $inactive ) );
+			foreach( $inactive as $path => $plugin ) {
+				$this->sysinfo[ $inactive_title ][] = sprintf( '%s : %s', $this->pad( $plugin, $pad ), $path );
+			}
+		}
+
+		return $this->implode( $active_title ) . $this->implode( $inactive_title );
+	}
+
+	/**
+	 * Get the webhost/webserver info
+	 *
+	 * @param string $title
+	 *
+	 * @return string
+	 */
+	public function getWebserver( $title = 'Server configuration' )
+	{
+		if( !$this->title( $title ) )return;
+
+		global $wpdb;
+
+		$server_ip = filter_input( INPUT_SERVER, 'SERVER_ADDR' );
+
+		$this->sysinfo[ $title ]['Host Name'] = sprintf( '%s (%s)', $this->webhost(), gethostbyaddr( $server_ip ) );
+		$this->sysinfo[ $title ]['MySQL Version'] = $wpdb->db_version();
+		$this->sysinfo[ $title ]['PHP Version'] = PHP_VERSION;
+		$this->sysinfo[ $title ]['Server Info'] = filter_input( INPUT_SERVER, 'SERVER_SOFTWARE' );
+		$this->sysinfo[ $title ]['Server IP Address'] = $server_ip;
+
+		return $this->implode( $title );
+	}
+
+	/**
+	 * Get the PHP config
+	 *
+	 * @param string $title
+	 *
+	 * @return string
+	 */
+	public function getPHPConfig( $title = 'PHP Configuration' )
+	{
+		if( !$this->title( $title ) )return;
+
+		$this->sysinfo[ $title ]['Display Errors'] = ini_get( 'display_errors' ) ? 'On (' . ini_get( 'display_errors' ) . ')' : 'N/A';
+		$this->sysinfo[ $title ]['Max Execution Time'] = ini_get( 'max_execution_time' );
+		$this->sysinfo[ $title ]['Max Input Nesting Level'] = ini_get( 'max_input_nesting_level' );
+		$this->sysinfo[ $title ]['Max Input Vars'] = ini_get( 'max_input_vars' );
+		$this->sysinfo[ $title ]['Memory Limit'] = ini_get( 'memory_limit' );
+		$this->sysinfo[ $title ]['Post Max Size'] = ini_get( 'post_max_size' );
+		$this->sysinfo[ $title ]['Session Cookie Path'] = esc_html( ini_get( 'session.cookie_path' ) );
+		$this->sysinfo[ $title ]['Session Name'] = esc_html( ini_get( 'session.name' ) );
+		$this->sysinfo[ $title ]['Session Save Path'] = esc_html( ini_get( 'session.save_path' ) );
+		$this->sysinfo[ $title ]['Session Use Cookies'] = ini_get( 'session.use_cookies' ) ? 'On' : 'Off';
+		$this->sysinfo[ $title ]['Session Use Only Cookies'] = ini_get( 'session.use_only_cookies' ) ? 'On' : 'Off';
+		$this->sysinfo[ $title ]['Upload Max Filesize'] = ini_get( 'upload_max_filesize' );
+
+		return $this->implode( $title );
+	}
+
+	/**
+	 * Get the status of required PHP extensions
+	 *
+	 * @param string $title
+	 *
+	 * @return string
+	 */
+	public function getPHPExtensions( $title = 'PHP Extensions' )
+	{
+		if( !$this->title( $title ) )return;
+
+		$this->sysinfo[ $title ]['cURL'] = function_exists( 'curl_init' ) ? 'Supported' : 'Not Supported';
+		$this->sysinfo[ $title ]['fsockopen'] = function_exists( 'fsockopen' ) ? 'Supported' : 'Not Supported';
+		$this->sysinfo[ $title ]['SOAP Client'] = class_exists( 'SoapClient' ) ? 'Installed' : 'Not Installed';
+		$this->sysinfo[ $title ]['Suhosin'] = extension_loaded( 'suhosin' ) ? 'Installed' : 'Not Installed';
+
+		return $this->implode( $title );
+	}
+
+	/**
+	 * Formats an array of plugins to [path] => [name version] and sort by value
+	 *
+	 * @param array $plugins
+	 *
+	 * @return array
+	 */
+	protected function formatPlugins( array $plugins )
+	{
+		$plugins = array_map( function( $plugin ) {
+			return sprintf( '%s v%s', $plugin['Name'], $plugin['Version'] );
+		}, $plugins );
+
+		natcasesort( $plugins );
+
+		return $plugins;
+	}
+
+	/**
+	 * Generates a string from a system info section array
+	 *
+	 * @param string $section
+	 *
+	 * @return string
+	 */
+	protected function implode( $section )
+	{
+		if( !isset( $this->sysinfo[ $section ] ) )return;
+
+		$strings[] = sprintf( "[%s]", strtoupper( $section ) );
+
+		foreach( $this->sysinfo[ $section ] as $key => $value ) {
+			if( is_int( $key ) ) {
+				$strings[] = " - {$value}";
+				continue;
+			}
+
+			$strings[] = sprintf( "%s : %s", $this->pad( $key ), $value );
+		}
+
+		return implode( PHP_EOL, $strings ) . PHP_EOL . PHP_EOL;
+	}
+
+	/**
+	 * Pad a string with periods to the required length
+	 *
+	 * @param string   $string
+	 * @param int|null $pad
+	 * @param string   $char
+	 *
+	 * @return string
+	 */
+	protected function pad( $string, $pad = null, $char = '.' )
+	{
+		$pad = $pad ?: $this->pad;
+
+		if( strlen( $string ) === $pad ) {
+			return $string;
+		}
+
+		return str_pad( "{$string} ", $pad, $char );
+	}
+
+	/**
+	 * Get the info title
+	 *
+	 * @param string $title
+	 *
+	 * @return void
+	 */
+	protected function title( $title )
+	{
+		if( !$title ) {
+			return false;
+		}
+
+		$this->sysinfo[ strtoupper( $title ) ] = [];
+
+		return true;
+	}
+
+	/**
+	 * Get the webhost name
+	 *
+	 * @return void
+	 */
+	protected function webhost()
+	{
+		$server_name = filter_input( INPUT_SERVER, 'SERVER_NAME' );
+
+		$uname = php_uname();
+
+		if( defined( 'WPE_APIKEY' ) ) {
+			$host = 'WP Engine';
+		} elseif( defined( 'PAGELYBIN' ) ) {
+			$host = 'Pagely';
+		} elseif( DB_HOST == 'localhost:/tmp/mysql5.sock' ) {
+			$host = 'ICDSoft';
+		} elseif( DB_HOST == 'mysqlv5' ) {
+			$host = 'NetworkSolutions';
+		} elseif( strpos( DB_HOST, 'ipagemysql.com' ) !== false ) {
+			$host = 'iPage';
+		} elseif( strpos( DB_HOST, 'ipowermysql.com' ) !== false ) {
+			$host = 'IPower';
+		} elseif( strpos( DB_HOST, '.gridserver.com' ) !== false ) {
+			$host = 'MediaTemple Grid';
+		} elseif( strpos( DB_HOST, '.pair.com' ) !== false ) {
+			$host = 'pair Networks';
+		} elseif( strpos( DB_HOST, '.stabletransit.com' ) !== false ) {
+			$host = 'Rackspace Cloud';
+		} elseif( strpos( DB_HOST, '.sysfix.eu' ) !== false ) {
+			$host = 'SysFix.eu Power Hosting';
+		} elseif( strpos( $server_name, 'Flywheel' ) !== false ) {
+			$host = 'Flywheel';
+		} elseif( filter_input( INPUT_SERVER, 'DH_USER' ) ) {
+			$host = 'DreamHost';
+		} elseif( strpos( $uname, 'bluehost.com' ) !== false ) {
+			$host = 'Bluehost';
+		} elseif( strpos( $uname, 'secureserver.net') !== false ) {
+			$host = 'GoDaddy';
+		} elseif( strpos( $uname, '.inmotionhosting.com') !== false ) {
+			$host = 'InMotion Hosting';
+		} elseif( strpos( $uname, '.ovh.net') !== false ) {
+			$host = 'OVH';
+		} elseif( strpos( $uname, '.accountservergroup.com ') !== false ) {
+			$host = 'Site5';
+		} elseif( strpos( $uname, '.stratoserver.net ') !== false ) {
+			$host = 'STRATO';
+		} else {
+			$host = sprintf( '%s, %s', DB_HOST, $server_name );
+		}
+
+		return $host;
+	}
+}

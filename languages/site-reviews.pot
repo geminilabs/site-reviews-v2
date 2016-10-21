@@ -1,0 +1,794 @@
+# Copyright (C) 2016 site-reviews
+# This file is distributed under the same license as the site-reviews package.
+msgid ""
+msgstr ""
+"Project-Id-Version: site-reviews\n"
+"Report-Msgid-Bugs-To: https://github.com/geminilabs/site-reviews/issues/new\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Paul Ryley <paul@geminilabs.io>\n"
+"Language-Team: Gemini Labs <support@geminilabs.io>\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: activate.php:36
+msgid "The Site Reviews plugin was deactivated."
+msgstr ""
+
+#: activate.php:39
+msgid "Sorry, this plugin requires PHP version 5.4 or greater in order to work properly."
+msgstr ""
+
+#: activate.php:40
+msgid "Please contact your hosting provider or server administrator to upgrade the version of PHP on your server (your server is running PHP version %s), or try to find an alternative plugin."
+msgstr ""
+
+#: activate.php:46
+msgid "Sorry, this plugin requires WordPress version 4.0.0 or greater in order to work properly."
+msgstr ""
+
+#: activate.php:47
+msgid "Update WordPress"
+msgstr ""
+
+#: plugin/Commands/RegisterPostType.php:20, plugin/Widgets/RecentReviews.php:43, plugin/Widgets/ReviewsForm.php:40
+msgid "Title"
+msgstr ""
+
+#: plugin/Commands/RegisterPostType.php:21, views/edit/meta.php:46
+msgid "Date"
+msgstr ""
+
+#: plugin/Controllers/AjaxController.php:26
+msgid "Log is empty"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:51
+msgid "Log was cleared."
+msgstr ""
+
+#: plugin/Controllers/MainController.php:87, plugin/Controllers/MainController.php:291, plugin/Controllers/MainController.php:419
+msgid "Settings"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:106
+msgid "%s Review"
+msgid_plural "%s Reviews"
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugin/Controllers/MainController.php:156
+msgid "Details"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:170
+msgid "Pin Your Reviews"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:171
+msgid "You can pin exceptional reviews so that they are always shown first in your widgets and shortcodes."
+msgstr ""
+
+#: plugin/Controllers/MainController.php:193
+msgid "Review"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:194, views/menu/status.php:17
+msgid "Reviews"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:195
+msgid "Site Reviews"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:203, views/edit/meta.php:50
+msgid "Reviewer"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:204, views/edit/meta.php:42
+msgid "Type"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:205, views/edit/meta.php:38
+msgid "Rating"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:206, views/edit/pinned.php:17
+msgid "Pinned"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:229
+msgid "Approve this review"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:231, plugin/Handlers/SubmitReview.php:94
+msgid "Approve"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:234
+msgid "Unapprove this review"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:236
+msgid "Unapprove"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:292
+msgid "Get Help"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:293, plugin/Controllers/MainController.php:347
+msgid "Add-Ons"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:325
+msgid "Submit a Site Review"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:326
+msgid "A \"submit a review\" form for your site."
+msgstr ""
+
+#: plugin/Controllers/MainController.php:330
+msgid "Recent Site Reviews"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:331
+msgid "Your site’s most recent Local Reviews."
+msgstr ""
+
+#: plugin/Controllers/MainController.php:367
+msgid "Documentation"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:370
+msgid "System Info"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:422
+msgid "Licenses"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:438
+msgid "Logging enabled."
+msgstr ""
+
+#: plugin/Controllers/MainController.php:439
+msgid "Logging disabled."
+msgstr ""
+
+#: plugin/Controllers/MainController.php:455
+msgid "Settings updated."
+msgstr ""
+
+#: plugin/Controllers/ReviewController.php:48
+msgid "Anonymous"
+msgstr ""
+
+#: plugin/Controllers/ReviewController.php:50
+msgid "No Title"
+msgstr ""
+
+#: plugin/Controllers/ReviewController.php:54
+msgid "Please fix the submission errors."
+msgstr ""
+
+#: plugin/Handlers/RegisterPostType.php:298
+msgid "%s review updated."
+msgid_plural "%s posts updated."
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugin/Handlers/RegisterPostType.php:299
+msgid "%s review not updated, somebody is editing it."
+msgid_plural "%s reviews not updated, somebody is editing them."
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugin/Handlers/RegisterPostType.php:300
+msgid "%s review permanently deleted."
+msgid_plural "%s reviews permanently deleted."
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugin/Handlers/RegisterPostType.php:301
+msgid "%s review moved to the Trash."
+msgid_plural "%s reviews moved to the Trash."
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugin/Handlers/RegisterPostType.php:302
+msgid "%s review restored from the Trash."
+msgid_plural "%s reviews restored from the Trash."
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugin/Handlers/RegisterPostType.php:589
+msgid "%s star"
+msgid_plural "%s stars"
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugin/Handlers/RegisterPostType.php:593
+msgid "All ratings"
+msgstr ""
+
+#: plugin/Handlers/RegisterPostType.php:611
+msgid "All types"
+msgstr ""
+
+#: plugin/Handlers/RegisterPostType.php:614, views/edit/meta.php:7
+msgid "Local Review"
+msgstr ""
+
+#: plugin/Handlers/SubmitReview.php:64
+msgid "Your review has been submitted!"
+msgstr ""
+
+#: plugin/Handlers/SubmitReview.php:95
+msgid "Discard"
+msgstr ""
+
+#: plugin/Handlers/SubmitReview.php:125
+msgid "New %s-Star Review"
+msgstr ""
+
+#: plugin/Handlers/TogglePinned.php:40
+msgid "The review is pinned."
+msgstr ""
+
+#: plugin/Handlers/TogglePinned.php:41
+msgid "The review is unpinned."
+msgstr ""
+
+#: plugin/Html/Fields/Colorpicker.php:40
+msgid "Hex Value"
+msgstr ""
+
+#: plugin/Html/Fields/Progress.php:37
+msgid "Please wait..."
+msgstr ""
+
+#: plugin/Html/Fields/Progress.php:38
+msgid "Inactive"
+msgstr ""
+
+#: plugin/Html/Fields/Yesno.php:25, views/edit/pinned.php:13
+msgid "No"
+msgstr ""
+
+#: plugin/Html/Fields/Yesno.php:26, views/edit/pinned.php:14
+msgid "Yes"
+msgstr ""
+
+#: plugin/Html/Form.php:119
+msgid "Submit"
+msgstr ""
+
+#: plugin/Html/Partials/Addon.php:38
+msgid "More Info"
+msgstr ""
+
+#: plugin/Html/Partials/Reviews.php:68
+msgid "No reviews were found."
+msgstr ""
+
+#: plugin/Html/Partials/Reviews.php:156
+msgid "read more"
+msgstr ""
+
+#: plugin/Settings.php:113, plugin/Settings.php:181
+msgid "Save Settings"
+msgstr ""
+
+#: plugin/Settings.php:121
+msgid "Require approval"
+msgstr ""
+
+#: plugin/Settings.php:123
+msgid "Set the status of new review submissions to pending."
+msgstr ""
+
+#: plugin/Settings.php:129
+msgid "Require login"
+msgstr ""
+
+#: plugin/Settings.php:130
+msgid "Only allow review submissions from registered users."
+msgstr ""
+
+#: plugin/Settings.php:136
+msgid "Notifications"
+msgstr ""
+
+#: plugin/Settings.php:138
+msgid "Do not send review notifications"
+msgstr ""
+
+#: plugin/Settings.php:139
+msgid "Send to administrator <code>%s</code>"
+msgstr ""
+
+#: plugin/Settings.php:140
+msgid "Send to one or more custom emails"
+msgstr ""
+
+#: plugin/Settings.php:147
+msgid "Send notification emails to"
+msgstr ""
+
+#: plugin/Settings.php:151
+msgid "Separate multiple emails with a comma"
+msgstr ""
+
+#: plugin/Settings.php:157
+msgid "Notification template"
+msgstr ""
+
+#: plugin/Settings.php:186
+msgid "Form Labels"
+msgstr ""
+
+#: plugin/Settings.php:187
+msgid "Customize the label text for the review submission form fields"
+msgstr ""
+
+#: plugin/Settings.php:193
+msgid "Rating label"
+msgstr ""
+
+#: plugin/Settings.php:194
+msgid "Your overall rating"
+msgstr ""
+
+#: plugin/Settings.php:201
+msgid "Title label"
+msgstr ""
+
+#: plugin/Settings.php:202
+msgid "Title of your review"
+msgstr ""
+
+#: plugin/Settings.php:209
+msgid "Content label"
+msgstr ""
+
+#: plugin/Settings.php:210
+msgid "Your review"
+msgstr ""
+
+#: plugin/Settings.php:217
+msgid "Reviewer label"
+msgstr ""
+
+#: plugin/Settings.php:218
+msgid "Your name"
+msgstr ""
+
+#: plugin/Settings.php:225
+msgid "Email label"
+msgstr ""
+
+#: plugin/Settings.php:226
+msgid "Your email"
+msgstr ""
+
+#: plugin/Settings.php:233
+msgid "Terms label"
+msgstr ""
+
+#: plugin/Settings.php:234
+msgid "I certify that this review is based on my own experience and is my genuine opinion, and that I have no personal or business relationship with the owners or administrators of this website, and have not been offered any incentive or payment to write this review."
+msgstr ""
+
+#: plugin/Settings.php:240
+msgid "Form Placeholders"
+msgstr ""
+
+#: plugin/Settings.php:241
+msgid "Customize the placeholder text for the review submission form fields"
+msgstr ""
+
+#: plugin/Settings.php:248
+msgid "Title placeholder"
+msgstr ""
+
+#: plugin/Settings.php:249
+msgid "Summarize your review or highlight an interesting detail"
+msgstr ""
+
+#: plugin/Settings.php:257
+msgid "Content placeholder"
+msgstr ""
+
+#: plugin/Settings.php:258
+msgid "Tell people your review"
+msgstr ""
+
+#: plugin/Settings.php:266
+msgid "Reviewer placeholder"
+msgstr ""
+
+#: plugin/Settings.php:267
+msgid "Tell us your name"
+msgstr ""
+
+#: plugin/Settings.php:275
+msgid "Email placeholder"
+msgstr ""
+
+#: plugin/Settings.php:276
+msgid "Tell us your email"
+msgstr ""
+
+#: plugin/Shortcodes/SiteReviewsForm.php:28, plugin/Widgets/ReviewsForm.php:125
+msgid "You must be <a href=\"%s\">logged in</a> to submit a review."
+msgstr ""
+
+#: plugin/Strings.php:18
+msgid "Add New Review"
+msgstr ""
+
+#: plugin/Strings.php:19
+msgid "All Reviews"
+msgstr ""
+
+#: plugin/Strings.php:20
+msgid "Review Archives"
+msgstr ""
+
+#: plugin/Strings.php:21
+msgid "Edit Review"
+msgstr ""
+
+#: plugin/Strings.php:22
+msgid "Insert into review"
+msgstr ""
+
+#: plugin/Strings.php:23
+msgid "New Review"
+msgstr ""
+
+#: plugin/Strings.php:24
+msgid "No Reviews found"
+msgstr ""
+
+#: plugin/Strings.php:25
+msgid "No Reviews found in Trash"
+msgstr ""
+
+#: plugin/Strings.php:26
+msgid "Search Reviews"
+msgstr ""
+
+#: plugin/Strings.php:27
+msgid "Uploaded to this review"
+msgstr ""
+
+#: plugin/Strings.php:28
+msgid "View Review"
+msgstr ""
+
+#: plugin/Strings.php:35
+msgid "Review has been approved and published."
+msgstr ""
+
+#: plugin/Strings.php:36
+msgid "Review draft updated."
+msgstr ""
+
+#: plugin/Strings.php:37
+msgid "Preview review"
+msgstr ""
+
+#: plugin/Strings.php:38
+msgid "Review published."
+msgstr ""
+
+#: plugin/Strings.php:39
+msgid "Review restored to revision from %s."
+msgstr ""
+
+#: plugin/Strings.php:40
+msgid "Review has been reverted to its original submission state."
+msgstr ""
+
+#: plugin/Strings.php:41
+msgid "Review saved."
+msgstr ""
+
+#: plugin/Strings.php:42
+msgid "Review scheduled for: %s."
+msgstr ""
+
+#: plugin/Strings.php:43
+msgid "Review submitted."
+msgstr ""
+
+#: plugin/Strings.php:44
+msgid "Review has been unapproved and is now pending."
+msgstr ""
+
+#: plugin/Strings.php:45
+msgid "Review updated."
+msgstr ""
+
+#: plugin/Strings.php:46
+msgid "View review"
+msgstr ""
+
+#: plugin/Strings.php:53
+msgctxt ":attribute is a placeholder and should not be translated."
+msgid "The :attribute must be accepted."
+msgstr ""
+
+#: plugin/Strings.php:54
+msgctxt ":attribute, :min, and :max are placeholders and should not be translated."
+msgid "The :attribute must be between :min and :max."
+msgstr ""
+
+#: plugin/Strings.php:55
+msgctxt ":attribute, :min, and :max are placeholders and should not be translated."
+msgid "The :attribute must be between :min and :max characters."
+msgstr ""
+
+#: plugin/Strings.php:56
+msgctxt ":attribute is a placeholder and should not be translated."
+msgid "The :attribute must be a valid email address."
+msgstr ""
+
+#: plugin/Strings.php:57
+msgctxt ":attribute and :max are placeholders and should not be translated."
+msgid "The :attribute may not be greater than :max."
+msgstr ""
+
+#: plugin/Strings.php:58
+msgctxt ":attribute and :max are placeholders and should not be translated."
+msgid "The :attribute may not be greater than :max characters."
+msgstr ""
+
+#: plugin/Strings.php:59
+msgctxt ":attribute and :min are placeholders and should not be translated."
+msgid "The :attribute must be at least :min."
+msgstr ""
+
+#: plugin/Strings.php:60
+msgctxt ":attribute and :min are placeholders and should not be translated."
+msgid "The :attribute must be at least :min characters."
+msgstr ""
+
+#: plugin/Strings.php:61
+msgctxt ":attribute is a placeholder and should not be translated."
+msgid "The :attribute format is invalid."
+msgstr ""
+
+#: plugin/Strings.php:62
+msgctxt ":attribute is a placeholder and should not be translated."
+msgid "The :attribute field is required."
+msgstr ""
+
+#: plugin/Widgets/RecentReviews.php:53
+msgid "Display only title"
+msgstr ""
+
+#: plugin/Widgets/RecentReviews.php:54
+msgid "Display only excerpt"
+msgstr ""
+
+#: plugin/Widgets/RecentReviews.php:55
+msgid "Display title and excerpt"
+msgstr ""
+
+#: plugin/Widgets/RecentReviews.php:62
+msgid "What is the minimum rating to display? "
+msgstr ""
+
+#: plugin/Widgets/RecentReviews.php:65
+msgid "5 stars"
+msgstr ""
+
+#: plugin/Widgets/RecentReviews.php:66
+msgid "4 stars"
+msgstr ""
+
+#: plugin/Widgets/RecentReviews.php:67
+msgid "3 stars"
+msgstr ""
+
+#: plugin/Widgets/RecentReviews.php:68
+msgid "2 stars"
+msgstr ""
+
+#: plugin/Widgets/RecentReviews.php:69
+msgid "1 star"
+msgstr ""
+
+#: plugin/Widgets/RecentReviews.php:76
+msgid "How many reviews would you like to display? "
+msgstr ""
+
+#: plugin/Widgets/RecentReviews.php:87
+msgid "Show the name of the reviewer?"
+msgstr ""
+
+#: plugin/Widgets/RecentReviews.php:88
+msgid "Show the review date?"
+msgstr ""
+
+#: plugin/Widgets/RecentReviews.php:89
+msgid "Show the review rating?"
+msgstr ""
+
+#: plugin/Widgets/RecentReviews.php:96, plugin/Widgets/ReviewsForm.php:67
+msgid "Enter any custom CSS classes here"
+msgstr ""
+
+#: plugin/Widgets/ReviewsForm.php:48
+msgid "Description"
+msgstr ""
+
+#: plugin/Widgets/ReviewsForm.php:57
+msgid "Hide the title field"
+msgstr ""
+
+#: plugin/Widgets/ReviewsForm.php:58
+msgid "Hide the reviewer field"
+msgstr ""
+
+#: plugin/Widgets/ReviewsForm.php:59
+msgid "Hide the email field"
+msgstr ""
+
+#: plugin/Widgets/ReviewsForm.php:60
+msgid "Hide the terms field"
+msgstr ""
+
+#: views/edit/meta.php:27
+msgid "Nothing to Revert"
+msgstr ""
+
+#: views/edit/meta.php:28
+msgid "Revert Changes"
+msgstr ""
+
+#: views/edit/meta.php:54
+msgid "Avatar"
+msgstr ""
+
+#: views/edit/pinned.php:21
+msgid "Edit"
+msgstr ""
+
+#: views/edit/pinned.php:22
+msgid "Edit pinned status"
+msgstr ""
+
+#: views/edit/pinned.php:30
+msgid "Pin"
+msgstr ""
+
+#: views/edit/pinned.php:31
+msgid "Unpin"
+msgstr ""
+
+#: views/edit/pinned.php:34
+msgid "OK"
+msgstr ""
+
+#: views/edit/pinned.php:35
+msgid "Cancel"
+msgstr ""
+
+#: views/menu/addons/addons.php:3
+msgid "The following Add-Ons extend the functionality of Site Reviews."
+msgstr ""
+
+#: views/menu/addons/addons.php:12
+msgid "Sync your Tripadvisor business reviews with an optional minimum rating and display them on your site."
+msgstr ""
+
+#: views/menu/addons/addons.php:19
+msgid "Sync your Yelp business reviews with an optional minimum rating and display them on your site."
+msgstr ""
+
+#: views/menu/help/system.php:9
+msgid "Download System Info"
+msgstr ""
+
+#: views/menu/help/system.php:14
+msgid "Logging"
+msgstr ""
+
+#: views/menu/help/system.php:15
+msgid "You can enable logging for debugging purposes. Log files can grow quickly, so don't leave this on."
+msgstr ""
+
+#: views/menu/help/system.php:26
+msgid "Clear Log"
+msgstr ""
+
+#: views/menu/help/system.php:32
+msgid "Download Log"
+msgstr ""
+
+#: views/menu/help/system.php:44
+msgid "Disable Logging"
+msgstr ""
+
+#: views/menu/help/system.php:48
+msgid "Enable Logging"
+msgstr ""
+
+#: views/menu/status.php:7
+msgid "All dates and times shown here use the WordPress <a href='%s'>configured timezone</a>."
+msgstr ""
+
+#: views/menu/status.php:16
+msgid "Site"
+msgstr ""
+
+#: views/menu/status.php:18, views/menu/status.php:35
+msgid "Last fetch"
+msgstr ""
+
+#: views/menu/status.php:19, views/menu/status.php:38
+msgid "Next scheduled fetch"
+msgstr ""
+
+#: views/menu/status.php:36
+msgid "No fetch has been completed"
+msgstr ""
+
+#: views/menu/status.php:39
+msgid "Nothing currently scheduled"
+msgstr ""
+
+#: views/menu/status.php:59
+msgid "Fetch reviews from"
+msgstr ""
+
+#: views/menu/status.php:66
+msgid "Fetch status"
+msgstr ""
+
+#: views/menu/status.php:67
+msgid "Fetching reviews..."
+msgstr ""
+
+#: views/menu/status.php:79
+msgid "Fetch Reviews"
+msgstr ""
+
+#: views/submit/index.php:17
+msgid "Select a Rating"
+msgstr ""
+
+#: views/submit/index.php:18
+msgid "Excellent"
+msgstr ""
+
+#: views/submit/index.php:19
+msgid "Very Good"
+msgstr ""
+
+#: views/submit/index.php:20
+msgid "Average"
+msgstr ""
+
+#: views/submit/index.php:21
+msgid "Poor"
+msgstr ""
+
+#: views/submit/index.php:22
+msgid "Terrible"
+msgstr ""
+
+#: views/submit/index.php:121
+msgid "Submit your review"
+msgstr ""

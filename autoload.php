@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * @package   GeminiLabs\SiteReviews
+ * @copyright Copyright (c) 2016, Paul Ryley
+ * @license   GPLv2 or later
+ * @since     1.0.0
+ * -------------------------------------------------------------------------------------------------
+ */
+
+defined( 'WPINC' ) or die;
+
+/**
+ * PSR-4 autoloader
+ */
+spl_autoload_register( function( $class )
+{
+	$namespaces = [
+		'GeminiLabs\\SiteReviews\\'        => __DIR__ . '/plugin/',
+		'GeminiLabs\\SiteReviews\\Tests\\' => __DIR__ . '/tests/',
+		'Sinergi\\BrowserDetector\\'       => __DIR__ . '/vendor/sinergi/browser-detector/src/',
+	];
+
+	foreach( $namespaces as $prefix => $base_dir ) {
+
+		$len = strlen( $prefix );
+
+		if( strncmp( $prefix, $class, $len ) !== 0 )continue;
+
+		$file = $base_dir . str_replace( '\\', '/', substr( $class, $len ) ) . '.php';
+
+		if( !file_exists( $file ) )continue;
+
+		require $file;
+		break;
+	}
+});
+
+require_once( ABSPATH . WPINC . '/class-phpass.php' );
