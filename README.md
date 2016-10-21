@@ -19,7 +19,6 @@ Minimum plugin requirements:
 * Filter reviews by rating
 * Logging
 * Minimal widget styling (tested with all official WP themes)
-* Paginated reviews
-* Shortcodes! Display reviews in your post content and templates
+* Shortcodes: Display reviews in your post content and templates
 * WordPress.org support
 * WP Filter Hooks
