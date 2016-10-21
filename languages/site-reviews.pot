@@ -336,7 +336,7 @@ msgid "Form Labels"
 msgstr ""
 
 #: plugin/Settings.php:187
-msgid "Customize the label text for the review submission form fields"
+msgid "Customize the label text for the review submission form fields."
 msgstr ""
 
 #: plugin/Settings.php:193
@@ -384,7 +384,7 @@ msgid "Terms label"
 msgstr ""
 
 #: plugin/Settings.php:234
-msgid "I certify that this review is based on my own experience and is my genuine opinion, and that I have no personal or business relationship with the owners or administrators of this website, and have not been offered any incentive or payment to write this review."
+msgid "This review is based on my own experience and is my genuine opinion."
 msgstr ""
 
 #: plugin/Settings.php:240
@@ -392,7 +392,7 @@ msgid "Form Placeholders"
 msgstr ""
 
 #: plugin/Settings.php:241
-msgid "Customize the placeholder text for the review submission form fields"
+msgid "Customize the placeholder text for the review submission form fields. Use a single space character to disable the placeholder text."
 msgstr ""
 
 #: plugin/Settings.php:248
