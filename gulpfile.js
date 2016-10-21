@@ -1,6 +1,7 @@
 "use strict";
 
 var gulp            = require( 'gulp' );
+var bump            = require( 'gulp-bump' );
 var checktextdomain = require( 'gulp-checktextdomain' );
 var potomo          = require( 'gulp-potomo' );
 var pseudo          = require( 'gulp-pseudo-i18n' );
@@ -16,6 +17,7 @@ var paths  = {
 	src : 'src/',
 	dest: 'assets/',
 	npm : '../../node_modules/',
+	bump: 'site-reviews.php',
 };
 
 elixir.config.assetsPath = paths.src;
@@ -39,6 +41,9 @@ elixir(( mix ) => mix
 	.sass( 'twenty-fifteen.scss' )
 	.sass( 'twenty-sixteen.scss' )
 );
+
+/* Language Tasks
+ -------------------------------------------------- */
 
 gulp.task( 'checktextdomain', () => gulp
 	.src(['plugin/**/*.php','views/**/*.php'])
@@ -93,3 +98,24 @@ gulp.task( 'potomo', () => gulp
 );
 
 gulp.task( 'languages', () => runSequence( 'checktextdomain', 'pot', 'pseudo', 'potomo' ));
+
+/* Version Bump Tasks
+ -------------------------------------------------- */
+
+gulp.task( 'bump:patch', () => gulp
+	.src( paths.bump, { base: './' })
+	.pipe( bump())
+	.pipe( gulp.dest( './' ))
+);
+
+gulp.task( 'bump:minor', () => gulp
+	.src( paths.bump, { base: './' })
+	.pipe( bump({ type: 'minor' }))
+	.pipe( gulp.dest( './' ))
+);
+
+gulp.task( 'bump:major', () => gulp
+	.src( paths.bump, { base: './' })
+	.pipe( bump({ type: 'major' }))
+	.pipe( gulp.dest( './' ))
+);
