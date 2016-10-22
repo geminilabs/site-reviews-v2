@@ -14,8 +14,8 @@ class Bootstrap
 {
 	protected static $instance = null;
 
-	public $reviews_dir;
 	public $plugin_dir;
+	public $reviews_dir;
 	public $tests_dir;
 	public $wp_tests_dir;
 
@@ -24,9 +24,9 @@ class Bootstrap
 		ini_set( 'display_errors', 'on' );
 		error_reporting( E_ALL );
 
-		$this->tests_dir    = dirname( __FILE__ );
-		$this->plugin_dir   = dirname( $this->tests_dir );
-		$this->app_dir  = dirname( $this->plugin_dir ) . '/site-reviews';
+		$this->tests_dir = dirname( __FILE__ );
+		$this->plugin_dir = dirname( $this->tests_dir );
+		$this->app_dir = dirname( $this->plugin_dir ) . '/site-reviews';
 		$this->wp_tests_dir = $this->get_tests_dir( $_SERVER['HOME'] . '/Sites/wordpress/tests/current/' );
 
 		// load test function so tests_add_filter() is available

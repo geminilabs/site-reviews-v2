@@ -1,7 +1,12 @@
 filter:
     excluded_paths:
-        - 'vendor/*'
+        - 'assets/*'
+        - 'languages/*'
+        - 'node_modules/*'
         - 'tests/*'
+        - 'vendor/*'
+before_commands:
+    - 'composer install --dev --prefer-source --ignore-platform-reqs'
 checks:
     php: true
     javascript: true
