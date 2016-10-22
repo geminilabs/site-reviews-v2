@@ -29,7 +29,9 @@ class SiteReviews extends Shortcode
 			'title'   => '',
 		];
 
-		extract( shortcode_atts( $defaults, $atts ) );
+		$args = shortcode_atts( $defaults, $atts );
+
+		extract( $args );
 
 		$display = array_map( 'trim', explode( ',', $display ) );
 

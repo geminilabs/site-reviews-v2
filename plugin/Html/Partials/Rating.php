@@ -25,7 +25,9 @@ class Rating extends Base
 			'stars' => 5,
 		];
 
-		extract( shortcode_atts( $defaults, $this->args ) );
+		$args = shortcode_atts( $defaults, $this->args );
+
+		extract( $args );
 
 		$rating = '';
 		$star   = '<span class="glsr-star star star-%s"></span>';

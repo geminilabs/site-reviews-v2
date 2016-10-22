@@ -256,7 +256,7 @@ class Validator
 	/**
 	 * Normalize the provided data to an array.
 	 *
-	 * @param mixed $formData
+	 * @param mixed $data
 	 *
 	 * @return $this
 	 */

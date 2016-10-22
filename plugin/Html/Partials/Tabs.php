@@ -27,7 +27,9 @@ class Tabs extends Base
 			'tab'  => '',
 		];
 
-		extract( shortcode_atts( $defaults, $this->args ) );
+		$args = shortcode_atts( $defaults, $this->args );
+
+		extract( $args );
 
 		if( count( $tabs ) < 2 )return;
 

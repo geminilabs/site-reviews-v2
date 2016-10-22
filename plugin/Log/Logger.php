@@ -16,7 +16,7 @@ class Logger implements LoggerInterface
 	 * Load/Create the log file
 	 *
 	 * @param string $filename
-	 * @param string $plugin_id
+	 * @param string $prefix
 	 *
 	 * @return Logger
 	 */

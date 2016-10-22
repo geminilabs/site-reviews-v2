@@ -125,7 +125,6 @@ GLSR.onFieldChange = function()
 		}
 		catch( e ) {
 			console.error( 'JSON Error: ' + depends[i] );
-			continue;
 		}
 	}
 };
@@ -227,7 +226,6 @@ GLSR.pinned.save = function( el )
 	};
 
 	x.post( site_reviews.ajaxurl, data, function( response ) {
-		console.log( response );
 		x( '#pinned-status' ).val( !response.pinned|0 );
 		x( '#hidden-pinned-status' ).val( response.pinned|0 );
 		x( '#pinned-status-text' ).text( response.pinned ? el.data( 'yes' ) : el.data( 'no' ) );

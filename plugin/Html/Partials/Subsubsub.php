@@ -28,7 +28,9 @@ class Subsubsub extends Base
 			'section' => '',
 		];
 
-		extract( shortcode_atts( $defaults, $this->args ) );
+		$args = shortcode_atts( $defaults, $this->args );
+
+		extract( $args );
 
 		if( !isset( $tabs[ $tab ]['sections'] ) || count( $tabs[ $tab ]['sections'] ) < 2 )return;
 

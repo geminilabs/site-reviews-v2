@@ -26,7 +26,9 @@ class Filterby extends Base
 			'values' => [],
 		];
 
-		extract( shortcode_atts( $defaults, $this->args ) );
+		$args = shortcode_atts( $defaults, $this->args );
+
+		extract( $args );
 
 		if( !$name || empty( $values ) )return;
 

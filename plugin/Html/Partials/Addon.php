@@ -28,7 +28,9 @@ class Addon extends Base
 			'link'        => '',
 		];
 
-		extract( shortcode_atts( $defaults, $this->args ) );
+		$args = shortcode_atts( $defaults, $this->args );
+
+		extract( $args );
 
 		$addonPoster = $link
 			? sprintf( '<a href="%s" class="glsr-addon-screenshot" data-name="%s"></a>', $link, $name )
