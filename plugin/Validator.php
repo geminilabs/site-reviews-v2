@@ -262,12 +262,13 @@ class Validator
 	 */
 	protected function normalizeData( $data )
 	{
-		// If an object was provided return its public properties
+		// If an object was provided, get its public properties
 		if( is_object( $data ) ) {
-			return get_object_vars( $data );
+			$this->data = get_object_vars( $data );
 		}
-
-		$this->data = $data;
+		else {
+			$this->data = $data;
+		}
 
 		return $this;
 	}

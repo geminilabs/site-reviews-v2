@@ -257,7 +257,7 @@ class RegisterPostType
 	 */
 	public function modifyContentEditor( array $settings )
 	{
-		if( !$this->isEditLocalReviewPage() ) {
+		if( $this->isEditLocalReviewPage() !== true ) {
 			return $settings;
 		}
 
@@ -280,7 +280,7 @@ class RegisterPostType
 	 */
 	public function modifyContentEditorHtml( $html )
 	{
-		if( !$this->isEditLocalReviewPage() ) {
+		if( $this->isEditLocalReviewPage() !== true ) {
 			return $html;
 		}
 

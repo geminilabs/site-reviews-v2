@@ -79,7 +79,7 @@ class Database
 
 			$post_id = $this->getReviewPostId( $review_id );
 
-			if( $post_id ) {
+			if( !empty( $post_id ) ) {
 				wp_delete_post( $post_id, true );
 			}
 		}
@@ -265,7 +265,7 @@ class Database
 	{
 		$post_id = $this->getReviewPostId( $review_id );
 
-		if( $post_id && !$update ) {
+		if( !empty( $post_id ) && !$update ) {
 			return $post_id;
 		}
 

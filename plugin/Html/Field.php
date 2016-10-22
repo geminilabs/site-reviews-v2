@@ -324,9 +324,9 @@ class Field
 	}
 
 	/**
-	 * [getDataDepends description]
+	 * Get the [data-depends] attribute
 	 *
-	 * @return [type] [description]
+	 * @return array|null
 	 */
 	public function getDataDepends()
 	{
