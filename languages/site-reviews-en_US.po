@@ -21,37 +21,37 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: qps-ploc\n"
 
-#: activate.php:36
+#: activate.php:42
 msgid "The Site Reviews plugin was deactivated."
 msgstr "The Site Reviews plugin was deactivated."
 
-#: activate.php:39
-msgid ""
-"Sorry, this plugin requires PHP version 5.4 or greater in order to work "
-"properly."
-msgstr ""
-"Sorry, this plugin requires PHP version 5.4 or greater in order to work "
-"properly."
-
-#: activate.php:40
-msgid ""
-"Please contact your hosting provider or server administrator to upgrade the "
-"version of PHP on your server (your server is running PHP version %s), or "
-"try to find an alternative plugin."
-msgstr ""
-"Please contact your hosting provider or server administrator to upgrade the "
-"version of PHP on your server (your server is running PHP version %s), or "
-"try to find an alternative plugin."
-
-#: activate.php:46
-msgid ""
-"Sorry, this plugin requires WordPress version 4.0.0 or greater in order to "
-"work properly."
-msgstr ""
-"Sorry, this plugin requires WordPress version 4.0.0 or greater in order to "
-"work properly."
-
 #: activate.php:47
+msgid ""
+"Sorry, this plugin requires PHP version 5.4 or greater in order to work "
+"properly."
+msgstr ""
+"Sorry, this plugin requires PHP version 5.4 or greater in order to work "
+"properly."
+
+#: activate.php:48
+msgid ""
+"Please contact your hosting provider or server administrator to upgrade the "
+"version of PHP on your server (your server is running PHP version %s), or "
+"try to find an alternative plugin."
+msgstr ""
+"Please contact your hosting provider or server administrator to upgrade the "
+"version of PHP on your server (your server is running PHP version %s), or "
+"try to find an alternative plugin."
+
+#: activate.php:54
+msgid ""
+"Sorry, this plugin requires WordPress version 4.0.0 or greater in order to "
+"work properly."
+msgstr ""
+"Sorry, this plugin requires WordPress version 4.0.0 or greater in order to "
+"work properly."
+
+#: activate.php:55
 msgid "Update WordPress"
 msgstr "Update WordPress"
 
@@ -71,7 +71,7 @@ msgstr "Log is empty"
 msgid "Log was cleared."
 msgstr "Log was cleared."
 
-#: plugin/Controllers/MainController.php:87, plugin/Controllers/MainController.php:291, plugin/Controllers/MainController.php:419
+#: plugin/Controllers/MainController.php:87, plugin/Controllers/MainController.php:293, plugin/Controllers/MainController.php:421
 msgid "Settings"
 msgstr "Settings"
 
@@ -141,51 +141,51 @@ msgstr "Unapprove this review"
 msgid "Unapprove"
 msgstr "Unapprove"
 
-#: plugin/Controllers/MainController.php:292
+#: plugin/Controllers/MainController.php:294
 msgid "Get Help"
 msgstr "Get Help"
 
-#: plugin/Controllers/MainController.php:293, plugin/Controllers/MainController.php:347
+#: plugin/Controllers/MainController.php:295, plugin/Controllers/MainController.php:349
 msgid "Add-Ons"
 msgstr "Add-Ons"
 
-#: plugin/Controllers/MainController.php:325
+#: plugin/Controllers/MainController.php:327
 msgid "Submit a Site Review"
 msgstr "Submit a Site Review"
 
-#: plugin/Controllers/MainController.php:326
+#: plugin/Controllers/MainController.php:328
 msgid "A \"submit a review\" form for your site."
 msgstr "A \"submit a review\" form for your site."
 
-#: plugin/Controllers/MainController.php:330
+#: plugin/Controllers/MainController.php:332
 msgid "Recent Site Reviews"
 msgstr "Recent Site Reviews"
 
-#: plugin/Controllers/MainController.php:331
+#: plugin/Controllers/MainController.php:333
 msgid "Your site’s most recent Local Reviews."
 msgstr "Your site’s most recent Local Reviews."
 
-#: plugin/Controllers/MainController.php:367
+#: plugin/Controllers/MainController.php:369
 msgid "Documentation"
 msgstr "Documentation"
 
-#: plugin/Controllers/MainController.php:370
+#: plugin/Controllers/MainController.php:372
 msgid "System Info"
 msgstr "System Info"
 
-#: plugin/Controllers/MainController.php:422
+#: plugin/Controllers/MainController.php:424
 msgid "Licenses"
 msgstr "Licenses"
 
-#: plugin/Controllers/MainController.php:438
+#: plugin/Controllers/MainController.php:440
 msgid "Logging enabled."
 msgstr "Logging enabled."
 
-#: plugin/Controllers/MainController.php:439
+#: plugin/Controllers/MainController.php:441
 msgid "Logging disabled."
 msgstr "Logging disabled."
 
-#: plugin/Controllers/MainController.php:455
+#: plugin/Controllers/MainController.php:457
 msgid "Settings updated."
 msgstr "Settings updated."
 
@@ -231,21 +231,21 @@ msgid_plural "%s reviews restored from the Trash."
 msgstr[0] "%s review restored from the Trash."
 msgstr[1] "%s reviews restored from the Trash."
 
-#: plugin/Handlers/RegisterPostType.php:589
+#: plugin/Handlers/RegisterPostType.php:590
 msgid "%s star"
 msgid_plural "%s stars"
 msgstr[0] "%s star"
 msgstr[1] "%s stars"
 
-#: plugin/Handlers/RegisterPostType.php:593
+#: plugin/Handlers/RegisterPostType.php:594
 msgid "All ratings"
 msgstr "All ratings"
 
-#: plugin/Handlers/RegisterPostType.php:611
+#: plugin/Handlers/RegisterPostType.php:612
 msgid "All types"
 msgstr "All types"
 
-#: plugin/Handlers/RegisterPostType.php:614, views/edit/meta.php:7
+#: plugin/Handlers/RegisterPostType.php:615, views/edit/meta.php:7
 msgid "Local Review"
 msgstr "Local Review"
 
@@ -293,7 +293,7 @@ msgstr "Yes"
 msgid "Submit"
 msgstr "Submit"
 
-#: plugin/Html/Partials/Addon.php:38
+#: plugin/Html/Partials/Addon.php:40
 msgid "More Info"
 msgstr "More Info"
 
