@@ -77,6 +77,9 @@ read -p "PRESS [ENTER] TO DEPLOY BRANCH "${BRANCH:-$DEFAULT_GIT_BRANCH}
 # MOVE INTO SVN DIR
 cd $ROOT_PATH$TEMP_SVN_REPO
 
+# COPY ASSETS to SVN DIR
+cp $ROOT_PATH/src/assets/* ./assets/
+
 # UPDATE SVN
 echo "Updating SVN"
 svn update || { echo "Unable to update SVN."; exit 1; }
