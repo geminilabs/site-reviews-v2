@@ -22,9 +22,6 @@ final class App extends Container
 	public $url;
 	public $version;
 
-	/**
-	 * @param string $file
-	 */
 	public function __construct()
 	{
 		// hardcoded path to the plugin file

@@ -30,7 +30,5 @@ class Select extends Base
 			$this->implodeOptions( 'select_option' ),
 			$this->generateDescription()
 		);
-
-		return $select;
 	}
 }

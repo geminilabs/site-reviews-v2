@@ -320,8 +320,9 @@ class RegisterPostType
 
 		$strings = (new Strings)->post_updated_messages();
 
-		$restored = isset( $_GET['revision'] )
-			? sprintf( $strings['restored'], wp_post_revision_title( (int) $_GET['revision'], false ) )
+		$restored = filter_input( INPUT_GET, 'revision' );
+		$restored = $restored
+			? sprintf( $strings['restored'], wp_post_revision_title( (int) $restored, false ) )
 			: false;
 
 		$scheduled_date = date_i18n( 'M j, Y @ H:i', strtotime( $post->post_date ) );

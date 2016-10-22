@@ -42,7 +42,7 @@ class SubmitReview
 	 */
 	protected function getIpAddress()
 	{
-		$ipAddress = isset( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : null;
+		$ipAddress = filter_input( INPUT_SERVER, 'REMOTE_ADDR' );
 
 		if( $ipAddress ) {
 			$ipAddress .= ', ' . @gethostbyaddr( $ipAddress );

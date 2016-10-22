@@ -10,6 +10,7 @@
 
 namespace GeminiLabs\SiteReviews\Controllers;
 
+use Exception;
 use GeminiLabs\SiteReviews\App;
 use InvalidArgumentException;
 

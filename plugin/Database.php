@@ -210,7 +210,9 @@ class Database
 			'site_name'    => '',
 		];
 
-		extract( shortcode_atts( $defaults, $args ) );
+		$args = shortcode_atts( $defaults, $args );
+
+		extract( $args );
 
 		if( !empty( $site_name ) ) {
 			$meta_query[] = [
@@ -241,7 +243,6 @@ class Database
 	 *
 	 * @param string $path
 	 * @param mixed  $fallback
-	 * @param string $suffix
 	 *
 	 * @return mixed
 	 */
@@ -365,7 +366,7 @@ class Database
 	 * Sets the default settings
 	 *
 	 * @param bool $mergeExistingSettings
-	 * @param bool $saveSettings
+	 * @param bool $updateSettings
 	 *
 	 * @return array
 	 */
@@ -399,7 +400,7 @@ class Database
 	/**
 	 * Gets a value from an array using a dot-notation path
 	 *
-	 * @param mixed  $arr
+	 * @param mixed  $settings
 	 * @param string $path
 	 * @param mixed  $fallback
 	 *

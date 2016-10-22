@@ -237,6 +237,8 @@ class MainController extends BaseController
 			],
 		];
 
+		$newActions = [];
+
 		foreach( $atts as $key => $values ) {
 			$newActions[ $key ] = sprintf( '<a href="%s" aria-label="%s">%s</a>',
 				$values['href'],

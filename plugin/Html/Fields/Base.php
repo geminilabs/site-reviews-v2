@@ -253,6 +253,8 @@ abstract class Base
 			'value' => '',
 		];
 
+		$args = [];
+
 		$value = $this->args['options'][ $optionName ];
 
 		if( is_array( $value ) ) {

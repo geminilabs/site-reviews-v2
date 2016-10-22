@@ -42,7 +42,7 @@ class RegisterShortcodes
 				add_shortcode( $key, [ $shortcode, 'printShortcode'] );
 			}
 			catch( Exception $e ) {
-				$this->log->error( sprintf( 'Error registering shortcode. Message: %s "(%s:%s)"',
+				$this->app->make( 'Log\Logger' )->error( sprintf( 'Error registering shortcode. Message: %s "(%s:%s)"',
 					$e->getMessage(),
 					$e->getFile(),
 					$e->getLine()

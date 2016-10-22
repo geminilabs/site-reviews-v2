@@ -86,8 +86,6 @@ class Router
 			case 'post-review':
 				$this->app->make( 'Controllers\ReviewController' )->postSubmitReview( $request );
 				break;
-
-			default:break;
 		}
 	}
 
@@ -97,8 +95,8 @@ class Router
 
 		if( !$request )return;
 
-		switch( $request ) {
-			default:break;
-		}
+		// switch( $request ) {
+		// 	default:break;
+		// }
 	}
 }

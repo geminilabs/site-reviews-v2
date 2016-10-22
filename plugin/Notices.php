@@ -105,6 +105,7 @@ class Notices
 
 		// Empty $wp_settings_errors in case ajax is being used (we don't want to keep old notices)
 		$wp_settings_errors = [];
+		$notices = [];
 
 		foreach( $unique_notices as $key => $notice ) {
 			if( is_string( $notice['message'] ) ) {
@@ -120,7 +121,7 @@ class Notices
 			}
 		}
 
-		$notices = implode( '', ( isset( $notices ) ? $notices : [] ) );
+		$notices = implode( '', $notices );
 
 		if( $print ) {
 			echo $notices;

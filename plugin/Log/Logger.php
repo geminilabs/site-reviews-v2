@@ -7,6 +7,7 @@ use GeminiLabs\SiteReviews\Log\LogLevel;
 
 class Logger implements LoggerInterface
 {
+	protected $file;
 	protected $id;
 	protected $log;
 	protected $prefix;

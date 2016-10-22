@@ -131,7 +131,7 @@ GLSR.parseFormData = function( form, convert )
 		var parts = field.name.match( keyBreaker );
 
 		if( !parts.length ) {
-			parts = [ name ];
+			parts = [ field.name ];
 		}
 
 		nestData( field, data, parts );

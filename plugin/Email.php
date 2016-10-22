@@ -195,8 +195,8 @@ class Email
 	 */
 	protected function reset()
 	{
-		$this->attachments = null;
-		$this->headers = null;
+		$this->attachments = [];
+		$this->headers = [];
 		$this->message = null;
 		$this->subject = null;
 		$this->to = null;

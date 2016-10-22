@@ -25,7 +25,7 @@ class Progress extends Base
 		$args['name']  = '';
 		$args['value'] = '';
 
-		return parent::__construct( $args );
+		parent::__construct( $args );
 	}
 
 	/**
@@ -38,8 +38,9 @@ class Progress extends Base
 			'data-inactive-text' => __( 'Inactive', 'geminilabs-site-reviews' ),
 		];
 
-		$args       = $this->mergeAttributesWith( $defaults );
-		$attributes = $this->implodeAttributes( $defaults );
+		$args = $this->mergeAttributesWith( $defaults );
+
+		// $attributes = $this->implodeAttributes( $defaults );
 
 		preg_match( '/\bactive(?=$|\s)/', $args['class'], $matches );
 
