@@ -4,7 +4,7 @@ Donate link: http://geminilabs.io/donate
 Tags: reviews, site reviews, business reviews, submit reviews, widgets, shortcodes
 Requires at least: 4.0.0
 Tested up to: 4.6
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -75,5 +75,9 @@ Some themes may have very small sidebars and CSS styles that conflict or alter t
 
 == Changelog ==
 
-= 1.0.0 =
+= 1.0.2 (2016-10-24) =
+* Set widget and settings defaults
+* Fix PHP error that is thrown when settings have not yet been saved to DB
+
+= 1.0.0 (2016-10-21) =
 * Initial plugin release
