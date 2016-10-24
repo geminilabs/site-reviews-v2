@@ -6,10 +6,29 @@ filter:
         - 'tests/*'
         - 'vendor/*'
 before_commands:
-    - 'composer install --dev --prefer-source --ignore-platform-reqs'
+    - 'composer install --dev --prefer-source'
 checks:
-    php: true
-    javascript: true
+    php:
+        no_exit: false
+        no_global_keyword: false
+        use_self_instead_of_fqcn: true
+        uppercase_constants: true
+        simplify_boolean_return: true
+        prefer_while_loop_over_for_loop: true
+        check_method_contracts:
+            verify_interface_like_constraints: true
+            verify_documented_constraints: true
+            verify_parent_constraints: true
+        return_doc_comments: true
+        return_doc_comment_if_not_inferrable: true
+        encourage_single_quotes: true
+        avoid_todo_comments: true
+        avoid_perl_style_comments: true
+        avoid_multiple_statements_on_same_line: true
+        psr2_switch_declaration: false
+    javascript:
+        no_else_return: true
+        eqeqeq: true
 coding_style:
     php:
         indentation:
@@ -25,6 +44,7 @@ coding_style:
             around_operators:
                 concatenation: true
             within:
+                brackets: true
                 array_initializer: true
                 grouping: true
                 function_call: true
@@ -51,4 +71,11 @@ coding_style:
                 general: lower
             constants:
                 true_false_null: lower
-build: true
+build:
+    environment:
+        php: '5.6.16'
+    project_setup:
+        before:
+            - 'bash tests/bin/install.sh wordpress_test root "" localhost $WP_VERSION'
+            - 'bash tests/bin/travis.sh before'
+
