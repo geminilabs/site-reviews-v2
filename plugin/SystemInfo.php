@@ -136,7 +136,6 @@ class SystemInfo
 			&& $response['response']['code'] < 300;
 
 		$this->sysinfo[ $title ]['Active Theme'] = sprintf( '%s v%s', $theme->Name, $theme->Version );
-		// $this->sysinfo[ $title ]['Admin AJAX'] = this->testAjax() ? 'Accessible' : 'Inaccessible';
 		$this->sysinfo[ $title ]['Home URL'] = home_url();
 		$this->sysinfo[ $title ]['Language'] = ( defined( 'WPLANG' ) && WPLANG ) ? WPLANG : 'en_US';
 		$this->sysinfo[ $title ]['Memory Limit'] = WP_MEMORY_LIMIT;
@@ -199,17 +198,9 @@ class SystemInfo
 		$auto_plugins = get_plugins( '/../' . basename( WPMU_PLUGIN_DIR ) );
 		$mu_plugins   = get_mu_plugins();
 
-        $plugins = $this->formatPlugins( array_merge( $mu_plugins, $auto_plugins ) );
+		$plugins = $this->formatPlugins( array_merge( $mu_plugins, $auto_plugins ) );
 
-		if( !$this->title( $title ) || !count( $plugins ) )return;
-
-		$pad = max( array_map( 'strlen', $plugins ) );
-
-		foreach( $plugins as $path => $plugin ) {
-			$this->sysinfo[ $title ][] = sprintf( '%s : %s', $this->pad( $plugin, $pad ), $path );
-		}
-
-		return $this->implode( $title );
+		return $this->wordpressPlugins( $title, $plugins );
 	}
 
 	/**
@@ -231,21 +222,10 @@ class SystemInfo
 		$inactive = $this->formatPlugins( array_diff_key( $plugins, array_flip( $active_plugins ) ) );
 		$active   = $this->formatPlugins( array_diff_key( $plugins, $inactive ) );
 
-		if( !!count( $active ) && $this->title( $active_title ) ) {
-			$pad = max( array_map( 'strlen', $active ) );
-			foreach( $active as $path => $plugin ) {
-				$this->sysinfo[ $active_title ][] = sprintf( '%s : %s', $this->pad( $plugin, $pad ), $path );
-			}
-		}
+		$active_plugins   = $this->wordpressPlugins( $active_title, $active );
+		$inactive_plugins = $this->wordpressPlugins( $inactive_title, $inactive );
 
-		if( !!count( $inactive ) && $this->title( $inactive_title ) ) {
-			$pad = max( array_map( 'strlen', $inactive ) );
-			foreach( $inactive as $path => $plugin ) {
-				$this->sysinfo[ $inactive_title ][] = sprintf( '%s : %s', $this->pad( $plugin, $pad ), $path );
-			}
-		}
-
-		return $this->implode( $active_title ) . $this->implode( $inactive_title );
+		return $active_plugins . $inactive_plugins;
 	}
 
 	/**
@@ -451,5 +431,25 @@ class SystemInfo
 		}
 
 		return $host;
+	}
+
+	/**
+	 * Format an array of passed WordPress plugins
+	 *
+	 * @param string $title
+	 *
+	 * @return string|null
+	 */
+	protected function wordpressPlugins( $title, array $plugins )
+	{
+		if( !count( $plugins ) || !$this->title( $title ) )return;
+
+		$pad = max( array_map( 'strlen', $plugins ) );
+
+		foreach( $plugins as $path => $plugin ) {
+			$this->sysinfo[ $title ][] = sprintf( '%s : %s', $this->pad( $plugin, $pad ), $path );
+		}
+
+		return $this->implode( $title );
 	}
 }

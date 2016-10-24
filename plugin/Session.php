@@ -259,19 +259,23 @@ class Session
 			"LIMIT 0, %d", absint( $limit )
 		));
 
+		if( empty( $sessions ) ) {
+			return 0;
+		}
+
 		$now = time();
 		$expired = [];
 		$count = 0;
 
 		foreach( $sessions as $session ) {
-			if( $now > $session->expiry ) {
-				$session_id = addslashes( substr( $session->name, 20 ) );
+			if( $now <= $session->expiry )continue;
 
-				$expired[] = $session->name;
-				$expired[] = "{$this->prefix}_{$session_id}";
+			$session_id = addslashes( substr( $session->name, 20 ) );
 
-				$count++;
-			}
+			$expired[] = $session->name;
+			$expired[] = "{$this->prefix}_{$session_id}";
+
+			$count++;
 		}
 
 		// Delete expired sessions

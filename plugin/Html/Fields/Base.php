@@ -172,7 +172,7 @@ abstract class Base
 	/**
 	 * Normalize attributes for this specific field type
 	 *
-	 * @param array $defaults
+	 * @param bool|string $implode
 	 *
 	 * @return array
 	 */
