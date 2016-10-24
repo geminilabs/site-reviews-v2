@@ -27,7 +27,7 @@ class ReviewsForm extends Widget
 	{
 		$defaults = [
 			'class'       => '',
-			'description' => '',
+			'description' => sprintf( __( 'Your email address will not be published. Required fields are marked %s*%s', 'geminilabs-site-reviews' ), '<span>', '</span>' ),
 			'fields'      => [],
 			'title'       => '',
 		];

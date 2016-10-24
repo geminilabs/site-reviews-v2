@@ -31,9 +31,13 @@ class RecentReviews extends Widget
 			'max_reviews' => 5,
 			'min_rating'  => '',
 			'order_by'    => '',
-			'show'        => [],
+			'show'        => ['show_author', 'show_date', 'show_rating'],
 			'title'       => '',
 		];
+
+		if( !empty( $instance ) ) {
+			isset( $instance['show'] ) ?: $instance['show'] = [];
+		}
 
 		$args = shortcode_atts( $defaults, $instance );
 

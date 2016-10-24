@@ -113,13 +113,11 @@ class Settings
 			'submit' => __( 'Save Settings', 'geminilabs-site-reviews' ),
 		]);
 
-		// @todo: fix setting radio defaults
-
 		$this->addSetting( $formId, [
 			'type'    => 'yesno_inline',
 			'name'    => 'general.require.approval',
 			'label'   => __( 'Require approval', 'geminilabs-site-reviews' ),
-			// 'default' => true,
+			'default' => true,
 			'desc'    => __( 'Set the status of new review submissions to pending.', 'geminilabs-site-reviews' ),
 		]);
 
@@ -134,6 +132,7 @@ class Settings
 			'type'    => 'radio',
 			'name'    => 'general.notification',
 			'label'   => __( 'Notifications', 'geminilabs-site-reviews' ),
+			'default' => 'none',
 			'options' => [
 				'none'    => __( 'Do not send review notifications', 'geminilabs-site-reviews' ),
 				'default' => sprintf( __( 'Send to administrator <code>%s</code>', 'geminilabs-site-reviews' ), get_option( 'admin_email' ) ),
