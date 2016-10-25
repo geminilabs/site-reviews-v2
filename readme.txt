@@ -12,9 +12,17 @@ Site Reviews is a WordPress plugin which allows you to easily receive and displa
 
 == Description ==
 
-Site Reviews is a WordPress plugin which allows you to easily receive and display reviews on your website or blog using easy-to-use widgets and shortcodes.
+Site Reviews is a plugin that allows your visitors to submit site reviews with a 1-5 star rating on your website, similar to the way you would on TripAdvisor or Yelp, and display them using a widget or shortcode.
 
-= Features =
+You can pin your best reviews so that they are always shown first, require approval before new review submissions are published, require visitors to be logged-in in order to write a review, send custom notifications on a new submission, and more. The plugin provides both widgets and shortcodes along with full shortcode documentation.
+
+Add-ons will be released shortly that allow you to sync your TripAdvisor and Yelp reviews in order to display them locally on your own website.
+
+The plugin roadmap includes support for custom review categories, webhook notifications, paginated reviews, allow visitors to up/down vote submitted reviews, reviewer avatars, percentage/fraction ratings, etc.
+
+The plugin can also be found on github at: https://github.com/geminilabs/site-reviews/
+
+= Current Features =
 
 * Actively developed and supported
 * Clean and easy-to-configure user interface
