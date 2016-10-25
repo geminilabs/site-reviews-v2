@@ -1,7 +1,7 @@
 === Site Reviews ===
 Contributors: geminilabs, pryley
 Donate link: http://geminilabs.io/donate
-Tags: reviews, site reviews, business reviews, submit reviews, widgets, shortcodes
+Tags: best reviews, business ratings, business reviews, curated reviews, moderated reviews, rating widget, rating, ratings shortcode, review widget, reviews login, reviews shortcode, reviews, simple reviews, site reviews, star rating, star review, submit review, testimonial, user rating, user review, user reviews, wp rating, wp review, wp testimonials
 Requires at least: 4.0.0
 Tested up to: 4.6
 Stable tag: 1.0.2
