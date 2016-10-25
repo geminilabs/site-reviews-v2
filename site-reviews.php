@@ -23,8 +23,6 @@ require_once __DIR__ . '/autoload.php';
 use GeminiLabs\SiteReviews\App;
 use GeminiLabs\SiteReviews\Providers\MainProvider;
 
-global $glsr_app;
-
 $app = App::load();
 
 $app->register( new MainProvider );
