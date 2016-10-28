@@ -14,6 +14,7 @@ use GeminiLabs\SiteReviews\Container;
 
 final class App extends Container
 {
+	public $defaults;
 	public $file;
 	public $id;
 	public $name;
@@ -35,13 +36,13 @@ final class App extends Container
 
 		$plugin = get_file_data( $file, $data, 'plugin' );
 
-		$this->id      = $plugin['id'];
-		$this->file    = $file;
-		$this->name    = $plugin['name'];
-		$this->path    = plugin_dir_path( $file );
-		$this->prefix  = str_replace( '-', '_', $plugin['id'] );
-		$this->url     = plugin_dir_url( $file );
-		$this->version = $plugin['version'];
+		$this->id       = $plugin['id'];
+		$this->file     = $file;
+		$this->name     = $plugin['name'];
+		$this->path     = plugin_dir_path( $file );
+		$this->prefix   = str_replace( '-', '_', $plugin['id'] );
+		$this->url      = plugin_dir_url( $file );
+		$this->version  = $plugin['version'];
 	}
 
 	/**
@@ -51,6 +52,8 @@ final class App extends Container
 	 */
 	public function init()
 	{
+		$this->defaults = $this->defaultSettings();
+
 		$basename = plugin_basename( $this->file );
 
 		$controller = $this->make( 'Controllers\MainController' );
@@ -128,7 +131,7 @@ final class App extends Container
 		$defaults = $this->make( 'Settings' )->getSettings();
 
 		// Allow addons to modify the default settings
-		return apply_filters( 'site-reviews/addon/defaults', $defaults );
+		$this->defaults = apply_filters( 'site-reviews/addon/defaults', $defaults );
 	}
 
 	/**

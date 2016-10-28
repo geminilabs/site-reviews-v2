@@ -138,7 +138,7 @@ class Database
 
 		// fallback to setting defaults
 		if( $suffix == 'settings' && empty( $option ) ) {
-			$defaults = $this->app->defaultSettings();
+			$defaults = $this->app->defaults;
 
 			if( isset( $defaults[ $path ] ) ) {
 				$option = $defaults[ $path ];
@@ -379,7 +379,7 @@ class Database
 		$currentSettings = $this->removeEmptyValuesFrom( $currentSettings );
 		$defaultSettings = [];
 
-		foreach( $this->app->defaultSettings() as $path => $value ) {
+		foreach( $this->app->defaults as $path => $value ) {
 			// Don't save the default selector values as they are used anyway by default.
 			if( !!$updateSettings && strpos( $path, '.selectors.' ) !== false ) {
 				$value = '';
