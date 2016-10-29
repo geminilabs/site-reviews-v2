@@ -6,6 +6,7 @@
 var x = jQuery.noConflict();
 
 var GLSR = {
+	addons: {},
 	pinned: {},
 };
 

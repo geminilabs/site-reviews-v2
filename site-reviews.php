@@ -27,7 +27,7 @@ $app = App::load();
 
 $app->register( new MainProvider );
 
-do_action( 'site-reviews/register/dependency', $app );
+do_action( 'site-reviews/addon/register', $app );
 
 register_activation_hook( __FILE__, array( $app, 'activate' ) );
 register_deactivation_hook( __FILE__, array( $app, 'deactivate' ) );

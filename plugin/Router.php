@@ -19,17 +19,28 @@ class Router
 	 */
 	protected $app;
 
+	/**
+	 * @var AjaxController
+	 */
+	protected $ajax;
+
+	protected $id;
+	protected $prefix;
+
 	public function __construct( App $app )
 	{
-		$this->app = $app;
+		$this->app    = $app;
+		$this->ajax   = $app->make( 'Controllers\AjaxController' );
+		$this->id     = $app->id;
+		$this->prefix = $app->prefix;
 	}
 
 	public function routeAjaxRequests()
 	{
 		$request = $_REQUEST['request'];
 
-		if( isset( $request[ $this->app->prefix ]['action'] ) ) {
-			$request = $request[ $this->app->prefix ];
+		if( isset( $request[ $this->prefix ]['action'] ) ) {
+			$request = $request[ $this->prefix ];
 		}
 
 		// All ajax requests are triggered by a single action hook,
@@ -42,20 +53,18 @@ class Router
 		$method   = preg_replace_callback( '/[-_](.)/', $callback, strtolower( 'ajax-' . $request['action'] ) );
 
 		// Nonce url is localized in "GeminiLabs\SiteReviews\Handlers\EnqueueAssets"
-		check_ajax_referer( "{$this->app->id}-ajax-nonce" );
-
-		$ajax = $this->app->make( 'Controllers\AjaxController' );
+		check_ajax_referer( "{$this->id}-ajax-nonce" );
 
 		$request['ajax_request'] = true;
 
-		if( is_callable([ $ajax, $method ]) ) {
+		if( is_callable([ $this->ajax, $method ]) ) {
 
 			// undo damage done by javascript: encodeURIComponent()
 			array_walk_recursive( $request, function( &$value ) {
 				$value = stripslashes( $value );
 			});
 
-			$ajax->$method( $request );
+			$this->ajax->$method( $request );
 		}
 
 		wp_die();
@@ -64,13 +73,29 @@ class Router
 	public function routePostRequests()
 	{
 		// get the request data that is prefixed with the app prefix
-		$request = filter_input( INPUT_POST, $this->app->prefix, FILTER_DEFAULT , FILTER_REQUIRE_ARRAY );
+		$request = filter_input( INPUT_POST, $this->prefix, FILTER_DEFAULT , FILTER_REQUIRE_ARRAY );
 
 		if( !isset( $request['action'] ) )return;
 
 		check_admin_referer( $request['action'] );
 
-		switch( $request['action'] ) {
+		$this->route( $request['action'] );
+	}
+
+	public function routeWebhookRequests()
+	{
+		$request = filter_input( INPUT_GET, "{$this->id}-hook" );
+
+		if( !$request )return;
+
+		// switch( $request ) {
+		// 	default:break;
+		// }
+	}
+
+	protected function route( $action )
+	{
+		switch( $action ) {
 			case 'clear-log':
 				$this->app->make( 'Controllers\MainController' )->postClearLog();
 				break;
@@ -87,16 +112,5 @@ class Router
 				$this->app->make( 'Controllers\ReviewController' )->postSubmitReview( $request );
 				break;
 		}
-	}
-
-	public function routeWebhookRequests()
-	{
-		$request = filter_input( INPUT_GET, "{$this->app->id}-hook" );
-
-		if( !$request )return;
-
-		// switch( $request ) {
-		// 	default:break;
-		// }
 	}
 }

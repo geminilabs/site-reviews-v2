@@ -10,13 +10,14 @@
 
 defined( 'WPINC' ) or die;
 
-function glsr_version_check()
-{
-	global $wp_version;
-	return [
-		'php' => version_compare( PHP_VERSION, '5.4.0', '<' ),
-		'wordpress' => version_compare( $wp_version, '4.0', '<' ),
-	];
+if( !function_exists( 'glsr_version_check' ) ) {
+	function glsr_version_check() {
+		global $wp_version;
+		return [
+			'php' => version_compare( PHP_VERSION, '5.4.0', '<' ),
+			'wordpress' => version_compare( $wp_version, '4.0', '<' ),
+		];
+	}
 }
 
 if( !function_exists( 'glsr_deactivate_plugin' ) ) {
