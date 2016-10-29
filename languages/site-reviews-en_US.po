@@ -21,20 +21,20 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: qps-ploc\n"
 
-#: activate.php:42
+#: activate.php:43
 msgid "The Site Reviews plugin was deactivated."
 msgstr "The Site Reviews plugin was deactivated."
 
-#: activate.php:47
-msgid ""
-"Sorry, this plugin requires PHP version 5.4 or greater in order to work "
-"properly."
-msgstr ""
-"Sorry, this plugin requires PHP version 5.4 or greater in order to work "
-"properly."
-
 #: activate.php:48
 msgid ""
+"Sorry, this plugin requires PHP version 5.4 or greater in order to work "
+"properly."
+msgstr ""
+"Sorry, this plugin requires PHP version 5.4 or greater in order to work "
+"properly."
+
+#: activate.php:49
+msgid ""
 "Please contact your hosting provider or server administrator to upgrade the "
 "version of PHP on your server (your server is running PHP version %s), or "
 "try to find an alternative plugin."
@@ -43,7 +43,7 @@ msgstr ""
 "version of PHP on your server (your server is running PHP version %s), or "
 "try to find an alternative plugin."
 
-#: activate.php:54
+#: activate.php:55
 msgid ""
 "Sorry, this plugin requires WordPress version 4.0.0 or greater in order to "
 "work properly."
@@ -51,11 +51,11 @@ msgstr ""
 "Sorry, this plugin requires WordPress version 4.0.0 or greater in order to "
 "work properly."
 
-#: activate.php:55
+#: activate.php:56
 msgid "Update WordPress"
 msgstr "Update WordPress"
 
-#: plugin/Commands/RegisterPostType.php:20, plugin/Widgets/RecentReviews.php:43, plugin/Widgets/ReviewsForm.php:40
+#: plugin/Commands/RegisterPostType.php:20, plugin/Widgets/RecentReviews.php:47, plugin/Widgets/ReviewsForm.php:40
 msgid "Title"
 msgstr "Title"
 
@@ -71,7 +71,7 @@ msgstr "Log is empty"
 msgid "Log was cleared."
 msgstr "Log was cleared."
 
-#: plugin/Controllers/MainController.php:87, plugin/Controllers/MainController.php:293, plugin/Controllers/MainController.php:421
+#: plugin/Controllers/MainController.php:87, plugin/Controllers/MainController.php:293, plugin/Controllers/MainController.php:444
 msgid "Settings"
 msgstr "Settings"
 
@@ -145,47 +145,47 @@ msgstr "Unapprove"
 msgid "Get Help"
 msgstr "Get Help"
 
-#: plugin/Controllers/MainController.php:295, plugin/Controllers/MainController.php:349
+#: plugin/Controllers/MainController.php:295, plugin/Controllers/MainController.php:353
 msgid "Add-Ons"
 msgstr "Add-Ons"
 
-#: plugin/Controllers/MainController.php:327
+#: plugin/Controllers/MainController.php:331
 msgid "Submit a Site Review"
 msgstr "Submit a Site Review"
 
-#: plugin/Controllers/MainController.php:328
+#: plugin/Controllers/MainController.php:332
 msgid "A \"submit a review\" form for your site."
 msgstr "A \"submit a review\" form for your site."
 
-#: plugin/Controllers/MainController.php:332
+#: plugin/Controllers/MainController.php:336
 msgid "Recent Site Reviews"
 msgstr "Recent Site Reviews"
 
-#: plugin/Controllers/MainController.php:333
+#: plugin/Controllers/MainController.php:337
 msgid "Your site’s most recent Local Reviews."
 msgstr "Your site’s most recent Local Reviews."
 
-#: plugin/Controllers/MainController.php:369
+#: plugin/Controllers/MainController.php:373
 msgid "Documentation"
 msgstr "Documentation"
 
-#: plugin/Controllers/MainController.php:372
+#: plugin/Controllers/MainController.php:376
 msgid "System Info"
 msgstr "System Info"
 
-#: plugin/Controllers/MainController.php:424
+#: plugin/Controllers/MainController.php:447
 msgid "Licenses"
 msgstr "Licenses"
 
-#: plugin/Controllers/MainController.php:440
+#: plugin/Controllers/MainController.php:463
 msgid "Logging enabled."
 msgstr "Logging enabled."
 
-#: plugin/Controllers/MainController.php:441
+#: plugin/Controllers/MainController.php:464
 msgid "Logging disabled."
 msgstr "Logging disabled."
 
-#: plugin/Controllers/MainController.php:457
+#: plugin/Controllers/MainController.php:480
 msgid "Settings updated."
 msgstr "Settings updated."
 
@@ -305,115 +305,115 @@ msgstr "No reviews were found."
 msgid "read more"
 msgstr "read more"
 
-#: plugin/Settings.php:113, plugin/Settings.php:181
+#: plugin/Settings.php:113, plugin/Settings.php:180
 msgid "Save Settings"
 msgstr "Save Settings"
 
-#: plugin/Settings.php:121
+#: plugin/Settings.php:119
 msgid "Require approval"
 msgstr "Require approval"
 
-#: plugin/Settings.php:123
+#: plugin/Settings.php:121
 msgid "Set the status of new review submissions to pending."
 msgstr "Set the status of new review submissions to pending."
 
-#: plugin/Settings.php:129
+#: plugin/Settings.php:127
 msgid "Require login"
 msgstr "Require login"
 
-#: plugin/Settings.php:130
+#: plugin/Settings.php:128
 msgid "Only allow review submissions from registered users."
 msgstr "Only allow review submissions from registered users."
 
-#: plugin/Settings.php:136
+#: plugin/Settings.php:134
 msgid "Notifications"
 msgstr "Notifications"
 
-#: plugin/Settings.php:138
+#: plugin/Settings.php:137
 msgid "Do not send review notifications"
 msgstr "Do not send review notifications"
 
-#: plugin/Settings.php:139
+#: plugin/Settings.php:138
 msgid "Send to administrator <code>%s</code>"
 msgstr "Send to administrator <code>%s</code>"
 
-#: plugin/Settings.php:140
+#: plugin/Settings.php:139
 msgid "Send to one or more custom emails"
 msgstr "Send to one or more custom emails"
 
-#: plugin/Settings.php:147
+#: plugin/Settings.php:146
 msgid "Send notification emails to"
 msgstr "Send notification emails to"
 
-#: plugin/Settings.php:151
+#: plugin/Settings.php:150
 msgid "Separate multiple emails with a comma"
 msgstr "Separate multiple emails with a comma"
 
-#: plugin/Settings.php:157
+#: plugin/Settings.php:156
 msgid "Notification template"
 msgstr "Notification template"
 
-#: plugin/Settings.php:186
+#: plugin/Settings.php:185
 msgid "Form Labels"
 msgstr "Form Labels"
 
-#: plugin/Settings.php:187
+#: plugin/Settings.php:186
 msgid "Customize the label text for the review submission form fields."
 msgstr "Customize the label text for the review submission form fields."
 
-#: plugin/Settings.php:193
+#: plugin/Settings.php:192
 msgid "Rating label"
 msgstr "Rating label"
 
-#: plugin/Settings.php:194
+#: plugin/Settings.php:193
 msgid "Your overall rating"
 msgstr "Your overall rating"
 
-#: plugin/Settings.php:201
+#: plugin/Settings.php:200
 msgid "Title label"
 msgstr "Title label"
 
-#: plugin/Settings.php:202
+#: plugin/Settings.php:201
 msgid "Title of your review"
 msgstr "Title of your review"
 
-#: plugin/Settings.php:209
+#: plugin/Settings.php:208
 msgid "Content label"
 msgstr "Content label"
 
-#: plugin/Settings.php:210
+#: plugin/Settings.php:209
 msgid "Your review"
 msgstr "Your review"
 
-#: plugin/Settings.php:217
+#: plugin/Settings.php:216
 msgid "Reviewer label"
 msgstr "Reviewer label"
 
-#: plugin/Settings.php:218
+#: plugin/Settings.php:217
 msgid "Your name"
 msgstr "Your name"
 
-#: plugin/Settings.php:225
+#: plugin/Settings.php:224
 msgid "Email label"
 msgstr "Email label"
 
-#: plugin/Settings.php:226
+#: plugin/Settings.php:225
 msgid "Your email"
 msgstr "Your email"
 
-#: plugin/Settings.php:233
+#: plugin/Settings.php:232
 msgid "Terms label"
 msgstr "Terms label"
 
-#: plugin/Settings.php:234
+#: plugin/Settings.php:233
 msgid "This review is based on my own experience and is my genuine opinion."
 msgstr "This review is based on my own experience and is my genuine opinion."
 
-#: plugin/Settings.php:240
+#: plugin/Settings.php:239
 msgid "Form Placeholders"
 msgstr "Form Placeholders"
 
-#: plugin/Settings.php:241
+#: plugin/Settings.php:240
 msgid ""
 "Customize the placeholder text for the review submission form fields. Use a "
 "single space character to disable the placeholder text."
@@ -421,35 +421,35 @@ msgstr ""
 "Customize the placeholder text for the review submission form fields. Use a "
 "single space character to disable the placeholder text."
 
-#: plugin/Settings.php:248
+#: plugin/Settings.php:247
 msgid "Title placeholder"
 msgstr "Title placeholder"
 
-#: plugin/Settings.php:249
+#: plugin/Settings.php:248
 msgid "Summarize your review or highlight an interesting detail"
 msgstr "Summarize your review or highlight an interesting detail"
 
-#: plugin/Settings.php:257
+#: plugin/Settings.php:256
 msgid "Content placeholder"
 msgstr "Content placeholder"
 
-#: plugin/Settings.php:258
+#: plugin/Settings.php:257
 msgid "Tell people your review"
 msgstr "Tell people your review"
 
-#: plugin/Settings.php:266
+#: plugin/Settings.php:265
 msgid "Reviewer placeholder"
 msgstr "Reviewer placeholder"
 
-#: plugin/Settings.php:267
+#: plugin/Settings.php:266
 msgid "Tell us your name"
 msgstr "Tell us your name"
 
-#: plugin/Settings.php:275
+#: plugin/Settings.php:274
 msgid "Email placeholder"
 msgstr "Email placeholder"
 
-#: plugin/Settings.php:276
+#: plugin/Settings.php:275
 msgid "Tell us your email"
 msgstr "Tell us your email"
 
@@ -549,61 +549,65 @@ msgstr "Review updated."
 msgid "View review"
 msgstr "View review"
 
-#: plugin/Widgets/RecentReviews.php:53
+#: plugin/Widgets/RecentReviews.php:57
 msgid "Display only title"
 msgstr "Display only title"
 
-#: plugin/Widgets/RecentReviews.php:54
+#: plugin/Widgets/RecentReviews.php:58
 msgid "Display only excerpt"
 msgstr "Display only excerpt"
 
-#: plugin/Widgets/RecentReviews.php:55
+#: plugin/Widgets/RecentReviews.php:59
 msgid "Display title and excerpt"
 msgstr "Display title and excerpt"
 
-#: plugin/Widgets/RecentReviews.php:62
+#: plugin/Widgets/RecentReviews.php:66
 msgid "What is the minimum rating to display? "
 msgstr "What is the minimum rating to display? "
 
-#: plugin/Widgets/RecentReviews.php:65
+#: plugin/Widgets/RecentReviews.php:69
 msgid "5 stars"
 msgstr "5 stars"
 
-#: plugin/Widgets/RecentReviews.php:66
+#: plugin/Widgets/RecentReviews.php:70
 msgid "4 stars"
 msgstr "4 stars"
 
-#: plugin/Widgets/RecentReviews.php:67
+#: plugin/Widgets/RecentReviews.php:71
 msgid "3 stars"
 msgstr "3 stars"
 
-#: plugin/Widgets/RecentReviews.php:68
+#: plugin/Widgets/RecentReviews.php:72
 msgid "2 stars"
 msgstr "2 stars"
 
-#: plugin/Widgets/RecentReviews.php:69
+#: plugin/Widgets/RecentReviews.php:73
 msgid "1 star"
 msgstr "1 star"
 
-#: plugin/Widgets/RecentReviews.php:76
+#: plugin/Widgets/RecentReviews.php:80
 msgid "How many reviews would you like to display? "
 msgstr "How many reviews would you like to display? "
 
-#: plugin/Widgets/RecentReviews.php:87
+#: plugin/Widgets/RecentReviews.php:91
 msgid "Show the name of the reviewer?"
 msgstr "Show the name of the reviewer?"
 
-#: plugin/Widgets/RecentReviews.php:88
+#: plugin/Widgets/RecentReviews.php:92
 msgid "Show the review date?"
 msgstr "Show the review date?"
 
-#: plugin/Widgets/RecentReviews.php:89
+#: plugin/Widgets/RecentReviews.php:93
 msgid "Show the review rating?"
 msgstr "Show the review rating?"
 
-#: plugin/Widgets/RecentReviews.php:96, plugin/Widgets/ReviewsForm.php:67
+#: plugin/Widgets/RecentReviews.php:100, plugin/Widgets/ReviewsForm.php:67
 msgid "Enter any custom CSS classes here"
 msgstr "Enter any custom CSS classes here"
+
+#: plugin/Widgets/ReviewsForm.php:30
+msgid "Your email address will not be published. Required fields are marked %s*%s"
+msgstr "Your email address will not be published. Required fields are marked %s*%s"
 
 #: plugin/Widgets/ReviewsForm.php:48
 msgid "Description"
