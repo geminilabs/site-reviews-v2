@@ -446,7 +446,7 @@ class MainController extends BaseController
 			],
 			'licenses' => __( 'Licenses', 'geminilabs-site-reviews' ),
 		],[
-			'settings' => $this->app->defaults,
+			'settings' => $this->app->getDefaults(),
 		]);
 	}
 

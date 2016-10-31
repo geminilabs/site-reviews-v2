@@ -52,8 +52,6 @@ final class App extends Container
 	 */
 	public function init()
 	{
-		$this->defaults = $this->defaultSettings();
-
 		$basename = plugin_basename( $this->file );
 
 		$controller = $this->make( 'Controllers\MainController' );
@@ -74,8 +72,8 @@ final class App extends Container
 		add_action( 'post_submitbox_misc_actions',           [ $controller, 'renderMetaBoxPinned'] );
 		add_action( "wp_ajax_{$this->prefix}_action",        [ $router, 'routeAjaxRequests'] );
 		add_action( "wp_ajax_nopriv_{$this->prefix}_action", [ $router, 'routeAjaxRequests'] );
-		add_action( 'init',                                  [ $router, 'routePostRequests'] );
-		add_action( 'init',                                  [ $router, 'routeWebhookRequests'] );
+		add_action( 'admin_init',                            [ $router, 'routePostRequests'] );
+		add_action( 'admin_init',                            [ $router, 'routeWebhookRequests'] );
 
 		// Filter Hooks
 		add_filter( "plugin_action_links_{$basename}", [ $controller, 'registerActionLinks'] );
@@ -126,12 +124,16 @@ final class App extends Container
 	 *
 	 * @return array
 	 */
-	public function defaultSettings()
+	public function getDefaults()
 	{
-		$defaults = $this->make( 'Settings' )->getSettings();
+		if( !$this->defaults ) {
+			$this->defaults = $this->make( 'Settings' )->getSettings();
 
-		// Allow addons to modify the default settings
-		$this->defaults = apply_filters( 'site-reviews/addon/defaults', $defaults );
+			// Allow addons to modify the default settings
+			$this->defaults = apply_filters( 'site-reviews/addon/defaults', $this->defaults );
+		}
+
+		return $this->defaults;
 	}
 
 	/**
