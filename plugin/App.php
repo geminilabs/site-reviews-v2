@@ -58,6 +58,7 @@ final class App extends Container
 		$router     = $this->make( 'Router' );
 
 		// Action Hooks
+		add_action( 'plugins_loaded',                        [ $this, 'registerAddons'] );
 		add_action( 'admin_enqueue_scripts',                 [ $controller, 'enqueueAssets'] );
 		add_action( 'wp_enqueue_scripts',                    [ $controller, 'enqueueAssets'] );
 		add_action( 'admin_menu',                            [ $controller, 'registerMenuCount'] );
@@ -134,6 +135,16 @@ final class App extends Container
 		}
 
 		return $this->defaults;
+	}
+
+	/**
+	 * Register available add-ons
+	 *
+	 * @return void
+	 */
+	public function registerAddons()
+	{
+		do_action( 'site-reviews/addon/register', $this );
 	}
 
 	/**
