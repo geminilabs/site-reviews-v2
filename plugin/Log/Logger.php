@@ -209,37 +209,25 @@ class Logger implements LoggerInterface
 	}
 
 	/**
-	 * Wrapper for print__r() plugin
-	 *
-	 * To enable method: add_filter( "{your gateway id here}_enable_print__r", '__return_true' );
+	 * Wrapper for print_r()
 	 *
 	 * @param mixed $value ...
 	 *
 	 * @return void
 	 */
-	public function display( $value )
+	public function display()
 	{
-		// if( !apply_filters( 'site-reviews/logger/display', false )
-		// 	|| ( defined( "WP_ENV" ) && WP_ENV != 'development' ) )return;
-
-		if( function_exists( 'print__r' ) ) {
-			call_user_func_array( 'print__r', func_get_args() );
-		}
-		else {
-			call_user_func_array( [ $this, 'print_r' ], func_get_args() );
-		}
+		call_user_func_array( [ $this, 'print_r' ], func_get_args() );
 	}
 
 	/**
-	 * Capture print__r() output as variable
-	 *
-	 * To enable method: add_filter( "{your gateway id here}_enable_print__r", '__return_true' );
+	 * Capture print_r() output as variable
 	 *
 	 * @param mixed $value ...
 	 *
 	 * @return void
 	 */
-	public function capture( $value )
+	public function capture()
 	{
 		ob_start();
 		call_user_func_array( [ $this, 'display' ], func_get_args() );
@@ -255,10 +243,6 @@ class Logger implements LoggerInterface
 	 */
 	public function print_r( $value )
 	{
-		// if( empty( $value ) ) {
-		// 	$value = "''";
-		// }
-
 		if( func_num_args() == 1 ) {
 			printf( '<div class="print__r"><pre>%s</pre></div>',
 				htmlspecialchars( print_r( $value, true ), ENT_QUOTES, 'UTF-8' )
