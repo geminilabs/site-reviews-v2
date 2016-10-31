@@ -318,7 +318,7 @@ class Field
 			$default = '';
 		}
 
-		return ( !empty( $value ) || $name === false || $prefix === false )
+		return ( !empty( $value ) || !$name || $prefix === false )
 			? $value
 			: $this->app->make( 'Database' )->getOption( $name, $default );
 	}
