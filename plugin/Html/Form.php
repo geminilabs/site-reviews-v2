@@ -239,9 +239,21 @@ class Form
 	 */
 	protected function generateSubmitButton()
 	{
+		$args = $this->args['submit'];
+
+		is_array( $args ) ?: $args = ['text' => $args ];
+
+		$args = shortcode_atts([
+			'text' => __( 'Save Changes', 'geminilabs-site-reviews' ),
+			'type' => 'primary',
+			'name' => 'submit',
+			'wrap' => true,
+			'other_attributes' => null,
+		], $args );
+
 		if( is_admin() ) {
 			ob_start();
-			submit_button( $this->args['submit'] );
+			submit_button( $args['text'], $args['type'], $args['name'], $args['wrap'], $args['other_attributes'] );
 			return ob_get_clean();
 		}
 	}
