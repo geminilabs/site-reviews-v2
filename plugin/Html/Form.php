@@ -186,7 +186,9 @@ class Form
 	 */
 	protected function generateFields()
 	{
-		$fields = array_reduce( $this->fields, function( $carry, $formField ) {
+		$hiddenFields = '';
+
+		$fields = array_reduce( $this->fields, function( $carry, $formField ) use ( &$hiddenFields ) {
 
 			$stringLegend    = '<legend class="screen-reader-text"><span>%s</span></legend>';
 			$stringFieldset  = '<fieldset%s>%s%s</fieldset>';
@@ -198,7 +200,13 @@ class Form
 			$label    = $field->generateLabel();
 			$rendered = $field->render();
 
-			$hidden = $this->isFieldHidden( $formField ) ? 'hidden' : '';
+			// render hidden inputs outside the table
+			if( $field->args['type'] === 'hidden' ) {
+				$hiddenFields .= $rendered;
+				return $carry;
+			}
+
+			$hiddenClass = $this->isFieldHidden( $formField ) ? 'hidden' : '';
 
 			if( $multi ) {
 				if( $depends = $formField->getDataDepends() ) {
@@ -211,12 +219,12 @@ class Form
 
 			$renderedField = $field->outside
 				? sprintf( $outsideRendered, $rendered )
-				: sprintf( $stringRendered, $hidden, $label, $rendered );
+				: sprintf( $stringRendered, $hiddenClass, $label, $rendered );
 
 			return $carry . $renderedField;
 		});
 
-		$hiddenFields = is_admin()
+		$hiddenFields .= is_admin()
 			? $this->generateAdminFields()
 			: $this->generatePublicFields();
 
