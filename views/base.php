@@ -2,6 +2,8 @@
 
 $file = trailingslashit( __DIR__ ) . "{$view}.php";
 
+$file = apply_filters( 'site-reviews/addon/views/file', $file, $view, $data );
+
 if( file_exists( $file ) ) {
 	include $file;
 }

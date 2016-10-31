@@ -21,17 +21,16 @@
 		'section' => $tabViewSection,
 	]);
 
-	$view = $tabViewSection ? "{$tabView}/{$tabViewSection}" : $tabView;
-	$view = trailingslashit( __DIR__ ) . "{$page}/{$view}.php";
+	$file = $tabViewSection ? "{$tabView}/{$tabViewSection}" : $tabView;
+	$file = trailingslashit( __DIR__ ) . "{$page}/{$file}.php";
 
-	// Allow addons to set their own section view locations
-	$view = apply_filters( 'site-reviews/addon/section/view', $view, $page, $tabView, $tabViewSection );
+	$file = apply_filters( 'site-reviews/addon/views/file', $file, $view, $data );
 
-	if( file_exists( $view ) ) {
-		include $view;
+	if( file_exists( $file ) ) {
+		include $file;
 	}
 	else {
-		$log->error( sprintf( 'File not found: %s', $view ) );
+		$log->error( sprintf( 'File not found: %s', $file ) );
 	}
 
 ?>
