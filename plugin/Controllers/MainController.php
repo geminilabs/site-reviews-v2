@@ -395,6 +395,8 @@ class MainController extends BaseController
 			'tabViewSection' => $section,
 		];
 
+		$data = apply_filters( 'site-reviews/addon/menu/data', $data, $defaults );
+
 		$this->render( "menu/index", wp_parse_args( $data, $defaults ) );
 	}
 
