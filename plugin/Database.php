@@ -134,7 +134,7 @@ class Database
 	{
 		$settings = get_option( "{$this->app->prefix}_{$suffix}", [] );
 
-		$option = $this->getDotNotation( $settings, $path, $fallback );
+		$option = $this->getDotNotationValue( $settings, $path, $fallback );
 
 		// fallback to setting defaults
 		if( $suffix == 'settings' && empty( $option ) ) {
@@ -248,9 +248,9 @@ class Database
 	 */
 	public function getSelectorOption( $path = '', $fallback = '' )
 	{
-		$settings = $this->setSettings( true, false );
+		$settings = $this->setDefaultSettings(['update' => false ]);
 
-		return $this->getDotNotation( $settings, $path, $fallback );
+		return $this->getDotNotationValue( $settings, $path, $fallback );
 	}
 
 	/**
@@ -281,7 +281,7 @@ class Database
 			'post_type'      => 'site-review',
 		];
 
-		if( $this->getOption( 'general.require.approval', false ) ) {
+		if( $this->getOption( 'general.require.approval', false ) && $meta['site_name'] == 'local' ) {
 			$post_data['post_status'] = 'pending';
 		}
 
@@ -357,7 +357,7 @@ class Database
 	{
 		$option = get_option( "{$this->app->prefix}_{$suffix}", [] );
 
-		$option = $this->setDotNotation( $path, $value, $option );
+		$option = $this->convertDotNotationPath( $path, $value, $option );
 
 		return update_option( "{$this->app->prefix}_{$suffix}", $option );
 	}
@@ -365,32 +365,39 @@ class Database
 	/**
 	 * Sets the default settings
 	 *
-	 * @param bool $mergeExistingSettings
-	 * @param bool $updateSettings
-	 *
 	 * @return array
 	 */
-	public function setSettings( $mergeExistingSettings = true, $updateSettings = true )
+	public function setDefaultSettings( array $args = [] )
 	{
-		$currentSettings = $mergeExistingSettings
+		$defaults = [
+			'data'   => null,
+			'merge'  => true,
+			'update' => true,
+		];
+
+		$args = shortcode_atts( $defaults, $args );
+
+		$currentSettings = $args['merge']
 			? get_option( "{$this->app->prefix}_settings", [] )
 			: [];
 
 		$currentSettings = $this->removeEmptyValuesFrom( $currentSettings );
 		$defaultSettings = [];
 
-		foreach( $this->app->getDefaults() as $path => $value ) {
+		$args['data'] ?: $args['data'] = $this->app->getDefaults();
+
+		foreach( $args['data'] as $path => $value ) {
 			// Don't save the default selector values as they are used anyway by default.
-			if( !!$updateSettings && strpos( $path, '.selectors.' ) !== false ) {
+			if( !!$args['update'] && strpos( $path, '.selectors.' ) !== false ) {
 				$value = '';
 			}
 
-			$defaultSettings = $this->setDotNotation( $path, $value, $defaultSettings );
+			$defaultSettings = $this->convertDotNotationPath( $path, $value, $defaultSettings );
 		}
 
 		$settings = array_replace_recursive( $defaultSettings, $currentSettings );
 
-		if( $updateSettings ) {
+		if( $args['update'] ) {
 			update_option( "{$this->app->prefix}_settings", $settings );
 		}
 
@@ -400,32 +407,32 @@ class Database
 	/**
 	 * Gets a value from an array using a dot-notation path
 	 *
-	 * @param mixed  $settings
+	 * @param mixed  $value
 	 * @param string $path
 	 * @param mixed  $fallback
 	 *
 	 * @return mixed
 	 */
-	protected function getDotNotation( $settings, $path, $fallback )
+	protected function getDotNotationValue( $value, $path, $fallback )
 	{
 		if( empty( $path ) ) {
-			return $settings;
+			return $value;
 		}
 
 		$keys = explode( '.', $path );
 
 		foreach( $keys as $key ) {
-			if( !isset( $settings[ $key ] ) ) {
+			if( !isset( $value[ $key ] ) ) {
 				return $fallback;
 			}
-			$settings = $settings[ $key ];
+			$value = $value[ $key ];
 		}
 
-		return $settings;
+		return $value;
 	}
 
 	/**
-	 * Sets a value to an array using a dot-notation path
+	 * Convert a dot-notation path to an array
 	 *
 	 * @param string $path
 	 * @param mixed  $value
@@ -433,7 +440,7 @@ class Database
 	 *
 	 * @return array
 	 */
-	protected function setDotNotation( $path, $value, $option )
+	protected function convertDotNotationPath( $path, $value, $option )
 	{
 		$token = strtok( $path, '.' );
 
