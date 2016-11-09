@@ -184,7 +184,6 @@ class Session
 
 		if( !!$purge ) {
 			$this->deleteSession();
-			// $this->createSession();
 		}
 	}
 

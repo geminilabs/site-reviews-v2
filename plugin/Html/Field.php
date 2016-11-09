@@ -199,7 +199,6 @@ class Field
 			return $carry . sprintf( '<span>%s</span> ', $error );
 		});
 
-		// $this->args['class']  = trim( 'glsr-form-error ' . $args['class'] );
 		$this->args['errors'] = sprintf( '<span class="glsr-field-errors">%s</span>', $errors );
 	}
 

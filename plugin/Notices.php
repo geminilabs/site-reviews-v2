@@ -154,7 +154,7 @@ class Notices
 			$messages = (array) $messages;
 		}
 
-		array_walk( $messages, function( &$message, $key ) {
+		array_walk( $messages, function( &$message ) {
 			$value = is_wp_error( $message )
 				? $message->get_error_message()
 				: $message;

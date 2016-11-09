@@ -21,8 +21,8 @@
 		'section' => $tabViewSection,
 	]);
 
-	$file = $tabViewSection ? "{$tabView}/{$tabViewSection}" : $tabView;
-	$file = trailingslashit( __DIR__ ) . "{$page}/{$file}.php";
+	$file = $tabViewSection ? sprintf( '%s/%s', $tabView, $tabViewSection ) : $tabView;
+	$file = trailingslashit( __DIR__ ) . sprintf( '%s/%s.php', $page, $file );
 
 	$file = apply_filters( 'site-reviews/addon/views/file', $file, $view, $data );
 

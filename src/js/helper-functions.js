@@ -1,5 +1,5 @@
 /* jshint browser:true, globalstrict:true, esversion:6 */
-/* global console, ActiveXObject */
+/* global console, ActiveXObject, XMLHttpRequest */
 
 "use strict";
 

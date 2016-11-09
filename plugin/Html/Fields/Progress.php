@@ -40,8 +40,6 @@ class Progress extends Base
 
 		$args = $this->mergeAttributesWith( $defaults );
 
-		// $attributes = $this->implodeAttributes( $defaults );
-
 		preg_match( '/\bactive(?=$|\s)/', $args['class'], $matches );
 
 		$initialText = isset( $matches[0] )

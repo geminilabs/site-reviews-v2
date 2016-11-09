@@ -211,8 +211,6 @@ class Logger implements LoggerInterface
 	/**
 	 * Wrapper for print_r()
 	 *
-	 * @param mixed $value ...
-	 *
 	 * @return void
 	 */
 	public function display()
@@ -223,9 +221,7 @@ class Logger implements LoggerInterface
 	/**
 	 * Capture print_r() output as variable
 	 *
-	 * @param mixed $value ...
-	 *
-	 * @return void
+	 * @return string
 	 */
 	public function capture()
 	{

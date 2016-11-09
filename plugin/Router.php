@@ -29,6 +29,12 @@ class Router
 		$this->prefix = $app->prefix;
 	}
 
+	/**
+	 * @param string $prefix
+	 * @param string $action
+	 *
+	 * @return string
+	 */
 	public function getMethodName( $prefix, $action )
 	{
 		$callback = function( $matches ) { return strtoupper( $matches[1] ); };
@@ -50,7 +56,7 @@ class Router
 		}
 
 		// Nonce url is localized in "GeminiLabs\SiteReviews\Handlers\EnqueueAssets"
-		check_ajax_referer( "{$this->id}-ajax-nonce" );
+		check_ajax_referer( sprintf( '%s-ajax-nonce', $this->id ) );
 
 		$request['ajax_request'] = true;
 
@@ -110,7 +116,7 @@ class Router
 
 	public function routeWebhookRequests()
 	{
-		$request = filter_input( INPUT_GET, "{$this->id}-hook" );
+		$request = filter_input( INPUT_GET, sprintf( '%s-hook', $this->id ) );
 
 		if( !$request )return;
 	}
