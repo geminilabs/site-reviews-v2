@@ -28,7 +28,6 @@ Follow plugin development on github at: https://github.com/geminilabs/site-revie
 * Clean and easy-to-configure user interface
 * Configurable Widgets
 * Easy setup and implementation
-* Fetch the reviewer avatars from gravatar
 * Filter reviews by rating
 * Logging
 * Minimal widget styling (tested with all official WP themes)
