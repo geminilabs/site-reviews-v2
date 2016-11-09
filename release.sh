@@ -43,7 +43,7 @@ read -p " - Added a changelog for "${PLUGIN_VERSION}"?"
 read -p " - Set stable tag in the readme.txt file to "${PLUGIN_VERSION}"?"
 read -p " - Set version in the main file to "${PLUGIN_VERSION}"?"
 read -p " - Updated the POT file?"
-read -p " - Committed all changes up to GITHUB?"
+read -p " - Committed all changes to the master branch on GITHUB?"
 echo ""
 read -p "PRESS [ENTER] TO BEGIN RELEASING "${PLUGIN_VERSION}
 clear
