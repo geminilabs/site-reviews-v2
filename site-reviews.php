@@ -62,14 +62,3 @@ if( !function_exists( 'get_avatar_url' ) ) {
 		return $dom->getElementsByTagName( 'img' )->item(0)->getAttribute( 'src' );
 	}
 }
-
-// Use mailtrap.io to test emails
-add_action( 'phpmailer_init', function( $phpmailer ) {
-	if( !defined( 'MAILTRAP_USERNAME' ) || !defined( 'MAILTRAP_USERNAME' ) )return;
-	$phpmailer->isSMTP();
-	$phpmailer->Host = 'mailtrap.io';
-	$phpmailer->SMTPAuth = true;
-	$phpmailer->Port = 25;
-	$phpmailer->Username = MAILTRAP_USERNAME;
-	$phpmailer->Password = MAILTRAP_PASSWORD;
-});
