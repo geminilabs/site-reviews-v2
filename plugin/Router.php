@@ -19,17 +19,34 @@ class Router
 	 */
 	protected $app;
 
+	protected $id;
+	protected $prefix;
+
 	public function __construct( App $app )
 	{
-		$this->app = $app;
+		$this->app    = $app;
+		$this->id     = $app->id;
+		$this->prefix = $app->prefix;
+	}
+
+	/**
+	 * @param string $prefix
+	 * @param string $action
+	 *
+	 * @return string
+	 */
+	public function getMethodName( $prefix, $action )
+	{
+		$callback = function( $matches ) { return strtoupper( $matches[1] ); };
+		return $prefix . preg_replace_callback( '/[-_](.)/', $callback, strtolower( $action ) );
 	}
 
 	public function routeAjaxRequests()
 	{
 		$request = $_REQUEST['request'];
 
-		if( isset( $request[ $this->app->prefix ]['action'] ) ) {
-			$request = $request[ $this->app->prefix ];
+		if( isset( $request[ $this->prefix ]['action'] ) ) {
+			$request = $request[ $this->prefix ];
 		}
 
 		// All ajax requests are triggered by a single action hook,
@@ -38,24 +55,24 @@ class Router
 			wp_die();
 		}
 
-		$callback = function( $matches ) { return strtoupper( $matches[1] ); };
-		$method   = preg_replace_callback( '/[-_](.)/', $callback, strtolower( 'ajax-' . $request['action'] ) );
-
 		// Nonce url is localized in "GeminiLabs\SiteReviews\Handlers\EnqueueAssets"
-		check_ajax_referer( "{$this->app->id}-ajax-nonce" );
-
-		$ajax = $this->app->make( 'Controllers\AjaxController' );
+		check_ajax_referer( sprintf( '%s-ajax-nonce', $this->id ) );
 
 		$request['ajax_request'] = true;
 
-		if( is_callable([ $ajax, $method ]) ) {
+		// undo damage done by javascript: encodeURIComponent()
+		array_walk_recursive( $request, function( &$value ) {
+			$value = stripslashes( $value );
+		});
 
-			// undo damage done by javascript: encodeURIComponent()
-			array_walk_recursive( $request, function( &$value ) {
-				$value = stripslashes( $value );
-			});
+		$ajaxController = $this->app->make( 'Controllers\AjaxController' );
+		$method         = $this->getMethodName( 'ajax', $request['action'] );
 
-			$ajax->$method( $request );
+		if( is_callable([ $ajaxController, $method ]) ) {
+			$ajaxController->$method( $request );
+		}
+		else {
+			do_action( 'site-reviews/router/ajax/request', $method, $request );
 		}
 
 		wp_die();
@@ -64,11 +81,15 @@ class Router
 	public function routePostRequests()
 	{
 		// get the request data that is prefixed with the app prefix
-		$request = filter_input( INPUT_POST, $this->app->prefix, FILTER_DEFAULT , FILTER_REQUIRE_ARRAY );
+		$request = filter_input( INPUT_POST, $this->prefix, FILTER_DEFAULT , FILTER_REQUIRE_ARRAY );
 
 		if( !isset( $request['action'] ) )return;
 
-		check_admin_referer( $request['action'] );
+		$nonce = ( filter_input( INPUT_POST, 'option_page' ) == $request['action'] && filter_input( INPUT_POST, 'action' ) == 'update' )
+			? $request['action'] . '-options'
+			: $request['action'];
+
+		check_admin_referer( $nonce );
 
 		switch( $request['action'] ) {
 			case 'clear-log':
@@ -86,17 +107,17 @@ class Router
 			case 'post-review':
 				$this->app->make( 'Controllers\ReviewController' )->postSubmitReview( $request );
 				break;
+
+			default:
+				do_action( 'site-reviews/router/post/request', $request['action'], $request );
+				break;
 		}
 	}
 
 	public function routeWebhookRequests()
 	{
-		$request = filter_input( INPUT_GET, "{$this->app->id}-hook" );
+		$request = filter_input( INPUT_GET, sprintf( '%s-hook', $this->id ) );
 
 		if( !$request )return;
-
-		// switch( $request ) {
-		// 	default:break;
-		// }
 	}
 }

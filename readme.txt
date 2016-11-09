@@ -1,10 +1,10 @@
 === Site Reviews ===
 Contributors: geminilabs, pryley
 Donate link: http://geminilabs.io/donate
-Tags: reviews, site reviews, business reviews, submit reviews, widgets, shortcodes
+Tags: best reviews, business ratings, business reviews, curated reviews, moderated reviews, rating widget, rating, ratings shortcode, review widget, reviews login, reviews shortcode, reviews, simple reviews, site reviews, star rating, star review, submit review, testimonial, user rating, user review, user reviews, wp rating, wp review, wp testimonials
 Requires at least: 4.0.0
 Tested up to: 4.6
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,9 +12,17 @@ Site Reviews is a WordPress plugin which allows you to easily receive and displa
 
 == Description ==
 
-Site Reviews is a WordPress plugin which allows you to easily receive and display reviews on your website or blog using easy-to-use widgets and shortcodes.
+Site Reviews is a plugin that allows your visitors to submit site reviews with a 1-5 star rating on your website, similar to the way you would on TripAdvisor or Yelp, and display them using a widget or shortcode.
 
-= Features =
+You can pin your best reviews so that they are always shown first, require approval before new review submissions are published, require visitors to be logged-in in order to write a review, send custom notifications on a new submission, and more. The plugin provides both widgets and shortcodes along with full shortcode documentation.
+
+Add-ons will be released shortly that allow you to sync your TripAdvisor and Yelp reviews in order to display them locally on your own website.
+
+The plugin [roadmap](https://github.com/geminilabs/site-reviews/blob/develop/ROADMAP.md) defines the upcoming features which include support for custom review categories, webhook notifications, paginated reviews, allowing visitors to up/down vote submitted reviews, reviewer avatars, percentage/fraction ratings, and more.
+
+Follow plugin development on github at: https://github.com/geminilabs/site-reviews/
+
+= Current Features =
 
 * Actively developed and supported
 * Clean and easy-to-configure user interface
@@ -74,6 +82,12 @@ Some themes may have very small sidebars and CSS styles that conflict or alter t
 10. How the Submit a Site Review widget looks like using the Twenty Sixteen WordPress theme
 
 == Changelog ==
+
+= 1.0.3 (2016-11-09) =
+- Updated plugin description
+- Fix plain-text emails
+- Fix inconsistencies with plugin settings form fields
+- Fix internal add-on integration code
 
 = 1.0.2 (2016-10-24) =
 * Set widget and settings defaults

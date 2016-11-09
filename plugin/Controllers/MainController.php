@@ -295,13 +295,17 @@ class MainController extends BaseController
 			'addons'   => __( 'Add-Ons', 'geminilabs-site-reviews' ),
 		];
 
+		$pages = apply_filters( 'site-reviews/addon/submenu/pages', $pages );
+
 		foreach( $pages as $slug => $title ) {
 
-			$method = 'render' . ucfirst( $slug ) . 'Menu';
+			$method = sprintf( 'render%sMenu', ucfirst( $slug ) );
 
-			if( !method_exists( $this, $method ) )continue;
+			$callback = apply_filters( 'site-reviews/addon/submenu/callback', [ $this, $method ], $slug );
 
-			add_submenu_page( 'edit.php?post_type=site-review', $title, $title, 'customize', $slug, [ $this, $method ] );
+			if( !is_callable( $callback ) )continue;
+
+			add_submenu_page( 'edit.php?post_type=site-review', $title, $title, 'customize', $slug, $callback );
 		}
 	}
 
@@ -376,6 +380,27 @@ class MainController extends BaseController
 	}
 
 	/**
+	 * @return void
+	 */
+	public function renderMenu( $page, $tabs, $data = [] )
+	{
+		$tabs    = $this->normalizeTabs( $tabs );
+		$tab     = $this->filterTab( $tabs );
+		$section = $this->filterSection( $tabs, $tab );
+
+		$defaults = [
+			'page'           => $page,
+			'tabs'           => $tabs,
+			'tabView'        => $tab,
+			'tabViewSection' => $section,
+		];
+
+		$data = apply_filters( 'site-reviews/addon/menu/data', $data, $defaults );
+
+		$this->render( "menu/index", wp_parse_args( $data, $defaults ) );
+	}
+
+	/**
 	 * add_meta_box() callback
 	 *
 	 * @return void
@@ -423,7 +448,7 @@ class MainController extends BaseController
 			],
 			'licenses' => __( 'Licenses', 'geminilabs-site-reviews' ),
 		],[
-			'settings' => $this->app->defaultSettings(),
+			'settings' => $this->app->getDefaults(),
 		]);
 	}
 
@@ -513,24 +538,5 @@ class MainController extends BaseController
 		}
 
 		return $tabs;
-	}
-
-	/**
-	 * @return void
-	 */
-	protected function renderMenu( $page, $tabs, $data = [] )
-	{
-		$tabs    = $this->normalizeTabs( $tabs );
-		$tab     = $this->filterTab( $tabs );
-		$section = $this->filterSection( $tabs, $tab );
-
-		$defaults = [
-			'page'           => $page,
-			'tabs'           => $tabs,
-			'tabView'        => $tab,
-			'tabViewSection' => $section,
-		];
-
-		$this->render( "menu/index", wp_parse_args( $data, $defaults ) );
 	}
 }

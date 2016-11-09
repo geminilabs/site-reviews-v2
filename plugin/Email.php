@@ -156,6 +156,7 @@ class Email
 		$message = wpautop( $message );
 		$message = str_replace( ']]>', ']]&gt;', $message );
 		$message = str_replace( '{message}', $message, $body );
+		$message = stripslashes( $message );
 
 		return apply_filters( 'site-reviews/email/message', $message, 'html', $this );
 	}
@@ -216,9 +217,14 @@ class Email
 		// replace other elements with a space
 		$string = preg_replace( '@</(td|th)@iu', " \$0", $string );
 
+		// add a placeholder for plain-text bullets to list elements
+		$string = preg_replace( '@<(li)[^>]*?>@siu', "\$0-o-^-o-", $string );
+
 		// strip all remaining HTML tags
 		$string = wp_strip_all_tags( $string );
 		$string = wp_specialchars_decode( $string, ENT_QUOTES );
+		$string = preg_replace( '/\v(?:[\v\h]+){2,}/', "\r\n\r\n", $string );
+		$string = str_replace( '-o-^-o-', ' - ', $string );
 
 		return html_entity_decode( $string, ENT_QUOTES, 'UTF-8' );
 	}

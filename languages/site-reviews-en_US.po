@@ -21,20 +21,20 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: qps-ploc\n"
 
-#: activate.php:42
+#: activate.php:43
 msgid "The Site Reviews plugin was deactivated."
 msgstr "The Site Reviews plugin was deactivated."
 
-#: activate.php:47
-msgid ""
-"Sorry, this plugin requires PHP version 5.4 or greater in order to work "
-"properly."
-msgstr ""
-"Sorry, this plugin requires PHP version 5.4 or greater in order to work "
-"properly."
-
 #: activate.php:48
 msgid ""
+"Sorry, this plugin requires PHP version 5.4 or greater in order to work "
+"properly."
+msgstr ""
+"Sorry, this plugin requires PHP version 5.4 or greater in order to work "
+"properly."
+
+#: activate.php:49
+msgid ""
 "Please contact your hosting provider or server administrator to upgrade the "
 "version of PHP on your server (your server is running PHP version %s), or "
 "try to find an alternative plugin."
@@ -43,7 +43,7 @@ msgstr ""
 "version of PHP on your server (your server is running PHP version %s), or "
 "try to find an alternative plugin."
 
-#: activate.php:54
+#: activate.php:55
 msgid ""
 "Sorry, this plugin requires WordPress version 4.0.0 or greater in order to "
 "work properly."
@@ -51,7 +51,7 @@ msgstr ""
 "Sorry, this plugin requires WordPress version 4.0.0 or greater in order to "
 "work properly."
 
-#: activate.php:55
+#: activate.php:56
 msgid "Update WordPress"
 msgstr "Update WordPress"
 
@@ -71,7 +71,7 @@ msgstr "Log is empty"
 msgid "Log was cleared."
 msgstr "Log was cleared."
 
-#: plugin/Controllers/MainController.php:87, plugin/Controllers/MainController.php:293, plugin/Controllers/MainController.php:421
+#: plugin/Controllers/MainController.php:87, plugin/Controllers/MainController.php:293, plugin/Controllers/MainController.php:446
 msgid "Settings"
 msgstr "Settings"
 
@@ -145,47 +145,47 @@ msgstr "Unapprove"
 msgid "Get Help"
 msgstr "Get Help"
 
-#: plugin/Controllers/MainController.php:295, plugin/Controllers/MainController.php:349
+#: plugin/Controllers/MainController.php:295, plugin/Controllers/MainController.php:353
 msgid "Add-Ons"
 msgstr "Add-Ons"
 
-#: plugin/Controllers/MainController.php:327
+#: plugin/Controllers/MainController.php:331
 msgid "Submit a Site Review"
 msgstr "Submit a Site Review"
 
-#: plugin/Controllers/MainController.php:328
+#: plugin/Controllers/MainController.php:332
 msgid "A \"submit a review\" form for your site."
 msgstr "A \"submit a review\" form for your site."
 
-#: plugin/Controllers/MainController.php:332
+#: plugin/Controllers/MainController.php:336
 msgid "Recent Site Reviews"
 msgstr "Recent Site Reviews"
 
-#: plugin/Controllers/MainController.php:333
+#: plugin/Controllers/MainController.php:337
 msgid "Your site’s most recent Local Reviews."
 msgstr "Your site’s most recent Local Reviews."
 
-#: plugin/Controllers/MainController.php:369
+#: plugin/Controllers/MainController.php:373
 msgid "Documentation"
 msgstr "Documentation"
 
-#: plugin/Controllers/MainController.php:372
+#: plugin/Controllers/MainController.php:376
 msgid "System Info"
 msgstr "System Info"
 
-#: plugin/Controllers/MainController.php:424
+#: plugin/Controllers/MainController.php:449
 msgid "Licenses"
 msgstr "Licenses"
 
-#: plugin/Controllers/MainController.php:440
+#: plugin/Controllers/MainController.php:465
 msgid "Logging enabled."
 msgstr "Logging enabled."
 
-#: plugin/Controllers/MainController.php:441
+#: plugin/Controllers/MainController.php:466
 msgid "Logging disabled."
 msgstr "Logging disabled."
 
-#: plugin/Controllers/MainController.php:457
+#: plugin/Controllers/MainController.php:482
 msgid "Settings updated."
 msgstr "Settings updated."
 
@@ -292,6 +292,10 @@ msgstr "Yes"
 #: plugin/Html/Form.php:119
 msgid "Submit"
 msgstr "Submit"
+
+#: plugin/Html/Form.php:255
+msgid "Save Changes"
+msgstr "Save Changes"
 
 #: plugin/Html/Partials/Addon.php:40
 msgid "More Info"

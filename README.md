@@ -1,8 +1,8 @@
 # Site Reviews
 
-[![GitHub version](https://badge.fury.io/gh/geminilabs%2Fsite-reviews.svg)](https://badge.fury.io/gh/geminilabs%2Fsite-reviews) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/geminilabs/site-reviews/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/geminilabs/site-reviews/?branch=master) [![License](https://img.shields.io/badge/license-GPLv2+-brightgreen.svg)](https://github.com/geminilabs/site-reviews/blob/master/license.txt)
+[![GitHub version](https://badge.fury.io/gh/geminilabs%2Fsite-reviews.svg)](https://badge.fury.io/gh/geminilabs%2Fsite-reviews) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/geminilabs/site-reviews/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/geminilabs/site-reviews/?branch=master) [![Build Status](https://travis-ci.org/geminilabs/site-reviews.svg?branch=master)](https://travis-ci.org/geminilabs/site-reviews) [![License](https://img.shields.io/badge/license-GPLv2+-brightgreen.svg)](https://github.com/geminilabs/site-reviews/blob/master/license.txt)
 
-![A view of the "All Reviews" page](src/assets/screenshot-1.png)
+![Site Reviews banner](src/assets/banner-1880x609.png)
 
 Site Reviews is a WordPress plugin which allows you to easily receive and display reviews for your business or website.
 

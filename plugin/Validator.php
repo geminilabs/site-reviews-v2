@@ -301,11 +301,11 @@ class Validator
 	{
 		$parameters = [];
 
-		// {rule}:{parameters}
+		// example: {rule}:{parameters}
 		if( strpos( $rule, ':' ) !== false ) {
 			list( $rule, $parameter ) = explode( ':', $rule, 2 );
 
-			// {parameter1,parameter2,etc.}
+			// example: {parameter1,parameter2,...}
 			$parameters = $this->parseParameters( $rule, $parameter );
 		}
 
@@ -481,7 +481,8 @@ class Validator
 		$value = $this->getValue( $attribute );
 
 		// is the value filled or is the attribute required?
-		$validatable = $this->validateRequired( $attribute, $value ) || in_array( $rule, $this->implicitRules );
+		// - removed $validatable assignment
+		$this->validateRequired( $attribute, $value ) || in_array( $rule, $this->implicitRules );
 
 		$method = "validate{$rule}";
 

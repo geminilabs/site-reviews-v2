@@ -14,6 +14,7 @@ use GeminiLabs\SiteReviews\Container;
 
 final class App extends Container
 {
+	public $defaults;
 	public $file;
 	public $id;
 	public $name;
@@ -35,13 +36,13 @@ final class App extends Container
 
 		$plugin = get_file_data( $file, $data, 'plugin' );
 
-		$this->id      = $plugin['id'];
-		$this->file    = $file;
-		$this->name    = $plugin['name'];
-		$this->path    = plugin_dir_path( $file );
-		$this->prefix  = str_replace( '-', '_', $plugin['id'] );
-		$this->url     = plugin_dir_url( $file );
-		$this->version = $plugin['version'];
+		$this->id       = $plugin['id'];
+		$this->file     = $file;
+		$this->name     = $plugin['name'];
+		$this->path     = plugin_dir_path( $file );
+		$this->prefix   = str_replace( '-', '_', $plugin['id'] );
+		$this->url      = plugin_dir_url( $file );
+		$this->version  = $plugin['version'];
 	}
 
 	/**
@@ -57,6 +58,7 @@ final class App extends Container
 		$router     = $this->make( 'Router' );
 
 		// Action Hooks
+		add_action( 'plugins_loaded',                        [ $this, 'registerAddons'] );
 		add_action( 'admin_enqueue_scripts',                 [ $controller, 'enqueueAssets'] );
 		add_action( 'wp_enqueue_scripts',                    [ $controller, 'enqueueAssets'] );
 		add_action( 'admin_menu',                            [ $controller, 'registerMenuCount'] );
@@ -71,8 +73,8 @@ final class App extends Container
 		add_action( 'post_submitbox_misc_actions',           [ $controller, 'renderMetaBoxPinned'] );
 		add_action( "wp_ajax_{$this->prefix}_action",        [ $router, 'routeAjaxRequests'] );
 		add_action( "wp_ajax_nopriv_{$this->prefix}_action", [ $router, 'routeAjaxRequests'] );
-		add_action( 'init',                                  [ $router, 'routePostRequests'] );
-		add_action( 'init',                                  [ $router, 'routeWebhookRequests'] );
+		add_action( 'admin_init',                            [ $router, 'routePostRequests'] );
+		add_action( 'admin_init',                            [ $router, 'routeWebhookRequests'] );
 
 		// Filter Hooks
 		add_filter( "plugin_action_links_{$basename}", [ $controller, 'registerActionLinks'] );
@@ -96,7 +98,7 @@ final class App extends Container
 		update_option( "{$this->prefix}_logging", 0 );
 		update_option( "{$this->prefix}_version", $this->version );
 
-		$this->make( 'Database' )->setSettings();
+		$this->make( 'Database' )->setDefaultSettings();
 
 		// Schedule session purge
 		if( !wp_next_scheduled( 'site-reviews/schedule/session/purge' ) ) {
@@ -123,12 +125,26 @@ final class App extends Container
 	 *
 	 * @return array
 	 */
-	public function defaultSettings()
+	public function getDefaults()
 	{
-		$defaults = $this->make( 'Settings' )->getSettings();
+		if( !$this->defaults ) {
+			$this->defaults = $this->make( 'Settings' )->getSettings();
 
-		// Allow addons to modify the default settings
-		return apply_filters( 'site-reviews/addon/defaults', $defaults );
+			// Allow addons to modify the default settings
+			$this->defaults = apply_filters( 'site-reviews/addon/defaults', $this->defaults );
+		}
+
+		return $this->defaults;
+	}
+
+	/**
+	 * Register available add-ons
+	 *
+	 * @return void
+	 */
+	public function registerAddons()
+	{
+		do_action( 'site-reviews/addon/register', $this );
 	}
 
 	/**

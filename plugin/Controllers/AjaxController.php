@@ -37,7 +37,7 @@ class AjaxController extends BaseController
 
 		wp_send_json([
 			'notices' => $this->notices->show( false ),
-			'pinned'  => $response,
+			'pinned'  => (bool) $response,
 		]);
 	}
 

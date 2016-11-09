@@ -17,23 +17,23 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: activate.php:42
+#: activate.php:43
 msgid "The Site Reviews plugin was deactivated."
 msgstr ""
 
-#: activate.php:47
+#: activate.php:48
 msgid "Sorry, this plugin requires PHP version 5.4 or greater in order to work properly."
 msgstr ""
 
-#: activate.php:48
+#: activate.php:49
 msgid "Please contact your hosting provider or server administrator to upgrade the version of PHP on your server (your server is running PHP version %s), or try to find an alternative plugin."
 msgstr ""
 
-#: activate.php:54
+#: activate.php:55
 msgid "Sorry, this plugin requires WordPress version 4.0.0 or greater in order to work properly."
 msgstr ""
 
-#: activate.php:55
+#: activate.php:56
 msgid "Update WordPress"
 msgstr ""
 
@@ -53,7 +53,7 @@ msgstr ""
 msgid "Log was cleared."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:87, plugin/Controllers/MainController.php:293, plugin/Controllers/MainController.php:421
+#: plugin/Controllers/MainController.php:87, plugin/Controllers/MainController.php:293, plugin/Controllers/MainController.php:446
 msgid "Settings"
 msgstr ""
 
@@ -123,47 +123,47 @@ msgstr ""
 msgid "Get Help"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:295, plugin/Controllers/MainController.php:349
+#: plugin/Controllers/MainController.php:295, plugin/Controllers/MainController.php:353
 msgid "Add-Ons"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:327
+#: plugin/Controllers/MainController.php:331
 msgid "Submit a Site Review"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:328
+#: plugin/Controllers/MainController.php:332
 msgid "A \"submit a review\" form for your site."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:332
+#: plugin/Controllers/MainController.php:336
 msgid "Recent Site Reviews"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:333
+#: plugin/Controllers/MainController.php:337
 msgid "Your site’s most recent Local Reviews."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:369
+#: plugin/Controllers/MainController.php:373
 msgid "Documentation"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:372
+#: plugin/Controllers/MainController.php:376
 msgid "System Info"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:424
+#: plugin/Controllers/MainController.php:449
 msgid "Licenses"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:440
+#: plugin/Controllers/MainController.php:465
 msgid "Logging enabled."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:441
+#: plugin/Controllers/MainController.php:466
 msgid "Logging disabled."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:457
+#: plugin/Controllers/MainController.php:482
 msgid "Settings updated."
 msgstr ""
 
@@ -269,6 +269,10 @@ msgstr ""
 
 #: plugin/Html/Form.php:119
 msgid "Submit"
+msgstr ""
+
+#: plugin/Html/Form.php:255
+msgid "Save Changes"
 msgstr ""
 
 #: plugin/Html/Partials/Addon.php:40
