@@ -3,16 +3,16 @@
 All proposed features are subject to change.
 
 ## v1.1.0
-- [ ] Webhook notifications
+- [ ] Paginated reviews
 
 ## v1.2.0
-- [ ] Review categories
+- [ ] Webhook notifications
 
 ## v1.3.0
-- [ ] MCE shortcode generator
+- [ ] Review categories
 
 ## v1.4.0
-- [ ] Paginated reviews
+- [ ] MCE shortcode generator
 
 ## v1.5.0
 - [ ] Review avatars
