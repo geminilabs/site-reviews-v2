@@ -71,7 +71,7 @@ msgstr "Log is empty"
 msgid "Log was cleared."
 msgstr "Log was cleared."
 
-#: plugin/Controllers/MainController.php:87, plugin/Controllers/MainController.php:293, plugin/Controllers/MainController.php:444
+#: plugin/Controllers/MainController.php:87, plugin/Controllers/MainController.php:293, plugin/Controllers/MainController.php:446
 msgid "Settings"
 msgstr "Settings"
 
@@ -173,19 +173,19 @@ msgstr "Documentation"
 msgid "System Info"
 msgstr "System Info"
 
-#: plugin/Controllers/MainController.php:447
+#: plugin/Controllers/MainController.php:449
 msgid "Licenses"
 msgstr "Licenses"
 
-#: plugin/Controllers/MainController.php:463
+#: plugin/Controllers/MainController.php:465
 msgid "Logging enabled."
 msgstr "Logging enabled."
 
-#: plugin/Controllers/MainController.php:464
+#: plugin/Controllers/MainController.php:466
 msgid "Logging disabled."
 msgstr "Logging disabled."
 
-#: plugin/Controllers/MainController.php:480
+#: plugin/Controllers/MainController.php:482
 msgid "Settings updated."
 msgstr "Settings updated."
 
@@ -292,6 +292,10 @@ msgstr "Yes"
 #: plugin/Html/Form.php:119
 msgid "Submit"
 msgstr "Submit"
+
+#: plugin/Html/Form.php:255
+msgid "Save Changes"
+msgstr "Save Changes"
 
 #: plugin/Html/Partials/Addon.php:40
 msgid "More Info"
