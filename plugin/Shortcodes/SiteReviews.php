@@ -45,6 +45,8 @@ class SiteReviews extends Shortcode
 			? ( count($display) > 1 ? 'both' : array_shift( $display ) )
 			: 'both';
 
+		ob_start();
+
 		echo '<div class="shortcode-site-reviews">';
 
 		if( !empty( $title ) ) {
@@ -65,5 +67,7 @@ class SiteReviews extends Shortcode
 		]);
 
 		echo '</div>';
+
+		return ob_get_clean();
 	}
 }

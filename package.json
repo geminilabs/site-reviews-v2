@@ -8,6 +8,7 @@
   "devDependencies": {
     "elixir-jshint": "^1.2.3",
     "fs-extra": "^0.30.0",
+    "graceful-fs": "^4.1.10",
     "gulp": "^3.9.1",
     "gulp-bump": "^2.4.0",
     "gulp-checktextdomain": "^1.1.0",
@@ -16,6 +17,7 @@
     "gulp-sort": "^2.0.0",
     "gulp-wp-pot": "^1.3.1",
     "laravel-elixir": "^6.0.0-11",
+    "minimatch": "^3.0.3",
     "run-sequence": "^1.2.2",
     "stream-browserify": "^2.0.1"
   }

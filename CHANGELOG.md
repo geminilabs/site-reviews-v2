@@ -12,6 +12,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Fixed
 ### Security
 
+## [1.0.4] - 2016-11-14
+
+### Changed
+- use the logged-in user's display_name by default instead of "Anonymous" when submitting reviews
+
+### Fixed
+- fix shortcodes to insert in the_content correctly
+
 ## [1.0.3] - 2016-11-09
 
 ### Added
