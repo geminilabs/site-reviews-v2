@@ -18,10 +18,12 @@
 .glsr-review {
 	margin-bottom: 2em;
 
-	a {}
+	// a {}
+
 	p {
-		margin: 0;
+		margin: 0 0 1em;
 	}
+
 	&-author {}
 	&-date {
 		font-style: italic;
