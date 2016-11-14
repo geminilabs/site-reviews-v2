@@ -171,11 +171,11 @@ msgstr ""
 msgid "Anonymous"
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:50
+#: plugin/Controllers/ReviewController.php:56
 msgid "No Title"
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:54
+#: plugin/Controllers/ReviewController.php:60
 msgid "Please fix the submission errors."
 msgstr ""
 
