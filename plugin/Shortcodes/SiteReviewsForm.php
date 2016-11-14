@@ -60,6 +60,8 @@ class SiteReviewsForm extends Shortcode
 			? $this->session->get( "{$formId}-values", [], 'and then remove values' )
 			: [];
 
+		ob_start();
+
 		echo '<div class="shortcode-reviews-form">';
 
 		if( !empty( $atts['title'] ) ) {
@@ -87,5 +89,7 @@ class SiteReviewsForm extends Shortcode
 		]);
 
 		echo '</div>';
+
+		return ob_get_clean();
 	}
 }
