@@ -82,6 +82,10 @@ Some themes may have very small sidebars and CSS styles that conflict or alter t
 
 == Changelog ==
 
+= 1.0.4 (2016-11-14) =
+- use the logged-in user's display_name by default instead of "Anonymous" when submitting reviews
+- Fix shortcodes to insert in the_content correctly
+
 = 1.0.3 (2016-11-09) =
 - Updated plugin description
 - Fix plain-text emails
