@@ -41,11 +41,17 @@ class ReviewController extends BaseController
 		// only use the rules for non-excluded values
 		$rules = array_diff_key( $rules, array_flip( $excluded ) );
 
+		$user = wp_get_current_user();
+
+		$reviewer = $user->exists()
+			? $user->display_name
+			: __( 'Anonymous', 'geminilabs-site-reviews' );
+
 		$defaults = [
 			'content'  => '',
 			'email'    => '',
 			'rating'   => '',
-			'reviewer' => __( 'Anonymous', 'geminilabs-site-reviews' ),
+			'reviewer' => $reviewer,
 			'terms'    => '',
 			'title'    => __( 'No Title', 'geminilabs-site-reviews' ),
 		];

@@ -39,7 +39,7 @@ else
 fi
 
 echo ""
-read -p " - Added a changelog for "${PLUGIN_VERSION}"?"
+read -p " - Updated the changelog for "${PLUGIN_VERSION}" and appended it to readme.txt?"
 read -p " - Set stable tag in the readme.txt file to "${PLUGIN_VERSION}"?"
 read -p " - Set version in the main file to "${PLUGIN_VERSION}"?"
 read -p " - Updated the POT file?"
