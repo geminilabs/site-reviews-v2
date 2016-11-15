@@ -293,6 +293,22 @@ class Database
 			return false;
 		}
 
+		// make sure we set post_meta fallback defaults
+		$meta = wp_parse_args( $meta, [
+			'author'     => '',
+			'avatar'     => '',
+			'content'    => '',
+			'date'       => get_date_from_gmt( gmdate( 'Y-m-d H:i:s' )),
+			'email'      => '',
+			'ip_address' => '',
+			'pinned'     => false,
+			'rating'     => '',
+			'review_id'  => '',
+			'site_name'  => 'local',
+			'title'      => '',
+			'url'        => '',
+		]);
+
 		// add post_meta
 		foreach( $meta as $field => $value ) {
 			update_post_meta( $post_id, $field, $value );
