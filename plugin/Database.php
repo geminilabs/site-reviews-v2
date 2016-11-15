@@ -310,6 +310,22 @@ class Database
 			return $post_id;
 		}
 
+		// make sure we set post_meta fallback defaults
+		$meta = wp_parse_args( $meta, [
+			'author'     => '',
+			'avatar'     => '',
+			'content'    => '',
+			'date'       => get_date_from_gmt( gmdate( 'Y-m-d H:i:s' )),
+			'email'      => '',
+			'ip_address' => '',
+			'pinned'     => false,
+			'rating'     => '',
+			'review_id'  => '',
+			'site_name'  => 'local',
+			'title'      => '',
+			'url'        => '',
+		]);
+
 		$post_data = [
 			'comment_status' => 'closed',
 			'ID'             => $post_id ? $post_id : 0,
@@ -333,22 +349,6 @@ class Database
 
 			return false;
 		}
-
-		// make sure we set post_meta fallback defaults
-		$meta = wp_parse_args( $meta, [
-			'author'     => '',
-			'avatar'     => '',
-			'content'    => '',
-			'date'       => get_date_from_gmt( gmdate( 'Y-m-d H:i:s' )),
-			'email'      => '',
-			'ip_address' => '',
-			'pinned'     => false,
-			'rating'     => '',
-			'review_id'  => '',
-			'site_name'  => 'local',
-			'title'      => '',
-			'url'        => '',
-		]);
 
 		// add post_meta
 		foreach( $meta as $field => $value ) {
