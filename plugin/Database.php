@@ -123,6 +123,20 @@ class Database
 	}
 
 	/**
+	 * Get the current page number for the global query
+	 *
+	 * @return int
+	 */
+	public function getCurrentPageNumber()
+	{
+		$paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : (
+			get_query_var( 'page' ) ? get_query_var( 'page' ) : 1
+		);
+
+		return intval( $paged );
+	}
+
+	/**
 	 * Gets an option from the plugin settings array using dot notation
 	 *
 	 * @param string $path
@@ -208,6 +222,7 @@ class Database
 			'max_reviews'  => '10',
 			'min_rating'   => '5',
 			'order_by'     => 'date',
+			'pagination'   => false,
 			'site_name'    => '',
 		];
 
@@ -228,11 +243,14 @@ class Database
 			'compare' => '>=',
 		];
 
+		$pagination = $pagination ? $this->getCurrentPageNumber() : 1;
+
 		return new WP_Query([
 			'meta_key'       => 'pinned',
 			'meta_query'     => $meta_query,
 			'order'          => 'DESC',
 			'orderby'        => "meta_value $order_by",
+			'paged'          => $pagination,
 			'post_status'    => 'publish',
 			'post_type'      => 'site-review',
 			'posts_per_page' => $max_reviews ? $max_reviews : -1,

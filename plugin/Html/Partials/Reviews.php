@@ -29,6 +29,7 @@ class Reviews extends Base
 			'max_reviews' => '',
 			'min_rating'  => '',
 			'order_by'    => '',
+			'pagination'  => false,
 			'show_author' => false,
 			'show_date'   => false,
 			'show_link'   => false,
@@ -65,6 +66,10 @@ class Reviews extends Base
 
 			endwhile;
 
+			if( $args['pagination'] ) {
+				$html .= $this->buildPagination( $reviews->max_num_pages );
+			}
+
 			wp_reset_postdata();
 		}
 		else {
@@ -99,6 +104,96 @@ class Reviews extends Base
 		$text = wp_trim_words( $text, $wordCount, $more );
 
 		return $text;
+	}
+
+	/**
+	 * Build the reviews pagination
+	 *
+	 * @param int $maxPageNum
+	 *
+	 * @return string|null
+	 */
+	protected function buildPagination( $maxPageNum )
+	{
+		if( $maxPageNum < 2 )return;
+
+		$paged = $this->app->make( 'Database' )->getCurrentPageNumber();
+		$theme = wp_get_theme()->get( 'TextDomain' );
+
+		if( in_array( $theme, ['twentyten','twentyeleven','twentytwelve','twentythirteen'] ) ) {
+
+			$links = '';
+
+			if( $paged > 1 ) {
+				$links .= sprintf( '<div class="nav-previous"><a href="%s">%s</a></div>',
+					get_pagenum_link( $paged - 1 ),
+					__( '<span class="meta-nav">&larr;</span> Previous', 'site-reviews' )
+				);
+			}
+			if( $paged < $maxPageNum ) {
+				$links .= sprintf( '<div class="nav-next"><a href="%s">%s</a></div>',
+					get_pagenum_link( $paged + 1 ),
+					__( 'Next <span class="meta-nav">&rarr;</span>', 'site-reviews' )
+				);
+			}
+		}
+		else {
+			$links = paginate_links([
+				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'site-reviews' ) . ' </span>',
+				'current'            => $this->app->make( 'Database' )->getCurrentPageNumber(),
+				'mid_size'           => 1,
+				'next_text'          => __( 'Next &rarr;', 'site-reviews' ),
+				'prev_text'          => __( '&larr; Previous', 'site-reviews' ),
+				'total'              => $maxPageNum,
+			]);
+		}
+
+		if( !$links )return;
+
+		return $this->paginationTemplate( $links );
+	}
+
+	/**
+	 * Get the correct pagination template
+	 *
+	 * @param string $links
+	 *
+	 * @return string
+	 */
+	protected function paginationTemplate( $links )
+	{
+		$class = '';
+		$theme = wp_get_theme()->get( 'TextDomain' );
+
+		switch( $theme ) {
+
+			case 'twentyten':
+			case 'twentyeleven':
+			case 'twentytwelve':
+				$template = '<nav class="navigation" role="navigation">%3$s</nav>';
+				break;
+			case 'twentyfourteen':
+				$class    = 'paging-navigation';
+				$template = '' .
+				'<nav class="navigation %1$s" role="navigation">' .
+					'<h2 class="screen-reader-text">%2$s</h2>' .
+					'<div class="pagination loop-pagination">%3$s</div>' .
+				'</nav>';
+				break;
+			default:
+				$class    = 'pagination';
+				$template = '' .
+				'<nav class="navigation %1$s" role="navigation">' .
+					'<h2 class="screen-reader-text">%2$s</h2>' .
+					'<div class="nav-links">%3$s</div>' .
+				'</nav>';
+		}
+
+		$template = apply_filters( 'navigation_markup_template', $template, $class );
+
+		$screenReaderText = __( 'Site Reviews navigation', 'site-reviews' );
+
+		return sprintf( $template, $class, $screenReaderText, $links );
 	}
 
 	/**
