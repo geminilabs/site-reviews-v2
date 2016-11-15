@@ -11,6 +11,7 @@
 namespace GeminiLabs\SiteReviews;
 
 use GeminiLabs\SiteReviews\App;
+use WP_Query;
 
 class Database
 {
@@ -227,14 +228,14 @@ class Database
 			'compare' => '>=',
 		];
 
-		return get_posts([
+		return new WP_Query([
 			'meta_key'       => 'pinned',
+			'meta_query'     => $meta_query,
 			'order'          => 'DESC',
 			'orderby'        => "meta_value $order_by",
 			'post_status'    => 'publish',
 			'post_type'      => 'site-review',
 			'posts_per_page' => $max_reviews ? $max_reviews : -1,
-			'meta_query'     => $meta_query,
 		]);
 	}
 

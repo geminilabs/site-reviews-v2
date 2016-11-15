@@ -21,6 +21,8 @@ class Reviews extends Base
 	 */
 	public function render()
 	{
+		global $post;
+
 		$defaults = [
 			'class'       => '',
 			'display'     => 'title',
@@ -39,11 +41,13 @@ class Reviews extends Base
 
 		$reviews = $this->app->make( 'Database' )->getReviews( $args );
 
-		if( $reviews ) {
+		if( $reviews->have_posts() ) {
 
 			$html = '';
 
-			foreach( $reviews as $post ) : setup_postdata( $post );
+			while( $reviews->have_posts() ) :
+
+				$reviews->the_post();
 
 				$meta = get_post_meta( $post->ID );
 				$meta = (object) array_map( 'array_shift', $meta );
@@ -59,7 +63,7 @@ class Reviews extends Base
 
 				$html .= sprintf( '<div class="glsr-review">%s%s</div>', ${"print_{$args['display']}"}, $review_author );
 
-			endforeach;
+			endwhile;
 
 			wp_reset_postdata();
 		}
