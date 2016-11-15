@@ -34,8 +34,8 @@ class Progress extends Base
 	public function render()
 	{
 		$defaults = [
-			'data-active-text'   => __( 'Please wait...', 'geminilabs-site-reviews' ),
-			'data-inactive-text' => __( 'Inactive', 'geminilabs-site-reviews' ),
+			'data-active-text'   => __( 'Please wait...', 'site-reviews' ),
+			'data-inactive-text' => __( 'Inactive', 'site-reviews' ),
 		];
 
 		$args = $this->mergeAttributesWith( $defaults );

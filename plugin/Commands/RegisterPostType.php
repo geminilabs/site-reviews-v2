@@ -17,8 +17,8 @@ class RegisterPostType
 	public function __construct( $input )
 	{
 		$columns = [
-			'title' => __( 'Title', 'geminilabs-site-reviews' ),
-			'date'  => __( 'Date', 'geminilabs-site-reviews' ),
+			'title' => __( 'Title', 'site-reviews' ),
+			'date'  => __( 'Date', 'site-reviews' ),
 		];
 
 		$defaults = [

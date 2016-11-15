@@ -36,13 +36,13 @@ final class App extends Container
 
 		$plugin = get_file_data( $file, $data, 'plugin' );
 
-		$this->id       = $plugin['id'];
-		$this->file     = $file;
-		$this->name     = $plugin['name'];
-		$this->path     = plugin_dir_path( $file );
-		$this->prefix   = str_replace( '-', '_', $plugin['id'] );
-		$this->url      = plugin_dir_url( $file );
-		$this->version  = $plugin['version'];
+		$this->id      = 'geminilabs-' . $plugin['id'];
+		$this->file    = $file;
+		$this->name    = $plugin['name'];
+		$this->path    = plugin_dir_path( $file );
+		$this->prefix  = str_replace( '-', '_', $this->id );
+		$this->url     = plugin_dir_url( $file );
+		$this->version = $plugin['version'];
 	}
 
 	/**

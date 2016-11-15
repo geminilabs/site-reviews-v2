@@ -110,50 +110,50 @@ class Settings
 		$this->html->createForm( $formId, [
 			'action' => admin_url( 'options.php' ),
 			'nonce'  => $this->app->id . '-settings',
-			'submit' => __( 'Save Settings', 'geminilabs-site-reviews' ),
+			'submit' => __( 'Save Settings', 'site-reviews' ),
 		]);
 
 		$this->addSetting( $formId, [
 			'type'    => 'yesno_inline',
 			'name'    => 'general.require.approval',
-			'label'   => __( 'Require approval', 'geminilabs-site-reviews' ),
+			'label'   => __( 'Require approval', 'site-reviews' ),
 			'default' => true,
-			'desc'    => __( 'Set the status of new review submissions to pending.', 'geminilabs-site-reviews' ),
+			'desc'    => __( 'Set the status of new review submissions to pending.', 'site-reviews' ),
 		]);
 
 		$this->addSetting( $formId, [
 			'type'  => 'yesno_inline',
 			'name'  => 'general.require.login',
-			'label' => __( 'Require login', 'geminilabs-site-reviews' ),
-			'desc'  => __( 'Only allow review submissions from registered users.', 'geminilabs-site-reviews' ),
+			'label' => __( 'Require login', 'site-reviews' ),
+			'desc'  => __( 'Only allow review submissions from registered users.', 'site-reviews' ),
 		]);
 
 		$this->addSetting( $formId, [
 			'type'    => 'radio',
 			'name'    => 'general.notification',
-			'label'   => __( 'Notifications', 'geminilabs-site-reviews' ),
+			'label'   => __( 'Notifications', 'site-reviews' ),
 			'default' => 'none',
 			'options' => [
-				'none'    => __( 'Do not send review notifications', 'geminilabs-site-reviews' ),
-				'default' => sprintf( __( 'Send to administrator <code>%s</code>', 'geminilabs-site-reviews' ), get_option( 'admin_email' ) ),
-				'custom'  => __( 'Send to one or more custom emails', 'geminilabs-site-reviews' ),
+				'none'    => __( 'Do not send review notifications', 'site-reviews' ),
+				'default' => sprintf( __( 'Send to administrator <code>%s</code>', 'site-reviews' ), get_option( 'admin_email' ) ),
+				'custom'  => __( 'Send to one or more custom emails', 'site-reviews' ),
 			],
 		]);
 
 		$this->addSetting( $formId, [
 			'type'    => 'text',
 			'name'    => 'general.notification_email',
-			'label'   => __( 'Send notification emails to', 'geminilabs-site-reviews' ),
+			'label'   => __( 'Send notification emails to', 'site-reviews' ),
 			'depends' => [
 				'general.notification' => 'custom',
 			],
-			'placeholder' => __( 'Separate multiple emails with a comma', 'geminilabs-site-reviews' ),
+			'placeholder' => __( 'Separate multiple emails with a comma', 'site-reviews' ),
 		]);
 
 		$this->addSetting( $formId, [
 			'type'    => 'code',
 			'name'    => 'general.notification_message',
-			'label'   => __( 'Notification template', 'geminilabs-site-reviews' ),
+			'label'   => __( 'Notification template', 'site-reviews' ),
 			'rows'    => 9,
 			'depends' => [
 				'general.notification' => ['custom', 'default'],
@@ -177,75 +177,75 @@ class Settings
 		$this->html->createForm( $formId, [
 			'action' => admin_url( 'options.php' ),
 			'nonce'  => $this->app->id . '-settings',
-			'submit' => __( 'Save Settings', 'geminilabs-site-reviews' ),
+			'submit' => __( 'Save Settings', 'site-reviews' ),
 		]);
 
 		$this->html->addfield( $formId, [
 			'type'  => 'heading',
-			'value' => __( 'Form Labels', 'geminilabs-site-reviews' ),
-			'desc'  => __( 'Customize the label text for the review submission form fields.', 'geminilabs-site-reviews' ),
+			'value' => __( 'Form Labels', 'site-reviews' ),
+			'desc'  => __( 'Customize the label text for the review submission form fields.', 'site-reviews' ),
 		]);
 
 		$this->addSetting( $formId, [
 			'type'  => 'text',
 			'name'  => 'form.rating.label',
-			'label' => __( 'Rating label', 'geminilabs-site-reviews' ),
-			'placeholder' => __( 'Your overall rating', 'geminilabs-site-reviews' ),
+			'label' => __( 'Rating label', 'site-reviews' ),
+			'placeholder' => __( 'Your overall rating', 'site-reviews' ),
 			'default' => ':placeholder',
 		]);
 
 		$this->addSetting( $formId, [
 			'type'  => 'text',
 			'name'  => 'form.title.label',
-			'label' => __( 'Title label', 'geminilabs-site-reviews' ),
-			'placeholder' => __( 'Title of your review', 'geminilabs-site-reviews' ),
+			'label' => __( 'Title label', 'site-reviews' ),
+			'placeholder' => __( 'Title of your review', 'site-reviews' ),
 			'default' => ':placeholder',
 		]);
 
 		$this->addSetting( $formId, [
 			'type'  => 'text',
 			'name'  => 'form.content.label',
-			'label' => __( 'Content label', 'geminilabs-site-reviews' ),
-			'placeholder' => __( 'Your review', 'geminilabs-site-reviews' ),
+			'label' => __( 'Content label', 'site-reviews' ),
+			'placeholder' => __( 'Your review', 'site-reviews' ),
 			'default' => ':placeholder',
 		]);
 
 		$this->addSetting( $formId, [
 			'type'  => 'text',
 			'name'  => 'form.reviewer.label',
-			'label' => __( 'Reviewer label', 'geminilabs-site-reviews' ),
-			'placeholder' => __( 'Your name', 'geminilabs-site-reviews' ),
+			'label' => __( 'Reviewer label', 'site-reviews' ),
+			'placeholder' => __( 'Your name', 'site-reviews' ),
 			'default' => ':placeholder',
 		]);
 
 		$this->addSetting( $formId, [
 			'type'  => 'text',
 			'name'  => 'form.email.label',
-			'label' => __( 'Email label', 'geminilabs-site-reviews' ),
-			'placeholder' => __( 'Your email', 'geminilabs-site-reviews' ),
+			'label' => __( 'Email label', 'site-reviews' ),
+			'placeholder' => __( 'Your email', 'site-reviews' ),
 			'default' => ':placeholder',
 		]);
 
 		$this->addSetting( $formId, [
 			'type'  => 'textarea',
 			'name'  => 'form.terms.label',
-			'label' => __( 'Terms label', 'geminilabs-site-reviews' ),
-			'placeholder' => __( 'This review is based on my own experience and is my genuine opinion.', 'geminilabs-site-reviews' ),
+			'label' => __( 'Terms label', 'site-reviews' ),
+			'placeholder' => __( 'This review is based on my own experience and is my genuine opinion.', 'site-reviews' ),
 			'default' => ':placeholder',
 		]);
 
 		$this->html->addfield( $formId, [
 			'type'  => 'heading',
-			'value' => __( 'Form Placeholders', 'geminilabs-site-reviews' ),
-			'desc'  => __( 'Customize the placeholder text for the review submission form fields. Use a single space character to disable the placeholder text.', 'geminilabs-site-reviews' ),
+			'value' => __( 'Form Placeholders', 'site-reviews' ),
+			'desc'  => __( 'Customize the placeholder text for the review submission form fields. Use a single space character to disable the placeholder text.', 'site-reviews' ),
 		]);
 
 		$this->addSetting( $formId, [
 			'type'  => 'text',
 			'name'  => 'form.title.placeholder',
 			'class' => 'large-text',
-			'label' => __( 'Title placeholder', 'geminilabs-site-reviews' ),
-			'placeholder' => __( 'Summarize your review or highlight an interesting detail', 'geminilabs-site-reviews' ),
+			'label' => __( 'Title placeholder', 'site-reviews' ),
+			'placeholder' => __( 'Summarize your review or highlight an interesting detail', 'site-reviews' ),
 			'default' => ':placeholder',
 		]);
 
@@ -253,8 +253,8 @@ class Settings
 			'type'  => 'text',
 			'name'  => 'form.content.placeholder',
 			'class' => 'large-text',
-			'label' => __( 'Content placeholder', 'geminilabs-site-reviews' ),
-			'placeholder' => __( 'Tell people your review', 'geminilabs-site-reviews' ),
+			'label' => __( 'Content placeholder', 'site-reviews' ),
+			'placeholder' => __( 'Tell people your review', 'site-reviews' ),
 			'default' => ':placeholder',
 		]);
 
@@ -262,8 +262,8 @@ class Settings
 			'type'  => 'text',
 			'name'  => 'form.reviewer.placeholder',
 			'class' => 'large-text',
-			'label' => __( 'Reviewer placeholder', 'geminilabs-site-reviews' ),
-			'placeholder' => __( 'Tell us your name', 'geminilabs-site-reviews' ),
+			'label' => __( 'Reviewer placeholder', 'site-reviews' ),
+			'placeholder' => __( 'Tell us your name', 'site-reviews' ),
 			'default' => ':placeholder',
 		]);
 
@@ -271,8 +271,8 @@ class Settings
 			'type'  => 'text',
 			'name'  => 'form.email.placeholder',
 			'class' => 'large-text',
-			'label' => __( 'Email placeholder', 'geminilabs-site-reviews' ),
-			'placeholder' => __( 'Tell us your email', 'geminilabs-site-reviews' ),
+			'label' => __( 'Email placeholder', 'site-reviews' ),
+			'placeholder' => __( 'Tell us your email', 'site-reviews' ),
 			'default' => ':placeholder',
 		]);
 	}

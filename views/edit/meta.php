@@ -4,7 +4,7 @@
 	$siteName = get_post_meta( $post->ID, 'site_name', true );
 
 	if( $siteName == 'local' ) {
-		$siteName = __( 'Local Review', 'geminilabs-site-reviews' );
+		$siteName = __( 'Local Review', 'site-reviews' );
 	}
 
 	$reviewUrl = get_post_meta( $post->ID, 'url', true );
@@ -24,8 +24,8 @@
 	$revertUrl = wp_nonce_url( admin_url( sprintf( 'post.php?post=%s&action=revert', $post->ID ) ), 'revert-review_' . $post->ID );
 
 	$revert = !$modified
-		? __( 'Nothing to Revert', 'geminilabs-site-reviews' )
-		: __( 'Revert Changes', 'geminilabs-site-reviews' );
+		? __( 'Nothing to Revert', 'site-reviews' )
+		: __( 'Revert Changes', 'site-reviews' );
 
 	$disabled = !$modified
 		? ' disabled'
@@ -35,23 +35,23 @@
 <table class="glsr-metabox-table">
 	<tbody>
 		<tr>
-			<td><?= __( 'Rating', 'geminilabs-site-reviews' ); ?></th>
+			<td><?= __( 'Rating', 'site-reviews' ); ?></th>
 			<td><?php $html->renderPartial( 'rating', ['stars' => get_post_meta( $post->ID, 'rating', true ) ] ); ?></td>
 		</tr>
 		<tr>
-			<td><?= __( 'Type', 'geminilabs-site-reviews' ); ?></th>
+			<td><?= __( 'Type', 'site-reviews' ); ?></th>
 			<td><?= $siteName; ?></td>
 		</tr>
 		<tr>
-			<td><?= __( 'Date', 'geminilabs-site-reviews' ); ?></th>
+			<td><?= __( 'Date', 'site-reviews' ); ?></th>
 			<td><?= get_date_from_gmt( get_post_meta( $post->ID, 'date', true ), 'F j, Y' ); ?></td>
 		</tr>
 		<tr>
-			<td><?= __( 'Reviewer', 'geminilabs-site-reviews' ); ?></th>
+			<td><?= __( 'Reviewer', 'site-reviews' ); ?></th>
 			<td><?= get_post_meta( $post->ID, 'author', true ); ?></td>
 		</tr>
 		<tr>
-			<td><?= __( 'Avatar', 'geminilabs-site-reviews' ); ?></th>
+			<td><?= __( 'Avatar', 'site-reviews' ); ?></th>
 			<td><img src="<?= get_post_meta( $post->ID, 'avatar', true ); ?>"></td>
 		</tr>
 	</tbody>

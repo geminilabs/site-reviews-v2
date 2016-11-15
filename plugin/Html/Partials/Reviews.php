@@ -65,7 +65,7 @@ class Reviews extends Base
 		}
 		else {
 			$html = sprintf( '<p class="glsr-review glsr-no-reviews">%s</p>',
-				__( 'No reviews were found.', 'geminilabs-site-reviews' )
+				__( 'No reviews were found.', 'site-reviews' )
 			);
 		}
 
@@ -153,7 +153,7 @@ class Reviews extends Base
 	protected function reviewLink( $link, $metaLink )
 	{
 		return wp_validate_boolean( $link )
-			? sprintf( '<span class="glsr-review-link">[<a href="%s" target="_blank">%s</a>]</span>', esc_url( $metaLink ), __( 'read more', 'geminilabs-site-reviews' ) )
+			? sprintf( '<span class="glsr-review-link">[<a href="%s" target="_blank">%s</a>]</span>', esc_url( $metaLink ), __( 'read more', 'site-reviews' ) )
 			: '';
 	}
 

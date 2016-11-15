@@ -48,7 +48,7 @@ class MainController extends BaseController
 	public function postClearLog()
 	{
 		$this->log->clear();
-		$this->notices->addSuccess( __( 'Log was cleared.', 'geminilabs-site-reviews' ) );
+		$this->notices->addSuccess( __( 'Log was cleared.', 'site-reviews' ) );
 	}
 
 	/**
@@ -84,7 +84,7 @@ class MainController extends BaseController
 	{
 		$settings_url = admin_url( "edit.php?post_type=site-review&page=settings" );
 
-		$links[] = sprintf( '<a href="%s">%s</a>', $settings_url, __( 'Settings', 'geminilabs-site-reviews' ) );
+		$links[] = sprintf( '<a href="%s">%s</a>', $settings_url, __( 'Settings', 'site-reviews' ) );
 
 		return $links;
 	}
@@ -103,7 +103,7 @@ class MainController extends BaseController
 
 		if( $num_posts && $num_posts->publish ) {
 
-			$text = _n( '%s Review', '%s Reviews', $num_posts->publish, 'geminilabs-site-reviews' );
+			$text = _n( '%s Review', '%s Reviews', $num_posts->publish, 'site-reviews' );
 			$text = sprintf( $text, number_format_i18n( $num_posts->publish ) );
 
 			$post_type_object = get_post_type_object( $post_type );
@@ -153,7 +153,7 @@ class MainController extends BaseController
 	 */
 	public function registerMetaBox()
 	{
-		add_meta_box( "{$this->app->id}_review", __( 'Details', 'geminilabs-site-reviews' ), [ $this, 'renderMetaBox'], null, 'side' );
+		add_meta_box( "{$this->app->id}_review", __( 'Details', 'site-reviews' ), [ $this, 'renderMetaBox'], null, 'side' );
 	}
 
 	/**
@@ -167,8 +167,8 @@ class MainController extends BaseController
 			'id'       => 'glsr-pointer-pinned',
 			'screen'   => 'site-review',
 			'target'   => '#misc-pub-pinned',
-			'title'    => __( 'Pin Your Reviews', 'geminilabs-site-reviews' ),
-			'content'  => __( 'You can pin exceptional reviews so that they are always shown first in your widgets and shortcodes.', 'geminilabs-site-reviews' ),
+			'title'    => __( 'Pin Your Reviews', 'site-reviews' ),
+			'content'  => __( 'You can pin exceptional reviews so that they are always shown first in your widgets and shortcodes.', 'site-reviews' ),
 			'position' => [
 				'edge'  => 'right',  // top, bottom, left, right
 				'align' => 'middle', // top, bottom, left, right, middle
@@ -190,9 +190,9 @@ class MainController extends BaseController
 		$command = new RegisterPostType([
 			'post_type'   => 'site-review',
 			'slug'        => 'reviews',
-			'single'      => __( 'Review', 'geminilabs-site-reviews' ),
-			'plural'      => __( 'Reviews', 'geminilabs-site-reviews' ),
-			'menu_name'   => __( 'Site Reviews', 'geminilabs-site-reviews' ),
+			'single'      => __( 'Review', 'site-reviews' ),
+			'plural'      => __( 'Reviews', 'site-reviews' ),
+			'menu_name'   => __( 'Site Reviews', 'site-reviews' ),
 			'menu_icon'   => 'dashicons-star-half',
 			'public'      => false,
 			'has_archive' => false,
@@ -200,10 +200,10 @@ class MainController extends BaseController
 			'labels'      => (new Strings)->post_type_labels(),
 			'columns'     => [
 				'title'    => '', // empty values use the default label
-				'reviewer' => __( 'Reviewer', 'geminilabs-site-reviews' ),
-				'site'     => __( 'Type', 'geminilabs-site-reviews' ),
-				'stars'    => __( 'Rating', 'geminilabs-site-reviews' ),
-				'sticky'   => __( 'Pinned', 'geminilabs-site-reviews' ),
+				'reviewer' => __( 'Reviewer', 'site-reviews' ),
+				'site'     => __( 'Type', 'site-reviews' ),
+				'stars'    => __( 'Rating', 'site-reviews' ),
+				'sticky'   => __( 'Pinned', 'site-reviews' ),
 				'date'     => '',
 			],
 		]);
@@ -226,14 +226,14 @@ class MainController extends BaseController
 
 		$atts = [
 			'approve' => [
-				'aria-label' => esc_attr__( 'Approve this review', 'geminilabs-site-reviews' ),
+				'aria-label' => esc_attr__( 'Approve this review', 'site-reviews' ),
 				'href'       => wp_nonce_url( admin_url( sprintf( 'post.php?post=%s&action=approve', $post->ID ) ), 'approve-review_' . $post->ID ),
-				'text'       => __( 'Approve', 'geminilabs-site-reviews' ),
+				'text'       => __( 'Approve', 'site-reviews' ),
 			],
 			'unapprove' => [
-				'aria-label' => esc_attr__( 'Unapprove this review', 'geminilabs-site-reviews' ),
+				'aria-label' => esc_attr__( 'Unapprove this review', 'site-reviews' ),
 				'href'       => wp_nonce_url( admin_url( sprintf( 'post.php?post=%s&action=unapprove', $post->ID ) ), 'unapprove-review_' . $post->ID ),
-				'text'       => __( 'Unapprove', 'geminilabs-site-reviews' ),
+				'text'       => __( 'Unapprove', 'site-reviews' ),
 			],
 		];
 
@@ -290,9 +290,9 @@ class MainController extends BaseController
 	public function registerSubMenus()
 	{
 		$pages = [
-			'settings' => __( 'Settings', 'geminilabs-site-reviews' ),
-			'help'     => __( 'Get Help', 'geminilabs-site-reviews' ),
-			'addons'   => __( 'Add-Ons', 'geminilabs-site-reviews' ),
+			'settings' => __( 'Settings', 'site-reviews' ),
+			'help'     => __( 'Get Help', 'site-reviews' ),
+			'addons'   => __( 'Add-Ons', 'site-reviews' ),
 		];
 
 		$pages = apply_filters( 'site-reviews/addon/submenu/pages', $pages );
@@ -328,13 +328,13 @@ class MainController extends BaseController
 	{
 		$command = new RegisterWidgets([
 			'reviews_form' => [
-				'title'       => __( 'Submit a Site Review', 'geminilabs-site-reviews' ),
-				'description' => __( 'A "submit a review" form for your site.', 'geminilabs-site-reviews' ),
+				'title'       => __( 'Submit a Site Review', 'site-reviews' ),
+				'description' => __( 'A "submit a review" form for your site.', 'site-reviews' ),
 				'class'       => 'glsr-widget glsr-widget-reviews-form',
 			],
 			'recent_reviews' => [
-				'title'       => __( 'Recent Site Reviews', 'geminilabs-site-reviews' ),
-				'description' => __( 'Your site’s most recent Local Reviews.', 'geminilabs-site-reviews' ),
+				'title'       => __( 'Recent Site Reviews', 'site-reviews' ),
+				'description' => __( 'Your site’s most recent Local Reviews.', 'site-reviews' ),
 				'class'       => 'glsr-widget glsr-widget-recent-reviews',
 			],
 		]);
@@ -350,7 +350,7 @@ class MainController extends BaseController
 	public function renderAddonsMenu()
 	{
 		$this->renderMenu( 'addons', [
-			'addons' => __( 'Add-Ons', 'geminilabs-site-reviews' ),
+			'addons' => __( 'Add-Ons', 'site-reviews' ),
 		]);
 	}
 
@@ -370,10 +370,10 @@ class MainController extends BaseController
 
 		$this->renderMenu( 'help', [
 			'documentation' => [
-				'title'    => __( 'Documentation', 'geminilabs-site-reviews' ),
+				'title'    => __( 'Documentation', 'site-reviews' ),
 				'sections' => $sections,
 			],
-			'system' => __( 'System Info', 'geminilabs-site-reviews' ),
+			'system' => __( 'System Info', 'site-reviews' ),
 		],[
 			'system_info' => $this->app->make( 'SystemInfo' ),
 		]);
@@ -443,10 +443,10 @@ class MainController extends BaseController
 
 		$this->renderMenu( 'settings', [
 			'settings' => [
-				'title' => __( 'Settings', 'geminilabs-site-reviews' ),
+				'title' => __( 'Settings', 'site-reviews' ),
 				'sections' => $sections,
 			],
-			'licenses' => __( 'Licenses', 'geminilabs-site-reviews' ),
+			'licenses' => __( 'Licenses', 'site-reviews' ),
 		],[
 			'settings' => $this->app->getDefaults(),
 		]);
@@ -462,8 +462,8 @@ class MainController extends BaseController
 	public function sanitizeLogging( $input )
 	{
 		$message = $input
-			? __( 'Logging enabled.', 'geminilabs-site-reviews' )
-			: __( 'Logging disabled.', 'geminilabs-site-reviews' );
+			? __( 'Logging enabled.', 'site-reviews' )
+			: __( 'Logging disabled.', 'site-reviews' );
 
 		$this->notices->addSuccess( $message );
 
@@ -479,7 +479,7 @@ class MainController extends BaseController
 	{
 		$settings = $this->db->getOption();
 
-		$this->notices->addSuccess( __( 'Settings updated.', 'geminilabs-site-reviews' ) );
+		$this->notices->addSuccess( __( 'Settings updated.', 'site-reviews' ) );
 
 		// Merge the settings tab section arrays
 		return array_merge( $settings, $input );

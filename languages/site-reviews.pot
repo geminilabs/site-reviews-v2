@@ -693,6 +693,10 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
+#: views/edit/review.php:4
+msgid "no title"
+msgstr ""
+
 #: views/menu/addons/addons.php:3
 msgid "The following Add-Ons extend the functionality of Site Reviews."
 msgstr ""

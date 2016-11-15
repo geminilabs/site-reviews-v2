@@ -23,7 +23,7 @@ class AjaxController extends BaseController
 		$this->app->make( 'Controllers\MainController' )->postClearLog();
 
 		wp_send_json([
-			'log'     => __( 'Log is empty', 'geminilabs-site-reviews' ),
+			'log'     => __( 'Log is empty', 'site-reviews' ),
 			'notices' => $this->notices->show( false ),
 		]);
 	}

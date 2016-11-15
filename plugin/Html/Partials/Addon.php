@@ -37,7 +37,7 @@ class Addon extends Base
 			: sprintf( '<div class="glsr-addon-screenshot" data-name="%s"></div>', $name );
 
 		$addonLink = $link
-			? sprintf( '<a href="%s" class="glsr-addon-link button button-secondary">%s</a>', $link, __( 'More Info', 'geminilabs-site-reviews' ) )
+			? sprintf( '<a href="%s" class="glsr-addon-link button button-secondary">%s</a>', $link, __( 'More Info', 'site-reviews' ) )
 			: '';
 
 		return '' .

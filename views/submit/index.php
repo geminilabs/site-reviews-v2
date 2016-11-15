@@ -14,12 +14,12 @@
 		'suffix'     => $form_id,
 		'value'      => $values['rating'],
 		'options'    => [
-			''  => __( 'Select a Rating', 'geminilabs-site-reviews' ),
-			'5' => __( 'Excellent', 'geminilabs-site-reviews' ),
-			'4' => __( 'Very Good', 'geminilabs-site-reviews' ),
-			'3' => __( 'Average', 'geminilabs-site-reviews' ),
-			'2' => __( 'Poor', 'geminilabs-site-reviews' ),
-			'1' => __( 'Terrible', 'geminilabs-site-reviews' ),
+			''  => __( 'Select a Rating', 'site-reviews' ),
+			'5' => __( 'Excellent', 'site-reviews' ),
+			'4' => __( 'Very Good', 'site-reviews' ),
+			'3' => __( 'Average', 'site-reviews' ),
+			'2' => __( 'Poor', 'site-reviews' ),
+			'1' => __( 'Terrible', 'site-reviews' ),
 		],
 	]);
 
@@ -118,7 +118,7 @@
 	$html->renderField([
 		'type'   => 'submit',
 		'prefix' => false,
-		'value'  => __( 'Submit your review', 'geminilabs-site-reviews' ),
+		'value'  => __( 'Submit your review', 'site-reviews' ),
 	]);
 
 ?>
