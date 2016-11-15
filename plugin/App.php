@@ -71,6 +71,8 @@ final class App extends Container
 		add_action( 'init',                                  [ $controller, 'registerTextdomain'] );
 		add_action( 'widgets_init',                          [ $controller, 'registerWidgets'] );
 		add_action( 'post_submitbox_misc_actions',           [ $controller, 'renderMetaBoxPinned'] );
+		add_action( 'edit_form_after_title',                 [ $controller, 'renderReview'] );
+		add_action( 'edit_form_top',                         [ $controller, 'renderReviewNotice'] );
 		add_action( "wp_ajax_{$this->prefix}_action",        [ $router, 'routeAjaxRequests'] );
 		add_action( "wp_ajax_nopriv_{$this->prefix}_action", [ $router, 'routeAjaxRequests'] );
 		add_action( 'admin_init',                            [ $router, 'routePostRequests'] );

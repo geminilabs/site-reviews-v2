@@ -429,6 +429,38 @@ class MainController extends BaseController
 	}
 
 	/**
+	 * @return void
+	 *
+	 * @action edit_form_after_title
+	 */
+	public function renderReview( WP_Post $post )
+	{
+		if( $post->post_type != 'site-review' )return;
+		if( post_type_supports( 'site-review', 'title' ) )return;
+		if( get_post_meta( $post->ID, 'site_name', true ) == 'local' )return;
+
+		$this->render( 'edit/review', ['post' => $post ] );
+	}
+
+	/**
+	 * @return void
+	 *
+	 * @action edit_form_top
+	 */
+	public function renderReviewNotice( WP_Post $post )
+	{
+		if( $post->post_type != 'site-review' )return;
+		if( post_type_supports( 'site-review', 'title' ) )return;
+
+		$type = get_post_meta( $post->ID, 'site_name', true );
+
+		if( $type == 'local' )return;
+
+		$this->notices->addWarning( sprintf( __( '%s reviews are read-only.', 'site-reviews' ), ucfirst( $type ) ) );
+		$this->render( 'edit/notice' );
+	}
+
+	/**
 	 * add_submenu_page() callback
 	 *
 	 * @return void
