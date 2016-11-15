@@ -28,6 +28,7 @@ class SiteReviews extends Shortcode
 			'pagination' => false,
 			'rating'     => 5,
 			'title'      => '',
+			'type'       => '',
 		];
 
 		$args = shortcode_atts( $defaults, $atts );
@@ -65,7 +66,7 @@ class SiteReviews extends Shortcode
 			'show_date'   => $date,
 			'show_link'   => $link,
 			'show_rating' => $rating,
-			'site_name'   => 'local',
+			'site_name'   => $type,
 		]);
 
 		echo '</div>';

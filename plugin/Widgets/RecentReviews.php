@@ -33,6 +33,7 @@ class RecentReviews extends Widget
 			'order_by'    => '',
 			'show'        => ['show_author', 'show_date', 'show_rating'],
 			'title'       => '',
+			'type'        => '',
 		];
 
 		if( !empty( $instance ) ) {
@@ -47,6 +48,18 @@ class RecentReviews extends Widget
 			'label' => __( 'Title', 'site-reviews' ),
 			'value' => $args['title'],
 		]);
+
+		$types = glsr_resolve( 'Database' )->getReviewTypes();
+
+		if( count( $types ) > 1 ) {
+			$this->create_field([
+				'type'  => 'select',
+				'name'  => 'type',
+				'label' => __( 'Which reviews would you like to display? ', 'geminilabs-site-reviews' ),
+				'value'   => $args['type'],
+				'options' => ['' => __( 'All Reviews', 'site-reviews' ) ] + $types,
+			]);
+		}
 
 		$this->create_field([
 			'type'  => 'select',
@@ -141,6 +154,7 @@ class RecentReviews extends Widget
 			'order_by'    => 'date',
 			'show'        => [],
 			'title'       => '',
+			'type'        => '',
 		];
 
 		$instance = shortcode_atts( $defaults, $instance );
@@ -152,7 +166,10 @@ class RecentReviews extends Widget
 		unset( $instance['show'] );
 
 		$instance['order_by'] ?: $instance['order_by'] = 'date';
-		$instance['site_name'] = 'local';
+
+		$instance['site_name'] = $instance['type'];
+
+		unset( $instance['type'] );
 
 		$title = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
 

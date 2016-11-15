@@ -212,9 +212,9 @@ class Database
 	}
 
 	/**
-	 * Gets an array of saved Reviews
+	 * Gets a WP_Query object of saved Reviews
 	 *
-	 * @return array
+	 * @return WP_Query
 	 */
 	public function getReviews( array $args = [] )
 	{
@@ -255,6 +255,28 @@ class Database
 			'post_type'      => 'site-review',
 			'posts_per_page' => $max_reviews ? $max_reviews : -1,
 		]);
+	}
+
+	/**
+	 * Gets the review types (default type is "local")
+	 *
+	 * @return array
+	 */
+	public function getReviewTypes()
+	{
+		global $wpdb;
+
+		$types = $wpdb->get_col(
+			"SELECT DISTINCT(meta_value) FROM $wpdb->postmeta WHERE meta_key = 'site_name' ORDER BY meta_value ASC"
+		);
+
+		$types = array_flip( $types );
+
+		array_walk( $types, function( &$value, $key ) {
+			$value = sprintf( '%s reviews', ucfirst( $key ) );
+		});
+
+		return $types;
 	}
 
 	/**
