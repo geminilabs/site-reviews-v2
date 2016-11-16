@@ -27,7 +27,7 @@ class ReviewsForm extends Widget
 	{
 		$defaults = [
 			'class'       => '',
-			'description' => sprintf( __( 'Your email address will not be published. Required fields are marked %s*%s', 'geminilabs-site-reviews' ), '<span>', '</span>' ),
+			'description' => sprintf( __( 'Your email address will not be published. Required fields are marked %s*%s', 'site-reviews' ), '<span>', '</span>' ),
 			'fields'      => [],
 			'title'       => '',
 		];
@@ -37,7 +37,7 @@ class ReviewsForm extends Widget
 		$this->create_field([
 			'type'  => 'text',
 			'name'  => 'title',
-			'label' => __( 'Title', 'geminilabs-site-reviews' ),
+			'label' => __( 'Title', 'site-reviews' ),
 			'value' => $args['title'],
 		]);
 
@@ -45,7 +45,7 @@ class ReviewsForm extends Widget
 			'type'  => 'textarea',
 			'name'  => 'description',
 			'class' => 'widefat',
-			'label' => __( 'Description', 'geminilabs-site-reviews' ),
+			'label' => __( 'Description', 'site-reviews' ),
 			'value' => $args['description'],
 		]);
 
@@ -54,17 +54,17 @@ class ReviewsForm extends Widget
 			'name'  => 'fields',
 			'value' => $args['fields'],
 			'options' => [
-				'title'    => __( 'Hide the title field', 'geminilabs-site-reviews' ),
-				'reviewer' => __( 'Hide the reviewer field', 'geminilabs-site-reviews' ),
-				'email'    => __( 'Hide the email field', 'geminilabs-site-reviews' ),
-				'terms'    => __( 'Hide the terms field', 'geminilabs-site-reviews' ),
+				'title'    => __( 'Hide the title field', 'site-reviews' ),
+				'reviewer' => __( 'Hide the reviewer field', 'site-reviews' ),
+				'email'    => __( 'Hide the email field', 'site-reviews' ),
+				'terms'    => __( 'Hide the terms field', 'site-reviews' ),
 			],
 		]);
 
 		$this->create_field([
 			'type'  => 'text',
 			'name'  => 'class',
-			'label' => __( 'Enter any custom CSS classes here', 'geminilabs-site-reviews' ),
+			'label' => __( 'Enter any custom CSS classes here', 'site-reviews' ),
 			'value' => $args['class'],
 		]);
 	}
@@ -122,7 +122,7 @@ class ReviewsForm extends Widget
 
 		if( $requireUser && !is_user_logged_in() ) {
 			$message = sprintf(
-				__( 'You must be <a href="%s">logged in</a> to submit a review.', 'geminilabs-site-reviews' ),
+				__( 'You must be <a href="%s">logged in</a> to submit a review.', 'site-reviews' ),
 				wp_login_url( get_permalink() )
 			);
 			echo wpautop( $message );

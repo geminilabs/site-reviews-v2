@@ -33,6 +33,7 @@ class RecentReviews extends Widget
 			'order_by'    => '',
 			'show'        => ['show_author', 'show_date', 'show_rating'],
 			'title'       => '',
+			'type'        => '',
 		];
 
 		if( !empty( $instance ) ) {
@@ -44,7 +45,7 @@ class RecentReviews extends Widget
 		$this->create_field([
 			'type'  => 'text',
 			'name'  => 'title',
-			'label' => __( 'Title', 'geminilabs-site-reviews' ),
+			'label' => __( 'Title', 'site-reviews' ),
 			'value' => $args['title'],
 		]);
 
@@ -54,30 +55,42 @@ class RecentReviews extends Widget
 			'class' => 'widefat',
 			'value'   => $args['display'],
 			'options' => [
-				'title'   => __( 'Display only title', 'geminilabs-site-reviews' ),
-				'excerpt' => __( 'Display only excerpt', 'geminilabs-site-reviews' ),
-				'both'    => __( 'Display title and excerpt', 'geminilabs-site-reviews' ),
+				'title'   => __( 'Display only title', 'site-reviews' ),
+				'excerpt' => __( 'Display only excerpt', 'site-reviews' ),
+				'both'    => __( 'Display title and excerpt', 'site-reviews' ),
 			],
 		]);
+
+		$types = glsr_resolve( 'Database' )->getReviewTypes();
+
+		if( count( $types ) > 1 ) {
+			$this->create_field([
+				'type'  => 'select',
+				'name'  => 'type',
+				'label' => __( 'Which reviews would you like to display? ', 'geminilabs-site-reviews' ),
+				'value'   => $args['type'],
+				'options' => ['' => __( 'All Reviews', 'site-reviews' ) ] + $types,
+			]);
+		}
 
 		$this->create_field([
 			'type'  => 'select',
 			'name'  => 'min_rating',
-			'label' => __( 'What is the minimum rating to display? ', 'geminilabs-site-reviews' ),
+			'label' => __( 'What is the minimum rating to display? ', 'site-reviews' ),
 			'value'   => $args['min_rating'],
 			'options' => [
-				'5' => __( '5 stars', 'geminilabs-site-reviews' ),
-				'4' => __( '4 stars', 'geminilabs-site-reviews' ),
-				'3' => __( '3 stars', 'geminilabs-site-reviews' ),
-				'2' => __( '2 stars', 'geminilabs-site-reviews' ),
-				'1' => __( '1 star', 'geminilabs-site-reviews' ),
+				'5' => __( '5 stars', 'site-reviews' ),
+				'4' => __( '4 stars', 'site-reviews' ),
+				'3' => __( '3 stars', 'site-reviews' ),
+				'2' => __( '2 stars', 'site-reviews' ),
+				'1' => __( '1 star', 'site-reviews' ),
 			],
 		]);
 
 		$this->create_field([
 			'type'    => 'number',
 			'name'    => 'max_reviews',
-			'label'   => __( 'How many reviews would you like to display? ', 'geminilabs-site-reviews' ),
+			'label'   => __( 'How many reviews would you like to display? ', 'site-reviews' ),
 			'value'   => $args['max_reviews'],
 			'default' => 5,
 			'max'     => 100,
@@ -88,16 +101,16 @@ class RecentReviews extends Widget
 			'name'  => 'show',
 			'value' => $args['show'],
 			'options' => [
-				'show_author' => __( 'Show the name of the reviewer?', 'geminilabs-site-reviews' ),
-				'show_date'   => __( 'Show the review date?', 'geminilabs-site-reviews' ),
-				'show_rating' => __( 'Show the review rating?', 'geminilabs-site-reviews' ),
+				'show_author' => __( 'Show the name of the reviewer?', 'site-reviews' ),
+				'show_date'   => __( 'Show the review date?', 'site-reviews' ),
+				'show_rating' => __( 'Show the review rating?', 'site-reviews' ),
 			],
 		]);
 
 		$this->create_field([
 			'type'  => 'text',
 			'name'  => 'class',
-			'label' => __( 'Enter any custom CSS classes here', 'geminilabs-site-reviews' ),
+			'label' => __( 'Enter any custom CSS classes here', 'site-reviews' ),
 			'value' => $args['class'],
 		]);
 	}
@@ -141,6 +154,7 @@ class RecentReviews extends Widget
 			'order_by'    => 'date',
 			'show'        => [],
 			'title'       => '',
+			'type'        => '',
 		];
 
 		$instance = shortcode_atts( $defaults, $instance );
@@ -152,7 +166,10 @@ class RecentReviews extends Widget
 		unset( $instance['show'] );
 
 		$instance['order_by'] ?: $instance['order_by'] = 'date';
-		$instance['site_name'] = 'local';
+
+		$instance['site_name'] = $instance['type'];
+
+		unset( $instance['type'] );
 
 		$title = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
 

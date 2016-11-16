@@ -44,15 +44,12 @@ class SubmitReview
 			'author'     => $command->reviewer,
 			'avatar'     => get_avatar_url( $command->email ),
 			'content'    => $command->content,
-			'date'       => get_date_from_gmt( gmdate( 'Y-m-d H:i:s' )),
 			'email'      => $command->email,
 			'ip_address' => $command->ipAddress,
-			'pinned'     => false,
 			'rating'     => $command->rating,
 			'review_id'  => $reviewId,
 			'site_name'  => 'local',
 			'title'      => $command->title,
-			'url'        => '',
 		];
 
 		$review = apply_filters( 'site-reviews/local/review', $review, $command );
@@ -61,7 +58,7 @@ class SubmitReview
 
 		$this->sendNotificationEmail( $post_id, $command );
 
-		$message = __( 'Your review has been submitted!', 'geminilabs-site-reviews' );
+		$message = __( 'Your review has been submitted!', 'site-reviews' );
 
 		if( $command->ajaxRequest ) {
 
@@ -91,8 +88,8 @@ class SubmitReview
 			$review_discard_link = wp_nonce_url( admin_url( sprintf( 'post.php?post=%s&action=trash', $post_id ) ), 'trash-post_' . $post_id );
 			// $review_discard_link = esc_url( get_delete_post_link( $post_id, false ) );
 
-			$after[] = sprintf( '%1$s: <a href="%2$s">%2$s</a>', __( 'Approve', 'geminilabs-site-reviews' ), $review_approve_link );
-			$after[] = sprintf( '%1$s: <a href="%2$s">%2$s</a>', __( 'Discard', 'geminilabs-site-reviews' ), $review_discard_link );
+			$after[] = sprintf( '%1$s: <a href="%2$s">%2$s</a>', __( 'Approve', 'site-reviews' ), $review_approve_link );
+			$after[] = sprintf( '%1$s: <a href="%2$s">%2$s</a>', __( 'Discard', 'site-reviews' ), $review_discard_link );
 
 			$args['after'] = "\r\n\r\n" . implode( "\r\n\r\n", $after ); // makes each line a paragraph
 		}
@@ -122,7 +119,7 @@ class SubmitReview
 
 		$subject = sprintf( '[%s] %s: "%s"',
 			$blogname,
-			sprintf( __( 'New %s-Star Review', 'geminilabs-site-reviews' ), $command->rating ),
+			sprintf( __( 'New %s-Star Review', 'site-reviews' ), $command->rating ),
 			$command->title
 		);
 

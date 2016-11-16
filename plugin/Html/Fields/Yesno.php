@@ -22,8 +22,8 @@ class Yesno extends Radio
 		$defaultValue = 0;
 
 		$this->args['options'] = [
-			__( 'No', 'geminilabs-site-reviews' ),
-			__( 'Yes', 'geminilabs-site-reviews' ),
+			__( 'No', 'site-reviews' ),
+			__( 'Yes', 'site-reviews' ),
 		];
 
 		return parent::render( $defaultValue );

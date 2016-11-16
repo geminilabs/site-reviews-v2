@@ -45,7 +45,7 @@ class ReviewController extends BaseController
 
 		$reviewer = $user->exists()
 			? $user->display_name
-			: __( 'Anonymous', 'geminilabs-site-reviews' );
+			: __( 'Anonymous', 'site-reviews' );
 
 		$defaults = [
 			'content'  => '',
@@ -53,11 +53,11 @@ class ReviewController extends BaseController
 			'rating'   => '',
 			'reviewer' => $reviewer,
 			'terms'    => '',
-			'title'    => __( 'No Title', 'geminilabs-site-reviews' ),
+			'title'    => __( 'No Title', 'site-reviews' ),
 		];
 
 		if( !$this->validate( $request, $rules ) ) {
-			return __( 'Please fix the submission errors.', 'geminilabs-site-reviews' );
+			return __( 'Please fix the submission errors.', 'site-reviews' );
 		}
 
 		// normalize the request array

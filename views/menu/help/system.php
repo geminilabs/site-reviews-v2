@@ -6,13 +6,13 @@
 	wp_nonce_field( 'download-system-info' );
 	printf( '<textarea rows="13" name="%s[system-info]" class="glsr-log" onclick="this.select()" readonly>%s</textarea>', glsr_app()->prefix, $system_info->getAll() );
 	printf( '<input type="hidden" name="%s[action]" value="download-system-info">', glsr_app()->prefix );
-	submit_button( __( 'Download System Info', 'geminilabs-site-reviews' ), 'secondary', '', false ); ?>
+	submit_button( __( 'Download System Info', 'site-reviews' ), 'secondary', '', false ); ?>
 </form>
 
 <br>
 
-<h3><?= __( 'Logging', 'geminilabs-site-reviews' ); ?></h3>
-<p><?= __( "You can enable logging for debugging purposes. Log files can grow quickly, so don't leave this on.", 'geminilabs-site-reviews' ); ?></p>
+<h3><?= __( 'Logging', 'site-reviews' ); ?></h3>
+<p><?= __( "You can enable logging for debugging purposes. Log files can grow quickly, so don't leave this on.", 'site-reviews' ); ?></p>
 
 <?php $logging_enabled = $db->getOption( '', '', 'logging' ); ?>
 
@@ -23,13 +23,13 @@
 <form method="post" class="float-left"><?php
 	wp_nonce_field( 'clear-log' );
 	printf( '<input type="hidden" name="%s[action]" value="clear-log">', glsr_app()->prefix );
-	submit_button( __( 'Clear Log', 'geminilabs-site-reviews' ), 'secondary', 'clear-log', false ); ?>
+	submit_button( __( 'Clear Log', 'site-reviews' ), 'secondary', 'clear-log', false ); ?>
 </form>
 
 <form method="post"><?php
 	wp_nonce_field( 'download-log' );
 	printf( '<input type="hidden" name="%s[action]" value="download-log">', glsr_app()->prefix );
-	submit_button( __( 'Download Log', 'geminilabs-site-reviews' ), 'secondary', '', false ); ?>
+	submit_button( __( 'Download Log', 'site-reviews' ), 'secondary', '', false ); ?>
 </form>
 
 <?php endif; ?>
@@ -41,10 +41,10 @@
 
 	if( $logging_enabled == 1 ) {
 		printf( '<input type="hidden" name="%s_logging" value="0">', glsr_app()->prefix );
-		submit_button( __( 'Disable Logging', 'geminilabs-site-reviews' ) );
+		submit_button( __( 'Disable Logging', 'site-reviews' ) );
 	}
 	else {
 		printf( '<input type="hidden" name="%s_logging" value="1">', glsr_app()->prefix );
-		submit_button( __( 'Enable Logging', 'geminilabs-site-reviews' ) );
+		submit_button( __( 'Enable Logging', 'site-reviews' ) );
 	}?>
 </form>

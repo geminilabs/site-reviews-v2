@@ -21,12 +21,15 @@ class Reviews extends Base
 	 */
 	public function render()
 	{
+		global $post;
+
 		$defaults = [
 			'class'       => '',
 			'display'     => 'title',
 			'max_reviews' => '',
 			'min_rating'  => '',
 			'order_by'    => '',
+			'pagination'  => false,
 			'show_author' => false,
 			'show_date'   => false,
 			'show_link'   => false,
@@ -39,11 +42,13 @@ class Reviews extends Base
 
 		$reviews = $this->app->make( 'Database' )->getReviews( $args );
 
-		if( $reviews ) {
+		if( $reviews->have_posts() ) {
 
 			$html = '';
 
-			foreach( $reviews as $post ) : setup_postdata( $post );
+			while( $reviews->have_posts() ) :
+
+				$reviews->the_post();
 
 				$meta = get_post_meta( $post->ID );
 				$meta = (object) array_map( 'array_shift', $meta );
@@ -59,13 +64,17 @@ class Reviews extends Base
 
 				$html .= sprintf( '<div class="glsr-review">%s%s</div>', ${"print_{$args['display']}"}, $review_author );
 
-			endforeach;
+			endwhile;
+
+			if( $args['pagination'] ) {
+				$html .= $this->buildPagination( $reviews->max_num_pages );
+			}
 
 			wp_reset_postdata();
 		}
 		else {
 			$html = sprintf( '<p class="glsr-review glsr-no-reviews">%s</p>',
-				__( 'No reviews were found.', 'geminilabs-site-reviews' )
+				__( 'No reviews were found.', 'site-reviews' )
 			);
 		}
 
@@ -98,6 +107,98 @@ class Reviews extends Base
 	}
 
 	/**
+	 * Build the reviews pagination
+	 *
+	 * @param int $maxPageNum
+	 *
+	 * @return string|null
+	 */
+	protected function buildPagination( $maxPageNum )
+	{
+		if( $maxPageNum < 2 )return;
+
+		$paged = $this->app->make( 'Database' )->getCurrentPageNumber();
+		$theme = wp_get_theme()->get( 'TextDomain' );
+
+		if( in_array( $theme, ['twentyten','twentyeleven','twentytwelve','twentythirteen'] ) ) {
+
+			$links = '';
+
+			if( $paged > 1 ) {
+				$links .= sprintf( '<div class="nav-previous"><a href="%s">%s</a></div>',
+					get_pagenum_link( $paged - 1 ),
+					__( '<span class="meta-nav">&larr;</span> Previous', 'site-reviews' )
+				);
+			}
+			if( $paged < $maxPageNum ) {
+				$links .= sprintf( '<div class="nav-next"><a href="%s">%s</a></div>',
+					get_pagenum_link( $paged + 1 ),
+					__( 'Next <span class="meta-nav">&rarr;</span>', 'site-reviews' )
+				);
+			}
+		}
+		else {
+			$links = paginate_links([
+				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'site-reviews' ) . ' </span>',
+				'current'            => $paged,
+				'mid_size'           => 1,
+				'next_text'          => __( 'Next &rarr;', 'site-reviews' ),
+				'prev_text'          => __( '&larr; Previous', 'site-reviews' ),
+				'total'              => $maxPageNum,
+			]);
+		}
+
+		$links = apply_filters( 'site-reviews/shortcode/navigation_links', $links, $paged, $maxPageNum );
+
+		if( !$links )return;
+
+		return $this->paginationTemplate( $links );
+	}
+
+	/**
+	 * Get the correct pagination template
+	 *
+	 * @param string $links
+	 *
+	 * @return string
+	 */
+	protected function paginationTemplate( $links )
+	{
+		$class = '';
+		$theme = wp_get_theme()->get( 'TextDomain' );
+
+		switch( $theme ) {
+
+			case 'twentyten':
+			case 'twentyeleven':
+			case 'twentytwelve':
+				$template = '<nav class="navigation" role="navigation">%3$s</nav>';
+				break;
+			case 'twentyfourteen':
+				$class    = 'paging-navigation';
+				$template = '' .
+				'<nav class="navigation %1$s" role="navigation">' .
+					'<h2 class="screen-reader-text">%2$s</h2>' .
+					'<div class="pagination loop-pagination">%3$s</div>' .
+				'</nav>';
+				break;
+			default:
+				$class    = 'pagination';
+				$template = '' .
+				'<nav class="navigation %1$s" role="navigation">' .
+					'<h2 class="screen-reader-text">%2$s</h2>' .
+					'<div class="nav-links">%3$s</div>' .
+				'</nav>';
+		}
+
+		$template = apply_filters( 'navigation_markup_template', $template, $class );
+
+		$screenReaderText = __( 'Site Reviews navigation', 'site-reviews' );
+
+		return sprintf( $template, $class, $screenReaderText, $links );
+	}
+
+	/**
 	 * Build the review author string
 	 *
 	 * @param string $author
@@ -125,11 +226,11 @@ class Reviews extends Base
 		$excerpt     = $this->buildExcerpt( get_the_content( $postId ), $args['word_limit'] );
 		$review_link = $this->reviewLink( $args['show_link'], $meta->url );
 
-		$use_excerpt_as_link = apply_filters( "site-reviews/{$meta->site_name}/widget/use_excerpt_as_link", false )
+		$use_excerpt_as_link = apply_filters( "site-reviews/widget/use_excerpt_as_link", false )
 			&& in_array( $args['display'], ['both', 'excerpt'] )
 			&& !empty( $review_link );
 
-		$show_excerpt_read_more = !apply_filters( "site-reviews/{$meta->site_name}/widget/hide_excerpt_read_more", false )
+		$show_excerpt_read_more = !apply_filters( "site-reviews/widget/hide_excerpt_read_more", false )
 			? $review_link
 			: '';
 
@@ -153,7 +254,7 @@ class Reviews extends Base
 	protected function reviewLink( $link, $metaLink )
 	{
 		return wp_validate_boolean( $link )
-			? sprintf( '<span class="glsr-review-link">[<a href="%s" target="_blank">%s</a>]</span>', esc_url( $metaLink ), __( 'read more', 'geminilabs-site-reviews' ) )
+			? sprintf( '<span class="glsr-review-link">[<a href="%s" target="_blank">%s</a>]</span>', esc_url( $metaLink ), __( 'read more', 'site-reviews' ) )
 			: '';
 	}
 
@@ -192,7 +293,7 @@ class Reviews extends Base
 	{
 		$review_link = $this->reviewLink( $args['show_link'], $meta->url );
 
-		$use_title_as_link = apply_filters( "site-reviews/{$meta->site_name}/widget/use_title_as_link", false )
+		$use_title_as_link = apply_filters( "site-reviews/widget/use_title_as_link", false )
 			&& in_array( $args['display'], ['both', 'excerpt'] )
 			&& !empty( $review_link );
 

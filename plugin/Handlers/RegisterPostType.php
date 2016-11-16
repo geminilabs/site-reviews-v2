@@ -295,11 +295,11 @@ class RegisterPostType
 	public function modifyPostTypeBulkMessages( array $messages, array $counts )
 	{
 		$messages['site-review'] = [
-			'updated'   => _n( '%s review updated.', '%s posts updated.', $counts['updated'], 'geminilabs-site-reviews' ),
-			'locked'    => _n( '%s review not updated, somebody is editing it.', '%s reviews not updated, somebody is editing them.', $counts['locked'], 'geminilabs-site-reviews' ),
-			'deleted'   => _n( '%s review permanently deleted.', '%s reviews permanently deleted.', $counts['deleted'], 'geminilabs-site-reviews' ),
-			'trashed'   => _n( '%s review moved to the Trash.', '%s reviews moved to the Trash.', $counts['trashed'], 'geminilabs-site-reviews' ),
-			'untrashed' => _n( '%s review restored from the Trash.', '%s reviews restored from the Trash.', $counts['untrashed'], 'geminilabs-site-reviews' ),
+			'updated'   => _n( '%s review updated.', '%s posts updated.', $counts['updated'], 'site-reviews' ),
+			'locked'    => _n( '%s review not updated, somebody is editing it.', '%s reviews not updated, somebody is editing them.', $counts['locked'], 'site-reviews' ),
+			'deleted'   => _n( '%s review permanently deleted.', '%s reviews permanently deleted.', $counts['deleted'], 'site-reviews' ),
+			'trashed'   => _n( '%s review moved to the Trash.', '%s reviews moved to the Trash.', $counts['trashed'], 'site-reviews' ),
+			'untrashed' => _n( '%s review restored from the Trash.', '%s reviews restored from the Trash.', $counts['untrashed'], 'site-reviews' ),
 		];
 
 		return $messages;
@@ -587,11 +587,11 @@ class RegisterPostType
 		$ratings = array_flip( array_reverse( $ratings ) );
 
 		array_walk( $ratings, function( &$value, $key ) {
-			$label = _n( '%s star', '%s stars', $key, 'geminilabs-site-reviews' );
+			$label = _n( '%s star', '%s stars', $key, 'site-reviews' );
 			$value = sprintf( $label, $key );
 		});
 
-		$ratings = [ __( 'All ratings', 'geminilabs-site-reviews' ) ] + $ratings;
+		$ratings = [ __( 'All ratings', 'site-reviews' ) ] + $ratings;
 
 		$this->app->make( 'Html' )->renderPartial( 'filterby', [
 			'name'   => 'rating',
@@ -609,10 +609,10 @@ class RegisterPostType
 		if( empty( $sites ) )return;
 
 		$sites = array_combine( $sites, array_map( 'ucfirst', $sites ) );
-		$sites = [ __( 'All types', 'geminilabs-site-reviews' ) ] + $sites;
+		$sites = [ __( 'All types', 'site-reviews' ) ] + $sites;
 
 		if( isset( $sites['local'] ) ) {
-			$sites['local'] = __( 'Local Review', 'geminilabs-site-reviews' );
+			$sites['local'] = __( 'Local Review', 'site-reviews' );
 		}
 
 		$this->app->make( 'Html' )->renderPartial( 'filterby', [

@@ -48,7 +48,7 @@ elixir(( mix ) => mix
 gulp.task( 'checktextdomain', () => gulp
 	.src(['plugin/**/*.php','views/**/*.php'])
 	.pipe( checktextdomain({
-		text_domain: 'geminilabs-site-reviews',
+		text_domain: 'site-reviews',
 		keywords: [
 			'__:1,2d',
 			'_e:1,2d',
@@ -72,7 +72,7 @@ gulp.task( 'pot', () => gulp
 	.src(['*.php', 'plugin/**/*.php', 'views/**/*.php'])
 	.pipe( sort())
 	.pipe( wpPot({
-		domain        : 'geminilabs-site-reviews',
+		domain        : 'site-reviews',
 		destFile      : 'site-reviews.pot',
 		package       : 'site-reviews',
 		bugReport     : 'https://github.com/geminilabs/site-reviews/issues/new',

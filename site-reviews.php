@@ -7,12 +7,12 @@
  * Plugin Name: Site Reviews
  * Plugin URI:  https://wordpress.org/plugins/site-reviews
  * Description: Receive and display site reviews
- * Version:     1.0.4
+ * Version:     1.1.0
  * Author:      Paul Ryley
  * Author URI:  http://geminilabs.io
  * License:     GPL2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: geminilabs-site-reviews
+ * Text Domain: site-reviews
  */
 
 defined( 'WPINC' ) or die;

@@ -22,11 +22,13 @@ class SiteReviews extends Shortcode
 	public function printShortcode( $atts = [] )
 	{
 		$defaults = [
-			'class'   => '',
-			'count'   => 10,
-			'display' => 'title,excerpt,author,date,rating,url',
-			'rating'  => 5,
-			'title'   => '',
+			'class'      => '',
+			'count'      => 10,
+			'display'    => 'title,excerpt,author,date,rating,url',
+			'pagination' => false,
+			'rating'     => 5,
+			'title'      => '',
+			'type'       => '',
 		];
 
 		$args = shortcode_atts( $defaults, $atts );
@@ -59,11 +61,12 @@ class SiteReviews extends Shortcode
 			'max_reviews' => $count,
 			'min_rating'  => $rating,
 			'order_by'    => 'date',
+			'pagination'  => $pagination,
 			'show_author' => $author,
 			'show_date'   => $date,
 			'show_link'   => $link,
 			'show_rating' => $rating,
-			'site_name'   => 'local',
+			'site_name'   => $type,
 		]);
 
 		echo '</div>';

@@ -1,7 +1,7 @@
 <?php defined( 'WPINC' ) or die; ?>
 
 <div id="welcome-panel" class="welcome-panel">
-	<a class="welcome-panel-close" href="<?= admin_url( 'edit.php?post_type=site-review&page=geminilabs-site-reviews&welcome=0' ); ?>" aria-label="Dismiss the welcome panel">Dismiss</a>
+	<a class="welcome-panel-close" href="<?= admin_url( 'edit.php?post_type=site-review&page=site-reviews&welcome=0' ); ?>" aria-label="Dismiss the welcome panel">Dismiss</a>
 	<div class="welcome-panel-content">
 
 		<h2>Thank you for installing Reviews!</h2>

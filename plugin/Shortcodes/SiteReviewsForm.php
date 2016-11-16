@@ -25,7 +25,7 @@ class SiteReviewsForm extends Shortcode
 
 		if( $requireUser && !is_user_logged_in() ) {
 			$message = sprintf(
-				__( 'You must be <a href="%s">logged in</a> to submit a review.', 'geminilabs-site-reviews' ),
+				__( 'You must be <a href="%s">logged in</a> to submit a review.', 'site-reviews' ),
 				wp_login_url( get_permalink() )
 			);
 			echo wpautop( $message );

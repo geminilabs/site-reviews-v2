@@ -28,4 +28,6 @@
 	<p>By default, the shortcode displays only 5-star reviews. Include the "rating" attribute to set the minimum star-rating of reviews to display.</p>
 	<code>class="my-reviews full-width"</code>
 	<p>Include the "class" attribute to add custom CSS classes to the shortcode.</p>
+	<code>pagination=true</code>
+	<p>Include the "pagination" attribute to display reviews in multiple pages (i.e. Page 1, Page 2, etc.). When using pagination, only one [site_reviews] shortcode can be used on a page at a time.</p>
 </div>

@@ -37,7 +37,7 @@ class Colorpicker extends Text
 		return parent::render([
 			'class'       => 'color-picker-hex',
 			'maxlength'   => 7,
-			'placeholder' => __( 'Hex Value', 'geminilabs-site-reviews' ),
+			'placeholder' => __( 'Hex Value', 'site-reviews' ),
 			'attributes'  => [
 				'data-colorpicker' => json_encode([
 					'palettes' => [

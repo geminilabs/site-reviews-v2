@@ -40,20 +40,20 @@ if( !function_exists( 'glsr_deactivate_plugin' ) ) {
 
 		deactivate_plugins( $plugin_name );
 
-		$title = __( 'The Site Reviews plugin was deactivated.', 'geminilabs-site-reviews' );
+		$title = __( 'The Site Reviews plugin was deactivated.', 'site-reviews' );
 		$msg_1 = '';
 		$msg_2 = '';
 
 		if( $check['php'] ) {
-			$msg_1 = __( 'Sorry, this plugin requires PHP version 5.4 or greater in order to work properly.', 'geminilabs-site-reviews' );
-			$msg_2 = __( 'Please contact your hosting provider or server administrator to upgrade the version of PHP on your server (your server is running PHP version %s), or try to find an alternative plugin.', 'geminilabs-site-reviews' );
+			$msg_1 = __( 'Sorry, this plugin requires PHP version 5.4 or greater in order to work properly.', 'site-reviews' );
+			$msg_2 = __( 'Please contact your hosting provider or server administrator to upgrade the version of PHP on your server (your server is running PHP version %s), or try to find an alternative plugin.', 'site-reviews' );
 			$msg_2 = sprintf( $msg_2, PHP_VERSION );
 		}
 
 		// WordPress check overrides the PHP check
 		if( $check['wordpress'] ) {
-			$msg_1 = __( 'Sorry, this plugin requires WordPress version 4.0.0 or greater in order to work properly.', 'geminilabs-site-reviews' );
-			$msg_2 = sprintf( '<a href="%s">%s</a>', admin_url( 'update-core.php' ), __( 'Update WordPress', 'geminilabs-site-reviews' ) );
+			$msg_1 = __( 'Sorry, this plugin requires WordPress version 4.0.0 or greater in order to work properly.', 'site-reviews' );
+			$msg_2 = sprintf( '<a href="%s">%s</a>', admin_url( 'update-core.php' ), __( 'Update WordPress', 'site-reviews' ) );
 		}
 
 		printf( '<div id="message" class="notice notice-error error is-dismissible"><p><strong>%s</strong></p><p>%s</p><p>%s</p></div>',

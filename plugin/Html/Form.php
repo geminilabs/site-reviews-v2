@@ -116,7 +116,7 @@ class Form
 			'enctype'    => 'multipart/form-data',
 			'method'     => 'post',
 			'nonce'      => '',
-			'submit'     => __( 'Submit', 'geminilabs-site-reviews' ),
+			'submit'     => __( 'Submit', 'site-reviews' ),
 		];
 
 		$this->args = array_merge( $defaults, $args );
@@ -252,7 +252,7 @@ class Form
 		is_array( $args ) ?: $args = ['text' => $args ];
 
 		$args = shortcode_atts([
-			'text' => __( 'Save Changes', 'geminilabs-site-reviews' ),
+			'text' => __( 'Save Changes', 'site-reviews' ),
 			'type' => 'primary',
 			'name' => 'submit',
 			'wrap' => true,

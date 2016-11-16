@@ -13,6 +13,7 @@ namespace GeminiLabs\SiteReviews\Controllers;
 use Exception;
 use GeminiLabs\SiteReviews\App;
 use InvalidArgumentException;
+use WP_Error;
 
 abstract class BaseController
 {

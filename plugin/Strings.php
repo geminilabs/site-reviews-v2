@@ -15,51 +15,51 @@ class Strings
 	public function post_type_labels()
 	{
 		return [
-			'add_new_item'          => __( 'Add New Review', 'geminilabs-site-reviews' ),
-			'all_items'             => __( 'All Reviews', 'geminilabs-site-reviews' ),
-			'archives'              => __( 'Review Archives', 'geminilabs-site-reviews' ),
-			'edit_item'             => __( 'Edit Review', 'geminilabs-site-reviews' ),
-			'insert_into_item'      => __( 'Insert into review', 'geminilabs-site-reviews' ),
-			'new_item'              => __( 'New Review', 'geminilabs-site-reviews' ),
-			'not_found'             => __( 'No Reviews found', 'geminilabs-site-reviews' ),
-			'not_found_in_trash'    => __( 'No Reviews found in Trash', 'geminilabs-site-reviews' ),
-			'search_items'          => __( 'Search Reviews', 'geminilabs-site-reviews' ),
-			'uploaded_to_this_item' => __( 'Uploaded to this review', 'geminilabs-site-reviews' ),
-			'view_item'             => __( 'View Review', 'geminilabs-site-reviews' ),
+			'add_new_item'          => __( 'Add New Review', 'site-reviews' ),
+			'all_items'             => __( 'All Reviews', 'site-reviews' ),
+			'archives'              => __( 'Review Archives', 'site-reviews' ),
+			'edit_item'             => __( 'Edit Review', 'site-reviews' ),
+			'insert_into_item'      => __( 'Insert into review', 'site-reviews' ),
+			'new_item'              => __( 'New Review', 'site-reviews' ),
+			'not_found'             => __( 'No Reviews found', 'site-reviews' ),
+			'not_found_in_trash'    => __( 'No Reviews found in Trash', 'site-reviews' ),
+			'search_items'          => __( 'Search Reviews', 'site-reviews' ),
+			'uploaded_to_this_item' => __( 'Uploaded to this review', 'site-reviews' ),
+			'view_item'             => __( 'View Review', 'site-reviews' ),
 		];
 	}
 
 	public function post_updated_messages()
 	{
 		return [
-			'approved'      => __( 'Review has been approved and published.', 'geminilabs-site-reviews' ),
-			'draft_updated' => __( 'Review draft updated.', 'geminilabs-site-reviews' ),
-			'preview'       => __( 'Preview review', 'geminilabs-site-reviews' ),
-			'published'     => __( 'Review published.', 'geminilabs-site-reviews' ),
-			'restored'      => __( 'Review restored to revision from %s.', 'geminilabs-site-reviews' ),
-			'reverted'      => __( 'Review has been reverted to its original submission state.', 'geminilabs-site-reviews' ),
-			'saved'         => __( 'Review saved.', 'geminilabs-site-reviews' ),
-			'scheduled'     => __( 'Review scheduled for: %s.', 'geminilabs-site-reviews' ),
-			'submitted'     => __( 'Review submitted.', 'geminilabs-site-reviews' ),
-			'unapproved'    => __( 'Review has been unapproved and is now pending.', 'geminilabs-site-reviews' ),
-			'updated'       => __( 'Review updated.', 'geminilabs-site-reviews' ),
-			'view'          => __( 'View review', 'geminilabs-site-reviews' ),
+			'approved'      => __( 'Review has been approved and published.', 'site-reviews' ),
+			'draft_updated' => __( 'Review draft updated.', 'site-reviews' ),
+			'preview'       => __( 'Preview review', 'site-reviews' ),
+			'published'     => __( 'Review published.', 'site-reviews' ),
+			'restored'      => __( 'Review restored to revision from %s.', 'site-reviews' ),
+			'reverted'      => __( 'Review has been reverted to its original submission state.', 'site-reviews' ),
+			'saved'         => __( 'Review saved.', 'site-reviews' ),
+			'scheduled'     => __( 'Review scheduled for: %s.', 'site-reviews' ),
+			'submitted'     => __( 'Review submitted.', 'site-reviews' ),
+			'unapproved'    => __( 'Review has been unapproved and is now pending.', 'site-reviews' ),
+			'updated'       => __( 'Review updated.', 'site-reviews' ),
+			'view'          => __( 'View review', 'site-reviews' ),
 		];
 	}
 
 	public function validation()
 	{
 		return [
-			'accepted'        => _x( 'The :attribute must be accepted.', ':attribute is a placeholder and should not be translated.', 'geminilabs-site-reviews' ),
-			'between.numeric' => _x( 'The :attribute must be between :min and :max.', ':attribute, :min, and :max are placeholders and should not be translated.', 'geminilabs-site-reviews' ),
-			'between.string'  => _x( 'The :attribute must be between :min and :max characters.', ':attribute, :min, and :max are placeholders and should not be translated.', 'geminilabs-site-reviews' ),
-			'email'           => _x( 'The :attribute must be a valid email address.', ':attribute is a placeholder and should not be translated.', 'geminilabs-site-reviews' ),
-			'max.numeric'     => _x( 'The :attribute may not be greater than :max.', ':attribute and :max are placeholders and should not be translated.', 'geminilabs-site-reviews' ),
-			'max.string'      => _x( 'The :attribute may not be greater than :max characters.', ':attribute and :max are placeholders and should not be translated.', 'geminilabs-site-reviews' ),
-			'min.numeric'     => _x( 'The :attribute must be at least :min.', ':attribute and :min are placeholders and should not be translated.', 'geminilabs-site-reviews' ),
-			'min.string'      => _x( 'The :attribute must be at least :min characters.', ':attribute and :min are placeholders and should not be translated.', 'geminilabs-site-reviews' ),
-			'regex'           => _x( 'The :attribute format is invalid.', ':attribute is a placeholder and should not be translated.', 'geminilabs-site-reviews' ),
-			'required'        => _x( 'The :attribute field is required.', ':attribute is a placeholder and should not be translated.', 'geminilabs-site-reviews' ),
+			'accepted'        => _x( 'The :attribute must be accepted.', ':attribute is a placeholder and should not be translated.', 'site-reviews' ),
+			'between.numeric' => _x( 'The :attribute must be between :min and :max.', ':attribute, :min, and :max are placeholders and should not be translated.', 'site-reviews' ),
+			'between.string'  => _x( 'The :attribute must be between :min and :max characters.', ':attribute, :min, and :max are placeholders and should not be translated.', 'site-reviews' ),
+			'email'           => _x( 'The :attribute must be a valid email address.', ':attribute is a placeholder and should not be translated.', 'site-reviews' ),
+			'max.numeric'     => _x( 'The :attribute may not be greater than :max.', ':attribute and :max are placeholders and should not be translated.', 'site-reviews' ),
+			'max.string'      => _x( 'The :attribute may not be greater than :max characters.', ':attribute and :max are placeholders and should not be translated.', 'site-reviews' ),
+			'min.numeric'     => _x( 'The :attribute must be at least :min.', ':attribute and :min are placeholders and should not be translated.', 'site-reviews' ),
+			'min.string'      => _x( 'The :attribute must be at least :min characters.', ':attribute and :min are placeholders and should not be translated.', 'site-reviews' ),
+			'regex'           => _x( 'The :attribute format is invalid.', ':attribute is a placeholder and should not be translated.', 'site-reviews' ),
+			'required'        => _x( 'The :attribute field is required.', ':attribute is a placeholder and should not be translated.', 'site-reviews' ),
 		];
 	}
 }
