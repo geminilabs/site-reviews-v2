@@ -67,7 +67,7 @@ class RecentReviews extends Widget
 			$this->create_field([
 				'type'  => 'select',
 				'name'  => 'type',
-				'label' => __( 'Which reviews would you like to display? ', 'geminilabs-site-reviews' ),
+				'label' => __( 'Which reviews would you like to display? ', 'site-reviews' ),
 				'value'   => $args['type'],
 				'options' => ['' => __( 'All Reviews', 'site-reviews' ) ] + $types,
 			]);
