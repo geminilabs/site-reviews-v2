@@ -13,6 +13,7 @@ Minimum plugin requirements:
 
 #### Features
 
+* [new] Review Pagination
 * Actively developed and supported
 * Clean and easy-to-configure user interface
 * Configurable Widgets

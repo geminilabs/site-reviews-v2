@@ -3,7 +3,7 @@
 All proposed features are subject to change.
 
 ## v1.1.0
-- [ ] Paginated reviews
+- [x] Paginated reviews
 
 ## v1.2.0
 - [ ] Webhook notifications

@@ -24,6 +24,7 @@ Follow plugin development on github at: https://github.com/geminilabs/site-revie
 
 = Current Features =
 
+* [new] Review Pagination
 * Actively developed and supported
 * Clean and easy-to-configure user interface
 * Configurable Widgets
@@ -31,7 +32,6 @@ Follow plugin development on github at: https://github.com/geminilabs/site-revie
 * Filter reviews by rating
 * Logging
 * Minimal widget styling (tested with all official WP themes)
-* Review Pagination
 * Shortcodes: Display reviews in your post content and templates
 * WordPress.org support
 * WP Filter Hooks
@@ -86,6 +86,7 @@ Some themes may have very small sidebars and CSS styles that conflict or alter t
 = 1.1.0 (2016-11-16) =
 
 * [feature] Pagination
+* [breaking] Changed internal widget hook names
 * [breaking] Changed text-domain to "site-reviews"
 * Set post_meta defaults when creating a review
 * [addon support] Display read-only reviews
