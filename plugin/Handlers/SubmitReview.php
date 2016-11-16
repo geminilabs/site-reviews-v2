@@ -44,15 +44,12 @@ class SubmitReview
 			'author'     => $command->reviewer,
 			'avatar'     => get_avatar_url( $command->email ),
 			'content'    => $command->content,
-			'date'       => get_date_from_gmt( gmdate( 'Y-m-d H:i:s' )),
 			'email'      => $command->email,
 			'ip_address' => $command->ipAddress,
-			'pinned'     => false,
 			'rating'     => $command->rating,
 			'review_id'  => $reviewId,
 			'site_name'  => 'local',
 			'title'      => $command->title,
-			'url'        => '',
 		];
 
 		$review = apply_filters( 'site-reviews/local/review', $review, $command );

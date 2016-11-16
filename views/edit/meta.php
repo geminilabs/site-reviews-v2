@@ -27,9 +27,9 @@
 		? __( 'Nothing to Revert', 'site-reviews' )
 		: __( 'Revert Changes', 'site-reviews' );
 
-	$disabled = !$modified
-		? ' disabled'
-		: '';
+	$revertButton = !$modified
+		? sprintf( '<button id="revert" class="button button-large" disabled>%s</button>', $revert )
+		: sprintf( '<a href="%s" id="revert" class="button button-large">%s</a>', $revertUrl, $revert );
 ?>
 
 <table class="glsr-metabox-table">
@@ -52,12 +52,12 @@
 		</tr>
 		<tr>
 			<td><?= __( 'Avatar', 'site-reviews' ); ?></th>
-			<td><img src="<?= get_post_meta( $post->ID, 'avatar', true ); ?>"></td>
+			<td><img src="<?= get_post_meta( $post->ID, 'avatar', true ); ?>" width="96"></td>
 		</tr>
 	</tbody>
 </table>
 
 <div class="revert-action">
 	<span class="spinner"></span>
-	<a href="<?= $revertUrl; ?>" id="revert" class="button button-large"<?= $disabled; ?>><?= $revert; ?></a>
+	<?= $revertButton; ?>
 </div>

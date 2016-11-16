@@ -12,27 +12,41 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Fixed
 ### Security
 
+## [1.1.0] - 2016-11-16
+
+### Added
+- [feature] Pagination
+- [addon support] Display read-only reviews
+- [addon support] Display widget link options (conditional field)
+
+### Changed
+- [breaking] Changed text-domain to "site-reviews"
+- [addon support] Show all review types by default in widgets and shortcodes
+
+### Fixed
+- Set post_meta defaults when creating a review
+
 ## [1.0.4] - 2016-11-14
 
 ### Changed
-- use the logged-in user's display_name by default instead of "Anonymous" when submitting reviews
+- Use the logged-in user's display_name by default instead of "Anonymous" when submitting reviews
 
 ### Fixed
-- fix shortcodes to insert in the_content correctly
+- Fix shortcodes to insert in the_content correctly
 
 ## [1.0.3] - 2016-11-09
 
 ### Added
-- Internal changes for add-on integration
+- [addon support] Internal add-on integration
 
 ### Changed
 - Updated plugin description
 
 ### Fixed
-- Fix plain-text emails
-- Prevent a possible infinite recursion loop when setting default settings
-- Fix form field values with a falsey attribute
 - Do not wrap hidden form inputs with HTML
+- Fix plain-text emails
+- Fix form field values with a falsey attribute
+- Prevent a possible infinite recursion loop when setting default settings
 
 ## [1.0.2] - 2016-10-24
 

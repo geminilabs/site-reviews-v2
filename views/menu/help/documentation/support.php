@@ -8,9 +8,6 @@
 
 		<dt>How do I disable the plugin CSS and/or Javascript?</dt>
 		<dd>To disable the plugin stylesheet or javascript from loading on your website, copy and paste the provided <code><a href="<?= admin_url( 'edit.php?post_type=site-review&page=help&tab=documentation&section=hooks' ); ?>">WordPress Filter Hooks</a></code> into your theme's <code>functions.php</code> file.</dd>
-
-		<dt>How do I enable pagination? I want to show all my reviews on a dedicated page.</dt>
-		<dd>Pagination of reviews is not not yet supported...however, it is a feature on the roadmap that is coming very soon!</dd>
 	</dl>
 </div>
 

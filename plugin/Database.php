@@ -11,6 +11,7 @@
 namespace GeminiLabs\SiteReviews;
 
 use GeminiLabs\SiteReviews\App;
+use WP_Query;
 
 class Database
 {
@@ -122,6 +123,20 @@ class Database
 	}
 
 	/**
+	 * Get the current page number for the global query
+	 *
+	 * @return int
+	 */
+	public function getCurrentPageNumber()
+	{
+		$paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : (
+			get_query_var( 'page' ) ? get_query_var( 'page' ) : 1
+		);
+
+		return intval( $paged );
+	}
+
+	/**
 	 * Gets an option from the plugin settings array using dot notation
 	 *
 	 * @param string $path
@@ -197,9 +212,9 @@ class Database
 	}
 
 	/**
-	 * Gets an array of saved Reviews
+	 * Gets a WP_Query object of saved Reviews
 	 *
-	 * @return array
+	 * @return WP_Query
 	 */
 	public function getReviews( array $args = [] )
 	{
@@ -207,6 +222,7 @@ class Database
 			'max_reviews'  => '10',
 			'min_rating'   => '5',
 			'order_by'     => 'date',
+			'pagination'   => false,
 			'site_name'    => '',
 		];
 
@@ -227,15 +243,40 @@ class Database
 			'compare' => '>=',
 		];
 
-		return get_posts([
+		$pagination = $pagination ? $this->getCurrentPageNumber() : 1;
+
+		return new WP_Query([
 			'meta_key'       => 'pinned',
+			'meta_query'     => $meta_query,
 			'order'          => 'DESC',
 			'orderby'        => "meta_value $order_by",
+			'paged'          => $pagination,
 			'post_status'    => 'publish',
 			'post_type'      => 'site-review',
 			'posts_per_page' => $max_reviews ? $max_reviews : -1,
-			'meta_query'     => $meta_query,
 		]);
+	}
+
+	/**
+	 * Gets the review types (default type is "local")
+	 *
+	 * @return array
+	 */
+	public function getReviewTypes()
+	{
+		global $wpdb;
+
+		$types = $wpdb->get_col(
+			"SELECT DISTINCT(meta_value) FROM $wpdb->postmeta WHERE meta_key = 'site_name' ORDER BY meta_value ASC"
+		);
+
+		$types = array_flip( $types );
+
+		array_walk( $types, function( &$value, $key ) {
+			$value = sprintf( '%s reviews', ucfirst( $key ) );
+		});
+
+		return $types;
 	}
 
 	/**
@@ -268,6 +309,22 @@ class Database
 		if( !empty( $post_id ) && !$update ) {
 			return $post_id;
 		}
+
+		// make sure we set post_meta fallback defaults
+		$meta = wp_parse_args( $meta, [
+			'author'     => '',
+			'avatar'     => '',
+			'content'    => '',
+			'date'       => get_date_from_gmt( gmdate( 'Y-m-d H:i:s' )),
+			'email'      => '',
+			'ip_address' => '',
+			'pinned'     => false,
+			'rating'     => '',
+			'review_id'  => '',
+			'site_name'  => 'local',
+			'title'      => '',
+			'url'        => '',
+		]);
 
 		$post_data = [
 			'comment_status' => 'closed',
