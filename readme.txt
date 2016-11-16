@@ -31,6 +31,7 @@ Follow plugin development on github at: https://github.com/geminilabs/site-revie
 * Filter reviews by rating
 * Logging
 * Minimal widget styling (tested with all official WP themes)
+* Review Pagination
 * Shortcodes: Display reviews in your post content and templates
 * WordPress.org support
 * WP Filter Hooks
@@ -82,19 +83,32 @@ Some themes may have very small sidebars and CSS styles that conflict or alter t
 
 == Changelog ==
 
+= 1.1.0 (2016-11-16) =
+
+* [feature] Pagination
+* [breaking] Changed text-domain to "site-reviews"
+* Set post_meta defaults when creating a review
+* [addon support] Display read-only reviews
+* [addon support] Display widget link options (conditional field)
+* [addon support] Show all review types by default in widgets and shortcodes
+
 = 1.0.4 (2016-11-14) =
-- use the logged-in user's display_name by default instead of "Anonymous" when submitting reviews
-- Fix shortcodes to insert in the_content correctly
+
+* use the logged-in user's display_name by default instead of "Anonymous" when submitting reviews
+* Fix shortcodes to insert in the_content correctly
 
 = 1.0.3 (2016-11-09) =
-- Updated plugin description
-- Fix plain-text emails
-- Fix inconsistencies with plugin settings form fields
-- Fix internal add-on integration code
+
+* Updated plugin description
+* Fix plain-text emails
+* Fix inconsistencies with plugin settings form fields
+* Fix internal add-on integration code
 
 = 1.0.2 (2016-10-24) =
+
 * Set widget and settings defaults
 * Fix PHP error that is thrown when settings have not yet been saved to DB
 
 = 1.0.0 (2016-10-21) =
+
 * Initial plugin release
