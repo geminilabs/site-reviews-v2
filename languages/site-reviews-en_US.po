@@ -55,7 +55,7 @@ msgstr ""
 msgid "Update WordPress"
 msgstr "Update WordPress"
 
-#: plugin/Commands/RegisterPostType.php:20, plugin/Widgets/RecentReviews.php:47, plugin/Widgets/ReviewsForm.php:40
+#: plugin/Commands/RegisterPostType.php:20, plugin/Widgets/RecentReviews.php:48, plugin/Widgets/ReviewsForm.php:40
 msgid "Title"
 msgstr "Title"
 
@@ -71,7 +71,7 @@ msgstr "Log is empty"
 msgid "Log was cleared."
 msgstr "Log was cleared."
 
-#: plugin/Controllers/MainController.php:87, plugin/Controllers/MainController.php:293, plugin/Controllers/MainController.php:446
+#: plugin/Controllers/MainController.php:87, plugin/Controllers/MainController.php:293, plugin/Controllers/MainController.php:478
 msgid "Settings"
 msgstr "Settings"
 
@@ -129,7 +129,7 @@ msgstr "Pinned"
 msgid "Approve this review"
 msgstr "Approve this review"
 
-#: plugin/Controllers/MainController.php:231, plugin/Handlers/SubmitReview.php:94
+#: plugin/Controllers/MainController.php:231, plugin/Handlers/SubmitReview.php:91
 msgid "Approve"
 msgstr "Approve"
 
@@ -173,19 +173,23 @@ msgstr "Documentation"
 msgid "System Info"
 msgstr "System Info"
 
-#: plugin/Controllers/MainController.php:449
+#: plugin/Controllers/MainController.php:459
+msgid "%s reviews are read-only."
+msgstr "%s reviews are read-only."
+
+#: plugin/Controllers/MainController.php:481
 msgid "Licenses"
 msgstr "Licenses"
 
-#: plugin/Controllers/MainController.php:465
+#: plugin/Controllers/MainController.php:497
 msgid "Logging enabled."
 msgstr "Logging enabled."
 
-#: plugin/Controllers/MainController.php:466
+#: plugin/Controllers/MainController.php:498
 msgid "Logging disabled."
 msgstr "Logging disabled."
 
-#: plugin/Controllers/MainController.php:482
+#: plugin/Controllers/MainController.php:514
 msgid "Settings updated."
 msgstr "Settings updated."
 
@@ -249,15 +253,15 @@ msgstr "All types"
 msgid "Local Review"
 msgstr "Local Review"
 
-#: plugin/Handlers/SubmitReview.php:64
+#: plugin/Handlers/SubmitReview.php:61
 msgid "Your review has been submitted!"
 msgstr "Your review has been submitted!"
 
-#: plugin/Handlers/SubmitReview.php:95
+#: plugin/Handlers/SubmitReview.php:92
 msgid "Discard"
 msgstr "Discard"
 
-#: plugin/Handlers/SubmitReview.php:125
+#: plugin/Handlers/SubmitReview.php:122
 msgid "New %s-Star Review"
 msgstr "New %s-Star Review"
 
@@ -301,11 +305,35 @@ msgstr "Save Changes"
 msgid "More Info"
 msgstr "More Info"
 
-#: plugin/Html/Partials/Reviews.php:68
+#: plugin/Html/Partials/Reviews.php:77
 msgid "No reviews were found."
 msgstr "No reviews were found."
 
-#: plugin/Html/Partials/Reviews.php:156
+#: plugin/Html/Partials/Reviews.php:130
+msgid "<span class=\"meta-nav\">&larr;</span> Previous"
+msgstr "<span class=\"meta-nav\">&larr;</span> Previous"
+
+#: plugin/Html/Partials/Reviews.php:136
+msgid "Next <span class=\"meta-nav\">&rarr;</span>"
+msgstr "Next <span class=\"meta-nav\">&rarr;</span>"
+
+#: plugin/Html/Partials/Reviews.php:142
+msgid "Page"
+msgstr "Page"
+
+#: plugin/Html/Partials/Reviews.php:145
+msgid "Next &rarr;"
+msgstr "Next &rarr;"
+
+#: plugin/Html/Partials/Reviews.php:146
+msgid "&larr; Previous"
+msgstr "&larr; Previous"
+
+#: plugin/Html/Partials/Reviews.php:196
+msgid "Site Reviews navigation"
+msgstr "Site Reviews navigation"
+
+#: plugin/Html/Partials/Reviews.php:257
 msgid "read more"
 msgstr "read more"
 
@@ -465,7 +493,7 @@ msgstr "You must be <a href=\"%s\">logged in</a> to submit a review."
 msgid "Add New Review"
 msgstr "Add New Review"
 
-#: plugin/Strings.php:19
+#: plugin/Strings.php:19, plugin/Widgets/RecentReviews.php:72
 msgid "All Reviews"
 msgstr "All Reviews"
 
@@ -553,59 +581,63 @@ msgstr "Review updated."
 msgid "View review"
 msgstr "View review"
 
-#: plugin/Widgets/RecentReviews.php:57
+#: plugin/Widgets/RecentReviews.php:58
 msgid "Display only title"
 msgstr "Display only title"
 
-#: plugin/Widgets/RecentReviews.php:58
+#: plugin/Widgets/RecentReviews.php:59
 msgid "Display only excerpt"
 msgstr "Display only excerpt"
 
-#: plugin/Widgets/RecentReviews.php:59
+#: plugin/Widgets/RecentReviews.php:60
 msgid "Display title and excerpt"
 msgstr "Display title and excerpt"
 
-#: plugin/Widgets/RecentReviews.php:66
+#: plugin/Widgets/RecentReviews.php:70
+msgid "Which reviews would you like to display? "
+msgstr "Which reviews would you like to display? "
+
+#: plugin/Widgets/RecentReviews.php:79
 msgid "What is the minimum rating to display? "
 msgstr "What is the minimum rating to display? "
 
-#: plugin/Widgets/RecentReviews.php:69
+#: plugin/Widgets/RecentReviews.php:82
 msgid "5 stars"
 msgstr "5 stars"
 
-#: plugin/Widgets/RecentReviews.php:70
+#: plugin/Widgets/RecentReviews.php:83
 msgid "4 stars"
 msgstr "4 stars"
 
-#: plugin/Widgets/RecentReviews.php:71
+#: plugin/Widgets/RecentReviews.php:84
 msgid "3 stars"
 msgstr "3 stars"
 
-#: plugin/Widgets/RecentReviews.php:72
+#: plugin/Widgets/RecentReviews.php:85
 msgid "2 stars"
 msgstr "2 stars"
 
-#: plugin/Widgets/RecentReviews.php:73
+#: plugin/Widgets/RecentReviews.php:86
 msgid "1 star"
 msgstr "1 star"
 
-#: plugin/Widgets/RecentReviews.php:80
+#: plugin/Widgets/RecentReviews.php:93
 msgid "How many reviews would you like to display? "
 msgstr "How many reviews would you like to display? "
 
-#: plugin/Widgets/RecentReviews.php:91
+#: plugin/Widgets/RecentReviews.php:104
 msgid "Show the name of the reviewer?"
 msgstr "Show the name of the reviewer?"
 
-#: plugin/Widgets/RecentReviews.php:92
+#: plugin/Widgets/RecentReviews.php:105
 msgid "Show the review date?"
 msgstr "Show the review date?"
 
-#: plugin/Widgets/RecentReviews.php:93
+#: plugin/Widgets/RecentReviews.php:106
 msgid "Show the review rating?"
 msgstr "Show the review rating?"
 
-#: plugin/Widgets/RecentReviews.php:100, plugin/Widgets/ReviewsForm.php:67
+#: plugin/Widgets/RecentReviews.php:113, plugin/Widgets/ReviewsForm.php:67
 msgid "Enter any custom CSS classes here"
 msgstr "Enter any custom CSS classes here"
 
