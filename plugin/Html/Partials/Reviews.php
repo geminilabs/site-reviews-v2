@@ -140,13 +140,15 @@ class Reviews extends Base
 		else {
 			$links = paginate_links([
 				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'site-reviews' ) . ' </span>',
-				'current'            => $this->app->make( 'Database' )->getCurrentPageNumber(),
+				'current'            => $paged,
 				'mid_size'           => 1,
 				'next_text'          => __( 'Next &rarr;', 'site-reviews' ),
 				'prev_text'          => __( '&larr; Previous', 'site-reviews' ),
 				'total'              => $maxPageNum,
 			]);
 		}
+
+		$links = apply_filters( 'site-reviews/shortcode/navigation_links', $links, $paged, $maxPageNum );
 
 		if( !$links )return;
 
@@ -224,11 +226,11 @@ class Reviews extends Base
 		$excerpt     = $this->buildExcerpt( get_the_content( $postId ), $args['word_limit'] );
 		$review_link = $this->reviewLink( $args['show_link'], $meta->url );
 
-		$use_excerpt_as_link = apply_filters( "site-reviews/{$meta->site_name}/widget/use_excerpt_as_link", false )
+		$use_excerpt_as_link = apply_filters( "site-reviews/widget/use_excerpt_as_link", false )
 			&& in_array( $args['display'], ['both', 'excerpt'] )
 			&& !empty( $review_link );
 
-		$show_excerpt_read_more = !apply_filters( "site-reviews/{$meta->site_name}/widget/hide_excerpt_read_more", false )
+		$show_excerpt_read_more = !apply_filters( "site-reviews/widget/hide_excerpt_read_more", false )
 			? $review_link
 			: '';
 
@@ -291,7 +293,7 @@ class Reviews extends Base
 	{
 		$review_link = $this->reviewLink( $args['show_link'], $meta->url );
 
-		$use_title_as_link = apply_filters( "site-reviews/{$meta->site_name}/widget/use_title_as_link", false )
+		$use_title_as_link = apply_filters( "site-reviews/widget/use_title_as_link", false )
 			&& in_array( $args['display'], ['both', 'excerpt'] )
 			&& !empty( $review_link );
 
