@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - [addon support] Display widget link options (conditional field)
 
 ### Changed
+- [breaking] Changed internal widget hook names
 - [breaking] Changed text-domain to "site-reviews"
 - [addon support] Show all review types by default in widgets and shortcodes
 
