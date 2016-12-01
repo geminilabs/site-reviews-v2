@@ -40,6 +40,6 @@ class Rating extends Base
 			$rating .= sprintf( $star, 'empty' );
 		}
 
-		return sprintf( '<span class="glsr-review-rating star-rating">%s</span>', $rating );
+		return sprintf( '<span class="glsr-review-rating">%s</span>', $rating );
 	}
 }

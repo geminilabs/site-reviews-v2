@@ -64,6 +64,8 @@ class Partial
 
 		$rendered = $instance->render();
 
+		$rendered = apply_filters( 'site-reviews/rendered/partial', $rendered, $this->args['partial'] );
+
 		if( !!$print && $print !== 'return' ) {
 			echo $rendered;
 		}

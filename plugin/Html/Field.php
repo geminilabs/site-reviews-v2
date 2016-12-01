@@ -160,6 +160,8 @@ class Field
 			$this->args['errors']
 		);
 
+		$rendered = apply_filters( 'site-reviews/rendered/field', $rendered, $field->args['type'] );
+
 		if( !!$print && $print !== 'return' ) {
 			echo $rendered;
 		}
