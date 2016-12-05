@@ -83,9 +83,9 @@ Some themes may have very small sidebars and CSS styles that conflict or alter t
 
 == Changelog ==
 
-= 1.1.1 (2016-11-30) =
+= 1.1.1 (2016-12-05) =
 
-* Removed unused ".star-rating" class which conflicted with the woocommerce plugin CSS
+* Remove ".star-rating" class on frontend which conflicts with the woocommerce plugin CSS
 * Added hooks to modify rendered fields/partials HTML
 
 = 1.1.0 (2016-11-16) =
