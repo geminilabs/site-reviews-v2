@@ -11,6 +11,7 @@
 
 !/vendor/sinergi/browser-detector
 
+/_
 /vendor/*.php
 /vendor/**/.git*
 /vendor/**/Tests
