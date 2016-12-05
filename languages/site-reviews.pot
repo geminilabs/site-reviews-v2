@@ -287,31 +287,31 @@ msgstr ""
 msgid "No reviews were found."
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:130
+#: plugin/Html/Partials/Reviews.php:129
 msgid "<span class=\"meta-nav\">&larr;</span> Previous"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:136
+#: plugin/Html/Partials/Reviews.php:135
 msgid "Next <span class=\"meta-nav\">&rarr;</span>"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:142
+#: plugin/Html/Partials/Reviews.php:141
 msgid "Page"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:145
+#: plugin/Html/Partials/Reviews.php:144
 msgid "Next &rarr;"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:146
+#: plugin/Html/Partials/Reviews.php:145
 msgid "&larr; Previous"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:196
+#: plugin/Html/Partials/Reviews.php:195
 msgid "Site Reviews navigation"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:257
+#: plugin/Html/Partials/Reviews.php:256
 msgid "read more"
 msgstr ""
 

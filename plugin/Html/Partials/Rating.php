@@ -30,16 +30,20 @@ class Rating extends Base
 		extract( $args );
 
 		$rating = '';
-		$star   = '<span class="glsr-star star star-%s"></span>';
+
+		$star = is_admin() ? ' star star%s' : '%s';
+		$star = sprintf( '<span class="glsr-star%s"></span>', $star );
+
+		$class = 'glsr-review-rating' . ( is_admin() ? ' star-rating' : '' );
 
 		for( $i = 0; $i < $stars; $i++ ) {
-			$rating .= sprintf( $star, 'full' );
+			$rating .= sprintf( $star, '-full' );
 		}
 
 		for( $i = 5; $i > $stars; $i-- ) {
-			$rating .= sprintf( $star, 'empty' );
+			$rating .= sprintf( $star, '-empty' );
 		}
 
-		return sprintf( '<span class="glsr-review-rating">%s</span>', $rating );
+		return sprintf( '<span class="%s">%s</span>', $class, $rating );
 	}
 }

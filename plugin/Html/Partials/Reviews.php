@@ -78,8 +78,7 @@ class Reviews extends Base
 			);
 		}
 
-		return sprintf( '<div class="glsr-reviews-wrap"><div class="glsr-reviews glsr-reviews-%s %s">%s</div></div>',
-			$args['site_name'],
+		return sprintf( '<div class="glsr-reviews-wrap"><div class="glsr-reviews %s">%s</div></div>',
 			$args['class'],
 			$html
 		);
