@@ -41,7 +41,7 @@
 	&-title {}
 }
 
-.glsr-star {
+[class*=glsr-star-] {
 	display: inline-block;
 	width: 16px;
 	height: 16px;
@@ -49,17 +49,19 @@
 	vertical-align: text-top;
 	background-repeat: no-repeat;
 	background-size: 16px;
+}
 
-	&.star-empty {
+.glsr-star {
+	&-empty {
 		// PNG fallback
 		// background: url(fallback.png);
 		// background-image: url(image.svg), none;
 		background-image: url(../img/star-empty.svg);
 	}
-	&.star-full {
+	&-full {
 		background-image: url(../img/star-filled.svg);
 	}
-	&.star-half {
+	&-half {
 		background-image: url(../img/star-half.svg);
 	}
 }
