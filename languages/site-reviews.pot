@@ -107,7 +107,7 @@ msgstr ""
 msgid "Approve this review"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:231, plugin/Handlers/SubmitReview.php:91
+#: plugin/Controllers/MainController.php:231, plugin/Handlers/SubmitReview.php:95
 msgid "Approve"
 msgstr ""
 
@@ -213,37 +213,37 @@ msgid_plural "%s reviews restored from the Trash."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Handlers/RegisterPostType.php:590
+#: plugin/Handlers/RegisterPostType.php:593
 msgid "%s star"
 msgid_plural "%s stars"
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Handlers/RegisterPostType.php:594
+#: plugin/Handlers/RegisterPostType.php:597
 msgid "All ratings"
 msgstr ""
 
-#: plugin/Handlers/RegisterPostType.php:612
+#: plugin/Handlers/RegisterPostType.php:615
 msgid "All types"
 msgstr ""
 
-#: plugin/Handlers/RegisterPostType.php:615, views/edit/meta.php:7
+#: plugin/Handlers/RegisterPostType.php:618, views/edit/meta.php:7
 msgid "Local Review"
 msgstr ""
 
-#: plugin/Handlers/SubmitReview.php:61
+#: plugin/Handlers/SubmitReview.php:63
 msgid "Your review has been submitted!"
 msgstr ""
 
-#: plugin/Handlers/SubmitReview.php:92
+#: plugin/Handlers/SubmitReview.php:96
 msgid "Discard"
 msgstr ""
 
-#: plugin/Handlers/SubmitReview.php:142
+#: plugin/Handlers/SubmitReview.php:144
 msgid "New %s-Star Review"
 msgstr ""
 
-#: plugin/Handlers/SubmitReview.php:191, plugin/Strings.php:28
+#: plugin/Handlers/SubmitReview.php:197, plugin/Strings.php:28
 msgid "View Review"
 msgstr ""
 
@@ -319,7 +319,7 @@ msgstr ""
 msgid "read more"
 msgstr ""
 
-#: plugin/Settings.php:113, plugin/Settings.php:194
+#: plugin/Settings.php:113, plugin/Settings.php:196
 msgid "Save Settings"
 msgstr ""
 
@@ -379,99 +379,99 @@ msgstr ""
 msgid "Notification template"
 msgstr ""
 
-#: plugin/Settings.php:199
+#: plugin/Settings.php:201
 msgid "Form Labels"
 msgstr ""
 
-#: plugin/Settings.php:200
+#: plugin/Settings.php:202
 msgid "Customize the label text for the review submission form fields."
 msgstr ""
 
-#: plugin/Settings.php:206
+#: plugin/Settings.php:208
 msgid "Rating label"
 msgstr ""
 
-#: plugin/Settings.php:207
+#: plugin/Settings.php:209
 msgid "Your overall rating"
 msgstr ""
 
-#: plugin/Settings.php:214
+#: plugin/Settings.php:216
 msgid "Title label"
 msgstr ""
 
-#: plugin/Settings.php:215
+#: plugin/Settings.php:217
 msgid "Title of your review"
 msgstr ""
 
-#: plugin/Settings.php:222
+#: plugin/Settings.php:224
 msgid "Content label"
 msgstr ""
 
-#: plugin/Settings.php:223
+#: plugin/Settings.php:225
 msgid "Your review"
 msgstr ""
 
-#: plugin/Settings.php:230
+#: plugin/Settings.php:232
 msgid "Reviewer label"
 msgstr ""
 
-#: plugin/Settings.php:231
+#: plugin/Settings.php:233
 msgid "Your name"
 msgstr ""
 
-#: plugin/Settings.php:238
+#: plugin/Settings.php:240
 msgid "Email label"
 msgstr ""
 
-#: plugin/Settings.php:239
+#: plugin/Settings.php:241
 msgid "Your email"
 msgstr ""
 
-#: plugin/Settings.php:246
+#: plugin/Settings.php:248
 msgid "Terms label"
 msgstr ""
 
-#: plugin/Settings.php:247
+#: plugin/Settings.php:249
 msgid "This review is based on my own experience and is my genuine opinion."
 msgstr ""
 
-#: plugin/Settings.php:253
+#: plugin/Settings.php:255
 msgid "Form Placeholders"
 msgstr ""
 
-#: plugin/Settings.php:254
+#: plugin/Settings.php:256
 msgid "Customize the placeholder text for the review submission form fields. Use a single space character to disable the placeholder text."
 msgstr ""
 
-#: plugin/Settings.php:261
+#: plugin/Settings.php:263
 msgid "Title placeholder"
 msgstr ""
 
-#: plugin/Settings.php:262
+#: plugin/Settings.php:264
 msgid "Summarize your review or highlight an interesting detail"
 msgstr ""
 
-#: plugin/Settings.php:270
+#: plugin/Settings.php:272
 msgid "Content placeholder"
 msgstr ""
 
-#: plugin/Settings.php:271
+#: plugin/Settings.php:273
 msgid "Tell people your review"
 msgstr ""
 
-#: plugin/Settings.php:279
+#: plugin/Settings.php:281
 msgid "Reviewer placeholder"
 msgstr ""
 
-#: plugin/Settings.php:280
+#: plugin/Settings.php:282
 msgid "Tell us your name"
 msgstr ""
 
-#: plugin/Settings.php:288
+#: plugin/Settings.php:290
 msgid "Email placeholder"
 msgstr ""
 
-#: plugin/Settings.php:289
+#: plugin/Settings.php:291
 msgid "Tell us your email"
 msgstr ""
 
