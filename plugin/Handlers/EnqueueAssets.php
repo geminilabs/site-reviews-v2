@@ -68,7 +68,11 @@ class EnqueueAssets
 			$command->version
 		);
 
-		if( !( $screen->post_type == 'site-review' || $screen->id == 'dashboard' || $screen->id == 'widgets' ) )return;
+		if( !( $screen->post_type == 'site-review'
+			|| $screen->base == 'post'
+			|| $screen->id == 'dashboard'
+			|| $screen->id == 'widgets'
+		))return;
 
 		wp_enqueue_script(
 			$command->handle,
