@@ -1,4 +1,4 @@
-<?php defined( 'WPINC' ) or die; ?>
+<?php defined( 'WPINC' ) || die; ?>
 
 <br>
 

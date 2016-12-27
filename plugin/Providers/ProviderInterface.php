@@ -14,5 +14,8 @@ use GeminiLabs\SiteReviews\App;
 
 interface ProviderInterface
 {
-    public function register( App $app );
+	/**
+	 * @return void
+	 */
+	public function register( App $app );
 }

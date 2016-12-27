@@ -1,4 +1,4 @@
-<?php defined( 'WPINC' ) or die;
+<?php defined( 'WPINC' ) || die;
 
 $file = trailingslashit( __DIR__ ) . "{$view}.php";
 

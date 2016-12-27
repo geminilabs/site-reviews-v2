@@ -27,7 +27,7 @@ class MainProvider implements ProviderInterface
 		// Initialise logger from log file
 		$app->bind( 'GeminiLabs\SiteReviews\Log\Logger', function( App $app )
 		{
-			return Logger::file( trailingslashit( $app->path ) . "debug.log", $app->prefix );
+			return Logger::file( trailingslashit( $app->path ) . 'debug.log', $app->prefix );
 		});
 
 		// Singletons must be last since they call "make()"

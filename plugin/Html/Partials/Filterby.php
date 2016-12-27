@@ -17,7 +17,7 @@ class Filterby extends Base
 	/**
 	 * Generate a filter dropdown for the admin post_type table
 	 *
-	 * @return string
+	 * @return string|null
 	 */
 	public function render()
 	{

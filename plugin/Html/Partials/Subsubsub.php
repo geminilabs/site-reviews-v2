@@ -17,7 +17,7 @@ class Subsubsub extends Base
 	/**
 	 * Generate tabs
 	 *
-	 * @return string
+	 * @return null|string
 	 */
 	public function render()
 	{

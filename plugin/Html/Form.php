@@ -234,7 +234,7 @@ class Form
 	/**
 	 * Generate the hidden fields of a front-end form
 	 *
-	 * @return string
+	 * @return null|string
 	 */
 	protected function generatePublicFields()
 	{
@@ -243,7 +243,7 @@ class Form
 	/**
 	 * Generate the form submit button
 	 *
-	 * @return string
+	 * @return null|string
 	 */
 	protected function generateSubmitButton()
 	{

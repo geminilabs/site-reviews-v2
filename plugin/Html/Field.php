@@ -172,7 +172,7 @@ class Field
 	/**
 	 * Reset the Field
 	 *
-	 * @return void
+	 * @return self
 	 */
 	public function reset()
 	{
@@ -207,7 +207,7 @@ class Field
 	/**
 	 * Parse the field attributes and convert to an array if needed
 	 *
-	 * @return string
+	 * @return array
 	 */
 	protected function parseAttributes( array $args )
 	{
@@ -231,7 +231,7 @@ class Field
 	/**
 	 * Parse the field ID from the field path
 	 *
-	 * @return string
+	 * @return null|string
 	 */
 	protected function parseId( array $args )
 	{
@@ -337,7 +337,7 @@ class Field
 	/**
 	 * Set the [data-depends] attribute
 	 *
-	 * @return array
+	 * @return null|array
 	 */
 	protected function setDataDepends()
 	{

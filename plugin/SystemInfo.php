@@ -81,7 +81,7 @@ class SystemInfo
 	 *
 	 * @param string $title
 	 *
-	 * @return string
+	 * @return null|string
 	 */
 	public function getBrowser( $title = 'Browser Details' )
 	{
@@ -101,7 +101,7 @@ class SystemInfo
 	 *
 	 * @param string $title
 	 *
-	 * @return string
+	 * @return null|string
 	 */
 	public function getPlugin( $title = 'Plugin Details' )
 	{
@@ -118,7 +118,7 @@ class SystemInfo
 	 *
 	 * @param string $title
 	 *
-	 * @return string
+	 * @return null|string
 	 */
 	public function getWordpress( $title = 'WordPress Configuration' )
 	{
@@ -162,7 +162,7 @@ class SystemInfo
 	 *
 	 * @param string $title
 	 *
-	 * @return string
+	 * @return null|string
 	 */
 	public function getWordpressMultisitePlugins( $title = 'Network Active Plugins' )
 	{
@@ -191,7 +191,7 @@ class SystemInfo
 	 *
 	 * @param string $title
 	 *
-	 * @return string
+	 * @return null|string
 	 */
 	public function getWordpressMuplugins( $title = 'Must-Use Plugins' )
 	{
@@ -209,7 +209,7 @@ class SystemInfo
 	 * @param string $active_title
 	 * @param string $inactive_title
 	 *
-	 * @return string
+	 * @return null|string
 	 */
 	public function getWordpressPlugins( $active_title = 'Active Plugins', $inactive_title = 'Inactive Plugins' )
 	{
@@ -233,7 +233,7 @@ class SystemInfo
 	 *
 	 * @param string $title
 	 *
-	 * @return string
+	 * @return null|string
 	 */
 	public function getWebserver( $title = 'Server configuration' )
 	{
@@ -257,7 +257,7 @@ class SystemInfo
 	 *
 	 * @param string $title
 	 *
-	 * @return string
+	 * @return null|string
 	 */
 	public function getPHPConfig( $title = 'PHP Configuration' )
 	{
@@ -284,7 +284,7 @@ class SystemInfo
 	 *
 	 * @param string $title
 	 *
-	 * @return string
+	 * @return null|string
 	 */
 	public function getPHPExtensions( $title = 'PHP Extensions' )
 	{
@@ -321,13 +321,15 @@ class SystemInfo
 	 *
 	 * @param string $section
 	 *
-	 * @return string
+	 * @return null|string
 	 */
 	protected function implode( $section )
 	{
 		if( !isset( $this->sysinfo[ $section ] ) )return;
 
-		$strings[] = sprintf( "[%s]", strtoupper( $section ) );
+		$strings = [];
+
+		$strings[] = sprintf( '[%s]', strtoupper( $section ) );
 
 		foreach( $this->sysinfo[ $section ] as $key => $value ) {
 			if( is_int( $key ) ) {
@@ -335,7 +337,7 @@ class SystemInfo
 				continue;
 			}
 
-			$strings[] = sprintf( "%s : %s", $this->pad( $key ), $value );
+			$strings[] = sprintf( '%s : %s', $this->pad( $key ), $value );
 		}
 
 		return implode( PHP_EOL, $strings ) . PHP_EOL . PHP_EOL;
@@ -366,7 +368,7 @@ class SystemInfo
 	 *
 	 * @param string $title
 	 *
-	 * @return void
+	 * @return bool
 	 */
 	protected function title( $title )
 	{
@@ -382,7 +384,7 @@ class SystemInfo
 	/**
 	 * Get the webhost name
 	 *
-	 * @return void
+	 * @return string
 	 */
 	protected function webhost()
 	{

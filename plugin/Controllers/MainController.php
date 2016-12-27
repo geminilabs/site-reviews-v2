@@ -82,7 +82,7 @@ class MainController extends BaseController
 	 */
 	public function registerActionLinks( array $links )
 	{
-		$settings_url = admin_url( "edit.php?post_type=site-review&page=settings" );
+		$settings_url = admin_url( 'edit.php?post_type=site-review&page=settings' );
 
 		$links[] = sprintf( '<a href="%s">%s</a>', $settings_url, __( 'Settings', 'site-reviews' ) );
 
@@ -397,7 +397,7 @@ class MainController extends BaseController
 
 		$data = apply_filters( 'site-reviews/addon/menu/data', $data, $defaults );
 
-		$this->render( "menu/index", wp_parse_args( $data, $defaults ) );
+		$this->render( 'menu/index', wp_parse_args( $data, $defaults ) );
 	}
 
 	/**

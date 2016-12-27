@@ -393,13 +393,13 @@ class RegisterPostType
 
 		switch( $column ) {
 
-			case "slug":
+			case 'slug':
 				echo $post->post_name;
 				break;
 
-			case "featured":
-			case "image":
-			case "thumbnail":
+			case 'featured':
+			case 'image':
+			case 'thumbnail':
 
 				if( has_post_thumbnail( $post->ID ) ) {
 					$img = wp_get_attachment_image( get_post_thumbnail_id( $post->ID ), [96, 48] );
@@ -408,21 +408,21 @@ class RegisterPostType
 				echo ( isset( $img ) && !empty( $img ) ) ? $img : '&mdash;';
 				break;
 
-			case "reviewer":
+			case 'reviewer':
 				echo get_post_meta( $post->ID, 'author', true );
 				break;
 
-			case "stars":
+			case 'stars':
 				$this->app->make( 'Html' )->renderPartial( 'rating', [
 					'stars' => get_post_meta( $post->ID, 'rating', true ),
 				]);
 				break;
 
-			case "site":
+			case 'site':
 				echo ucfirst( get_post_meta( $post->ID, 'site_name', true ) );
 				break;
 
-			case "sticky":
+			case 'sticky':
 				$pinned = get_post_meta( $post->ID, 'pinned', true )
 					? ' pinned'
 					: '';
@@ -514,7 +514,7 @@ class RegisterPostType
 	}
 
 	/**
-	 * @return true|null
+	 * @return null|bool
 	 */
 	protected function isEditLocalReviewPage()
 	{

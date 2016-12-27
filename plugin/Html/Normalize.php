@@ -221,7 +221,7 @@ class Normalize
 	/**
 	 * Normalize form attributes
 	 *
-	 * @return array
+	 * @return array|string
 	 */
 	public function form( array $args = [], $implode = false )
 	{
@@ -233,7 +233,7 @@ class Normalize
 	/**
 	 * Normalize input attributes
 	 *
-	 * @return array
+	 * @return array|string
 	 */
 	public function input( array $args = [], $implode = false )
 	{
@@ -280,7 +280,7 @@ class Normalize
 	/**
 	 * Normalize select attributes
 	 *
-	 * @return array
+	 * @return array|string
 	 */
 	public function select( array $args = [], $implode = false )
 	{
@@ -292,7 +292,7 @@ class Normalize
 	/**
 	 * Normalize textarea attributes
 	 *
-	 * @return array
+	 * @return array|string
 	 */
 	public function textarea( array $args = [], $implode = false )
 	{

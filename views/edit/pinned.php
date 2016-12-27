@@ -1,4 +1,4 @@
-<?php defined( 'WPINC' ) or die; ?>
+<?php defined( 'WPINC' ) || die; ?>
 
 <div id="misc-pub-pinned" class="misc-pub-section misc-pub-pinned">
 

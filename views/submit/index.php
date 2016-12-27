@@ -1,4 +1,4 @@
-<?php defined( 'WPINC' ) or die; ?>
+<?php defined( 'WPINC' ) || die; ?>
 
 <form method="post" action="" name="glsr-<?= $form_id; ?>" class="<?= $class; ?>">
 <?php

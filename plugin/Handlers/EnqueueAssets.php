@@ -90,7 +90,7 @@ class EnqueueAssets
 
 		$stylesheet = file_exists( $command->path . "css/{$currentTheme}.css" )
 			? $command->url . "css/{$currentTheme}.css"
-			: $command->url . "css/site-reviews.css";
+			: $command->url . 'css/site-reviews.css';
 
 		if( apply_filters( 'site-reviews/assets/css', true ) ) {
 			wp_enqueue_style(

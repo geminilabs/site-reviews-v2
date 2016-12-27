@@ -1,4 +1,4 @@
-<?php defined( 'WPINC' ) or die; ?>
+<?php defined( 'WPINC' ) || die; ?>
 
 <p>Hooks (also known as Filters &amp; Actions) are used to make changes to the plugin without modifying the core files of the plugin directly. In order to use the following hooks, you must add them to your theme's <code>functions.php</code> file.</p>
 

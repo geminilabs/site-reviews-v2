@@ -1,4 +1,4 @@
-<?php defined( 'WPINC' ) or die; ?>
+<?php defined( 'WPINC' ) || die; ?>
 
 <?php
 	$siteName = get_post_meta( $post->ID, 'site_name', true );

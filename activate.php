@@ -8,7 +8,7 @@
  * -------------------------------------------------------------------------------------------------
  */
 
-defined( 'WPINC' ) or die;
+defined( 'WPINC' ) || die;
 
 if( !function_exists( 'glsr_version_check' ) ) {
 	function glsr_version_check() {
@@ -34,7 +34,7 @@ if( !function_exists( 'glsr_deactivate_plugin' ) ) {
 			$s      = filter_input( INPUT_GET, 's' );
 			$status = filter_input( INPUT_GET, 'plugin_status' );
 
-			wp_redirect( self_admin_url( "plugins.php?plugin_status=$status&paged=$paged&s=$s" ) );
+			wp_redirect( self_admin_url( sprintf( 'plugins.php?plugin_status=%s&paged=%s&s=%s', $status, $paged, $s ) ) );
 			die;
 		}
 

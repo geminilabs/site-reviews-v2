@@ -225,11 +225,11 @@ class Reviews extends Base
 		$excerpt     = $this->buildExcerpt( get_the_content( $postId ), $args['word_limit'] );
 		$review_link = $this->reviewLink( $args['show_link'], $meta->url );
 
-		$use_excerpt_as_link = apply_filters( "site-reviews/widget/use_excerpt_as_link", false )
+		$use_excerpt_as_link = apply_filters( 'site-reviews/widget/use_excerpt_as_link', false )
 			&& in_array( $args['display'], ['both', 'excerpt'] )
 			&& !empty( $review_link );
 
-		$show_excerpt_read_more = !apply_filters( "site-reviews/widget/hide_excerpt_read_more", false )
+		$show_excerpt_read_more = !apply_filters( 'site-reviews/widget/hide_excerpt_read_more', false )
 			? $review_link
 			: '';
 
@@ -292,7 +292,7 @@ class Reviews extends Base
 	{
 		$review_link = $this->reviewLink( $args['show_link'], $meta->url );
 
-		$use_title_as_link = apply_filters( "site-reviews/widget/use_title_as_link", false )
+		$use_title_as_link = apply_filters( 'site-reviews/widget/use_title_as_link', false )
 			&& in_array( $args['display'], ['both', 'excerpt'] )
 			&& !empty( $review_link );
 

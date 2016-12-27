@@ -15,7 +15,7 @@
  * Text Domain: site-reviews
  */
 
-defined( 'WPINC' ) or die;
+defined( 'WPINC' ) || die;
 
 require_once __DIR__ . '/activate.php';
 require_once __DIR__ . '/autoload.php';

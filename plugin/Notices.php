@@ -94,7 +94,9 @@ class Notices
 	{
 		global $wp_settings_errors;
 
-		if( $hide_on_update && !empty( $_GET['settings-updated'] ) )return;
+
+
+		if( $hide_on_update && !empty( filter_input( INPUT_GET, 'settings-updated' ) ) )return;
 
 		$settings_errors = get_settings_errors( $this->app->id, $sanitize );
 

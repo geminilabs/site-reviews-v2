@@ -1,4 +1,4 @@
-<?php defined( 'WPINC' ) or die; ?>
+<?php defined( 'WPINC' ) || die; ?>
 
 <div id="welcome-panel" class="welcome-panel">
 	<a class="welcome-panel-close" href="<?= admin_url( 'edit.php?post_type=site-review&page=site-reviews&welcome=0' ); ?>" aria-label="Dismiss the welcome panel">Dismiss</a>

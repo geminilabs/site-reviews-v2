@@ -111,9 +111,9 @@ class Session
 	/**
 	 * Get a variable from the current session
 	 *
-	 * @param string $key
-	 * @param string $fallback
-	 * @param mixed  $unset
+	 * @param string       $key
+	 * @param string|array $fallback
+	 * @param mixed        $unset
 	 *
 	 * @return string
 	 */

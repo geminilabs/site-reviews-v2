@@ -17,7 +17,7 @@ use GeminiLabs\SiteReviews\Shortcode;
 class SiteReviews extends Shortcode
 {
 	/**
-	 * @return void
+	 * @return string
 	 */
 	public function printShortcode( $atts = [] )
 	{

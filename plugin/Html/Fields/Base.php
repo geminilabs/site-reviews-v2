@@ -76,7 +76,7 @@ abstract class Base
 	 *
 	 * @param bool $paragraph
 	 *
-	 * @return string
+	 * @return null|string
 	 */
 	public function generateDescription( $paragraph = true )
 	{
@@ -90,7 +90,7 @@ abstract class Base
 	/**
 	 * Generate the field label
 	 *
-	 * @return string
+	 * @return null|string
 	 */
 	public function generateLabel()
 	{
@@ -127,7 +127,7 @@ abstract class Base
 	/**
 	 * Implode the field attributes
 	 *
-	 * @return string
+	 * @return array
 	 */
 	protected function implodeAttributes( $defaults = [] )
 	{
@@ -137,7 +137,7 @@ abstract class Base
 	/**
 	 * Implode multi-field items
 	 *
-	 * @return string
+	 * @return null|string
 	 */
 	protected function implodeOptions( $method = 'select_option', $default = null )
 	{
@@ -213,7 +213,7 @@ abstract class Base
 	 * @param string $number
 	 * @param string $type
 	 *
-	 * @return string
+	 * @return null|string
 	 */
 	protected function multiInput( $optionKey, $number, $type = 'radio' )
 	{
@@ -304,7 +304,7 @@ abstract class Base
 	 * @param string $optionKey
 	 * @param string $number
 	 *
-	 * @return string
+	 * @return null|string
 	 */
 	protected function multiInputCheckbox( $optionKey, $number )
 	{
@@ -332,7 +332,7 @@ abstract class Base
 	 *
 	 * @param string $type
 	 *
-	 * @return string
+	 * @return null|string
 	 */
 	protected function singleInput( $type = 'checkbox' )
 	{

@@ -150,7 +150,7 @@ class Validator
 	 * @param string $attribute
 	 * @param string $rule
 	 *
-	 * @return string
+	 * @return string|null
 	 */
 	protected function getMessage( $attribute, $rule, array $parameters )
 	{
@@ -214,7 +214,7 @@ class Validator
 	 * @param string $attribute
 	 * @param string $rule
 	 *
-	 * @return string
+	 * @return string|null
 	 */
 	protected function getSizeMessage( $attribute, $rule, array $parameters )
 	{

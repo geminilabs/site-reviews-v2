@@ -1,4 +1,4 @@
-<?php defined( 'WPINC' ) or die; ?>
+<?php defined( 'WPINC' ) || die; ?>
 
 <div class="glsr-card card">
 	<h3>F.A.Q.</h3>

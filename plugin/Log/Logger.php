@@ -273,7 +273,7 @@ class Logger implements LoggerInterface
 	 * @param string $message
 	 * @param array  $context
 	 *
-	 * @return string
+	 * @return array|string
 	 */
 	protected function interpolate( $message, array $context = [] )
 	{

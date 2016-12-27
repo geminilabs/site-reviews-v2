@@ -88,6 +88,8 @@ class SubmitReview
 			$review_discard_link = wp_nonce_url( admin_url( sprintf( 'post.php?post=%s&action=trash', $post_id ) ), 'trash-post_' . $post_id );
 			// $review_discard_link = esc_url( get_delete_post_link( $post_id, false ) );
 
+			$after = [];
+
 			$after[] = sprintf( '%1$s: <a href="%2$s">%2$s</a>', __( 'Approve', 'site-reviews' ), $review_approve_link );
 			$after[] = sprintf( '%1$s: <a href="%2$s">%2$s</a>', __( 'Discard', 'site-reviews' ), $review_discard_link );
 
