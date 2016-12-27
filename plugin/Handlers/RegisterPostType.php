@@ -564,6 +564,9 @@ class RegisterPostType
 	}
 
 	/**
+	 * @param int $post_id
+	 * @param int $message_index
+	 *
 	 * @return string
 	 */
 	protected function getRedirectUrl( $post_id, $message_index )
@@ -621,6 +624,12 @@ class RegisterPostType
 		]);
 	}
 
+	/**
+	 * @param int    $post_id
+	 * @param string $status
+	 *
+	 * @return void
+	 */
 	protected function changePostStatus( $post_id, $status )
 	{
 		return wp_update_post([
