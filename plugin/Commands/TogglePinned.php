@@ -17,9 +17,11 @@ class TogglePinned
 
 	public function __construct( $input )
 	{
-		isset( $input['pinned'] ) ?: $input['pinned'] = false;
+		$pinned = isset( $input['pinned'] )
+			? wp_validate_boolean( $input['pinned'] )
+			: null;
 
 		$this->id     = $input['id'];
-		$this->pinned = wp_validate_boolean( $input['pinned'] );
+		$this->pinned = $pinned;
 	}
 }
