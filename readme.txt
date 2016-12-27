@@ -24,7 +24,7 @@ Follow plugin development on github at: https://github.com/geminilabs/site-revie
 
 = Current Features =
 
-* [new] Review Pagination
+* [new] Webhook notifications for Slack
 * Actively developed and supported
 * Clean and easy-to-configure user interface
 * Configurable Widgets
@@ -32,6 +32,7 @@ Follow plugin development on github at: https://github.com/geminilabs/site-revie
 * Filter reviews by rating
 * Logging
 * Minimal widget styling (tested with all official WP themes)
+* Review Pagination
 * Shortcodes: Display reviews in your post content and templates
 * WordPress.org support
 * WP Filter Hooks
@@ -55,9 +56,20 @@ Download the Site Reviews plugin and uploading it to your server via your favori
 
 == Frequently Asked Questions ==
 
+= I don't want form placeholders. How do I remove them? =
+
+To remove the form placeholders, go to "Settings" -> "Submission Form" and replace all placeholder text with a single space character. Placeholders no more!
+
+= How do I disable the plugin CSS and/or Javascript? =
+
+To disable the plugin stylesheet or javascript from loading on your website, copy and paste the following WordPress Filter Hooks into your theme's functions.php file:
+
+`add_filter( 'site-reviews/assets/css', '__return_false' );`
+`add_filter( 'site-reviews/assets/js', '__return_false' );`
+
 = The widgets look funny in my sidebar. What's happening? =
 
-Some themes may have very small sidebars and CSS styles that conflict or alter the styles within Site Reviews. To correct any styling errors you can either disable the plugin's CSS altogether, or override the CSS selectors in use to make the widget or shortcode appear how you'd like. CSS-related issues are not actively supported as there are too many variations between the thousands of WordPress themes available.
+Some themes may have very small sidebars and/or CSS styles that conflict or alter the styles within Site Reviews. To correct any styling errors you can either disable the plugin's CSS altogether, or override the CSS selectors in use to make the widget or shortcode appear how you'd like. CSS-related issues are not actively supported as there are too many variations between the thousands of WordPress themes available.
 
 == Screenshots ==
 

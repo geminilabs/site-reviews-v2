@@ -4,7 +4,7 @@
 	<h3>F.A.Q.</h3>
 	<dl>
 		<dt>I don't want form placeholders. How do I remove them?</dt>
-		<dd>To remove the form placeholders, go to <code><a href="<?= admin_url( 'edit.php?post_type=site-review&page=settings&tab=settings&section=form' ); ?>">Settings -> Submission Form</a></code> and replace all placeholder text with a single space character and then save the settings. Placeholders no more!</dd>
+		<dd>To remove the form placeholders, go to <code><a href="<?= admin_url( 'edit.php?post_type=site-review&page=settings&tab=settings&section=form' ); ?>">Settings -> Submission Form</a></code> and replace all placeholder text with a single space character. Placeholders no more!</dd>
 
 		<dt>How do I disable the plugin CSS and/or Javascript?</dt>
 		<dd>To disable the plugin stylesheet or javascript from loading on your website, copy and paste the provided <code><a href="<?= admin_url( 'edit.php?post_type=site-review&page=help&tab=documentation&section=hooks' ); ?>">WordPress Filter Hooks</a></code> into your theme's <code>functions.php</code> file.</dd>

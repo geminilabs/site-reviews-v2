@@ -13,15 +13,15 @@ Minimum plugin requirements:
 
 #### Features
 
-* [new] Review Pagination
+* [new] Webhook notifications for Slack
 * Actively developed and supported
 * Clean and easy-to-configure user interface
 * Configurable Widgets
 * Easy setup and implementation
-* Fetch the reviewer avatars from gravatar
 * Filter reviews by rating
 * Logging
 * Minimal widget styling (tested with all official WP themes)
+* Review Pagination
 * Shortcodes: Display reviews in your post content and templates
 * WordPress.org support
 * WP Filter Hooks
