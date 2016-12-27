@@ -98,30 +98,28 @@ class SubmitReview
 	}
 
 	/**
-	 * @param string $recipient
-	 *
-	 * @return bool|void
+	 * @return GeminiLabs\SiteReviews\Email
 	 */
-	protected function createNotification( $recipient, Command $command )
+	protected function createNotification( Command $command, array $args )
 	{
-		$args = [
-			'to' => $recipient,
-			'subject'  => $command->notification['title'],
+		$email = [
+			'to' => $args['recipient'],
+			'subject'  => $args['notification_title'],
 			'template' => 'review-notification',
 			'template-tags' => [
 				'review_author'  => $command->reviewer,
 				'review_content' => $command->content,
 				'review_email'   => $command->email,
 				'review_ip'      => $command->ipAddress,
-				'review_link'    => sprintf( '<a href="%1$s">%1$s</a>', $command->notification['link'] ),
+				'review_link'    => sprintf( '<a href="%1$s">%1$s</a>', $args['notification_link'] ),
 				'review_rating'  => $command->rating,
 				'review_title'   => $command->title,
 			],
 		];
 
-		// $args = $this->addNotificationLinks( $post_id, $args );
+		// $email = $this->addNotificationLinks( $post_id, $email );
 
-		return $this->app->make( 'Email' )->compose( $args );
+		return $this->app->make( 'Email' )->compose( $email );
 	}
 
 	/**
@@ -137,43 +135,47 @@ class SubmitReview
 
 		$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 
-		$command->notification['title'] = sprintf( '[%s] %s',
+		$notificationTitle = sprintf( '[%s] %s',
 			$blogname,
 			sprintf( __( 'New %s-Star Review', 'site-reviews' ), $command->rating )
 		);
 
-		$command->notification['link'] = esc_url( admin_url( sprintf( 'post.php?post=%s&action=edit', $post_id ) ) );
+		$args = [
+			'notification_link'  => esc_url( admin_url( sprintf( 'post.php?post=%s&action=edit', $post_id ) ) ),
+			'notification_title' => $notificationTitle,
+			'notification_type'  => $notificationType,
+		];
 
-		return $notificationType == 'webhook'
-			? $this->sendNotificationWebhook( $command )
-			: $this->sendNotificationEmail( $notificationType, $command );
+		return $args['notification_type'] == 'webhook'
+			? $this->sendNotificationWebhook( $command, $args )
+			: $this->sendNotificationEmail( $command, $args );
 	}
 
 	/**
-	 * @param string $notificationType
-	 *
 	 * @return bool|void
 	 */
-	protected function sendNotificationEmail( $notificationType, Command $command )
+	protected function sendNotificationEmail( Command $command, array $args )
 	{
-		$recipient = 'default' === $notificationType
+		$args['recipient'] = 'default' === $args['notification_type']
 			? get_option( 'admin_email' )
 			: $this->db->getOption( 'general.notification_email' );
 
 		// no email address has been set
-		if( empty( $recipient ) )return;
+		if( empty( $args['recipient'] ) )return;
 
-		$this->createNotification( $recipient, $command )->send();
+		$this->createNotification( $command, $args )->send();
 	}
 
 	/**
 	 * @return bool|void
 	 */
-	protected function sendNotificationWebhook( Command $command )
+	protected function sendNotificationWebhook( Command $command, array $args )
 	{
 		if( !( $endpoint = $this->db->getOption( 'general.webhook_url' ) ) )return;
 
-		$fields[] = ['title' => str_repeat( ":star:", $command->rating ) ];
+		$fields = [];
+
+		$fields[] = ['title' => str_repeat( ':star:', $command->rating ) ];
 
 		if( $command->title ) {
 			$fields[] = ['title' => $command->title ];
@@ -188,14 +190,14 @@ class SubmitReview
 			$fields[] = ['value' => trim( sprintf( '%s%s - %s', $command->reviewer, $command->email, $command->ipAddress ) ) ];
 		}
 
-		$fields[] = ['value' => sprintf( '<%s|%s>', $command->notification['link'], __( 'View Review', 'site-reviews' ) ) ];
+		$fields[] = ['value' => sprintf( '<%s|%s>', $args['notification_link'], __( 'View Review', 'site-reviews' ) ) ];
 
 		$notification = json_encode([
 			'icon_url'    => $this->app->url . 'assets/img/icon.png',
 			'username'    => $this->app->name,
 			'attachments' => [
 				[
-					'pretext'  => $command->notification['title'],
+					'pretext'  => $args['notification_title'],
 					'color'    => '#665068',
 					'fallback' => $this->createNotification( '', $command )->read( 'plaintext' ),
 					'fields'   => $fields,
