@@ -102,7 +102,7 @@ class SubmitReview
 	/**
 	 * @return GeminiLabs\SiteReviews\Email
 	 */
-	protected function createNotification( Command $command, array $args )
+	protected function createNotification( Command $command, array $args = [] )
 	{
 		$email = [
 			'to' => $args['recipient'],
@@ -201,7 +201,7 @@ class SubmitReview
 				[
 					'pretext'  => $args['notification_title'],
 					'color'    => '#665068',
-					'fallback' => $this->createNotification( '', $command )->read( 'plaintext' ),
+					'fallback' => $this->createNotification( $command, $args )->read( 'plaintext' ),
 					'fields'   => $fields,
 				],
 			],
