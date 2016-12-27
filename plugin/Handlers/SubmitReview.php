@@ -129,7 +129,7 @@ class SubmitReview
 	/**
 	 * @param int $post_id
 	 *
-	 * @return bool|void
+	 * @return null|bool|array|WP_Error
 	 */
 	protected function sendNotification( $post_id, Command $command )
 	{
