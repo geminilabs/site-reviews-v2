@@ -70,8 +70,14 @@ class Email
 	/**
 	 * @return string|null
 	 */
-	public function read()
+	public function read( $plaintext = false )
 	{
+		if( !!$plaintext ) {
+			$message = $this->stripHtmlTags( $this->message );
+
+			return apply_filters( 'site-reviews/email/message', $message, 'text', $this );
+		}
+
 		return $this->message;
 	}
 
