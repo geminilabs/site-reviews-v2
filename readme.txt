@@ -4,7 +4,7 @@ Donate link: http://geminilabs.io/donate
 Tags: best reviews, business ratings, business reviews, curated reviews, moderated reviews, rating widget, rating, ratings shortcode, review widget, reviews login, reviews shortcode, reviews, simple reviews, site reviews, star rating, star review, submit review, testimonial, user rating, user review, user reviews, wp rating, wp review, wp testimonials
 Requires at least: 4.0.0
 Tested up to: 4.7
-Stable tag: 1.1.1
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,6 +82,11 @@ Some themes may have very small sidebars and CSS styles that conflict or alter t
 10. How the Submit a Site Review widget looks like using the Twenty Sixteen WordPress theme
 
 == Changelog ==
+
+= 1.2.0 (2016-12-27) =
+
+* [feature] Send notifications to Slack
+* Fix notifications to use the email template setting
 
 = 1.1.1 (2016-12-05) =
 

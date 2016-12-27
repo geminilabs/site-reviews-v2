@@ -261,9 +261,13 @@ msgstr "Your review has been submitted!"
 msgid "Discard"
 msgstr "Discard"
 
-#: plugin/Handlers/SubmitReview.php:122
+#: plugin/Handlers/SubmitReview.php:142
 msgid "New %s-Star Review"
 msgstr "New %s-Star Review"
+
+#: plugin/Handlers/SubmitReview.php:191, plugin/Strings.php:28
+msgid "View Review"
+msgstr "View Review"
 
 #: plugin/Handlers/TogglePinned.php:40
 msgid "The review is pinned."
@@ -337,7 +341,7 @@ msgstr "Site Reviews navigation"
 msgid "read more"
 msgstr "read more"
 
-#: plugin/Settings.php:113, plugin/Settings.php:180
+#: plugin/Settings.php:113, plugin/Settings.php:194
 msgid "Save Settings"
 msgstr "Save Settings"
 
@@ -370,82 +374,98 @@ msgid "Send to administrator <code>%s</code>"
 msgstr "Send to administrator <code>%s</code>"
 
 #: plugin/Settings.php:139
-msgid "Send to one or more custom emails"
-msgstr "Send to one or more custom emails"
+msgid "Send to one or more email addresses"
+msgstr "Send to one or more email addresses"
 
-#: plugin/Settings.php:146
+#: plugin/Settings.php:140
+msgid "Send to <a href=\"https://slack.com/\">Slack</a>"
+msgstr "Send to <a href=\"https://slack.com/\">Slack</a>"
+
+#: plugin/Settings.php:147
 msgid "Send notification emails to"
 msgstr "Send notification emails to"
 
-#: plugin/Settings.php:150
+#: plugin/Settings.php:151
 msgid "Separate multiple emails with a comma"
 msgstr "Separate multiple emails with a comma"
 
-#: plugin/Settings.php:156
+#: plugin/Settings.php:157
+msgid "Webhook URL"
+msgstr "Webhook URL"
+
+#: plugin/Settings.php:162
+msgid ""
+"To send notifications to Slack, <a href=\"%s\">create a new Incoming "
+"WebHook</a> and then paste the provided Webhook URL in the field above."
+msgstr ""
+"To send notifications to Slack, <a href=\"%s\">create a new Incoming "
+"WebHook</a> and then paste the provided Webhook URL in the field above."
+
+#: plugin/Settings.php:170
 msgid "Notification template"
 msgstr "Notification template"
 
-#: plugin/Settings.php:185
+#: plugin/Settings.php:199
 msgid "Form Labels"
 msgstr "Form Labels"
 
-#: plugin/Settings.php:186
+#: plugin/Settings.php:200
 msgid "Customize the label text for the review submission form fields."
 msgstr "Customize the label text for the review submission form fields."
 
-#: plugin/Settings.php:192
+#: plugin/Settings.php:206
 msgid "Rating label"
 msgstr "Rating label"
 
-#: plugin/Settings.php:193
+#: plugin/Settings.php:207
 msgid "Your overall rating"
 msgstr "Your overall rating"
 
-#: plugin/Settings.php:200
+#: plugin/Settings.php:214
 msgid "Title label"
 msgstr "Title label"
 
-#: plugin/Settings.php:201
+#: plugin/Settings.php:215
 msgid "Title of your review"
 msgstr "Title of your review"
 
-#: plugin/Settings.php:208
+#: plugin/Settings.php:222
 msgid "Content label"
 msgstr "Content label"
 
-#: plugin/Settings.php:209
+#: plugin/Settings.php:223
 msgid "Your review"
 msgstr "Your review"
 
-#: plugin/Settings.php:216
+#: plugin/Settings.php:230
 msgid "Reviewer label"
 msgstr "Reviewer label"
 
-#: plugin/Settings.php:217
+#: plugin/Settings.php:231
 msgid "Your name"
 msgstr "Your name"
 
-#: plugin/Settings.php:224
+#: plugin/Settings.php:238
 msgid "Email label"
 msgstr "Email label"
 
-#: plugin/Settings.php:225
+#: plugin/Settings.php:239
 msgid "Your email"
 msgstr "Your email"
 
-#: plugin/Settings.php:232
+#: plugin/Settings.php:246
 msgid "Terms label"
 msgstr "Terms label"
 
-#: plugin/Settings.php:233
+#: plugin/Settings.php:247
 msgid "This review is based on my own experience and is my genuine opinion."
 msgstr "This review is based on my own experience and is my genuine opinion."
 
-#: plugin/Settings.php:239
+#: plugin/Settings.php:253
 msgid "Form Placeholders"
 msgstr "Form Placeholders"
 
-#: plugin/Settings.php:240
+#: plugin/Settings.php:254
 msgid ""
 "Customize the placeholder text for the review submission form fields. Use a "
 "single space character to disable the placeholder text."
@@ -453,35 +473,35 @@ msgstr ""
 "Customize the placeholder text for the review submission form fields. Use a "
 "single space character to disable the placeholder text."
 
-#: plugin/Settings.php:247
+#: plugin/Settings.php:261
 msgid "Title placeholder"
 msgstr "Title placeholder"
 
-#: plugin/Settings.php:248
+#: plugin/Settings.php:262
 msgid "Summarize your review or highlight an interesting detail"
 msgstr "Summarize your review or highlight an interesting detail"
 
-#: plugin/Settings.php:256
+#: plugin/Settings.php:270
 msgid "Content placeholder"
 msgstr "Content placeholder"
 
-#: plugin/Settings.php:257
+#: plugin/Settings.php:271
 msgid "Tell people your review"
 msgstr "Tell people your review"
 
-#: plugin/Settings.php:265
+#: plugin/Settings.php:279
 msgid "Reviewer placeholder"
 msgstr "Reviewer placeholder"
 
-#: plugin/Settings.php:266
+#: plugin/Settings.php:280
 msgid "Tell us your name"
 msgstr "Tell us your name"
 
-#: plugin/Settings.php:274
+#: plugin/Settings.php:288
 msgid "Email placeholder"
 msgstr "Email placeholder"
 
-#: plugin/Settings.php:275
+#: plugin/Settings.php:289
 msgid "Tell us your email"
 msgstr "Tell us your email"
 
@@ -528,10 +548,6 @@ msgstr "Search Reviews"
 #: plugin/Strings.php:27
 msgid "Uploaded to this review"
 msgstr "Uploaded to this review"
-
-#: plugin/Strings.php:28
-msgid "View Review"
-msgstr "View Review"
 
 #: plugin/Strings.php:35
 msgid "Review has been approved and published."

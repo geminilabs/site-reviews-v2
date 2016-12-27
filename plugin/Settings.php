@@ -159,7 +159,7 @@ class Settings
 				'general.notification' => 'webhook',
 			],
 			'desc' => sprintf(
-				__( 'To send notifications to Slack, <a href="%s">create a new Incoming WebHook</a> and then paste the provided Webhook URL in the field above.' ),
+				__( 'To send notifications to Slack, <a href="%s">create a new Incoming WebHook</a> and then paste the provided Webhook URL in the field above.', 'site-reviews' ),
 				esc_url( 'https://slack.com/apps/new/A0F7XDUAZ-incoming-webhooks' )
 			),
 		]);
