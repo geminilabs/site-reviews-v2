@@ -136,7 +136,8 @@ class Settings
 			'options' => [
 				'none'    => __( 'Do not send review notifications', 'site-reviews' ),
 				'default' => sprintf( __( 'Send to administrator <code>%s</code>', 'site-reviews' ), get_option( 'admin_email' ) ),
-				'custom'  => __( 'Send to one or more custom emails', 'site-reviews' ),
+				'custom'  => __( 'Send to one or more email addresses', 'site-reviews' ),
+				'webhook' => __( 'Send to <a href="https://slack.com/">Slack</a>', 'site-reviews' ),
 			],
 		]);
 
@@ -151,12 +152,25 @@ class Settings
 		]);
 
 		$this->addSetting( $formId, [
+			'type'    => 'url',
+			'name'    => 'general.webhook_url',
+			'label'   => __( 'Webhook URL', 'site-reviews' ),
+			'depends' => [
+				'general.notification' => 'webhook',
+			],
+			'desc' => sprintf(
+				__( 'To send notifications to Slack, <a href="%s">create a new Incoming WebHook</a> and then paste the provided Webhook URL in the field above.' ),
+				esc_url( 'https://slack.com/apps/new/A0F7XDUAZ-incoming-webhooks' )
+			),
+		]);
+
+		$this->addSetting( $formId, [
 			'type'    => 'code',
 			'name'    => 'general.notification_message',
 			'label'   => __( 'Notification template', 'site-reviews' ),
 			'rows'    => 9,
 			'depends' => [
-				'general.notification' => ['custom', 'default'],
+				'general.notification' => ['custom', 'default', 'webhook'],
 			],
 			'default' => $this->html->renderTemplate( 'email/templates/review-notification', [], 'return' ),
 			'desc' => 'To restore the default text, save an empty template. Available template tags:<br>

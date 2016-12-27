@@ -56,7 +56,7 @@ class SubmitReview
 
 		$post_id = $this->db->postReview( $reviewId, $review );
 
-		$this->sendNotificationEmail( $post_id, $command );
+		$this->sendNotification( $post_id, $command );
 
 		$message = __( 'Your review has been submitted!', 'site-reviews' );
 
@@ -98,43 +98,22 @@ class SubmitReview
 	}
 
 	/**
-	 * @param int $post_id
+	 * @param string $recipient
 	 *
-	 * @return bool
+	 * @return bool|void
 	 */
-	protected function sendNotificationEmail( $post_id, Command $command )
+	protected function createNotification( $recipient, Command $command )
 	{
-		$notificationType = $this->db->getOption( 'general.notification', 'none' );
-
-		if( !in_array( $notificationType, ['default', 'custom'] ) )return;
-
-		$to = 'default' === $notificationType
-			? get_option( 'admin_email' )
-			: $this->db->getOption( 'general.notification_email' );
-
-		// no email has been set
-		if( empty( $to ) )return;
-
-		$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
-
-		$subject = sprintf( '[%s] %s: "%s"',
-			$blogname,
-			sprintf( __( 'New %s-Star Review', 'site-reviews' ), $command->rating ),
-			$command->title
-		);
-
-		$link = sprintf( '<a href="%1$s">%1$s</a>', esc_url( admin_url( sprintf( 'post.php?post=%s&action=edit', $post_id ) ) ) );
-
 		$args = [
-			'to' => $to,
-			'subject'  => $subject,
+			'to' => $recipient,
+			'subject'  => $command->notification['title'],
 			'template' => 'review-notification',
 			'template-tags' => [
 				'review_author'  => $command->reviewer,
 				'review_content' => $command->content,
 				'review_email'   => $command->email,
 				'review_ip'      => $command->ipAddress,
-				'review_link'    => $link,
+				'review_link'    => sprintf( '<a href="%1$s">%1$s</a>', $command->notification['link'] ),
 				'review_rating'  => $command->rating,
 				'review_title'   => $command->title,
 			],
@@ -142,6 +121,97 @@ class SubmitReview
 
 		// $args = $this->addNotificationLinks( $post_id, $args );
 
-		$this->app->make( 'Email' )->compose( $args )->send();
+		return $this->app->make( 'Email' )->compose( $args );
+	}
+
+	/**
+	 * @param int $post_id
+	 *
+	 * @return bool|void
+	 */
+	protected function sendNotification( $post_id, Command $command )
+	{
+		$notificationType = $this->db->getOption( 'general.notification', 'none' );
+
+		if( !in_array( $notificationType, ['default', 'custom', 'webhook'] ) )return;
+
+		$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+
+		$command->notification['title'] = sprintf( '[%s] %s',
+			$blogname,
+			sprintf( __( 'New %s-Star Review', 'site-reviews' ), $command->rating )
+		);
+
+		$command->notification['link'] = esc_url( admin_url( sprintf( 'post.php?post=%s&action=edit', $post_id ) ) );
+
+		return $notificationType == 'webhook'
+			? $this->sendNotificationWebhook( $command )
+			: $this->sendNotificationEmail( $notificationType, $command );
+	}
+
+	/**
+	 * @param string $notificationType
+	 *
+	 * @return bool|void
+	 */
+	protected function sendNotificationEmail( $notificationType, Command $command )
+	{
+		$recipient = 'default' === $notificationType
+			? get_option( 'admin_email' )
+			: $this->db->getOption( 'general.notification_email' );
+
+		// no email address has been set
+		if( empty( $recipient ) )return;
+
+		$this->createNotification( $recipient, $command )->send();
+	}
+
+	/**
+	 * @return bool|void
+	 */
+	protected function sendNotificationWebhook( Command $command )
+	{
+		if( !( $endpoint = $this->db->getOption( 'general.webhook_url' ) ) )return;
+
+		$fields[] = ['title' => str_repeat( ":star:", $command->rating ) ];
+
+		if( $command->title ) {
+			$fields[] = ['title' => $command->title ];
+		}
+
+		if( $command->content ) {
+			$fields[] = ['value' => $command->content ];
+		}
+
+		if( $command->reviewer ) {
+			!$command->email ?: $command->email = sprintf( ' <%s>', $command->email );
+			$fields[] = ['value' => trim( sprintf( '%s%s - %s', $command->reviewer, $command->email, $command->ipAddress ) ) ];
+		}
+
+		$fields[] = ['value' => sprintf( '<%s|%s>', $command->notification['link'], __( 'View Review', 'site-reviews' ) ) ];
+
+		$notification = json_encode([
+			'icon_url'    => $this->app->url . 'assets/img/icon.png',
+			'username'    => $this->app->name,
+			'attachments' => [
+				[
+					'pretext'  => $command->notification['title'],
+					'color'    => '#665068',
+					'fallback' => $this->createNotification( '', $command )->read( 'plaintext' ),
+					'fields'   => $fields,
+				],
+			],
+		]);
+
+		$response = wp_remote_post( $endpoint, [
+			'method'      => 'POST',
+			'timeout'     => 45,
+			'redirection' => 5,
+			'httpversion' => '1.0',
+			'blocking'    => false,
+			'sslverify'   => false,
+			'headers'     => ['Content-Type' => 'application/json'],
+			'body'        => apply_filters( 'site-reviews/webhook/notification', $notification, $command ),
+		]);
 	}
 }

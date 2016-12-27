@@ -150,7 +150,7 @@ class Html
 	 *
 	 * @return void|string
 	 */
-	public function renderTemplate( $templatePath, $args = [], $print = 'print' )
+	public function renderTemplate( $templatePath, array $args = [], $print = 'print' )
 	{
 		$file = $this->app->path . "views/{$templatePath}.php";
 
@@ -160,6 +160,19 @@ class Html
 		include $file;
 		$template = ob_get_clean();
 
+		return $this->renderTemplateString( $template, $args, $print );
+	}
+
+	/**
+	 * Render a template string
+	 *
+	 * @param string      $template
+	 * @param string|bool $print
+	 *
+	 * @return void|string
+	 */
+	public function renderTemplateString( $template, array $args = [], $print = 'print' )
+	{
 		if( !empty( $args ) ) {
 			foreach( $args as $key => $value ) {
 				$template = str_replace( '{' . $key . '}', $value, $template );
