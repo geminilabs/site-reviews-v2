@@ -173,7 +173,9 @@ class Settings
 				'general.notification' => ['custom', 'default', 'webhook'],
 			],
 			'default' => $this->html->renderTemplate( 'email/templates/review-notification', [], 'return' ),
-			'desc' => 'To restore the default text, save an empty template. Available template tags:<br>
+			'desc' => 'To restore the default text, save an empty template.
+				If you are sending notifications to Slack then this template will only be used as a fallback in the event that <a href="https://api.slack.com/docs/attachments">Message Attachments</a> have been disabled.<br>
+				Available template tags:<br>
 				<code>{review_rating}</code> - The review rating number (1-5)<br>
 				<code>{review_title}</code> - The review title<br>
 				<code>{review_content}</code> - The review content<br>
