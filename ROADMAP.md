@@ -6,7 +6,7 @@ All proposed features are subject to change.
 - [x] Paginated reviews
 
 ## v1.2.0
-- [-] Webhook notifications
+- [x] Webhook notifications for Slack
 
 ## v1.3.0
 - [ ] MCE shortcode generator

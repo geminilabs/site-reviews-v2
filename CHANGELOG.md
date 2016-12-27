@@ -12,6 +12,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Fixed
 ### Security
 
+## [1.2.0] - 2016-12-27
+
+### Added
+- [feature] Send notifications to Slack
+
+### Fixed
+- Fix notifications to use the email template setting
+
 ## [1.1.1] - 2016-12-05
 
 ### Added

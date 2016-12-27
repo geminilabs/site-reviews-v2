@@ -137,7 +137,7 @@ class Settings
 				'none'    => __( 'Do not send review notifications', 'site-reviews' ),
 				'default' => sprintf( __( 'Send to administrator <code>%s</code>', 'site-reviews' ), get_option( 'admin_email' ) ),
 				'custom'  => __( 'Send to one or more email addresses', 'site-reviews' ),
-				'webhook' => __( 'Send using a webhook (e.g. send notifications to <a href="https://slack.com/">Slack</a>)', 'site-reviews' ),
+				'webhook' => __( 'Send to <a href="https://slack.com/">Slack</a>', 'site-reviews' ),
 			],
 		]);
 
