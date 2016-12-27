@@ -145,8 +145,15 @@ class Email
 	 */
 	protected function buildHtmlMessage( $email )
 	{
-		if( $email['template'] ) {
-			$message = $this->app->make( 'Html' )->renderTemplate( "email/templates/{$email['template']}", $email['template-tags'], 'return' );
+		$html = $this->app->make( 'Html' );
+
+		$template = trim( $this->app->make( 'Database' )->getOption( 'general.notification_message' ) );
+
+		if( !empty( $template ) ) {
+			$message = $html->renderTemplateString( $template, $email['template-tags'], 'return' );
+		}
+		else if( $email['template'] ) {
+			$message = $html->renderTemplate( "email/templates/{$email['template']}", $email['template-tags'], 'return' );
 		}
 
 		if( !isset( $message ) ) {
@@ -155,7 +162,7 @@ class Email
 
 		$message = $email['before'] . $message . $email['after'];
 
-		$body = $this->app->make( 'Html' )->renderTemplate( 'email/index', [], 'return' );
+		$body = $html->renderTemplate( 'email/index', [], 'return' );
 
 		$message = strip_shortcodes( $message );
 		$message = wptexturize( $message );
