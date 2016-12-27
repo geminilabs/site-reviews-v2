@@ -167,6 +167,7 @@ class Email
 		$message = strip_shortcodes( $message );
 		$message = wptexturize( $message );
 		$message = wpautop( $message );
+		$message = str_replace( '&lt;&gt; ', '', $message );
 		$message = str_replace( ']]>', ']]&gt;', $message );
 		$message = str_replace( '{message}', $message, $body );
 		$message = stripslashes( $message );
