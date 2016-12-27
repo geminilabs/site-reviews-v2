@@ -34,6 +34,8 @@ class SubmitReview
 	}
 
 	/**
+	 * @todo log any negative result of the sent notification
+	 *
 	 * return void
 	 */
 	public function handle( Command $command )
@@ -154,7 +156,7 @@ class SubmitReview
 	}
 
 	/**
-	 * @return bool|void
+	 * @return bool|null
 	 */
 	protected function sendNotificationEmail( Command $command, array $args )
 	{
@@ -165,11 +167,11 @@ class SubmitReview
 		// no email address has been set
 		if( empty( $args['recipient'] ) )return;
 
-		$this->createNotification( $command, $args )->send();
+		return $this->createNotification( $command, $args )->send();
 	}
 
 	/**
-	 * @return bool|void
+	 * @return null|array|WP_Error
 	 */
 	protected function sendNotificationWebhook( Command $command, array $args )
 	{
@@ -207,7 +209,7 @@ class SubmitReview
 			],
 		]);
 
-		$response = wp_remote_post( $endpoint, [
+		return wp_remote_post( $endpoint, [
 			'method'      => 'POST',
 			'timeout'     => 45,
 			'redirection' => 5,
