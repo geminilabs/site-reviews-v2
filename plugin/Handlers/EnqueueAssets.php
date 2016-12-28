@@ -10,44 +10,44 @@
 
 namespace GeminiLabs\SiteReviews\Handlers;
 
-use GeminiLabs\SiteReviews\App;
 use GeminiLabs\SiteReviews\Commands\EnqueueAssets as Command;
 
 class EnqueueAssets
 {
 	/**
-	 * @var App
-	 */
-	protected $app;
-
-	/**
 	 * @var array
 	 */
 	protected $dependencies;
-
-	public function __construct( App $app )
-	{
-		$this->app = $app;
-	}
 
 	/**
 	 * @return void
 	 */
 	public function handle( Command $command )
 	{
-		$this->dependencies = $this->app->make( 'Html' )->getDependencies();
+		$this->dependencies = glsr_resolve( 'Html' )->getDependencies();
+
+		$variables = [
+			'action'  => glsr_app()->prefix . '_action',
+			'ajaxurl' => wp_nonce_url( admin_url( 'admin-ajax.php' ), glsr_app()->id . '-ajax-nonce' ),
+		];
 
 		if( is_admin() ) {
 			$this->enqueueAdmin( $command );
+
+			if( user_can_richedit() ) {
+
+				add_filter( 'mce_external_plugins', [ $this, 'enqueueTinymcePlugins'], 15 );
+
+				$variables = array_merge( $variables, [
+					'shortcodes' => $this->localizeShortcodes(),
+				]);
+			}
 		}
 		else {
 			$this->enqueuePublic( $command );
 		}
 
-		wp_localize_script( $command->handle, 'site_reviews', [
-			'action'  => $this->app->prefix . '_action',
-			'ajaxurl' => wp_nonce_url( admin_url( 'admin-ajax.php' ), "{$this->app->id}-ajax-nonce" ),
-		]);
+		wp_localize_script( $command->handle, 'site_reviews', $variables );
 	}
 
 	/**
@@ -114,5 +114,35 @@ class EnqueueAssets
 			$command->version,
 			true
 		);
+	}
+
+	/**
+	 * Enqueue TinyMCE plugins
+	 *
+	 * @return array|null
+	 */
+	public function enqueueTinymcePlugins( array $plugins )
+	{
+		if( !current_user_can( 'edit_posts' ) && !current_user_can( 'edit_pages' ) )return;
+
+		$plugins['glsr_shortcode'] = glsr_app()->url . 'assets/js/mce-plugin.js';
+
+		return $plugins;
+	}
+
+	/**
+	 * @return array
+	 */
+	protected function localizeShortcodes()
+	{
+		$variables = [];
+
+		foreach( glsr_app()->mceShortcodes as $tag => $args ) {
+			if( !empty( $args['required'] ) ) {
+				$variables[ $tag ] = $args['required'];
+			}
+		}
+
+		return $variables;
 	}
 }

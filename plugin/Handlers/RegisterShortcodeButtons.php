@@ -4,36 +4,33 @@
  * @package   GeminiLabs\SiteReviews
  * @copyright Copyright (c) 2016, Paul Ryley
  * @license   GPLv2 or later
- * @since     1.0.0
+ * @since     1.3.0
  * -------------------------------------------------------------------------------------------------
  */
 
 namespace GeminiLabs\SiteReviews\Handlers;
 
 use Exception;
-use GeminiLabs\SiteReviews\Commands\RegisterShortcodes as Command;
+use GeminiLabs\SiteReviews\Commands\RegisterShortcodeButtons as Command;
 use ReflectionException;
 
-class RegisterShortcodes
+class RegisterShortcodeButtons
 {
 	/**
 	 * @return void
 	 */
 	public function handle( Command $command )
 	{
-		foreach( $command->shortcodes as $key ) {
-			try {
-				$shortcode = glsr_resolve( $this->getClassName( $key ) );
-				add_shortcode( $key, [ $shortcode, 'printShortcode'] );
-			}
-			catch( Exception $e ) {
-				glsr_resolve( 'Log\Logger' )->error( sprintf( 'Error registering shortcode. Message: %s "(%s:%s)"',
-					$e->getMessage(),
-					$e->getFile(),
-					$e->getLine()
-				));
-			}
+		$properties = [];
+
+		foreach( $command->shortcodes as $slug => $args ) {
+
+			$shortcode = glsr_resolve( $this->getClassName( $slug ) )->register( $slug, $args );
+
+			$properties[ $slug ] = $shortcode->properties;
 		}
+
+		glsr_app()->mceShortcodes = $properties;
 	}
 
 	/**
@@ -44,7 +41,7 @@ class RegisterShortcodes
 	protected function getClassName( $shortcode )
 	{
 		$className = implode( '', array_map( 'ucfirst', explode( '_', $shortcode ) ) );
-		$className = "GeminiLabs\SiteReviews\Shortcodes\\$className";
+		$className = "GeminiLabs\SiteReviews\Shortcodes\Buttons\\$className";
 
 		return $className;
 	}

@@ -13,6 +13,7 @@ namespace GeminiLabs\SiteReviews\Controllers;
 use GeminiLabs\SiteReviews\Commands\EnqueueAssets;
 use GeminiLabs\SiteReviews\Commands\RegisterPointers;
 use GeminiLabs\SiteReviews\Commands\RegisterPostType;
+use GeminiLabs\SiteReviews\Commands\RegisterShortcodeButtons;
 use GeminiLabs\SiteReviews\Commands\RegisterShortcodes;
 use GeminiLabs\SiteReviews\Commands\RegisterWidgets;
 use GeminiLabs\SiteReviews\Commands\SubmitReview;
@@ -285,6 +286,30 @@ class MainController extends BaseController
 	/**
 	 * @return void
 	 *
+	 * @action admin_init
+	 */
+	public function registerShortcodeButtons()
+	{
+		$site_reviews      = esc_html__( 'Recent Site Reviews', 'site-reviews' );
+		$site_reviews_form = esc_html__( 'Submit a Site Review', 'site-reviews' );
+
+		$command = new registerShortcodeButtons([
+			'site_reviews' => [
+				'title' => $site_reviews,
+				'label' => $site_reviews,
+			],
+			'site_reviews_form' => [
+				'title' => $site_reviews_form,
+				'label' => $site_reviews_form,
+			],
+		]);
+
+		$this->execute( $command );
+	}
+
+	/**
+	 * @return void
+	 *
 	 * @action admin_menu
 	 */
 	public function registerSubMenus()
@@ -482,6 +507,31 @@ class MainController extends BaseController
 		],[
 			'settings' => $this->app->getDefaults(),
 		]);
+	}
+
+	/**
+	 * Adds the shortcode button above the TinyMCE Editor on add/edit screens
+	 *
+	 * @return null|void
+	 *
+	 * @action media_buttons
+	 */
+	public function renderTinymceButton()
+	{
+		$screen = get_current_screen();
+
+		if( $screen->base != 'post' )return;
+
+		$shortcodes = [];
+
+		foreach( $this->app->mceShortcodes as $shortcode => $values ) {
+			if( !apply_filters( sanitize_title( $shortcode ) . '_condition', true ) )continue;
+			$shortcodes[ $shortcode ] = $values;
+		}
+
+		if( empty( $shortcodes ) )return;
+
+		$this->render( 'edit/tinymce', ['shortcodes' => $shortcodes ] );
 	}
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * = Reviews Form shortcode
+ * = Site Reviews shortcode
  *
  * @package   GeminiLabs\SiteReviews
  * @copyright Copyright (c) 2016, Paul Ryley
