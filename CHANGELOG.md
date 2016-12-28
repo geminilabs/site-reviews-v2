@@ -12,6 +12,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Fixed
 ### Security
 
+## [1.2.1] - 2016-12-28
+
+### Fixed
+- Fix PHP 5.4 compatibility regression
+
 ## [1.2.0] - 2016-12-27
 
 ### Added
