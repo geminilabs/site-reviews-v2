@@ -43,6 +43,8 @@ read -p " - Updated the changelog for "${PLUGIN_VERSION}" and appended it to rea
 read -p " - Set stable tag in the readme.txt file to "${PLUGIN_VERSION}"?"
 read -p " - Set version in the main file to "${PLUGIN_VERSION}"?"
 read -p " - Updated the POT file?"
+read -p " - Verified compatibility with PHP v5.4 to latest?"
+read -p " - Verified compatibility with Wordpress v4.0 to latest?"
 read -p " - Committed all changes to the master branch on GITHUB?"
 echo ""
 read -p "PRESS [ENTER] TO BEGIN RELEASING "${PLUGIN_VERSION}
