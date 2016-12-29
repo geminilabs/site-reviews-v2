@@ -534,116 +534,120 @@ msgid "All settings are optional."
 msgstr "All settings are optional."
 
 #: plugin/Shortcodes/Buttons/SiteReviews.php:32, plugin/Shortcodes/Buttons/SiteReviewsForm.php:31
-msgid "Title:"
-msgstr "Title:"
+msgid "Heading:"
+msgstr "Heading:"
 
 #: plugin/Shortcodes/Buttons/SiteReviews.php:33, plugin/Shortcodes/Buttons/SiteReviewsForm.php:32
 msgid "Enter a custom shortcode heading."
 msgstr "Enter a custom shortcode heading."
 
 #: plugin/Shortcodes/Buttons/SiteReviews.php:37
+msgid "Display:"
+msgstr "Display:"
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:39, plugin/Widgets/RecentReviews.php:58
+msgid "Display only title"
+msgstr "Display only title"
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:40
+msgid "Display only review"
+msgstr "Display only review"
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:41
+msgid "Display title and review"
+msgstr "Display title and review"
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:43
+msgid "Display the title, review, or both."
+msgstr "Display the title, review, or both."
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:47
 msgid "Rating:"
 msgstr "Rating:"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:39, plugin/Widgets/RecentReviews.php:82
+#: plugin/Shortcodes/Buttons/SiteReviews.php:49, plugin/Widgets/RecentReviews.php:82
 msgid "5 stars"
 msgstr "5 stars"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:40, plugin/Widgets/RecentReviews.php:83
+#: plugin/Shortcodes/Buttons/SiteReviews.php:50, plugin/Widgets/RecentReviews.php:83
 msgid "4 stars"
 msgstr "4 stars"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:41, plugin/Widgets/RecentReviews.php:84
+#: plugin/Shortcodes/Buttons/SiteReviews.php:51, plugin/Widgets/RecentReviews.php:84
 msgid "3 stars"
 msgstr "3 stars"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:42, plugin/Widgets/RecentReviews.php:85
+#: plugin/Shortcodes/Buttons/SiteReviews.php:52, plugin/Widgets/RecentReviews.php:85
 msgid "2 stars"
 msgstr "2 stars"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:43, plugin/Widgets/RecentReviews.php:86
+#: plugin/Shortcodes/Buttons/SiteReviews.php:53, plugin/Widgets/RecentReviews.php:86
 msgid "1 star"
 msgstr "1 star"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:45
+#: plugin/Shortcodes/Buttons/SiteReviews.php:55
 msgid "What is the minimum rating to display?"
 msgstr "What is the minimum rating to display?"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:52
-msgid "Count:"
-msgstr "Count:"
-
-#: plugin/Shortcodes/Buttons/SiteReviews.php:53
-msgid "How many reviews would you like to display?"
-msgstr "How many reviews would you like to display?"
-
-#: plugin/Shortcodes/Buttons/SiteReviews.php:57
+#: plugin/Shortcodes/Buttons/SiteReviews.php:59
 msgid "Pagination:"
 msgstr "Pagination:"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:59
+#: plugin/Shortcodes/Buttons/SiteReviews.php:61
 msgid "Enable"
 msgstr "Enable"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:60
+#: plugin/Shortcodes/Buttons/SiteReviews.php:62
 msgid "Disable"
 msgstr "Disable"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:62
+#: plugin/Shortcodes/Buttons/SiteReviews.php:64
 msgid "When using pagination this shortcode can only be used once on a page."
 msgstr "When using pagination this shortcode can only be used once on a page."
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:66, plugin/Shortcodes/Buttons/SiteReviewsForm.php:44
+#: plugin/Shortcodes/Buttons/SiteReviews.php:71
+msgid "Count:"
+msgstr "Count:"
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:72
+msgid "How many reviews would you like to display?"
+msgstr "How many reviews would you like to display?"
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:76, plugin/Shortcodes/Buttons/SiteReviewsForm.php:44
 msgid "Classes:"
 msgstr "Classes:"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:67, plugin/Shortcodes/Buttons/SiteReviewsForm.php:45
+#: plugin/Shortcodes/Buttons/SiteReviews.php:77, plugin/Shortcodes/Buttons/SiteReviewsForm.php:45
 msgid "Add custom CSS classes to the shortcode."
 msgstr "Add custom CSS classes to the shortcode."
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:70, plugin/Shortcodes/Buttons/SiteReviewsForm.php:48
+#: plugin/Shortcodes/Buttons/SiteReviews.php:80, plugin/Shortcodes/Buttons/SiteReviewsForm.php:48
 msgid "Hide:"
 msgstr "Hide:"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:78
+#: plugin/Shortcodes/Buttons/SiteReviews.php:88
 msgid " Author"
 msgstr " Author"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:79
+#: plugin/Shortcodes/Buttons/SiteReviews.php:89
 msgid "Hide the author field?"
 msgstr "Hide the author field?"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:83
+#: plugin/Shortcodes/Buttons/SiteReviews.php:93
 msgid " Date"
 msgstr " Date"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:84
+#: plugin/Shortcodes/Buttons/SiteReviews.php:94
 msgid "Hide the date field?"
 msgstr "Hide the date field?"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:88
+#: plugin/Shortcodes/Buttons/SiteReviews.php:98
 msgid " Rating"
 msgstr " Rating"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:89
+#: plugin/Shortcodes/Buttons/SiteReviews.php:99
 msgid "Hide the rating field?"
 msgstr "Hide the rating field?"
-
-#: plugin/Shortcodes/Buttons/SiteReviews.php:93, plugin/Shortcodes/Buttons/SiteReviewsForm.php:61
-msgid " Review"
-msgstr " Review"
-
-#: plugin/Shortcodes/Buttons/SiteReviews.php:94, plugin/Shortcodes/Buttons/SiteReviewsForm.php:62
-msgid "Hide the review field?"
-msgstr "Hide the review field?"
-
-#: plugin/Shortcodes/Buttons/SiteReviews.php:98
-msgid " Title"
-msgstr " Title"
-
-#: plugin/Shortcodes/Buttons/SiteReviews.php:99, plugin/Shortcodes/Buttons/SiteReviewsForm.php:57
-msgid "Hide the title field?"
-msgstr "Hide the title field?"
 
 #: plugin/Shortcodes/Buttons/SiteReviews.php:103
 msgid " URL"
@@ -660,6 +664,18 @@ msgstr "Description:"
 #: plugin/Shortcodes/Buttons/SiteReviewsForm.php:37
 msgid "Enter a custom shortcode description."
 msgstr "Enter a custom shortcode description."
+
+#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:57
+msgid "Hide the title field?"
+msgstr "Hide the title field?"
+
+#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:61
+msgid " Review"
+msgstr " Review"
+
+#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:62
+msgid "Hide the review field?"
+msgstr "Hide the review field?"
 
 #: plugin/Shortcodes/Buttons/SiteReviewsForm.php:66
 msgid " Name"
@@ -776,10 +792,6 @@ msgstr "Review updated."
 #: plugin/Strings.php:46
 msgid "View review"
 msgstr "View review"
-
-#: plugin/Widgets/RecentReviews.php:58
-msgid "Display only title"
-msgstr "Display only title"
 
 #: plugin/Widgets/RecentReviews.php:59
 msgid "Display only excerpt"

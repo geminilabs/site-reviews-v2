@@ -25,6 +25,8 @@ class SiteReviews extends Shortcode
 			'class'      => '',
 			'count'      => 10,
 			'display'    => 'title,excerpt,author,date,rating,url',
+			'hide'       => '',
+			'heading'    => '',
 			'pagination' => false,
 			'rating'     => 5,
 			'title'      => '',
@@ -36,6 +38,9 @@ class SiteReviews extends Shortcode
 		extract( $args );
 
 		$display = array_map( 'trim', explode( ',', $display ) );
+		$hide    = array_map( 'trim', explode( ',', $hide ) );
+
+		$display = array_values( array_diff( $display, $hide ) );
 
 		$author = in_array( 'author', $display );
 		$date   = in_array( 'date', $display );
@@ -51,8 +56,11 @@ class SiteReviews extends Shortcode
 
 		echo '<div class="shortcode-site-reviews">';
 
-		if( !empty( $title ) ) {
-			printf( '<h2>%s</h2>', $title );
+		// Backwards compatability
+		!empty( $heading ) ?: $heading = $title;
+
+		if( !empty( $heading ) ) {
+			printf( '<h2>%s</h2>', $heading );
 		}
 
 		$this->html->renderPartial( 'reviews', [

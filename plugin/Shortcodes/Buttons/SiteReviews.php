@@ -28,9 +28,19 @@ class SiteReviews extends Generator
 				'minWidth' => 320,
 			],[
 				'type'     => 'textbox',
-				'name'     => 'title',
-				'label'    => esc_html__( 'Title:', 'site-reviews' ),
+				'name'     => 'heading',
+				'label'    => esc_html__( 'Heading:', 'site-reviews' ),
 				'tooltip'  => esc_attr__( 'Enter a custom shortcode heading.', 'site-reviews' ),
+			],[
+				'type'    => 'listbox',
+				'name'    => 'display',
+				'label'   => esc_html__( 'Display:', 'site-reviews' ),
+				'options' => [
+					'title'   => esc_html__( 'Display only title', 'site-reviews' ),
+					'excerpt' => esc_html__( 'Display only review', 'site-reviews' ),
+					'both'    => esc_html__( 'Display title and review', 'site-reviews' ),
+				],
+				'tooltip' => esc_attr__( 'Display the title, review, or both.', 'site-reviews' ),
 			],[
 				'type'    => 'listbox',
 				'name'    => 'rating',
@@ -44,14 +54,6 @@ class SiteReviews extends Generator
 				],
 				'tooltip' => esc_attr__( 'What is the minimum rating to display?', 'site-reviews' ),
 			],[
-				'type'      => 'textbox',
-				'name'      => 'count',
-				'maxLength' => 5,
-				'size'      => 3,
-				'text'      => '10',
-				'label'     => esc_html__( 'Count:', 'site-reviews' ),
-				'tooltip'   => esc_attr__( 'How many reviews would you like to display?', 'site-reviews' ),
-			],[
 				'type'    => 'listbox',
 				'name'    => 'pagination',
 				'label'   => esc_html__( 'Pagination:', 'site-reviews' ),
@@ -60,6 +62,14 @@ class SiteReviews extends Generator
 					'false' => esc_html__( 'Disable', 'site-reviews' ),
 				],
 				'tooltip' => esc_attr__( 'When using pagination this shortcode can only be used once on a page.', 'site-reviews' ),
+			],[
+				'type'      => 'textbox',
+				'name'      => 'count',
+				'maxLength' => 5,
+				'size'      => 3,
+				'text'      => '10',
+				'label'     => esc_html__( 'Count:', 'site-reviews' ),
+				'tooltip'   => esc_attr__( 'How many reviews would you like to display (default: 10)?', 'site-reviews' ),
 			],[
 				'type'     => 'textbox',
 				'name'     => 'class',
@@ -87,16 +97,6 @@ class SiteReviews extends Generator
 						'name' => 'hide_rating',
 						'text' => esc_html__( ' Rating', 'site-reviews' ),
 						'tooltip' => esc_attr__( 'Hide the rating field?', 'site-reviews' ),
-					],[
-						'type' => 'checkbox',
-						'name' => 'hide_excerpt',
-						'text' => esc_html__( ' Review', 'site-reviews' ),
-						'tooltip' => esc_attr__( 'Hide the review field?', 'site-reviews' ),
-					],[
-						'type' => 'checkbox',
-						'name' => 'hide_title',
-						'text' => esc_html__( ' Title', 'site-reviews' ),
-						'tooltip' => esc_attr__( 'Hide the title field?', 'site-reviews' ),
 					],[
 						'type' => 'checkbox',
 						'name' => 'hide_url',

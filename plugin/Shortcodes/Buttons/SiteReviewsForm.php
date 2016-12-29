@@ -27,8 +27,8 @@ class SiteReviewsForm extends Generator
 				'html' => sprintf( '<p class="strong">%s</p>', esc_html__( 'All settings are optional.', 'site-reviews' ) ),
 			],[
 				'type'    => 'textbox',
-				'name'    => 'title',
-				'label'   => esc_html__( 'Title:', 'site-reviews' ),
+				'name'    => 'heading',
+				'label'   => esc_html__( 'Heading:', 'site-reviews' ),
 				'tooltip' => esc_attr__( 'Enter a custom shortcode heading.', 'site-reviews' ),
 			],[
 				'type'    => 'textbox',

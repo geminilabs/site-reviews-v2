@@ -20,8 +20,8 @@
 	<p>This shortcode displays your most recent submitted reviews.</p>
 	<code>title="Our Reviews"</code>
 	<p>By default, the shortcode displays no heading. Include the "title" attribute to display a custom shortcode heading.</p>
-	<code>display=title,excerpt,author,date,rating,url</code>
-	<p>By default, the shortcode displays all review fields. Include the "display" attribute to display only the specific fields you want.</p>
+	<code>hide=author,date,rating,excerpt,title,url</code>
+	<p>By default, the shortcode displays all review fields. Include the "hide" attribute to hide any specific fields you don't want to show.</p>
 	<code>count=10</code>
 	<p>By default, the shortcode displays the latest 10 reviews. Include the "count" attribute to change the number of reviews that are displayed.</p>
 	<code>rating=4</code>

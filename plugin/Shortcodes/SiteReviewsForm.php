@@ -36,6 +36,7 @@ class SiteReviewsForm extends Shortcode
 			'class'       => '',
 			'description' => '',
 			'hide'        => '',
+			'heading'     => '',
 			'title'       => '',
 		];
 
@@ -64,8 +65,11 @@ class SiteReviewsForm extends Shortcode
 
 		echo '<div class="shortcode-reviews-form">';
 
-		if( !empty( $atts['title'] ) ) {
-			printf( '<h3 class="glsr-form-title">%s</h3>', $atts['title'] );
+		// Backwards compatability
+		!empty( $atts['heading'] ) ?: $atts['heading'] = $atts['title'];
+
+		if( !empty( $atts['heading'] ) ) {
+			printf( '<h3 class="glsr-form-title">%s</h3>', $atts['heading'] );
 		}
 
 		if( !empty( $atts['description'] ) ) {
