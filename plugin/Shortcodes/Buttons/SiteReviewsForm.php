@@ -26,10 +26,6 @@ class SiteReviewsForm extends Generator
 				'type' => 'container',
 				'html' => sprintf( '<p class="strong">%s</p>', esc_html__( 'All settings are optional.', 'site-reviews' ) ),
 			],[
-				'type'   => 'textbox',
-				'name'   => 'id',
-				'hidden' => true,
-			],[
 				'type'    => 'textbox',
 				'name'    => 'title',
 				'label'   => esc_html__( 'Title:', 'site-reviews' ),
@@ -81,6 +77,10 @@ class SiteReviewsForm extends Generator
 						'tooltip' => esc_attr__( 'Hide the terms field?', 'site-reviews' ),
 					],
 				],
+			],[
+				'type'   => 'textbox',
+				'name'   => 'id',
+				'hidden' => true,
 			],
 		];
 	}

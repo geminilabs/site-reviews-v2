@@ -55,7 +55,7 @@ msgstr ""
 msgid "Update WordPress"
 msgstr "Update WordPress"
 
-#: plugin/Commands/RegisterPostType.php:20, plugin/Shortcodes/Buttons/SiteReviewsForm.php:60, plugin/Widgets/RecentReviews.php:48, plugin/Widgets/ReviewsForm.php:40
+#: plugin/Commands/RegisterPostType.php:20, plugin/Shortcodes/Buttons/SiteReviewsForm.php:56, plugin/Widgets/RecentReviews.php:48, plugin/Widgets/ReviewsForm.php:40
 msgid "Title"
 msgstr "Title"
 
@@ -525,7 +525,7 @@ msgstr "Shortcode"
 msgid "- Select -"
 msgstr "- Select -"
 
-#: plugin/Shortcodes/Buttons/Generator.php:329
+#: plugin/Shortcodes/Buttons/Generator.php:331
 msgid "Some of the shortcode options are required."
 msgstr "Some of the shortcode options are required."
 
@@ -533,11 +533,11 @@ msgstr "Some of the shortcode options are required."
 msgid "All settings are optional."
 msgstr "All settings are optional."
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:32, plugin/Shortcodes/Buttons/SiteReviewsForm.php:35
+#: plugin/Shortcodes/Buttons/SiteReviews.php:32, plugin/Shortcodes/Buttons/SiteReviewsForm.php:31
 msgid "Title:"
 msgstr "Title:"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:33, plugin/Shortcodes/Buttons/SiteReviewsForm.php:36
+#: plugin/Shortcodes/Buttons/SiteReviews.php:33, plugin/Shortcodes/Buttons/SiteReviewsForm.php:32
 msgid "Enter a custom shortcode heading."
 msgstr "Enter a custom shortcode heading."
 
@@ -593,15 +593,15 @@ msgstr "Disable"
 msgid "When using pagination this shortcode can only be used once on a page."
 msgstr "When using pagination this shortcode can only be used once on a page."
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:66, plugin/Shortcodes/Buttons/SiteReviewsForm.php:48
+#: plugin/Shortcodes/Buttons/SiteReviews.php:66, plugin/Shortcodes/Buttons/SiteReviewsForm.php:44
 msgid "Classes:"
 msgstr "Classes:"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:67, plugin/Shortcodes/Buttons/SiteReviewsForm.php:49
+#: plugin/Shortcodes/Buttons/SiteReviews.php:67, plugin/Shortcodes/Buttons/SiteReviewsForm.php:45
 msgid "Add custom CSS classes to the shortcode."
 msgstr "Add custom CSS classes to the shortcode."
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:70, plugin/Shortcodes/Buttons/SiteReviewsForm.php:52
+#: plugin/Shortcodes/Buttons/SiteReviews.php:70, plugin/Shortcodes/Buttons/SiteReviewsForm.php:48
 msgid "Hide:"
 msgstr "Hide:"
 
@@ -629,11 +629,11 @@ msgstr " Rating"
 msgid "Hide the rating field?"
 msgstr "Hide the rating field?"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:93, plugin/Shortcodes/Buttons/SiteReviewsForm.php:65
+#: plugin/Shortcodes/Buttons/SiteReviews.php:93, plugin/Shortcodes/Buttons/SiteReviewsForm.php:61
 msgid " Review"
 msgstr " Review"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:94, plugin/Shortcodes/Buttons/SiteReviewsForm.php:66
+#: plugin/Shortcodes/Buttons/SiteReviews.php:94, plugin/Shortcodes/Buttons/SiteReviewsForm.php:62
 msgid "Hide the review field?"
 msgstr "Hide the review field?"
 
@@ -641,7 +641,7 @@ msgstr "Hide the review field?"
 msgid " Title"
 msgstr " Title"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:99, plugin/Shortcodes/Buttons/SiteReviewsForm.php:61
+#: plugin/Shortcodes/Buttons/SiteReviews.php:99, plugin/Shortcodes/Buttons/SiteReviewsForm.php:57
 msgid "Hide the title field?"
 msgstr "Hide the title field?"
 
@@ -653,35 +653,35 @@ msgstr " URL"
 msgid "Hide the URL field?"
 msgstr "Hide the URL field?"
 
-#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:40
+#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:36
 msgid "Description:"
 msgstr "Description:"
 
-#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:41
+#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:37
 msgid "Enter a custom shortcode description."
 msgstr "Enter a custom shortcode description."
 
-#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:70
+#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:66
 msgid " Name"
 msgstr " Name"
 
-#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:71
+#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:67
 msgid "Hide the name field?"
 msgstr "Hide the name field?"
 
-#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:75
+#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:71
 msgid " Email"
 msgstr " Email"
 
-#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:76
+#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:72
 msgid "Hide the email field?"
 msgstr "Hide the email field?"
 
-#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:80
+#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:76
 msgid " Terms"
 msgstr " Terms"
 
-#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:81
+#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:77
 msgid "Hide the terms field?"
 msgstr "Hide the terms field?"
 
@@ -1005,7 +1005,7 @@ msgstr "Terrible"
 msgid "Submit your review"
 msgstr "Submit your review"
 
-#: plugin/Shortcodes/Buttons/Generator.php:336
+#: plugin/Shortcodes/Buttons/Generator.php:338
 msgctxt "the option label"
 msgid "The \"%s\" option is required."
 msgstr "The \"%s\" option is required."
