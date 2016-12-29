@@ -24,13 +24,13 @@ class SiteReviews extends Generator
 		return [
 			[
 				'type' => 'container',
-				'html' => sprintf( '<p class="strong">%s</p>', esc_html__( 'Optional settings', 'site-reviews' ) ),
+				'html' => sprintf( '<p class="strong">%s</p>', esc_html__( 'All settings are optional.', 'site-reviews' ) ),
+				'minWidth' => 320,
 			],[
 				'type'     => 'textbox',
 				'name'     => 'title',
 				'label'    => esc_html__( 'Title:', 'site-reviews' ),
-				'minWidth' => 320,
-				'tooltip'  => esc_attr__( 'Enter a title', 'site-reviews' ),
+				'tooltip'  => esc_attr__( 'Enter a custom shortcode heading.', 'site-reviews' ),
 			],[
 				'type'    => 'listbox',
 				'name'    => 'rating',
@@ -44,16 +44,13 @@ class SiteReviews extends Generator
 				],
 				'tooltip' => esc_attr__( 'What is the minimum rating to display?', 'site-reviews' ),
 			],[
-				'type'     => 'textbox',
-				'name'     => 'count',
-				'label'    => esc_html__( 'Display:', 'site-reviews' ),
-				'tooltip'  => esc_attr__( 'How many reviews would you like to display?', 'site-reviews' ),
-			],[
-				'type'     => 'textbox',
-				'name'     => 'class',
-				'label'    => esc_html__( 'Classes:', 'site-reviews' ),
-				'minWidth' => 320,
-				'tooltip'  => esc_attr__( 'Enter any custom CSS classes here.', 'site-reviews' ),
+				'type'      => 'textbox',
+				'name'      => 'count',
+				'maxLength' => 5,
+				'size'      => 3,
+				'text'      => '10',
+				'label'     => esc_html__( 'Count:', 'site-reviews' ),
+				'tooltip'   => esc_attr__( 'How many reviews would you like to display?', 'site-reviews' ),
 			],[
 				'type'    => 'listbox',
 				'name'    => 'pagination',
@@ -63,6 +60,50 @@ class SiteReviews extends Generator
 					'false' => esc_html__( 'Disable', 'site-reviews' ),
 				],
 				'tooltip' => esc_attr__( 'When using pagination this shortcode can only be used once on a page.', 'site-reviews' ),
+			],[
+				'type'     => 'textbox',
+				'name'     => 'class',
+				'label'    => esc_html__( 'Classes:', 'site-reviews' ),
+				'tooltip'  => esc_attr__( 'Add custom CSS classes to the shortcode.', 'site-reviews' ),
+			],[
+				'type'    => 'container',
+				'label'   => esc_html__( 'Hide:', 'site-reviews' ),
+				'layout'  => 'grid',
+				'columns' => 2,
+				'spacing' => 5,
+				'items'   => [
+					[
+						'type' => 'checkbox',
+						'name' => 'hide_author',
+						'text' => esc_html__( ' Author', 'site-reviews' ),
+						'tooltip' => esc_attr__( 'Hide the author field?', 'site-reviews' ),
+					],[
+						'type' => 'checkbox',
+						'name' => 'hide_date',
+						'text' => esc_html__( ' Date', 'site-reviews' ),
+						'tooltip' => esc_attr__( 'Hide the date field?', 'site-reviews' ),
+					],[
+						'type' => 'checkbox',
+						'name' => 'hide_rating',
+						'text' => esc_html__( ' Rating', 'site-reviews' ),
+						'tooltip' => esc_attr__( 'Hide the rating field?', 'site-reviews' ),
+					],[
+						'type' => 'checkbox',
+						'name' => 'hide_excerpt',
+						'text' => esc_html__( ' Review', 'site-reviews' ),
+						'tooltip' => esc_attr__( 'Hide the review field?', 'site-reviews' ),
+					],[
+						'type' => 'checkbox',
+						'name' => 'hide_title',
+						'text' => esc_html__( ' Title', 'site-reviews' ),
+						'tooltip' => esc_attr__( 'Hide the title field?', 'site-reviews' ),
+					],[
+						'type' => 'checkbox',
+						'name' => 'hide_url',
+						'text' => esc_html__( ' URL', 'site-reviews' ),
+						'tooltip' => esc_attr__( 'Hide the URL field?', 'site-reviews' ),
+					],
+				],
 			],
 		];
 	}

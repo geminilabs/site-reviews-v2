@@ -273,17 +273,20 @@ abstract class Generator
 	{
 		if( !$this->validate( $field ) )return;
 
-		$textbox = shortcode_atts( array(
+		$textbox = shortcode_atts([
+			'hidden'    => false,
 			'label'     => '',
 			'maxLength' => '',
 			'minHeight' => '',
 			'minWidth'  => '',
 			'multiline' => false,
 			'name'      => false,
+			'size'      => '',
+			'text'      => '',
 			'tooltip'   => '',
 			'type'      => '',
 			'value'     => '',
-		), $field );
+		], $field );
 
 		return array_filter( $textbox, function( $value ) {
 			return $value !== '';
