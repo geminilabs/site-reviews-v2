@@ -169,14 +169,13 @@ abstract class Generator
 	 */
 	protected function generateContainer( $field )
 	{
-		if( !array_key_exists( 'html', $field ) )return;
+		if( !array_key_exists( 'html', $field ) && !array_key_exists( 'items', $field ) )return;
+
+		if( isset( $field['items'] ) && is_array( $field['items'] ) ) {
+			$field['items'] = $this->setFields( $field['items'] );
+		}
 
 		return $field;
-
-		return [
-			'type' => $field['type'],
-			'html' => $field['html'],
-		];
 	}
 
 	/**
