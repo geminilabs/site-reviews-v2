@@ -37,7 +37,7 @@ msgstr ""
 msgid "Update WordPress"
 msgstr ""
 
-#: plugin/Commands/RegisterPostType.php:20, plugin/Widgets/RecentReviews.php:48, plugin/Widgets/ReviewsForm.php:40
+#: plugin/Commands/RegisterPostType.php:20, plugin/Shortcodes/Buttons/SiteReviewsForm.php:60, plugin/Widgets/RecentReviews.php:48, plugin/Widgets/ReviewsForm.php:40
 msgid "Title"
 msgstr ""
 
@@ -49,125 +49,129 @@ msgstr ""
 msgid "Log is empty"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:51
+#: plugin/Controllers/AjaxController.php:72
+msgid "Okay"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:52
 msgid "Log was cleared."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:87, plugin/Controllers/MainController.php:293, plugin/Controllers/MainController.php:478
+#: plugin/Controllers/MainController.php:88, plugin/Controllers/MainController.php:318, plugin/Controllers/MainController.php:503
 msgid "Settings"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:106
+#: plugin/Controllers/MainController.php:107
 msgid "%s Review"
 msgid_plural "%s Reviews"
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Controllers/MainController.php:156
+#: plugin/Controllers/MainController.php:157
 msgid "Details"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:170
+#: plugin/Controllers/MainController.php:171
 msgid "Pin Your Reviews"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:171
+#: plugin/Controllers/MainController.php:172
 msgid "You can pin exceptional reviews so that they are always shown first in your widgets and shortcodes."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:193
+#: plugin/Controllers/MainController.php:194
 msgid "Review"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:194, views/menu/status.php:17
+#: plugin/Controllers/MainController.php:195, views/menu/status.php:17
 msgid "Reviews"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:195
+#: plugin/Controllers/MainController.php:196
 msgid "Site Reviews"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:203, views/edit/meta.php:50
+#: plugin/Controllers/MainController.php:204, views/edit/meta.php:50
 msgid "Reviewer"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:204, views/edit/meta.php:42
+#: plugin/Controllers/MainController.php:205, views/edit/meta.php:42
 msgid "Type"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:205, views/edit/meta.php:38
+#: plugin/Controllers/MainController.php:206, views/edit/meta.php:38
 msgid "Rating"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:206, views/edit/pinned.php:17
+#: plugin/Controllers/MainController.php:207, views/edit/pinned.php:17
 msgid "Pinned"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:229
+#: plugin/Controllers/MainController.php:230
 msgid "Approve this review"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:231, plugin/Handlers/SubmitReview.php:95
+#: plugin/Controllers/MainController.php:232, plugin/Handlers/SubmitReview.php:95
 msgid "Approve"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:234
+#: plugin/Controllers/MainController.php:235
 msgid "Unapprove this review"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:236
+#: plugin/Controllers/MainController.php:237
 msgid "Unapprove"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:294
-msgid "Get Help"
-msgstr ""
-
-#: plugin/Controllers/MainController.php:295, plugin/Controllers/MainController.php:353
-msgid "Add-Ons"
-msgstr ""
-
-#: plugin/Controllers/MainController.php:331
-msgid "Submit a Site Review"
-msgstr ""
-
-#: plugin/Controllers/MainController.php:332
-msgid "A \"submit a review\" form for your site."
-msgstr ""
-
-#: plugin/Controllers/MainController.php:336
+#: plugin/Controllers/MainController.php:293, plugin/Controllers/MainController.php:361
 msgid "Recent Site Reviews"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:337
+#: plugin/Controllers/MainController.php:294, plugin/Controllers/MainController.php:356
+msgid "Submit a Site Review"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:319
+msgid "Get Help"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:320, plugin/Controllers/MainController.php:378
+msgid "Add-Ons"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:357
+msgid "A \"submit a review\" form for your site."
+msgstr ""
+
+#: plugin/Controllers/MainController.php:362
 msgid "Your site’s most recent Local Reviews."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:373
+#: plugin/Controllers/MainController.php:398
 msgid "Documentation"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:376
+#: plugin/Controllers/MainController.php:401
 msgid "System Info"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:459
+#: plugin/Controllers/MainController.php:484
 msgid "%s reviews are read-only."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:481
+#: plugin/Controllers/MainController.php:506
 msgid "Licenses"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:497
+#: plugin/Controllers/MainController.php:547
 msgid "Logging enabled."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:498
+#: plugin/Controllers/MainController.php:548
 msgid "Logging disabled."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:514
+#: plugin/Controllers/MainController.php:564
 msgid "Settings updated."
 msgstr ""
 
@@ -475,6 +479,187 @@ msgstr ""
 msgid "Tell us your email"
 msgstr ""
 
+#: plugin/Shortcodes/Buttons/Generator.php:55
+msgid "Close"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/Generator.php:56
+msgid "Insert Shortcode"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/Generator.php:61
+msgid "Shortcode"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/Generator.php:212
+msgid "- Select -"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/Generator.php:329
+msgid "Some of the shortcode options are required."
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/Generator.php:336
+msgctxt "the option label"
+msgid "The \"%s\" option is required."
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:27, plugin/Shortcodes/Buttons/SiteReviewsForm.php:27
+msgid "All settings are optional."
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:32, plugin/Shortcodes/Buttons/SiteReviewsForm.php:35
+msgid "Title:"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:33, plugin/Shortcodes/Buttons/SiteReviewsForm.php:36
+msgid "Enter a custom shortcode heading."
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:37
+msgid "Rating:"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:39, plugin/Widgets/RecentReviews.php:82
+msgid "5 stars"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:40, plugin/Widgets/RecentReviews.php:83
+msgid "4 stars"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:41, plugin/Widgets/RecentReviews.php:84
+msgid "3 stars"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:42, plugin/Widgets/RecentReviews.php:85
+msgid "2 stars"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:43, plugin/Widgets/RecentReviews.php:86
+msgid "1 star"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:45
+msgid "What is the minimum rating to display?"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:52
+msgid "Count:"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:53
+msgid "How many reviews would you like to display?"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:57
+msgid "Pagination:"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:59
+msgid "Enable"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:60
+msgid "Disable"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:62
+msgid "When using pagination this shortcode can only be used once on a page."
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:66, plugin/Shortcodes/Buttons/SiteReviewsForm.php:48
+msgid "Classes:"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:67, plugin/Shortcodes/Buttons/SiteReviewsForm.php:49
+msgid "Add custom CSS classes to the shortcode."
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:70, plugin/Shortcodes/Buttons/SiteReviewsForm.php:52
+msgid "Hide:"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:78
+msgid " Author"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:79
+msgid "Hide the author field?"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:83
+msgid " Date"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:84
+msgid "Hide the date field?"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:88
+msgid " Rating"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:89
+msgid "Hide the rating field?"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:93, plugin/Shortcodes/Buttons/SiteReviewsForm.php:65
+msgid " Review"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:94, plugin/Shortcodes/Buttons/SiteReviewsForm.php:66
+msgid "Hide the review field?"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:98
+msgid " Title"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:99, plugin/Shortcodes/Buttons/SiteReviewsForm.php:61
+msgid "Hide the title field?"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:103
+msgid " URL"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:104
+msgid "Hide the URL field?"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:40
+msgid "Description:"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:41
+msgid "Enter a custom shortcode description."
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:70
+msgid " Name"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:71
+msgid "Hide the name field?"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:75
+msgid " Email"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:76
+msgid "Hide the email field?"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:80
+msgid " Terms"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:81
+msgid "Hide the terms field?"
+msgstr ""
+
 #: plugin/Shortcodes/SiteReviewsForm.php:28, plugin/Widgets/ReviewsForm.php:125
 msgid "You must be <a href=\"%s\">logged in</a> to submit a review."
 msgstr ""
@@ -635,26 +820,6 @@ msgstr ""
 
 #: plugin/Widgets/RecentReviews.php:79
 msgid "What is the minimum rating to display? "
-msgstr ""
-
-#: plugin/Widgets/RecentReviews.php:82
-msgid "5 stars"
-msgstr ""
-
-#: plugin/Widgets/RecentReviews.php:83
-msgid "4 stars"
-msgstr ""
-
-#: plugin/Widgets/RecentReviews.php:84
-msgid "3 stars"
-msgstr ""
-
-#: plugin/Widgets/RecentReviews.php:85
-msgid "2 stars"
-msgstr ""
-
-#: plugin/Widgets/RecentReviews.php:86
-msgid "1 star"
 msgstr ""
 
 #: plugin/Widgets/RecentReviews.php:93
