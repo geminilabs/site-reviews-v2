@@ -78,13 +78,13 @@ Some themes may have very small sidebars and/or CSS styles that conflict or alte
 
 2. A view of the Edit Review page
 
-3. A view of the Site Reviews &gt; Settings page
+3. A view of the MCE shortcode dropdown button
 
-4. A view of the Site Reviews &gt; Get Help &gt; Documentation tab
+4. A view of the Site Reviews &gt; Settings page
 
-5. A view of the Site Reviews &gt; Get Help &gt; System Info tab
+5. A view of the Site Reviews &gt; Get Help &gt; Documentation tab
 
-6. A view of the Site Reviews &gt; Add-Ons page
+6. A view of the Site Reviews &gt; Get Help &gt; System Info tab
 
 7. A view of the Recent Site Reviews widget settings
 
