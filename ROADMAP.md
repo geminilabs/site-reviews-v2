@@ -9,7 +9,7 @@ All proposed features are subject to change.
 - [x] Webhook notifications for Slack
 
 ## v1.3.0
-- [ ] MCE shortcode generator
+- [x] MCE shortcode button dropdown
 
 ## v2.0.0
 - [ ] Microdata/rich snippets for reviews

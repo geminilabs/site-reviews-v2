@@ -12,6 +12,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Fixed
 ### Security
 
+## [1.3.0] - 2016-12-29
+
+### Added
+- [feature] MCE shortcode button dropdown
+
 ## [1.2.1] - 2016-12-28
 
 ### Fixed

@@ -13,7 +13,7 @@ Minimum plugin requirements:
 
 #### Features
 
-* [new] Webhook notifications for Slack
+* [new] MCE shortcode button dropdown
 * Actively developed and supported
 * Clean and easy-to-configure user interface
 * Configurable Widgets
@@ -23,5 +23,6 @@ Minimum plugin requirements:
 * Minimal widget styling (tested with all official WP themes)
 * Review Pagination
 * Shortcodes: Display reviews in your post content and templates
+* Webhook notifications for Slack
 * WordPress.org support
 * WP Filter Hooks
