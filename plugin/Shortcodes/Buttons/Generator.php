@@ -40,7 +40,7 @@ abstract class Generator
 	abstract public function fields();
 
 	/**
-	 * @param string $shortcode
+	 * @param string $tag
 	 *
 	 * @return self
 	 */
@@ -301,7 +301,7 @@ abstract class Generator
 	 *
 	 * @param array $field
 	 *
-	 * @return bool|null
+	 * @return bool
 	 */
 	protected function validate( $field )
 	{
@@ -311,7 +311,9 @@ abstract class Generator
 			'label'    => '',
 		], $field );
 
-		if( !$vars['name'] )return;
+		if( !$vars['name'] ) {
+			return false;
+		}
 
 		extract( $vars );
 

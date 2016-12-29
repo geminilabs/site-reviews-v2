@@ -1,3 +1,4 @@
+/** global: GLSR */
 (function( tinymce ) {
 
 	tinymce.PluginManager.add( 'glsr_shortcode', function( editor ) {

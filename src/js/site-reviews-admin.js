@@ -323,9 +323,7 @@ GLSR.shortcode.create = function( editor_id )
 
 	if( !editor )return;
 
-	var data, field, required, valid, win;
-
-	data = {
+	var data = {
 		action: site_reviews.action,
 		request: {
 			action: 'mce-shortcode',
@@ -343,18 +341,15 @@ GLSR.shortcode.create = function( editor_id )
 			return;
 		}
 
-		var popup, buttons;
-
-		buttons = [{
+		var buttons = [{
 			text    : response.ok,
 			classes : 'primary sc-primary',
 			onclick : function() {
+				var field, required, valid, win;
 				// Get the top most window object
 				win = editor.windowManager.getWindows()[0];
-
 				// Get the shortcode required attributes
 				required = site_reviews.shortcodes[ GLSR.shortcode.current ];
-
 				valid = true;
 
 				// Do some validation voodoo
@@ -379,7 +374,7 @@ GLSR.shortcode.create = function( editor_id )
 			onclick : 'close'
 		}];
 
-		popup = {
+		var popup = {
 			title   : response.title,
 			body    : response.body,
 			classes: 'sc-popup',
