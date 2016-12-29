@@ -114,10 +114,10 @@ abstract class Container
 	 */
 	public function addListener( $tag, $listener, $priority = 10, $acceptedArgs = 1 )
 	{
-		$reviews = $this;
+		$app = $this;
 
-		add_action( $tag, function( $event ) use ( $listener, $reviews ) {
-			$reviews->make( $listener )->handle( $event );
+		add_action( $tag, function( $event ) use ( $listener, $app ) {
+			$app->make( $listener )->handle( $event );
 		}, $priority, $acceptedArgs );
 	}
 

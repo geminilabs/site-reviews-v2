@@ -38,8 +38,8 @@ function glsr_app() {
 }
 
 // Global helper to resolve a class instance where $app is not accessible
-function glsr_resolve( $class ) {
-	return App::load()->make( $class );
+function glsr_resolve( $alias ) {
+	return App::load()->make( $alias );
 }
 
 // Wordpress 4.0-4.2 support

@@ -11,23 +11,12 @@
 namespace GeminiLabs\SiteReviews\Handlers;
 
 use Exception;
-use GeminiLabs\SiteReviews\App;
 use GeminiLabs\SiteReviews\Commands\RegisterWidgets as Command;
 
 class RegisterWidgets
 {
 	/**
-	 * @var App
-	 */
-	protected $app;
-
-	public function __construct( App $app )
-	{
-		$this->app = $app;
-	}
-
-	/**
-	 * return void
+	 * @return void
 	 */
 	public function handle( Command $command )
 	{
@@ -35,21 +24,33 @@ class RegisterWidgets
 
 		foreach( $command->widgets as $key => $values ) {
 
-			$widgetClass = implode( '', array_map( 'ucfirst', explode( '_', $key ) ) );
-			$widgetClass = "GeminiLabs\SiteReviews\Widgets\\$widgetClass";
+			$widgetClass = $this->getClassName( $key );
 
 			try {
 				// bypass register_widget() in order to pass our custom values to the widget
-				$widget = new $widgetClass( "{$this->app->id}_{$key}", $values['title'], $values );
+				$widget = new $widgetClass( glsr_app()->id . $key, $values['title'], $values );
 				$wp_widget_factory->widgets[ $widgetClass ] = $widget;
 			}
 			catch( Exception $e ) {
-				$this->app->make( 'Log\Logger' )->error( sprintf( 'Error registering widget. Message: %s "(%s:%s)"',
+				glsr_resolve( 'Log\Logger' )->error( sprintf( 'Error registering widget. Message: %s "(%s:%s)"',
 					$e->getMessage(),
 					$e->getFile(),
 					$e->getLine()
 				));
 			}
 		}
+	}
+
+	/**
+	 * @param string $widget
+	 *
+	 * @return string
+	 */
+	protected function getClassName( $widget )
+	{
+		$className = implode( '', array_map( 'ucfirst', explode( '_', $widget ) ) );
+		$className = "GeminiLabs\SiteReviews\Widgets\\$className";
+
+		return $className;
 	}
 }
