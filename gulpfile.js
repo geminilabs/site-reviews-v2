@@ -25,12 +25,18 @@ elixir.config.publicPath = paths.dest;
 
 elixir(( mix ) => mix
 	.jshint( paths.src + 'js/*.js' )
-	.scripts( 'site-reviews-admin.js' )
 	.scripts( 'mce-plugin.js' )
+	.scripts([
+		'partials/init.js',
+		'partials/functions.js',
+		'partials/pinned.js',
+		'partials/shortcode.js',
+		'partials/ready.js',
+	], paths.dest + 'js/site-reviews-admin.js' )
 	.scripts([
 		paths.npm + 'star-rating.js/dist/star-rating.js',
 		'helper-functions.js',
-		'site-reviews.js'
+		'site-reviews.js',
 	], paths.dest + 'js/site-reviews.js' )
 	.sass( 'site-reviews-admin.scss' )
 	.sass( 'site-reviews.scss' )

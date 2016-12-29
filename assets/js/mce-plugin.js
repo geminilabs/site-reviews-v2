@@ -1,1 +1,1 @@
-!function(n){n.PluginManager.add("glsr_shortcode",function(n){n.addCommand("GLSR_Shortcode",function(){GLSR.shortcode.create(n.id)})})}(window.tinymce);
+!function(n){"use strict";n.PluginManager.add("glsr_shortcode",function(n){n.addCommand("GLSR_Shortcode",function(){GLSR.shortcode.create(n.id)})})}(window.tinymce);
