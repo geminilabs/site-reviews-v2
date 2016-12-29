@@ -5,6 +5,7 @@
 .glsr-mce {
 	position: relative;
 	display: inline-block;
+	margin-right: 1px;
 
 	&-menu.mce-menu {
 		display: none;
@@ -15,6 +16,7 @@
 
 	&-menu-item.mce-menu-item {
 		cursor: pointer;
+		font-size: 14px;
 		padding: 6px 12px;
 		margin-bottom: 2px;
 	}
@@ -83,4 +85,11 @@ button.glsr-mce-button {
 			font-size: 20px !important;
 		}
 	}
+}
+
+/* =Hack to fix wp-give shortcode button margin
+-------------------------------------------------------------- */
+
+div.sc-wrap {
+	margin-right: 1px;
 }
