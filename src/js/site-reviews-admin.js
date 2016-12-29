@@ -387,10 +387,11 @@ GLSR.shortcode.create = function( editor_id )
 			buttons : buttons,
 			onsubmit: function( e ) {
 				var attributes = '';
+				var data = GLSR.shortcode.normalize( e.data );
 
-				for( var key in e.data ) {
-					if( e.data.hasOwnProperty( key ) && e.data[ key ] !== '' ) {
-						attributes += ' ' + key + '="' + e.data[ key ] + '"';
+				for( var key in data ) {
+					if( data.hasOwnProperty( key ) && data[ key ] !== '' ) {
+						attributes += ' ' + key + '="' + data[ key ] + '"';
 					}
 				}
 				// Insert shortcode into the WP_Editor
@@ -410,6 +411,46 @@ GLSR.shortcode.create = function( editor_id )
 
 		editor.windowManager.open( popup );
 	});
+};
+
+GLSR.shortcode.normalize = function( data )
+{
+	var shortcodes = {
+		'site_reviews'     : ['author','date','excerpt','rating','title','url'],
+		'site_reviews_form': ['email','name','review','terms','title'],
+	};
+
+	var hide = [];
+
+	for( var key in data ) {
+		if( shortcodes.hasOwnProperty( GLSR.shortcode.current ) ) {
+
+			var value = '';
+
+			if( key.lastIndexOf( 'hide_', 0 ) === 0 ) {
+				value = key.substring(5);
+			}
+
+			if( shortcodes[ GLSR.shortcode.current ].indexOf( value ) > -1 ) {
+				if( data[ key ] ) {
+					hide.push( value );
+				}
+				delete data[ key ];
+			}
+		}
+
+		if( key === 'count' && !x.isNumeric( data[ key ] ) ) {
+			data[ key ] = '';
+		}
+
+		if( key === 'id' ) {
+			data[ key ] = (+new Date()).toString(36);
+		}
+	}
+
+	data.hide = hide.join( ',' );
+
+	return data;
 };
 
 GLSR.shortcode.destroy = function()
