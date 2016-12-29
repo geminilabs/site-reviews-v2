@@ -75,9 +75,9 @@ GLSR.normalizeValues = function( array )
 	return array.map( GLSR.normalizeValue );
 };
 
-GLSR.onClearLog = function( e )
+GLSR.onClearLog = function( ev )
 {
-	e.preventDefault();
+	ev.preventDefault();
 
 	var el = x( this );
 
