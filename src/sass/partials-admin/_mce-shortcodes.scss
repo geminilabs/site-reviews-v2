@@ -2,15 +2,25 @@
 // Partials -> TinyMCE Shortcodes
 // =============================================================================
 
-/* =Primary button in shortcode tinymce dialog
--------------------------------------------------------------- */
+.glsr-mce {
+	position: relative;
+	display: inline-block;
 
-.mce-primary.mce-sc-primary button {
-	padding-right: 10px;
-	padding-left: 10px;
+	&-menu.mce-menu {
+		display: none;
+		top: 100%;
+		min-width: 100%;
+		margin: -2px 0 0;
+	}
+
+	&-menu-item.mce-menu-item {
+		cursor: pointer;
+		padding: 6px 12px;
+		margin-bottom: 2px;
+	}
 }
 
-.mce-sc-popup {
+.mce-glsr-mce-popup {
 	a {
 		text-decoration: underline;
 	}
@@ -28,33 +38,29 @@
 	}
 }
 
+.mce-glsr-mce-primary.mce-btn button {
+	padding: 0 8px;
+}
+
 /* =Shortcode button above wp_editor
 -------------------------------------------------------------- */
 
-@media screen and (max-width: 782px) {
-	.wp-media-buttons button.sc-button span {
-		width: 22px !important;
-		margin-left: -2px !important;
-	}
-}
+button.glsr-mce-button {
 
-.wp-media-buttons {
-	button.sc-button {
+	.wp-media-buttons & {
 		outline: none;
 		padding-left: 5px;
 		margin-right: 0;
 	}
-}
 
-button.sc-button {
 	&:after {
-		position: relative;
 		display: inline-block;
+		position: relative;
 		top: -1px;
 		left: -1px;
-		content: '';
 		width: 0;
 		height: 0;
+		content: '';
 		border-top: 6px solid #777;
 		border-right: 4px solid transparent;
 		border-left: 4px solid transparent;
@@ -77,51 +83,4 @@ button.sc-button {
 			font-size: 20px !important;
 		}
 	}
-}
-
-/* =Shortcode button dropdown menu
--------------------------------------------------------------- */
-
-.sc-wrap {
-	position: relative;
-	display: inline-block;
-	margin-right: 5px;
-}
-
-div.sc-menu {
-	display: none;
-	position: absolute;
-	top: 100%;
-	left: 0;
-	min-width: 100%;
-	max-height: 410px;
-	font-size: 14px;
-	box-shadow: 0 3px 5px rgba( 0, 0, 0, 0.2 );
-	background: #fff;
-	border: 1px solid rgba( 0, 0, 0, 0.15 );
-	overflow: auto;
-	overflow-x: hidden;
-	padding: 5px 0;
-	margin: -2px 0 0;
-	z-index: 1002;
-}
-
-div.sc-shortcode {
-	display: block;
-	white-space: nowrap;
-	cursor: pointer;
-	padding: 6px 12px;
-	margin-bottom: 2px;
-
-	&:hover {
-		color: #fff;
-	}
-}
-
-/* =Shortcode tinymce dialog backdrop
--------------------------------------------------------------- */
-
-#mce-modal-block.mce-reset.mce-fade.mce-in {
-	opacity: 0.7;
-	filter: alpha(opacity=70);
 }

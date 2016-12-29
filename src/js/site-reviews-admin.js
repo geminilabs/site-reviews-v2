@@ -257,16 +257,16 @@ GLSR.pinned.save = function( el )
 
 GLSR.shortcode.close = function( el )
 {
-	var button = x(( el = el || '.sc-button' ));
+	var button = x(( el = el || '.glsr-mce-button' ));
 
 	if( button.length ) {
-		button.removeClass( 'active' ).parent().find( '.sc-menu' ).hide();
+		button.removeClass( 'active' ).parent().find( '.glsr-mce-menu' ).hide();
 	}
 };
 
 GLSR.shortcode.open = function( el )
 {
-	x( el ).addClass( 'active' ).parent().find( '.sc-menu' ).show();
+	x( el ).addClass( 'active' ).parent().find( '.glsr-mce-menu' ).show();
 };
 
 GLSR.shortcode.toggle = function( ev )
@@ -343,7 +343,7 @@ GLSR.shortcode.create = function( editor_id )
 
 		var buttons = [{
 			text    : response.ok,
-			classes : 'primary sc-primary',
+			classes : 'primary glsr-mce-primary',
 			onclick : function() {
 				var field, required, valid, win;
 				// Get the top most window object
@@ -377,7 +377,7 @@ GLSR.shortcode.create = function( editor_id )
 		var popup = {
 			title   : response.title,
 			body    : response.body,
-			classes: 'sc-popup',
+			classes: 'glsr-mce-popup',
 			minWidth: 320,
 			buttons : buttons,
 			onsubmit: function( e ) {
@@ -487,13 +487,13 @@ x( function()
 
 	x( document ).on( 'click', function( ev )
 	{
-		if( !x( ev.target ).closest( '.sc-wrap' ).length ) {
+		if( !x( ev.target ).closest( '.glsr-mce' ).length ) {
 			GLSR.shortcode.close();
 		}
 	});
 
-	x( document ).on( 'click', '.sc-button', GLSR.shortcode.toggle );
-	x( document ).on( 'click', '.sc-shortcode', GLSR.shortcode.trigger );
+	x( document ).on( 'click', '.glsr-mce-button', GLSR.shortcode.toggle );
+	x( document ).on( 'click', '.glsr-mce-menu-item', GLSR.shortcode.trigger );
 
 	// WP 4.0 - 4.2 support: toggle list table rows on small screens
 	x( document ).on( 'click', '.branch-4 .toggle-row, .branch-4-1 .toggle-row, .branch-4-2 .toggle-row', function() {
