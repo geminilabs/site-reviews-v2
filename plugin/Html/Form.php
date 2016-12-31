@@ -195,7 +195,10 @@ class Form
 			$stringRendered  = '<tr class="glsr-field %s"><th scope="row">%s</th><td>%s</td></tr>';
 			$outsideRendered = '</tbody></table>%s<table class="form-table"><tbody>';
 
-			$field    = $formField->getField();
+			// set field value only when rendering because we need to check the default setting
+			// against the database
+			$field = $formField->setValue()->getField();
+
 			$multi    = $field->multi === true;
 			$label    = $field->generateLabel();
 			$rendered = $field->render();
