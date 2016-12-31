@@ -16,7 +16,6 @@ use GeminiLabs\SiteReviews\Commands\RegisterPostType;
 use GeminiLabs\SiteReviews\Commands\RegisterShortcodeButtons;
 use GeminiLabs\SiteReviews\Commands\RegisterShortcodes;
 use GeminiLabs\SiteReviews\Commands\RegisterWidgets;
-use GeminiLabs\SiteReviews\Commands\SubmitReview;
 use GeminiLabs\SiteReviews\Controllers\BaseController;
 use GeminiLabs\SiteReviews\Strings;
 use WP_Admin_Bar;
@@ -200,12 +199,12 @@ class MainController extends BaseController
 			'show_ui'     => false,
 			'labels'      => (new Strings)->post_type_labels(),
 			'columns'     => [
-				'title'    => '', // empty values use the default label
-				'reviewer' => __( 'Reviewer', 'site-reviews' ),
-				'site'     => __( 'Type', 'site-reviews' ),
-				'stars'    => __( 'Rating', 'site-reviews' ),
-				'sticky'   => __( 'Pinned', 'site-reviews' ),
-				'date'     => '',
+				'title'  => '', // empty values use the default label
+				'author' => __( 'Author', 'site-reviews' ),
+				'site'   => __( 'Type', 'site-reviews' ),
+				'stars'  => __( 'Rating', 'site-reviews' ),
+				'sticky' => __( 'Pinned', 'site-reviews' ),
+				'date'   => '',
 			],
 		]);
 
@@ -352,15 +351,15 @@ class MainController extends BaseController
 	public function registerWidgets()
 	{
 		$command = new RegisterWidgets([
-			'reviews_form' => [
-				'title'       => __( 'Submit a Site Review', 'site-reviews' ),
-				'description' => __( 'A "submit a review" form for your site.', 'site-reviews' ),
-				'class'       => 'glsr-widget glsr-widget-reviews-form',
-			],
-			'recent_reviews' => [
+			'site_reviews' => [
 				'title'       => __( 'Recent Site Reviews', 'site-reviews' ),
 				'description' => __( 'Your site’s most recent Local Reviews.', 'site-reviews' ),
 				'class'       => 'glsr-widget glsr-widget-recent-reviews',
+			],
+			'site_reviews_form' => [
+				'title'       => __( 'Submit a Site Review', 'site-reviews' ),
+				'description' => __( 'A "submit a review" form for your site.', 'site-reviews' ),
+				'class'       => 'glsr-widget glsr-widget-reviews-form',
 			],
 		]);
 

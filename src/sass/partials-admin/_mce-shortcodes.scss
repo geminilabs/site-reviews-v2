@@ -9,14 +9,19 @@
 
 	&-menu.mce-menu {
 		display: none;
+		position: absolute;
 		top: 100%;
+		left: 0;
 		min-width: 100%;
+		background: #fff;
+		padding: 5px 0;
 		margin: -2px 0 0;
 	}
 
 	&-menu-item.mce-menu-item {
 		cursor: pointer;
 		font-size: 14px;
+		white-space: nowrap;
 		padding: 6px 12px;
 		margin-bottom: 2px;
 	}
@@ -72,6 +77,10 @@ button.glsr-mce-button {
 		top: -2px;
 		border-top: 0;
 		border-bottom: 6px solid #32373c;
+	}
+
+	&:active {
+		margin-bottom: 5px;
 	}
 
 	.wp-media-buttons-icon:before {

@@ -13,9 +13,12 @@
 namespace GeminiLabs\SiteReviews\Shortcodes;
 
 use GeminiLabs\SiteReviews\Shortcode;
+use GeminiLabs\SiteReviews\Traits\SiteReviews as Common;
 
 class SiteReviews extends Shortcode
 {
+	use Common;
+
 	/**
 	 * @return string
 	 */
@@ -24,58 +27,24 @@ class SiteReviews extends Shortcode
 		$defaults = [
 			'class'      => '',
 			'count'      => 10,
-			'display'    => 'title,excerpt,author,date,rating,url',
+			'display'    => 'all',
 			'hide'       => '',
-			'heading'    => '',
 			'pagination' => false,
 			'rating'     => 5,
 			'title'      => '',
-			'type'       => '',
 		];
 
 		$args = shortcode_atts( $defaults, $atts );
-
-		extract( $args );
-
-		$display = array_map( 'trim', explode( ',', $display ) );
-		$hide    = array_map( 'trim', explode( ',', $hide ) );
-
-		$display = array_values( array_diff( $display, $hide ) );
-
-		$author = in_array( 'author', $display );
-		$date   = in_array( 'date', $display );
-		$link   = in_array( 'link', $display );
-		$rating = in_array( 'rating', $display );
-
-		$display = array_intersect( ['title', 'excerpt'], $display );
-		$display = $display
-			? ( count($display) > 1 ? 'both' : array_shift( $display ) )
-			: 'both';
 
 		ob_start();
 
 		echo '<div class="shortcode-site-reviews">';
 
-		// Backwards compatability
-		!empty( $heading ) ?: $heading = $title;
-
-		if( !empty( $heading ) ) {
-			printf( '<h2>%s</h2>', $heading );
+		if( !empty( $args['title'] ) ) {
+			printf( '<h3 class="glsr-shortcode-title">%s</h3>', $args['title'] );
 		}
 
-		$this->html->renderPartial( 'reviews', [
-			'class'       => $class,
-			'display'     => $display,
-			'max_reviews' => $count,
-			'min_rating'  => $rating,
-			'order_by'    => 'date',
-			'pagination'  => $pagination,
-			'show_author' => $author,
-			'show_date'   => $date,
-			'show_link'   => $link,
-			'show_rating' => $rating,
-			'site_name'   => $type,
-		]);
+		$this->renderReviews( $args );
 
 		echo '</div>';
 

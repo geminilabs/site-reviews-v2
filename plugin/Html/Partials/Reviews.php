@@ -24,21 +24,24 @@ class Reviews extends Base
 		global $post;
 
 		$defaults = [
-			'class'       => '',
-			'display'     => 'title',
-			'max_reviews' => '',
-			'min_rating'  => '',
-			'order_by'    => '',
-			'pagination'  => false,
-			'show_author' => false,
-			'show_date'   => false,
-			'show_link'   => false,
-			'show_rating' => false,
-			'site_name'   => '',
-			'word_limit'  => 55,
+			'class'        => '',
+			'count'        => '',
+			'hide_author'  => false,
+			'hide_date'    => false,
+			'hide_excerpt' => false,
+			'hide_link'    => true,
+			'hide_rating'  => false,
+			'hide_title'   => false,
+			'order_by'     => 'date',
+			'pagination'   => false,
+			'rating'       => '',
+			'site_name'    => '',
+			'word_limit'   => 55,
 		];
 
 		$args = shortcode_atts( $defaults, $this->args );
+
+		if( $this->hideReviews( $args ) )return;
 
 		$reviews = $this->app->make( 'Database' )->getReviews( $args );
 
@@ -53,16 +56,12 @@ class Reviews extends Base
 				$meta = get_post_meta( $post->ID );
 				$meta = (object) array_map( 'array_shift', $meta );
 
-				$review_author  = $this->reviewAuthor( $args['show_author'], $meta->author );
-				$review_excerpt = $this->reviewExcerpt( $args, $meta, $post->ID );
-				$review_meta    = $this->reviewMeta( $args, $meta, $post->ID );
-				$review_title   = $this->reviewTitle( $args, $meta, $post->ID );
-
-				$print_both    = $review_title . $review_meta . $review_excerpt;
-				$print_excerpt = $review_meta . $review_excerpt;
-				$print_title   = $review_title . $review_meta;
-
-				$html .= sprintf( '<div class="glsr-review">%s%s</div>', ${"print_{$args['display']}"}, $review_author );
+				$html .= sprintf( '<div class="glsr-review">%s%s%s%s</div>',
+					$this->reviewTitle( $args, $meta, $post->ID ),
+					$this->reviewMeta( $args, $meta, $post->ID ),
+					$this->reviewExcerpt( $args, $meta, $post->ID ),
+					$this->reviewAuthor( $args['hide_author'], $meta->author )
+				);
 
 			endwhile;
 
@@ -78,7 +77,10 @@ class Reviews extends Base
 			);
 		}
 
-		return sprintf( '<div class="glsr-reviews-wrap"><div class="glsr-reviews %s">%s</div></div>',
+		return sprintf(
+			'<div class="glsr-reviews-wrap">' .
+				'<div class="glsr-reviews %s">%s</div>' .
+			'</div>',
 			$args['class'],
 			$html
 		);
@@ -155,6 +157,18 @@ class Reviews extends Base
 	}
 
 	/**
+	 * @return bool
+	 */
+	protected function hideReviews( array $args )
+	{
+		return wp_validate_boolean( $args['hide_author'] )
+			&& wp_validate_boolean( $args['hide_date'] )
+			&& wp_validate_boolean( $args['hide_excerpt'] )
+			&& wp_validate_boolean( $args['hide_rating'] )
+			&& wp_validate_boolean( $args['hide_title'] );
+	}
+
+	/**
 	 * Get the correct pagination template
 	 *
 	 * @param string $links
@@ -205,11 +219,11 @@ class Reviews extends Base
 	 *
 	 * @return string
 	 */
-	protected function reviewAuthor( $author, $metaAuthor )
+	protected function reviewAuthor( $hideAuthor, $metaAuthor )
 	{
-		return wp_validate_boolean( $author )
-			? sprintf( '<p class="glsr-review-author">&mdash;%s</p> ', $metaAuthor )
-			: '';
+		if( wp_validate_boolean( $hideAuthor ) )return;
+
+		return sprintf( '<p class="glsr-review-author">&mdash;%s</p> ', $metaAuthor );
 	}
 
 	/**
@@ -222,12 +236,12 @@ class Reviews extends Base
 	 */
 	protected function reviewExcerpt( array $args, $meta, $postId )
 	{
-		$excerpt     = $this->buildExcerpt( get_the_content( $postId ), $args['word_limit'] );
-		$review_link = $this->reviewLink( $args['show_link'], $meta->url );
+		if( $args['hide_excerpt'] )return;
 
-		$use_excerpt_as_link = apply_filters( 'site-reviews/widget/use_excerpt_as_link', false )
-			&& in_array( $args['display'], ['both', 'excerpt'] )
-			&& !empty( $review_link );
+		$excerpt     = $this->buildExcerpt( get_the_content( $postId ), $args['word_limit'] );
+		$review_link = $this->reviewLink( $args['hide_link'], $meta->url );
+
+		$use_excerpt_as_link = apply_filters( 'site-reviews/widget/use_excerpt_as_link', false ) && $review_link;
 
 		$show_excerpt_read_more = !apply_filters( 'site-reviews/widget/hide_excerpt_read_more', false )
 			? $review_link
@@ -250,11 +264,14 @@ class Reviews extends Base
 	 *
 	 * @return string
 	 */
-	protected function reviewLink( $link, $metaLink )
+	protected function reviewLink( $hideLink, $metaLink )
 	{
-		return wp_validate_boolean( $link )
-			? sprintf( '<span class="glsr-review-link">[<a href="%s" target="_blank">%s</a>]</span>', esc_url( $metaLink ), __( 'read more', 'site-reviews' ) )
-			: '';
+		if( wp_validate_boolean( $hideLink ) )return;
+
+		return sprintf( '<span class="glsr-review-link">[<a href="%s" target="_blank">%s</a>]</span>',
+			esc_url( $metaLink ),
+			__( 'read more', 'site-reviews' )
+		);
 	}
 
 	/**
@@ -267,11 +284,11 @@ class Reviews extends Base
 	 */
 	protected function reviewMeta( array $args, $meta, $postId )
 	{
-		$rating = wp_validate_boolean( $args['show_rating'] )
+		$rating = !wp_validate_boolean( $args['hide_rating'] )
 			? $this->app->make( 'Html' )->renderPartial( 'rating', ['stars' => $meta->rating ], 'return' )
 			: '';
 
-		$date = wp_validate_boolean( $args['show_date'] )
+		$date = !wp_validate_boolean( $args['hide_date'] )
 			? sprintf( '<span class="glsr-review-date">%s</span> ', get_the_date( 'M j, Y', $postId ) )
 			: '';
 
@@ -290,11 +307,11 @@ class Reviews extends Base
 	 */
 	protected function reviewTitle( array $args, $meta, $postId )
 	{
-		$review_link = $this->reviewLink( $args['show_link'], $meta->url );
+		if( $args['hide_title'] )return;
 
-		$use_title_as_link = apply_filters( 'site-reviews/widget/use_title_as_link', false )
-			&& in_array( $args['display'], ['both', 'excerpt'] )
-			&& !empty( $review_link );
+		$review_link = $this->reviewLink( $args['hide_link'], $meta->url );
+
+		$use_title_as_link = apply_filters( 'site-reviews/widget/use_title_as_link', false ) && $review_link;
 
 		$review_title = $use_title_as_link
 			? sprintf( '<a href="%s" target="_blank">%s</a>', esc_url( $meta->url ), get_the_title( $postId ) )

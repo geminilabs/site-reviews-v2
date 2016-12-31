@@ -219,18 +219,18 @@ class Database
 	public function getReviews( array $args = [] )
 	{
 		$defaults = [
-			'max_reviews'  => '10',
-			'min_rating'   => '5',
-			'order_by'     => 'date',
-			'pagination'   => false,
-			'site_name'    => '',
+			'count'      => '10',
+			'order_by'   => 'date',
+			'pagination' => false,
+			'rating'     => '5',
+			'site_name'  => '',
 		];
 
 		$args = shortcode_atts( $defaults, $args );
 
 		extract( $args );
 
-		if( !empty( $site_name ) ) {
+		if( !empty( $site_name ) && $site_name != 'all' ) {
 			$meta_query[] = [
 				'key'   => 'site_name',
 				'value' => $site_name,
@@ -239,21 +239,19 @@ class Database
 
 		$meta_query[] = [
 			'key'     => 'rating',
-			'value'   => $min_rating,
+			'value'   => $rating,
 			'compare' => '>=',
 		];
-
-		$pagination = $pagination ? $this->getCurrentPageNumber() : 1;
 
 		return new WP_Query([
 			'meta_key'       => 'pinned',
 			'meta_query'     => $meta_query,
 			'order'          => 'DESC',
 			'orderby'        => "meta_value $order_by",
-			'paged'          => $pagination,
+			'paged'          => $pagination ? $this->getCurrentPageNumber() : 1,
 			'post_status'    => 'publish',
 			'post_type'      => 'site-review',
-			'posts_per_page' => $max_reviews ? $max_reviews : -1,
+			'posts_per_page' => $count ? $count : -1,
 		]);
 	}
 

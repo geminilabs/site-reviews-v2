@@ -228,8 +228,8 @@ class Settings
 
 		$this->addSetting( $formId, [
 			'type'  => 'text',
-			'name'  => 'form.reviewer.label',
-			'label' => __( 'Reviewer label', 'site-reviews' ),
+			'name'  => 'form.name.label',
+			'label' => __( 'Name label', 'site-reviews' ),
 			'placeholder' => __( 'Your name', 'site-reviews' ),
 			'default' => ':placeholder',
 		]);
@@ -276,9 +276,9 @@ class Settings
 
 		$this->addSetting( $formId, [
 			'type'  => 'text',
-			'name'  => 'form.reviewer.placeholder',
+			'name'  => 'form.name.placeholder',
 			'class' => 'large-text',
-			'label' => __( 'Reviewer placeholder', 'site-reviews' ),
+			'label' => __( 'Name placeholder', 'site-reviews' ),
 			'placeholder' => __( 'Tell us your name', 'site-reviews' ),
 			'default' => ':placeholder',
 		]);

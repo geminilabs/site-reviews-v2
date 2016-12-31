@@ -26,12 +26,12 @@ class ReviewController extends BaseController
 		$minContentLength = apply_filters( 'site-reviews/local/review/content/minLength', '0' );
 
 		$rules = [
-			'content'  => 'required|min:' . $minContentLength,
-			'email'    => 'required|email|min:5',
-			'rating'   => 'required|numeric|between:1,5',
-			'reviewer' => 'required',
-			'terms'    => 'accepted',
-			'title'    => 'required',
+			'content' => 'required|min:' . $minContentLength,
+			'email'   => 'required|email|min:5',
+			'name'    => 'required',
+			'rating'  => 'required|numeric|between:1,5',
+			'terms'   => 'accepted',
+			'title'   => 'required',
 		];
 
 		$excluded = isset( $request['excluded'] )
@@ -43,17 +43,14 @@ class ReviewController extends BaseController
 
 		$user = wp_get_current_user();
 
-		$reviewer = $user->exists()
-			? $user->display_name
-			: __( 'Anonymous', 'site-reviews' );
-
 		$defaults = [
-			'content'  => '',
-			'email'    => '',
-			'rating'   => '',
-			'reviewer' => $reviewer,
-			'terms'    => '',
-			'title'    => __( 'No Title', 'site-reviews' ),
+			'content' => '',
+			'email'   => ( $user->exists() ? $user->user_email : '' ),
+			'form_id' => '',
+			'name'    => ( $user->exists() ? $user->display_name : __( 'Anonymous', 'site-reviews' ) ),
+			'rating'  => '',
+			'terms'   => '',
+			'title'   => __( 'No Title', 'site-reviews' ),
 		];
 
 		if( !$this->validate( $request, $rules ) ) {

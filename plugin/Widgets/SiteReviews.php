@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Recent Reviews widget
+ * Site Reviews widget
  *
  * @package   GeminiLabs\SiteReviews
  * @copyright Copyright (c) 2016, Paul Ryley
@@ -12,10 +12,13 @@
 
 namespace GeminiLabs\SiteReviews\Widgets;
 
+use GeminiLabs\SiteReviews\Traits\SiteReviews as Common;
 use GeminiLabs\SiteReviews\Widget;
 
-class RecentReviews extends Widget
+class SiteReviews extends Widget
 {
+	use Common;
+
 	/**
 	 * Display the widget form
 	 *
@@ -26,19 +29,13 @@ class RecentReviews extends Widget
 	public function form( $instance )
 	{
 		$defaults = [
-			'class'       => '',
-			'display'     => 'both',
-			'max_reviews' => 5,
-			'min_rating'  => '',
-			'order_by'    => '',
-			'show'        => ['show_author', 'show_date', 'show_rating'],
-			'title'       => '',
-			'type'        => '',
+			'class'   => '',
+			'count'   => '5',
+			'display' => '',
+			'hide'    => [],
+			'rating'  => '5',
+			'title'   => '',
 		];
-
-		if( !empty( $instance ) ) {
-			isset( $instance['show'] ) ?: $instance['show'] = [];
-		}
 
 		$args = shortcode_atts( $defaults, $instance );
 
@@ -49,35 +46,23 @@ class RecentReviews extends Widget
 			'value' => $args['title'],
 		]);
 
-		$this->create_field([
-			'type'  => 'select',
-			'name'  => 'display',
-			'class' => 'widefat',
-			'value'   => $args['display'],
-			'options' => [
-				'title'   => __( 'Display only title', 'site-reviews' ),
-				'excerpt' => __( 'Display only excerpt', 'site-reviews' ),
-				'both'    => __( 'Display title and excerpt', 'site-reviews' ),
-			],
-		]);
-
 		$types = glsr_resolve( 'Database' )->getReviewTypes();
 
 		if( count( $types ) > 1 ) {
 			$this->create_field([
 				'type'  => 'select',
-				'name'  => 'type',
+				'name'  => 'display',
 				'label' => __( 'Which reviews would you like to display? ', 'site-reviews' ),
-				'value'   => $args['type'],
+				'value' => $args['display'],
 				'options' => ['' => __( 'All Reviews', 'site-reviews' ) ] + $types,
 			]);
 		}
 
 		$this->create_field([
 			'type'  => 'select',
-			'name'  => 'min_rating',
+			'name'  => 'rating',
 			'label' => __( 'What is the minimum rating to display? ', 'site-reviews' ),
-			'value'   => $args['min_rating'],
+			'value' => $args['rating'],
 			'options' => [
 				'5' => __( '5 stars', 'site-reviews' ),
 				'4' => __( '4 stars', 'site-reviews' ),
@@ -89,21 +74,23 @@ class RecentReviews extends Widget
 
 		$this->create_field([
 			'type'    => 'number',
-			'name'    => 'max_reviews',
+			'name'    => 'count',
 			'label'   => __( 'How many reviews would you like to display? ', 'site-reviews' ),
-			'value'   => $args['max_reviews'],
+			'value'   => $args['count'],
 			'default' => 5,
 			'max'     => 100,
 		]);
 
 		$this->create_field([
 			'type'  => 'checkbox',
-			'name'  => 'show',
-			'value' => $args['show'],
+			'name'  => 'hide',
+			'value' => $args['hide'],
 			'options' => [
-				'show_author' => __( 'Show the name of the reviewer?', 'site-reviews' ),
-				'show_date'   => __( 'Show the review date?', 'site-reviews' ),
-				'show_rating' => __( 'Show the review rating?', 'site-reviews' ),
+				'author'  => __( 'Hide the review author?', 'site-reviews' ),
+				'date'    => __( 'Hide the review date?', 'site-reviews' ),
+				'excerpt' => __( 'Hide the review excerpt?', 'site-reviews' ),
+				'rating'  => __( 'Hide the review rating?', 'site-reviews' ),
+				'title'   => __( 'Hide the review title?', 'site-reviews' ),
 			],
 		]);
 
@@ -125,12 +112,16 @@ class RecentReviews extends Widget
 	 */
 	public function update( $new_instance, $old_instance )
 	{
-		if( $new_instance['max_reviews'] < 0 ) {
-			$new_instance['max_reviews'] = 0;
+		if( $new_instance['count'] < 0 ) {
+			$new_instance['count'] = 0;
 		}
 
-		if( $new_instance['max_reviews'] > 100 ) {
-			$new_instance['max_reviews'] = 100;
+		if( $new_instance['count'] > 100 ) {
+			$new_instance['count'] = 100;
+		}
+
+		if( !is_numeric( $new_instance['count'] ) ) {
+			$new_instance['count'] = 5;
 		}
 
 		return parent::update( $new_instance, $old_instance );
@@ -147,37 +138,25 @@ class RecentReviews extends Widget
 	public function widget( $args, $instance )
 	{
 		$defaults = [
-			'class'       => '',
-			'display'     => 'both',
-			'max_reviews' => '10',
-			'min_rating'  => '5',
-			'order_by'    => 'date',
-			'show'        => [],
-			'title'       => '',
-			'type'        => '',
+			'class'   => '',
+			'count'   => '5', // count
+			'display' => '',
+			'hide'    => [],
+			'rating'  => '5', // rating
+			'title'   => '',
 		];
 
 		$instance = shortcode_atts( $defaults, $instance );
-
-		foreach( $instance['show'] as $key ) {
-			$instance[ $key ] = true;
-		}
-
-		unset( $instance['show'] );
-
-		$instance['order_by'] ?: $instance['order_by'] = 'date';
-
-		$instance['site_name'] = $instance['type'];
-
-		unset( $instance['type'] );
 
 		$title = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
 
 		echo $args['before_widget'];
 
-		echo $title ? $args['before_title'] . $title . $args['after_title'] : '';
+		if( !empty( $title ) ) {
+			echo $args['before_title'] . $title . $args['after_title'];
+		}
 
-		glsr_resolve( 'Html' )->renderPartial( 'reviews', $instance );
+		$this->renderReviews( $instance );
 
 		echo $args['after_widget'];
 	}

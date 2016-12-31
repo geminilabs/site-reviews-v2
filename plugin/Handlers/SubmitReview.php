@@ -43,7 +43,7 @@ class SubmitReview
 		$reviewId = 'local_' . md5( serialize( $command ) );
 
 		$review = [
-			'author'     => $command->reviewer,
+			'author'     => $command->author,
 			'avatar'     => get_avatar_url( $command->email ),
 			'content'    => $command->content,
 			'email'      => $command->email,
@@ -111,7 +111,7 @@ class SubmitReview
 			'subject'  => $args['notification_title'],
 			'template' => 'review-notification',
 			'template-tags' => [
-				'review_author'  => $command->reviewer,
+				'review_author'  => $command->author,
 				'review_content' => $command->content,
 				'review_email'   => $command->email,
 				'review_ip'      => $command->ipAddress,
@@ -189,9 +189,9 @@ class SubmitReview
 			$fields[] = ['value' => $command->content ];
 		}
 
-		if( $command->reviewer ) {
+		if( $command->author ) {
 			!$command->email ?: $command->email = sprintf( ' <%s>', $command->email );
-			$fields[] = ['value' => trim( sprintf( '%s%s - %s', $command->reviewer, $command->email, $command->ipAddress ) ) ];
+			$fields[] = ['value' => trim( sprintf( '%s%s - %s', $command->author, $command->email, $command->ipAddress ) ) ];
 		}
 
 		$fields[] = ['value' => sprintf( '<%s|%s>', $args['notification_link'], __( 'View Review', 'site-reviews' ) ) ];

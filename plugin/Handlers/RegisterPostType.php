@@ -178,10 +178,10 @@ class RegisterPostType
 	 */
 	public function manageSortableColumns( array $columns )
 	{
-		$columns['reviewer'] = 'author';
-		$columns['site']     = 'site_name';
-		$columns['stars']    = 'rating';
-		$columns['sticky']   = 'pinned';
+		$columns['author'] = 'author';
+		$columns['site']   = 'site_name';
+		$columns['stars']  = 'rating';
+		$columns['sticky'] = 'pinned';
 
 		return $columns;
 	}
@@ -408,7 +408,7 @@ class RegisterPostType
 				echo ( isset( $img ) && !empty( $img ) ) ? $img : '&mdash;';
 				break;
 
-			case 'reviewer':
+			case 'author':
 				echo get_post_meta( $post->ID, 'author', true );
 				break;
 

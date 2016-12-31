@@ -12,10 +12,13 @@
 
 namespace GeminiLabs\SiteReviews\Widgets;
 
+use GeminiLabs\SiteReviews\Traits\SiteReviewsForm as Common;
 use GeminiLabs\SiteReviews\Widget;
 
-class ReviewsForm extends Widget
+class SiteReviewsForm extends Widget
 {
+	use Common;
+
 	/**
 	 * Display the widget form
 	 *
@@ -28,7 +31,7 @@ class ReviewsForm extends Widget
 		$defaults = [
 			'class'       => '',
 			'description' => sprintf( __( 'Your email address will not be published. Required fields are marked %s*%s', 'site-reviews' ), '<span>', '</span>' ),
-			'fields'      => [],
+			'hide'        => [],
 			'title'       => '',
 		];
 
@@ -51,13 +54,13 @@ class ReviewsForm extends Widget
 
 		$this->create_field([
 			'type'  => 'checkbox',
-			'name'  => 'fields',
-			'value' => $args['fields'],
+			'name'  => 'hide',
+			'value' => $args['hide'],
 			'options' => [
-				'title'    => __( 'Hide the title field', 'site-reviews' ),
-				'reviewer' => __( 'Hide the reviewer field', 'site-reviews' ),
-				'email'    => __( 'Hide the email field', 'site-reviews' ),
-				'terms'    => __( 'Hide the terms field', 'site-reviews' ),
+				'email' => __( 'Hide the email field', 'site-reviews' ),
+				'name'  => __( 'Hide the name field', 'site-reviews' ),
+				'terms' => __( 'Hide the terms field', 'site-reviews' ),
+				'title' => __( 'Hide the title field', 'site-reviews' ),
 			],
 		]);
 
@@ -82,63 +85,23 @@ class ReviewsForm extends Widget
 		$defaults = [
 			'class'       => '',
 			'description' => '',
-			'fields'      => [],
+			'hide'        => [],
 			'title'       => '',
 		];
 
 		// custom widget attributes
 		$instance = shortcode_atts( $defaults, $instance );
 
-		$controller = glsr_resolve( 'Controllers\ReviewController' );
-		$session    = glsr_resolve( 'Session' );
-
-		$defaults = [
-			'content'  => '',
-			'email'    => '',
-			'rating'   => '',
-			'reviewer' => '',
-			'terms'    => '',
-			'title'    => '',
-		];
-
-		$formId = $this->generate_id();
-
-		$errors  = $session->get( "{$formId}-errors", [], 'and then remove errors' );
-		$message = $session->get( "{$formId}-message", [], 'and then remove message' );
-
-		$values  = !empty( $errors )
-			? $this->session->get( "{$formId}-values", [], 'and then remove values' )
-			: [];
-
 		$title = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
-
-		$description = apply_filters( 'widget_description', $instance['description'], $instance, $this->id_base );
 
 		echo $args['before_widget'];
 
-		echo $title ? $args['before_title'] . $title . $args['after_title'] : '';
-
-		$requireUser = glsr_resolve( 'Database' )->getOption( 'general.require.login', false );
-
-		if( $requireUser && !is_user_logged_in() ) {
-			$message = sprintf(
-				__( 'You must be <a href="%s">logged in</a> to submit a review.', 'site-reviews' ),
-				wp_login_url( get_permalink() )
-			);
-			echo wpautop( $message );
-			return;
+		if( !empty( $title ) ) {
+			echo $args['before_title'] . $title . $args['after_title'];
 		}
-		else {
-			echo $description ? sprintf( '<p class="glsr-form-description">%s</p>', $description ) : '';
 
-			$controller->render( 'submit/index', [
-				'class'   => trim( 'glsr-submit-review-form ' . $instance['class'] ),
-				'errors'  => $errors,
-				'exclude' => $instance['fields'],
-				'form_id' => $formId,
-				'message' => $message,
-				'values'  => shortcode_atts( $defaults, $values ),
-			]);
+		if( !$this->renderRequireLogin() ) {
+			echo $this->renderForm( $instance );
 		}
 
 		echo $args['after_widget'];

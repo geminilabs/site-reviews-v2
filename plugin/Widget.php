@@ -96,18 +96,4 @@ abstract class Widget extends WP_Widget
 
 		glsr_resolve( 'Html' )->renderField( $atts, 'echo' );
 	}
-
-	/**
-	 * Generate a unique ID string
-	 *
-	 * @param mixed $from
-	 *
-	 * @return string
-	 */
-	protected function generate_id( $from = [] )
-	{
-		!empty( $from ) ?: $from = $this->id;
-
-		return substr( md5( serialize( $from ) ), 0, 8 );
-	}
 }

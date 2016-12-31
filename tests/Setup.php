@@ -31,8 +31,8 @@ trait Setup
 			'email'    => 'jane@doee.com',
 			'excluded' => "[]",
 			'form_id'  => 'abcdef',
+			'name'     => 'Jane doe',
 			'rating'   => '5',
-			'reviewer' => 'Jane doe',
 			'terms'    => '1',
 			'title'    => 'Test Review',
 		];

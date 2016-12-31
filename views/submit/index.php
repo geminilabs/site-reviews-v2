@@ -52,15 +52,15 @@
 
 	$html->renderField([
 		'type'        => 'text',
-		'name'        => 'reviewer',
+		'name'        => 'name',
 		'errors'      => $errors,
-		'label'       => $db->getOption( 'form.reviewer.label' ),
-		'placeholder' => $db->getOption( 'form.reviewer.placeholder' ),
+		'label'       => $db->getOption( 'form.name.label' ),
+		'placeholder' => $db->getOption( 'form.name.placeholder' ),
 		'prefix'      => false,
-		'render'      => !in_array( 'reviewer', $exclude ),
+		'render'      => !in_array( 'name', $exclude ),
 		'required'    => true,
 		'suffix'      => $form_id,
-		'value'       => $values['reviewer'],
+		'value'       => $values['name'],
 	]);
 
 	$html->renderField([
