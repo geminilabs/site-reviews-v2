@@ -40,7 +40,7 @@ class RegisterShortcodeButtons
 	 */
 	protected function getClassName( $shortcode )
 	{
-		$className = implode( '', array_map( 'ucfirst', explode( '_', $shortcode ) ) );
+		$className = implode( '', array_map( 'ucfirst', preg_split( '/[-_]/', $shortcode ) ) );
 		$className = "GeminiLabs\SiteReviews\Shortcodes\Buttons\\$className";
 
 		return $className;

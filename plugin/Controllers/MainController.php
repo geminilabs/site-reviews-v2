@@ -351,12 +351,12 @@ class MainController extends BaseController
 	public function registerWidgets()
 	{
 		$command = new RegisterWidgets([
-			'site_reviews' => [
+			'site-reviews' => [
 				'title'       => __( 'Recent Site Reviews', 'site-reviews' ),
 				'description' => __( 'Your site’s most recent Local Reviews.', 'site-reviews' ),
 				'class'       => 'glsr-widget glsr-widget-recent-reviews',
 			],
-			'site_reviews_form' => [
+			'site-reviews-form' => [
 				'title'       => __( 'Submit a Site Review', 'site-reviews' ),
 				'description' => __( 'A "submit a review" form for your site.', 'site-reviews' ),
 				'class'       => 'glsr-widget glsr-widget-reviews-form',

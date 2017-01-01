@@ -59,6 +59,7 @@ final class App extends Container
 
 		// Action Hooks
 		add_action( 'plugins_loaded',                        [ $this, 'registerAddons'] );
+		add_action( 'upgrader_process_complete',             [ $this, 'upgrade'], 10, 2 );
 		add_action( 'admin_enqueue_scripts',                 [ $controller, 'enqueueAssets'] );
 		add_action( 'wp_enqueue_scripts',                    [ $controller, 'enqueueAssets'] );
 		add_action( 'admin_menu',                            [ $controller, 'registerMenuCount'] );
@@ -84,6 +85,13 @@ final class App extends Container
 		add_filter( "plugin_action_links_{$basename}", [ $controller, 'registerActionLinks'] );
 		add_filter( 'dashboard_glance_items',          [ $controller, 'registerDashboardGlanceItems'] );
 		add_filter( 'post_row_actions',                [ $controller, 'registerRowActions'], 10, 2 );
+
+		update_option( "{$this->prefix}_version", '1.2.1' );
+		$this->upgrade( null, [
+			'action'   => 'update',
+			'type'     => 'plugin',
+			'packages' => [ plugin_basename( $this->file ) ],
+		]);
 	}
 
 	/**
@@ -93,14 +101,9 @@ final class App extends Container
 	 */
 	public function activate()
 	{
-		$current_version = get_option( "{$this->prefix}_version" );
-
-		if( $current_version ) {
-			update_option( "{$this->prefix}_version_upgraded_from", $current_version );
-		}
+		$this->updateVersion();
 
 		update_option( "{$this->prefix}_logging", 0 );
-		update_option( "{$this->prefix}_version", $this->version );
 
 		$this->make( 'Database' )->setDefaultSettings();
 
@@ -149,6 +152,54 @@ final class App extends Container
 	public function registerAddons()
 	{
 		do_action( 'site-reviews/addon/register', $this );
+	}
+
+	/**
+	 * Update the plugin versions in the database
+	 *
+	 * @param string $current
+	 *
+	 * @return void
+	 */
+	public function updateVersion( $current = '' )
+	{
+		if( empty( $current ) ) {
+			$current = get_option( "{$this->prefix}_version" );
+		}
+
+		if( version_compare( $current, $this->version, '<' ) ) {
+			update_option( "{$this->prefix}_version", $this->version );
+			update_option( "{$this->prefix}_version_upgraded_from", $current );
+		}
+	}
+
+	/**
+	 * Runs on plugin upgrade
+	 *
+	 * @param mixed $upgrader
+	 *
+	 * @return void
+	 */
+	public function upgrade( $upgrader, array $data )
+	{
+		if( $data['action'] != 'update'
+			|| $data['type'] != 'plugin'
+			|| !in_array( plugin_basename( $this->file ), $data['packages'] )
+		)return;
+
+		$version = get_option( "{$this->prefix}_version" );
+
+		if( version_compare( $version, '1.3.0', '<' ) ) {
+
+			$upgrade = $this->make( 'Upgrade' );
+
+			$upgrade->sidebarWidgets_130();
+			$upgrade->themeMods_130();
+			$upgrade->widgetSiteReviews_130();
+			$upgrade->widgetSiteReviewsForm_130();
+		}
+
+		$this->updateVersion( $version );
 	}
 
 	/**

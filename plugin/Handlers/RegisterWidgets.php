@@ -28,7 +28,7 @@ class RegisterWidgets
 
 			try {
 				// bypass register_widget() in order to pass our custom values to the widget
-				$widget = new $widgetClass( glsr_app()->id . $key, $values['title'], $values );
+				$widget = new $widgetClass( sprintf( '%s_%s', glsr_app()->id, $key ), $values['title'], $values );
 				$wp_widget_factory->widgets[ $widgetClass ] = $widget;
 			}
 			catch( Exception $e ) {
@@ -48,7 +48,7 @@ class RegisterWidgets
 	 */
 	protected function getClassName( $widget )
 	{
-		$className = implode( '', array_map( 'ucfirst', explode( '_', $widget ) ) );
+		$className = implode( '', array_map( 'ucfirst', preg_split( '/[-_]/', $widget ) ) );
 		$className = "GeminiLabs\SiteReviews\Widgets\\$className";
 
 		return $className;
