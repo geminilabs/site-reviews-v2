@@ -19,14 +19,9 @@ class Router
 	 */
 	protected $app;
 
-	protected $id;
-	protected $prefix;
-
 	public function __construct( App $app )
 	{
-		$this->app    = $app;
-		$this->id     = $app->id;
-		$this->prefix = $app->prefix;
+		$this->app = $app;
 	}
 
 	/**
@@ -46,10 +41,10 @@ class Router
 
 	public function routeAjaxRequests()
 	{
-		$request = filter_input( INPUT_POST, 'request' );
+		$request = $_REQUEST['request'];
 
-		if( isset( $request[ $this->prefix ]['action'] ) ) {
-			$request = $request[ $this->prefix ];
+		if( isset( $request[ $this->app->prefix ]['action'] ) ) {
+			$request = $request[ $this->app->prefix ];
 		}
 
 		// All ajax requests are triggered by a single action hook,
@@ -59,7 +54,7 @@ class Router
 		}
 
 		// Nonce url is localized in "GeminiLabs\SiteReviews\Handlers\EnqueueAssets"
-		check_ajax_referer( sprintf( '%s-ajax-nonce', $this->id ) );
+		check_ajax_referer( sprintf( '%s-ajax-nonce', $this->app->id ) );
 
 		$request['ajax_request'] = true;
 
@@ -84,7 +79,7 @@ class Router
 	public function routePostRequests()
 	{
 		// get the request data that is prefixed with the app prefix
-		$request = filter_input( INPUT_POST, $this->prefix, FILTER_DEFAULT , FILTER_REQUIRE_ARRAY );
+		$request = filter_input( INPUT_POST, $this->app->prefix, FILTER_DEFAULT , FILTER_REQUIRE_ARRAY );
 
 		if( !isset( $request['action'] ) )return;
 
@@ -119,7 +114,7 @@ class Router
 
 	public function routeWebhookRequests()
 	{
-		$request = filter_input( INPUT_GET, sprintf( '%s-hook', $this->id ) );
+		$request = filter_input( INPUT_GET, sprintf( '%s-hook', $this->app->id ) );
 
 		if( !$request )return;
 	}

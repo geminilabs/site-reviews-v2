@@ -26,7 +26,6 @@ class Bootstrap
 
 		$this->tests_dir = dirname( __FILE__ );
 		$this->plugin_dir = dirname( $this->tests_dir );
-		$this->app_dir = dirname( $this->plugin_dir ) . '/site-reviews';
 		$this->wp_tests_dir = $this->get_tests_dir( $_SERVER['HOME'] . '/Sites/wordpress/tests/current/' );
 
 		// load test function so tests_add_filter() is available
@@ -68,7 +67,7 @@ class Bootstrap
 	 */
 	public function load_plugin_environment()
 	{
-		require_once( $this->app_dir . '/site-reviews.php' );
+		require_once( $this->plugin_dir . '/site-reviews.php' );
 	}
 
 	/**
@@ -79,7 +78,7 @@ class Bootstrap
 		define( 'WP_UNINSTALL_PLUGIN', true );
 
 		// clean existing install first
-		include( $this->app_dir . '/uninstall.php' );
+		include( $this->plugin_dir . '/uninstall.php' );
 
 		// reload capabilities after install, see https://core.trac.wordpress.org/ticket/28374
 		$GLOBALS['wp_roles']->reinit();

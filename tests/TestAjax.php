@@ -45,6 +45,7 @@ class TestAjax extends WP_Ajax_UnitTestCase
 		catch( WPAjaxDieContinueException $e ) {
 		}
 		catch( WPAjaxDieStopException $e ) {
+			error_log( print_r( 'WPAjaxDieStopException', 1 ) );
 		}
 
 		$response = json_decode( $this->_last_response );
