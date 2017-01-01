@@ -36,6 +36,8 @@ class SiteReviews extends Shortcode
 
 		$args = shortcode_atts( $defaults, $atts );
 
+		$args = $this->makeCompatible( $args );
+
 		ob_start();
 
 		echo '<div class="shortcode-site-reviews">';
@@ -49,5 +51,23 @@ class SiteReviews extends Shortcode
 		echo '</div>';
 
 		return ob_get_clean();
+	}
+
+	/**
+	 * Maintain backwards compatibility with version <= v1.2.1
+	 *
+	 * @return array
+	 */
+	protected function makeCompatible( array $args )
+	{
+		$hide    = ['title','excerpt','author','date','rating'];
+		$display = array_map( 'trim', explode( ',', $args['display'] ) );
+
+		if( count( array_intersect( $hide, $display ) ) > 0 ) {
+			$args['hide']    = array_diff( $hide, $display );
+			$args['display'] = '';
+		}
+
+		return $args;
 	}
 }
