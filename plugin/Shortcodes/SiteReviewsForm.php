@@ -33,6 +33,8 @@ class SiteReviewsForm extends Shortcode
 
 		$atts = shortcode_atts( $defaults, $atts );
 
+		$atts = $this->makeCompatible( $atts );
+
 		$atts['hide'] = explode( ',', $atts['hide'] );
 		$atts['hide'] = array_filter( $atts['hide'], function( $value ) {
 			return in_array( $value, [
@@ -58,5 +60,21 @@ class SiteReviewsForm extends Shortcode
 		echo '</div>';
 
 		return ob_get_clean();
+	}
+
+	/**
+	 * Maintain backwards compatibility with version <= v1.2.1
+	 *
+	 * @return array
+	 */
+	protected function makeCompatible( array $args )
+	{
+		$args['hide'] = str_replace( 'reviewer', 'name', $args['hide'] );
+
+		$hide = explode( ',', $args['hide'] );
+
+		$args['hide'] = implode( ',', array_unique( array_map( 'trim', $hide ) ) );
+
+		return $args;
 	}
 }
