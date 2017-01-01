@@ -74,12 +74,14 @@ coding_style:
 build:
     environment:
         php: '7.1.0'
+        node: '5.1.0'
     project_setup:
         before:
             - 'bash tests/bin/install.sh wordpress_test root "" localhost $WP_VERSION'
             - 'bash tests/bin/travis.sh before'
     tests:
         override:
+            -  jshint-run
             -
                 command: 'phpunit --coverage-clover=tests/clover.xml'
                 coverage:
