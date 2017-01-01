@@ -278,7 +278,7 @@ class RegisterPostType
 	/**
 	 * Customize the bulk updated messages array for this post_type
 	 *
-	 * return array
+	 * @return array
 	 */
 	public function modifyPostTypeBulkMessages( array $messages, array $counts )
 	{
@@ -296,7 +296,7 @@ class RegisterPostType
 	/**
 	 * Customize the updated messages array for this post_type
 	 *
-	 * return array
+	 * @return array
 	 */
 	public function modifyPostTypeMessages( array $messages )
 	{
@@ -477,7 +477,7 @@ class RegisterPostType
 	/**
 	 * Set/persist custom permissions for the post_type
 	 *
-	 * return void
+	 * @return void
 	 */
 	public function setPermissions()
 	{
@@ -491,7 +491,7 @@ class RegisterPostType
 	 *
 	 * @todo: Move this to addons
 	 *
-	 * return void
+	 * @return void
 	 */
 	public function setPostTypeSupport()
 	{

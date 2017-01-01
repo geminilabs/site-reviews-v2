@@ -25,6 +25,9 @@ class TogglePinned
 		$this->notices = $notices;
 	}
 
+	/**
+	 * @return bool
+	 */
 	public function handle( Command $command )
 	{
 		if( !get_post( $command->id ) ) {

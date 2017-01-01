@@ -25,7 +25,7 @@ class RegisterPointers
 	/**
 	 * Add pointers to the current screen if they have not yet been dismissed
 	 *
-	 * return void
+	 * @return void
 	 */
 	public function handle( Command $command )
 	{
