@@ -195,7 +195,7 @@ class RegisterPostType
 	 */
 	public function modifyColumnMetaQuery( WP_Query $query )
 	{
-		if( !hasPermission( $query ) )return;
+		if( !$this->hasPermission( $query ) )return;
 
 		$meta_keys = [
 			'rating',
@@ -221,7 +221,7 @@ class RegisterPostType
 	 */
 	public function modifyColumnOrderby( WP_Query $query )
 	{
-		if( !hasPermission( $query ) )return;
+		if( !$this->hasPermission( $query ) )return;
 
 		$orderby = $query->get( 'orderby' );
 
