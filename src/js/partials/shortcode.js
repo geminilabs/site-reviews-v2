@@ -1,3 +1,4 @@
+/** global: GLSR, site_reviews, tinymce, x */
 
 GLSR.shortcode.close = function( el )
 {
@@ -162,6 +163,9 @@ GLSR.shortcode.normalize = function( data )
 	var hide = [];
 
 	for( var key in data ) {
+
+		if( !data.hasOwnProperty( key ) )continue;
+
 		if( shortcodes.hasOwnProperty( GLSR.shortcode.current ) ) {
 
 			var value = '';

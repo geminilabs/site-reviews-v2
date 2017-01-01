@@ -1,3 +1,4 @@
+/** global: GLSR, site_reviews, x */
 
 GLSR.pinned.events = function()
 {

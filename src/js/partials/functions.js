@@ -1,3 +1,4 @@
+/** global: ajaxurl, GLSR, site_reviews, x */
 
 GLSR.colorControls = function()
 {

@@ -1,3 +1,4 @@
+/** global: GLSR, site_reviews_pointers, x */
 
 x( function()
 {

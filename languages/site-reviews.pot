@@ -1,4 +1,4 @@
-# Copyright (C) 2016 site-reviews
+# Copyright (C) 2017 site-reviews
 # This file is distributed under the same license as the site-reviews package.
 msgid ""
 msgstr ""
@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Paul Ryley <paul@geminilabs.io>\n"
 "Language-Team: Gemini Labs <support@geminilabs.io>\n"
 "X-Poedit-Basepath: ..\n"
@@ -111,7 +111,7 @@ msgstr ""
 msgid "Approve this review"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:231, plugin/Handlers/SubmitReview.php:95
+#: plugin/Controllers/MainController.php:231, plugin/Handlers/SubmitReview.php:97
 msgid "Approve"
 msgstr ""
 
@@ -187,51 +187,51 @@ msgstr ""
 msgid "Please fix the submission errors."
 msgstr ""
 
-#: plugin/Handlers/RegisterPostType.php:298
+#: plugin/Handlers/RegisterPostType.php:286
 msgid "%s review updated."
 msgid_plural "%s posts updated."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Handlers/RegisterPostType.php:299
+#: plugin/Handlers/RegisterPostType.php:287
 msgid "%s review not updated, somebody is editing it."
 msgid_plural "%s reviews not updated, somebody is editing them."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Handlers/RegisterPostType.php:300
+#: plugin/Handlers/RegisterPostType.php:288
 msgid "%s review permanently deleted."
 msgid_plural "%s reviews permanently deleted."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Handlers/RegisterPostType.php:301
+#: plugin/Handlers/RegisterPostType.php:289
 msgid "%s review moved to the Trash."
 msgid_plural "%s reviews moved to the Trash."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Handlers/RegisterPostType.php:302
+#: plugin/Handlers/RegisterPostType.php:290
 msgid "%s review restored from the Trash."
 msgid_plural "%s reviews restored from the Trash."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Handlers/RegisterPostType.php:593
+#: plugin/Handlers/RegisterPostType.php:595
 msgid "%s star"
 msgid_plural "%s stars"
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Handlers/RegisterPostType.php:597
+#: plugin/Handlers/RegisterPostType.php:599
 msgid "All ratings"
 msgstr ""
 
-#: plugin/Handlers/RegisterPostType.php:615
+#: plugin/Handlers/RegisterPostType.php:617
 msgid "All types"
 msgstr ""
 
-#: plugin/Handlers/RegisterPostType.php:618, views/edit/meta.php:7
+#: plugin/Handlers/RegisterPostType.php:620, views/edit/meta.php:7
 msgid "Local Review"
 msgstr ""
 
@@ -239,23 +239,23 @@ msgstr ""
 msgid "Your review has been submitted!"
 msgstr ""
 
-#: plugin/Handlers/SubmitReview.php:96
+#: plugin/Handlers/SubmitReview.php:98
 msgid "Discard"
 msgstr ""
 
-#: plugin/Handlers/SubmitReview.php:144
+#: plugin/Handlers/SubmitReview.php:146
 msgid "New %s-Star Review"
 msgstr ""
 
-#: plugin/Handlers/SubmitReview.php:197, plugin/Strings.php:28
+#: plugin/Handlers/SubmitReview.php:199, plugin/Strings.php:28
 msgid "View Review"
 msgstr ""
 
-#: plugin/Handlers/TogglePinned.php:40
+#: plugin/Handlers/TogglePinned.php:43
 msgid "The review is pinned."
 msgstr ""
 
-#: plugin/Handlers/TogglePinned.php:41
+#: plugin/Handlers/TogglePinned.php:44
 msgid "The review is unpinned."
 msgstr ""
 
@@ -283,7 +283,7 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: plugin/Html/Form.php:255
+#: plugin/Html/Form.php:258
 msgid "Save Changes"
 msgstr ""
 
@@ -778,7 +778,7 @@ msgctxt ":attribute is a placeholder and should not be translated."
 msgid "The :attribute field is required."
 msgstr ""
 
-#: plugin/Traits/SiteReviewsForm.php:81
+#: plugin/Traits/SiteReviewsForm.php:86
 msgid "You must be <a href=\"%s\">logged in</a> to submit a review."
 msgstr ""
 
