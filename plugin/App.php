@@ -12,6 +12,9 @@ namespace GeminiLabs\SiteReviews;
 
 use GeminiLabs\SiteReviews\Container;
 
+/**
+ * @property array $mceShortcodes
+ */
 final class App extends Container
 {
 	public $defaults;

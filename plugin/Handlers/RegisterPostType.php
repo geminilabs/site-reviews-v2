@@ -195,13 +195,7 @@ class RegisterPostType
 	 */
 	public function modifyColumnMetaQuery( WP_Query $query )
 	{
-		global $pagenow;
-
-		if( !is_admin()
-			|| !$query->is_main_query()
-			|| $query->query['post_type'] != 'site-review'
-			|| $pagenow != 'edit.php'
-		)return;
+		if( !hasPermission( $query ) )return;
 
 		$meta_keys = [
 			'rating',
@@ -227,13 +221,7 @@ class RegisterPostType
 	 */
 	public function modifyColumnOrderby( WP_Query $query )
 	{
-		global $pagenow;
-
-		if( !is_admin()
-			|| !$query->is_main_query()
-			|| $query->query['post_type'] != 'site-review'
-			|| $pagenow != 'edit.php'
-		)return;
+		if( !hasPermission( $query ) )return;
 
 		$orderby = $query->get( 'orderby' );
 
@@ -514,6 +502,20 @@ class RegisterPostType
 	}
 
 	/**
+	 * @return bool
+	 */
+	protected function hasPermission( WP_Query $query )
+	{
+		global $pagenow;
+
+		return !( !is_admin()
+			|| !$query->is_main_query()
+			|| $query->query['post_type'] != 'site-review'
+			|| $pagenow != 'edit.php'
+		);
+	}
+
+	/**
 	 * @return null|bool
 	 */
 	protected function isEditLocalReviewPage()
@@ -534,6 +536,21 @@ class RegisterPostType
 		if( 'local' === $siteName ) {
 			return true;
 		}
+	}
+
+	/**
+	 * @param int $post_id
+	 * @param int $message_index
+	 *
+	 * @return string
+	 */
+	protected function getRedirectUrl( $post_id, $message_index )
+	{
+		$referer = wp_get_referer();
+
+		return !$referer || strpos( $referer, 'post.php' ) !== false || strpos( $referer, 'post-new.php' ) !== false
+			? add_query_arg( ['message' => $message_index ], get_edit_post_link( $post_id, false ) )
+			: add_query_arg( ['message' => $message_index ], remove_query_arg( ['trashed', 'untrashed', 'deleted', 'ids'], $referer ) );
 	}
 
 	/**
@@ -561,21 +578,6 @@ class RegisterPostType
 		add_filter( 'the_editor',                                [ $this, 'modifyContentEditorHtml'] );
 		add_filter( 'bulk_post_updated_messages',                [ $this, 'modifyPostTypeBulkMessages'], 10, 2 );
 		add_filter( 'post_updated_messages',                     [ $this, 'modifyPostTypeMessages'] );
-	}
-
-	/**
-	 * @param int $post_id
-	 * @param int $message_index
-	 *
-	 * @return string
-	 */
-	protected function getRedirectUrl( $post_id, $message_index )
-	{
-		$referer = wp_get_referer();
-
-		return !$referer || strpos( $referer, 'post.php' ) !== false || strpos( $referer, 'post-new.php' ) !== false
-			? add_query_arg( ['message' => $message_index ], get_edit_post_link( $post_id, false ) )
-			: add_query_arg( ['message' => $message_index ], remove_query_arg( ['trashed', 'untrashed', 'deleted', 'ids'], $referer ) );
 	}
 
 	/**

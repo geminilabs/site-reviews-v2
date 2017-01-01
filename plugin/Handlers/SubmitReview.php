@@ -72,7 +72,9 @@ class SubmitReview
 			// set message
 			$this->app->make( 'Session' )->set( "{$command->formId}-message", $message );
 
-			wp_redirect( $_SERVER['PHP_SELF'] );
+			$redirectUrl = filter_input( INPUT_SERVER, 'PHP_SELF' );
+
+			wp_redirect( $redirectUrl );
 			exit;
 		}
 	}

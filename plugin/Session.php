@@ -62,9 +62,11 @@ class Session
 
 		$this->prefix = "_{$this->app->prefix}_session";
 
-		if( isset( $_COOKIE[ $this->app->id ] ) ) {
+		$cookieId = filter_input( INPUT_COOKIE, $this->app->id );
 
-			$cookie = explode( '||', stripslashes( $_COOKIE[ $this->app->id ] ) );
+		if( $cookieId ) {
+
+			$cookie = explode( '||', stripslashes( $cookieId ) );
 
 			$this->sessionId   = $cookie[0];
 			$this->expiry      = $cookie[1];

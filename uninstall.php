@@ -8,7 +8,7 @@
  * -------------------------------------------------------------------------------------------------
  */
 
-defined( 'WP_UNINSTALL_PLUGIN' ) or die;
+defined( 'WP_UNINSTALL_PLUGIN' ) || die;
 
 require_once __DIR__ . '/site-reviews.php';
 

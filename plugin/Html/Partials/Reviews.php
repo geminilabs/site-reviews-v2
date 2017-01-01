@@ -17,7 +17,7 @@ class Reviews extends Base
 	/**
 	 * Generate a review
 	 *
-	 * @return string
+	 * @return null|string
 	 */
 	public function render()
 	{
@@ -214,10 +214,10 @@ class Reviews extends Base
 	/**
 	 * Build the review author string
 	 *
-	 * @param string $author
+	 * @param string $hideAuthor
 	 * @param string $metaAuthor
 	 *
-	 * @return string
+	 * @return null|string
 	 */
 	protected function reviewAuthor( $hideAuthor, $metaAuthor )
 	{
@@ -232,7 +232,7 @@ class Reviews extends Base
 	 * @param object $meta
 	 * @param string $postId
 	 *
-	 * @return string
+	 * @return null|string
 	 */
 	protected function reviewExcerpt( array $args, $meta, $postId )
 	{
@@ -241,7 +241,7 @@ class Reviews extends Base
 		$excerpt     = $this->buildExcerpt( get_the_content( $postId ), $args['word_limit'] );
 		$review_link = $this->reviewLink( $args['hide_link'], $meta->url );
 
-		$use_excerpt_as_link = apply_filters( 'site-reviews/widget/use_excerpt_as_link', false ) && $review_link;
+		$use_excerpt_as_link = apply_filters( 'site-reviews/widget/use_excerpt_as_link', false ) && $review_link !== null;
 
 		$show_excerpt_read_more = !apply_filters( 'site-reviews/widget/hide_excerpt_read_more', false )
 			? $review_link
@@ -259,10 +259,10 @@ class Reviews extends Base
 	/**
 	 * Build the review url
 	 *
-	 * @param string $link
+	 * @param string $hideLink
 	 * @param string $metaLink
 	 *
-	 * @return string
+	 * @return null|string
 	 */
 	protected function reviewLink( $hideLink, $metaLink )
 	{
@@ -303,7 +303,7 @@ class Reviews extends Base
 	 * @param object $meta
 	 * @param string $postId
 	 *
-	 * @return string
+	 * @return null|string
 	 */
 	protected function reviewTitle( array $args, $meta, $postId )
 	{
@@ -311,7 +311,7 @@ class Reviews extends Base
 
 		$review_link = $this->reviewLink( $args['hide_link'], $meta->url );
 
-		$use_title_as_link = apply_filters( 'site-reviews/widget/use_title_as_link', false ) && $review_link;
+		$use_title_as_link = apply_filters( 'site-reviews/widget/use_title_as_link', false ) && $review_link !== null;
 
 		$review_title = $use_title_as_link
 			? sprintf( '<a href="%s" target="_blank">%s</a>', esc_url( $meta->url ), get_the_title( $postId ) )

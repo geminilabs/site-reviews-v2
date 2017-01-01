@@ -125,7 +125,7 @@ abstract class Container
 	 * Bind a service to the container.
 	 *
 	 * @param string $alias
-	 * @param string $concrete
+	 * @param mixed  $concrete
 	 *
 	 * @return mixed
 	 */

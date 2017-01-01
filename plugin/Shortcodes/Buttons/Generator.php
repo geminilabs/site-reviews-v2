@@ -137,7 +137,7 @@ abstract class Generator
 	 *
 	 * @param array $field
 	 *
-	 * @return array|false
+	 * @return null|array
 	 */
 	protected function generateCheckbox( $field )
 	{
@@ -227,7 +227,7 @@ abstract class Generator
 	 *
 	 * @param array $field
 	 *
-	 * @return array|false
+	 * @return null|array|false
 	 */
 	protected function generatePost( $field )
 	{
@@ -267,7 +267,7 @@ abstract class Generator
 	 *
 	 * @param array $field
 	 *
-	 * @return array|false
+	 * @return null|array
 	 */
 	protected function generateTextbox( $field )
 	{

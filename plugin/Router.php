@@ -37,13 +37,16 @@ class Router
 	 */
 	public function getMethodName( $prefix, $action )
 	{
-		$callback = function( $matches ) { return strtoupper( $matches[1] ); };
+		$callback = function( $matches ) {
+			return strtoupper( $matches[1] );
+		};
+
 		return $prefix . preg_replace_callback( '/[-_](.)/', $callback, strtolower( $action ) );
 	}
 
 	public function routeAjaxRequests()
 	{
-		$request = $_REQUEST['request'];
+		$request = filter_input( INPUT_POST, 'request' );
 
 		if( isset( $request[ $this->prefix ]['action'] ) ) {
 			$request = $request[ $this->prefix ];

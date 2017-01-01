@@ -36,13 +36,6 @@ abstract class Shortcode
 	 */
 	protected $session;
 
-	/**
-	 * Unique ID string of the current instance (id_base-number).
-	 *
-	 * @var bool|string
-	 */
-	public $id = false;
-
 	public function __construct( App $app )
 	{
 		$this->app = $app;
