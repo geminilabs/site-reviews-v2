@@ -43,6 +43,7 @@ class BrowserDetector implements DetectorInterface
         'SeaMonkey',
         'Firefox',
         'Yandex',
+        'Samsung',
         'Chrome',
         'OmniWeb',
         // common mobile
@@ -52,6 +53,8 @@ class BrowserDetector implements DetectorInterface
         'Gsa',
         // common bots
         'Robot',
+        // wkhtmltopdf before Safari
+        'Wkhtmltopdf',
         // WebKit base check (post mobile and others)
         'Safari',
         // everyone else
@@ -366,6 +369,27 @@ class BrowserDetector implements DetectorInterface
                     self::$browser->setVersion($matches[1]);
                 }
             }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Determine if the browser is Samsung.
+     *
+     * @return bool
+     */
+    public static function checkBrowserSamsung()
+    {
+        if (stripos(self::$userAgentString, 'SamsungBrowser') !== false) {
+            $aresult = explode('/', stristr(self::$userAgentString, 'SamsungBrowser'));
+            if (isset($aresult[1])) {
+                $aversion = explode(' ', $aresult[1]);
+                self::$browser->setVersion($aversion[0]);
+            }
+            self::$browser->setName(Browser::SAMSUNG_BROWSER);
 
             return true;
         }
@@ -877,6 +901,20 @@ class BrowserDetector implements DetectorInterface
         return false;
     }
 
+    /**
+     * Determine if the browser is Safari.
+     *
+     * @return bool
+     */
+    public static function checkBrowserWkhtmltopdf()
+    {
+        if (stripos(self::$userAgentString, 'wkhtmltopdf') !== false) {
+            self::$browser->setName(Browser::WKHTMLTOPDF);
+            return true;
+        }
+
+        return false;
+    }
     /**
      * Determine if the browser is Safari.
      *
