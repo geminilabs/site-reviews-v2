@@ -90,8 +90,11 @@ class SystemInfo
 		$browser = new Browser;
 		$userAgent = $browser->getUserAgent();
 
-		$this->sysinfo[ $title ]['Browser Name'] = sprintf( '%s v%s', $browser->getName(), $browser->getVersion() );
-		$this->sysinfo[ $title ]['Browser UA'] = $userAgent->getUserAgentString();
+		$name = esc_attr( $browser->getName() );
+		$version = esc_attr( $browser->getVersion() );
+
+		$this->sysinfo[ $title ]['Browser Name'] = sprintf( '%s %s', $name, $version );
+		$this->sysinfo[ $title ]['Browser UA'] = esc_attr( $userAgent->getUserAgentString() );
 
 		return $this->implode( $title );
 	}
