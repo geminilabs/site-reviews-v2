@@ -88,13 +88,6 @@ final class App extends Container
 		add_filter( "plugin_action_links_{$basename}", [ $controller, 'registerActionLinks'] );
 		add_filter( 'dashboard_glance_items',          [ $controller, 'registerDashboardGlanceItems'] );
 		add_filter( 'post_row_actions',                [ $controller, 'registerRowActions'], 10, 2 );
-
-		update_option( "{$this->prefix}_version", '1.2.1' );
-		$this->upgrade( null, [
-			'action'   => 'update',
-			'type'     => 'plugin',
-			'packages' => [ plugin_basename( $this->file ) ],
-		]);
 	}
 
 	/**
