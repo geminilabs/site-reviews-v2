@@ -141,6 +141,16 @@ final class App extends Container
 	}
 
 	/**
+	 * Verify permissions
+	 *
+	 * @return bool
+	 */
+	public function hasPermission()
+	{
+		return current_user_can( 'customize' );
+	}
+
+	/**
 	 * Register available add-ons
 	 *
 	 * @return void
@@ -196,15 +206,5 @@ final class App extends Container
 		}
 
 		$this->updateVersion( $version );
-	}
-
-	/**
-	 * Verify permissions
-	 *
-	 * @return bool
-	 */
-	public function verify()
-	{
-		return current_user_can( 'customize' );
 	}
 }

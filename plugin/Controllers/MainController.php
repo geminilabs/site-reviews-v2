@@ -185,7 +185,7 @@ class MainController extends BaseController
 	 */
 	public function registerPostType()
 	{
-		if( !$this->app->verify() )return;
+		if( !$this->app->hasPermission() )return;
 
 		$command = new RegisterPostType([
 			'post_type'   => 'site-review',
