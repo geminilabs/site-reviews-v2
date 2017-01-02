@@ -192,14 +192,14 @@ final class App extends Container
 
 		$version = get_option( "{$this->prefix}_version" );
 
-		if( version_compare( $version, '1.3.0', '<' ) ) {
+		if( version_compare( $version, '2.0.0', '<' ) ) {
 
 			$upgrade = $this->make( 'Upgrade' );
 
-			$upgrade->sidebarWidgets_130();
-			$upgrade->themeMods_130();
-			$upgrade->widgetSiteReviews_130();
-			$upgrade->widgetSiteReviewsForm_130();
+			$upgrade->sidebarWidgets_200();
+			$upgrade->themeMods_200();
+			$upgrade->widgetSiteReviews_200();
+			$upgrade->widgetSiteReviewsForm_200();
 		}
 
 		$this->updateVersion( $version );

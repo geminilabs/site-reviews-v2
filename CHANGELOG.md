@@ -5,17 +5,19 @@ All notable changes to Site Reviews will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-### Added
-### Changed
-### Deprecated
-### Removed
-### Fixed
-### Security
-
-## [1.3.0] - 2016-12-29
 
 ### Added
 - [feature] MCE shortcode button dropdown
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
 
 ## [1.2.1] - 2016-12-28
 

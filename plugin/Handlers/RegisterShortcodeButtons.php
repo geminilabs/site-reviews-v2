@@ -2,9 +2,9 @@
 
 /**
  * @package   GeminiLabs\SiteReviews
- * @copyright Copyright (c) 2016, Paul Ryley
+ * @copyright Copyright (c) 2017, Paul Ryley
  * @license   GPLv2 or later
- * @since     1.3.0
+ * @since     2.0.0
  * -------------------------------------------------------------------------------------------------
  */
 

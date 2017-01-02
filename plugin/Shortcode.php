@@ -1,11 +1,11 @@
 <?php
 
 /**
- * = Shortcode Boilerplate
+ * Shortcode Boilerplate
  *
  * @package   GeminiLabs\SiteReviews
  * @copyright Copyright (c) 2016, Paul Ryley
- * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @license   GPLv2 or later
  * @since     1.0.0
  * -------------------------------------------------------------------------------------------------
  */

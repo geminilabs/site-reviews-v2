@@ -1,7 +1,5 @@
 <?php
 
-namespace GeminiLabs\SiteReviews\Log;
-
 /**
  * Describes a logger instance
  *
@@ -16,7 +14,16 @@ namespace GeminiLabs\SiteReviews\Log;
  *
  * See https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md
  * for the full interface specification.
+ *
+ * @package   GeminiLabs\SiteReviews
+ * @copyright Copyright (c) 2016, Paul Ryley
+ * @license   GPLv2 or later
+ * @since     1.0.0
+ * -------------------------------------------------------------------------------------------------
  */
+
+namespace GeminiLabs\SiteReviews\Log;
+
 interface LoggerInterface
 {
 	/**

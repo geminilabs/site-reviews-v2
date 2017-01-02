@@ -2,9 +2,9 @@
 
 /**
  * @package   GeminiLabs\SiteReviews
- * @copyright Copyright (c) 2016, Paul Ryley
+ * @copyright Copyright (c) 2017, Paul Ryley
  * @license   GPLv2 or later
- * @since     1.3.0
+ * @since     2.0.0
  * -------------------------------------------------------------------------------------------------
  */
 
@@ -27,11 +27,11 @@ class Upgrade
 	/**
 	 * @return void
 	 */
-	public function sidebarWidgets_130()
+	public function sidebarWidgets_200()
 	{
 		$sidebarWidgets = get_option( 'sidebars_widgets' );
 
-		$sidebarWidgets = $this->replaceWidgetNames_130( $sidebarWidgets );
+		$sidebarWidgets = $this->replaceWidgetNames_200( $sidebarWidgets );
 
 		update_option( 'sidebars_widgets', $sidebarWidgets );
 	}
@@ -39,7 +39,7 @@ class Upgrade
 	/**
 	 * @return void
 	 */
-	public function themeMods_130()
+	public function themeMods_200()
 	{
 		global $wpdb;
 
@@ -51,7 +51,7 @@ class Upgrade
 
 			if( !isset( $themeMod['sidebars_widgets']['data'] ) )continue;
 
-			$themeMod['sidebars_widgets']['data'] = $this->replaceWidgetNames_130( $themeMod['sidebars_widgets']['data'] );
+			$themeMod['sidebars_widgets']['data'] = $this->replaceWidgetNames_200( $themeMod['sidebars_widgets']['data'] );
 
 			update_option( $theme, $themeMod );
 		}
@@ -60,7 +60,7 @@ class Upgrade
 	/**
 	 * @return void
 	 */
-	public function widgetSiteReviews_130()
+	public function widgetSiteReviews_200()
 	{
 		$oldWidget = get_option( "widget_{$this->app->id}recent_reviews" );
 
@@ -105,7 +105,7 @@ class Upgrade
 	/**
 	 * @return void
 	 */
-	public function widgetSiteReviewsForm_130()
+	public function widgetSiteReviewsForm_200()
 	{
 		$oldWidget = get_option( "widget_{$this->app->id}reviews_form" );
 
@@ -133,7 +133,7 @@ class Upgrade
 	/**
 	 * @return array
 	 */
-	protected function replaceWidgetNames_130( array $widgets )
+	protected function replaceWidgetNames_200( array $widgets )
 	{
 		foreach( $widgets as &$values ) {
 

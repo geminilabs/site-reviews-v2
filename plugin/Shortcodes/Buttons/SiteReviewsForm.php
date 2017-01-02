@@ -1,12 +1,12 @@
 <?php
 
 /**
- * = Site Reviews Form shortcode button
+ * Site Reviews Form shortcode button
  *
  * @package   GeminiLabs\SiteReviews
- * @copyright Copyright (c) 2016, Paul Ryley
- * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since     1.3.0
+ * @copyright Copyright (c) 2017, Paul Ryley
+ * @license   GPLv2 or later
+ * @since     2.0.0
  * -------------------------------------------------------------------------------------------------
  */
 
