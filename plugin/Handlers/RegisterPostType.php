@@ -46,36 +46,6 @@ class RegisterPostType
 
 		if( in_array( $post_type, get_post_types(['_builtin' => true ]) ) )return;
 
-		$post_type = empty( $post_type )
-			? sanitize_title( $single )
-			: $post_type;
-
-		$slug = empty( $slug )
-			? sanitize_title( $plural )
-			: $slug;
-
-		$menu_name = empty( $menu_name )
-			? $plural
-			: $menu_name;
-
-		$show_in_nav_menus = isset( $args['show_in_nav_menus'] )
-			? $args['show_in_nav_menus']
-			: $public;
-
-		$show_ui = !isset( $args['show_ui'] ) ?: $args['show_ui'];
-
-		$exclude_from_search = isset( $args['exclude_from_search'] )
-			? $args['exclude_from_search']
-			: !$public;
-
-		$publicly_queryable = isset( $args['publicly_queryable'] )
-			? $args['publicly_queryable']
-			: $public;
-
-		$labels['singular_name'] = $single;
-		$labels['name'] = $plural;
-		$labels['menu_name'] = $menu_name;
-
 		$args = [
 			'description'         => '',
 			'labels'              => $labels,
