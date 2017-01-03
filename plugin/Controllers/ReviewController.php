@@ -12,6 +12,7 @@ namespace GeminiLabs\SiteReviews\Controllers;
 
 use GeminiLabs\SiteReviews\Commands\SubmitReview;
 use GeminiLabs\SiteReviews\Controllers\BaseController;
+use GeminiLabs\SiteReviews\Strings;
 
 class ReviewController extends BaseController
 {
@@ -37,7 +38,7 @@ class ReviewController extends BaseController
 	 */
 	public function modifyAutosave()
 	{
-		if( !$this->isReadOnly() )return;
+		if( $this->canEdit() )return;
 
 		wp_deregister_script( 'autosave' );
 	}
@@ -51,7 +52,7 @@ class ReviewController extends BaseController
 	 */
 	public function modifyEditor( array $settings )
 	{
-		if( $this->isReadOnly() ) {
+		if( $this->canEdit() ) {
 			$settings = [
 				'textarea_rows' => 12,
 				'media_buttons' => false,
@@ -74,7 +75,7 @@ class ReviewController extends BaseController
 	 */
 	public function modifyEditorTextarea( $html )
 	{
-		if( $this->isReadOnly() ) {
+		if( $this->canEdit() ) {
 			$html = str_replace( '<textarea', '<div id="ed_toolbar"></div><textarea', $html );
 		}
 
@@ -90,7 +91,7 @@ class ReviewController extends BaseController
 	 */
 	public function modifyFeatures()
 	{
-		if( !$this->isReadOnly() )return;
+		if( $this->canEdit() )return;
 
 		remove_post_type_support( 'site-review', 'title' );
 		remove_post_type_support( 'site-review', 'editor' );
@@ -272,7 +273,7 @@ class ReviewController extends BaseController
 	/**
 	 * @return bool
 	 */
-	protected function isReadOnly()
+	protected function canEdit()
 	{
 		$screen = get_current_screen();
 

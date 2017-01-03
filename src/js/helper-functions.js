@@ -216,7 +216,7 @@ GLSR.serialize = function( obj, prefix )
 		var key = prefix ? prefix + "[" + property + "]" : property;
 		var value = obj[ property ];
 
-		str.push( typeof value == "object" ?
+		str.push( typeof value === "object" ?
 			GLSR.serialize( value, key ) :
 			encodeURIComponent( key ) + "=" + encodeURIComponent( value )
 		);

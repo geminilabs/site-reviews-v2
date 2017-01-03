@@ -79,7 +79,7 @@ msgstr "Log was cleared."
 msgid "Settings"
 msgstr "Settings"
 
-#: plugin/Controllers/MainController.php:106
+#: plugin/Controllers/MainController.php:108
 msgid "%s Review"
 msgid_plural "%s Reviews"
 msgstr[0] "%s Review"
@@ -145,11 +145,11 @@ msgstr "Unapprove this review"
 msgid "Unapprove"
 msgstr "Unapprove"
 
-#: plugin/Controllers/MainController.php:292, plugin/Controllers/MainController.php:355
+#: plugin/Controllers/MainController.php:277, plugin/Controllers/MainController.php:355
 msgid "Recent Site Reviews"
 msgstr "Recent Site Reviews"
 
-#: plugin/Controllers/MainController.php:293, plugin/Controllers/MainController.php:360
+#: plugin/Controllers/MainController.php:278, plugin/Controllers/MainController.php:360
 msgid "Submit a Site Review"
 msgstr "Submit a Site Review"
 
@@ -197,63 +197,63 @@ msgstr "Logging disabled."
 msgid "Settings updated."
 msgstr "Settings updated."
 
-#: plugin/Controllers/ReviewController.php:50
-msgid "Anonymous"
-msgstr "Anonymous"
-
-#: plugin/Controllers/ReviewController.php:53
-msgid "No Title"
-msgstr "No Title"
-
-#: plugin/Controllers/ReviewController.php:57
-msgid "Please fix the submission errors."
-msgstr "Please fix the submission errors."
-
-#: plugin/Handlers/RegisterPostType.php:286
+#: plugin/Controllers/ReviewController.php:147
 msgid "%s review updated."
 msgid_plural "%s posts updated."
 msgstr[0] "%s review updated."
 msgstr[1] "%s posts updated."
 
-#: plugin/Handlers/RegisterPostType.php:287
+#: plugin/Controllers/ReviewController.php:148
 msgid "%s review not updated, somebody is editing it."
 msgid_plural "%s reviews not updated, somebody is editing them."
 msgstr[0] "%s review not updated, somebody is editing it."
 msgstr[1] "%s reviews not updated, somebody is editing them."
 
-#: plugin/Handlers/RegisterPostType.php:288
+#: plugin/Controllers/ReviewController.php:149
 msgid "%s review permanently deleted."
 msgid_plural "%s reviews permanently deleted."
 msgstr[0] "%s review permanently deleted."
 msgstr[1] "%s reviews permanently deleted."
 
-#: plugin/Handlers/RegisterPostType.php:289
+#: plugin/Controllers/ReviewController.php:150
 msgid "%s review moved to the Trash."
 msgid_plural "%s reviews moved to the Trash."
 msgstr[0] "%s review moved to the Trash."
 msgstr[1] "%s reviews moved to the Trash."
 
-#: plugin/Handlers/RegisterPostType.php:290
+#: plugin/Controllers/ReviewController.php:151
 msgid "%s review restored from the Trash."
 msgid_plural "%s reviews restored from the Trash."
 msgstr[0] "%s review restored from the Trash."
 msgstr[1] "%s reviews restored from the Trash."
 
-#: plugin/Handlers/RegisterPostType.php:595
+#: plugin/Controllers/ReviewController.php:189
+msgid "Anonymous"
+msgstr "Anonymous"
+
+#: plugin/Controllers/ReviewController.php:192
+msgid "No Title"
+msgstr "No Title"
+
+#: plugin/Controllers/ReviewController.php:196
+msgid "Please fix the submission errors."
+msgstr "Please fix the submission errors."
+
+#: plugin/Handlers/RegisterPostType.php:271
 msgid "%s star"
 msgid_plural "%s stars"
 msgstr[0] "%s star"
 msgstr[1] "%s stars"
 
-#: plugin/Handlers/RegisterPostType.php:599
+#: plugin/Handlers/RegisterPostType.php:275
 msgid "All ratings"
 msgstr "All ratings"
 
-#: plugin/Handlers/RegisterPostType.php:617
+#: plugin/Handlers/RegisterPostType.php:293
 msgid "All types"
 msgstr "All types"
 
-#: plugin/Handlers/RegisterPostType.php:620, views/edit/meta.php:7
+#: plugin/Handlers/RegisterPostType.php:296, views/edit/meta.php:7
 msgid "Local Review"
 msgstr "Local Review"
 
