@@ -25,8 +25,7 @@ class ReviewController extends BaseController
 			'post_status' => 'publish',
 		]);
 
-		wp_redirect( $this->getRedirectUrl( $post_id, 50 ) );
-		exit();
+		$this->redirect( $post_id, 50 );
 	}
 
 	/**
@@ -38,7 +37,7 @@ class ReviewController extends BaseController
 	 */
 	public function modifyAutosave()
 	{
-		if( $this->canEdit() )return;
+		if( $this->canEditReview() )return;
 
 		wp_deregister_script( 'autosave' );
 	}
@@ -52,7 +51,7 @@ class ReviewController extends BaseController
 	 */
 	public function modifyEditor( array $settings )
 	{
-		if( $this->canEdit() ) {
+		if( $this->canEditReview() ) {
 			$settings = [
 				'textarea_rows' => 12,
 				'media_buttons' => false,
@@ -75,7 +74,7 @@ class ReviewController extends BaseController
 	 */
 	public function modifyEditorTextarea( $html )
 	{
-		if( $this->canEdit() ) {
+		if( $this->canEditReview() ) {
 			$html = str_replace( '<textarea', '<div id="ed_toolbar"></div><textarea', $html );
 		}
 
@@ -91,7 +90,7 @@ class ReviewController extends BaseController
 	 */
 	public function modifyFeatures()
 	{
-		if( $this->canEdit() )return;
+		if( $this->canEditReview() )return;
 
 		remove_post_type_support( 'site-review', 'title' );
 		remove_post_type_support( 'site-review', 'editor' );
@@ -218,8 +217,7 @@ class ReviewController extends BaseController
 
 		$this->db->revertReview( $post_id );
 
-		wp_redirect( $this->getRedirectUrl( $post_id, 52 ) );
-		exit();
+		$this->redirect( $post_id, 52 );
 	}
 
 	/**
@@ -243,37 +241,13 @@ class ReviewController extends BaseController
 			'post_status' => 'pending',
 		]);
 
-		wp_redirect( $this->getRedirectUrl( $post_id, 51 ) );
-		exit();
-	}
-
-	/**
-	 * @return int
-	 */
-	protected function getPostId()
-	{
-		return (int) filter_input( INPUT_GET, 'post' );
-	}
-
-	/**
-	 * @param int $post_id
-	 * @param int $message_index
-	 *
-	 * @return string
-	 */
-	protected function getRedirectUrl( $post_id, $message_index )
-	{
-		$referer = wp_get_referer();
-
-		return !$referer || strpos( $referer, 'post.php' ) !== false || strpos( $referer, 'post-new.php' ) !== false
-			? add_query_arg( ['message' => $message_index ], get_edit_post_link( $post_id, false ) )
-			: add_query_arg( ['message' => $message_index ], remove_query_arg( ['trashed', 'untrashed', 'deleted', 'ids'], $referer ) );
+		$this->redirect( $post_id, 51 );
 	}
 
 	/**
 	 * @return bool
 	 */
-	protected function canEdit()
+	protected function canEditReview()
 	{
 		$screen = get_current_screen();
 
@@ -290,5 +264,36 @@ class ReviewController extends BaseController
 		$siteName = get_post_meta( $postId, 'site_name', true );
 
 		return 'local' === $siteName;
+	}
+
+	/**
+	 * @return int
+	 */
+	protected function getPostId()
+	{
+		return (int) filter_input( INPUT_GET, 'post' );
+	}
+
+	/**
+	 * @param int $post_id
+	 * @param int $message_index
+	 *
+	 * @return void
+	 */
+	protected function redirect( $post_id, $message_index )
+	{
+		$referer = wp_get_referer();
+
+		$hasReferer = !$referer
+			|| strpos( $referer, 'post.php' ) !== false
+			|| strpos( $referer, 'post-new.php' ) !== false;
+
+
+		$redirect = !$hasReferer
+			? add_query_arg( ['message' => $message_index ], get_edit_post_link( $post_id, false ) )
+			: add_query_arg( ['message' => $message_index ], remove_query_arg( ['trashed', 'untrashed', 'deleted', 'ids'], $referer ) );
+
+		wp_safe_redirect( $redirect );
+		exit();
 	}
 }

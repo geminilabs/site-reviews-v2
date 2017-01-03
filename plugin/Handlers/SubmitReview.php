@@ -74,7 +74,7 @@ class SubmitReview
 
 			$redirectUrl = filter_input( INPUT_SERVER, 'PHP_SELF' );
 
-			wp_redirect( $redirectUrl );
+			wp_safe_redirect( $redirectUrl );
 			exit;
 		}
 	}
