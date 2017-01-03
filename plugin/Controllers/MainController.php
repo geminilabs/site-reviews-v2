@@ -101,17 +101,18 @@ class MainController extends BaseController
 		$post_type = 'site-review';
 		$num_posts = wp_count_posts( $post_type );
 
-		if( $num_posts && $num_posts->publish ) {
-
-			$text = _n( '%s Review', '%s Reviews', $num_posts->publish, 'site-reviews' );
-			$text = sprintf( $text, number_format_i18n( $num_posts->publish ) );
-
-			$post_type_object = get_post_type_object( $post_type );
-
-			$items[] = $post_type_object && current_user_can( $post_type_object->cap->edit_posts )
-				? sprintf( '<a class="glsr-review-count" href="edit.php?post_type=%s">%s</a>', $post_type, $text )
-				: sprintf( '<span class="glsr-review-count">%s</span>', $text );
+		if( !isset( $num_posts->publish ) || !$num_posts->publish ) {
+			return $items;
 		}
+
+		$text = _n( '%s Review', '%s Reviews', $num_posts->publish, 'site-reviews' );
+		$text = sprintf( $text, number_format_i18n( $num_posts->publish ) );
+
+		$post_type_object = get_post_type_object( $post_type );
+
+		$items[] = $post_type_object && current_user_can( $post_type_object->cap->edit_posts )
+			? sprintf( '<a class="glsr-review-count" href="edit.php?post_type=%s">%s</a>', $post_type, $text )
+			: sprintf( '<span class="glsr-review-count">%s</span>', $text );
 
 		return $items;
 	}
@@ -128,14 +129,13 @@ class MainController extends BaseController
 		$post_type = 'site-review';
 
 		foreach( $menu as $key => $value ) {
-			if( !( isset( $value[2] ) && $value[2] === "edit.php?post_type={$post_type}" ) )continue;
+			if( !isset( $value[2] ) || $value[2] !== "edit.php?post_type={$post_type}" )continue;
 
-			$awaiting_mod = wp_count_posts( $post_type );
-			$awaiting_mod = $awaiting_mod->pending;
+			$postCount = wp_count_posts( $post_type );
 
 			$menu[ $key ][0] .= sprintf( ' <span class="awaiting-mod count-%d"><span class="pending-count">%s</span></span>',
-				absint( $awaiting_mod ),
-				number_format_i18n( $awaiting_mod )
+				absint( $postCount->pending ),
+				number_format_i18n( $postCount->pending )
 			);
 
 			if( $typenow === $post_type ) {
@@ -270,21 +270,6 @@ class MainController extends BaseController
 	/**
 	 * @return void
 	 *
-	 * @action init
-	 */
-	public function registerShortcodes()
-	{
-		$command = new RegisterShortcodes([
-			'site_reviews',
-			'site_reviews_form',
-		]);
-
-		$this->execute( $command );
-	}
-
-	/**
-	 * @return void
-	 *
 	 * @action admin_init
 	 */
 	public function registerShortcodeButtons()
@@ -301,6 +286,21 @@ class MainController extends BaseController
 				'title' => $site_reviews_form,
 				'label' => $site_reviews_form,
 			],
+		]);
+
+		$this->execute( $command );
+	}
+
+	/**
+	 * @return void
+	 *
+	 * @action init
+	 */
+	public function registerShortcodes()
+	{
+		$command = new RegisterShortcodes([
+			'site_reviews',
+			'site_reviews_form',
 		]);
 
 		$this->execute( $command );
