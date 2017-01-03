@@ -202,6 +202,8 @@ trait Reviews
 	 * @param string $type
 	 *
 	 * @return array
+	 *
+	 * @todo refactor to input array of multiple key/status/type values
 	 */
 	public function getReviewMeta( $key = '', $status = 'publish', $type = 'site-review' )
 	{

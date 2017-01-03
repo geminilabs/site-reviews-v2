@@ -47,7 +47,7 @@ class RegisterPostType
 			'post_type'           => sanitize_title( $args['single'] ),
 			'publicly_queryable'  => $args['public'],
 			'show_in_nav_menus'   => $args['public'],
-			'show_ui'             => false,
+			'show_ui'             => true,
 			'slug'                => sanitize_title( $args['plural'] ),
 		];
 

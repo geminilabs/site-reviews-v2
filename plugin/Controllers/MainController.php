@@ -196,7 +196,7 @@ class MainController extends BaseController
 			'menu_icon'   => 'dashicons-star-half',
 			'public'      => false,
 			'has_archive' => false,
-			'show_ui'     => false,
+			'show_ui'     => true,
 			'labels'      => (new Strings)->post_type_labels(),
 			'columns'     => [
 				'title'  => '', // empty values use the default label
