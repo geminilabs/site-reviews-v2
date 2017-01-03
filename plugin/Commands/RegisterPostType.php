@@ -26,6 +26,7 @@ class RegisterPostType
 			'columns'         => $columns,
 			'has_archive'     => false,
 			'hierarchical'    => false,
+			'labels'           => [],
 			'map_meta_cap'    => true,
 			'menu_icon'       => null,
 			'menu_name'       => '',
@@ -38,6 +39,24 @@ class RegisterPostType
 			'taxonomies'      => [],
 		];
 
-		$this->args = wp_parse_args( $input, $defaults );
+		$args = wp_parse_args( $input, $defaults );
+
+		$defaults = [
+			'exclude_from_search' => !$args['public'],
+			'menu_name'           => sanitize_title( $args['plural'] ),
+			'post_type'           => sanitize_title( $args['single'] ),
+			'publicly_queryable'  => $args['public'],
+			'show_in_nav_menus'   => $args['public'],
+			'show_ui'             => true,
+			'slug'                => sanitize_title( $args['plural'] ),
+		];
+
+		$args = wp_parse_args( $args, $defaults );
+
+		$args['labels']['singular_name'] = $args['single'];
+		$args['labels']['name'] = $args['plural'];
+		$args['labels']['menu_name'] = $args['menu_name'];
+
+		$this->args = $args;
 	}
 }

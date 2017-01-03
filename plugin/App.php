@@ -57,37 +57,49 @@ final class App extends Container
 	{
 		$basename = plugin_basename( $this->file );
 
-		$controller = $this->make( 'Controllers\MainController' );
-		$router     = $this->make( 'Router' );
+		$main   = $this->make( 'Controllers\MainController' );
+		$review = $this->make( 'Controllers\ReviewController' );
+		$router = $this->make( 'Router' );
 
 		// Action Hooks
 		add_action( 'plugins_loaded',                        [ $this, 'registerAddons'] );
 		add_action( 'upgrader_process_complete',             [ $this, 'upgrade'], 10, 2 );
-		add_action( 'admin_enqueue_scripts',                 [ $controller, 'enqueueAssets'] );
-		add_action( 'wp_enqueue_scripts',                    [ $controller, 'enqueueAssets'] );
-		add_action( 'admin_menu',                            [ $controller, 'registerMenuCount'] );
-		add_action( 'add_meta_boxes_site-review',            [ $controller, 'registerMetaBox'] );
-		add_action( 'admin_enqueue_scripts',                 [ $controller, 'registerPointers'], 13 );
-		add_action( 'init',                                  [ $controller, 'registerPostType'] );
-		add_action( 'admin_init',                            [ $controller, 'registerSettings'] );
-		add_action( 'admin_init',                            [ $controller, 'registerShortcodeButtons'] );
-		add_action( 'init',                                  [ $controller, 'registerShortcodes'] );
-		add_action( 'admin_menu',                            [ $controller, 'registerSubMenus'] );
-		add_action( 'init',                                  [ $controller, 'registerTextdomain'] );
-		add_action( 'widgets_init',                          [ $controller, 'registerWidgets'] );
-		add_action( 'post_submitbox_misc_actions',           [ $controller, 'renderMetaBoxPinned'] );
-		add_action( 'edit_form_after_title',                 [ $controller, 'renderReview'] );
-		add_action( 'edit_form_top',                         [ $controller, 'renderReviewNotice'] );
-		add_action( 'media_buttons',                         [ $controller, 'renderTinymceButton'] );
+		add_action( 'admin_enqueue_scripts',                 [ $main, 'enqueueAssets'] );
+		add_action( 'wp_enqueue_scripts',                    [ $main, 'enqueueAssets'] );
+		add_action( 'admin_menu',                            [ $main, 'registerMenuCount'] );
+		add_action( 'add_meta_boxes_site-review',            [ $main, 'registerMetaBox'] );
+		add_action( 'admin_enqueue_scripts',                 [ $main, 'registerPointers'], 13 );
+		add_action( 'init',                                  [ $main, 'registerPostType'] );
+		add_action( 'admin_init',                            [ $main, 'registerSettings'] );
+		add_action( 'admin_init',                            [ $main, 'registerShortcodeButtons'] );
+		add_action( 'init',                                  [ $main, 'registerShortcodes'] );
+		add_action( 'admin_menu',                            [ $main, 'registerSubMenus'] );
+		add_action( 'init',                                  [ $main, 'registerTextdomain'] );
+		add_action( 'widgets_init',                          [ $main, 'registerWidgets'] );
+		add_action( 'post_submitbox_misc_actions',           [ $main, 'renderMetaBoxPinned'] );
+		add_action( 'edit_form_after_title',                 [ $main, 'renderReview'] );
+		add_action( 'edit_form_top',                         [ $main, 'renderReviewNotice'] );
+		add_action( 'media_buttons',                         [ $main, 'renderTinymceButton'] );
+		add_action( 'admin_action_approve',                  [ $review, 'approve'] );
+		add_action( 'admin_print_scripts-post.php',          [ $review, 'modifyAutosave'], 999 );
+		add_action( 'current_screen',                        [ $review, 'modifyFeatures'] );
+		add_action( 'admin_menu',                            [ $review, 'removeMetaBoxes'] );
+		add_action( 'admin_action_revert',                   [ $review, 'revert'] );
+		add_action( 'admin_init',                            [ $review, 'setPermissions'], 999 );
+		add_action( 'admin_action_unapprove',                [ $review, 'unapprove'] );
 		add_action( "wp_ajax_{$this->prefix}_action",        [ $router, 'routeAjaxRequests'] );
 		add_action( "wp_ajax_nopriv_{$this->prefix}_action", [ $router, 'routeAjaxRequests'] );
 		add_action( 'admin_init',                            [ $router, 'routePostRequests'] );
 		add_action( 'admin_init',                            [ $router, 'routeWebhookRequests'] );
 
 		// Filter Hooks
-		add_filter( "plugin_action_links_{$basename}", [ $controller, 'registerActionLinks'] );
-		add_filter( 'dashboard_glance_items',          [ $controller, 'registerDashboardGlanceItems'] );
-		add_filter( 'post_row_actions',                [ $controller, 'registerRowActions'], 10, 2 );
+		add_filter( "plugin_action_links_{$basename}", [ $main, 'registerActionLinks'] );
+		add_filter( 'dashboard_glance_items',          [ $main, 'registerDashboardGlanceItems'] );
+		add_filter( 'post_row_actions',                [ $main, 'registerRowActions'], 10, 2 );
+		add_filter( 'wp_editor_settings',              [ $review, 'modifyEditor' ] );
+		add_filter( 'the_editor',                      [ $review, 'modifyEditorTextarea'] );
+		add_filter( 'post_updated_messages',           [ $review, 'modifyUpdateMessages'] );
+		add_filter( 'bulk_post_updated_messages',      [ $review, 'modifyUpdateMessagesBulk'], 10, 2 );
 	}
 
 	/**

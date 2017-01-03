@@ -56,7 +56,7 @@ class SubmitReview
 
 		$review = apply_filters( 'site-reviews/local/review', $review, $command );
 
-		$post_id = $this->db->postReview( $reviewId, $review );
+		$post_id = $this->db->createReview( $reviewId, $review );
 
 		$this->sendNotification( $post_id, $command );
 

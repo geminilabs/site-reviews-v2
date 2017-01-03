@@ -12,7 +12,6 @@ namespace GeminiLabs\SiteReviews\Handlers;
 
 use GeminiLabs\SiteReviews\App;
 use GeminiLabs\SiteReviews\Commands\RegisterPostType as Command;
-use GeminiLabs\SiteReviews\Strings;
 use WP_Query;
 
 class RegisterPostType
@@ -32,6 +31,11 @@ class RegisterPostType
 	 */
 	protected $db;
 
+	/**
+	 * @var string
+	 */
+	protected $post_type;
+
 	public function __construct( App $app )
 	{
 		$this->app = $app;
@@ -42,39 +46,10 @@ class RegisterPostType
 	{
 		extract( $command->args );
 
-		$this->columns = $columns;
-
 		if( in_array( $post_type, get_post_types(['_builtin' => true ]) ) )return;
 
-		$post_type = empty( $post_type )
-			? sanitize_title( $single )
-			: $post_type;
-
-		$slug = empty( $slug )
-			? sanitize_title( $plural )
-			: $slug;
-
-		$menu_name = empty( $menu_name )
-			? $plural
-			: $menu_name;
-
-		$show_in_nav_menus = isset( $args['show_in_nav_menus'] )
-			? $args['show_in_nav_menus']
-			: $public;
-
-		$show_ui = !isset( $args['show_ui'] ) ?: $args['show_ui'];
-
-		$exclude_from_search = isset( $args['exclude_from_search'] )
-			? $args['exclude_from_search']
-			: !$public;
-
-		$publicly_queryable = isset( $args['publicly_queryable'] )
-			? $args['publicly_queryable']
-			: $public;
-
-		$labels['singular_name'] = $single;
-		$labels['name'] = $plural;
-		$labels['menu_name'] = $menu_name;
+		$this->columns   = $columns;
+		$this->post_type = $post_type;
 
 		$args = [
 			'description'         => '',
@@ -98,37 +73,12 @@ class RegisterPostType
 
 		register_post_type( $post_type, $args );
 
-		$this->performHooks( $post_type );
-	}
+		add_action( 'restrict_manage_posts',                   [ $this, 'printColumnFilters'] );
+		add_action( "manage_{$post_type}_posts_custom_column", [ $this, 'printColumnValues'] );
+		add_action( 'pre_get_posts',                           [ $this, 'setColumnQuery'] );
 
-	/**
-	 * Removes the autosave functionality
-	 *
-	 * @return void
-	 *
-	 * @action admin_print_scripts-post.php
-	 */
-	public function disableAutosave()
-	{
-		if( $this->isEditLocalReviewPage() )return;
-
-		global $post;
-
-		if( $post->post_type == 'site-review' ) {
-			wp_deregister_script( 'autosave' );
-		}
-	}
-
-	/**
-	 * Removes the slug metabox
-	 *
-	 * @return void
-	 *
-	 * @action admin_menu
-	 */
-	public function disableMetaBoxes()
-	{
-		remove_meta_box( 'slugdiv', 'site-review', 'advanced' );
+		add_filter( "manage_{$post_type}_posts_columns",         [ $this, 'modifyColumns'] );
+		add_filter( "manage_edit-{$post_type}_sortable_columns", [ $this, 'modifyColumnsSortable'] );
 	}
 
 	/**
@@ -138,7 +88,7 @@ class RegisterPostType
 	 *
 	 * @filter manage_{$post_type}_posts_columns
 	 */
-	public function manageColumns( array $columns )
+	public function modifyColumns( array $columns )
 	{
 		$this->columns = ['cb' => ''] + $this->columns;
 
@@ -147,10 +97,10 @@ class RegisterPostType
 				$value = $columns[ $key ];
 			}
 			else if( $key === 'sticky' ) {
+				global $wp_version;
+
 				// wrap in <span> so we can replace with a dashicon in CSS @media
 				$value = "<span class=\"pinned-icon\">{$value}</span>";
-
-				global $wp_version;
 
 				// WP < 4.4 support
 				if( version_compare( $wp_version, '4.4', '<' ) ) {
@@ -159,7 +109,7 @@ class RegisterPostType
 			}
 		});
 
-		$sites = $this->db->getMetaValues( 'site_name' );
+		$sites = $this->db->getReviewMeta( 'site_name' );
 
 		if( count( $sites ) < 1 || ( count( $sites ) == 1 && $sites[0] == 'local' ) ) {
 			unset( $this->columns['site'] );
@@ -176,7 +126,7 @@ class RegisterPostType
 	 *
 	 * @filter manage_edit-{$post_type}_sortable_columns
 	 */
-	public function manageSortableColumns( array $columns )
+	public function modifyColumnsSortable( array $columns )
 	{
 		$columns['author'] = 'author';
 		$columns['site']   = 'site_name';
@@ -184,152 +134,6 @@ class RegisterPostType
 		$columns['sticky'] = 'pinned';
 
 		return $columns;
-	}
-
-	/**
-	 * Modifies the WP_Query meta_query value
-	 *
-	 * @return void
-	 *
-	 * @action pre_get_posts
-	 */
-	public function modifyColumnMetaQuery( WP_Query $query )
-	{
-		if( !$this->hasPermission( $query ) )return;
-
-		$meta_keys = [
-			'rating',
-			'site_name',
-		];
-
-		foreach( $meta_keys as $key ) {
-			if( $value = filter_input( INPUT_GET, $key ) ) {
-				$query->query_vars['meta_query'][] = [
-					'key'   => $key,
-					'value' => $value,
-				];
-			}
-		}
-	}
-
-	/**
-	 * Modifies the WP_Query orderby value
-	 *
-	 * @return void
-	 *
-	 * @action pre_get_posts
-	 */
-	public function modifyColumnOrderby( WP_Query $query )
-	{
-		if( !$this->hasPermission( $query ) )return;
-
-		$orderby = $query->get( 'orderby' );
-
-		switch( $orderby ) {
-			case 'author':
-			case 'site_name':
-			case 'rating':
-			case 'pinned':
-				$query->set( 'meta_key', $orderby );
-				$query->set( 'orderby', 'meta_value' );
-				break;
-		}
-	}
-
-	/**
-	 * Modifies the WP_Editor settings
-	 *
-	 * @return array
-	 *
-	 * @action wp_editor_settings
-	 */
-	public function modifyContentEditor( array $settings )
-	{
-		if( $this->isEditLocalReviewPage() !== true ) {
-			return $settings;
-		}
-
-		return [
-			'textarea_rows' => 12,
-			'media_buttons' => false,
-			'quicktags'     => false,
-			'tinymce'       => false,
-		];
-	}
-
-	/**
-	 * Modify the WP_Editor html to allow autosizing without breaking the `editor-expand` script
-	 *
-	 * @param string $html
-	 *
-	 * @return string
-	 *
-	 * @action the_editor
-	 */
-	public function modifyContentEditorHtml( $html )
-	{
-		if( $this->isEditLocalReviewPage() !== true ) {
-			return $html;
-		}
-
-		return str_replace( '<textarea', '<div id="ed_toolbar"></div><textarea', $html );
-	}
-
-	/**
-	 * Customize the bulk updated messages array for this post_type
-	 *
-	 * @return array
-	 */
-	public function modifyPostTypeBulkMessages( array $messages, array $counts )
-	{
-		$messages['site-review'] = [
-			'updated'   => _n( '%s review updated.', '%s posts updated.', $counts['updated'], 'site-reviews' ),
-			'locked'    => _n( '%s review not updated, somebody is editing it.', '%s reviews not updated, somebody is editing them.', $counts['locked'], 'site-reviews' ),
-			'deleted'   => _n( '%s review permanently deleted.', '%s reviews permanently deleted.', $counts['deleted'], 'site-reviews' ),
-			'trashed'   => _n( '%s review moved to the Trash.', '%s reviews moved to the Trash.', $counts['trashed'], 'site-reviews' ),
-			'untrashed' => _n( '%s review restored from the Trash.', '%s reviews restored from the Trash.', $counts['untrashed'], 'site-reviews' ),
-		];
-
-		return $messages;
-	}
-
-	/**
-	 * Customize the updated messages array for this post_type
-	 *
-	 * @return array
-	 */
-	public function modifyPostTypeMessages( array $messages )
-	{
-		global $post;
-
-		if( !isset( $post->ID ) || !$post->ID ) {
-			return $messages;
-		}
-
-		$strings = (new Strings)->post_updated_messages();
-
-		$restored = filter_input( INPUT_GET, 'revision' );
-		$restored = $restored
-			? sprintf( $strings['restored'], wp_post_revision_title( (int) $restored, false ) )
-			: false;
-
-		$scheduled_date = date_i18n( 'M j, Y @ H:i', strtotime( $post->post_date ) );
-
-		$messages['site-review'] = [
-			 1 => $strings['updated'],
-			 4 => $strings['updated'],
-			 5 => $restored,
-			 6 => $strings['published'],
-			 7 => $strings['saved'],
-			 8 => $strings['submitted'],
-			 9 => sprintf( $strings['scheduled'], sprintf( '<strong>%s</strong>', $scheduled_date ) ),
-			10 => $strings['draft_updated'],
-			50 => $strings['approved'],
-			51 => $strings['unapproved'],
-			52 => $strings['reverted'],
-		];
-
-		return $messages;
 	}
 
 	/**
@@ -349,20 +153,16 @@ class RegisterPostType
 			$post_type = $screen->post_type;
 		}
 
-		if( $post_type !== 'site-review' )return;
+		if( $post_type !== $this->post_type )return;
 
 		$status = filter_input( INPUT_GET, 'post_status' );
-		$status = $status ? $status : 'publish';
+		$status ?: $status = 'publish';
 
-		$ratings = $this->db->getMetaValues( 'rating', $status );
+		$ratings = $this->db->getReviewMeta( 'rating', $status );
+		$sites   = $this->db->getReviewMeta( 'site_name', $status );
 
-		$this->renderRatingsFilter( $ratings );
-
-		$sites = $this->db->getMetaValues( 'site_name', $status );
-
-		if( count( $sites ) == 1 && $sites[0] == 'local' )return;
-
-		$this->renderSitesFilter( $sites );
+		$this->renderFilterRatings( $ratings );
+		$this->renderFilterSites( $sites );
 	}
 
 	/**
@@ -376,8 +176,7 @@ class RegisterPostType
 	 */
 	public function printColumnValues( $column )
 	{
-		global $post;
-		global $wp_version;
+		global $post, $wp_version;
 
 		switch( $column ) {
 
@@ -429,76 +228,18 @@ class RegisterPostType
 		}
 	}
 
-	public function revertPost()
-	{
-		$post_id = filter_input( INPUT_GET, 'post' );
-
-		if( !$post_id )return;
-
-		check_admin_referer( 'revert-review_' . $post_id );
-
-		$this->db->revertReview( $post_id );
-
-		wp_redirect( $this->getRedirectUrl( $post_id, 52 ) );
-
-		exit();
-	}
-
-	public function unapprovePost()
-	{
-		$post_id = filter_input( INPUT_GET, 'post' );
-
-		if( !$post_id )return;
-
-		check_admin_referer( 'unapprove-review_' . $post_id );
-
-		$this->changePostStatus( $post_id, 'pending' );
-
-		wp_redirect( $this->getRedirectUrl( $post_id, 51 ) );
-
-		exit();
-	}
-
-	public function approvePost()
-	{
-		$post_id = filter_input( INPUT_GET, 'post' );
-
-		if( !$post_id )return;
-
-		check_admin_referer( 'approve-review_' . $post_id );
-
-		$this->changePostStatus( $post_id, 'publish' );
-
-		wp_redirect( $this->getRedirectUrl( $post_id, 50 ) );
-
-		exit();
-	}
-
 	/**
-	 * Set/persist custom permissions for the post_type
+	 * Sets the WP_Query
 	 *
 	 * @return void
-	 */
-	public function setPermissions()
-	{
-		foreach( wp_roles()->roles as $role => $value ) {
-			wp_roles()->remove_cap( $role, 'create_reviews' );
-		}
-	}
-
-	/**
-	 * Remove post_type support for all non-local reviews
 	 *
-	 * @todo: Move this to addons
-	 *
-	 * @return void
+	 * @action pre_get_posts
 	 */
-	public function setPostTypeSupport()
+	public function setColumnQuery( WP_Query $query )
 	{
-		if( $this->isEditLocalReviewPage() )return;
+		if( !$this->hasPermission( $query ) )return;
 
-		remove_post_type_support( 'site-review', 'title' );
-		remove_post_type_support( 'site-review', 'editor' );
+		$this->setMeta( $query )->setOrderby( $query );
 	}
 
 	/**
@@ -510,74 +251,9 @@ class RegisterPostType
 
 		return !( !is_admin()
 			|| !$query->is_main_query()
-			|| $query->query['post_type'] != 'site-review'
+			|| $query->query['post_type'] != $this->post_type
 			|| $pagenow != 'edit.php'
 		);
-	}
-
-	/**
-	 * @return null|bool
-	 */
-	protected function isEditLocalReviewPage()
-	{
-		$screen = get_current_screen();
-
-		$action = filter_input( INPUT_GET, 'action' );
-		$postId = filter_input( INPUT_GET, 'post' );
-
-		if( $action != 'edit'
-			|| $postId < 1
-			|| $screen->base != 'post'
-			|| $screen->post_type != 'site-review'
-		)return;
-
-		$siteName = get_post_meta( $postId, 'site_name', true );
-
-		if( 'local' === $siteName ) {
-			return true;
-		}
-	}
-
-	/**
-	 * @param int $post_id
-	 * @param int $message_index
-	 *
-	 * @return string
-	 */
-	protected function getRedirectUrl( $post_id, $message_index )
-	{
-		$referer = wp_get_referer();
-
-		return !$referer || strpos( $referer, 'post.php' ) !== false || strpos( $referer, 'post-new.php' ) !== false
-			? add_query_arg( ['message' => $message_index ], get_edit_post_link( $post_id, false ) )
-			: add_query_arg( ['message' => $message_index ], remove_query_arg( ['trashed', 'untrashed', 'deleted', 'ids'], $referer ) );
-	}
-
-	/**
-	 * @param string $post_type
-	 *
-	 * @return void
-	 */
-	protected function performHooks( $post_type = '' )
-	{
-		add_action( 'admin_action_approve',                    [ $this, 'approvePost'] );
-		add_action( 'admin_print_scripts-post.php',            [ $this, 'disableAutosave'], 999 );
-		add_action( 'admin_menu',                              [ $this, 'disableMetaBoxes'] );
-		add_action( 'pre_get_posts',                           [ $this, 'modifyColumnMetaQuery'] );
-		add_action( 'pre_get_posts',                           [ $this, 'modifyColumnOrderby'] );
-		add_action( 'restrict_manage_posts',                   [ $this, 'printColumnFilters'] );
-		add_action( "manage_{$post_type}_posts_custom_column", [ $this, 'printColumnValues'] );
-		add_action( 'admin_action_revert',                     [ $this, 'revertPost'] );
-		add_action( 'admin_init',                              [ $this, 'setPermissions'], 999 );
-		add_action( 'current_screen',                          [ $this, 'setPostTypeSupport'] );
-		add_action( 'admin_action_unapprove',                  [ $this, 'unapprovePost'] );
-
-		add_filter( "manage_{$post_type}_posts_columns",         [ $this, 'manageColumns'] );
-		add_filter( "manage_edit-{$post_type}_sortable_columns", [ $this, 'manageSortableColumns'] );
-		add_filter( 'wp_editor_settings',                        [ $this, 'modifyContentEditor' ] );
-		add_filter( 'the_editor',                                [ $this, 'modifyContentEditorHtml'] );
-		add_filter( 'bulk_post_updated_messages',                [ $this, 'modifyPostTypeBulkMessages'], 10, 2 );
-		add_filter( 'post_updated_messages',                     [ $this, 'modifyPostTypeMessages'] );
 	}
 
 	/**
@@ -585,7 +261,7 @@ class RegisterPostType
 	 *
 	 * @return void
 	 */
-	protected function renderRatingsFilter( $ratings )
+	protected function renderFilterRatings( $ratings )
 	{
 		if( empty( $ratings ) )return;
 
@@ -609,7 +285,7 @@ class RegisterPostType
 	 *
 	 * @return void
 	 */
-	protected function renderSitesFilter( $sites )
+	protected function renderFilterSites( $sites )
 	{
 		if( empty( $sites ) )return;
 
@@ -627,16 +303,48 @@ class RegisterPostType
 	}
 
 	/**
-	 * @param int    $post_id
-	 * @param string $status
+	 * Modifies the WP_Query meta_query value
 	 *
-	 * @return void
+	 * @return self
 	 */
-	protected function changePostStatus( $post_id, $status )
+	protected function setMeta( WP_Query $query )
 	{
-		return wp_update_post([
-			'ID'          => $post_id,
-			'post_status' => $status,
-		]);
+		$meta_keys = [
+			'rating',
+			'site_name',
+		];
+
+		foreach( $meta_keys as $key ) {
+			if( $value = filter_input( INPUT_GET, $key ) ) {
+				$query->query_vars['meta_query'][] = [
+					'key'   => $key,
+					'value' => $value,
+				];
+			}
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Modifies the WP_Query orderby value
+	 *
+	 * @return self
+	 */
+	protected function setOrderby( WP_Query $query )
+	{
+		$orderby = $query->get( 'orderby' );
+
+		switch( $orderby ) {
+			case 'author':
+			case 'site_name':
+			case 'rating':
+			case 'pinned':
+				$query->set( 'meta_key', $orderby );
+				$query->set( 'orderby', 'meta_value' );
+				break;
+		}
+
+		return $this;
 	}
 }

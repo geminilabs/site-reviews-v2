@@ -41,29 +41,11 @@ class Router
 
 	public function routeAjaxRequests()
 	{
-		$request = $_REQUEST['request'];
-
-		if( isset( $request[ $this->app->prefix ]['action'] ) ) {
-			$request = $request[ $this->app->prefix ];
-		}
-
-		// All ajax requests are triggered by a single action hook,
-		// each route is determined by the request["action"].
-		if( !isset( $request['action'] ) ) {
-			wp_die();
-		}
-
 		// Nonce url is localized in "GeminiLabs\SiteReviews\Handlers\EnqueueAssets"
 		check_ajax_referer( sprintf( '%s-ajax-nonce', $this->app->id ) );
 
-		$request['ajax_request'] = true;
-
-		// undo damage done by javascript: encodeURIComponent()
-		array_walk_recursive( $request, function( &$value ) {
-			$value = stripslashes( $value );
-		});
-
 		$ajaxController = $this->app->make( 'Controllers\AjaxController' );
+		$request        = $this->normalizeAjaxRequest();
 		$method         = $this->getMethodName( 'ajax', $request['action'] );
 
 		if( is_callable([ $ajaxController, $method ]) ) {
@@ -117,5 +99,42 @@ class Router
 		$request = filter_input( INPUT_GET, sprintf( '%s-hook', $this->app->id ) );
 
 		if( !$request )return;
+
+		// @todo manage webhook here
+	}
+
+	/**
+	 * @return array|void
+	 */
+	protected function normalizeAjaxRequest()
+	{
+		$request = $_REQUEST['request'];
+
+		// All ajax requests are triggered by a single action hook,
+		// each route is determined by the request["action"].
+		if( !isset( $request['action'] ) ) {
+			wp_die();
+		}
+
+		if( isset( $request[ $this->app->prefix ]['action'] ) ) {
+			$request = $request[ $this->app->prefix ];
+		}
+
+		$request['ajax_request'] = true;
+
+		return $this->normalize( $request );
+	}
+
+	/**
+	 * @return array
+	 */
+	protected function normalize( array $request )
+	{
+		// undo damage done by javascript: encodeURIComponent() and sanitize tainted value
+		array_walk_recursive( $request, function( &$value ) {
+			$value = htmlspecialchars( stripslashes( $value ) );
+		});
+
+		return $request;
 	}
 }
