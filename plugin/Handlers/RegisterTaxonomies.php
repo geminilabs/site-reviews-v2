@@ -66,14 +66,16 @@ class RegisterTaxonomies
 
 			wp_dropdown_categories([
 				'depth'           => 3,
-				'hide_empty'      => false,
+				'hide_empty'      => true,
+				'hide_if_empty'   => true,
 				'hierarchical'    => true,
 				'name'            => $taxonomy,
 				'orderby'         => 'name',
 				'selected'        => $selected,
-				'show_count'      => true,
+				'show_count'      => false,
 				'show_option_all' => ucfirst( strtolower( get_taxonomy( $taxonomy )->labels->all_items ) ),
 				'taxonomy'        => $taxonomy,
+				'value_field'     => 'slug',
 			]);
 		}
 	}

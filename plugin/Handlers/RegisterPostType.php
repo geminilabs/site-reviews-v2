@@ -274,6 +274,8 @@ class RegisterPostType
 
 		$ratings = [ __( 'All ratings', 'site-reviews' ) ] + $ratings;
 
+		printf( '<label class="screen-reader-text" for="rating">%s</label>', __( 'Filter by rating', 'site-reviews' ) );
+
 		$this->app->make( 'Html' )->renderPartial( 'filterby', [
 			'name'   => 'rating',
 			'values' => $ratings,
@@ -295,6 +297,8 @@ class RegisterPostType
 		if( isset( $sites['local'] ) ) {
 			$sites['local'] = __( 'Local Review', 'site-reviews' );
 		}
+
+		printf( '<label class="screen-reader-text" for="site_name">%s</label>', __( 'Filter by type', 'site-reviews' ) );
 
 		$this->app->make( 'Html' )->renderPartial( 'filterby', [
 			'name'   => 'site_name',
