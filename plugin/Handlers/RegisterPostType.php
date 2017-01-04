@@ -263,7 +263,7 @@ class RegisterPostType
 	 */
 	protected function renderFilterRatings( $ratings )
 	{
-		if( empty( $ratings ) )return;
+		if( empty( $ratings ) || apply_filters( 'site-reviews/disable/filter/ratings', false ) )return;
 
 		$ratings = array_flip( array_reverse( $ratings ) );
 
@@ -287,7 +287,7 @@ class RegisterPostType
 	 */
 	protected function renderFilterSites( $sites )
 	{
-		if( empty( $sites ) )return;
+		if( empty( $sites ) || apply_filters( 'site-reviews/disable/filter/sites', false ) )return;
 
 		$sites = array_combine( $sites, array_map( 'ucfirst', $sites ) );
 		$sites = [ __( 'All types', 'site-reviews' ) ] + $sites;
