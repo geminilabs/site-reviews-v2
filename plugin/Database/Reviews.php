@@ -114,25 +114,29 @@ trait Reviews
 	}
 
 	/**
-	 * @param string $siteName
+	 * @param string $metaKey
+	 * @param string $metaValue
 	 *
-	 * @return int
+	 * @return int|array
 	 */
-	public function getReviewCount( $siteName )
+	public function getReviewCount( $metaKey = '', $metaValue = '' )
 	{
-		global $wpdb;
+		if( !$metaKey ) {
+			return (array) wp_count_posts( 'site-review' );
+		}
 
-		$counts = wp_cache_get( $this->app->id, 'counts' );
+		$counts = wp_cache_get( $this->app->id, $metaKey . '_count' );
 
 		if( $counts === false ) {
+			global $wpdb;
 
-			$results = (array) $wpdb->get_results(
+			$results = (array) $wpdb->get_results( $wpdb->prepare(
 				"SELECT m.meta_value AS name, COUNT( * ) num_posts " .
 				"FROM {$wpdb->posts} AS p " .
 				"INNER JOIN {$wpdb->postmeta} AS m ON p.ID = m.post_id " .
-				"WHERE p.post_type = 'site-review' AND m.meta_key = 'site_name' " .
-				"GROUP BY name"
-			);
+				"WHERE p.post_type = 'site-review' AND m.meta_key = '%s' " .
+				"GROUP BY name", $metaKey
+			));
 
 			$counts = [];
 
@@ -140,10 +144,14 @@ trait Reviews
 				$counts[ $site->name ] = $site->num_posts;
 			}
 
-			wp_cache_set( $this->app->id, $counts, 'counts' );
+			wp_cache_set( $this->app->id, $counts, $metaKey . '_count' );
 		}
 
-		return isset( $counts[ $siteName ] ) ? $counts[ $siteName ] : 0;
+		if( !$metaValue ) {
+			return $counts;
+		}
+
+		return isset( $counts[ $metaValue ] ) ? $counts[ $metaValue ] : 0;
 	}
 
 	/**
