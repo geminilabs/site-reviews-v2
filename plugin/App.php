@@ -74,6 +74,7 @@ final class App extends Container
 		add_action( 'admin_init',                            [ $main, 'registerShortcodeButtons'] );
 		add_action( 'init',                                  [ $main, 'registerShortcodes'] );
 		add_action( 'admin_menu',                            [ $main, 'registerSubMenus'] );
+		add_action( 'init',                                  [ $main, 'registerTaxonomies'] );
 		add_action( 'init',                                  [ $main, 'registerTextdomain'] );
 		add_action( 'widgets_init',                          [ $main, 'registerWidgets'] );
 		add_action( 'post_submitbox_misc_actions',           [ $main, 'renderMetaBoxPinned'] );

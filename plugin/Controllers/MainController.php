@@ -15,6 +15,7 @@ use GeminiLabs\SiteReviews\Commands\RegisterPointers;
 use GeminiLabs\SiteReviews\Commands\RegisterPostType;
 use GeminiLabs\SiteReviews\Commands\RegisterShortcodeButtons;
 use GeminiLabs\SiteReviews\Commands\RegisterShortcodes;
+use GeminiLabs\SiteReviews\Commands\RegisterTaxonomies;
 use GeminiLabs\SiteReviews\Commands\RegisterWidgets;
 use GeminiLabs\SiteReviews\Controllers\BaseController;
 use GeminiLabs\SiteReviews\Strings;
@@ -331,6 +332,24 @@ class MainController extends BaseController
 
 			add_submenu_page( 'edit.php?post_type=site-review', $title, $title, 'customize', $slug, $callback );
 		}
+	}
+
+	/**
+	 * @return void
+	 *
+	 * @action init
+	 */
+	public function registerTaxonomies()
+	{
+		if( !$this->app->hasPermission() )return;
+
+		$command = new RegisterTaxonomies([
+			'site-review-category' => [
+				'post_type' => 'site-review',
+			],
+		]);
+
+		$this->execute( $command );
 	}
 
 	/**
