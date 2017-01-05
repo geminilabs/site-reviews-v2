@@ -31,11 +31,6 @@ class RegisterPostType
 	 */
 	protected $db;
 
-	/**
-	 * @var string
-	 */
-	protected $post_type;
-
 	public function __construct( App $app )
 	{
 		$this->app = $app;
@@ -46,10 +41,11 @@ class RegisterPostType
 	{
 		extract( $command->args );
 
+		$post_type = $this->app->post_type;
+
 		if( in_array( $post_type, get_post_types(['_builtin' => true ]) ) )return;
 
-		$this->columns   = $columns;
-		$this->post_type = $post_type;
+		$this->columns = $columns;
 
 		$args = [
 			'description'         => '',
@@ -153,7 +149,7 @@ class RegisterPostType
 			$post_type = $screen->post_type;
 		}
 
-		if( $post_type !== $this->post_type )return;
+		if( $post_type !== $this->app->post_type )return;
 
 		$status = filter_input( INPUT_GET, 'post_status' );
 		$status ?: $status = 'publish';
@@ -251,7 +247,7 @@ class RegisterPostType
 
 		return !( !is_admin()
 			|| !$query->is_main_query()
-			|| $query->query['post_type'] != $this->post_type
+			|| $query->query['post_type'] != $this->app->post_type
 			|| $pagenow != 'edit.php'
 		);
 	}

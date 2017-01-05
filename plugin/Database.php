@@ -11,11 +11,13 @@
 namespace GeminiLabs\SiteReviews;
 
 use GeminiLabs\SiteReviews\App;
+use GeminiLabs\SiteReviews\Database\Posts;
 use GeminiLabs\SiteReviews\Database\Reviews;
 use WP_Query;
 
 class Database
 {
+	use Posts;
 	use Reviews;
 
 	/**

@@ -25,6 +25,7 @@ class SiteReviewsForm extends Shortcode
 	public function printShortcode( $atts = [] )
 	{
 		$defaults = [
+			'category'    => '',
 			'class'       => '',
 			'description' => '',
 			'hide'        => '',

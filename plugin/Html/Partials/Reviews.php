@@ -24,6 +24,7 @@ class Reviews extends Base
 		global $post;
 
 		$defaults = [
+			'category'     => '',
 			'class'        => '',
 			'count'        => '',
 			'hide_author'  => false,

@@ -109,6 +109,13 @@
 		'value'  => $form_id,
 	]);
 
+	$html->renderField([
+		'type'   => 'hidden',
+		'name'   => 'category',
+		'prefix' => false,
+		'value'  => $category,
+	]);
+
 	wp_nonce_field( 'post-review' );
 
 	if( $message ) {

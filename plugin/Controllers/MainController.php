@@ -15,7 +15,7 @@ use GeminiLabs\SiteReviews\Commands\RegisterPointers;
 use GeminiLabs\SiteReviews\Commands\RegisterPostType;
 use GeminiLabs\SiteReviews\Commands\RegisterShortcodeButtons;
 use GeminiLabs\SiteReviews\Commands\RegisterShortcodes;
-use GeminiLabs\SiteReviews\Commands\RegisterTaxonomies;
+use GeminiLabs\SiteReviews\Commands\RegisterTaxonomy;
 use GeminiLabs\SiteReviews\Commands\RegisterWidgets;
 use GeminiLabs\SiteReviews\Controllers\BaseController;
 use GeminiLabs\SiteReviews\Strings;
@@ -99,7 +99,7 @@ class MainController extends BaseController
 	 */
 	public function registerDashboardGlanceItems( array $items )
 	{
-		$post_type = 'site-review';
+		$post_type = $this->app->post_type;
 		$num_posts = wp_count_posts( $post_type );
 
 		if( !isset( $num_posts->publish ) || !$num_posts->publish ) {
@@ -127,7 +127,7 @@ class MainController extends BaseController
 	{
 		global $menu, $typenow;
 
-		$post_type = 'site-review';
+		$post_type = $this->app->post_type;
 
 		foreach( $menu as $key => $value ) {
 			if( !isset( $value[2] ) || $value[2] !== "edit.php?post_type={$post_type}" )continue;
@@ -148,12 +148,16 @@ class MainController extends BaseController
 	}
 
 	/**
+	 * @param string $post_type
+	 *
 	 * @return void
 	 *
 	 * @action add_meta_boxes_review
 	 */
-	public function registerMetaBox()
+	public function registerMetaBox( $post_type )
 	{
+		if( $post_type != $this->app->post_type )return;
+
 		add_meta_box( "{$this->app->id}_review", __( 'Details', 'site-reviews' ), [ $this, 'renderMetaBox'], null, 'side' );
 	}
 
@@ -166,7 +170,7 @@ class MainController extends BaseController
 	{
 		$command = new RegisterPointers([[
 			'id'       => 'glsr-pointer-pinned',
-			'screen'   => 'site-review',
+			'screen'   => $this->app->post_type,
 			'target'   => '#misc-pub-pinned',
 			'title'    => __( 'Pin Your Reviews', 'site-reviews' ),
 			'content'  => __( 'You can pin exceptional reviews so that they are always shown first in your widgets and shortcodes.', 'site-reviews' ),
@@ -188,8 +192,9 @@ class MainController extends BaseController
 	{
 		if( !$this->app->hasPermission() )return;
 
+		$this->app->post_type = 'site-review';
+
 		$command = new RegisterPostType([
-			'post_type'   => 'site-review',
 			'slug'        => 'reviews',
 			'single'      => __( 'Review', 'site-reviews' ),
 			'plural'      => __( 'Reviews', 'site-reviews' ),
@@ -221,7 +226,7 @@ class MainController extends BaseController
 	 */
 	public function registerRowActions( array $actions, WP_Post $post )
 	{
-		if( $post->post_type !== 'site-review' || $post->post_status === 'trash' ) {
+		if( $post->post_type !== $this->app->post_type || $post->post_status === 'trash' ) {
 			return $actions;
 		}
 
@@ -330,7 +335,7 @@ class MainController extends BaseController
 
 			if( !is_callable( $callback ) )continue;
 
-			add_submenu_page( 'edit.php?post_type=site-review', $title, $title, 'customize', $slug, $callback );
+			add_submenu_page( sprintf( 'edit.php?post_type=%s', $this->app->post_type ), $title, $title, 'customize', $slug, $callback );
 		}
 	}
 
@@ -339,14 +344,15 @@ class MainController extends BaseController
 	 *
 	 * @action init
 	 */
-	public function registerTaxonomies()
+	public function registerTaxonomy()
 	{
 		if( !$this->app->hasPermission() )return;
 
-		$command = new RegisterTaxonomies([
-			'site-review-category' => [
-				'post_type' => 'site-review',
-			],
+		$this->app->taxonomy = 'site-review-category';
+
+		$command = new RegisterTaxonomy([
+			'hierarchical'      => true,
+			'show_admin_column' => true,
 		]);
 
 		$this->execute( $command );
@@ -450,7 +456,7 @@ class MainController extends BaseController
 	 */
 	public function renderMetaBox( WP_Post $post )
 	{
-		if( $post->post_type != 'site-review' )return;
+		if( $post->post_type != $this->app->post_type )return;
 
 		$this->render( 'edit/meta', ['post' => $post ] );
 	}
@@ -464,7 +470,7 @@ class MainController extends BaseController
 	{
 		global $post;
 
-		if( $post->post_type != 'site-review' )return;
+		if( $post->post_type != $this->app->post_type )return;
 
 		$pinned = get_post_meta( $post->ID, 'pinned', true );
 
@@ -478,8 +484,8 @@ class MainController extends BaseController
 	 */
 	public function renderReview( WP_Post $post )
 	{
-		if( $post->post_type != 'site-review' )return;
-		if( post_type_supports( 'site-review', 'title' ) )return;
+		if( $post->post_type != $this->app->post_type )return;
+		if( post_type_supports( $this->app->post_type, 'title' ) )return;
 		if( get_post_meta( $post->ID, 'site_name', true ) == 'local' )return;
 
 		$this->render( 'edit/review', ['post' => $post ] );
@@ -492,8 +498,8 @@ class MainController extends BaseController
 	 */
 	public function renderReviewNotice( WP_Post $post )
 	{
-		if( $post->post_type != 'site-review' )return;
-		if( post_type_supports( 'site-review', 'title' ) )return;
+		if( $post->post_type != $this->app->post_type )return;
+		if( post_type_supports( $this->app->post_type, 'title' ) )return;
 
 		$type = get_post_meta( $post->ID, 'site_name', true );
 

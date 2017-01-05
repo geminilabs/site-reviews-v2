@@ -22,7 +22,9 @@ final class App extends Container
 	public $id;
 	public $name;
 	public $path;
+	public $post_type;
 	public $prefix;
+	public $taxonomy;
 	public $url;
 	public $version;
 
@@ -67,14 +69,14 @@ final class App extends Container
 		add_action( 'admin_enqueue_scripts',                 [ $main, 'enqueueAssets'] );
 		add_action( 'wp_enqueue_scripts',                    [ $main, 'enqueueAssets'] );
 		add_action( 'admin_menu',                            [ $main, 'registerMenuCount'] );
-		add_action( 'add_meta_boxes_site-review',            [ $main, 'registerMetaBox'] );
+		add_action( 'add_meta_boxes',                        [ $main, 'registerMetaBox'] );
 		add_action( 'admin_enqueue_scripts',                 [ $main, 'registerPointers'], 13 );
-		add_action( 'init',                                  [ $main, 'registerPostType'] );
+		add_action( 'init',                                  [ $main, 'registerPostType'], 8 );
 		add_action( 'admin_init',                            [ $main, 'registerSettings'] );
 		add_action( 'admin_init',                            [ $main, 'registerShortcodeButtons'] );
 		add_action( 'init',                                  [ $main, 'registerShortcodes'] );
 		add_action( 'admin_menu',                            [ $main, 'registerSubMenus'] );
-		add_action( 'init',                                  [ $main, 'registerTaxonomies'] );
+		add_action( 'init',                                  [ $main, 'registerTaxonomy'], 9 );
 		add_action( 'init',                                  [ $main, 'registerTextdomain'] );
 		add_action( 'widgets_init',                          [ $main, 'registerWidgets'] );
 		add_action( 'post_submitbox_misc_actions',           [ $main, 'renderMetaBoxPinned'] );

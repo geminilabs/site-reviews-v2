@@ -71,7 +71,7 @@ trait Reviews
 			'post_name'      => $meta['site_name'] . str_replace( ['review_', '_'], '-', $review_id ),
 			'post_status'    => 'publish',
 			'post_title'     => wp_strip_all_tags( $meta['title'] ),
-			'post_type'      => 'site-review',
+			'post_type'      => $this->app->post_type,
 		];
 
 		if( $this->getOption( 'general.require.approval', false ) && $meta['site_name'] == 'local' ) {
@@ -122,7 +122,7 @@ trait Reviews
 	public function getReviewCount( $metaKey = '', $metaValue = '' )
 	{
 		if( !$metaKey ) {
-			return (array) wp_count_posts( 'site-review' );
+			return (array) wp_count_posts( $this->app->post_type );
 		}
 
 		$counts = wp_cache_get( $this->app->id, $metaKey . '_count' );
@@ -134,8 +134,11 @@ trait Reviews
 				"SELECT m.meta_value AS name, COUNT( * ) num_posts " .
 				"FROM {$wpdb->posts} AS p " .
 				"INNER JOIN {$wpdb->postmeta} AS m ON p.ID = m.post_id " .
-				"WHERE p.post_type = 'site-review' AND m.meta_key = '%s' " .
-				"GROUP BY name", $metaKey
+				"WHERE p.post_type = '%s' " .
+					"AND m.meta_key = '%s' " .
+				"GROUP BY name",
+				$this->app->post_type,
+				$metaKey
 			));
 
 			$counts = [];
@@ -169,9 +172,10 @@ trait Reviews
 			"SELECT p.ID " .
 			"FROM {$wpdb->posts} AS p " .
 			"INNER JOIN {$wpdb->postmeta} AS m1 ON p.ID = m1.post_id " .
-			"WHERE p.post_type = 'site-review' " .
+			"WHERE p.post_type = '%s' " .
 				"AND m1.meta_key = 'review_id' " .
 				"AND m1.meta_value = '%s'",
+			$this->app->post_type,
 			$review_id
 		));
 	}
@@ -192,10 +196,11 @@ trait Reviews
 			"FROM {$wpdb->posts} AS p " .
 			"INNER JOIN {$wpdb->postmeta} AS m1 ON p.ID = m1.post_id " .
 			"INNER JOIN {$wpdb->postmeta} AS m2 ON p.ID = m2.post_id " .
-			"WHERE p.post_type = 'site-review' " .
+			"WHERE p.post_type = '%s' " .
 				"AND m1.meta_key = 'review_id' " .
 				"AND m2.meta_key = 'site_name' " .
 				"AND m2.meta_value = '%s'",
+			$this->app->post_type,
 			$siteName
 		));
 
@@ -207,13 +212,12 @@ trait Reviews
 	 *
 	 * @param string $key
 	 * @param string $status
-	 * @param string $type
 	 *
 	 * @return array
 	 *
 	 * @todo refactor to input array of multiple key/status/type values
 	 */
-	public function getReviewMeta( $key = '', $status = 'publish', $type = 'site-review' )
+	public function getReviewMeta( $key = '', $status = 'publish' )
 	{
 		if( empty( $key ) ) {
 			return [];
@@ -236,7 +240,7 @@ trait Reviews
 				"AND ({$status}) " .
 			"ORDER BY pm.meta_value",
 			$key,
-			$type
+			$this->app->post_type
 		));
 	}
 
@@ -248,6 +252,7 @@ trait Reviews
 	public function getReviews( array $args = [] )
 	{
 		$defaults = [
+			'category'   => '',
 			'count'      => '10',
 			'order_by'   => 'date',
 			'pagination' => false,
@@ -258,6 +263,10 @@ trait Reviews
 		$args = shortcode_atts( $defaults, $args );
 
 		extract( $args );
+
+		$terms = $this->normalizeTerms( $category );
+
+		// 2.build the SQL query string
 
 		if( !empty( $site_name ) && $site_name != 'all' ) {
 			$meta_query[] = [
@@ -279,7 +288,7 @@ trait Reviews
 			'orderby'        => "meta_value $order_by",
 			'paged'          => $pagination ? $this->getCurrentPageNumber() : 1,
 			'post_status'    => 'publish',
-			'post_type'      => 'site-review',
+			'post_type'      => $this->app->post_type,
 			'posts_per_page' => $count ? $count : -1,
 		]);
 	}
@@ -318,7 +327,7 @@ trait Reviews
 	{
 		$post = get_post( $postId );
 
-		if( !isset( $post->post_type ) || $post->post_type != 'site-review' ) {
+		if( !isset( $post->post_type ) || $post->post_type != $this->app->post_type ) {
 			return false;
 		}
 

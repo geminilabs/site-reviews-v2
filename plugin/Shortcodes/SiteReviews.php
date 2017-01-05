@@ -25,6 +25,7 @@ class SiteReviews extends Shortcode
 	public function printShortcode( $atts = [] )
 	{
 		$defaults = [
+			'category'   => '',
 			'class'      => '',
 			'count'      => 10,
 			'display'    => 'all',

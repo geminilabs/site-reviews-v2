@@ -43,9 +43,15 @@ class SiteReviews extends Generator
 				'name'     => 'title',
 				'label'    => esc_html__( 'Title', 'site-reviews' ),
 				'tooltip'  => esc_attr__( 'Enter a custom shortcode heading.', 'site-reviews' ),
-			],
-				( isset( $display ) ? $display : [] ),
-			[
+			],[
+				'type'      => 'textbox',
+				'name'      => 'count',
+				'maxLength' => 5,
+				'size'      => 3,
+				'text'      => '10',
+				'label'     => esc_html__( 'Count', 'site-reviews' ),
+				'tooltip'   => esc_attr__( 'How many reviews would you like to display (default: 10)?', 'site-reviews' ),
+			],[
 				'type'    => 'listbox',
 				'name'    => 'rating',
 				'label'   => esc_html__( 'Rating', 'site-reviews' ),
@@ -57,6 +63,14 @@ class SiteReviews extends Generator
 					'1' => esc_html__( '1 star', 'site-reviews' ),
 				],
 				'tooltip' => esc_attr__( 'What is the minimum rating to display?', 'site-reviews' ),
+			],
+				( isset( $display ) ? $display : [] ),
+			[
+				'type'    => 'listbox',
+				'name'    => 'category',
+				'label'   => esc_html__( 'Category', 'site-reviews' ),
+				'options' => glsr_resolve( 'Database' )->getTerms(),
+				'tooltip' => esc_attr__( 'Limit reviews to this category.', 'site-reviews' ),
 			],[
 				'type'    => 'listbox',
 				'name'    => 'pagination',
@@ -66,14 +80,6 @@ class SiteReviews extends Generator
 					'false' => esc_html__( 'Disable', 'site-reviews' ),
 				],
 				'tooltip' => esc_attr__( 'When using pagination this shortcode can only be used once on a page.', 'site-reviews' ),
-			],[
-				'type'      => 'textbox',
-				'name'      => 'count',
-				'maxLength' => 5,
-				'size'      => 3,
-				'text'      => '10',
-				'label'     => esc_html__( 'Count', 'site-reviews' ),
-				'tooltip'   => esc_attr__( 'How many reviews would you like to display (default: 10)?', 'site-reviews' ),
 			],[
 				'type'     => 'textbox',
 				'name'     => 'class',

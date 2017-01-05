@@ -4,6 +4,9 @@
 	<h3>[site_reviews]</h3>
 	<p>This shortcode displays your most recently submitted reviews.</p>
 
+	<code>category="13,test"</code>
+	<p>Include the "category" attribute to limit reviews to one or more categories. Accepted values are either a category ID or slug.</p>
+
 	<code>class="my-reviews full-width"</code>
 	<p>Include the "class" attribute to add custom CSS classes to the shortcode.</p>
 
@@ -26,6 +29,9 @@
 <div class="glsr-card card">
 	<h3>[site_reviews_form]</h3>
 	<p>This shortcode displays the review submission form.</p>
+
+	<code>category="13,test"</code>
+	<p>Include the "category" attribute to automatically assign one or more categories to the submitted review. Accepted values are either a category ID or slug.</p>
 
 	<code>class="my-reviews-form"</code>
 	<p>Include the "class" attribute to add custom CSS classes to the shortcode form.</p>

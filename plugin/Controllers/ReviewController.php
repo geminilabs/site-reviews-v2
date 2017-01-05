@@ -92,8 +92,8 @@ class ReviewController extends BaseController
 	{
 		if( $this->canEditReview() )return;
 
-		remove_post_type_support( 'site-review', 'title' );
-		remove_post_type_support( 'site-review', 'editor' );
+		remove_post_type_support( $this->app->post_type, 'title' );
+		remove_post_type_support( $this->app->post_type, 'editor' );
 	}
 
 	/**
@@ -118,7 +118,7 @@ class ReviewController extends BaseController
 
 		$scheduled_date = date_i18n( 'M j, Y @ H:i', strtotime( $post->post_date ) );
 
-		$messages['site-review'] = [
+		$messages[ $this->app->post_type ] = [
 			 1 => $strings['updated'],
 			 4 => $strings['updated'],
 			 5 => $restored,
@@ -142,7 +142,7 @@ class ReviewController extends BaseController
 	 */
 	public function modifyUpdateMessagesBulk( array $messages, array $counts )
 	{
-		$messages['site-review'] = [
+		$messages[ $this->app->post_type ] = [
 			'updated'   => _n( '%s review updated.', '%s posts updated.', $counts['updated'], 'site-reviews' ),
 			'locked'    => _n( '%s review not updated, somebody is editing it.', '%s reviews not updated, somebody is editing them.', $counts['locked'], 'site-reviews' ),
 			'deleted'   => _n( '%s review permanently deleted.', '%s reviews permanently deleted.', $counts['deleted'], 'site-reviews' ),
@@ -182,13 +182,14 @@ class ReviewController extends BaseController
 		$user = wp_get_current_user();
 
 		$defaults = [
-			'content' => '',
-			'email'   => ( $user->exists() ? $user->user_email : '' ),
-			'form_id' => '',
-			'name'    => ( $user->exists() ? $user->display_name : __( 'Anonymous', 'site-reviews' ) ),
-			'rating'  => '',
-			'terms'   => '',
-			'title'   => __( 'No Title', 'site-reviews' ),
+			'category' => '',
+			'content'  => '',
+			'email'    => ( $user->exists() ? $user->user_email : '' ),
+			'form_id'  => '',
+			'name'     => ( $user->exists() ? $user->display_name : __( 'Anonymous', 'site-reviews' ) ),
+			'rating'   => '',
+			'terms'    => '',
+			'title'    => __( 'No Title', 'site-reviews' ),
 		];
 
 		if( !$this->validate( $request, $rules ) ) {
@@ -208,7 +209,7 @@ class ReviewController extends BaseController
 	 */
 	public function removeMetaBoxes()
 	{
-		remove_meta_box( 'slugdiv', 'site-review', 'advanced' );
+		remove_meta_box( 'slugdiv', $this->app->post_type, 'advanced' );
 	}
 
 	public function revert()
@@ -257,7 +258,7 @@ class ReviewController extends BaseController
 		if( $action != 'edit'
 			|| $postId < 1
 			|| $screen->base != 'post'
-			|| $screen->post_type != 'site-review' ) {
+			|| $screen->post_type != $this->app->post_type ) {
 			return false;
 		}
 

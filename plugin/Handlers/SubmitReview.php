@@ -58,6 +58,8 @@ class SubmitReview
 
 		$post_id = $this->db->createReview( $reviewId, $review );
 
+		$this->db->setTerms( $post_id, $command->category );
+
 		$this->sendNotification( $post_id, $command );
 
 		$message = __( 'Your review has been submitted!', 'site-reviews' );

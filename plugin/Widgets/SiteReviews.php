@@ -29,12 +29,13 @@ class SiteReviews extends Widget
 	public function form( $instance )
 	{
 		$defaults = [
-			'class'   => '',
-			'count'   => '5',
-			'display' => '',
-			'hide'    => [],
-			'rating'  => '5',
-			'title'   => '',
+			'category' => '',
+			'class'    => '',
+			'count'    => '5',
+			'display'  => '',
+			'hide'     => [],
+			'rating'   => '5',
+			'title'    => '',
 		];
 
 		$args = shortcode_atts( $defaults, $instance );
@@ -46,17 +47,14 @@ class SiteReviews extends Widget
 			'value' => $args['title'],
 		]);
 
-		$types = glsr_resolve( 'Database' )->getReviewTypes();
-
-		if( count( $types ) > 1 ) {
-			$this->create_field([
-				'type'  => 'select',
-				'name'  => 'display',
-				'label' => __( 'Which reviews would you like to display? ', 'site-reviews' ),
-				'value' => $args['display'],
-				'options' => ['' => __( 'All Reviews', 'site-reviews' ) ] + $types,
-			]);
-		}
+		$this->create_field([
+			'type'    => 'number',
+			'name'    => 'count',
+			'label'   => __( 'How many reviews would you like to display? ', 'site-reviews' ),
+			'value'   => $args['count'],
+			'default' => 5,
+			'max'     => 100,
+		]);
 
 		$this->create_field([
 			'type'  => 'select',
@@ -72,13 +70,33 @@ class SiteReviews extends Widget
 			],
 		]);
 
+		$types = glsr_resolve( 'Database' )->getReviewTypes();
+
+		if( count( $types ) > 1 ) {
+			$this->create_field([
+				'type'  => 'select',
+				'name'  => 'display',
+				'label' => __( 'Which reviews would you like to display? ', 'site-reviews' ),
+				'class' => 'widefat',
+				'value' => $args['display'],
+				'options' => ['' => __( 'All Reviews', 'site-reviews' ) ] + $types,
+			]);
+		}
+
 		$this->create_field([
-			'type'    => 'number',
-			'name'    => 'count',
-			'label'   => __( 'How many reviews would you like to display? ', 'site-reviews' ),
-			'value'   => $args['count'],
-			'default' => 5,
-			'max'     => 100,
+			'type'  => 'select',
+			'name'  => 'category',
+			'label' => __( 'Limit reviews to this category', 'site-reviews' ),
+			'class' => 'widefat',
+			'value' => $args['category'],
+			'options' => ['' => __( 'All Categories', 'site-reviews' ) ] + glsr_resolve( 'Database' )->getTerms(),
+		]);
+
+		$this->create_field([
+			'type'  => 'text',
+			'name'  => 'class',
+			'label' => __( 'Enter any custom CSS classes here', 'site-reviews' ),
+			'value' => $args['class'],
 		]);
 
 		$this->create_field([
@@ -92,13 +110,6 @@ class SiteReviews extends Widget
 				'rating'  => __( 'Hide the review rating?', 'site-reviews' ),
 				'title'   => __( 'Hide the review title?', 'site-reviews' ),
 			],
-		]);
-
-		$this->create_field([
-			'type'  => 'text',
-			'name'  => 'class',
-			'label' => __( 'Enter any custom CSS classes here', 'site-reviews' ),
-			'value' => $args['class'],
 		]);
 	}
 
@@ -138,12 +149,13 @@ class SiteReviews extends Widget
 	public function widget( $args, $instance )
 	{
 		$defaults = [
-			'class'   => '',
-			'count'   => '5', // count
-			'display' => '',
-			'hide'    => [],
-			'rating'  => '5', // rating
-			'title'   => '',
+			'category' => '',
+			'class'    => '',
+			'count'    => '5', // count
+			'display'  => '',
+			'hide'     => [],
+			'rating'   => '5', // rating
+			'title'    => '',
 		];
 
 		$instance = shortcode_atts( $defaults, $instance );
