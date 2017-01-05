@@ -14,6 +14,8 @@ use WP_Query;
 
 trait Posts
 {
+	protected $app;
+
 	public function getPosts( array $args = [] )
 	{}
 
@@ -51,8 +53,10 @@ trait Posts
 
 			!is_numeric( $term ) ?: $term = intval( $term );
 
-			if( term_exists( $term, $taxonomy ) ) {
-				return $term;
+			$term = term_exists( $term, $taxonomy );
+
+			if( isset( $term['term_id'] ) ) {
+				return intval( $term['term_id'] );
 			}
 
 		}, $terms );

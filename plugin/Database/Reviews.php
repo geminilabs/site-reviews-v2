@@ -31,6 +31,16 @@ trait Reviews
 	abstract public function getOption( $path = '', $fallback = '', $suffix = 'settings' );
 
 	/**
+	 * Normalize a string of comma-separated terms into an array
+	 *
+	 * @param string $terms
+	 * @param string $taxonomy
+	 *
+	 * @return array
+	 */
+	abstract public function normalizeTerms( $terms, $taxonomy = '' );
+
+	/**
 	 * Save a review to the database
 	 *
 	 * @param string $review_id
@@ -264,10 +274,6 @@ trait Reviews
 
 		extract( $args );
 
-		$terms = $this->normalizeTerms( $category );
-
-		// 2.build the SQL query string
-
 		if( !empty( $site_name ) && $site_name != 'all' ) {
 			$meta_query[] = [
 				'key'   => 'site_name',
@@ -281,7 +287,7 @@ trait Reviews
 			'compare' => '>=',
 		];
 
-		return new WP_Query([
+		$query = [
 			'meta_key'       => 'pinned',
 			'meta_query'     => $meta_query,
 			'order'          => 'DESC',
@@ -290,7 +296,10 @@ trait Reviews
 			'post_status'    => 'publish',
 			'post_type'      => $this->app->post_type,
 			'posts_per_page' => $count ? $count : -1,
-		]);
+			'tax_query'      => $this->buildTermsQuery( $category ),
+		];
+
+		return new WP_Query( $query );
 	}
 
 	/**
@@ -339,5 +348,26 @@ trait Reviews
 			'post_date'    => get_post_meta( $post->ID, 'date', true ),
 			'post_title'   => get_post_meta( $post->ID, 'title', true ),
 		]);
+	}
+
+	/**
+	 * @param string $terms
+	 *
+	 * @return array
+	 */
+	protected function buildTermsQuery( $terms )
+	{
+		$terms =  $this->normalizeTerms( $terms );
+		$query = [];
+
+		if( $terms ) {
+			$query[] = [
+				'taxonomy' => $this->app->taxonomy,
+				'field'    => 'id',
+				'terms'    => implode( ',', $terms ),
+			];
+		}
+
+		return $query;
 	}
 }
