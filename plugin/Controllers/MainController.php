@@ -348,7 +348,9 @@ class MainController extends BaseController
 
 		$command = new RegisterTaxonomy([
 			'hierarchical'      => true,
+			'public'            => false,
 			'show_admin_column' => true,
+			'show_ui'           => true,
 		]);
 
 		$this->execute( $command );
