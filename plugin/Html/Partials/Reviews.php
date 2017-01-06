@@ -100,7 +100,11 @@ class Reviews extends Base
 		$text = convert_smilies( $text );
 		$text = wpautop( $text );
 		$text = str_replace( ']]>', ']]&gt;', $text );
-		$text = wp_trim_words( $text, $wordCount, $more );
+
+		if( apply_filters( 'site-reviews/reviews/use_excerpt', true ) ) {
+			$wordCount = apply_filters( 'site-reviews/reviews/excerpt_length', $wordCount );
+			$text = wp_trim_words( $text, $wordCount, $more );
+		}
 
 		return $text;
 	}
@@ -147,7 +151,7 @@ class Reviews extends Base
 			]);
 		}
 
-		$links = apply_filters( 'site-reviews/shortcode/navigation_links', $links, $paged, $maxPageNum );
+		$links = apply_filters( 'site-reviews/reviews/navigation_links', $links, $paged, $maxPageNum );
 
 		if( !$links )return;
 
@@ -225,11 +229,11 @@ class Reviews extends Base
 		$excerpt     = $this->buildExcerpt( get_the_content( $postId ), $args['word_limit'] );
 		$review_link = $this->reviewLink( $args['show_link'], $meta->url );
 
-		$use_excerpt_as_link = apply_filters( 'site-reviews/widget/use_excerpt_as_link', false )
+		$use_excerpt_as_link = apply_filters( 'site-reviews/reviews/use_excerpt_as_link', false )
 			&& in_array( $args['display'], ['both', 'excerpt'] )
 			&& !empty( $review_link );
 
-		$show_excerpt_read_more = !apply_filters( 'site-reviews/widget/hide_excerpt_read_more', false )
+		$show_excerpt_read_more = !apply_filters( 'site-reviews/reviews/hide_excerpt_read_more', false )
 			? $review_link
 			: '';
 
