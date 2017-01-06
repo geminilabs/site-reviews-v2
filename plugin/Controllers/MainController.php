@@ -203,12 +203,12 @@ class MainController extends BaseController
 			'show_ui'     => true,
 			'labels'      => glsr_resolve( 'Strings' )->post_type_labels(),
 			'columns'     => [
-				'title'  => '', // empty values use the default label
-				'author' => __( 'Author', 'site-reviews' ),
-				'site'   => __( 'Type', 'site-reviews' ),
-				'stars'  => __( 'Rating', 'site-reviews' ),
-				'sticky' => __( 'Pinned', 'site-reviews' ),
-				'date'   => '',
+				'title'    => '', // empty values use the default label
+				'category' => '',
+				'type'     => __( 'Type', 'site-reviews' ),
+				'stars'    => __( 'Rating', 'site-reviews' ),
+				'sticky'   => __( 'Pinned', 'site-reviews' ),
+				'date'     => '',
 			],
 		]);
 

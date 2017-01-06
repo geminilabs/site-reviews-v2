@@ -105,10 +105,10 @@ class RegisterPostType
 			}
 		});
 
-		$sites = $this->db->getReviewMeta( 'site_name' );
+		$types = $this->db->getReviewMeta( 'site_name' );
 
-		if( count( $sites ) < 1 || ( count( $sites ) == 1 && $sites[0] == 'local' ) ) {
-			unset( $this->columns['site'] );
+		if( count( $types ) < 1 || ( count( $types ) == 1 && $types[0] == 'local' ) ) {
+			unset( $this->columns['type'] );
 		}
 
 		// remove all keys with null, false, or empty values
@@ -124,8 +124,7 @@ class RegisterPostType
 	 */
 	public function modifyColumnsSortable( array $columns )
 	{
-		$columns['author'] = 'author';
-		$columns['site']   = 'site_name';
+		$columns['type']   = 'site_name';
 		$columns['stars']  = 'rating';
 		$columns['sticky'] = 'pinned';
 
@@ -176,32 +175,13 @@ class RegisterPostType
 
 		switch( $column ) {
 
-			case 'slug':
-				echo $post->post_name;
-				break;
-
-			case 'featured':
-			case 'image':
-			case 'thumbnail':
-
-				if( has_post_thumbnail( $post->ID ) ) {
-					$img = wp_get_attachment_image( get_post_thumbnail_id( $post->ID ), [96, 48] );
-				}
-
-				echo ( isset( $img ) && !empty( $img ) ) ? $img : '&mdash;';
-				break;
-
-			case 'author':
-				echo get_post_meta( $post->ID, 'author', true );
-				break;
-
 			case 'stars':
 				$this->app->make( 'Html' )->renderPartial( 'rating', [
 					'stars' => get_post_meta( $post->ID, 'rating', true ),
 				]);
 				break;
 
-			case 'site':
+			case 'type':
 				echo ucfirst( get_post_meta( $post->ID, 'site_name', true ) );
 				break;
 
@@ -235,7 +215,12 @@ class RegisterPostType
 	{
 		if( !$this->hasPermission( $query ) )return;
 
-		$this->setMeta( $query )->setOrderby( $query );
+		$this->setMeta( $query, [
+			'rating',
+			'site_name',
+		]);
+
+		$this->setOrderby( $query );
 	}
 
 	/**
@@ -307,20 +292,15 @@ class RegisterPostType
 	 *
 	 * @return self
 	 */
-	protected function setMeta( WP_Query $query )
+	protected function setMeta( WP_Query $query, array $meta_keys )
 	{
-		$meta_keys = [
-			'rating',
-			'site_name',
-		];
-
 		foreach( $meta_keys as $key ) {
-			if( $value = filter_input( INPUT_GET, $key ) ) {
-				$query->query_vars['meta_query'][] = [
-					'key'   => $key,
-					'value' => $value,
-				];
-			}
+			if( !( $value = filter_input( INPUT_GET, $key )))continue;
+
+			$query->query_vars['meta_query'][] = [
+				'key'   => $key,
+				'value' => $value,
+			];
 		}
 
 		return $this;
@@ -336,7 +316,6 @@ class RegisterPostType
 		$orderby = $query->get( 'orderby' );
 
 		switch( $orderby ) {
-			case 'author':
 			case 'site_name':
 			case 'rating':
 			case 'pinned':
