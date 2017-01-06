@@ -192,8 +192,6 @@ class MainController extends BaseController
 	{
 		if( !$this->app->hasPermission() )return;
 
-		$this->app->post_type = 'site-review';
-
 		$command = new RegisterPostType([
 			'slug'        => 'reviews',
 			'single'      => __( 'Review', 'site-reviews' ),
@@ -347,8 +345,6 @@ class MainController extends BaseController
 	public function registerTaxonomy()
 	{
 		if( !$this->app->hasPermission() )return;
-
-		$this->app->taxonomy = 'site-review-category';
 
 		$command = new RegisterTaxonomy([
 			'hierarchical'      => true,

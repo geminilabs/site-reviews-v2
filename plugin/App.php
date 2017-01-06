@@ -48,6 +48,9 @@ final class App extends Container
 		$this->prefix  = str_replace( '-', '_', $this->id );
 		$this->url     = plugin_dir_url( $file );
 		$this->version = $plugin['version'];
+
+		$this->post_type = 'site-review';
+		$this->taxonomy  = 'site-review-category';
 	}
 
 	/**
