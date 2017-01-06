@@ -3,6 +3,7 @@
 All proposed features are subject to change.
 
 ## v2.0.0
+- [ ] Choose the review excerpt length
 - [ ] Custom review table filter links
 - [ ] Dated log files: http://stackoverflow.com/a/217468/2744691
 - [ ] Helper functions to easily access review meta
