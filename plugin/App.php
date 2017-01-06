@@ -22,7 +22,9 @@ final class App extends Container
 	public $id;
 	public $name;
 	public $path;
+	public $post_type;
 	public $prefix;
+	public $taxonomy;
 	public $url;
 	public $version;
 
@@ -46,6 +48,9 @@ final class App extends Container
 		$this->prefix  = str_replace( '-', '_', $this->id );
 		$this->url     = plugin_dir_url( $file );
 		$this->version = $plugin['version'];
+
+		$this->post_type = 'site-review';
+		$this->taxonomy  = 'site-review-category';
 	}
 
 	/**
@@ -67,13 +72,14 @@ final class App extends Container
 		add_action( 'admin_enqueue_scripts',                 [ $main, 'enqueueAssets'] );
 		add_action( 'wp_enqueue_scripts',                    [ $main, 'enqueueAssets'] );
 		add_action( 'admin_menu',                            [ $main, 'registerMenuCount'] );
-		add_action( 'add_meta_boxes_site-review',            [ $main, 'registerMetaBox'] );
+		add_action( 'add_meta_boxes',                        [ $main, 'registerMetaBox'] );
 		add_action( 'admin_enqueue_scripts',                 [ $main, 'registerPointers'], 13 );
-		add_action( 'init',                                  [ $main, 'registerPostType'] );
+		add_action( 'init',                                  [ $main, 'registerPostType'], 8 );
 		add_action( 'admin_init',                            [ $main, 'registerSettings'] );
 		add_action( 'admin_init',                            [ $main, 'registerShortcodeButtons'] );
 		add_action( 'init',                                  [ $main, 'registerShortcodes'] );
 		add_action( 'admin_menu',                            [ $main, 'registerSubMenus'] );
+		add_action( 'init',                                  [ $main, 'registerTaxonomy'], 9 );
 		add_action( 'init',                                  [ $main, 'registerTextdomain'] );
 		add_action( 'widgets_init',                          [ $main, 'registerWidgets'] );
 		add_action( 'post_submitbox_misc_actions',           [ $main, 'renderMetaBoxPinned'] );
@@ -113,7 +119,7 @@ final class App extends Container
 
 		update_option( "{$this->prefix}_logging", 0 );
 
-		$this->make( 'Database' )->setDefaultSettings();
+		$this->make( 'Database' )->setDefaults();
 
 		// Schedule session purge
 		if( !wp_next_scheduled( 'site-reviews/schedule/session/purge' ) ) {
@@ -215,6 +221,7 @@ final class App extends Container
 			$upgrade->themeMods_200();
 			$upgrade->widgetSiteReviews_200();
 			$upgrade->widgetSiteReviewsForm_200();
+			$upgrade->yesNo_200();
 		}
 
 		$this->updateVersion( $version );

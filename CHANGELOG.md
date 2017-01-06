@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 - [feature] MCE shortcode button dropdown
+- [feature] Review categories
 
 ### Changed
 

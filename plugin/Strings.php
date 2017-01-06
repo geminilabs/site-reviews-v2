@@ -47,6 +47,20 @@ class Strings
 		];
 	}
 
+	/**
+	 * @since 2.0.0
+	 *
+	 * @return array
+	 */
+	public function review_types()
+	{
+		$types = [
+			'local' => __( 'Local Reviews', 'site-reviews' ),
+		];
+
+		return apply_filters( 'site-reviews/addon/types', $types );
+	}
+
 	public function validation()
 	{
 		return [

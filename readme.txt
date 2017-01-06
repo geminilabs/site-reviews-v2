@@ -25,6 +25,7 @@ Follow plugin development on github at: https://github.com/geminilabs/site-revie
 = Current Features =
 
 * [new] MCE shortcode button dropdown
+* [new] Review categories
 * Actively developed and supported
 * Clean and easy-to-configure user interface
 * Configurable Widgets
@@ -99,6 +100,7 @@ Some themes may have very small sidebars and/or CSS styles that conflict or alte
 = Unreleased =
 
 * [feature] MCE shortcode button dropdown
+- [feature] Review categories
 
 = 1.2.1 (2016-12-28) =
 

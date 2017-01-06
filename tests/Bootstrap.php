@@ -81,7 +81,7 @@ class Bootstrap
 		include( $this->plugin_dir . '/uninstall.php' );
 
 		// reload capabilities after install, see https://core.trac.wordpress.org/ticket/28374
-		$GLOBALS['wp_roles']->reinit();
+		$GLOBALS['wp_roles'] = new \WP_Roles();
 	}
 }
 

@@ -31,11 +31,6 @@ class RegisterPostType
 	 */
 	protected $db;
 
-	/**
-	 * @var string
-	 */
-	protected $post_type;
-
 	public function __construct( App $app )
 	{
 		$this->app = $app;
@@ -46,10 +41,11 @@ class RegisterPostType
 	{
 		extract( $command->args );
 
+		$post_type = $this->app->post_type;
+
 		if( in_array( $post_type, get_post_types(['_builtin' => true ]) ) )return;
 
-		$this->columns   = $columns;
-		$this->post_type = $post_type;
+		$this->columns = $columns;
 
 		$args = [
 			'description'         => '',
@@ -109,10 +105,10 @@ class RegisterPostType
 			}
 		});
 
-		$sites = $this->db->getReviewMeta( 'site_name' );
+		$types = $this->db->getReviewMeta( 'site_name' );
 
-		if( count( $sites ) < 1 || ( count( $sites ) == 1 && $sites[0] == 'local' ) ) {
-			unset( $this->columns['site'] );
+		if( count( $types ) < 1 || ( count( $types ) == 1 && $types[0] == 'local' ) ) {
+			unset( $this->columns['type'] );
 		}
 
 		// remove all keys with null, false, or empty values
@@ -128,8 +124,7 @@ class RegisterPostType
 	 */
 	public function modifyColumnsSortable( array $columns )
 	{
-		$columns['author'] = 'author';
-		$columns['site']   = 'site_name';
+		$columns['type']   = 'site_name';
 		$columns['stars']  = 'rating';
 		$columns['sticky'] = 'pinned';
 
@@ -153,7 +148,7 @@ class RegisterPostType
 			$post_type = $screen->post_type;
 		}
 
-		if( $post_type !== $this->post_type )return;
+		if( $post_type !== $this->app->post_type )return;
 
 		$status = filter_input( INPUT_GET, 'post_status' );
 		$status ?: $status = 'publish';
@@ -180,32 +175,13 @@ class RegisterPostType
 
 		switch( $column ) {
 
-			case 'slug':
-				echo $post->post_name;
-				break;
-
-			case 'featured':
-			case 'image':
-			case 'thumbnail':
-
-				if( has_post_thumbnail( $post->ID ) ) {
-					$img = wp_get_attachment_image( get_post_thumbnail_id( $post->ID ), [96, 48] );
-				}
-
-				echo ( isset( $img ) && !empty( $img ) ) ? $img : '&mdash;';
-				break;
-
-			case 'author':
-				echo get_post_meta( $post->ID, 'author', true );
-				break;
-
 			case 'stars':
 				$this->app->make( 'Html' )->renderPartial( 'rating', [
 					'stars' => get_post_meta( $post->ID, 'rating', true ),
 				]);
 				break;
 
-			case 'site':
+			case 'type':
 				echo ucfirst( get_post_meta( $post->ID, 'site_name', true ) );
 				break;
 
@@ -239,7 +215,12 @@ class RegisterPostType
 	{
 		if( !$this->hasPermission( $query ) )return;
 
-		$this->setMeta( $query )->setOrderby( $query );
+		$this->setMeta( $query, [
+			'rating',
+			'site_name',
+		]);
+
+		$this->setOrderby( $query );
 	}
 
 	/**
@@ -251,7 +232,7 @@ class RegisterPostType
 
 		return !( !is_admin()
 			|| !$query->is_main_query()
-			|| $query->query['post_type'] != $this->post_type
+			|| $query->query['post_type'] != $this->app->post_type
 			|| $pagenow != 'edit.php'
 		);
 	}
@@ -263,7 +244,7 @@ class RegisterPostType
 	 */
 	protected function renderFilterRatings( $ratings )
 	{
-		if( empty( $ratings ) )return;
+		if( empty( $ratings ) || apply_filters( 'site-reviews/disable/filter/ratings', false ) )return;
 
 		$ratings = array_flip( array_reverse( $ratings ) );
 
@@ -273,6 +254,8 @@ class RegisterPostType
 		});
 
 		$ratings = [ __( 'All ratings', 'site-reviews' ) ] + $ratings;
+
+		printf( '<label class="screen-reader-text" for="rating">%s</label>', __( 'Filter by rating', 'site-reviews' ) );
 
 		$this->app->make( 'Html' )->renderPartial( 'filterby', [
 			'name'   => 'rating',
@@ -287,7 +270,7 @@ class RegisterPostType
 	 */
 	protected function renderFilterSites( $sites )
 	{
-		if( empty( $sites ) )return;
+		if( empty( $sites ) || apply_filters( 'site-reviews/disable/filter/sites', false ) )return;
 
 		$sites = array_combine( $sites, array_map( 'ucfirst', $sites ) );
 		$sites = [ __( 'All types', 'site-reviews' ) ] + $sites;
@@ -295,6 +278,8 @@ class RegisterPostType
 		if( isset( $sites['local'] ) ) {
 			$sites['local'] = __( 'Local Review', 'site-reviews' );
 		}
+
+		printf( '<label class="screen-reader-text" for="site_name">%s</label>', __( 'Filter by type', 'site-reviews' ) );
 
 		$this->app->make( 'Html' )->renderPartial( 'filterby', [
 			'name'   => 'site_name',
@@ -307,20 +292,15 @@ class RegisterPostType
 	 *
 	 * @return self
 	 */
-	protected function setMeta( WP_Query $query )
+	protected function setMeta( WP_Query $query, array $meta_keys )
 	{
-		$meta_keys = [
-			'rating',
-			'site_name',
-		];
-
 		foreach( $meta_keys as $key ) {
-			if( $value = filter_input( INPUT_GET, $key ) ) {
-				$query->query_vars['meta_query'][] = [
-					'key'   => $key,
-					'value' => $value,
-				];
-			}
+			if( !( $value = filter_input( INPUT_GET, $key )))continue;
+
+			$query->query_vars['meta_query'][] = [
+				'key'   => $key,
+				'value' => $value,
+			];
 		}
 
 		return $this;
@@ -336,7 +316,6 @@ class RegisterPostType
 		$orderby = $query->get( 'orderby' );
 
 		switch( $orderby ) {
-			case 'author':
 			case 'site_name':
 			case 'rating':
 			case 'pinned':

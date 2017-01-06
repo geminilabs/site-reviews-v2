@@ -29,6 +29,7 @@ class SiteReviewsForm extends Widget
 	public function form( $instance )
 	{
 		$defaults = [
+			'category'    => '',
 			'class'       => '',
 			'description' => sprintf( __( 'Your email address will not be published. Required fields are marked %s*%s', 'site-reviews' ), '<span>', '</span>' ),
 			'hide'        => [],
@@ -53,6 +54,22 @@ class SiteReviewsForm extends Widget
 		]);
 
 		$this->create_field([
+			'type'  => 'select',
+			'name'  => 'category',
+			'label' => __( 'Automatically assign a category', 'site-reviews' ),
+			'value' => $args['category'],
+			'options' => ['' => __( 'Do not assign a category', 'site-reviews' ) ] + glsr_resolve( 'Database' )->getTerms(),
+			'class' => 'widefat',
+		]);
+
+		$this->create_field([
+			'type'  => 'text',
+			'name'  => 'class',
+			'label' => __( 'Enter any custom CSS classes here', 'site-reviews' ),
+			'value' => $args['class'],
+		]);
+
+		$this->create_field([
 			'type'  => 'checkbox',
 			'name'  => 'hide',
 			'value' => $args['hide'],
@@ -62,13 +79,6 @@ class SiteReviewsForm extends Widget
 				'terms' => __( 'Hide the terms field', 'site-reviews' ),
 				'title' => __( 'Hide the title field', 'site-reviews' ),
 			],
-		]);
-
-		$this->create_field([
-			'type'  => 'text',
-			'name'  => 'class',
-			'label' => __( 'Enter any custom CSS classes here', 'site-reviews' ),
-			'value' => $args['class'],
 		]);
 	}
 
@@ -83,6 +93,7 @@ class SiteReviewsForm extends Widget
 	public function widget( $args, $instance )
 	{
 		$defaults = [
+			'category'    => '',
 			'class'       => '',
 			'description' => '',
 			'hide'        => [],

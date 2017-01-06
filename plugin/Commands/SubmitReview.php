@@ -14,6 +14,7 @@ class SubmitReview
 {
 	public $ajaxRequest;
 	public $author;
+	public $category;
 	public $content;
 	public $email;
 	public $formId;
@@ -26,6 +27,7 @@ class SubmitReview
 	{
 		$this->ajaxRequest = isset( $input['ajax_request'] ) ? true : false;
 		$this->author      = $input['name'];
+		$this->category    = $input['category'];
 		$this->content     = $input['content'];
 		$this->email       = $input['email'];
 		$this->formId      = $input['form_id'];

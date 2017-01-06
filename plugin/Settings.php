@@ -117,7 +117,7 @@ class Settings
 			'type'    => 'yesno_inline',
 			'name'    => 'general.require.approval',
 			'label'   => __( 'Require approval', 'site-reviews' ),
-			'default' => true,
+			'default' => 'yes',
 			'desc'    => __( 'Set the status of new review submissions to pending.', 'site-reviews' ),
 		]);
 

@@ -57,6 +57,25 @@ class RegisterPostType
 		$args['labels']['name'] = $args['plural'];
 		$args['labels']['menu_name'] = $args['menu_name'];
 
+		$args['columns'] = $this->normalizeColumns( $args['columns'] );
+
 		$this->args = $args;
+	}
+
+	/**
+	 * @return array
+	 */
+	protected function normalizeColumns( array $columns )
+	{
+		if( array_key_exists( 'category', $columns ) ) {
+
+			$keys = array_keys( $columns );
+
+			$keys[ array_search( 'category', $keys ) ] = sprintf( 'taxonomy-%s', glsr_app()->taxonomy );
+
+			$columns = array_combine( $keys, $columns );
+		}
+
+		return $columns;
 	}
 }

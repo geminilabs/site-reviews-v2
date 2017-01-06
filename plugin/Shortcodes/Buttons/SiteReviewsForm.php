@@ -39,6 +39,12 @@ class SiteReviewsForm extends Generator
 				'minHeight' => 60,
 				'multiline' => true,
 			],[
+				'type'    => 'listbox',
+				'name'    => 'category',
+				'label'   => esc_html__( 'Category', 'site-reviews' ),
+				'options' => glsr_resolve( 'Database' )->getTerms(),
+				'tooltip' => esc_attr__( 'Automatically assign a category to reviews submitted with this shortcode.', 'site-reviews' ),
+			],[
 				'type'     => 'textbox',
 				'name'     => 'class',
 				'label'    => esc_html__( 'Classes', 'site-reviews' ),

@@ -132,7 +132,7 @@ class Router
 	{
 		// undo damage done by javascript: encodeURIComponent() and sanitize tainted value
 		array_walk_recursive( $request, function( &$value ) {
-			$value = htmlspecialchars( stripslashes( $value ) );
+			$value = stripslashes( $value );
 		});
 
 		return $request;
