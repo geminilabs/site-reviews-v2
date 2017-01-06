@@ -22,8 +22,8 @@ class Yesno extends Radio
 		$defaultValue = 0;
 
 		$this->args['options'] = [
-			__( 'No', 'site-reviews' ),
-			__( 'Yes', 'site-reviews' ),
+			'no'  => __( 'No', 'site-reviews' ),
+			'yes' => __( 'Yes', 'site-reviews' ),
 		];
 
 		return parent::render( $defaultValue );

@@ -131,6 +131,22 @@ class Upgrade
 	}
 
 	/**
+	 * @return void
+	 */
+	public function yesNo_200()
+	{
+		$db = $this->app->make( 'Database' );
+
+		foreach( ['general.require.approval', 'general.require.login'] as $option ) {
+			$value = $db->getOption( $option, false )
+				? 'yes'
+				: 'no';
+
+			$db->setOption( $option, $value );
+		}
+	}
+
+	/**
 	 * @return array
 	 */
 	protected function replaceWidgetNames_200( array $widgets )

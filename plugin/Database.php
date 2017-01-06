@@ -329,7 +329,9 @@ class Database implements Contract
 			'hide_empty' => false,
 		]));
 
-		return is_array( $terms ) ? $terms : [];
+		return is_array( $terms )
+			? $terms
+			: [];
 	}
 
 	/**
