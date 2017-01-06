@@ -20,6 +20,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [1.2.2] - 2017-01-06
+
+### Added
+- Added hook to change excerpt length
+- Added hook to disable the excerpt and instead display the full review content
+
 ## [1.2.1] - 2016-12-28
 
 ### Fixed

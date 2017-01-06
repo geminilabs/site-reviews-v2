@@ -100,7 +100,12 @@ Some themes may have very small sidebars and/or CSS styles that conflict or alte
 = Unreleased =
 
 * [feature] MCE shortcode button dropdown
-- [feature] Review categories
+* [feature] Review categories
+
+= 1.2.2 (2017-01-06) =
+
+* Added hook to change excerpt length
+* Added hook to disable the excerpt and instead display the full review content
 
 = 1.2.1 (2016-12-28) =
 
