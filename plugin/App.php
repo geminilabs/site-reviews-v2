@@ -104,6 +104,8 @@ final class App extends Container
 		add_filter( 'post_row_actions',                [ $main, 'registerRowActions'], 10, 2 );
 		add_filter( 'wp_editor_settings',              [ $review, 'modifyEditor' ] );
 		add_filter( 'the_editor',                      [ $review, 'modifyEditorTextarea'] );
+		add_filter( 'ngettext',                        [ $review, 'modifyStatusEditBulk'], 10, 5 );
+		add_filter( 'gettext',                         [ $review, 'modifyStatusFilter'], 10, 3 );
 		add_filter( 'post_updated_messages',           [ $review, 'modifyUpdateMessages'] );
 		add_filter( 'bulk_post_updated_messages',      [ $review, 'modifyUpdateMessagesBulk'], 10, 2 );
 	}

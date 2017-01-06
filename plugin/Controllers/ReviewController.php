@@ -98,6 +98,80 @@ class ReviewController extends BaseController
 	}
 
 	/**
+	 * Customize the post_type status text
+	 *
+	 * @param string $translation
+	 * @param string $single
+	 * @param string $plural
+	 * @param int    $number
+	 * @param string $domain
+	 *
+	 * @return string
+	 */
+	public function modifyStatusEditBulk( $translation, $single, $plural, $number, $domain )
+	{
+		if( $this->canModifyTranslation( $domain ) ) {
+
+			$search = [
+				'Published',
+				'Pending',
+			];
+
+			$replace = [
+				__( 'Approved', 'site-reviews' ),
+				__( 'Unapproved', 'site-reviews' ),
+			];
+
+			foreach( $search as $string ) {
+				if( strpos( $single, $string ) === false )continue;
+
+				$translation = $this->getTranslation([
+					'number' => $number,
+					'plural' => str_replace( $search, $replace, $plural ),
+					'single' => str_replace( $search, $replace, $single ),
+				]);
+			}
+		}
+
+		return $translation;
+	}
+
+	/**
+	 * Customize the post_type status text
+	 *
+	 * @param string $translation
+	 * @param string $text
+	 * @param string $domain
+	 *
+	 * @return string
+	 */
+	public function modifyStatusFilter( $translation, $text, $domain )
+	{
+		if( $this->canModifyTranslation( $domain ) ) {
+
+			$search = [
+				'Published',
+				'Pending Review',
+			];
+
+			$replace = [
+				__( 'Approved (published)', 'site-reviews' ),
+				__( 'Unapproved (pending review)', 'site-reviews' ),
+			];
+
+			foreach( $search as $string ) {
+				if( strpos( $text, $string ) === false )continue;
+
+				$translation = $this->getTranslation([
+					'text' => str_replace( $search, $replace, $text ),
+				]);
+			}
+		}
+
+		return $translation;
+	}
+
+	/**
 	 * Customize the updated messages array for this post_type
 	 *
 	 * @return array
@@ -144,7 +218,7 @@ class ReviewController extends BaseController
 	public function modifyUpdateMessagesBulk( array $messages, array $counts )
 	{
 		$messages[ $this->app->post_type ] = [
-			'updated'   => _n( '%s review updated.', '%s posts updated.', $counts['updated'], 'site-reviews' ),
+			'updated'   => _n( '%s review updated.', '%s reviews updated.', $counts['updated'], 'site-reviews' ),
 			'locked'    => _n( '%s review not updated, somebody is editing it.', '%s reviews not updated, somebody is editing them.', $counts['locked'], 'site-reviews' ),
 			'deleted'   => _n( '%s review permanently deleted.', '%s reviews permanently deleted.', $counts['deleted'], 'site-reviews' ),
 			'trashed'   => _n( '%s review moved to the Trash.', '%s reviews moved to the Trash.', $counts['trashed'], 'site-reviews' ),
@@ -270,11 +344,51 @@ class ReviewController extends BaseController
 	}
 
 	/**
+	 * Check if the translation string can be modified
+	 *
+	 * @param string $domain
+	 *
+	 * @return bool
+	 */
+	protected function canModifyTranslation( $domain = 'default' )
+	{
+		global $current_screen;
+
+		return isset( $current_screen )
+			&& $current_screen->base == 'edit'
+			&& $current_screen->post_type == $this->app->post_type
+			&& $domain == 'default';
+	}
+
+	/**
 	 * @return int
 	 */
 	protected function getPostId()
 	{
 		return (int) filter_input( INPUT_GET, 'post' );
+	}
+
+	/**
+	 * Get the modified translation string
+	 *
+	 * @return string
+	 */
+	protected function getTranslation( array $args )
+	{
+		$defaults = [
+			'number' => 0,
+			'plural' => '',
+			'single' => '',
+			'text'   => '',
+		];
+
+		$args = (object) wp_parse_args( $args, $defaults );
+
+		$translations = get_translations_for_domain( 'site-reviews' );
+
+		return $args->text
+			? $translations->translate( $args->text )
+			: $translations->translate_plural( $args->single, $args->plural, $args->number );
 	}
 
 	/**

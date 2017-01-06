@@ -35,7 +35,7 @@ class Strings
 			'approved'      => __( 'Review has been approved and published.', 'site-reviews' ),
 			'draft_updated' => __( 'Review draft updated.', 'site-reviews' ),
 			'preview'       => __( 'Preview review', 'site-reviews' ),
-			'published'     => __( 'Review published.', 'site-reviews' ),
+			'published'     => __( 'Review approved and published.', 'site-reviews' ),
 			'restored'      => __( 'Review restored to revision from %s.', 'site-reviews' ),
 			'reverted'      => __( 'Review has been reverted to its original submission state.', 'site-reviews' ),
 			'saved'         => __( 'Review saved.', 'site-reviews' ),
