@@ -6,6 +6,7 @@
 *.log
 *.map
 clover.xml
+scrap.md
 
 /node_modules
 /vendor/*/*
