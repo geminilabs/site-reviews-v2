@@ -109,7 +109,7 @@ class ReviewController extends BaseController
 			return $messages;
 		}
 
-		$strings = (new Strings)->post_updated_messages();
+		$strings = glsr_resolve( 'Strings' )->post_updated_messages();
 
 		$restored = filter_input( INPUT_GET, 'revision' );
 		$restored = $restored

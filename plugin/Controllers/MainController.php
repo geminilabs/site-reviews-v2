@@ -203,7 +203,7 @@ class MainController extends BaseController
 			'public'      => false,
 			'has_archive' => false,
 			'show_ui'     => true,
-			'labels'      => (new Strings)->post_type_labels(),
+			'labels'      => glsr_resolve( 'Strings' )->post_type_labels(),
 			'columns'     => [
 				'title'  => '', // empty values use the default label
 				'author' => __( 'Author', 'site-reviews' ),
