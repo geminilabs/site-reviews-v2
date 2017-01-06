@@ -116,7 +116,7 @@ final class App extends Container
 
 		update_option( "{$this->prefix}_logging", 0 );
 
-		$this->make( 'Database' )->setDefaultSettings();
+		$this->make( 'Database' )->setDefaults();
 
 		// Schedule session purge
 		if( !wp_next_scheduled( 'site-reviews/schedule/session/purge' ) ) {

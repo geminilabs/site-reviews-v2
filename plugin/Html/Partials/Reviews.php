@@ -119,7 +119,7 @@ class Reviews extends Base
 	{
 		if( $maxPageNum < 2 )return;
 
-		$paged = $this->app->make( 'Database' )->getCurrentPageNumber();
+		$paged = $this->app->make( 'Database' )->getPaged();
 		$theme = wp_get_theme()->get( 'TextDomain' );
 
 		if( in_array( $theme, ['twentyten','twentyeleven','twentytwelve','twentythirteen'] ) ) {
