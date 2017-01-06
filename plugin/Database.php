@@ -324,10 +324,12 @@ class Database implements Contract
 	{
 		!empty( $taxonomy ) ?: $taxonomy = $this->app->taxonomy;
 
-		return get_terms( $taxonomy, wp_parse_args( $args, [
+		$terms = get_terms( $taxonomy, wp_parse_args( $args, [
 			'fields'     => 'id=>name',
 			'hide_empty' => false,
 		]));
+
+		return is_array( $terms ) ? $terms : [];
 	}
 
 	/**

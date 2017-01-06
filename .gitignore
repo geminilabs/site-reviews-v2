@@ -5,6 +5,7 @@
 !.travis.yml
 *.log
 *.map
+clover.xml
 
 /node_modules
 /vendor/*/*
