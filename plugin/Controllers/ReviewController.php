@@ -25,7 +25,8 @@ class ReviewController extends BaseController
 			'post_status' => 'publish',
 		]);
 
-		$this->redirect( $post_id, 50 );
+		wp_safe_redirect( wp_get_referer() );
+		exit;
 	}
 
 	/**
@@ -242,7 +243,8 @@ class ReviewController extends BaseController
 			'post_status' => 'pending',
 		]);
 
-		$this->redirect( $post_id, 51 );
+		wp_safe_redirect( wp_get_referer() );
+		exit;
 	}
 
 	/**
