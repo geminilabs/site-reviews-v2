@@ -49,6 +49,8 @@ class Strings
 
 	/**
 	 * @since 2.0.0
+	 *
+	 * @return array
 	 */
 	public function review_types()
 	{

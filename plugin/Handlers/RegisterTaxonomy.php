@@ -31,7 +31,35 @@ class RegisterTaxonomy
 
 		register_taxonomy_for_object_type( $this->app->taxonomy, $this->app->post_type );
 
-		add_action( 'restrict_manage_posts', [ $this, 'renderFilterTaxonomy'], 9 );
+		add_action( "{$this->app->taxonomy}_term_edit_form_top", [ $this, 'disableParents'] );
+		add_action( "{$this->app->taxonomy}_term_new_form_tag",  [ $this, 'disableParents'] );
+		add_action( "{$this->app->taxonomy}_add_form_fields",    [ $this, 'enableParents'] );
+		add_action( "{$this->app->taxonomy}_edit_form",          [ $this, 'enableParents'] );
+		add_action( 'restrict_manage_posts',                     [ $this, 'renderFilterTaxonomy'], 9 );
+	}
+
+	/**
+	 * @return void
+	 *
+	 * @action {$taxonomy}_add_form_fields
+	 * @action {$taxonomy}_edit_form
+	 */
+	public function disableParents()
+	{
+		global $wp_taxonomies;
+		$wp_taxonomies[ $this->app->taxonomy ]->hierarchical = false;
+	}
+
+	/**
+	 * @return void
+	 *
+	 * @action {$taxonomy}_term_edit_form_top
+	 * @action {$taxonomy}_term_new_form_tag
+	 */
+	public function enableParents()
+	{
+		global $wp_taxonomies;
+		$wp_taxonomies[ $this->app->taxonomy ]->hierarchical = true;
 	}
 
 	/**

@@ -348,6 +348,7 @@ class MainController extends BaseController
 
 		$command = new RegisterTaxonomy([
 			'hierarchical'      => true,
+			'meta_box_cb'       => [ $this, 'renderTaxonomyMetabox' ],
 			'public'            => false,
 			'show_admin_column' => true,
 			'show_ui'           => true,
@@ -456,7 +457,7 @@ class MainController extends BaseController
 	{
 		if( $post->post_type != $this->app->post_type )return;
 
-		$this->render( 'edit/meta', ['post' => $post ] );
+		$this->render( 'edit/metabox-details', ['post' => $post ] );
 	}
 
 	/**
@@ -528,6 +529,26 @@ class MainController extends BaseController
 			'licenses' => __( 'Licenses', 'site-reviews' ),
 		],[
 			'settings' => $this->app->getDefaults(),
+		]);
+	}
+
+	/**
+	 * register_taxonomy() 'meta_box_cb' callback
+	 *
+	 * @return void
+	 */
+	public function renderTaxonomyMetabox( $post, $box )
+	{
+		if( $post->post_type != $this->app->post_type )return;
+
+		$taxonomy = isset( $box['args']['taxonomy'] )
+			? $box['args']['taxonomy']
+			: $this->app->taxonomy;
+
+		$this->render( 'edit/metabox-categories', [
+			'post'     => $post,
+			'tax_name' => esc_attr( $taxonomy ),
+			'taxonomy' => get_taxonomy( $taxonomy ),
 		]);
 	}
 

@@ -32,7 +32,7 @@ class Database implements Contract
 	/**
 	 * Save a review to the database
 	 *
-	 * @param string $review_id
+	 * @param string $metaReviewId
 	 * @param bool   $update
 	 *
 	 * @return int|bool
@@ -156,7 +156,7 @@ class Database implements Contract
 	/**
 	 * Get the review post ID from the review_id meta value
 	 *
-	 * @param string $review_id
+	 * @param string $metaReviewId
 	 *
 	 * @return int
 	 */
@@ -181,7 +181,7 @@ class Database implements Contract
 	/**
 	 * Gets an array of all saved review IDs by review type
 	 *
-	 * @param string $type
+	 * @param string $reviewType
 	 *
 	 * @return array
 	 */
