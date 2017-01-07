@@ -33,7 +33,7 @@ class RegisterPostType
 			'menu_position'   => 25,
 			'public'          => true,
 			'query_var'       => true,
-			'rewrite'         => ['slug' => $input['slug'], 'with_front' => false ],
+			'rewrite'         => ['slug' => glsr_app()->post_type, 'with_front' => false ],
 			'show_in_menu'    => true, //'edit.php?post_type=post'
 			'supports'        => ['title', 'editor'],
 			'taxonomies'      => [],
@@ -48,7 +48,6 @@ class RegisterPostType
 			'publicly_queryable'  => $args['public'],
 			'show_in_nav_menus'   => $args['public'],
 			'show_ui'             => true,
-			'slug'                => sanitize_title( $args['plural'] ),
 		];
 
 		$args = wp_parse_args( $args, $defaults );

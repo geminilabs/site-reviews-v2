@@ -193,7 +193,6 @@ class MainController extends BaseController
 		if( !$this->app->hasPermission() )return;
 
 		$command = new RegisterPostType([
-			'slug'        => 'reviews',
 			'single'      => __( 'Review', 'site-reviews' ),
 			'plural'      => __( 'Reviews', 'site-reviews' ),
 			'menu_name'   => __( 'Site Reviews', 'site-reviews' ),

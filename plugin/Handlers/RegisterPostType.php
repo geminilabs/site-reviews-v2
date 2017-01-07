@@ -61,7 +61,7 @@ class RegisterPostType
 			'show_ui'             => $show_ui,
 			'exclude_from_search' => $exclude_from_search,
 			'publicly_queryable'  => $publicly_queryable,
-			'capabilities'        => ['create_posts' => "create_{$slug}"],
+			'capabilities'        => ['create_posts' => "create_{$post_type}"],
 			'hierarchical'        => $hierarchical,
 			'rewrite'             => $rewrite,
 			'query_var'           => $query_var,
