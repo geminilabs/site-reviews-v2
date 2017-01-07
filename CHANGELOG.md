@@ -8,7 +8,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 - [feature] MCE shortcode button dropdown
+- [feature] Review avatars (gravatar.com)
 - [feature] Review categories
+- Added option to choose the excerpt length
+- Added option to enable excerpts
+- Custom Published/Pending labels
 
 ### Changed
 

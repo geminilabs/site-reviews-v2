@@ -19,7 +19,7 @@ class Yesno extends Radio
 	 */
 	public function render()
 	{
-		$defaultValue = 0;
+		$defaultValue = 'no';
 
 		$this->args['options'] = [
 			'no'  => __( 'No', 'site-reviews' ),

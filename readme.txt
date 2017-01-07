@@ -25,6 +25,7 @@ Follow plugin development on github at: https://github.com/geminilabs/site-revie
 = Current Features =
 
 * [new] MCE shortcode button dropdown
+* [new] Review avatars (gravatar.com)
 * [new] Review categories
 * Actively developed and supported
 * Clean and easy-to-configure user interface
@@ -100,7 +101,11 @@ Some themes may have very small sidebars and/or CSS styles that conflict or alte
 = Unreleased =
 
 * [feature] MCE shortcode button dropdown
+* [feature] Review avatars (gravatar.com)
 * [feature] Review categories
+* Added option to choose the excerpt length
+* Added option to enable excerpts
+* Custom Published/Pending labels
 
 = 1.2.2 (2017-01-06) =
 

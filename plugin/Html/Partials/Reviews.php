@@ -44,7 +44,7 @@ class Reviews extends Base
 
 		if( $this->hideReviews( $args ) )return;
 
-		$reviews = $this->app->make( 'Database' )->getReviews( $args );
+		$reviews = $this->db->getReviews( $args );
 
 		if( $reviews->have_posts() ) {
 
@@ -57,10 +57,11 @@ class Reviews extends Base
 				$meta = get_post_meta( $post->ID );
 				$meta = (object) array_map( 'array_shift', $meta );
 
-				$html .= sprintf( '<div class="glsr-review">%s%s%s%s</div>',
+				$html .= sprintf( '<div class="glsr-review">%s%s%s%s%s</div>',
 					$this->reviewTitle( $args, $meta, $post->ID ),
 					$this->reviewMeta( $args, $meta, $post->ID ),
 					$this->reviewExcerpt( $args, $meta, $post->ID ),
+					$this->reviewAvatar( $post->ID ),
 					$this->reviewAuthor( $args['hide_author'], $meta->author )
 				);
 
@@ -104,10 +105,8 @@ class Reviews extends Base
 		$text = wpautop( $text );
 		$text = str_replace( ']]>', ']]&gt;', $text );
 
-		$db = $this->app->make( 'Database' );
-
-		if( 'yes' == $db->getOption( 'reviews.excerpt.enabled', 'yes' )) {
-			$wordCount = $db->getOption( 'reviews.excerpt.length', $wordCount );
+		if( 'yes' == $this->db->getOption( 'reviews.excerpt.enabled', 'yes' )) {
+			$wordCount = $this->db->getOption( 'reviews.excerpt.length', $wordCount );
 			$text = wp_trim_words( $text, $wordCount, $more );
 		}
 
@@ -125,7 +124,7 @@ class Reviews extends Base
 	{
 		if( $maxPageNum < 2 )return;
 
-		$paged = $this->app->make( 'Database' )->getPaged();
+		$paged = $this->app->make( 'Query' )->getPaged();
 		$theme = wp_get_theme()->get( 'TextDomain' );
 
 		if( in_array( $theme, ['twentyten','twentyeleven','twentytwelve','twentythirteen'] ) ) {
@@ -230,7 +229,18 @@ class Reviews extends Base
 	{
 		if( wp_validate_boolean( $hideAuthor ) )return;
 
-		return sprintf( '<p class="glsr-review-author">&mdash;%s</p> ', $metaAuthor );
+		$dash = $this->db->getOption( 'reviews.avatars.enabled', 'no' ) == 'no'
+			? '&mdash;'
+			: '';
+
+		return sprintf( '<p class="glsr-review-author">%s%s</p>', $dash, $metaAuthor );
+	}
+
+	protected function reviewAvatar( $postId )
+	{
+		if( $this->db->getOption( 'reviews.avatars.enabled', 'no' ) == 'no' )return;
+
+		return sprintf( '<div class="glsr-review-avatar"><img src="%s" width="36" /></div>', get_post_meta( $postId, 'avatar', true ));
 	}
 
 	/**
@@ -259,7 +269,7 @@ class Reviews extends Base
 			: "{$excerpt} {$show_excerpt_read_more}";
 
 		return !empty( $review_excerpt )
-			? sprintf( '<p class="glsr-review-excerpt">%s</p>', $review_excerpt )
+			? sprintf( '<div class="glsr-review-excerpt">%s</div>', $review_excerpt )
 			: '';
 	}
 

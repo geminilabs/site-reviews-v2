@@ -305,6 +305,13 @@ class Settings
 
 		$this->addSetting( $formId, [
 			'type'  => 'yesno_inline',
+			'name'  => 'reviews.avatars.enabled',
+			'label' => __( 'Enable Avatars', 'site-reviews' ),
+			'desc'  => __( 'Display reviewer avatars. These are generated from the email address of the reviewer using <a href="https://gravatar.com">Gravatar</a>.', 'site-reviews' ),
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'yesno_inline',
 			'name'  => 'reviews.excerpt.enabled',
 			'label' => __( 'Enable Excerpts', 'site-reviews' ),
 			'desc'  => __( 'Display an excerpt instead of the full review.', 'site-reviews' ),

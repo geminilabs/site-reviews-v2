@@ -13,8 +13,9 @@ Minimum plugin requirements:
 
 #### Features
 
-* [new] MCE shortcode button dropdown
-* [new] Review categories
+- [new] MCE shortcode button dropdown
+- [new] Review avatars (gravatar.com)
+- [new] Review categories
 * Actively developed and supported
 * Clean and easy-to-configure user interface
 * Configurable Widgets

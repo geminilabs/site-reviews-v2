@@ -75,7 +75,7 @@ msgstr "Okay"
 msgid "Log was cleared."
 msgstr "Log was cleared."
 
-#: plugin/Controllers/MainController.php:88, plugin/Controllers/MainController.php:321, plugin/Controllers/MainController.php:526
+#: plugin/Controllers/MainController.php:88, plugin/Controllers/MainController.php:321, plugin/Controllers/MainController.php:527
 msgid "Settings"
 msgstr "Settings"
 
@@ -177,61 +177,77 @@ msgstr "System Info"
 msgid "%s reviews are read-only."
 msgstr "%s reviews are read-only."
 
-#: plugin/Controllers/MainController.php:529
+#: plugin/Controllers/MainController.php:530
 msgid "Licenses"
 msgstr "Licenses"
 
-#: plugin/Controllers/MainController.php:590
+#: plugin/Controllers/MainController.php:591
 msgid "Logging enabled."
 msgstr "Logging enabled."
 
-#: plugin/Controllers/MainController.php:591
+#: plugin/Controllers/MainController.php:592
 msgid "Logging disabled."
 msgstr "Logging disabled."
 
-#: plugin/Controllers/MainController.php:607
+#: plugin/Controllers/MainController.php:608
 msgid "Settings updated."
 msgstr "Settings updated."
 
-#: plugin/Controllers/ReviewController.php:146
-msgid "%s review updated."
-msgid_plural "%s posts updated."
-msgstr[0] "%s review updated."
-msgstr[1] "%s posts updated."
+#: plugin/Controllers/ReviewController.php:121
+msgid "Approved"
+msgstr "Approved"
 
-#: plugin/Controllers/ReviewController.php:147
+#: plugin/Controllers/ReviewController.php:122
+msgid "Unapproved"
+msgstr "Unapproved"
+
+#: plugin/Controllers/ReviewController.php:158
+msgid "Approved (published)"
+msgstr "Approved (published)"
+
+#: plugin/Controllers/ReviewController.php:159
+msgid "Unapproved (pending review)"
+msgstr "Unapproved (pending review)"
+
+#: plugin/Controllers/ReviewController.php:221
+msgid "%s review updated."
+msgid_plural "%s reviews updated."
+msgstr[0] "%s review updated."
+msgstr[1] "%s reviews updated."
+
+#: plugin/Controllers/ReviewController.php:222
 msgid "%s review not updated, somebody is editing it."
 msgid_plural "%s reviews not updated, somebody is editing them."
 msgstr[0] "%s review not updated, somebody is editing it."
 msgstr[1] "%s reviews not updated, somebody is editing them."
 
-#: plugin/Controllers/ReviewController.php:148
+#: plugin/Controllers/ReviewController.php:223
 msgid "%s review permanently deleted."
 msgid_plural "%s reviews permanently deleted."
 msgstr[0] "%s review permanently deleted."
 msgstr[1] "%s reviews permanently deleted."
 
-#: plugin/Controllers/ReviewController.php:149
+#: plugin/Controllers/ReviewController.php:224
 msgid "%s review moved to the Trash."
 msgid_plural "%s reviews moved to the Trash."
 msgstr[0] "%s review moved to the Trash."
 msgstr[1] "%s reviews moved to the Trash."
 
-#: plugin/Controllers/ReviewController.php:150
+#: plugin/Controllers/ReviewController.php:225
 msgid "%s review restored from the Trash."
 msgid_plural "%s reviews restored from the Trash."
 msgstr[0] "%s review restored from the Trash."
 msgstr[1] "%s reviews restored from the Trash."
 
-#: plugin/Controllers/ReviewController.php:189
+#: plugin/Controllers/ReviewController.php:264
 msgid "Anonymous"
 msgstr "Anonymous"
 
-#: plugin/Controllers/ReviewController.php:192
+#: plugin/Controllers/ReviewController.php:267
 msgid "No Title"
 msgstr "No Title"
 
-#: plugin/Controllers/ReviewController.php:196
+#: plugin/Controllers/ReviewController.php:271
 msgid "Please fix the submission errors."
 msgstr "Please fix the submission errors."
 
@@ -321,39 +337,39 @@ msgstr "Save Changes"
 msgid "More Info"
 msgstr "More Info"
 
-#: plugin/Html/Partials/Reviews.php:77
+#: plugin/Html/Partials/Reviews.php:78
 msgid "No reviews were found."
 msgstr "No reviews were found."
 
-#: plugin/Html/Partials/Reviews.php:132
+#: plugin/Html/Partials/Reviews.php:137
 msgid "<span class=\"meta-nav\">&larr;</span> Previous"
 msgstr "<span class=\"meta-nav\">&larr;</span> Previous"
 
-#: plugin/Html/Partials/Reviews.php:138
+#: plugin/Html/Partials/Reviews.php:143
 msgid "Next <span class=\"meta-nav\">&rarr;</span>"
 msgstr "Next <span class=\"meta-nav\">&rarr;</span>"
 
-#: plugin/Html/Partials/Reviews.php:144
+#: plugin/Html/Partials/Reviews.php:149
 msgid "Page"
 msgstr "Page"
 
-#: plugin/Html/Partials/Reviews.php:147
+#: plugin/Html/Partials/Reviews.php:152
 msgid "Next &rarr;"
 msgstr "Next &rarr;"
 
-#: plugin/Html/Partials/Reviews.php:148
+#: plugin/Html/Partials/Reviews.php:153
 msgid "&larr; Previous"
 msgstr "&larr; Previous"
 
-#: plugin/Html/Partials/Reviews.php:210
+#: plugin/Html/Partials/Reviews.php:215
 msgid "Site Reviews navigation"
 msgstr "Site Reviews navigation"
 
-#: plugin/Html/Partials/Reviews.php:274
+#: plugin/Html/Partials/Reviews.php:290
 msgid "read more"
 msgstr "read more"
 
-#: plugin/Settings.php:113, plugin/Settings.php:196
+#: plugin/Settings.php:113, plugin/Settings.php:196, plugin/Settings.php:303
 msgid "Save Settings"
 msgstr "Save Settings"
 
@@ -516,6 +532,34 @@ msgstr "Email placeholder"
 #: plugin/Settings.php:291
 msgid "Tell us your email"
 msgstr "Tell us your email"
+
+#: plugin/Settings.php:309
+msgid "Enable Avatars"
+msgstr "Enable Avatars"
+
+#: plugin/Settings.php:310
+msgid ""
+"Display reviewer avatars. These are generated from the email address of the "
+"reviewer using <a href=\"https://gravatar.com\">Gravatar</a>."
+msgstr ""
+"Display reviewer avatars. These are generated from the email address of the "
+"reviewer using <a href=\"https://gravatar.com\">Gravatar</a>."
+
+#: plugin/Settings.php:316
+msgid "Enable Excerpts"
+msgstr "Enable Excerpts"
+
+#: plugin/Settings.php:317
+msgid "Display an excerpt instead of the full review."
+msgstr "Display an excerpt instead of the full review."
+
+#: plugin/Settings.php:323
+msgid "Excerpt Length"
+msgstr "Excerpt Length"
+
+#: plugin/Settings.php:325
+msgid "Set the excerpt word length."
+msgstr "Set the excerpt word length."
 
 #: plugin/Shortcodes/Buttons/Generator.php:55
 msgid "Close"
@@ -742,8 +786,8 @@ msgid "Preview review"
 msgstr "Preview review"
 
 #: plugin/Strings.php:38
-msgid "Review published."
-msgstr "Review published."
+msgid "Review approved and published."
+msgstr "Review approved and published."
 
 #: plugin/Strings.php:39
 msgid "Review restored to revision from %s."
