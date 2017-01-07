@@ -4,7 +4,6 @@ All proposed features are subject to change.
 
 ## v2.0.0
 - [x] Custom Published/Pending labels
-- [ ] Dated log files: http://stackoverflow.com/a/217468/2744691
 - [ ] Helper functions to easily access review meta
 - [x] MCE shortcode button dropdown
 - [x] Option to choose the excerpt length
@@ -27,3 +26,8 @@ All proposed features are subject to change.
 
 ## v2.4.0
 - [ ] WP REST API support
+
+## Other
+
+- [ ] Code coverage for each class
+- [ ] Dated log files: http://stackoverflow.com/a/217468/2744691
