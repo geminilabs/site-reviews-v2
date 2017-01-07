@@ -4,11 +4,11 @@ Donate link: http://geminilabs.io/donate
 Tags: best reviews, business ratings, business reviews, curated reviews, moderated reviews, rating widget, rating, ratings shortcode, review widget, reviews login, reviews shortcode, reviews, simple reviews, site reviews, star rating, star review, submit review, testimonial, user rating, user review, user reviews, wp rating, wp review, wp testimonials
 Requires at least: 4.0.0
 Tested up to: 4.7
-Stable tag: 2.0.0 alpha
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Site Reviews is a WordPress plugin which allows you to easily receive and display reviews for your business or website.
+Site Reviews is a WordPress plugin which allows you to easily receive and display reviews for your website and business.
 
 == Description ==
 
@@ -16,14 +16,17 @@ Site Reviews is a plugin that allows your visitors to submit site reviews with a
 
 You can pin your best reviews so that they are always shown first, require approval before new review submissions are published, require visitors to be logged-in in order to write a review, send custom notifications on a new submission, and more. The plugin provides both widgets and shortcodes along with full shortcode documentation.
 
-Add-ons will be released shortly that allow you to sync your TripAdvisor and Yelp reviews in order to display them locally on your own website.
+Add-ons are being developed that will allow you to sync your TripAdvisor and Yelp reviews in order to display them locally on your website.
 
-The plugin [roadmap](https://github.com/geminilabs/site-reviews/blob/develop/ROADMAP.md) defines the upcoming features which include support for custom review categories, webhook notifications, paginated reviews, allowing visitors to up/down vote submitted reviews, reviewer avatars, percentage/fraction ratings, and more.
+support for custom review categories, webhook notifications, paginated reviews,
+
+The plugin [roadmap](https://github.com/geminilabs/site-reviews/blob/develop/ROADMAP.md) includes upcoming features which include allowing visitors to up/down vote submitted reviews, reviewer avatars, percentage/fraction ratings, and more.
 
 Follow plugin development on github at: https://github.com/geminilabs/site-reviews/
 
 = Current Features =
 
+* [new] Helper functions to easily access review meta
 * [new] MCE shortcode button dropdown
 * [new] Review avatars (gravatar.com)
 * [new] Review categories
@@ -34,9 +37,9 @@ Follow plugin development on github at: https://github.com/geminilabs/site-revie
 * Filter reviews by rating
 * Logging
 * Minimal widget styling (tested with all official WP themes)
-* Review Pagination
+* Review pagination
 * Shortcodes: Display reviews in your post content and templates
-* Webhook notifications for Slack
+* Custom notifications (including Slack support)
 * WordPress.org support
 * WP Filter Hooks
 
@@ -98,14 +101,18 @@ Some themes may have very small sidebars and/or CSS styles that conflict or alte
 
 == Changelog ==
 
-= Unreleased =
+= 2.0.0 (2017-01-08) =
 
+* [feature] Helper functions to easily access review meta
 * [feature] MCE shortcode button dropdown
 * [feature] Review avatars (gravatar.com)
 * [feature] Review categories
-* Added option to choose the excerpt length
-* Added option to enable excerpts
+* [breaking] Changed internal widget/shortcode hook names
+* [breaking] Changed shortcode variables
+* Added excerpt options
 * Custom Published/Pending labels
+* Removed "site-reviews/reviews/excerpt_length" filter hook
+* Removed "site-reviews/reviews/use_excerpt" filter hook
 
 = 1.2.2 (2017-01-06) =
 

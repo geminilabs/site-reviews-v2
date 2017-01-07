@@ -7,12 +7,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## [Unreleased]
 
 ### Added
-- [feature] MCE shortcode button dropdown
-- [feature] Review avatars (gravatar.com)
-- [feature] Review categories
-- Added option to choose the excerpt length
-- Added option to enable excerpts
-- Custom Published/Pending labels
 
 ### Changed
 
@@ -23,6 +17,24 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Fixed
 
 ### Security
+
+## [2.0.0] - 2017-01-08
+
+### Added
+- [feature] Helper functions to easily access review meta
+- [feature] MCE shortcode button dropdown
+- [feature] Review avatars (gravatar.com)
+- [feature] Review categories
+- Added excerpt options
+- Custom Published/Pending labels
+
+### Changed
+- [breaking] Changed internal widget/shortcode hook names
+- [breaking] Changed shortcode variables
+
+### Removed
+- Removed "site-reviews/reviews/excerpt_length" filter hook
+- Removed "site-reviews/reviews/use_excerpt" filter hook
 
 ## [1.2.2] - 2017-01-06
 

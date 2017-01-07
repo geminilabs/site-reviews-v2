@@ -13,18 +13,19 @@ Minimum plugin requirements:
 
 #### Features
 
+- [new] Helper functions to easily access review meta
 - [new] MCE shortcode button dropdown
 - [new] Review avatars (gravatar.com)
 - [new] Review categories
-* Actively developed and supported
-* Clean and easy-to-configure user interface
-* Configurable Widgets
-* Easy setup and implementation
-* Filter reviews by rating
-* Logging
-* Minimal widget styling (tested with all official WP themes)
-* Review Pagination
-* Shortcodes: Display reviews in your post content and templates
-* Webhook notifications for Slack
-* WordPress.org support
-* WP Filter Hooks
+- Actively developed and supported
+- Clean and easy-to-configure user interface
+- Configurable Widgets
+- Easy setup and implementation
+- Filter reviews by rating
+- Logging
+- Minimal widget styling (tested with all official WP themes)
+- Review pagination
+- Shortcodes: Display reviews in your post content and templates
+- Custom notifications (including Slack support)
+- WordPress.org support
+- WP Filter Hooks

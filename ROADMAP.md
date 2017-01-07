@@ -2,15 +2,6 @@
 
 All proposed features are subject to change.
 
-## v2.0.0
-- [x] Custom Published/Pending labels
-- [ ] Helper functions to easily access review meta
-- [x] MCE shortcode button dropdown
-- [x] Option to choose the excerpt length
-- [x] Option to enable excerpts
-- [x] Review avatars (gravatar.com)
-- [x] Review categories
-
 ## v2.1.0
 - [ ] Customization of stars, fonts, colors, etc.
 
