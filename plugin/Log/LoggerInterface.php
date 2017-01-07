@@ -17,7 +17,7 @@
  *
  * @package   GeminiLabs\SiteReviews
  * @copyright Copyright (c) 2016, Paul Ryley
- * @license   GPLv2 or later
+ * @license   GPLv3
  * @since     1.0.0
  * -------------------------------------------------------------------------------------------------
  */

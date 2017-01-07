@@ -5,7 +5,7 @@ Tags: best reviews, business ratings, business reviews, curated reviews, moderat
 Requires at least: 4.0.0
 Tested up to: 4.7
 Stable tag: 2.0.0
-License: GPLv2 or later
+License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Site Reviews is a WordPress plugin which allows you to easily receive and display reviews for your website and business.

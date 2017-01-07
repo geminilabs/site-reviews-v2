@@ -3,7 +3,7 @@
 /**
  * @package   GeminiLabs\SiteReviews
  * @copyright Copyright (c) 2016, Paul Ryley
- * @license   GPLv2 or later
+ * @license   GPLv3
  * @since     1.0.0
  *
  * Much of the code in this class is derived from Illuminate\Validation\Validator (5.3)
