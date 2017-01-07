@@ -16,6 +16,9 @@ use GeminiLabs\SiteReviews\Strings;
 
 class ReviewController extends BaseController
 {
+	/**
+	 * @return void
+	 */
 	public function approve()
 	{
 		check_admin_referer( 'approve-review_' . ( $post_id = $this->getPostId() ) );
@@ -108,7 +111,7 @@ class ReviewController extends BaseController
 	 *
 	 * @return string
 	 */
-	public function modifyStatusEditBulk( $translation, $single, $plural, $number, $domain )
+	public function modifyStatusFilter( $translation, $single, $plural, $number, $domain )
 	{
 		if( $this->canModifyTranslation( $domain ) ) {
 
@@ -129,41 +132,6 @@ class ReviewController extends BaseController
 					'number' => $number,
 					'plural' => str_replace( $search, $replace, $plural ),
 					'single' => str_replace( $search, $replace, $single ),
-				]);
-			}
-		}
-
-		return $translation;
-	}
-
-	/**
-	 * Customize the post_type status text
-	 *
-	 * @param string $translation
-	 * @param string $text
-	 * @param string $domain
-	 *
-	 * @return string
-	 */
-	public function modifyStatusFilter( $translation, $text, $domain )
-	{
-		if( $this->canModifyTranslation( $domain ) ) {
-
-			$search = [
-				'Published',
-				'Pending Review',
-			];
-
-			$replace = [
-				__( 'Approved (published)', 'site-reviews' ),
-				__( 'Unapproved (pending review)', 'site-reviews' ),
-			];
-
-			foreach( $search as $string ) {
-				if( strpos( $text, $string ) === false )continue;
-
-				$translation = $this->getTranslation([
-					'text' => str_replace( $search, $replace, $text ),
 				]);
 			}
 		}
@@ -287,6 +255,9 @@ class ReviewController extends BaseController
 		remove_meta_box( 'slugdiv', $this->app->post_type, 'advanced' );
 	}
 
+	/**
+	 * @return void
+	 */
 	public function revert()
 	{
 		check_admin_referer( 'revert-review_' . ( $post_id = $this->getPostId() ) );
@@ -308,6 +279,9 @@ class ReviewController extends BaseController
 		}
 	}
 
+	/**
+	 * @return void
+	 */
 	public function unapprove()
 	{
 		check_admin_referer( 'unapprove-review_' . ( $post_id = $this->getPostId() ) );
