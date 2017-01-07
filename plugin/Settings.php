@@ -186,9 +186,9 @@ class Settings
 		]);
 	}
 
-	protected function setForm()
+	protected function setReviewsForm()
 	{
-		$formId = 'settings/form';
+		$formId = 'settings/reviews-form';
 
 		$this->html->createForm( $formId, [
 			'action' => admin_url( 'options.php' ),
@@ -290,6 +290,35 @@ class Settings
 			'label' => __( 'Email placeholder', 'site-reviews' ),
 			'placeholder' => __( 'Tell us your email', 'site-reviews' ),
 			'default' => ':placeholder',
+		]);
+	}
+
+	protected function setReviews()
+	{
+		$formId = 'settings/reviews';
+
+		$this->html->createForm( $formId, [
+			'action' => admin_url( 'options.php' ),
+			'nonce'  => $this->app->id . '-settings',
+			'submit' => __( 'Save Settings', 'site-reviews' ),
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'yesno_inline',
+			'name'  => 'reviews.excerpt.enabled',
+			'label' => __( 'Enable Excerpts', 'site-reviews' ),
+			'desc'  => __( 'Display an excerpt instead of the full review.', 'site-reviews' ),
+		]);
+
+		$this->addSetting( $formId, [
+			'type'    => 'number',
+			'name'    => 'reviews.excerpt.length',
+			'label'   => __( 'Excerpt Length', 'site-reviews' ),
+			'default' => '55',
+			'desc'    => __( 'Set the excerpt word length.', 'site-reviews' ),
+			'depends' => [
+				'reviews.excerpt.enabled' => 'yes',
+			],
 		]);
 	}
 }

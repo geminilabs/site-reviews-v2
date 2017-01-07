@@ -104,8 +104,10 @@ class Reviews extends Base
 		$text = wpautop( $text );
 		$text = str_replace( ']]>', ']]&gt;', $text );
 
-		if( apply_filters( 'site-reviews/reviews/use_excerpt', true ) ) {
-			$wordCount = apply_filters( 'site-reviews/reviews/excerpt_length', $wordCount );
+		$db = $this->app->make( 'Database' );
+
+		if( 'yes' == $db->getOption( 'reviews.excerpt.enabled', 'yes' )) {
+			$wordCount = $db->getOption( 'reviews.excerpt.length', $wordCount );
 			$text = wp_trim_words( $text, $wordCount, $more );
 		}
 

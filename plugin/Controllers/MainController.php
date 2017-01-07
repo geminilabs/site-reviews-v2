@@ -517,8 +517,9 @@ class MainController extends BaseController
 	{
 		// allow addons to add their own setting sections
 		$sections = apply_filters( 'site-reviews/addon/settings/sections', [
-			'general' => 'General',
-			'form'    => 'Submission Form',
+			'general'      => 'General',
+			'reviews'      => 'Reviews',
+			'reviews-form' => 'Submission Form',
 		]);
 
 		$this->renderMenu( 'settings', [
