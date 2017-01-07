@@ -1,5 +1,13 @@
 # Add-ons
 
+## facebook-reviews
+- [ ] one-way sync of all reviews
+- [ ] scheduling
+
+## google-reviews
+- [ ] one-way sync of all reviews
+- [ ] scheduling
+
 ## page-reviews
 - [ ] Support for Post/Page/CPT/Comment ratings/reviews
 - [ ] Microdata/rich snippets for reviews
@@ -17,12 +25,4 @@
 
 ## yelp-reviews
 - [x] one-way sync of all reviews
-- [ ] scheduling
-
-## google-reviews
-- [ ] one-way sync of all reviews
-- [ ] scheduling
-
-## facebook-reviews
-- [ ] one-way sync of all reviews
 - [ ] scheduling
