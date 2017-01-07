@@ -33,7 +33,7 @@ class Reviews extends Base
 			'hide_link'    => true,
 			'hide_rating'  => false,
 			'hide_title'   => false,
-			'order_by'     => 'date',
+			'orderby'      => 'date',
 			'pagination'   => false,
 			'rating'       => '',
 			'site_name'    => '',
@@ -46,37 +46,25 @@ class Reviews extends Base
 
 		$reviews = $this->db->getReviews( $args );
 
-		if( $reviews->have_posts() ) {
+		$html = '';
 
-			$html = '';
-
-			while( $reviews->have_posts() ) :
-
-				$reviews->the_post();
-
-				$meta = get_post_meta( $post->ID );
-				$meta = (object) array_map( 'array_shift', $meta );
-
-				$html .= sprintf( '<div class="glsr-review">%s%s%s%s%s</div>',
-					$this->reviewTitle( $args, $meta, $post->ID ),
-					$this->reviewMeta( $args, $meta, $post->ID ),
-					$this->reviewExcerpt( $args, $meta, $post->ID ),
-					$this->reviewAvatar( $post->ID ),
-					$this->reviewAuthor( $args['hide_author'], $meta->author )
-				);
-
-			endwhile;
-
-			if( $args['pagination'] ) {
-				$html .= $this->buildPagination( $reviews->max_num_pages );
-			}
-
-			wp_reset_postdata();
+		foreach( $reviews->reviews as $review ) {
+			$html .= sprintf( '<div class="glsr-review">%s%s%s%s%s</div>',
+				$this->reviewTitle( $review, $args ),
+				$this->reviewMeta( $review, $args ),
+				$this->reviewExcerpt( $review, $args ),
+				$this->reviewAvatar( $review->avatar ),
+				$this->reviewAuthor( $review->author, $args['hide_author'] )
+			);
 		}
-		else {
+
+		if( empty( $reviews->reviews )) {
 			$html = sprintf( '<p class="glsr-review glsr-no-reviews">%s</p>',
 				__( 'No reviews were found.', 'site-reviews' )
 			);
+		}
+		else if( $args['pagination'] ) {
+			$html .= $this->buildPagination( $reviews->max_num_pages );
 		}
 
 		return sprintf(
@@ -220,12 +208,12 @@ class Reviews extends Base
 	/**
 	 * Build the review author string
 	 *
+	 * @param string $reviewAuthor
 	 * @param string $hideAuthor
-	 * @param string $metaAuthor
 	 *
 	 * @return null|string
 	 */
-	protected function reviewAuthor( $hideAuthor, $metaAuthor )
+	protected function reviewAuthor( $reviewAuthor, $hideAuthor )
 	{
 		if( wp_validate_boolean( $hideAuthor ) )return;
 
@@ -233,30 +221,36 @@ class Reviews extends Base
 			? '&mdash;'
 			: '';
 
-		return sprintf( '<p class="glsr-review-author">%s%s</p>', $dash, $metaAuthor );
+		return sprintf( '<p class="glsr-review-author">%s%s</p>', $dash, $reviewAuthor );
 	}
 
-	protected function reviewAvatar( $postId )
+	/**
+	 * Build the review avatar string
+	 *
+	 * @param string $reviewAvatar
+	 *
+	 * @return null|string
+	 */
+	protected function reviewAvatar( $reviewAvatar )
 	{
 		if( $this->db->getOption( 'reviews.avatars.enabled', 'no' ) == 'no' )return;
 
-		return sprintf( '<div class="glsr-review-avatar"><img src="%s" width="36" /></div>', get_post_meta( $postId, 'avatar', true ));
+		return sprintf( '<div class="glsr-review-avatar"><img src="%s" width="36" /></div>', $reviewAvatar );
 	}
 
 	/**
 	 * Build the review excerpt string
 	 *
-	 * @param object $meta
-	 * @param string $postId
+	 * @param object $review
 	 *
 	 * @return null|string
 	 */
-	protected function reviewExcerpt( array $args, $meta, $postId )
+	protected function reviewExcerpt( $review, array $args )
 	{
 		if( $args['hide_excerpt'] )return;
 
-		$excerpt     = $this->buildExcerpt( get_the_content( $postId ), $args['word_limit'] );
-		$review_link = $this->reviewLink( $args['hide_link'], $meta->url );
+		$excerpt     = $this->buildExcerpt( $review->content, $args['word_limit'] );
+		$review_link = $this->reviewLink( $args['hide_link'], $review->url );
 
 		$use_excerpt_as_link = apply_filters( 'site-reviews/reviews/use_excerpt_as_link', false ) && $review_link !== null;
 
@@ -265,7 +259,7 @@ class Reviews extends Base
 			: '';
 
 		$review_excerpt = $use_excerpt_as_link
-			? sprintf( '<a href="%s" target="_blank">%s</a>', esc_url( $meta->url ), $excerpt )
+			? sprintf( '<a href="%s" target="_blank">%s</a>', esc_url( $review->url ), $excerpt )
 			: "{$excerpt} {$show_excerpt_read_more}";
 
 		return !empty( $review_excerpt )
@@ -277,16 +271,16 @@ class Reviews extends Base
 	 * Build the review url
 	 *
 	 * @param string $hideLink
-	 * @param string $metaLink
+	 * @param string $reviewLink
 	 *
 	 * @return null|string
 	 */
-	protected function reviewLink( $hideLink, $metaLink )
+	protected function reviewLink( $hideLink, $reviewLink )
 	{
 		if( wp_validate_boolean( $hideLink ) )return;
 
 		return sprintf( '<span class="glsr-review-link">[<a href="%s" target="_blank">%s</a>]</span>',
-			esc_url( $metaLink ),
+			esc_url( $reviewLink ),
 			__( 'read more', 'site-reviews' )
 		);
 	}
@@ -294,19 +288,18 @@ class Reviews extends Base
 	/**
 	 * Build the review meta string
 	 *
-	 * @param object $meta
-	 * @param string $postId
+	 * @param object $review
 	 *
 	 * @return string
 	 */
-	protected function reviewMeta( array $args, $meta, $postId )
+	protected function reviewMeta( $review, array $args )
 	{
 		$rating = !wp_validate_boolean( $args['hide_rating'] )
-			? $this->app->make( 'Html' )->renderPartial( 'rating', ['stars' => $meta->rating ], 'return' )
+			? $this->app->make( 'Html' )->renderPartial( 'rating', ['stars' => $review->rating ], 'return' )
 			: '';
 
 		$date = !wp_validate_boolean( $args['hide_date'] )
-			? sprintf( '<span class="glsr-review-date">%s</span> ', get_the_date( 'M j, Y', $postId ) )
+			? sprintf( '<span class="glsr-review-date">%s</span> ', mysql2date( 'M j, Y', $review->date ))
 			: '';
 
 		return ( $rating || $date )
@@ -317,22 +310,21 @@ class Reviews extends Base
 	/**
 	 * Build the review title string
 	 *
-	 * @param object $meta
-	 * @param string $postId
+	 * @param object $review
 	 *
 	 * @return null|string
 	 */
-	protected function reviewTitle( array $args, $meta, $postId )
+	protected function reviewTitle( $review, array $args )
 	{
 		if( $args['hide_title'] )return;
 
-		$review_link = $this->reviewLink( $args['hide_link'], $meta->url );
+		$review_link = $this->reviewLink( $args['hide_link'], $review->url );
 
 		$use_title_as_link = apply_filters( 'site-reviews/reviews/use_title_as_link', false ) && $review_link !== null;
 
 		$review_title = $use_title_as_link
-			? sprintf( '<a href="%s" target="_blank">%s</a>', esc_url( $meta->url ), get_the_title( $postId ) )
-			: get_the_title( $postId );
+			? sprintf( '<a href="%s" target="_blank">%s</a>', esc_url( $review->url ), $review->title )
+			: $review->title;
 
 		return !empty( $review_title )
 			? sprintf( '<h3 class="glsr-review-title">%s</h3>', $review_title )

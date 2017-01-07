@@ -603,7 +603,7 @@ class MainController extends BaseController
 	 */
 	public function sanitizeSettings( array $input )
 	{
-		$settings = $this->db->getOption();
+		$settings = $this->db->getOptions();
 
 		$this->notices->addSuccess( __( 'Settings updated.', 'site-reviews' ) );
 

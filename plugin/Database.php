@@ -110,6 +110,45 @@ class Database implements Contract
 	}
 
 	/**
+	 * @param WP_Post|null $post
+	 *
+	 * @return null|object
+	 */
+	public function getReview( $post )
+	{
+		if( !isset( $post->ID )
+			|| $post->post_type != $this->app->post_type
+		)return;
+
+		$meta = (object) $this->normalizeMeta( $this->getReviewMeta( $post->ID ));
+
+		$modified = $post->post_title != $meta->title
+			|| $post->post_content != $meta->content
+			|| $post->post_date != $meta->date;
+
+		$review = (object) [
+			'author'     => $meta->author,
+			'avatar'     => $meta->avatar,
+			'content'    => $post->post_content,
+			'date'       => $post->post_date,
+			'email'      => $meta->email,
+			'id'         => $meta->review_id,
+			'ip_address' => $meta->ip_address,
+			'modified'   => $modified,
+			'pinned'     => $meta->pinned,
+			'post_id'    => $post->ID,
+			'rating'     => $meta->rating,
+			'status'     => $post->post_status,
+			'title'      => $post->post_title,
+			'type'       => $meta->site_name,
+			'url'        => $meta->url,
+			'user_id'    => $post->post_author,
+		];
+
+		return apply_filters( 'site-reviews/get/review', $review, $post );
+	}
+
+	/**
 	 * @param string $metaKey
 	 * @param string $metaValue
 	 *
@@ -206,6 +245,78 @@ class Database implements Contract
 	}
 
 	/**
+	 * Get an array of meta values for a review
+	 *
+	 * @param int $postId
+	 *
+	 * @return array
+	 */
+	public function getReviewMeta( $postId )
+	{
+		return get_post_type( $postId ) == $this->app->post_type
+			? array_map( 'array_shift', (array) get_post_meta( $postId ))
+			: [];
+	}
+
+	/**
+	 * Gets a array of saved review objects
+	 *
+	 * @return array
+	 */
+	public function getReviews( array $args = [] )
+	{
+		$defaults = [
+			'category'     => '',
+			'count'        => 10,
+			'order'        => 'DESC',
+			'orderby'      => 'date',
+			'pagination'   => false,
+			'post__in'     => [],
+			'post__not_in' => [],
+			'rating'       => 5,
+			'site_name'    => '',
+		];
+
+		$args = shortcode_atts( $defaults, $args );
+
+		extract( $args );
+
+		if( !empty( $site_name ) && $site_name != 'all' ) {
+			$meta_query[] = [
+				'key'   => 'site_name',
+				'value' => $site_name,
+			];
+		}
+
+		$meta_query[] = [
+			'key'     => 'rating',
+			'value'   => $rating,
+			'compare' => '>=',
+		];
+
+		$query = [
+			'meta_key'       => 'pinned',
+			'meta_query'     => $meta_query,
+			'order'          => $order,
+			'orderby'        => "meta_value $orderby",
+			'paged'          => $pagination ? $this->app->make( 'Query' )->getPaged() : 1,
+			'post__in'       => $post__in,
+			'post__not_in'   => $post__not_in,
+			'post_status'    => 'publish',
+			'post_type'      => $this->app->post_type,
+			'posts_per_page' => $count ? $count : -1,
+			'tax_query'      => $this->app->make( 'Query' )->buildTerms( $this->normalizeTerms( $category ) ),
+		];
+
+		$reviews = new WP_Query( $query );
+
+		return (object) [
+			'reviews' => array_map([ $this, 'getReview'], $reviews->posts ),
+			'max_num_pages' => $reviews->max_num_pages,
+		];
+	}
+
+	/**
 	 * Get array of meta values for all of a post_type
 	 *
 	 * @param string|array $keys
@@ -213,7 +324,7 @@ class Database implements Contract
 	 *
 	 * @return array
 	 */
-	public function getReviewMeta( $keys, $status = 'publish' )
+	public function getReviewsMeta( $keys, $status = 'publish' )
 	{
 		global $wpdb;
 
@@ -237,54 +348,6 @@ class Database implements Contract
 		);
 
 		return $wpdb->get_col( $query );
-	}
-
-	/**
-	 * Gets a WP_Query object of saved Reviews
-	 *
-	 * @return WP_Query
-	 */
-	public function getReviews( array $args = [] )
-	{
-		$defaults = [
-			'category'   => '',
-			'count'      => '10',
-			'order_by'   => 'date',
-			'pagination' => false,
-			'rating'     => '5',
-			'site_name'  => '',
-		];
-
-		$args = shortcode_atts( $defaults, $args );
-
-		extract( $args );
-
-		if( !empty( $site_name ) && $site_name != 'all' ) {
-			$meta_query[] = [
-				'key'   => 'site_name',
-				'value' => $site_name,
-			];
-		}
-
-		$meta_query[] = [
-			'key'     => 'rating',
-			'value'   => $rating,
-			'compare' => '>=',
-		];
-
-		$query = [
-			'meta_key'       => 'pinned',
-			'meta_query'     => $meta_query,
-			'order'          => 'DESC',
-			'orderby'        => "meta_value $order_by",
-			'paged'          => $pagination ? $this->app->make( 'Query' )->getPaged() : 1,
-			'post_status'    => 'publish',
-			'post_type'      => $this->app->post_type,
-			'posts_per_page' => $count ? $count : -1,
-			'tax_query'      => $this->app->make( 'Query' )->buildTerms( $this->normalizeTerms( $category ) ),
-		];
-
-		return new WP_Query( $query );
 	}
 
 	/**
@@ -332,6 +395,30 @@ class Database implements Contract
 		return is_array( $terms )
 			? $terms
 			: [];
+	}
+
+	/**
+	 * Get all meta values for a review
+	 *
+	 * @return array
+	 */
+	public function normalizeMeta( array $meta )
+	{
+		return shortcode_atts([
+			'author'     => '',
+			'avatar'     => '',
+			'content'    => '',
+			'date'       => '',
+			'email'      => '',
+			'ip_address' => '',
+			'pinned'     => '',
+			'rating'     => '',
+			'review_id'  => '',
+			'site_name'  => '',
+			'status'     => '',
+			'title'      => '',
+			'url'        => '',
+		], $meta );
 	}
 
 	/**

@@ -25,12 +25,11 @@ class MainProvider implements ProviderInterface
 		$app->bind( 'GeminiLabs\SiteReviews\App', $app );
 
 		// Initialise logger from log file
-		$app->bind( 'GeminiLabs\SiteReviews\Log\Logger', function( App $app )
+		$app->bind( 'GeminiLabs\SiteReviews\Log\Logger', function( $app )
 		{
 			return Logger::file( trailingslashit( $app->path ) . 'debug.log', $app->prefix );
 		});
 
-		// Singletons must be last since they call "make()"
 		$app->singleton(
 			'GeminiLabs\SiteReviews\Controllers\AjaxController',
 			'GeminiLabs\SiteReviews\Controllers\AjaxController'

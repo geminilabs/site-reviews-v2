@@ -15,7 +15,7 @@ trait Options
 	protected $app;
 
 	/**
-	 * Gets an option from the plugin settings array using dot notation
+	 * Get an option from the plugin settings array using dot notation
 	 *
 	 * @param string $path
 	 * @param mixed  $fallback
@@ -25,9 +25,7 @@ trait Options
 	 */
 	public function getOption( $path = '', $fallback = '', $suffix = 'settings' )
 	{
-		$value = get_option( "{$this->app->prefix}_{$suffix}", [] );
-
-		$option = $this->getValueFromPath( $value, $path, $fallback );
+		$option = $this->getValueFromPath( $this->getOptions( $suffix ), $path, $fallback );
 
 		// fallback to setting defaults
 		if( $suffix == 'settings' && empty( $option ) ) {
@@ -39,6 +37,18 @@ trait Options
 		}
 
 		return $option;
+	}
+
+	/**
+	 * Get the options array from the plugin settings array
+	 *
+	 * @param string $suffix
+	 *
+	 * @return mixed
+	 */
+	public function getOptions( $suffix = 'settings' )
+	{
+		return get_option( "{$this->app->prefix}_{$suffix}", [] );
 	}
 
 	/**
@@ -105,28 +115,26 @@ trait Options
 	/**
 	 * Gets a value from an array using a dot-notation path
 	 *
-	 * @param mixed  $value
+	 * @param mixed  $options
 	 * @param string $path
 	 * @param mixed  $fallback
 	 *
-	 * @return mixed
+	 * @return null|mixed
 	 */
-	public function getValueFromPath( $value, $path, $fallback )
+	public function getValueFromPath( $options, $path, $fallback )
 	{
-		if( empty( $path ) ) {
-			return $value;
-		}
+		if( empty( $path ) )return;
 
 		$keys = explode( '.', $path );
 
 		foreach( $keys as $key ) {
-			if( !isset( $value[ $key ] ) ) {
+			if( !isset( $options[ $key ] ) ) {
 				return $fallback;
 			}
-			$value = $value[ $key ];
+			$options = $options[ $key ];
 		}
 
-		return $value;
+		return $options;
 	}
 
 	/**

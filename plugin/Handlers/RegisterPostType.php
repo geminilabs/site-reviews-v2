@@ -105,7 +105,7 @@ class RegisterPostType
 			}
 		});
 
-		$types = $this->db->getReviewMeta( 'site_name' );
+		$types = $this->db->getReviewsMeta( 'site_name' );
 
 		if( count( $types ) < 1 || ( count( $types ) == 1 && $types[0] == 'local' ) ) {
 			unset( $this->columns['type'] );
@@ -153,8 +153,8 @@ class RegisterPostType
 		$status = filter_input( INPUT_GET, 'post_status' );
 		$status ?: $status = 'publish';
 
-		$ratings = $this->db->getReviewMeta( 'rating', $status );
-		$sites   = $this->db->getReviewMeta( 'site_name', $status );
+		$ratings = $this->db->getReviewsMeta( 'rating', $status );
+		$sites   = $this->db->getReviewsMeta( 'site_name', $status );
 
 		$this->renderFilterRatings( $ratings );
 		$this->renderFilterSites( $sites );

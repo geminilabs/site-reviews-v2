@@ -37,6 +37,25 @@ function glsr_app() {
 	return App::load();
 }
 
+function glsr_debug() {
+	call_user_func_array([ App::load()->make( 'Log\Logger' ), 'display' ], func_get_args());
+}
+
+// Global helper to get a setting option
+function glsr_get_option( $option_path, $fallback = '' ) {
+	return App::load()->make( 'Helper' )->get( 'option', $option_path, $fallback );
+}
+
+// Global helper to get a single review
+function glsr_get_review( $post_id ) {
+	return App::load()->make( 'Helper' )->get( 'review', $post_id );
+}
+
+// Global helper to get an array of reviews
+function glsr_get_reviews( array $args = [] ) {
+	return App::load()->make( 'Helper' )->get( 'reviews', $args );
+}
+
 // Global helper to resolve a class instance where $app is not accessible
 function glsr_resolve( $alias ) {
 	return App::load()->make( $alias );

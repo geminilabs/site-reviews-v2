@@ -75,6 +75,8 @@ class Query
 	 */
 	public function getPaged()
 	{
-		return intval( get_query_var(( is_front_page() ? 'page' : 'paged' ), 1 ));
+		$paged = intval( get_query_var(( is_front_page() ? 'page' : 'paged' )));
+
+		return $paged ?: $paged = 1;
 	}
 }
