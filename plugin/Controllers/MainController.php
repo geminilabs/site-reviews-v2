@@ -485,7 +485,7 @@ class MainController extends BaseController
 	{
 		if( $post->post_type != $this->app->post_type )return;
 		if( post_type_supports( $this->app->post_type, 'title' ) )return;
-		if( get_post_meta( $post->ID, 'type', true ) == 'local' )return;
+		if( get_post_meta( $post->ID, 'review_type', true ) == 'local' )return;
 
 		$this->render( 'edit/review', ['post' => $post ] );
 	}
@@ -498,13 +498,13 @@ class MainController extends BaseController
 	public function renderReviewNotice( WP_Post $post )
 	{
 		if( $post->post_type != $this->app->post_type )return;
-		if( post_type_supports( $this->app->post_type, 'title' ) )return;
+		if( post_type_supports( $this->app->post_type, 'title' ))return;
 
-		$type = get_post_meta( $post->ID, 'type', true );
+		$reviewType = get_post_meta( $post->ID, 'review_type', true );
 
-		if( $type == 'local' )return;
+		if( $reviewType == 'local' )return;
 
-		$this->notices->addWarning( sprintf( __( '%s reviews are read-only.', 'site-reviews' ), ucfirst( $type ) ) );
+		$this->notices->addWarning( sprintf( __( '%s reviews are read-only.', 'site-reviews' ), ucfirst( $reviewType )));
 		$this->render( 'edit/notice' );
 	}
 

@@ -47,18 +47,18 @@ class Database implements Contract
 
 		// make sure we set post_meta fallback defaults
 		$meta = wp_parse_args( $meta, [
-			'author'     => '',
-			'avatar'     => '',
-			'content'    => '',
-			'date'       => get_date_from_gmt( gmdate( 'Y-m-d H:i:s' )),
-			'email'      => '',
-			'ip_address' => '',
-			'pinned'     => false,
-			'rating'     => '',
-			'review_id'  => '',
-			'title'      => '',
-			'type'       => 'local',
-			'url'        => '',
+			'author'      => '',
+			'avatar'      => '',
+			'content'     => '',
+			'date'        => get_date_from_gmt( gmdate( 'Y-m-d H:i:s' )),
+			'email'       => '',
+			'ip_address'  => '',
+			'pinned'      => false,
+			'rating'      => '',
+			'review_id'   => '',
+			'review_type' => 'local',
+			'title'       => '',
+			'url'         => '',
 		]);
 
 		$post_data = [
@@ -67,13 +67,13 @@ class Database implements Contract
 			'ping_status'    => 'closed',
 			'post_content'   => $meta['content'],
 			'post_date'      => $meta['date'],
-			'post_name'      => $meta['type'] . str_replace( ['review_', '_'], '-', $metaReviewId ),
+			'post_name'      => $meta['review_type'] . str_replace( ['review_', '_'], '-', $metaReviewId ),
 			'post_status'    => 'publish',
 			'post_title'     => wp_strip_all_tags( $meta['title'] ),
 			'post_type'      => $this->app->post_type,
 		];
 
-		if( $this->getOption( 'general.require.approval' ) == 'yes' && $meta['type'] == 'local' ) {
+		if( $this->getOption( 'general.require.approval' ) == 'yes' && $meta['review_type'] == 'local' ) {
 			$post_data['post_status'] = 'pending';
 		}
 
@@ -127,22 +127,22 @@ class Database implements Contract
 			|| $post->post_date != $meta->date;
 
 		$review = (object) [
-			'author'     => $meta->author,
-			'avatar'     => $meta->avatar,
-			'content'    => $post->post_content,
-			'date'       => $post->post_date,
-			'email'      => $meta->email,
-			'id'         => $meta->review_id,
-			'ip_address' => $meta->ip_address,
-			'modified'   => $modified,
-			'pinned'     => $meta->pinned,
-			'post_id'    => $post->ID,
-			'rating'     => $meta->rating,
-			'status'     => $post->post_status,
-			'title'      => $post->post_title,
-			'type'       => $meta->type,
-			'url'        => $meta->url,
-			'user_id'    => $post->post_author,
+			'author'      => $meta->author,
+			'avatar'      => $meta->avatar,
+			'content'     => $post->post_content,
+			'date'        => $post->post_date,
+			'email'       => $meta->email,
+			'ip_address'  => $meta->ip_address,
+			'modified'    => $modified,
+			'pinned'      => $meta->pinned,
+			'post_id'     => $post->ID,
+			'rating'      => $meta->rating,
+			'review_id'   => $meta->review_id,
+			'review_type' => $meta->review_type,
+			'status'      => $post->post_status,
+			'title'       => $post->post_title,
+			'url'         => $meta->url,
+			'user_id'     => $post->post_author,
 		];
 
 		return apply_filters( 'site-reviews/get/review', $review, $post );
@@ -156,6 +156,8 @@ class Database implements Contract
 	 */
 	public function getReviewCount( $metaKey = '', $metaValue = '' )
 	{
+		$metaKey = $this->normalizeMetaKey( $metaKey );
+
 		if( !$metaKey ) {
 			return (array) wp_count_posts( $this->app->post_type );
 		}
@@ -235,7 +237,7 @@ class Database implements Contract
 			"INNER JOIN {$wpdb->postmeta} AS m2 ON p.ID = m2.post_id " .
 			"WHERE p.post_type = '%s' " .
 				"AND m1.meta_key = 'review_id' " .
-				"AND m2.meta_key = 'type' " .
+				"AND m2.meta_key = 'review_type' " .
 				"AND m2.meta_value = '%s'",
 			$this->app->post_type,
 			$reviewType
@@ -276,7 +278,7 @@ class Database implements Contract
 			'post__in'     => [],
 			'post__not_in' => [],
 			'rating'       => 5,
-			'type'    => '',
+			'type'         => '',
 		];
 
 		$args = shortcode_atts( $defaults, $args );
@@ -285,7 +287,7 @@ class Database implements Contract
 
 		if( !empty( $type ) && $type != 'all' ) {
 			$meta_query[] = [
-				'key'   => 'type',
+				'key'   => 'review_type',
 				'value' => $type,
 			];
 		}
@@ -332,6 +334,8 @@ class Database implements Contract
 
 		$query = $this->app->make( 'Query' );
 
+		$keys = array_map([ $this, 'normalizeMetaKey'], (array) $keys );
+
 		if( $status == 'all' || empty( $status )) {
 			$status = get_post_stati( ['exclude_from_search' => false ] );
 		}
@@ -353,7 +357,7 @@ class Database implements Contract
 	}
 
 	/**
-	 * Gets the review types (default type is "local")
+	 * Gets the review types (default review_type is "local")
 	 *
 	 * @return array
 	 */
@@ -362,7 +366,10 @@ class Database implements Contract
 		global $wpdb;
 
 		$types = $wpdb->get_col(
-			"SELECT DISTINCT(meta_value) FROM {$wpdb->postmeta} WHERE meta_key = 'type' ORDER BY meta_value ASC"
+			"SELECT DISTINCT(meta_value) " .
+			"FROM {$wpdb->postmeta} " .
+			"WHERE meta_key = 'review_type' " .
+			"ORDER BY meta_value ASC"
 		);
 
 		$types = array_flip( $types );
@@ -407,24 +414,40 @@ class Database implements Contract
 	public function normalizeMeta( array $meta )
 	{
 		$defaults = [
-			'author'     => '',
-			'avatar'     => '',
-			'content'    => '',
-			'date'       => '',
-			'email'      => '',
-			'ip_address' => '',
-			'pinned'     => '',
-			'rating'     => '',
-			'review_id'  => '',
-			'status'     => '',
-			'title'      => '',
-			'type'       => '',
-			'url'        => '',
+			'author'      => '',
+			'avatar'      => '',
+			'content'     => '',
+			'date'        => '',
+			'email'       => '',
+			'ip_address'  => '',
+			'pinned'      => '',
+			'rating'      => '',
+			'review_id'   => '',
+			'review_type' => '',
+			'status'      => '',
+			'title'       => '',
+			'url'         => '',
 		];
 
 		return !empty( $meta )
 			? shortcode_atts( $defaults, $meta )
 			: [];
+	}
+
+	/**
+	 * Normalize a review meta key
+	 *
+	 * @return string
+	 */
+	public function normalizeMetaKey( $metaKey )
+	{
+		$metaKey = strtolower( $metaKey );
+
+		if( in_array( $metaKey, ['id', 'type'])) {
+			$metaKey = 'review_' . $metaKey;
+		}
+
+		return $metaKey;
 	}
 
 	/**
@@ -488,9 +511,9 @@ class Database implements Contract
 	public function setDefaults( array $args = [] )
 	{
 		$defaults = [
-			'data'   => null,
-			'merge'  => true,
-			'update' => true,
+			'data'   => null, // provide custom data as defaults
+			'merge'  => true, // merge defaults with existing saved settings
+			'update' => true, // save generated defaults to database
 		];
 
 		$args = shortcode_atts( $defaults, $args );

@@ -45,7 +45,7 @@ class Upgrade
 
 		$query = "UPDATE {$wpdb->postmeta} AS pm " .
 		"INNER JOIN {$wpdb->posts} AS p ON pm.post_id = p.ID " .
-		"SET pm.meta_key = 'type' " .
+		"SET pm.meta_key = 'review_type' " .
 		"WHERE pm.meta_key = 'site_name' " .
 		"AND pm.meta_value = 'local' " .
 		"AND p.post_type = '{$this->app->post_type}'";

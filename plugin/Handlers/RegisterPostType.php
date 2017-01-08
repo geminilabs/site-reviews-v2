@@ -145,7 +145,7 @@ class RegisterPostType
 		$columns['reviewer'] = 'reviewer';
 		$columns['stars']    = 'rating';
 		$columns['sticky']   = 'pinned';
-		$columns['type']     = 'type';
+		$columns['type']     = 'review_type';
 
 		return $columns;
 	}
@@ -230,9 +230,9 @@ class RegisterPostType
 
 			case 'type':
 				$types = $this->app->make( 'Strings' )->review_types();
-				echo isset( $types[ $meta->type ])
-					? $types[ $meta->type ]
-					: $meta->type;
+				echo isset( $types[ $meta->review_type ] )
+					? $types[ $meta->review_type ]
+					: $meta->review_type;
 				break;
 
 			default:
@@ -254,7 +254,7 @@ class RegisterPostType
 
 		$this->setMeta( $query, [
 			'rating',
-			'type',
+			'review_type',
 		]);
 
 		$this->setOrderby( $query );
@@ -319,7 +319,7 @@ class RegisterPostType
 		printf( '<label class="screen-reader-text" for="type">%s</label>', __( 'Filter by type', 'site-reviews' ) );
 
 		$this->app->make( 'Html' )->renderPartial( 'filterby', [
-			'name'   => 'type',
+			'name'   => 'review_type',
 			'values' => $types,
 		]);
 	}
@@ -354,9 +354,9 @@ class RegisterPostType
 
 		switch( $orderby ) {
 			case 'author':
-			case 'rating':
 			case 'pinned':
-			case 'type':
+			case 'rating':
+			case 'review_type':
 				$query->set( 'meta_key', $orderby );
 				$query->set( 'orderby', 'meta_value' );
 				break;

@@ -43,15 +43,15 @@ class SubmitReview
 		$reviewId = 'local_' . md5( serialize( $command ) );
 
 		$review = [
-			'author'     => $command->author,
-			'avatar'     => get_avatar_url( $command->email ),
-			'content'    => $command->content,
-			'email'      => $command->email,
-			'ip_address' => $command->ipAddress,
-			'rating'     => $command->rating,
-			'review_id'  => $reviewId,
-			'title'      => $command->title,
-			'type'       => 'local',
+			'author'      => $command->author,
+			'avatar'      => get_avatar_url( $command->email ),
+			'content'     => $command->content,
+			'email'       => $command->email,
+			'ip_address'  => $command->ipAddress,
+			'rating'      => $command->rating,
+			'review_id'   => $reviewId,
+			'review_type' => 'local',
+			'title'       => $command->title,
 		];
 
 		$review = apply_filters( 'site-reviews/local/review', $review, $command );

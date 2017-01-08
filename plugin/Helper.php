@@ -34,11 +34,23 @@ class Helper
 	/**
 	 * @param string $name
 	 *
+	 * @return string
+	 */
+	public function buildMethodName( $name )
+	{
+		$method = array_map( 'ucfirst', array_map( 'strtolower', preg_split( '/[-_]/', $name )));
+
+		return 'get' . implode( '', $method );
+	}
+
+	/**
+	 * @param string $name
+	 *
 	 * @return mixed
 	 */
 	public function get( $name )
 	{
-		$method = 'get' . ucfirst( strtolower( $name ));
+		$method = $this->buildMethodName( $name );
 
 		if( !method_exists( $this, $method ))return;
 
