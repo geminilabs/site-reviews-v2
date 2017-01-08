@@ -25,24 +25,12 @@ class RegisterShortcodeButtons
 
 		foreach( $command->shortcodes as $slug => $args ) {
 
-			$shortcode = glsr_resolve( $this->getClassName( $slug ) )->register( $slug, $args );
+			$className = glsr_resolve( 'Helper' )->buildMethodName( $key );
+			$shortcode = glsr_resolve( 'Shortcodes\Buttons\\' . $className )->register( $slug, $args );
 
 			$properties[ $slug ] = $shortcode->properties;
 		}
 
 		glsr_app()->mceShortcodes = $properties;
-	}
-
-	/**
-	 * @param string $shortcode
-	 *
-	 * @return string
-	 */
-	protected function getClassName( $shortcode )
-	{
-		$className = implode( '', array_map( 'ucfirst', preg_split( '/[-_]/', $shortcode ) ) );
-		$className = "GeminiLabs\SiteReviews\Shortcodes\Buttons\\$className";
-
-		return $className;
 	}
 }

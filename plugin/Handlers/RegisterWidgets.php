@@ -24,7 +24,8 @@ class RegisterWidgets
 
 		foreach( $command->widgets as $key => $values ) {
 
-			$widgetClass = $this->getClassName( $key );
+			$widgetClass = glsr_resolve( 'Helper' )->buildMethodName( $key );
+			$widgetClass = 'GeminiLabs\SiteReviews\Widgets\\' . $widgetClass;
 
 			try {
 				// bypass register_widget() in order to pass our custom values to the widget
@@ -39,18 +40,5 @@ class RegisterWidgets
 				));
 			}
 		}
-	}
-
-	/**
-	 * @param string $widget
-	 *
-	 * @return string
-	 */
-	protected function getClassName( $widget )
-	{
-		$className = implode( '', array_map( 'ucfirst', preg_split( '/[-_]/', $widget ) ) );
-		$className = "GeminiLabs\SiteReviews\Widgets\\$className";
-
-		return $className;
 	}
 }

@@ -23,8 +23,11 @@ class RegisterShortcodes
 	{
 		foreach( $command->shortcodes as $key ) {
 			try {
-				$shortcode = glsr_resolve( $this->getClassName( $key ) );
-				add_shortcode( $key, [ $shortcode, 'printShortcode'] );
+
+				$shortcodeClass = glsr_resolve( 'Helper' )->buildMethodName( $key );
+				$shortcodeClass = 'GeminiLabs\SiteReviews\Shortcodes\\' . $shortcodeClass;
+
+				add_shortcode( $key, [ $shortcodeClass, 'printShortcode']);
 			}
 			catch( Exception $e ) {
 				glsr_resolve( 'Log\Logger' )->error( sprintf( 'Error registering shortcode. Message: %s "(%s:%s)"',
@@ -34,18 +37,5 @@ class RegisterShortcodes
 				));
 			}
 		}
-	}
-
-	/**
-	 * @param string $shortcode
-	 *
-	 * @return string
-	 */
-	protected function getClassName( $shortcode )
-	{
-		$className = implode( '', array_map( 'ucfirst', preg_split( '/[-_]/', $shortcode ) ) );
-		$className = "GeminiLabs\SiteReviews\Shortcodes\\$className";
-
-		return $className;
 	}
 }
