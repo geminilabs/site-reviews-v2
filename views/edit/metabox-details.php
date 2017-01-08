@@ -2,15 +2,14 @@
 
 <?php
 	$reviewType = get_post_meta( $post->ID, 'review_type', true );
-
-	if( $reviewType == 'local' ) {
-		$reviewType = __( 'Local Review', 'site-reviews' );
-	}
+	$reviewType = sprintf( __( '%s review', 'site-reviews' ),
+		glsr_resolve( 'Strings' )->review_types( $reviewType, ucfirst( $reviewType ))
+	);
 
 	$reviewUrl = get_post_meta( $post->ID, 'url', true );
 
 	if( $reviewUrl ) {
-		$reviewType = sprintf( '<a href="%s" target="_blank">%s</a>', $reviewUrl, glsr_resolve( 'Strings' )->review_types( $reviewType, ucfirst( $reviewType )));
+		$reviewType = sprintf( '<a href="%s" target="_blank">%s</a>', $reviewUrl, $reviewType );
 	}
 
 	$modified = false;

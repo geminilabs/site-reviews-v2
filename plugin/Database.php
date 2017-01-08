@@ -377,9 +377,11 @@ class Database implements Contract
 		$labels = $this->app->make( 'Strings' )->review_types();
 
 		array_walk( $types, function( &$value, $key ) use( $labels ) {
-			$value = array_key_exists( $key, $labels )
+			$type = array_key_exists( $key, $labels )
 				? $labels[ $key ]
-				: sprintf( __( '%s reviews', 'site-reviews' ), ucfirst( $key ));
+				: ucfirst( $key );
+
+			$value = sprintf( __( '%s reviews', 'site-reviews' ), $type );
 		});
 
 		return $types;
