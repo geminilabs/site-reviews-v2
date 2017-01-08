@@ -20,14 +20,17 @@ trait SiteReviews
 	public function renderReviews( array $args )
 	{
 		if( !is_array( $args['hide'] ) ) {
-			$args['hide'] = array_map( 'trim', array_filter( explode( ',', $args['hide'] ) ) );
+			$args['hide'] = array_map( 'trim', array_filter( explode( ',', $args['hide'] )));
 		}
 
 		foreach( $args['hide'] as $key ) {
 			$args[ 'hide_' . $key ] = true;
 		}
 
-		$args['type'] = $args['display'];
+		// "type" takes precedence over "display"
+		if( empty( $args['type'] )) {
+			$args['type'] = $args['display'];
+		}
 
 		glsr_resolve( 'Html' )->renderPartial( 'reviews', $args );
 	}

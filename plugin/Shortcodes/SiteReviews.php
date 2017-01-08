@@ -33,6 +33,7 @@ class SiteReviews extends Shortcode
 			'pagination' => false,
 			'rating'     => 5,
 			'title'      => '',
+			'type'       => '',
 		];
 
 		$args = shortcode_atts( $defaults, $atts );
