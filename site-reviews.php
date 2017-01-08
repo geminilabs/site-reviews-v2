@@ -32,31 +32,56 @@ register_deactivation_hook( __FILE__, array( $app, 'deactivate' ) );
 
 $app->init();
 
-// Global helper to return $app
+/**
+ * Global helper to return $app
+ *
+ * @return App
+ */
 function glsr_app() {
 	return App::load();
 }
 
+/**
+ * Global helper to debug variables
+ *
+ * @return void
+ */
 function glsr_debug() {
 	call_user_func_array([ App::load()->make( 'Log\Logger' ), 'display' ], func_get_args());
 }
 
-// Global helper to get a setting option
+/**
+ * Global helper to get a setting option
+ *
+ * @return mixed
+ */
 function glsr_get_option( $option_path, $fallback = '' ) {
 	return App::load()->make( 'Helper' )->get( 'option', $option_path, $fallback );
 }
 
-// Global helper to get a single review
+/**
+ * Global helper to get a single review
+ *
+ * @return null|object
+ */
 function glsr_get_review( $post_id ) {
 	return App::load()->make( 'Helper' )->get( 'review', $post_id );
 }
 
-// Global helper to get an array of reviews
+/**
+ * Global helper to get an array of reviews
+ *
+ * @return array
+ */
 function glsr_get_reviews( array $args = [] ) {
 	return App::load()->make( 'Helper' )->get( 'reviews', $args );
 }
 
-// Global helper to resolve a class instance where $app is not accessible
+/**
+ * Global helper to resolve a class instance where $app is not accessible
+ *
+ * @return class
+ */
 function glsr_resolve( $alias ) {
 	return App::load()->make( $alias );
 }

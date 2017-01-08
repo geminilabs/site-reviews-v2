@@ -33,11 +33,10 @@ class Helper
 
 	/**
 	 * @param string $name
-	 * @param mixed  $args ...
 	 *
 	 * @return mixed
 	 */
-	public function get( $name, $args )
+	public function get( $name )
 	{
 		$method = 'get' . ucfirst( strtolower( $name ));
 
