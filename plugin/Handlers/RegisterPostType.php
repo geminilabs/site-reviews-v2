@@ -192,53 +192,11 @@ class RegisterPostType
 	{
 		global $post, $wp_version;
 
-		$meta = $this->db->getReviewMeta( $post->ID );
+		$method = $this->app->make( 'Helper' )->buildMethodName( $column, 'buildColumn' );
 
-		switch( $column ) {
-
-			case 'reviewer':
-				if( get_the_author()) {
-					$url = add_query_arg([
-						'author'    => get_the_author_meta( 'ID' ),
-						'post_type' => $post->post_type,
-					], 'edit.php' );
-					printf( '<a href="%s">%s</a>', esc_url( $url ), get_the_author());
-				}
-				else {
-					echo $meta->author;
-				}
-				break;
-
-			case 'stars':
-				$this->app->make( 'Html' )->renderPartial( 'rating', [
-					'stars' => $meta->rating,
-				]);
-				break;
-
-			case 'sticky':
-				$pinned = $meta->pinned
-					? ' pinned'
-					: '';
-
-				// WP < 4.4 support
-				$fallback = version_compare( $wp_version, '4.4', '<' )
-					? file_get_contents( "{$this->app->path}assets/img/pinned.svg" )
-					: '';
-
-				printf( '<i class="dashicons dashicons-sticky%s" data-id="%s">%s</i>', $pinned, $post->ID, $fallback );
-				break;
-
-			case 'type':
-				$types = $this->app->make( 'Strings' )->review_types();
-				echo isset( $types[ $meta->review_type ] )
-					? $types[ $meta->review_type ]
-					: $meta->review_type;
-				break;
-
-			default:
-				echo apply_filters( "site-reviews/columns/{$column}", '', $post->ID );
-				break;
-		}
+		echo !method_exists( $this, $method )
+			? apply_filters( "site-reviews/columns/{$column}", '', $post->ID )
+			: call_user_func([ $this, $method ]);
 	}
 
 	/**
@@ -258,6 +216,75 @@ class RegisterPostType
 		]);
 
 		$this->setOrderby( $query );
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function buildColumnReviewer()
+	{
+		global $post;
+
+		if( !get_the_author()) {
+			return $this->db->getReviewMeta( $post->ID )->author;
+		}
+
+		$url = add_query_arg([
+			'author'    => get_the_author_meta( 'ID' ),
+			'post_type' => $post->post_type,
+		], 'edit.php' );
+
+		return sprintf( '<a href="%s">%s</a>', esc_url( $url ), get_the_author());
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function buildColumnStars()
+	{
+		global $post;
+
+		return $this->app->make( 'Html' )->renderPartial( 'rating', [
+			'stars' => $this->db->getReviewMeta( $post->ID )->rating,
+		], 'return' );
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function buildColumnSticky()
+	{
+		global $post, $wp_version;
+
+		$pinned = $this->db->getReviewMeta( $post->ID )->pinned
+			? ' pinned'
+			: '';
+
+		// WP < 4.4 support
+		$fallback = version_compare( $wp_version, '4.4', '<' )
+			? file_get_contents( "{$this->app->path}assets/img/pinned.svg" )
+			: '';
+
+		return sprintf( '<i class="dashicons dashicons-sticky%s" data-id="%s">%s</i>',
+			$pinned,
+			$post->ID,
+			$fallback
+		);
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function buildColumnType()
+	{
+		global $post;
+
+		$meta  = $this->db->getReviewMeta( $post->ID );
+		$types = $this->app->make( 'Strings' )->review_types();
+
+		return isset( $types[ $meta->review_type ] )
+			? $types[ $meta->review_type ]
+			: $meta->review_type;
 	}
 
 	/**
