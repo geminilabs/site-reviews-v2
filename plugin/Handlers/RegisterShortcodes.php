@@ -24,8 +24,7 @@ class RegisterShortcodes
 		foreach( $command->shortcodes as $key ) {
 			try {
 
-				$shortcodeClass = glsr_resolve( 'Helper' )->buildMethodName( $key );
-				$shortcodeClass = 'GeminiLabs\SiteReviews\Shortcodes\\' . $shortcodeClass;
+				$shortcodeClass = glsr_resolve( 'Helper' )->buildClassName( $key, 'GeminiLabs\SiteReviews\Shortcodes' );
 
 				add_shortcode( $key, [ $shortcodeClass, 'printShortcode']);
 			}

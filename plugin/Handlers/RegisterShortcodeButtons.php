@@ -25,8 +25,8 @@ class RegisterShortcodeButtons
 
 		foreach( $command->shortcodes as $slug => $args ) {
 
-			$className = glsr_resolve( 'Helper' )->buildMethodName( $key );
-			$shortcode = glsr_resolve( 'Shortcodes\Buttons\\' . $className )->register( $slug, $args );
+			$className = glsr_resolve( 'Helper' )->buildClassName( $slug, 'Shortcodes\Buttons' );
+			$shortcode = glsr_resolve( $className )->register( $slug, $args );
 
 			$properties[ $slug ] = $shortcode->properties;
 		}

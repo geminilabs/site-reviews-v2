@@ -33,14 +33,28 @@ class Helper
 
 	/**
 	 * @param string $name
+	 * @param string $path
+	 *
+	 * @return string
+	 */
+	public function buildClassName( $name, $path = '' )
+	{
+		$className = array_map( 'ucfirst', array_map( 'strtolower', preg_split( '/[-_]/', $name )));
+		$className = implode( '', $className );
+
+		return !empty( $path )
+			? str_replace( '\\\\', '\\', sprintf( '%s\%s', $path, $className ))
+			: $className;
+	}
+
+	/**
+	 * @param string $name
 	 *
 	 * @return string
 	 */
 	public function buildMethodName( $name )
 	{
-		$method = array_map( 'ucfirst', array_map( 'strtolower', preg_split( '/[-_]/', $name )));
-
-		return 'get' . implode( '', $method );
+		return 'get' . $this->buildClassName( $name );
 	}
 
 	/**

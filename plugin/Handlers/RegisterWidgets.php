@@ -24,8 +24,7 @@ class RegisterWidgets
 
 		foreach( $command->widgets as $key => $values ) {
 
-			$widgetClass = glsr_resolve( 'Helper' )->buildMethodName( $key );
-			$widgetClass = 'GeminiLabs\SiteReviews\Widgets\\' . $widgetClass;
+			$widgetClass = glsr_resolve( 'Helper' )->buildClassName( $key, 'GeminiLabs\SiteReviews\Widgets' );
 
 			try {
 				// bypass register_widget() in order to pass our custom values to the widget
