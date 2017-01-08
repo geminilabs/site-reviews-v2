@@ -25,8 +25,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - [feature] MCE shortcode button dropdown
 - [feature] Review avatars (gravatar.com)
 - [feature] Review categories
-- Added excerpt options
 - Custom Published/Pending labels
+- New settings page for reviews
 
 ### Changed
 - [breaking] Changed internal widget/shortcode hook names

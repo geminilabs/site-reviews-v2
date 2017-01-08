@@ -294,12 +294,18 @@ class Reviews extends Base
 	 */
 	protected function reviewMeta( $review, array $args )
 	{
+		$date = '';
+
+		if( !wp_validate_boolean( $args['hide_date'] ) ) {
+			$format = $this->db->getOption( 'reviews.date.enabled' ) == 'yes'
+				? $this->db->getOption( 'reviews.date.format', 'M j, Y' )
+				: get_option( 'date_format' );
+
+			$date = sprintf( '<span class="glsr-review-date">%s</span> ', date_i18n( $format, strtotime( $review->date )));
+		}
+
 		$rating = !wp_validate_boolean( $args['hide_rating'] )
 			? $this->app->make( 'Html' )->renderPartial( 'rating', ['stars' => $review->rating ], 'return' )
-			: '';
-
-		$date = !wp_validate_boolean( $args['hide_date'] )
-			? sprintf( '<span class="glsr-review-date">%s</span> ', mysql2date( 'M j, Y', $review->date ))
 			: '';
 
 		return ( $rating || $date )

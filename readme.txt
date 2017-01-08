@@ -94,8 +94,8 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 * [feature] Review categories
 * [breaking] Changed internal widget/shortcode hook names
 * [breaking] Changed shortcode variables
-* Added excerpt options
 * Custom Published/Pending labels
+* New settings page for reviews
 * Removed "site-reviews/reviews/excerpt_length" filter hook
 * Removed "site-reviews/reviews/use_excerpt" filter hook
 

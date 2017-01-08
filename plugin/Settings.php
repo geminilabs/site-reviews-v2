@@ -312,6 +312,24 @@ class Settings
 
 		$this->addSetting( $formId, [
 			'type'  => 'yesno_inline',
+			'name'  => 'reviews.date.enabled',
+			'label' => __( 'Enable Custom Dates', 'site-reviews' ),
+			'desc'  => sprintf( __( 'The default date format is the one set in your <a href="%s">WordPress settings<a>.', 'site-reviews' ), get_admin_url( null, 'options-general.php' ) ),
+		]);
+
+		$this->addSetting( $formId, [
+			'type'    => 'text',
+			'name'    => 'reviews.date.format',
+			'label'   => __( 'Date Format', 'site-reviews' ),
+			'default' => get_option( 'date_format' ),
+			'desc'    => sprintf( __( 'Enter a custom date format (<a href="%s">documentation on date and time formatting</a>).', 'site-reviews' ), 'https://codex.wordpress.org/Formatting_Date_and_Time' ),
+			'depends' => [
+				'reviews.date.enabled' => 'yes',
+			],
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'yesno_inline',
 			'name'  => 'reviews.excerpt.enabled',
 			'label' => __( 'Enable Excerpts', 'site-reviews' ),
 			'desc'  => __( 'Display an excerpt instead of the full review.', 'site-reviews' ),
