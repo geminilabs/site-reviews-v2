@@ -39,11 +39,28 @@ class Upgrade
 	/**
 	 * @return void
 	 */
+	public function siteName_200()
+	{
+		global $wpdb;
+
+		$query = "UPDATE {$wpdb->postmeta} AS pm " .
+		"INNER JOIN {$wpdb->posts} AS p ON pm.post_id = p.ID " .
+		"SET pm.meta_key = 'type' " .
+		"WHERE pm.meta_key = 'site_name' " .
+		"AND pm.meta_value = 'local' " .
+		"AND p.post_type = '{$this->app->post_type}'";
+
+		$wpdb->query( $query );
+	}
+
+	/**
+	 * @return void
+	 */
 	public function themeMods_200()
 	{
 		global $wpdb;
 
-		$themeMods = $wpdb->get_col( "SELECT option_name FROM {$wpdb->prefix}options WHERE option_name LIKE '%theme_mods_%'" );
+		$themeMods = $wpdb->get_col( "SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE '%theme_mods_%'" );
 
 		foreach( $themeMods as $theme ) {
 

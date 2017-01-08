@@ -219,6 +219,7 @@ final class App extends Container
 			$upgrade = $this->make( 'Upgrade' );
 
 			$upgrade->sidebarWidgets_200();
+			$upgrade->siteName_200();
 			$upgrade->themeMods_200();
 			$upgrade->widgetSiteReviews_200();
 			$upgrade->widgetSiteReviewsForm_200();

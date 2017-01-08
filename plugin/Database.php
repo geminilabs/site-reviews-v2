@@ -56,8 +56,8 @@ class Database implements Contract
 			'pinned'     => false,
 			'rating'     => '',
 			'review_id'  => '',
-			'site_name'  => 'local',
 			'title'      => '',
+			'type'       => 'local',
 			'url'        => '',
 		]);
 
@@ -67,13 +67,13 @@ class Database implements Contract
 			'ping_status'    => 'closed',
 			'post_content'   => $meta['content'],
 			'post_date'      => $meta['date'],
-			'post_name'      => $meta['site_name'] . str_replace( ['review_', '_'], '-', $metaReviewId ),
+			'post_name'      => $meta['type'] . str_replace( ['review_', '_'], '-', $metaReviewId ),
 			'post_status'    => 'publish',
 			'post_title'     => wp_strip_all_tags( $meta['title'] ),
 			'post_type'      => $this->app->post_type,
 		];
 
-		if( $this->getOption( 'general.require.approval' ) == 'yes' && $meta['site_name'] == 'local' ) {
+		if( $this->getOption( 'general.require.approval' ) == 'yes' && $meta['type'] == 'local' ) {
 			$post_data['post_status'] = 'pending';
 		}
 
@@ -140,7 +140,7 @@ class Database implements Contract
 			'rating'     => $meta->rating,
 			'status'     => $post->post_status,
 			'title'      => $post->post_title,
-			'type'       => $meta->site_name,
+			'type'       => $meta->type,
 			'url'        => $meta->url,
 			'user_id'    => $post->post_author,
 		];
@@ -178,8 +178,8 @@ class Database implements Contract
 
 			$counts = [];
 
-			foreach( $results as $site ) {
-				$counts[ $site->name ] = $site->num_posts;
+			foreach( $results as $result ) {
+				$counts[ $result->name ] = $result->num_posts;
 			}
 
 			wp_cache_set( $this->app->id, $counts, $metaKey . '_count' );
@@ -235,7 +235,7 @@ class Database implements Contract
 			"INNER JOIN {$wpdb->postmeta} AS m2 ON p.ID = m2.post_id " .
 			"WHERE p.post_type = '%s' " .
 				"AND m1.meta_key = 'review_id' " .
-				"AND m2.meta_key = 'site_name' " .
+				"AND m2.meta_key = 'type' " .
 				"AND m2.meta_value = '%s'",
 			$this->app->post_type,
 			$reviewType
@@ -276,17 +276,17 @@ class Database implements Contract
 			'post__in'     => [],
 			'post__not_in' => [],
 			'rating'       => 5,
-			'site_name'    => '',
+			'type'    => '',
 		];
 
 		$args = shortcode_atts( $defaults, $args );
 
 		extract( $args );
 
-		if( !empty( $site_name ) && $site_name != 'all' ) {
+		if( !empty( $type ) && $type != 'all' ) {
 			$meta_query[] = [
-				'key'   => 'site_name',
-				'value' => $site_name,
+				'key'   => 'type',
+				'value' => $type,
 			];
 		}
 
@@ -362,7 +362,7 @@ class Database implements Contract
 		global $wpdb;
 
 		$types = $wpdb->get_col(
-			"SELECT DISTINCT(meta_value) FROM $wpdb->postmeta WHERE meta_key = 'site_name' ORDER BY meta_value ASC"
+			"SELECT DISTINCT(meta_value) FROM {$wpdb->postmeta} WHERE meta_key = 'type' ORDER BY meta_value ASC"
 		);
 
 		$types = array_flip( $types );
@@ -416,9 +416,9 @@ class Database implements Contract
 			'pinned'     => '',
 			'rating'     => '',
 			'review_id'  => '',
-			'site_name'  => '',
 			'status'     => '',
 			'title'      => '',
+			'type'       => '',
 			'url'        => '',
 		];
 

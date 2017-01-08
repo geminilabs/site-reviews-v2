@@ -24,12 +24,12 @@
 
 		<?php foreach( $tabs['settings']['sections'] as $key => $title ) : ?>
 
-			<tr data-site="<?= $key; ?>">
+			<tr data-type="<?= $key; ?>">
 				<td class="site">
 					<a href="<?= admin_url( 'edit.php?post_type=site-review&page=' . glsr_app()->id . "&tab=settings&section={$key}" ); ?>"><?= $title; ?></a>
 				</td>
 				<td class="total-fetched column-primary">
-					<a href="<?= admin_url( "edit.php?post_type=site-review&post_status=all&site_name={$key}" ); ?>"><?= $db->getReviewCount( 'site_name', $key ); ?></a>
+					<a href="<?= admin_url( "edit.php?post_type=site-review&post_status=all&type={$key}" ); ?>"><?= $db->getReviewCount( 'type', $key ); ?></a>
 					<button type="button" class="toggle-row"><span class="screen-reader-text">Show more details</span></button>
 				</td>
 				<td class="last-fetch" data-colname="<?= __( 'Last fetch', 'site-reviews' ); ?>">
@@ -55,10 +55,10 @@
 
 		<?php
 
-			echo $html->row()->select( 'site', [
+			echo $html->row()->select( 'type', [
 				'label'      => __( 'Fetch reviews from', 'site-reviews' ),
 				'options'    => $tabs['settings']['sections'],
-				'attributes' => 'data-site',
+				'attributes' => 'data-type',
 				'prefix'     => glsr_app()->prefix,
 			]);
 

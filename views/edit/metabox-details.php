@@ -1,16 +1,16 @@
 <?php defined( 'WPINC' ) || die; ?>
 
 <?php
-	$siteName = get_post_meta( $post->ID, 'site_name', true );
+	$type = get_post_meta( $post->ID, 'type', true );
 
-	if( $siteName == 'local' ) {
-		$siteName = __( 'Local Review', 'site-reviews' );
+	if( $type == 'local' ) {
+		$type = __( 'Local Review', 'site-reviews' );
 	}
 
 	$reviewUrl = get_post_meta( $post->ID, 'url', true );
 
 	if( $reviewUrl ) {
-		$siteName = sprintf( '<a href="%s" target="_blank">%s</a>', $reviewUrl, ucfirst( $siteName ) );
+		$type = sprintf( '<a href="%s" target="_blank">%s</a>', $reviewUrl, ucfirst( $type ) );
 	}
 
 	$modified = false;
@@ -40,7 +40,7 @@
 		</tr>
 		<tr>
 			<td><?= __( 'Type', 'site-reviews' ); ?></th>
-			<td><?= $siteName; ?></td>
+			<td><?= $type; ?></td>
 		</tr>
 		<tr>
 			<td><?= __( 'Date', 'site-reviews' ); ?></th>

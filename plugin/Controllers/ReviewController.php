@@ -312,9 +312,9 @@ class ReviewController extends BaseController
 			return false;
 		}
 
-		$siteName = get_post_meta( $postId, 'site_name', true );
+		$type = get_post_meta( $postId, 'type', true );
 
-		return 'local' === $siteName;
+		return 'local' === $type;
 	}
 
 	/**

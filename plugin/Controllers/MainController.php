@@ -485,7 +485,7 @@ class MainController extends BaseController
 	{
 		if( $post->post_type != $this->app->post_type )return;
 		if( post_type_supports( $this->app->post_type, 'title' ) )return;
-		if( get_post_meta( $post->ID, 'site_name', true ) == 'local' )return;
+		if( get_post_meta( $post->ID, 'type', true ) == 'local' )return;
 
 		$this->render( 'edit/review', ['post' => $post ] );
 	}
@@ -500,7 +500,7 @@ class MainController extends BaseController
 		if( $post->post_type != $this->app->post_type )return;
 		if( post_type_supports( $this->app->post_type, 'title' ) )return;
 
-		$type = get_post_meta( $post->ID, 'site_name', true );
+		$type = get_post_meta( $post->ID, 'type', true );
 
 		if( $type == 'local' )return;
 

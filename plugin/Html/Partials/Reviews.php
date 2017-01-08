@@ -36,7 +36,7 @@ class Reviews extends Base
 			'orderby'      => 'date',
 			'pagination'   => false,
 			'rating'       => '',
-			'site_name'    => '',
+			'type'         => '',
 			'word_limit'   => 55,
 		];
 

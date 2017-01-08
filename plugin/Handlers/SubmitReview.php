@@ -50,8 +50,8 @@ class SubmitReview
 			'ip_address' => $command->ipAddress,
 			'rating'     => $command->rating,
 			'review_id'  => $reviewId,
-			'site_name'  => 'local',
 			'title'      => $command->title,
+			'type'       => 'local',
 		];
 
 		$review = apply_filters( 'site-reviews/local/review', $review, $command );

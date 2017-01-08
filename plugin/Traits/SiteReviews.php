@@ -27,7 +27,7 @@ trait SiteReviews
 			$args[ 'hide_' . $key ] = true;
 		}
 
-		$args['site_name'] = $args['display'];
+		$args['type'] = $args['display'];
 
 		glsr_resolve( 'Html' )->renderPartial( 'reviews', $args );
 	}

@@ -107,7 +107,7 @@ class RegisterPostType
 			}
 		});
 
-		$types = $this->db->getReviewsMeta( 'site_name' );
+		$types = $this->db->getReviewsMeta( 'type' );
 
 		if( count( $types ) < 1 || ( count( $types ) == 1 && $types[0] == 'local' ) ) {
 			unset( $this->columns['type'] );
@@ -145,7 +145,7 @@ class RegisterPostType
 		$columns['reviewer'] = 'reviewer';
 		$columns['stars']    = 'rating';
 		$columns['sticky']   = 'pinned';
-		$columns['type']     = 'site_name';
+		$columns['type']     = 'type';
 
 		return $columns;
 	}
@@ -173,10 +173,10 @@ class RegisterPostType
 		$status ?: $status = 'publish';
 
 		$ratings = $this->db->getReviewsMeta( 'rating', $status );
-		$sites   = $this->db->getReviewsMeta( 'site_name', $status );
+		$types   = $this->db->getReviewsMeta( 'type', $status );
 
 		$this->renderFilterRatings( $ratings );
-		$this->renderFilterSites( $sites );
+		$this->renderFilterTypes( $types );
 	}
 
 	/**
@@ -230,9 +230,9 @@ class RegisterPostType
 
 			case 'type':
 				$types = $this->app->make( 'Strings' )->review_types();
-				echo isset( $types[ $meta->site_name ])
-					? $types[ $meta->site_name ]
-					: $meta->site_name;
+				echo isset( $types[ $meta->type ])
+					? $types[ $meta->type ]
+					: $meta->type;
 				break;
 
 			default:
@@ -254,7 +254,7 @@ class RegisterPostType
 
 		$this->setMeta( $query, [
 			'rating',
-			'site_name',
+			'type',
 		]);
 
 		$this->setOrderby( $query );
@@ -301,26 +301,26 @@ class RegisterPostType
 	}
 
 	/**
-	 * @param array $sites
+	 * @param array $types
 	 *
 	 * @return void
 	 */
-	protected function renderFilterSites( $sites )
+	protected function renderFilterTypes( $types )
 	{
-		if( empty( $sites ) || apply_filters( 'site-reviews/disable/filter/sites', false ) )return;
+		if( empty( $types ) || apply_filters( 'site-reviews/disable/filter/types', false ) )return;
 
-		$sites = array_combine( $sites, array_map( 'ucfirst', $sites ) );
-		$sites = [ __( 'All types', 'site-reviews' ) ] + $sites;
+		$types = array_combine( $types, array_map( 'ucfirst', $types ) );
+		$types = [ __( 'All types', 'site-reviews' ) ] + $types;
 
-		if( isset( $sites['local'] ) ) {
-			$sites['local'] = __( 'Local Review', 'site-reviews' );
+		if( isset( $types['local'] ) ) {
+			$types['local'] = __( 'Local Review', 'site-reviews' );
 		}
 
-		printf( '<label class="screen-reader-text" for="site_name">%s</label>', __( 'Filter by type', 'site-reviews' ) );
+		printf( '<label class="screen-reader-text" for="type">%s</label>', __( 'Filter by type', 'site-reviews' ) );
 
 		$this->app->make( 'Html' )->renderPartial( 'filterby', [
-			'name'   => 'site_name',
-			'values' => $sites,
+			'name'   => 'type',
+			'values' => $types,
 		]);
 	}
 
@@ -354,9 +354,9 @@ class RegisterPostType
 
 		switch( $orderby ) {
 			case 'author':
-			case 'site_name':
 			case 'rating':
 			case 'pinned':
+			case 'type':
 				$query->set( 'meta_key', $orderby );
 				$query->set( 'orderby', 'meta_value' );
 				break;

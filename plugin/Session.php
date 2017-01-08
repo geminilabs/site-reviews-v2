@@ -234,8 +234,7 @@ class Session
 		global $wpdb;
 
 		$count = $wpdb->query(
-			"DELETE FROM $wpdb->options " .
-			"WHERE option_name LIKE '{$this->prefix}_%'"
+			"DELETE FROM {$wpdb->options} WHERE option_name LIKE '{$this->prefix}_%'"
 		);
 
 		return (int) ( $count / 2 );
@@ -254,7 +253,7 @@ class Session
 
 		$sessions = $wpdb->get_results( $wpdb->prepare(
 			"SELECT option_name AS name, option_value AS expiry " .
-			"FROM $wpdb->options " .
+			"FROM {$wpdb->options} " .
 			"WHERE option_name LIKE '{$this->prefix}_expires_%' " .
 			"ORDER BY option_value ASC " .
 			"LIMIT 0, %d", absint( $limit )
@@ -284,8 +283,7 @@ class Session
 			$session_names = implode( "','", $expired );
 
 			$wpdb->query(
-				"DELETE FROM $wpdb->options " .
-				"WHERE option_name IN ('{$session_names}')"
+				"DELETE FROM {$wpdb->options} WHERE option_name IN ('{$session_names}')"
 			);
 		}
 
