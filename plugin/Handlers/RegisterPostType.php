@@ -309,18 +309,17 @@ class RegisterPostType
 	{
 		if( empty( $types ) || apply_filters( 'site-reviews/disable/filter/types', false ) )return;
 
-		$types = array_combine( $types, array_map( 'ucfirst', $types ) );
-		$types = [ __( 'All types', 'site-reviews' ) ] + $types;
+		$reviewTypes = [ __( 'All types', 'site-reviews' ) ];
 
-		if( isset( $types['local'] ) ) {
-			$types['local'] = __( 'Local Review', 'site-reviews' );
+		foreach( $types as $type ) {
+			$reviewTypes[ $type ] = $this->app->make( 'Strings' )->review_types( $type, ucfirst( $type ));
 		}
 
 		printf( '<label class="screen-reader-text" for="type">%s</label>', __( 'Filter by type', 'site-reviews' ) );
 
 		$this->app->make( 'Html' )->renderPartial( 'filterby', [
 			'name'   => 'review_type',
-			'values' => $types,
+			'values' => $reviewTypes,
 		]);
 	}
 

@@ -379,7 +379,7 @@ class Database implements Contract
 		array_walk( $types, function( &$value, $key ) use( $labels ) {
 			$value = array_key_exists( $key, $labels )
 				? $labels[ $key ]
-				: sprintf( '%s reviews', ucfirst( $key ));
+				: sprintf( __( '%s reviews', 'site-reviews' ), ucfirst( $key ));
 		});
 
 		return $types;

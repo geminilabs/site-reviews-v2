@@ -49,12 +49,13 @@ class Helper
 
 	/**
 	 * @param string $name
+	 * @param string $prefix
 	 *
 	 * @return string
 	 */
-	public function buildMethodName( $name )
+	public function buildMethodName( $name, $prefix = 'get' )
 	{
-		return 'get' . $this->buildClassName( $name );
+		return $prefix . $this->buildClassName( $name );
 	}
 
 	/**

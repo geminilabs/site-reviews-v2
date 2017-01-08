@@ -10,7 +10,7 @@
 	$reviewUrl = get_post_meta( $post->ID, 'url', true );
 
 	if( $reviewUrl ) {
-		$reviewType = sprintf( '<a href="%s" target="_blank">%s</a>', $reviewUrl, ucfirst( $reviewType ) );
+		$reviewType = sprintf( '<a href="%s" target="_blank">%s</a>', $reviewUrl, glsr_resolve( 'Strings' )->review_types( $reviewType, ucfirst( $reviewType )));
 	}
 
 	$modified = false;

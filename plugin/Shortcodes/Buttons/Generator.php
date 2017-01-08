@@ -117,7 +117,7 @@ abstract class Generator
 			];
 
 			$field  = wp_parse_args( (array) $field, $defaults );
-			$method = 'generate' . ucfirst( strtolower( $field['type'] ) );
+			$method = glsr_resolve( 'Helper' )->buildMethodName( $field['type'], 'generate' );
 
 			if( method_exists( $this, $method ) ) {
 
