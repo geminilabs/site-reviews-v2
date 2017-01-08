@@ -247,29 +247,29 @@ msgstr "No Title"
 msgid "Please fix the submission errors."
 msgstr "Please fix the submission errors."
 
-#: plugin/Handlers/RegisterPostType.php:271
+#: plugin/Handlers/RegisterPostType.php:289
 msgid "%s star"
 msgid_plural "%s stars"
 msgstr[0] "%s star"
 msgstr[1] "%s stars"
 
-#: plugin/Handlers/RegisterPostType.php:275
+#: plugin/Handlers/RegisterPostType.php:293
 msgid "All ratings"
 msgstr "All ratings"
 
-#: plugin/Handlers/RegisterPostType.php:277
+#: plugin/Handlers/RegisterPostType.php:295
 msgid "Filter by rating"
 msgstr "Filter by rating"
 
-#: plugin/Handlers/RegisterPostType.php:295
+#: plugin/Handlers/RegisterPostType.php:313
 msgid "All types"
 msgstr "All types"
 
-#: plugin/Handlers/RegisterPostType.php:298, views/edit/metabox-details.php:7
+#: plugin/Handlers/RegisterPostType.php:316, views/edit/metabox-details.php:7
 msgid "Local Review"
 msgstr "Local Review"
 
-#: plugin/Handlers/RegisterPostType.php:301
+#: plugin/Handlers/RegisterPostType.php:319
 msgid "Filter by type"
 msgstr "Filter by type"
 

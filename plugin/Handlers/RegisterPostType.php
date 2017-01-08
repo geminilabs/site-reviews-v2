@@ -12,6 +12,7 @@ namespace GeminiLabs\SiteReviews\Handlers;
 
 use GeminiLabs\SiteReviews\App;
 use GeminiLabs\SiteReviews\Commands\RegisterPostType as Command;
+use WP_Screen;
 use WP_Query;
 
 class RegisterPostType
@@ -74,6 +75,7 @@ class RegisterPostType
 		add_action( 'pre_get_posts',                           [ $this, 'setColumnQuery'] );
 
 		add_filter( "manage_{$post_type}_posts_columns",         [ $this, 'modifyColumns'] );
+		add_filter( 'default_hidden_columns',                    [ $this, 'modifyColumnsHidden'], 10, 2 );
 		add_filter( "manage_edit-{$post_type}_sortable_columns", [ $this, 'modifyColumnsSortable'] );
 	}
 
@@ -113,6 +115,22 @@ class RegisterPostType
 
 		// remove all keys with null, false, or empty values
 		return array_filter( $this->columns, 'strlen' );
+	}
+
+	/**
+	 * Filters the default list of hidden columns
+	 *
+	 * @return array
+	 *
+	 * @filter default_hidden_columns
+	 */
+	public function modifyColumnsHidden( array $hidden, WP_Screen $screen )
+	{
+		if( $screen->id == sprintf( 'edit-%s', $this->app->post_type )) {
+			$hidden = ['reviewer'];
+		}
+
+		return $hidden;
 	}
 
 	/**
