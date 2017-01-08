@@ -55,7 +55,7 @@ class Strings
 	public function review_types()
 	{
 		$types = [
-			'local' => __( 'Local Reviews', 'site-reviews' ),
+			'local' => __( 'Local', 'site-reviews' ),
 		];
 
 		return apply_filters( 'site-reviews/addon/types', $types );

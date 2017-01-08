@@ -93,7 +93,7 @@ class Reviews extends Base
 		$text = wpautop( $text );
 		$text = str_replace( ']]>', ']]&gt;', $text );
 
-		if( 'yes' == $this->db->getOption( 'reviews.excerpt.enabled', 'yes' )) {
+		if( $this->db->getOption( 'reviews.excerpt.enabled' ) == 'yes' ) {
 			$wordCount = $this->db->getOption( 'reviews.excerpt.length', $wordCount );
 			$text = wp_trim_words( $text, $wordCount, $more );
 		}
@@ -198,6 +198,11 @@ class Reviews extends Base
 				'</nav>';
 		}
 
+		/**
+		 * Filters the navigation markup template.
+		 *
+		 * @since WP 4.4.0
+		 */
 		$template = apply_filters( 'navigation_markup_template', $template, $class );
 
 		$screenReaderText = __( 'Site Reviews navigation', 'site-reviews' );
@@ -217,7 +222,7 @@ class Reviews extends Base
 	{
 		if( wp_validate_boolean( $hideAuthor ) )return;
 
-		$dash = $this->db->getOption( 'reviews.avatars.enabled', 'no' ) == 'no'
+		$dash = $this->db->getOption( 'reviews.avatars.enabled' ) != 'yes'
 			? '&mdash;'
 			: '';
 
@@ -233,7 +238,7 @@ class Reviews extends Base
 	 */
 	protected function reviewAvatar( $reviewAvatar )
 	{
-		if( $this->db->getOption( 'reviews.avatars.enabled', 'no' ) == 'no' )return;
+		if( $this->db->getOption( 'reviews.avatars.enabled' ) != 'yes' )return;
 
 		return sprintf( '<div class="glsr-review-avatar"><img src="%s" width="36" /></div>', $reviewAvatar );
 	}

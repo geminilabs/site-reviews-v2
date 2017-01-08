@@ -88,7 +88,7 @@ class SubmitReview
 	 */
 	protected function addNotificationLinks( $post_id, array $args )
 	{
-		if( $this->db->getOption( 'general.require.approval', false ) ) {
+		if( $this->db->getOption( 'general.require.approval' ) == 'yes' ) {
 
 			$review_approve_link = wp_nonce_url( admin_url( sprintf( 'post.php?post=%s&action=approve', $post_id ) ), 'approve-review_' . $post_id );
 			$review_discard_link = wp_nonce_url( admin_url( sprintf( 'post.php?post=%s&action=trash', $post_id ) ), 'trash-post_' . $post_id );
@@ -179,7 +179,7 @@ class SubmitReview
 	 */
 	protected function sendNotificationWebhook( Command $command, array $args )
 	{
-		if( !( $endpoint = $this->db->getOption( 'general.webhook_url' ) ) )return;
+		if( !( $endpoint = $this->db->getOption( 'general.webhook_url' )))return;
 
 		$fields = [];
 

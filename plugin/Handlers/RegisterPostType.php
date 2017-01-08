@@ -199,7 +199,7 @@ class RegisterPostType
 				break;
 
 			default:
-				echo apply_filters( "_populate_column_{$column}", '', $post->ID );
+				echo apply_filters( "site-reviews/columns/{$column}", '', $post->ID );
 				break;
 		}
 	}

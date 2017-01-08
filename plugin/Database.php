@@ -73,7 +73,7 @@ class Database implements Contract
 			'post_type'      => $this->app->post_type,
 		];
 
-		if( $this->getOption( 'general.require.approval', false ) && $meta['site_name'] == 'local' ) {
+		if( $this->getOption( 'general.require.approval' ) == 'yes' && $meta['site_name'] == 'local' ) {
 			$post_data['post_status'] = 'pending';
 		}
 

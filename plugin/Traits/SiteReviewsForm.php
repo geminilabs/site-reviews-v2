@@ -80,9 +80,9 @@ trait SiteReviewsForm
 	 */
 	public function renderRequireLogin()
 	{
-		$requireUser = glsr_resolve( 'Database' )->getOption( 'general.require.login', false );
+		$requireUser = glsr_resolve( 'Database' )->getOption( 'general.require.login' );
 
-		if( $requireUser && !is_user_logged_in() ) {
+		if( $requireUser == 'yes' && !is_user_logged_in() ) {
 			$message = sprintf(
 				__( 'You must be <a href="%s">logged in</a> to submit a review.', 'site-reviews' ),
 				wp_login_url( get_permalink() )
