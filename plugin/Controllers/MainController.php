@@ -204,6 +204,7 @@ class MainController extends BaseController
 			'columns'     => [
 				'title'    => '', // empty values use the default label
 				'category' => '',
+				'reviewer' => __( 'Author', 'site-reviews' ),
 				'type'     => __( 'Type', 'site-reviews' ),
 				'stars'    => __( 'Rating', 'site-reviews' ),
 				'sticky'   => __( 'Pinned', 'site-reviews' ),

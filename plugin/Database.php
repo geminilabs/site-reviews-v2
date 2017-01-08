@@ -120,7 +120,7 @@ class Database implements Contract
 			|| $post->post_type != $this->app->post_type
 		)return;
 
-		$meta = (object) $this->normalizeMeta( $this->getReviewMeta( $post->ID ));
+		$meta = $this->getReviewMeta( $post->ID );
 
 		$modified = $post->post_title != $meta->title
 			|| $post->post_content != $meta->content
@@ -245,17 +245,19 @@ class Database implements Contract
 	}
 
 	/**
-	 * Get an array of meta values for a review
+	 * Get an object of meta values for a review
 	 *
 	 * @param int $postId
 	 *
-	 * @return array
+	 * @return object
 	 */
 	public function getReviewMeta( $postId )
 	{
-		return get_post_type( $postId ) == $this->app->post_type
+		$meta = get_post_type( $postId ) == $this->app->post_type
 			? array_map( 'array_shift', (array) get_post_meta( $postId ))
 			: [];
+
+		return (object) $this->normalizeMeta( $meta );
 	}
 
 	/**
@@ -404,7 +406,7 @@ class Database implements Contract
 	 */
 	public function normalizeMeta( array $meta )
 	{
-		return shortcode_atts([
+		$defaults = [
 			'author'     => '',
 			'avatar'     => '',
 			'content'    => '',
@@ -418,7 +420,11 @@ class Database implements Contract
 			'status'     => '',
 			'title'      => '',
 			'url'        => '',
-		], $meta );
+		];
+
+		return !empty( $meta )
+			? shortcode_atts( $defaults, $meta )
+			: [];
 	}
 
 	/**

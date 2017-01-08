@@ -79,16 +79,20 @@ msgstr ""
 msgid "You can pin exceptional reviews so that they are always shown first in your widgets and shortcodes."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:197
+#: plugin/Controllers/MainController.php:196
 msgid "Review"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:198, views/menu/status.php:17
+#: plugin/Controllers/MainController.php:197, views/menu/status.php:17
 msgid "Reviews"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:199
+#: plugin/Controllers/MainController.php:198
 msgid "Site Reviews"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:207, plugin/Shortcodes/Buttons/SiteReviews.php:98
+msgid "Author"
 msgstr ""
 
 #: plugin/Controllers/MainController.php:208, views/edit/metabox-details.php:42
@@ -171,87 +175,79 @@ msgstr ""
 msgid "Settings updated."
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:121
+#: plugin/Controllers/ReviewController.php:124
 msgid "Approved"
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:122
+#: plugin/Controllers/ReviewController.php:125
 msgid "Unapproved"
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:158
-msgid "Approved (published)"
-msgstr ""
-
-#: plugin/Controllers/ReviewController.php:159
-msgid "Unapproved (pending review)"
-msgstr ""
-
-#: plugin/Controllers/ReviewController.php:221
+#: plugin/Controllers/ReviewController.php:189
 msgid "%s review updated."
 msgid_plural "%s reviews updated."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Controllers/ReviewController.php:222
+#: plugin/Controllers/ReviewController.php:190
 msgid "%s review not updated, somebody is editing it."
 msgid_plural "%s reviews not updated, somebody is editing them."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Controllers/ReviewController.php:223
+#: plugin/Controllers/ReviewController.php:191
 msgid "%s review permanently deleted."
 msgid_plural "%s reviews permanently deleted."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Controllers/ReviewController.php:224
+#: plugin/Controllers/ReviewController.php:192
 msgid "%s review moved to the Trash."
 msgid_plural "%s reviews moved to the Trash."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Controllers/ReviewController.php:225
+#: plugin/Controllers/ReviewController.php:193
 msgid "%s review restored from the Trash."
 msgid_plural "%s reviews restored from the Trash."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Controllers/ReviewController.php:264
+#: plugin/Controllers/ReviewController.php:232
 msgid "Anonymous"
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:267
+#: plugin/Controllers/ReviewController.php:235
 msgid "No Title"
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:271
+#: plugin/Controllers/ReviewController.php:239
 msgid "Please fix the submission errors."
 msgstr ""
 
-#: plugin/Handlers/RegisterPostType.php:252
+#: plugin/Handlers/RegisterPostType.php:271
 msgid "%s star"
 msgid_plural "%s stars"
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Handlers/RegisterPostType.php:256
+#: plugin/Handlers/RegisterPostType.php:275
 msgid "All ratings"
 msgstr ""
 
-#: plugin/Handlers/RegisterPostType.php:258
+#: plugin/Handlers/RegisterPostType.php:277
 msgid "Filter by rating"
 msgstr ""
 
-#: plugin/Handlers/RegisterPostType.php:276
+#: plugin/Handlers/RegisterPostType.php:295
 msgid "All types"
 msgstr ""
 
-#: plugin/Handlers/RegisterPostType.php:279, views/edit/metabox-details.php:7
+#: plugin/Handlers/RegisterPostType.php:298, views/edit/metabox-details.php:7
 msgid "Local Review"
 msgstr ""
 
-#: plugin/Handlers/RegisterPostType.php:282
+#: plugin/Handlers/RegisterPostType.php:301
 msgid "Filter by type"
 msgstr ""
 
@@ -315,35 +311,35 @@ msgstr ""
 msgid "More Info"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:78
+#: plugin/Html/Partials/Reviews.php:63
 msgid "No reviews were found."
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:137
+#: plugin/Html/Partials/Reviews.php:125
 msgid "<span class=\"meta-nav\">&larr;</span> Previous"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:143
+#: plugin/Html/Partials/Reviews.php:131
 msgid "Next <span class=\"meta-nav\">&rarr;</span>"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:149
+#: plugin/Html/Partials/Reviews.php:137
 msgid "Page"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:152
+#: plugin/Html/Partials/Reviews.php:140
 msgid "Next &rarr;"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:153
+#: plugin/Html/Partials/Reviews.php:141
 msgid "&larr; Previous"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:215
+#: plugin/Html/Partials/Reviews.php:208
 msgid "Site Reviews navigation"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:290
+#: plugin/Html/Partials/Reviews.php:289
 msgid "read more"
 msgstr ""
 
@@ -512,18 +508,34 @@ msgid "Display reviewer avatars. These are generated from the email address of t
 msgstr ""
 
 #: plugin/Settings.php:316
-msgid "Enable Excerpts"
+msgid "Enable Custom Dates"
 msgstr ""
 
 #: plugin/Settings.php:317
-msgid "Display an excerpt instead of the full review."
+msgid "The default date format is the one set in your <a href=\"%s\">WordPress settings<a>."
 msgstr ""
 
 #: plugin/Settings.php:323
-msgid "Excerpt Length"
+msgid "Date Format"
 msgstr ""
 
 #: plugin/Settings.php:325
+msgid "Enter a custom date format (<a href=\"%s\">documentation on date and time formatting</a>)."
+msgstr ""
+
+#: plugin/Settings.php:334
+msgid "Enable Excerpts"
+msgstr ""
+
+#: plugin/Settings.php:335
+msgid "Display an excerpt instead of the full review."
+msgstr ""
+
+#: plugin/Settings.php:341
+msgid "Excerpt Length"
+msgstr ""
+
+#: plugin/Settings.php:343
 msgid "Set the excerpt word length."
 msgstr ""
 
@@ -634,10 +646,6 @@ msgstr ""
 
 #: plugin/Shortcodes/Buttons/SiteReviews.php:90, plugin/Shortcodes/Buttons/SiteReviewsForm.php:54
 msgid "Hide"
-msgstr ""
-
-#: plugin/Shortcodes/Buttons/SiteReviews.php:98
-msgid "Author"
 msgstr ""
 
 #: plugin/Shortcodes/Buttons/SiteReviews.php:99, plugin/Widgets/SiteReviews.php:107
@@ -793,7 +801,7 @@ msgid "View review"
 msgstr ""
 
 #: plugin/Strings.php:58
-msgid "Local Reviews"
+msgid "Local"
 msgstr ""
 
 #: plugin/Strings.php:67

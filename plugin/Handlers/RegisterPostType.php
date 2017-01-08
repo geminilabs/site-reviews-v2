@@ -124,9 +124,10 @@ class RegisterPostType
 	 */
 	public function modifyColumnsSortable( array $columns )
 	{
-		$columns['type']   = 'site_name';
-		$columns['stars']  = 'rating';
-		$columns['sticky'] = 'pinned';
+		$columns['reviewer'] = 'reviewer';
+		$columns['stars']    = 'rating';
+		$columns['sticky']   = 'pinned';
+		$columns['type']     = 'site_name';
 
 		return $columns;
 	}
@@ -173,20 +174,31 @@ class RegisterPostType
 	{
 		global $post, $wp_version;
 
+		$meta = $this->db->getReviewMeta( $post->ID );
+
 		switch( $column ) {
+
+			case 'reviewer':
+				if( get_the_author()) {
+					$url = add_query_arg([
+						'author'    => get_the_author_meta( 'ID' ),
+						'post_type' => $post->post_type,
+					], 'edit.php' );
+					printf( '<a href="%s">%s</a>', esc_url( $url ), get_the_author());
+				}
+				else {
+					echo $meta->author;
+				}
+				break;
 
 			case 'stars':
 				$this->app->make( 'Html' )->renderPartial( 'rating', [
-					'stars' => get_post_meta( $post->ID, 'rating', true ),
+					'stars' => $meta->rating,
 				]);
 				break;
 
-			case 'type':
-				echo ucfirst( get_post_meta( $post->ID, 'site_name', true ) );
-				break;
-
 			case 'sticky':
-				$pinned = get_post_meta( $post->ID, 'pinned', true )
+				$pinned = $meta->pinned
 					? ' pinned'
 					: '';
 
@@ -195,7 +207,14 @@ class RegisterPostType
 					? file_get_contents( "{$this->app->path}assets/img/pinned.svg" )
 					: '';
 
-				echo sprintf( '<i class="dashicons dashicons-sticky%s" data-id="%s">%s</i>', $pinned, $post->ID, $fallback );
+				printf( '<i class="dashicons dashicons-sticky%s" data-id="%s">%s</i>', $pinned, $post->ID, $fallback );
+				break;
+
+			case 'type':
+				$types = $this->app->make( 'Strings' )->review_types();
+				echo isset( $types[ $meta->site_name ])
+					? $types[ $meta->site_name ]
+					: $meta->site_name;
 				break;
 
 			default:
@@ -316,6 +335,7 @@ class RegisterPostType
 		$orderby = $query->get( 'orderby' );
 
 		switch( $orderby ) {
+			case 'author':
 			case 'site_name':
 			case 'rating':
 			case 'pinned':
