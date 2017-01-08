@@ -22,6 +22,7 @@ class SiteReviews extends Generator
 	public function fields()
 	{
 		$types = glsr_resolve( 'Database' )->getReviewTypes();
+		$terms = glsr_resolve( 'Database' )->getTerms();
 
 		if( count( $types ) > 1 ) {
 			$display = [
@@ -30,6 +31,16 @@ class SiteReviews extends Generator
 				'label'   => esc_html__( 'Display', 'site-reviews' ),
 				'options' => $types,
 				'tooltip' => esc_attr__( 'Which reviews would you like to display?', 'site-reviews' ),
+			];
+		}
+
+		if( !empty( $terms )) {
+			$category = [
+				'type'    => 'listbox',
+				'name'    => 'category',
+				'label'   => esc_html__( 'Category', 'site-reviews' ),
+				'options' => $terms,
+				'tooltip' => esc_attr__( 'Limit reviews to this category.', 'site-reviews' ),
 			];
 		}
 
@@ -64,14 +75,9 @@ class SiteReviews extends Generator
 				],
 				'tooltip' => esc_attr__( 'What is the minimum rating to display?', 'site-reviews' ),
 			],
-				( isset( $display ) ? $display : [] ),
+			( isset( $display ) ? $display : [] ),
+			( isset( $category ) ? $category : [] ),
 			[
-				'type'    => 'listbox',
-				'name'    => 'category',
-				'label'   => esc_html__( 'Category', 'site-reviews' ),
-				'options' => glsr_resolve( 'Database' )->getTerms(),
-				'tooltip' => esc_attr__( 'Limit reviews to this category.', 'site-reviews' ),
-			],[
 				'type'    => 'listbox',
 				'name'    => 'pagination',
 				'label'   => esc_html__( 'Pagination', 'site-reviews' ),
