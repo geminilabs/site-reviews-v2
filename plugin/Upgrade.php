@@ -11,6 +11,7 @@
 namespace GeminiLabs\SiteReviews;
 
 use GeminiLabs\SiteReviews\App;
+use GeminiLabs\SiteReviews\Database;
 
 class Upgrade
 {
@@ -19,9 +20,51 @@ class Upgrade
 	 */
 	protected $app;
 
-	public function __construct( App $app )
+	/**
+	 * @var Database
+	 */
+	protected $db;
+
+	public function __construct( App $app, Database $db )
 	{
 		$this->app = $app;
+		$this->db  = $db;
+	}
+
+	/**
+	 * Migrate plugin options
+	 *
+	 * @return void
+	 */
+	public function options_200()
+	{
+		$defaults = [
+			'last_fetch'            => [],
+			'logging'               => 0,
+			'settings'              => [],
+			'version'               => '',
+			'version_upgraded_from' => '',
+		];
+
+		$oldOptions = [];
+
+		foreach( $defaults as $key => $fallback ) {
+			$optionName = sprintf( '%s_%s', $this->app->prefix, $key );
+			$oldOptions[ $key ] = get_option( $optionName, $fallback );
+			delete_option( $optionName );
+		}
+
+		if( isset( $oldOptions['settings']['form'] )) {
+			$oldOptions['settings']['reviews-form'] = $oldOptions['settings']['form'];
+			unset( $oldOptions['settings']['form'] );
+		}
+
+		$newOptions = get_option( $this->db->getOptionName(), [] );
+		$newOptions = array_replace_recursive( $oldOptions, $newOptions );
+
+		update_option( $this->db->getOptionName(), $newOptions );
+
+		$this->db->setDefaults();
 	}
 
 	/**
@@ -152,14 +195,12 @@ class Upgrade
 	 */
 	public function yesNo_200()
 	{
-		$db = $this->app->make( 'Database' );
-
 		foreach( ['general.require.approval', 'general.require.login'] as $option ) {
-			$value = $db->getOption( $option, false )
+			$value = $this->db->getOption( $option, false, 'settings' )
 				? 'yes'
 				: 'no';
 
-			$db->setOption( $option, $value );
+			$this->db->setOption( $option, $value, 'settings' );
 		}
 	}
 

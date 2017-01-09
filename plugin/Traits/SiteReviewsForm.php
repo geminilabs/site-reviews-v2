@@ -80,7 +80,7 @@ trait SiteReviewsForm
 	 */
 	public function renderRequireLogin()
 	{
-		$requireUser = glsr_resolve( 'Database' )->getOption( 'general.require.login' );
+		$requireUser = glsr_resolve( 'Database' )->getOption( 'settings.general.require.login' );
 
 		if( $requireUser == 'yes' && !is_user_logged_in() ) {
 			$message = sprintf(

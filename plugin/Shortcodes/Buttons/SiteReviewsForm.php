@@ -21,6 +21,18 @@ class SiteReviewsForm extends Generator
 	 */
 	public function fields()
 	{
+		$terms = glsr_resolve( 'Database' )->getTerms();
+
+		if( !empty( $terms )) {
+			$category = [
+				'type'    => 'listbox',
+				'name'    => 'category',
+				'label'   => esc_html__( 'Category', 'site-reviews' ),
+				'options' => $terms,
+				'tooltip' => esc_attr__( 'Automatically assign a category to reviews submitted with this shortcode.', 'site-reviews' ),
+			];
+		}
+
 		return [
 			[
 				'type' => 'container',
@@ -38,13 +50,9 @@ class SiteReviewsForm extends Generator
 				'minWidth' => 240,
 				'minHeight' => 60,
 				'multiline' => true,
-			],[
-				'type'    => 'listbox',
-				'name'    => 'category',
-				'label'   => esc_html__( 'Category', 'site-reviews' ),
-				'options' => glsr_resolve( 'Database' )->getTerms(),
-				'tooltip' => esc_attr__( 'Automatically assign a category to reviews submitted with this shortcode.', 'site-reviews' ),
-			],[
+			],
+			( isset( $category ) ? $category : [] ),
+			[
 				'type'     => 'textbox',
 				'name'     => 'class',
 				'label'    => esc_html__( 'Classes', 'site-reviews' ),

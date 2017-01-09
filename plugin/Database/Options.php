@@ -15,24 +15,25 @@ trait Options
 	protected $app;
 
 	/**
-	 * Get an option from the plugin settings array using dot notation
+	 * Get an option from the plugin options using dot notation
 	 *
-	 * @param string $path
-	 * @param mixed  $fallback
-	 * @param string $suffix
+	 * @param string      $path
+	 * @param mixed       $fallback
+	 * @param bool|string $isPluginSetting
 	 *
 	 * @return mixed
 	 */
-	public function getOption( $path = '', $fallback = '', $suffix = 'settings' )
+	public function getOption( $path, $fallback = '', $isPluginSetting = false )
 	{
-		$option = $this->getValueFromPath( $this->getOptions( $suffix ), $path, $fallback );
+		$option = $this->getValueFromPath( $path, $fallback, $this->getOptions( $isPluginSetting ));
 
-		// fallback to setting defaults
-		if( $suffix == 'settings' && empty( $option ) ) {
-			$defaults = $this->app->getDefaults();
+		// fallback to default settings
+		if( $isPluginSetting && empty( $option )) {
 
-			if( isset( $defaults[ $path ] ) ) {
-				$option = $defaults[ $path ];
+			$defaultPaths = $this->app->getDefaults();
+
+			if( isset( $defaultPaths[ $path ] ) ) {
+				$option = $defaultPaths[ $path ];
 			}
 		}
 
@@ -40,101 +41,57 @@ trait Options
 	}
 
 	/**
-	 * Get the options array from the plugin settings array
+	 * Get the plugin options database key
 	 *
-	 * @param string $suffix
-	 *
-	 * @return mixed
+	 * @return string
 	 */
-	public function getOptions( $suffix = 'settings' )
+	public function getOptionName()
 	{
-		return get_option( "{$this->app->prefix}_{$suffix}", [] );
+		return sprintf( '%s-v%d', $this->app->prefix, explode( '.', $this->app->version )[0] );
 	}
 
 	/**
-	 * Resets an option to the provided value and returns the old value
+	 * Get the plugin options array
 	 *
-	 * @param mixed  $value
-	 * @param string $path
-	 * @param string $suffix
-	 *
-	 * @return mixed
-	 */
-	public function resetOption( $value, $path = '', $suffix = 'settings' )
-	{
-		$option = $this->getOption( $path, '', $suffix );
-
-		$this->setOption( $value, $path, $suffix );
-
-		return $option;
-	}
-
-	/**
-	 * Sets an option to the plugin settings array using dot notation
-	 *
-	 * @param mixed  $value
-	 * @param string $path
-	 * @param string $suffix
-	 *
-	 * @return bool
-	 */
-	public function setOption( $value, $path = '', $suffix = 'settings' )
-	{
-		$option = get_option( "{$this->app->prefix}_{$suffix}", [] );
-		$option = $this->convertPathToArray( $path, $value, $option );
-
-		return update_option( "{$this->app->prefix}_{$suffix}", $option );
-	}
-
-	/**
-	 * Convert a dot-notation path to an array
-	 *
-	 * @param string $path
-	 * @param mixed  $value
-	 * @param mixed  $option
+	 * @param bool|string $isPluginSetting
 	 *
 	 * @return array
 	 */
-	public function convertPathToArray( $path, $value, $option )
+	public function getOptions( $isPluginSetting = false )
 	{
-		$token = strtok( $path, '.' );
+		$options = get_option( $this->getOptionName(), [] );
 
-		$ref = &$option;
-
-		while( $token !== false ) {
-			$ref = is_array( $ref ) ? $ref : [];
-			$ref = &$ref[ $token ];
-			$token = strtok( '.' );
+		if( $isPluginSetting == 'settings' ) {
+			$options = isset( $options['settings'] )
+				? $options['settings']
+				: [];
 		}
 
-		$ref = $value;
-
-		return $option;
+		return $options;
 	}
 
 	/**
-	 * Gets a value from an array using a dot-notation path
+	 * Get a value from an array of values using a dot-notation path as reference
 	 *
-	 * @param mixed  $options
 	 * @param string $path
 	 * @param mixed  $fallback
 	 *
 	 * @return null|mixed
 	 */
-	public function getValueFromPath( $options, $path, $fallback )
+	public function getValueFromPath( $path, $fallback, array $values )
 	{
-		if( empty( $path ) )return;
+		if( empty( $path ))return;
 
 		$keys = explode( '.', $path );
 
 		foreach( $keys as $key ) {
-			if( !isset( $options[ $key ] ) ) {
+			if( !isset( $values[ $key ] )) {
 				return $fallback;
 			}
-			$options = $options[ $key ];
+			$values = $values[ $key ];
 		}
 
-		return $options;
+		return $values;
 	}
 
 	/**
@@ -154,5 +111,71 @@ trait Options
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Resets an option to the provided value and returns the old value
+	 *
+	 * @param string      $path
+	 * @param mixed       $value
+	 * @param bool|string $isPluginSetting
+	 *
+	 * @return mixed
+	 */
+	public function resetOption( $path = '', $value, $isPluginSetting = false )
+	{
+		$option = $this->getOption( $path, '', $isPluginSetting );
+
+		$this->setOption( $path, $value, $isPluginSetting );
+
+		return $option;
+	}
+
+	/**
+	 * Sets an option to the plugin settings array using dot notation
+	 *
+	 * @param string      $path
+	 * @param mixed       $value
+	 * @param bool|string $isPluginSetting
+	 *
+	 * @return bool
+	 */
+	public function setOption( $path, $value, $isPluginSetting = false )
+	{
+		$options = $this->getOptions();
+
+		if( $isPluginSetting ) {
+			$options['settings'] = $this->setValueToPath( $value, $path, $options['settings'] );
+		}
+		else {
+			$options = $this->setValueToPath( $value, $path, $options );
+		}
+
+		return update_option( $this->getOptionName(), $options );
+	}
+
+	/**
+	 * Set a value to an array of values using a dot-notation path as reference
+	 *
+	 * @param mixed  $value
+	 * @param string $path
+	 *
+	 * @return array
+	 */
+	public function setValueToPath( $value, $path, array $values )
+	{
+		$token = strtok( $path, '.' );
+
+		$ref = &$values;
+
+		while( $token !== false ) {
+			$ref = is_array( $ref ) ? $ref : [];
+			$ref = &$ref[ $token ];
+			$token = strtok( '.' );
+		}
+
+		$ref = $value;
+
+		return $values;
 	}
 }

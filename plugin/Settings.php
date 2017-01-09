@@ -11,6 +11,7 @@
 namespace GeminiLabs\SiteReviews;
 
 use GeminiLabs\SiteReviews\App;
+use GeminiLabs\SiteReviews\Html;
 use ReflectionClass;
 use ReflectionMethod;
 
@@ -31,10 +32,10 @@ class Settings
 	 */
 	protected $settings;
 
-	public function __construct( App $app )
+	public function __construct( App $app, Html $html )
 	{
 		$this->app      = $app;
-		$this->html     = $app->make( 'Html' );
+		$this->html     = $html;
 		$this->settings = [];
 	}
 
@@ -47,6 +48,8 @@ class Settings
 	 */
 	public function addSetting( $formId, array $args )
 	{
+		$args = $this->normalizePaths( $formId, $args );
+
 		if( isset( $args['name'] ) ) {
 			$this->settings[ $args['name'] ] = $this->getDefault( $args );
 		}
@@ -84,6 +87,43 @@ class Settings
 	}
 
 	/**
+	 * @param string $path
+	 * @param string $prefix
+	 *
+	 * @return string
+	 */
+	public function normalizePath( $path, $prefix )
+	{
+		return substr( $path, 0, strlen( $prefix )) != $prefix
+			? sprintf( '%s.%s', $prefix, $path )
+			: $path;
+	}
+
+	/**
+	 * @param string $formID
+	 *
+	 * @return array
+	 */
+	public function normalizePaths( $formId, array $args )
+	{
+		$prefix = strtolower( str_replace( '/', '.', $formId ));
+
+		if( isset( $args['name'] ) && is_string( $args['name'] )) {
+			$args['name'] = $this->normalizePath( $args['name'], $prefix );
+		}
+
+		if( isset( $args['depends'] ) && is_array( $args['depends'] )) {
+			$depends = [];
+			foreach( $args['depends'] as $path => $value ) {
+				$depends[ $this->normalizePath( $path, $prefix ) ] = $value;
+			}
+			$args['depends'] = $depends;
+		}
+
+		return $args;
+	}
+
+	/**
 	 * Register the settings for each form
 	 *
 	 * @return void
@@ -103,6 +143,9 @@ class Settings
 		}
 	}
 
+	/**
+	 * @return void
+	 */
 	protected function setGeneral()
 	{
 		$formId = 'settings/general';
@@ -115,7 +158,7 @@ class Settings
 
 		$this->addSetting( $formId, [
 			'type'    => 'yesno_inline',
-			'name'    => 'general.require.approval',
+			'name'    => 'require.approval',
 			'label'   => __( 'Require approval', 'site-reviews' ),
 			'default' => 'yes',
 			'desc'    => __( 'Set the status of new review submissions to pending.', 'site-reviews' ),
@@ -123,14 +166,14 @@ class Settings
 
 		$this->addSetting( $formId, [
 			'type'  => 'yesno_inline',
-			'name'  => 'general.require.login',
+			'name'  => 'require.login',
 			'label' => __( 'Require login', 'site-reviews' ),
 			'desc'  => __( 'Only allow review submissions from registered users.', 'site-reviews' ),
 		]);
 
 		$this->addSetting( $formId, [
 			'type'    => 'radio',
-			'name'    => 'general.notification',
+			'name'    => 'notification',
 			'label'   => __( 'Notifications', 'site-reviews' ),
 			'default' => 'none',
 			'options' => [
@@ -143,20 +186,20 @@ class Settings
 
 		$this->addSetting( $formId, [
 			'type'    => 'text',
-			'name'    => 'general.notification_email',
+			'name'    => 'notification_email',
 			'label'   => __( 'Send notification emails to', 'site-reviews' ),
 			'depends' => [
-				'general.notification' => 'custom',
+				'notification' => 'custom',
 			],
 			'placeholder' => __( 'Separate multiple emails with a comma', 'site-reviews' ),
 		]);
 
 		$this->addSetting( $formId, [
 			'type'    => 'url',
-			'name'    => 'general.webhook_url',
+			'name'    => 'webhook_url',
 			'label'   => __( 'Webhook URL', 'site-reviews' ),
 			'depends' => [
-				'general.notification' => 'webhook',
+				'notification' => 'webhook',
 			],
 			'desc' => sprintf(
 				__( 'To send notifications to Slack, <a href="%s">create a new Incoming WebHook</a> and then paste the provided Webhook URL in the field above.', 'site-reviews' ),
@@ -166,11 +209,11 @@ class Settings
 
 		$this->addSetting( $formId, [
 			'type'    => 'code',
-			'name'    => 'general.notification_message',
+			'name'    => 'notification_message',
 			'label'   => __( 'Notification template', 'site-reviews' ),
 			'rows'    => 9,
 			'depends' => [
-				'general.notification' => ['custom', 'default', 'webhook'],
+				'notification' => ['custom', 'default', 'webhook'],
 			],
 			'default' => $this->html->renderTemplate( 'email/templates/review-notification', [], 'return' ),
 			'desc' => 'To restore the default text, save an empty template.
@@ -186,6 +229,9 @@ class Settings
 		]);
 	}
 
+	/**
+	 * @return void
+	 */
 	protected function setReviewsForm()
 	{
 		$formId = 'settings/reviews-form';
@@ -204,7 +250,7 @@ class Settings
 
 		$this->addSetting( $formId, [
 			'type'  => 'text',
-			'name'  => 'form.rating.label',
+			'name'  => 'rating.label',
 			'label' => __( 'Rating label', 'site-reviews' ),
 			'placeholder' => __( 'Your overall rating', 'site-reviews' ),
 			'default' => ':placeholder',
@@ -212,7 +258,7 @@ class Settings
 
 		$this->addSetting( $formId, [
 			'type'  => 'text',
-			'name'  => 'form.title.label',
+			'name'  => 'title.label',
 			'label' => __( 'Title label', 'site-reviews' ),
 			'placeholder' => __( 'Title of your review', 'site-reviews' ),
 			'default' => ':placeholder',
@@ -220,7 +266,7 @@ class Settings
 
 		$this->addSetting( $formId, [
 			'type'  => 'text',
-			'name'  => 'form.content.label',
+			'name'  => 'content.label',
 			'label' => __( 'Content label', 'site-reviews' ),
 			'placeholder' => __( 'Your review', 'site-reviews' ),
 			'default' => ':placeholder',
@@ -228,7 +274,7 @@ class Settings
 
 		$this->addSetting( $formId, [
 			'type'  => 'text',
-			'name'  => 'form.name.label',
+			'name'  => 'name.label',
 			'label' => __( 'Name label', 'site-reviews' ),
 			'placeholder' => __( 'Your name', 'site-reviews' ),
 			'default' => ':placeholder',
@@ -236,7 +282,7 @@ class Settings
 
 		$this->addSetting( $formId, [
 			'type'  => 'text',
-			'name'  => 'form.email.label',
+			'name'  => 'email.label',
 			'label' => __( 'Email label', 'site-reviews' ),
 			'placeholder' => __( 'Your email', 'site-reviews' ),
 			'default' => ':placeholder',
@@ -244,7 +290,7 @@ class Settings
 
 		$this->addSetting( $formId, [
 			'type'  => 'textarea',
-			'name'  => 'form.terms.label',
+			'name'  => 'terms.label',
 			'label' => __( 'Terms label', 'site-reviews' ),
 			'placeholder' => __( 'This review is based on my own experience and is my genuine opinion.', 'site-reviews' ),
 			'default' => ':placeholder',
@@ -258,7 +304,7 @@ class Settings
 
 		$this->addSetting( $formId, [
 			'type'  => 'text',
-			'name'  => 'form.title.placeholder',
+			'name'  => 'title.placeholder',
 			'class' => 'large-text',
 			'label' => __( 'Title placeholder', 'site-reviews' ),
 			'placeholder' => __( 'Summarize your review or highlight an interesting detail', 'site-reviews' ),
@@ -267,7 +313,7 @@ class Settings
 
 		$this->addSetting( $formId, [
 			'type'  => 'text',
-			'name'  => 'form.content.placeholder',
+			'name'  => 'content.placeholder',
 			'class' => 'large-text',
 			'label' => __( 'Content placeholder', 'site-reviews' ),
 			'placeholder' => __( 'Tell people your review', 'site-reviews' ),
@@ -276,7 +322,7 @@ class Settings
 
 		$this->addSetting( $formId, [
 			'type'  => 'text',
-			'name'  => 'form.name.placeholder',
+			'name'  => 'name.placeholder',
 			'class' => 'large-text',
 			'label' => __( 'Name placeholder', 'site-reviews' ),
 			'placeholder' => __( 'Tell us your name', 'site-reviews' ),
@@ -285,7 +331,7 @@ class Settings
 
 		$this->addSetting( $formId, [
 			'type'  => 'text',
-			'name'  => 'form.email.placeholder',
+			'name'  => 'email.placeholder',
 			'class' => 'large-text',
 			'label' => __( 'Email placeholder', 'site-reviews' ),
 			'placeholder' => __( 'Tell us your email', 'site-reviews' ),
@@ -293,6 +339,9 @@ class Settings
 		]);
 	}
 
+	/**
+	 * @return void
+	 */
 	protected function setReviews()
 	{
 		$formId = 'settings/reviews';
@@ -305,44 +354,44 @@ class Settings
 
 		$this->addSetting( $formId, [
 			'type'  => 'yesno_inline',
-			'name'  => 'reviews.avatars.enabled',
+			'name'  => 'avatars.enabled',
 			'label' => __( 'Enable Avatars', 'site-reviews' ),
 			'desc'  => __( 'Display reviewer avatars. These are generated from the email address of the reviewer using <a href="https://gravatar.com">Gravatar</a>.', 'site-reviews' ),
 		]);
 
 		$this->addSetting( $formId, [
 			'type'  => 'yesno_inline',
-			'name'  => 'reviews.date.enabled',
+			'name'  => 'date.enabled',
 			'label' => __( 'Enable Custom Dates', 'site-reviews' ),
 			'desc'  => sprintf( __( 'The default date format is the one set in your <a href="%s">WordPress settings<a>.', 'site-reviews' ), get_admin_url( null, 'options-general.php' ) ),
 		]);
 
 		$this->addSetting( $formId, [
 			'type'    => 'text',
-			'name'    => 'reviews.date.format',
+			'name'    => 'date.format',
 			'label'   => __( 'Date Format', 'site-reviews' ),
 			'default' => get_option( 'date_format' ),
 			'desc'    => sprintf( __( 'Enter a custom date format (<a href="%s">documentation on date and time formatting</a>).', 'site-reviews' ), 'https://codex.wordpress.org/Formatting_Date_and_Time' ),
 			'depends' => [
-				'reviews.date.enabled' => 'yes',
+				'date.enabled' => 'yes',
 			],
 		]);
 
 		$this->addSetting( $formId, [
 			'type'  => 'yesno_inline',
-			'name'  => 'reviews.excerpt.enabled',
+			'name'  => 'excerpt.enabled',
 			'label' => __( 'Enable Excerpts', 'site-reviews' ),
 			'desc'  => __( 'Display an excerpt instead of the full review.', 'site-reviews' ),
 		]);
 
 		$this->addSetting( $formId, [
 			'type'    => 'number',
-			'name'    => 'reviews.excerpt.length',
+			'name'    => 'excerpt.length',
 			'label'   => __( 'Excerpt Length', 'site-reviews' ),
 			'default' => '55',
 			'desc'    => __( 'Set the excerpt word length.', 'site-reviews' ),
 			'depends' => [
-				'reviews.excerpt.enabled' => 'yes',
+				'excerpt.enabled' => 'yes',
 			],
 		]);
 	}

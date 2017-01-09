@@ -264,10 +264,14 @@ class MainController extends BaseController
 	 */
 	public function registerSettings()
 	{
-		register_setting( "{$this->app->id}-settings", "{$this->app->prefix}_settings", [ $this, 'sanitizeSettings'] );
-		register_setting( "{$this->app->id}-logging", "{$this->app->prefix}_logging", [ $this, 'sanitizeLogging'] );
+		$optionName = $this->db->getOptionName();
 
-		// register the settings form fields
+		$settings = apply_filters( 'site-reviews/settings', ['logging', 'settings'] );
+
+		foreach( $settings as $setting ) {
+			register_setting( sprintf( '%s-%s', $this->app->id, $setting ), $optionName, [ $this, 'sanitizeSettings' ] );
+		}
+
 		$this->app->make( 'Settings' )->register();
 	}
 
@@ -581,34 +585,29 @@ class MainController extends BaseController
 	/**
 	 * register_setting() callback
 	 *
-	 * @param int $input
-	 *
-	 * @return int
-	 */
-	public function sanitizeLogging( $input )
-	{
-		$message = $input
-			? __( 'Logging enabled.', 'site-reviews' )
-			: __( 'Logging disabled.', 'site-reviews' );
-
-		$this->notices->addSuccess( $message );
-
-		return $input;
-	}
-
-	/**
-	 * register_setting() callback
-	 *
 	 * @return array
 	 */
 	public function sanitizeSettings( array $input )
 	{
-		$settings = $this->db->getOptions();
+		$key = key( $input );
+		$message = '';
 
-		$this->notices->addSuccess( __( 'Settings updated.', 'site-reviews' ) );
+		if( $key == 'logging' ) {
+			$message = $input[ $key ]
+				? __( 'Logging enabled.', 'site-reviews' )
+				: __( 'Logging disabled.', 'site-reviews' );
+		}
+		else if( $key == 'settings' ) {
+			$message = __( 'Settings updated.', 'site-reviews' );
+		}
 
-		// Merge the settings tab section arrays
-		return array_merge( $settings, $input );
+		$message = apply_filters( 'site-reviews/settings/notice', $message, $key );
+
+		if( $message ) {
+			$this->notices->addSuccess( $message );
+		}
+
+		return array_replace_recursive( $this->db->getOptions(), $input );
 	}
 
 	/**

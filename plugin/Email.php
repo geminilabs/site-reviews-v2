@@ -147,7 +147,7 @@ class Email
 	{
 		$html = $this->app->make( 'Html' );
 
-		$template = trim( $this->app->make( 'Database' )->getOption( 'general.notification_message' ) );
+		$template = trim( $this->app->make( 'Database' )->getOption( 'settings.general.notification_message' ) );
 
 		if( !empty( $template ) ) {
 			$message = $html->renderTemplateString( $template, $email['template-tags'], 'return' );

@@ -68,7 +68,7 @@ final class App extends Container
 
 		// Action Hooks
 		add_action( 'plugins_loaded',                        [ $this, 'registerAddons'] );
-		add_action( 'upgrader_process_complete',             [ $this, 'upgrade'], 10, 2 );
+		add_action( 'upgrader_process_complete',             [ $this, 'upgrader'], 10, 2 );
 		add_action( 'admin_enqueue_scripts',                 [ $main, 'enqueueAssets'] );
 		add_action( 'wp_enqueue_scripts',                    [ $main, 'enqueueAssets'] );
 		add_action( 'admin_menu',                            [ $main, 'registerMenuCount'] );
@@ -118,9 +118,8 @@ final class App extends Container
 	{
 		$this->updateVersion();
 
-		update_option( "{$this->prefix}_logging", 0 );
-
 		$this->make( 'Database' )->setDefaults();
+		$this->make( 'Database' )->setOption( 'logging', 0 );
 
 		// Schedule session purge
 		if( !wp_next_scheduled( 'site-reviews/schedule/session/purge' ) ) {
@@ -150,10 +149,15 @@ final class App extends Container
 	public function getDefaults()
 	{
 		if( !$this->defaults ) {
+
 			$this->defaults = $this->make( 'Settings' )->getSettings();
 
 			// Allow addons to modify the default settings
 			$this->defaults = apply_filters( 'site-reviews/addon/defaults', $this->defaults );
+
+			if( empty( $this->make( 'Database' )->getOptions() )) {
+				$this->upgrade();
+			}
 		}
 
 		return $this->defaults;
@@ -188,36 +192,35 @@ final class App extends Container
 	 */
 	public function updateVersion( $current = '' )
 	{
-		if( empty( $current ) ) {
-			$current = get_option( "{$this->prefix}_version" );
+		$db = $this->make( 'Database' );
+
+		if( empty( $current )) {
+			$current = $db->getOption( 'version' );
 		}
 
-		if( version_compare( $current, $this->version, '<' ) ) {
-			update_option( "{$this->prefix}_version", $this->version );
-			update_option( "{$this->prefix}_version_upgraded_from", $current );
+		if( version_compare( $current, $this->version, '<' )) {
+			$db->setOption( 'version', $this->version );
+		}
+
+		if( $current != $this->version ) {
+			$db->setOption( 'version_upgraded_from', $current );
 		}
 	}
 
 	/**
-	 * Runs on plugin upgrade
-	 *
-	 * @param mixed $upgrader
+	 * Upgrade routine
 	 *
 	 * @return void
 	 */
-	public function upgrade( $upgrader, array $data )
+	public function upgrade()
 	{
-		if( $data['action'] != 'update'
-			|| $data['type'] != 'plugin'
-			|| !in_array( plugin_basename( $this->file ), $data['packages'] )
-		)return;
-
-		$version = get_option( "{$this->prefix}_version" );
+		$version = $this->make( 'Database' )->getOption( 'version' );
 
 		if( version_compare( $version, '2.0.0', '<' ) ) {
 
 			$upgrade = $this->make( 'Upgrade' );
 
+			$upgrade->options_200();
 			$upgrade->sidebarWidgets_200();
 			$upgrade->siteName_200();
 			$upgrade->themeMods_200();
@@ -227,5 +230,22 @@ final class App extends Container
 		}
 
 		$this->updateVersion( $version );
+	}
+
+	/**
+	 * Runs on plugin upgrade
+	 *
+	 * @param mixed $upgrader
+	 *
+	 * @return null|void
+	 */
+	public function upgrader( $upgrader, array $data )
+	{
+		if( !in_array( plugin_basename( $this->file ), $data['packages'] )
+			|| $data['action'] != 'update'
+			|| $data['type'] != 'plugin'
+		)return;
+
+		$this->upgrade();
 	}
 }

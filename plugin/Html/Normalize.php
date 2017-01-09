@@ -315,12 +315,12 @@ class Normalize
 		foreach( $filtered as $key => $value ) {
 			if( !in_array( $key, $this->booleanAttributes ) )continue;
 
-			if( $value === false ) {
-				unset( $filtered[ $key ] );
-			}
-			else {
+			if( $value !== false ) {
 				$filtered[ $key ] = '';
+				continue;
 			}
+
+			unset( $filtered[ $key ] );
 		}
 
 		$filteredKeys = array_filter( array_keys( $filtered ), function( $key ) use ( $filtered ) {

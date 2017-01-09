@@ -93,8 +93,8 @@ class Reviews extends Base
 		$text = wpautop( $text );
 		$text = str_replace( ']]>', ']]&gt;', $text );
 
-		if( $this->db->getOption( 'reviews.excerpt.enabled' ) == 'yes' ) {
-			$wordCount = $this->db->getOption( 'reviews.excerpt.length', $wordCount );
+		if( $this->db->getOption( 'settings.reviews.excerpt.enabled' ) == 'yes' ) {
+			$wordCount = $this->db->getOption( 'settings.reviews.excerpt.length', $wordCount );
 			$text = wp_trim_words( $text, $wordCount, $more );
 		}
 
@@ -222,7 +222,7 @@ class Reviews extends Base
 	{
 		if( wp_validate_boolean( $hideAuthor ) )return;
 
-		$dash = $this->db->getOption( 'reviews.avatars.enabled' ) != 'yes'
+		$dash = $this->db->getOption( 'settings.reviews.avatars.enabled' ) != 'yes'
 			? '&mdash;'
 			: '';
 
@@ -238,7 +238,7 @@ class Reviews extends Base
 	 */
 	protected function reviewAvatar( $reviewAvatar )
 	{
-		if( $this->db->getOption( 'reviews.avatars.enabled' ) != 'yes' )return;
+		if( $this->db->getOption( 'settings.reviews.avatars.enabled' ) != 'yes' )return;
 
 		return sprintf( '<div class="glsr-review-avatar"><img src="%s" width="36" /></div>', $reviewAvatar );
 	}
@@ -302,8 +302,8 @@ class Reviews extends Base
 		$date = '';
 
 		if( !wp_validate_boolean( $args['hide_date'] ) ) {
-			$format = $this->db->getOption( 'reviews.date.enabled' ) == 'yes'
-				? $this->db->getOption( 'reviews.date.format', 'M j, Y' )
+			$format = $this->db->getOption( 'settings.reviews.date.enabled' ) == 'yes'
+				? $this->db->getOption( 'settings.reviews.date.format', 'M j, Y' )
 				: get_option( 'date_format' );
 
 			$date = sprintf( '<span class="glsr-review-date">%s</span> ', date_i18n( $format, strtotime( $review->date )));

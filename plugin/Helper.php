@@ -80,7 +80,9 @@ class Helper
 	 */
 	protected function getOption( $optionPath, $fallback )
 	{
-		return $this->db->getOption( $optionPath, $fallback );
+		return !empty( $optionPath )
+			? $this->db->getOption( $optionPath, $fallback )
+			: $this->db->getOptions();
 	}
 
 	/**

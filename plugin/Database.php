@@ -11,11 +11,11 @@
 namespace GeminiLabs\SiteReviews;
 
 use GeminiLabs\SiteReviews\App;
-use GeminiLabs\SiteReviews\Database\Contract;
 use GeminiLabs\SiteReviews\Database\Options;
+use GeminiLabs\SiteReviews\Database\OptionsContract;
 use WP_Query;
 
-class Database implements Contract
+class Database implements OptionsContract
 {
 	use Options;
 
@@ -73,7 +73,7 @@ class Database implements Contract
 			'post_type'      => $this->app->post_type,
 		];
 
-		if( $this->getOption( 'general.require.approval' ) == 'yes' && $meta['review_type'] == 'local' ) {
+		if( $this->getOption( 'settings.general.require.approval' ) == 'yes' && $meta['review_type'] == 'local' ) {
 			$post_data['post_status'] = 'pending';
 		}
 
@@ -513,21 +513,19 @@ class Database implements Contract
 	public function setDefaults( array $args = [] )
 	{
 		$defaults = [
-			'data'   => null, // provide custom data as defaults
+			'data'   => null, // provide custom data instead of using defaults
 			'merge'  => true, // merge defaults with existing saved settings
 			'update' => true, // save generated defaults to database
 		];
 
 		$args = shortcode_atts( $defaults, $args );
 
-		$currentSettings = $args['merge']
-			? get_option( "{$this->app->prefix}_settings", [] )
-			: [];
+		is_array( $args['data'] ) ?: $args['data'] = $this->app->getDefaults();
 
-		$currentSettings = $this->removeEmptyValuesFrom( $currentSettings );
 		$defaultSettings = [];
-
-		$args['data'] ?: $args['data'] = $this->app->getDefaults();
+		$currentSettings = $args['merge']
+			? $this->removeEmptyValuesFrom( $this->getOptions( 'settings' ))
+			: [];
 
 		foreach( $args['data'] as $path => $value ) {
 			// Don't save the default selector values as they are used anyway by default.
@@ -535,13 +533,16 @@ class Database implements Contract
 				$value = '';
 			}
 
-			$defaultSettings = $this->convertPathToArray( $path, $value, $defaultSettings );
+			$defaultSettings = $this->setValueToPath( $value, $path, $defaultSettings );
 		}
 
 		$settings = array_replace_recursive( $defaultSettings, $currentSettings );
 
 		if( $args['update'] ) {
-			update_option( "{$this->app->prefix}_settings", $settings );
+			$option = get_option( $this->getOptionName(), [] );
+			$option = array_replace_recursive( $option, $settings );
+
+			update_option( $this->getOptionName(), $option );
 		}
 
 		return $settings;

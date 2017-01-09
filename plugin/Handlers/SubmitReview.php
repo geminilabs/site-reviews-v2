@@ -88,7 +88,7 @@ class SubmitReview
 	 */
 	protected function addNotificationLinks( $post_id, array $args )
 	{
-		if( $this->db->getOption( 'general.require.approval' ) == 'yes' ) {
+		if( $this->db->getOption( 'settings.general.require.approval' ) == 'yes' ) {
 
 			$review_approve_link = wp_nonce_url( admin_url( sprintf( 'post.php?post=%s&action=approve', $post_id ) ), 'approve-review_' . $post_id );
 			$review_discard_link = wp_nonce_url( admin_url( sprintf( 'post.php?post=%s&action=trash', $post_id ) ), 'trash-post_' . $post_id );
@@ -137,7 +137,7 @@ class SubmitReview
 	 */
 	protected function sendNotification( $post_id, Command $command )
 	{
-		$notificationType = $this->db->getOption( 'general.notification', 'none' );
+		$notificationType = $this->db->getOption( 'settings.general.notification', 'none' );
 
 		if( !in_array( $notificationType, ['default', 'custom', 'webhook'] ) )return;
 
@@ -166,7 +166,7 @@ class SubmitReview
 	{
 		$args['recipient'] = 'default' === $args['notification_type']
 			? get_option( 'admin_email' )
-			: $this->db->getOption( 'general.notification_email' );
+			: $this->db->getOption( 'settings.general.notification_email' );
 
 		// no email address has been set
 		if( empty( $args['recipient'] ) )return;
@@ -179,7 +179,7 @@ class SubmitReview
 	 */
 	protected function sendNotificationWebhook( Command $command, array $args )
 	{
-		if( !( $endpoint = $this->db->getOption( 'general.webhook_url' )))return;
+		if( !( $endpoint = $this->db->getOption( 'settings.general.webhook_url' )))return;
 
 		$fields = [];
 

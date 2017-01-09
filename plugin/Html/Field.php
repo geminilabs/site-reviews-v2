@@ -287,7 +287,7 @@ class Field
 		$prefix = $args['prefix'];
 
 		return ( '' === trim( $prefix ) && $prefix !== false )
-			? "{$this->app->prefix}_settings"
+			? $this->app->make( 'Database' )->getOptionName()
 			: $prefix;
 	}
 
