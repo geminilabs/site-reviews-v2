@@ -19,6 +19,7 @@ defined( 'WPINC' ) || die;
 
 require_once __DIR__ . '/activate.php';
 require_once __DIR__ . '/autoload.php';
+require_once __DIR__ . '/compatibility.php';
 
 use GeminiLabs\SiteReviews\App;
 use GeminiLabs\SiteReviews\Providers\MainProvider;
@@ -51,11 +52,11 @@ function glsr_debug() {
 }
 
 /**
- * Global helper to get a setting option
+ * Global helper to get a plugin option
  *
  * @return mixed
  */
-function glsr_get_option( $option_path, $fallback = '' ) {
+function glsr_get_option( $option_path = '', $fallback = '' ) {
 	return App::load()->make( 'Helper' )->get( 'option', $option_path, $fallback );
 }
 
@@ -84,25 +85,4 @@ function glsr_get_reviews( array $args = [] ) {
  */
 function glsr_resolve( $alias ) {
 	return App::load()->make( $alias );
-}
-
-// Wordpress 4.0-4.2 support
-if( !function_exists( 'wp_roles' ) ) {
-	function wp_roles() {
-		global $wp_roles;
-		isset( $wp_roles ) ?: $wp_roles = new WP_Roles;
-		return $wp_roles;
-	}
-}
-
-// Wordpress 4.0-4.2 support
-if( !function_exists( 'get_avatar_url' ) ) {
-	function get_avatar_url( $id_or_email, $args = null ) {
-		isset( $args['size'] ) ?: $args['size'] = 96;
-		isset( $args['default'] ) ?: $args['default'] = 'mystery';
-		$avatar = get_avatar( $id_or_email, $args['size'], $args['default'] );
-		$dom = new \DOMDocument;
-		$dom->loadHTML( $avatar );
-		return $dom->getElementsByTagName( 'img' )->item(0)->getAttribute( 'src' );
-	}
 }
