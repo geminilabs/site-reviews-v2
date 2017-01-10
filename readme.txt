@@ -92,7 +92,7 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 
 == Changelog ==
 
-= 2.0.0 (2017-01-08) =
+= 2.0.0 (2017-01-10) =
 
 * [feature] Helper functions to easily access review meta
 * [feature] MCE shortcode button dropdown
@@ -100,6 +100,7 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 * [feature] Review categories
 * [breaking] Changed internal widget/shortcode hook names
 * [breaking] Changed shortcode variables
+* [breaking] Consolidated all plugin settings into a single setting variable
 * Custom Published/Pending labels
 * New settings page for reviews
 * Removed "site-reviews/reviews/excerpt_length" filter hook
