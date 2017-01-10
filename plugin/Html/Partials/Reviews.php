@@ -90,13 +90,14 @@ class Reviews extends Base
 		$text = strip_shortcodes( $text );
 		$text = wptexturize( $text );
 		$text = convert_smilies( $text );
-		$text = wpautop( $text );
 		$text = str_replace( ']]>', ']]&gt;', $text );
 
 		if( $this->db->getOption( 'settings.reviews.excerpt.enabled' ) == 'yes' ) {
 			$wordCount = $this->db->getOption( 'settings.reviews.excerpt.length', $wordCount );
 			$text = wp_trim_words( $text, $wordCount, $more );
 		}
+
+		$text = wpautop( $text );
 
 		return $text;
 	}
