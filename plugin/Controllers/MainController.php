@@ -244,8 +244,9 @@ class MainController extends BaseController
 		$newActions = [];
 
 		foreach( $atts as $key => $values ) {
-			$newActions[ $key ] = sprintf( '<a href="%s" aria-label="%s">%s</a>',
+			$newActions[ $key ] = sprintf( '<a href="%s" class="change-%s-status" aria-label="%s">%s</a>',
 				$values['href'],
+				$this->app->post_type,
 				$values['aria-label'],
 				$values['text']
 			);

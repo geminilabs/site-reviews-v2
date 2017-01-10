@@ -11,10 +11,23 @@
 namespace GeminiLabs\SiteReviews\Controllers;
 
 use GeminiLabs\SiteReviews\Controllers\BaseController;
+use GeminiLabs\SiteReviews\Commands\ChangeStatus;
 use GeminiLabs\SiteReviews\Commands\TogglePinned;
 
 class AjaxController extends BaseController
 {
+	/**
+	 * Change a review status
+	 *
+	 * @since 2.0.0
+	 */
+	public function ajaxChangeReviewStatus( $request )
+	{
+		$response = $this->execute( new ChangeStatus( $request ));
+
+		wp_send_json( $response );
+	}
+
 	/**
 	 * Clears the log
 	 */

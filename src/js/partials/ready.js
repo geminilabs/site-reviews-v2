@@ -36,6 +36,7 @@ x( function()
 
 	x( document ).on( 'click', '.glsr-mce-button', GLSR.shortcode.toggle );
 	x( document ).on( 'click', '.glsr-mce-menu-item', GLSR.shortcode.trigger );
+	x( document ).on( 'click', 'a.change-site-review-status', GLSR.onChangeStatus );
 
 	// WP 4.0 - 4.2 support: toggle list table rows on small screens
 	x( document ).on( 'click', '.branch-4 .toggle-row, .branch-4-1 .toggle-row, .branch-4-2 .toggle-row', function() {

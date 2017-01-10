@@ -46,6 +46,12 @@ GLSR.insertNotices = function( notices )
 	x( document ).trigger( 'wp-updates-notice-added' );
 };
 
+GLSR.isUndefined = function( value )
+{
+	var undefined = void(0);
+	return value === undefined;
+};
+
 GLSR.normalizeValue = function( value )
 {
 	if(['true','on','1'].indexOf( value ) > -1 ) {
@@ -64,32 +70,40 @@ GLSR.normalizeValues = function( array )
 	return array.map( GLSR.normalizeValue );
 };
 
-GLSR.onClearLog = function( ev )
+GLSR.onChangeStatus = function( ev )
 {
-	ev.preventDefault();
+	var post_id = this.href.match(/post=([0-9]+)/)[1];
+	var status  = this.href.match(/action=([a-z]+)/)[1];
 
-	var el = x( this );
+	if( GLSR.isUndefined( status ) || GLSR.isUndefined( post_id ))return;
 
-	if( el.is( ':disabled' ) )return;
-
-	var data = {
-		action: site_reviews.action,
-		request: {
-			action: 'clear-log',
-		},
+	var request = {
+		action: 'change-review-status',
+		status : status,
+		post_id: post_id,
 	};
 
-	el.prop( 'disabled', true );
+	GLSR.postAjax( ev, request, function( response )
+	{
+		var el = x( ev.target );
 
-	x.post( site_reviews.ajaxurl, data, function( response )
+		el.closest( 'tr' ).removeClass( 'status-pending status-publish' ).addClass( response.class );
+		el.closest( 'td.column-title' ).find( 'strong' ).html( response.link );
+	});
+};
+
+GLSR.onClearLog = function( ev )
+{
+	var request = {
+		action: 'clear-log',
+	};
+
+	GLSR.postAjax( ev, request, function( response )
 	{
 		GLSR.insertNotices( response.notices );
 
 		x( '#log-file' ).val( response.log );
-
-		el.prop( 'disabled', false );
-
-	}, 'json' );
+	});
 };
 
 GLSR.onFieldChange = function()
@@ -146,6 +160,32 @@ GLSR.pointers = function( pointer )
 		x( pointer.target ).pointer( 'reposition' );
 	});
 };
+
+GLSR.postAjax = function( event, request, callback )
+{
+	event.preventDefault();
+
+	var el = x( event.target );
+
+	if( el.is( ':disabled' ))return;
+
+	var data = {
+		action: site_reviews.action,
+		request: request,
+	};
+
+	el.prop( 'disabled', true );
+
+	x.post( site_reviews.ajaxurl, data, function( response ) {
+
+		if( typeof callback === 'function' ) {
+			callback( response );
+		}
+
+		el.prop( 'disabled', false );
+
+	}, 'json' );
+}
 
 GLSR.textareaResize = function( el )
 {
