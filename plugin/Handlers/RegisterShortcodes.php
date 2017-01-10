@@ -26,7 +26,7 @@ class RegisterShortcodes
 
 				$shortcodeClass = glsr_resolve( 'Helper' )->buildClassName( $key, 'GeminiLabs\SiteReviews\Shortcodes' );
 
-				add_shortcode( $key, [ $shortcodeClass, 'printShortcode']);
+				add_shortcode( $key, [ glsr_resolve( $shortcodeClass ), 'printShortcode'] );
 			}
 			catch( Exception $e ) {
 				glsr_resolve( 'Log\Logger' )->error( sprintf( 'Error registering shortcode. Message: %s "(%s:%s)"',

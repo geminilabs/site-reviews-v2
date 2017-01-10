@@ -385,6 +385,6 @@ class ReviewController extends BaseController
 			: add_query_arg( ['message' => $message_index ], remove_query_arg( ['trashed', 'untrashed', 'deleted', 'ids'], $referer ) );
 
 		wp_safe_redirect( $redirect );
-		exit();
+		exit;
 	}
 }
