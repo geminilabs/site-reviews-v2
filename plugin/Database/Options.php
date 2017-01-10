@@ -10,10 +10,11 @@
 
 namespace GeminiLabs\SiteReviews\Database;
 
+/**
+ * @property App $app
+ */
 trait Options
 {
-	protected $app;
-
 	/**
 	 * Get an option from the plugin options using dot notation
 	 *

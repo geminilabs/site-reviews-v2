@@ -90,13 +90,6 @@
 
 	$html->renderField([
 		'type'   => 'hidden',
-		'name'   => 'excluded',
-		'prefix' => false,
-		'value'  => esc_attr( json_encode( $exclude ) ),
-	]);
-
-	$html->renderField([
-		'type'   => 'hidden',
 		'name'   => 'action',
 		'prefix' => false,
 		'value'  => 'post-review',
@@ -114,6 +107,13 @@
 		'name'   => 'category',
 		'prefix' => false,
 		'value'  => $category,
+	]);
+
+	$html->renderField([
+		'type'   => 'hidden',
+		'name'   => 'excluded',
+		'prefix' => false,
+		'value'  => esc_attr( json_encode( $exclude ) ),
 	]);
 
 	wp_nonce_field( 'post-review' );

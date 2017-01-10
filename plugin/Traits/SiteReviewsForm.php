@@ -12,13 +12,11 @@
 
 namespace GeminiLabs\SiteReviews\Traits;
 
+/**
+ * @property bool|string $id
+ */
 trait SiteReviewsForm
 {
-	/**
-	 * @var bool|string
-	 */
-	public $id = false;
-
 	/**
 	 * Generate a unique ID string
 	 *
