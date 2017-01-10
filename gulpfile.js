@@ -27,11 +27,11 @@ elixir(( mix ) => mix
 	.jshint( paths.src + 'js/*.js' )
 	.scripts( 'mce-plugin.js' )
 	.scripts([
-		'partials/init.js',
-		'partials/functions.js',
-		'partials/pinned.js',
-		'partials/shortcode.js',
-		'partials/ready.js',
+		'admin/init.js',
+		'admin/functions.js',
+		'admin/pinned.js',
+		'admin/shortcode.js',
+		'admin/ready.js',
 	], paths.dest + 'js/site-reviews-admin.js' )
 	.scripts([
 		paths.npm + 'star-rating.js/dist/star-rating.js',
