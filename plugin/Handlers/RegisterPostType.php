@@ -225,16 +225,7 @@ class RegisterPostType
 	{
 		global $post;
 
-		if( !get_the_author()) {
-			return $this->db->getReviewMeta( $post->ID )->author;
-		}
-
-		$url = add_query_arg([
-			'author'    => get_the_author_meta( 'ID' ),
-			'post_type' => $post->post_type,
-		], 'edit.php' );
-
-		return sprintf( '<a href="%s">%s</a>', esc_url( $url ), get_the_author());
+		return $this->db->getReviewMeta( $post->ID )->author;
 	}
 
 	/**
