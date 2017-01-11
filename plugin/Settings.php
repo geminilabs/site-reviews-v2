@@ -50,8 +50,8 @@ class Settings
 	{
 		$args = $this->normalizePaths( $formId, $args );
 
-		if( isset( $args['name'] ) ) {
-			$this->settings[ $args['name'] ] = $this->getDefault( $args );
+		if( isset( $args['name'] )) {
+			$this->settings[ $args['name']] = $this->getDefault( $args );
 		}
 
 		$this->html->addfield( $formId, $args );
@@ -69,6 +69,10 @@ class Settings
 
 		if( $args['default'] === ':placeholder' ) {
 			$args['default'] = $args['placeholder'];
+		}
+
+		if( strpos( $args['type'], 'yesno' ) !== false && empty( $args['default'] )) {
+			$args['default'] = 'no';
 		}
 
 		return $args['default'];

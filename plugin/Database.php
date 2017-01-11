@@ -523,7 +523,7 @@ class Database implements OptionsContract
 
 		$defaultSettings = [];
 		$currentSettings = $args['merge']
-			? $this->removeEmptyValuesFrom( $this->getOptions( 'settings' ))
+			? $this->removeEmptyValuesFrom( $this->getOptions())
 			: [];
 
 		foreach( $args['data'] as $path => $value ) {

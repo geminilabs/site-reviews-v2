@@ -54,9 +54,16 @@ class Upgrade
 			delete_option( $optionName );
 		}
 
+		// migrate "form" settings page
 		if( isset( $oldOptions['settings']['form'] )) {
 			$oldOptions['settings']['reviews-form'] = $oldOptions['settings']['form'];
 			unset( $oldOptions['settings']['form'] );
+		}
+
+		// migrate "yes/no" settings options
+		foreach( ['approval', 'login'] as $option ) {
+			$yesno = &$oldOptions['settings']['general']['require'][ $option ];
+			$yesno = empty( $yesno ) ? 'no' : 'yes';
 		}
 
 		$newOptions = get_option( $this->db->getOptionName(), [] );
@@ -132,14 +139,15 @@ class Upgrade
 
 			if( !is_array( $widget ))continue;
 
-			$hide = [];
+			$migrate = [
+				'excerpt'     => 'title',
+				'max_reviews' => 'count',
+				'min_rating'  => 'rating',
+				'title'       => 'excerpt',
+				'type'        => 'display',
+			];
 
-			if( $widget['display'] == 'title' ) {
-				$hide[] = 'excerpt';
-			}
-			else if( $widget['display'] == 'excerpt' ) {
-				$hide[] = 'title';
-			}
+			$hide = [];
 
 			if( isset( $widget['show'] )) {
 				foreach( ['author','date','rating'] as $value ) {
@@ -148,10 +156,18 @@ class Upgrade
 				}
 			}
 
-			$widget['count']   = $widget['max_reviews'];
-			$widget['display'] = $widget['type'];
+			if( isset( $migrate[ $widget['display']] )) {
+				$hide[] = $migrate[ $widget['display']];
+			}
+
 			$widget['hide']    = $hide;
-			$widget['rating']  = $widget['min_rating'];
+			$widget['display'] = '';
+
+			foreach( $migrate as $old => $new ) {
+				if( isset( $widget[ $old ] ) && !in_array( $old, ['title', 'excerpt'] )) {
+					$widget[ $new ] = $widget[ $old ];
+				}
+			}
 
 			foreach( ['max_reviews','min_rating','order_by','show','type'] as $value ) {
 				if( isset( $widget[ $value ] )) {
@@ -190,20 +206,6 @@ class Upgrade
 
 		update_option( "widget_{$this->app->id}_site-reviews-form", $oldWidget );
 		delete_option( "widget_{$this->app->id}_reviews_form" );
-	}
-
-	/**
-	 * @return void
-	 */
-	public function yesNo_200()
-	{
-		foreach( ['general.require.approval', 'general.require.login'] as $option ) {
-			$value = $this->db->getOption( $option, false, 'settings' )
-				? 'yes'
-				: 'no';
-
-			$this->db->setOption( $option, $value, 'settings' );
-		}
 	}
 
 	/**

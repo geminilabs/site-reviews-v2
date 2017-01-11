@@ -228,7 +228,6 @@ final class App extends Container
 			$upgrade->themeMods_200();
 			$upgrade->widgetSiteReviews_200();
 			$upgrade->widgetSiteReviewsForm_200();
-			$upgrade->yesNo_200();
 		}
 
 		$this->updateVersion( $version );
