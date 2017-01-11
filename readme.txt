@@ -101,6 +101,7 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 * [breaking] Changed internal widget/shortcode hook names
 * [breaking] Changed shortcode variables
 * [breaking] Consolidated all plugin settings into a single setting variable
+* Ajaxified approve/unapprove
 * Custom Published/Pending labels
 * New settings page for reviews
 * Removed "site-reviews/reviews/excerpt_length" filter hook
