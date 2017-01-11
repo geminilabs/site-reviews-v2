@@ -8,7 +8,7 @@
 		'name'       => 'rating',
 		'class'      => 'glsr-star-rating',
 		'errors'     => $errors,
-		'label'      => $db->getOption( 'form.rating.label' ),
+		'label'      => $db->getOption( 'settings.reviews-form.rating.label' ),
 		'prefix'     => false,
 		'render'     => !in_array( 'rating', $exclude ),
 		'suffix'     => $form_id,
@@ -27,8 +27,8 @@
 		'type'        => 'text',
 		'name'        => 'title',
 		'errors'      => $errors,
-		'label'       => $db->getOption( 'form.title.label' ),
-		'placeholder' => $db->getOption( 'form.title.placeholder' ),
+		'label'       => $db->getOption( 'settings.reviews-form.title.label' ),
+		'placeholder' => $db->getOption( 'settings.reviews-form.title.placeholder' ),
 		'prefix'      => false,
 		'render'      => !in_array( 'title', $exclude ),
 		'required'    => true,
@@ -40,8 +40,8 @@
 		'type'        => 'textarea',
 		'name'        => 'content',
 		'errors'      => $errors,
-		'label'       => $db->getOption( 'form.content.label' ),
-		'placeholder' => $db->getOption( 'form.content.placeholder' ),
+		'label'       => $db->getOption( 'settings.reviews-form.content.label' ),
+		'placeholder' => $db->getOption( 'settings.reviews-form.content.placeholder' ),
 		'prefix'      => false,
 		'rows'        => 5,
 		'render'      => !in_array( 'content', $exclude ),
@@ -52,23 +52,23 @@
 
 	$html->renderField([
 		'type'        => 'text',
-		'name'        => 'reviewer',
+		'name'        => 'name',
 		'errors'      => $errors,
-		'label'       => $db->getOption( 'form.reviewer.label' ),
-		'placeholder' => $db->getOption( 'form.reviewer.placeholder' ),
+		'label'       => $db->getOption( 'settings.reviews-form.name.label' ),
+		'placeholder' => $db->getOption( 'settings.reviews-form.name.placeholder' ),
 		'prefix'      => false,
-		'render'      => !in_array( 'reviewer', $exclude ),
+		'render'      => !in_array( 'name', $exclude ),
 		'required'    => true,
 		'suffix'      => $form_id,
-		'value'       => $values['reviewer'],
+		'value'       => $values['name'],
 	]);
 
 	$html->renderField([
 		'type'        => 'email',
 		'name'        => 'email',
 		'errors'      => $errors,
-		'label'       => $db->getOption( 'form.email.label' ),
-		'placeholder' => $db->getOption( 'form.email.placeholder' ),
+		'label'       => $db->getOption( 'settings.reviews-form.email.label' ),
+		'placeholder' => $db->getOption( 'settings.reviews-form.email.placeholder' ),
 		'prefix'      => false,
 		'render'      => !in_array( 'email', $exclude ),
 		'required'    => true,
@@ -80,19 +80,12 @@
 		'type'       => 'checkbox',
 		'name'       => 'terms',
 		'errors'     => $errors,
-		'options'    => $db->getOption( 'form.terms.label' ),
+		'options'    => $db->getOption( 'settings.reviews-form.terms.label' ),
 		'prefix'     => false,
 		'render'     => !in_array( 'terms', $exclude ),
 		'required'   => true,
 		'suffix'     => $form_id,
 		'value'      => $values['terms'],
-	]);
-
-	$html->renderField([
-		'type'   => 'hidden',
-		'name'   => 'excluded',
-		'prefix' => false,
-		'value'  => esc_attr( json_encode( $exclude ) ),
 	]);
 
 	$html->renderField([
@@ -107,6 +100,20 @@
 		'name'   => 'form_id',
 		'prefix' => false,
 		'value'  => $form_id,
+	]);
+
+	$html->renderField([
+		'type'   => 'hidden',
+		'name'   => 'category',
+		'prefix' => false,
+		'value'  => $category,
+	]);
+
+	$html->renderField([
+		'type'   => 'hidden',
+		'name'   => 'excluded',
+		'prefix' => false,
+		'value'  => esc_attr( json_encode( $exclude ) ),
 	]);
 
 	wp_nonce_field( 'post-review' );

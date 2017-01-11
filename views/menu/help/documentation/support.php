@@ -8,6 +8,9 @@
 
 		<dt>How do I disable the plugin CSS and/or Javascript?</dt>
 		<dd>To disable the plugin stylesheet or javascript from loading on your website, copy and paste the provided <code><a href="<?= admin_url( 'edit.php?post_type=site-review&page=help&tab=documentation&section=hooks' ); ?>">WordPress Filter Hooks</a></code> into your theme's <code>functions.php</code> file.</dd>
+
+		<dt>The widgets look funny in my sidebar. What's happening?</dt>
+		<dd>Some themes may have very small sidebars and/or CSS styles that conflict or alter the styles within Site Reviews. To correct any styling errors you can either disable the plugin's CSS altogether, or override the CSS selectors in use to make the widget or shortcode appear how you'd like. CSS-related issues are not actively supported as there are too many variations between the thousands of WordPress themes available.</dd>
 	</dl>
 </div>
 

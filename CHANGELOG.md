@@ -5,12 +5,38 @@ All notable changes to Site Reviews will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
 ### Added
+
 ### Changed
+
 ### Deprecated
+
 ### Removed
+
 ### Fixed
+
 ### Security
+
+## [2.0.0] - 2017-01-10
+
+### Added
+- [feature] Helper functions to easily access review meta
+- [feature] MCE shortcode button dropdown
+- [feature] Review avatars (gravatar.com)
+- [feature] Review categories
+- Ajaxified approve/unapprove
+- Custom Published/Pending labels
+- New settings page for reviews
+
+### Changed
+- [breaking] Changed internal widget/shortcode hook names
+- [breaking] Changed shortcode variables
+- [breaking] Consolidated all plugin settings into a single setting variable
+
+### Removed
+- Removed "site-reviews/reviews/excerpt_length" filter hook
+- Removed "site-reviews/reviews/use_excerpt" filter hook
 
 ## [1.2.2] - 2017-01-06
 

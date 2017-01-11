@@ -5,7 +5,7 @@
  *
  * @package   GeminiLabs\SiteReviews
  * @copyright Copyright (c) 2016, Paul Ryley
- * @license   GPLv2 or later
+ * @license   GPLv3
  * @since     1.0.0
  * -------------------------------------------------------------------------------------------------
  */
@@ -95,19 +95,5 @@ abstract class Widget extends WP_Widget
 		}
 
 		glsr_resolve( 'Html' )->renderField( $atts, 'echo' );
-	}
-
-	/**
-	 * Generate a unique ID string
-	 *
-	 * @param mixed $from
-	 *
-	 * @return string
-	 */
-	protected function generate_id( $from = [] )
-	{
-		!empty( $from ) ?: $from = $this->id;
-
-		return substr( md5( serialize( $from ) ), 0, 8 );
 	}
 }

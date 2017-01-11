@@ -3,7 +3,7 @@
 /**
  * @package   GeminiLabs\SiteReviews
  * @copyright Copyright (c) 2016, Paul Ryley
- * @license   GPLv2 or later
+ * @license   GPLv3
  * @since     1.0.0
  * -------------------------------------------------------------------------------------------------
  */
@@ -12,6 +12,9 @@ namespace GeminiLabs\SiteReviews;
 
 use GeminiLabs\SiteReviews\Container;
 
+/**
+ * @property array $mceShortcodes
+ */
 final class App extends Container
 {
 	public $defaults;
@@ -19,7 +22,9 @@ final class App extends Container
 	public $id;
 	public $name;
 	public $path;
+	public $post_type;
 	public $prefix;
+	public $taxonomy;
 	public $url;
 	public $version;
 
@@ -36,13 +41,16 @@ final class App extends Container
 
 		$plugin = get_file_data( $file, $data, 'plugin' );
 
-		$this->id      = 'geminilabs-' . $plugin['id'];
 		$this->file    = $file;
+		$this->id      = 'geminilabs-' . $plugin['id'];
 		$this->name    = $plugin['name'];
 		$this->path    = plugin_dir_path( $file );
 		$this->prefix  = str_replace( '-', '_', $this->id );
 		$this->url     = plugin_dir_url( $file );
 		$this->version = $plugin['version'];
+
+		$this->post_type = 'site-review';
+		$this->taxonomy  = 'site-review-category';
 	}
 
 	/**
@@ -54,34 +62,51 @@ final class App extends Container
 	{
 		$basename = plugin_basename( $this->file );
 
-		$controller = $this->make( 'Controllers\MainController' );
-		$router     = $this->make( 'Router' );
+		$main   = $this->make( 'Controllers\MainController' );
+		$review = $this->make( 'Controllers\ReviewController' );
+		$router = $this->make( 'Router' );
 
 		// Action Hooks
 		add_action( 'plugins_loaded',                        [ $this, 'registerAddons'] );
-		add_action( 'admin_enqueue_scripts',                 [ $controller, 'enqueueAssets'] );
-		add_action( 'wp_enqueue_scripts',                    [ $controller, 'enqueueAssets'] );
-		add_action( 'admin_menu',                            [ $controller, 'registerMenuCount'] );
-		add_action( 'add_meta_boxes_site-review',            [ $controller, 'registerMetaBox'] );
-		add_action( 'admin_enqueue_scripts',                 [ $controller, 'registerPointers'], 13 );
-		add_action( 'init',                                  [ $controller, 'registerPostType'] );
-		add_action( 'admin_init',                            [ $controller, 'registerSettings'] );
-		add_action( 'init',                                  [ $controller, 'registerShortcodes'] );
-		add_action( 'admin_menu',                            [ $controller, 'registerSubMenus'] );
-		add_action( 'init',                                  [ $controller, 'registerTextdomain'] );
-		add_action( 'widgets_init',                          [ $controller, 'registerWidgets'] );
-		add_action( 'post_submitbox_misc_actions',           [ $controller, 'renderMetaBoxPinned'] );
-		add_action( 'edit_form_after_title',                 [ $controller, 'renderReview'] );
-		add_action( 'edit_form_top',                         [ $controller, 'renderReviewNotice'] );
+		add_action( 'upgrader_process_complete',             [ $this, 'upgrader'], 10, 2 );
+		add_action( 'admin_enqueue_scripts',                 [ $main, 'enqueueAssets'] );
+		add_action( 'wp_enqueue_scripts',                    [ $main, 'enqueueAssets'] );
+		add_action( 'admin_menu',                            [ $main, 'registerMenuCount'] );
+		add_action( 'add_meta_boxes',                        [ $main, 'registerMetaBox'] );
+		add_action( 'admin_enqueue_scripts',                 [ $main, 'registerPointers'], 13 );
+		add_action( 'init',                                  [ $main, 'registerPostType'], 8 );
+		add_action( 'admin_init',                            [ $main, 'registerSettings'] );
+		add_action( 'admin_init',                            [ $main, 'registerShortcodeButtons'] );
+		add_action( 'init',                                  [ $main, 'registerShortcodes'] );
+		add_action( 'admin_menu',                            [ $main, 'registerSubMenus'] );
+		add_action( 'init',                                  [ $main, 'registerTaxonomy'], 9 );
+		add_action( 'init',                                  [ $main, 'registerTextdomain'] );
+		add_action( 'widgets_init',                          [ $main, 'registerWidgets'] );
+		add_action( 'post_submitbox_misc_actions',           [ $main, 'renderMetaBoxPinned'] );
+		add_action( 'edit_form_after_title',                 [ $main, 'renderReview'] );
+		add_action( 'edit_form_top',                         [ $main, 'renderReviewNotice'] );
+		add_action( 'media_buttons',                         [ $main, 'renderTinymceButton'], 11 );
+		add_action( 'admin_action_approve',                  [ $review, 'approve'] );
+		add_action( 'admin_print_scripts',                   [ $review, 'modifyAutosave'], 999 );
+		add_action( 'current_screen',                        [ $review, 'modifyFeatures'] );
+		add_action( 'admin_menu',                            [ $review, 'removeMetaBoxes'] );
+		add_action( 'admin_action_revert',                   [ $review, 'revert'] );
+		add_action( 'admin_init',                            [ $review, 'setPermissions'], 999 );
+		add_action( 'admin_action_unapprove',                [ $review, 'unapprove'] );
 		add_action( "wp_ajax_{$this->prefix}_action",        [ $router, 'routeAjaxRequests'] );
 		add_action( "wp_ajax_nopriv_{$this->prefix}_action", [ $router, 'routeAjaxRequests'] );
 		add_action( 'admin_init',                            [ $router, 'routePostRequests'] );
 		add_action( 'admin_init',                            [ $router, 'routeWebhookRequests'] );
 
 		// Filter Hooks
-		add_filter( "plugin_action_links_{$basename}", [ $controller, 'registerActionLinks'] );
-		add_filter( 'dashboard_glance_items',          [ $controller, 'registerDashboardGlanceItems'] );
-		add_filter( 'post_row_actions',                [ $controller, 'registerRowActions'], 10, 2 );
+		add_filter( "plugin_action_links_{$basename}", [ $main, 'registerActionLinks'] );
+		add_filter( 'dashboard_glance_items',          [ $main, 'registerDashboardGlanceItems'] );
+		add_filter( 'post_row_actions',                [ $main, 'registerRowActions'], 10, 2 );
+		add_filter( 'wp_editor_settings',              [ $review, 'modifyEditor' ] );
+		add_filter( 'the_editor',                      [ $review, 'modifyEditorTextarea'] );
+		add_filter( 'ngettext',                        [ $review, 'modifyStatusFilter'], 10, 5 );
+		add_filter( 'post_updated_messages',           [ $review, 'modifyUpdateMessages'] );
+		add_filter( 'bulk_post_updated_messages',      [ $review, 'modifyUpdateMessagesBulk'], 10, 2 );
 	}
 
 	/**
@@ -91,16 +116,10 @@ final class App extends Container
 	 */
 	public function activate()
 	{
-		$current_version = get_option( "{$this->prefix}_version" );
+		$this->updateVersion();
 
-		if( $current_version ) {
-			update_option( "{$this->prefix}_version_upgraded_from", $current_version );
-		}
-
-		update_option( "{$this->prefix}_logging", 0 );
-		update_option( "{$this->prefix}_version", $this->version );
-
-		$this->make( 'Database' )->setDefaultSettings();
+		$this->make( 'Database' )->setDefaults();
+		$this->make( 'Database' )->setOption( 'logging', 0 );
 
 		// Schedule session purge
 		if( !wp_next_scheduled( 'site-reviews/schedule/session/purge' ) ) {
@@ -130,13 +149,30 @@ final class App extends Container
 	public function getDefaults()
 	{
 		if( !$this->defaults ) {
+
 			$this->defaults = $this->make( 'Settings' )->getSettings();
 
 			// Allow addons to modify the default settings
 			$this->defaults = apply_filters( 'site-reviews/addon/defaults', $this->defaults );
+
+			$options = $this->make( 'Database' )->getOptions();
+
+			if( empty( $options )) {
+				$this->upgrade();
+			}
 		}
 
 		return $this->defaults;
+	}
+
+	/**
+	 * Verify permissions
+	 *
+	 * @return bool
+	 */
+	public function hasPermission()
+	{
+		return current_user_can( 'customize' );
 	}
 
 	/**
@@ -150,12 +186,68 @@ final class App extends Container
 	}
 
 	/**
-	 * Verify permissions
+	 * Update the plugin versions in the database
 	 *
-	 * @return bool
+	 * @param string $current
+	 *
+	 * @return void
 	 */
-	public function verify()
+	public function updateVersion( $current = '' )
 	{
-		return current_user_can( 'customize' );
+		$db = $this->make( 'Database' );
+
+		if( empty( $current )) {
+			$current = $db->getOption( 'version' );
+		}
+
+		if( version_compare( $current, $this->version, '<' )) {
+			$db->setOption( 'version', $this->version );
+		}
+
+		if( $current != $this->version ) {
+			$db->setOption( 'version_upgraded_from', $current );
+		}
+	}
+
+	/**
+	 * Upgrade routine
+	 *
+	 * @return void
+	 */
+	public function upgrade()
+	{
+		$version = $this->make( 'Database' )->getOption( 'version' );
+
+		if( version_compare( $version, '2.0.0', '<' ) ) {
+
+			$upgrade = $this->make( 'Upgrade' );
+
+			$upgrade->options_200();
+			$upgrade->sidebarWidgets_200();
+			$upgrade->siteName_200();
+			$upgrade->themeMods_200();
+			$upgrade->widgetSiteReviews_200();
+			$upgrade->widgetSiteReviewsForm_200();
+			$upgrade->yesNo_200();
+		}
+
+		$this->updateVersion( $version );
+	}
+
+	/**
+	 * Runs on plugin upgrade
+	 *
+	 * @param mixed $upgrader
+	 *
+	 * @return null|void
+	 */
+	public function upgrader( $upgrader, array $data )
+	{
+		if( !in_array( plugin_basename( $this->file ), $data['packages'] )
+			|| $data['action'] != 'update'
+			|| $data['type'] != 'plugin'
+		)return;
+
+		$this->upgrade();
 	}
 }

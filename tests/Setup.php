@@ -3,7 +3,7 @@
 /**
  * @package   GeminiLabs\SiteReviews\Tests
  * @copyright Copyright (c) 2016, Paul Ryley
- * @license   GPLv2 or later
+ * @license   GPLv3
  * @since     1.0.0
  * -------------------------------------------------------------------------------------------------
  */
@@ -31,8 +31,8 @@ trait Setup
 			'email'    => 'jane@doee.com',
 			'excluded' => "[]",
 			'form_id'  => 'abcdef',
+			'name'     => 'Jane doe',
 			'rating'   => '5',
-			'reviewer' => 'Jane doe',
 			'terms'    => '1',
 			'title'    => 'Test Review',
 		];

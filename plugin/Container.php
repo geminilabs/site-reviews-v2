@@ -3,7 +3,7 @@
 /**
  * @package   GeminiLabs\SiteReviews
  * @copyright Copyright (c) 2016, Paul Ryley
- * @license   GPLv2 or later
+ * @license   GPLv3
  * @since     1.0.0
  * -------------------------------------------------------------------------------------------------
  */
@@ -114,10 +114,10 @@ abstract class Container
 	 */
 	public function addListener( $tag, $listener, $priority = 10, $acceptedArgs = 1 )
 	{
-		$reviews = $this;
+		$app = $this;
 
-		add_action( $tag, function( $event ) use ( $listener, $reviews ) {
-			$reviews->make( $listener )->handle( $event );
+		add_action( $tag, function( $event ) use ( $listener, $app ) {
+			$app->make( $listener )->handle( $event );
 		}, $priority, $acceptedArgs );
 	}
 
@@ -125,7 +125,7 @@ abstract class Container
 	 * Bind a service to the container.
 	 *
 	 * @param string $alias
-	 * @param string $concrete
+	 * @param mixed  $concrete
 	 *
 	 * @return mixed
 	 */

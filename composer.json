@@ -16,6 +16,8 @@
   ],
   "archive": {
     "exclude": [
+      "/_",
+      "/src",
       "/tests",
       "/.*"
     ]

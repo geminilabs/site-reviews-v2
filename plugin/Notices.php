@@ -3,7 +3,7 @@
 /**
  * @package   GeminiLabs\SiteReviews
  * @copyright Copyright (c) 2016, Paul Ryley
- * @license   GPLv2 or later
+ * @license   GPLv3
  * @since     1.0.0
  * -------------------------------------------------------------------------------------------------
  */
@@ -94,7 +94,9 @@ class Notices
 	{
 		global $wp_settings_errors;
 
-		if( $hide_on_update && !empty( $_GET['settings-updated'] ) )return;
+		$settings_updated = filter_input( INPUT_GET, 'settings-updated' );
+
+		if( $hide_on_update && !empty( $settings_updated ) )return;
 
 		$settings_errors = get_settings_errors( $this->app->id, $sanitize );
 

@@ -3,7 +3,7 @@
 /**
  * @package   GeminiLabs\SiteReviews
  * @copyright Copyright (c) 2016, Paul Ryley
- * @license   GPLv2 or later
+ * @license   GPLv3
  * @since     1.0.0
  * -------------------------------------------------------------------------------------------------
  */
@@ -36,27 +36,29 @@ class SubmitReview
 	/**
 	 * @todo log any negative result of the sent notification
 	 *
-	 * return void
+	 * @return void
 	 */
 	public function handle( Command $command )
 	{
 		$reviewId = 'local_' . md5( serialize( $command ) );
 
 		$review = [
-			'author'     => $command->reviewer,
-			'avatar'     => get_avatar_url( $command->email ),
-			'content'    => $command->content,
-			'email'      => $command->email,
-			'ip_address' => $command->ipAddress,
-			'rating'     => $command->rating,
-			'review_id'  => $reviewId,
-			'site_name'  => 'local',
-			'title'      => $command->title,
+			'author'      => $command->author,
+			'avatar'      => get_avatar_url( $command->email ),
+			'content'     => $command->content,
+			'email'       => $command->email,
+			'ip_address'  => $command->ipAddress,
+			'rating'      => $command->rating,
+			'review_id'   => $reviewId,
+			'review_type' => 'local',
+			'title'       => $command->title,
 		];
 
 		$review = apply_filters( 'site-reviews/local/review', $review, $command );
 
-		$post_id = $this->db->postReview( $reviewId, $review );
+		$post_id = $this->db->createReview( $reviewId, $review );
+
+		$this->db->setTerms( $post_id, $command->category );
 
 		$this->sendNotification( $post_id, $command );
 
@@ -72,7 +74,9 @@ class SubmitReview
 			// set message
 			$this->app->make( 'Session' )->set( "{$command->formId}-message", $message );
 
-			wp_redirect( $_SERVER['PHP_SELF'] );
+			$redirectUrl = filter_input( INPUT_SERVER, 'PHP_SELF' );
+
+			wp_safe_redirect( $redirectUrl );
 			exit;
 		}
 	}
@@ -84,7 +88,7 @@ class SubmitReview
 	 */
 	protected function addNotificationLinks( $post_id, array $args )
 	{
-		if( $this->db->getOption( 'general.require.approval', false ) ) {
+		if( $this->db->getOption( 'settings.general.require.approval' ) == 'yes' ) {
 
 			$review_approve_link = wp_nonce_url( admin_url( sprintf( 'post.php?post=%s&action=approve', $post_id ) ), 'approve-review_' . $post_id );
 			$review_discard_link = wp_nonce_url( admin_url( sprintf( 'post.php?post=%s&action=trash', $post_id ) ), 'trash-post_' . $post_id );
@@ -111,7 +115,7 @@ class SubmitReview
 			'subject'  => $args['notification_title'],
 			'template' => 'review-notification',
 			'template-tags' => [
-				'review_author'  => $command->reviewer,
+				'review_author'  => $command->author,
 				'review_content' => $command->content,
 				'review_email'   => $command->email,
 				'review_ip'      => $command->ipAddress,
@@ -133,7 +137,7 @@ class SubmitReview
 	 */
 	protected function sendNotification( $post_id, Command $command )
 	{
-		$notificationType = $this->db->getOption( 'general.notification', 'none' );
+		$notificationType = $this->db->getOption( 'settings.general.notification', 'none' );
 
 		if( !in_array( $notificationType, ['default', 'custom', 'webhook'] ) )return;
 
@@ -162,7 +166,7 @@ class SubmitReview
 	{
 		$args['recipient'] = 'default' === $args['notification_type']
 			? get_option( 'admin_email' )
-			: $this->db->getOption( 'general.notification_email' );
+			: $this->db->getOption( 'settings.general.notification_email' );
 
 		// no email address has been set
 		if( empty( $args['recipient'] ) )return;
@@ -175,7 +179,7 @@ class SubmitReview
 	 */
 	protected function sendNotificationWebhook( Command $command, array $args )
 	{
-		if( !( $endpoint = $this->db->getOption( 'general.webhook_url' ) ) )return;
+		if( !( $endpoint = $this->db->getOption( 'settings.general.webhook_url' )))return;
 
 		$fields = [];
 
@@ -189,9 +193,9 @@ class SubmitReview
 			$fields[] = ['value' => $command->content ];
 		}
 
-		if( $command->reviewer ) {
+		if( $command->author ) {
 			!$command->email ?: $command->email = sprintf( ' <%s>', $command->email );
-			$fields[] = ['value' => trim( sprintf( '%s%s - %s', $command->reviewer, $command->email, $command->ipAddress ) ) ];
+			$fields[] = ['value' => trim( sprintf( '%s%s - %s', $command->author, $command->email, $command->ipAddress ) ) ];
 		}
 
 		$fields[] = ['value' => sprintf( '<%s|%s>', $args['notification_link'], __( 'View Review', 'site-reviews' ) ) ];

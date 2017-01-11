@@ -1,11 +1,11 @@
 <?php
 
 /**
- * = Shortcode Boilerplate
+ * Shortcode Boilerplate
  *
  * @package   GeminiLabs\SiteReviews
  * @copyright Copyright (c) 2016, Paul Ryley
- * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @license   GPLv3
  * @since     1.0.0
  * -------------------------------------------------------------------------------------------------
  */
@@ -38,10 +38,8 @@ abstract class Shortcode
 
 	public function __construct( App $app )
 	{
-		$this->app     = $app;
-		$this->db      = $app->make( 'Database' );
-		$this->html    = $app->make( 'Html' );
-		$this->session = $app->make( 'Session' );
+		$this->app = $app;
+		$this->db  = $app->make( 'Database' );
 	}
 
 	/**
@@ -89,15 +87,5 @@ abstract class Shortcode
 	public function helpTabsHook()
 	{
 		add_action( 'in_admin_header', [ $this, 'addHelpTabs'] );
-	}
-
-	/**
-	 * Generate a unique ID string from the Shortcode attributes array
-	 *
-	 * @return string
-	 */
-	protected function generate_id( array $atts )
-	{
-		return substr( md5( serialize( $atts ) ), 0, 8 );
 	}
 }

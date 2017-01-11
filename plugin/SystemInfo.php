@@ -3,7 +3,7 @@
 /**
  * @package   GeminiLabs\SiteReviews
  * @copyright Copyright (c) 2016, Paul Ryley
- * @license   GPLv2 or later
+ * @license   GPLv3
  * @since     1.0.0
  * -------------------------------------------------------------------------------------------------
  */
@@ -90,8 +90,11 @@ class SystemInfo
 		$browser = new Browser;
 		$userAgent = $browser->getUserAgent();
 
-		$this->sysinfo[ $title ]['Browser Name'] = sprintf( '%s v%s', $browser->getName(), $browser->getVersion() );
-		$this->sysinfo[ $title ]['Browser UA'] = $userAgent->getUserAgentString();
+		$name = esc_attr( $browser->getName() );
+		$version = esc_attr( $browser->getVersion() );
+
+		$this->sysinfo[ $title ]['Browser Name'] = sprintf( '%s %s', $name, $version );
+		$this->sysinfo[ $title ]['Browser UA'] = esc_attr( $userAgent->getUserAgentString() );
 
 		return $this->implode( $title );
 	}
@@ -126,31 +129,26 @@ class SystemInfo
 
 		global $wpdb;
 
-		$theme    = wp_get_theme();
-		$response = wp_remote_post( 'https://api.wordpress.org/stats/php/1.0/' );
+		$theme = wp_get_theme();
 
 		$wp_prefix_status = strlen( $wpdb->prefix ) > 16 ? 'ERROR: Too long' : 'Acceptable';
 
-		$wp_remote_post = !is_wp_error( $response )
-			&& $response['response']['code'] >= 200
-			&& $response['response']['code'] < 300;
-
 		$this->sysinfo[ $title ]['Active Theme'] = sprintf( '%s v%s', $theme->Name, $theme->Version );
 		$this->sysinfo[ $title ]['Home URL'] = home_url();
-		$this->sysinfo[ $title ]['Language'] = ( defined( 'WPLANG' ) && WPLANG ) ? WPLANG : 'en_US';
+		$this->sysinfo[ $title ]['Language'] = defined( 'WPLANG' ) ? WPLANG : 'en_US';
 		$this->sysinfo[ $title ]['Memory Limit'] = WP_MEMORY_LIMIT;
 		$this->sysinfo[ $title ]['Multisite'] = is_multisite() ? 'Yes' : 'No';
 		$this->sysinfo[ $title ]['Page For Posts ID'] = get_option( 'page_for_posts' );
 		$this->sysinfo[ $title ]['Page On Front ID'] = get_option( 'page_on_front' );
 		$this->sysinfo[ $title ]['Permalink Structure'] = get_option( 'permalink_structure', 'Default' );
 		$this->sysinfo[ $title ]['Post Stati'] = implode( ', ', get_post_stati() );
-		$this->sysinfo[ $title ]['Remote Post'] = $wp_remote_post ? 'Works' : 'Does not work';
+		$this->sysinfo[ $title ]['Remote Post'] = $this->testRemotePost();
 		$this->sysinfo[ $title ]['Show On Front'] = get_option( 'show_on_front' );
 		$this->sysinfo[ $title ]['Site URL'] = site_url();
 		$this->sysinfo[ $title ]['Table Prefix'] = sprintf( '%s (%d)', $wp_prefix_status, strlen( $wpdb->prefix ) );
 		$this->sysinfo[ $title ]['Timezone'] = get_option( 'timezone_string' );
 		$this->sysinfo[ $title ]['Version'] = get_bloginfo( 'version' );
-		$this->sysinfo[ $title ]['WP Debug'] = defined( 'WP_DEBUG' ) ? WP_DEBUG ? 'Enabled' : 'Disabled' : 'Not set';
+		$this->sysinfo[ $title ]['WP Debug'] = defined( 'WP_DEBUG' ) ? WP_DEBUG : 'Not set';
 		$this->sysinfo[ $title ]['WP Max Upload Size'] = size_format( wp_max_upload_size() );
 		$this->sysinfo[ $title ]['WP Memory Limit'] = WP_MEMORY_LIMIT;
 
@@ -364,6 +362,18 @@ class SystemInfo
 	}
 
 	/**
+	 * @return string
+	 */
+	protected function testRemotePost()
+	{
+		$response = wp_remote_post( 'https://api.wordpress.org/stats/php/1.0/' );
+
+		return !is_wp_error( $response ) && in_array( $response['response']['code'], range( 200, 299 ) )
+			? 'Works'
+			: 'Does not work';
+	}
+
+	/**
 	 * Get the info title
 	 *
 	 * @param string $title
@@ -389,10 +399,11 @@ class SystemInfo
 	protected function webhost()
 	{
 		$server_name = filter_input( INPUT_SERVER, 'SERVER_NAME' );
+		$uname       = php_uname();
 
-		$uname = php_uname();
-
-		if( defined( 'WPE_APIKEY' ) ) {
+		if( filter_input( INPUT_SERVER, 'DH_USER' ) ) {
+			$host = 'DreamHost';
+		} elseif( defined( 'WPE_APIKEY' ) ) {
 			$host = 'WP Engine';
 		} elseif( defined( 'PAGELYBIN' ) ) {
 			$host = 'Pagely';
@@ -414,8 +425,6 @@ class SystemInfo
 			$host = 'SysFix.eu Power Hosting';
 		} elseif( strpos( $server_name, 'Flywheel' ) !== false ) {
 			$host = 'Flywheel';
-		} elseif( filter_input( INPUT_SERVER, 'DH_USER' ) ) {
-			$host = 'DreamHost';
 		} elseif( strpos( $uname, 'bluehost.com' ) !== false ) {
 			$host = 'Bluehost';
 		} elseif( strpos( $uname, 'secureserver.net') !== false ) {

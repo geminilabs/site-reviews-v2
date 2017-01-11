@@ -3,7 +3,7 @@
 /**
  * @package   GeminiLabs\SiteReviews
  * @copyright Copyright (c) 2016, Paul Ryley
- * @license   GPLv2 or later
+ * @license   GPLv3
  * @since     1.0.0
  * -------------------------------------------------------------------------------------------------
  */
@@ -19,14 +19,9 @@ class Router
 	 */
 	protected $app;
 
-	protected $id;
-	protected $prefix;
-
 	public function __construct( App $app )
 	{
-		$this->app    = $app;
-		$this->id     = $app->id;
-		$this->prefix = $app->prefix;
+		$this->app = $app;
 	}
 
 	/**
@@ -37,35 +32,20 @@ class Router
 	 */
 	public function getMethodName( $prefix, $action )
 	{
-		$callback = function( $matches ) { return strtoupper( $matches[1] ); };
+		$callback = function( $matches ) {
+			return strtoupper( $matches[1] );
+		};
+
 		return $prefix . preg_replace_callback( '/[-_](.)/', $callback, strtolower( $action ) );
 	}
 
 	public function routeAjaxRequests()
 	{
-		$request = $_REQUEST['request'];
-
-		if( isset( $request[ $this->prefix ]['action'] ) ) {
-			$request = $request[ $this->prefix ];
-		}
-
-		// All ajax requests are triggered by a single action hook,
-		// each route is determined by the request["action"].
-		if( !isset( $request['action'] ) ) {
-			wp_die();
-		}
-
 		// Nonce url is localized in "GeminiLabs\SiteReviews\Handlers\EnqueueAssets"
-		check_ajax_referer( sprintf( '%s-ajax-nonce', $this->id ) );
-
-		$request['ajax_request'] = true;
-
-		// undo damage done by javascript: encodeURIComponent()
-		array_walk_recursive( $request, function( &$value ) {
-			$value = stripslashes( $value );
-		});
+		check_ajax_referer( sprintf( '%s-ajax-nonce', $this->app->id ) );
 
 		$ajaxController = $this->app->make( 'Controllers\AjaxController' );
+		$request        = $this->normalizeAjaxRequest();
 		$method         = $this->getMethodName( 'ajax', $request['action'] );
 
 		if( is_callable([ $ajaxController, $method ]) ) {
@@ -81,7 +61,7 @@ class Router
 	public function routePostRequests()
 	{
 		// get the request data that is prefixed with the app prefix
-		$request = filter_input( INPUT_POST, $this->prefix, FILTER_DEFAULT , FILTER_REQUIRE_ARRAY );
+		$request = filter_input( INPUT_POST, $this->app->prefix, FILTER_DEFAULT , FILTER_REQUIRE_ARRAY );
 
 		if( !isset( $request['action'] ) )return;
 
@@ -116,8 +96,45 @@ class Router
 
 	public function routeWebhookRequests()
 	{
-		$request = filter_input( INPUT_GET, sprintf( '%s-hook', $this->id ) );
+		$request = filter_input( INPUT_GET, sprintf( '%s-hook', $this->app->id ) );
 
 		if( !$request )return;
+
+		// @todo manage webhook here
+	}
+
+	/**
+	 * @return array|void
+	 */
+	protected function normalizeAjaxRequest()
+	{
+		$request = $_REQUEST['request'];
+
+		// All ajax requests are triggered by a single action hook,
+		// each route is determined by the request["action"].
+		if( !isset( $request['action'] ) ) {
+			wp_die();
+		}
+
+		if( isset( $request[ $this->app->prefix ]['action'] ) ) {
+			$request = $request[ $this->app->prefix ];
+		}
+
+		$request['ajax_request'] = true;
+
+		return $this->normalize( $request );
+	}
+
+	/**
+	 * @return array
+	 */
+	protected function normalize( array $request )
+	{
+		// undo damage done by javascript: encodeURIComponent() and sanitize tainted value
+		array_walk_recursive( $request, function( &$value ) {
+			$value = stripslashes( $value );
+		});
+
+		return $request;
 	}
 }

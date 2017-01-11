@@ -3,7 +3,7 @@
 /**
  * @package   GeminiLabs\SiteReviews
  * @copyright Copyright (c) 2016, Paul Ryley
- * @license   GPLv2 or later
+ * @license   GPLv3
  * @since     1.0.0
  * -------------------------------------------------------------------------------------------------
  */
@@ -19,11 +19,11 @@ class Yesno extends Radio
 	 */
 	public function render()
 	{
-		$defaultValue = 0;
+		$defaultValue = 'no';
 
 		$this->args['options'] = [
-			__( 'No', 'site-reviews' ),
-			__( 'Yes', 'site-reviews' ),
+			'no'  => __( 'No', 'site-reviews' ),
+			'yes' => __( 'Yes', 'site-reviews' ),
 		];
 
 		return parent::render( $defaultValue );

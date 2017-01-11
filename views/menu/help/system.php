@@ -14,7 +14,7 @@
 <h3><?= __( 'Logging', 'site-reviews' ); ?></h3>
 <p><?= __( "You can enable logging for debugging purposes. Log files can grow quickly, so don't leave this on.", 'site-reviews' ); ?></p>
 
-<?php $logging_enabled = $db->getOption( '', '', 'logging' ); ?>
+<?php $logging_enabled = $db->getOption( 'logging', 0 ); ?>
 
 <?php if( $logging_enabled == 1 ) : ?>
 
@@ -40,11 +40,11 @@
 	do_settings_sections( glsr_app()->id . '-logging' );
 
 	if( $logging_enabled == 1 ) {
-		printf( '<input type="hidden" name="%s_logging" value="0">', glsr_app()->prefix );
+		printf( '<input type="hidden" name="%s[logging]" value="0">', glsr_resolve( 'Database' )->getOptionName() );
 		submit_button( __( 'Disable Logging', 'site-reviews' ) );
 	}
 	else {
-		printf( '<input type="hidden" name="%s_logging" value="1">', glsr_app()->prefix );
+		printf( '<input type="hidden" name="%s[logging]" value="1">', glsr_resolve( 'Database' )->getOptionName() );
 		submit_button( __( 'Enable Logging', 'site-reviews' ) );
 	}?>
 </form>

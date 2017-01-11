@@ -7,7 +7,7 @@
  * Plugin Name: Site Reviews
  * Plugin URI:  https://wordpress.org/plugins/site-reviews
  * Description: Receive and display site reviews
- * Version:     1.2.2
+ * Version:     2.0.0
  * Author:      Paul Ryley
  * Author URI:  http://geminilabs.io
  * License:     GPL2
@@ -19,6 +19,7 @@ defined( 'WPINC' ) || die;
 
 require_once __DIR__ . '/activate.php';
 require_once __DIR__ . '/autoload.php';
+require_once __DIR__ . '/compatibility.php';
 
 use GeminiLabs\SiteReviews\App;
 use GeminiLabs\SiteReviews\Providers\MainProvider;
@@ -32,33 +33,56 @@ register_deactivation_hook( __FILE__, array( $app, 'deactivate' ) );
 
 $app->init();
 
-// Global helper to return $app
+/**
+ * Global helper to return $app
+ *
+ * @return App
+ */
 function glsr_app() {
 	return App::load();
 }
 
-// Global helper to resolve a class instance where $app is not accessible
-function glsr_resolve( $class ) {
-	return App::load()->make( $class );
+/**
+ * Global helper to debug variables
+ *
+ * @return void
+ */
+function glsr_debug() {
+	call_user_func_array([ App::load()->make( 'Log\Logger' ), 'display' ], func_get_args());
 }
 
-// Wordpress 4.0-4.2 support
-if( !function_exists( 'wp_roles' ) ) {
-	function wp_roles() {
-		global $wp_roles;
-		isset( $wp_roles ) ?: $wp_roles = new WP_Roles;
-		return $wp_roles;
-	}
+/**
+ * Global helper to get a plugin option
+ *
+ * @return mixed
+ */
+function glsr_get_option( $option_path = '', $fallback = '' ) {
+	return App::load()->make( 'Helper' )->get( 'option', $option_path, $fallback );
 }
 
-// Wordpress 4.0-4.2 support
-if( !function_exists( 'get_avatar_url' ) ) {
-	function get_avatar_url( $id_or_email, $args = null ) {
-		isset( $args['size'] ) ?: $args['size'] = 96;
-		isset( $args['default'] ) ?: $args['default'] = 'mystery';
-		$avatar = get_avatar( $id_or_email, $args['size'], $args['default'] );
-		$dom = new \DOMDocument;
-		$dom->loadHTML( $avatar );
-		return $dom->getElementsByTagName( 'img' )->item(0)->getAttribute( 'src' );
-	}
+/**
+ * Global helper to get a single review
+ *
+ * @return null|object
+ */
+function glsr_get_review( $post_id ) {
+	return App::load()->make( 'Helper' )->get( 'review', $post_id );
+}
+
+/**
+ * Global helper to get an array of reviews
+ *
+ * @return array
+ */
+function glsr_get_reviews( array $args = [] ) {
+	return App::load()->make( 'Helper' )->get( 'reviews', $args );
+}
+
+/**
+ * Global helper to resolve a class instance where $app is not accessible
+ *
+ * @return class
+ */
+function glsr_resolve( $alias ) {
+	return App::load()->make( $alias );
 }

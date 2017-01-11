@@ -3,7 +3,7 @@
 /**
  * @package   GeminiLabs\SiteReviews
  * @copyright Copyright (c) 2016, Paul Ryley
- * @license   GPLv2 or later
+ * @license   GPLv3
  * @since     1.0.0
  * -------------------------------------------------------------------------------------------------
  */
@@ -25,7 +25,7 @@ class RegisterPointers
 	/**
 	 * Add pointers to the current screen if they have not yet been dismissed
 	 *
-	 * return void
+	 * @return void
 	 */
 	public function handle( Command $command )
 	{

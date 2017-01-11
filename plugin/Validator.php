@@ -3,7 +3,7 @@
 /**
  * @package   GeminiLabs\SiteReviews
  * @copyright Copyright (c) 2016, Paul Ryley
- * @license   GPLv2 or later
+ * @license   GPLv3
  * @since     1.0.0
  *
  * Much of the code in this class is derived from Illuminate\Validation\Validator (5.3)
@@ -14,7 +14,6 @@
 namespace GeminiLabs\SiteReviews;
 
 use BadMethodCallException;
-use GeminiLabs\SiteReviews\Strings;
 use InvalidArgumentException;
 
 class Validator
@@ -426,7 +425,7 @@ class Validator
 	 */
 	protected function translator( $key, $rule, $attribute, array $parameters )
 	{
-		$strings = (new Strings)->validation();
+		$strings = glsr_resolve( 'Strings' )->validation();
 
 		$message = isset( $strings[ $key ] )
 			? $strings[ $key ]

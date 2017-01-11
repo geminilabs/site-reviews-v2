@@ -3,7 +3,7 @@
 /**
  * @package   GeminiLabs\SiteReviews
  * @copyright Copyright (c) 2016, Paul Ryley
- * @license   GPLv2 or later
+ * @license   GPLv3
  * @since     1.0.0
  * -------------------------------------------------------------------------------------------------
  */
@@ -147,7 +147,7 @@ class Email
 	{
 		$html = $this->app->make( 'Html' );
 
-		$template = trim( $this->app->make( 'Database' )->getOption( 'general.notification_message' ) );
+		$template = trim( $this->app->make( 'Database' )->getOption( 'settings.general.notification_message' ) );
 
 		if( !empty( $template ) ) {
 			$message = $html->renderTemplateString( $template, $email['template-tags'], 'return' );

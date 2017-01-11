@@ -3,7 +3,7 @@
 /**
  * @package   GeminiLabs\SiteReviews
  * @copyright Copyright (c) 2016, Paul Ryley
- * @license   GPLv2 or later
+ * @license   GPLv3
  * @since     1.0.0
  * -------------------------------------------------------------------------------------------------
  */
@@ -13,9 +13,10 @@ namespace GeminiLabs\SiteReviews\Controllers;
 use GeminiLabs\SiteReviews\Commands\EnqueueAssets;
 use GeminiLabs\SiteReviews\Commands\RegisterPointers;
 use GeminiLabs\SiteReviews\Commands\RegisterPostType;
+use GeminiLabs\SiteReviews\Commands\RegisterShortcodeButtons;
 use GeminiLabs\SiteReviews\Commands\RegisterShortcodes;
+use GeminiLabs\SiteReviews\Commands\RegisterTaxonomy;
 use GeminiLabs\SiteReviews\Commands\RegisterWidgets;
-use GeminiLabs\SiteReviews\Commands\SubmitReview;
 use GeminiLabs\SiteReviews\Controllers\BaseController;
 use GeminiLabs\SiteReviews\Strings;
 use WP_Admin_Bar;
@@ -98,20 +99,21 @@ class MainController extends BaseController
 	 */
 	public function registerDashboardGlanceItems( array $items )
 	{
-		$post_type = 'site-review';
+		$post_type = $this->app->post_type;
 		$num_posts = wp_count_posts( $post_type );
 
-		if( $num_posts && $num_posts->publish ) {
-
-			$text = _n( '%s Review', '%s Reviews', $num_posts->publish, 'site-reviews' );
-			$text = sprintf( $text, number_format_i18n( $num_posts->publish ) );
-
-			$post_type_object = get_post_type_object( $post_type );
-
-			$items[] = $post_type_object && current_user_can( $post_type_object->cap->edit_posts )
-				? sprintf( '<a class="glsr-review-count" href="edit.php?post_type=%s">%s</a>', $post_type, $text )
-				: sprintf( '<span class="glsr-review-count">%s</span>', $text );
+		if( !isset( $num_posts->publish ) || !$num_posts->publish ) {
+			return $items;
 		}
+
+		$text = _n( '%s Review', '%s Reviews', $num_posts->publish, 'site-reviews' );
+		$text = sprintf( $text, number_format_i18n( $num_posts->publish ) );
+
+		$post_type_object = get_post_type_object( $post_type );
+
+		$items[] = $post_type_object && current_user_can( $post_type_object->cap->edit_posts )
+			? sprintf( '<a class="glsr-review-count" href="edit.php?post_type=%s">%s</a>', $post_type, $text )
+			: sprintf( '<span class="glsr-review-count">%s</span>', $text );
 
 		return $items;
 	}
@@ -125,17 +127,16 @@ class MainController extends BaseController
 	{
 		global $menu, $typenow;
 
-		$post_type = 'site-review';
+		$post_type = $this->app->post_type;
 
 		foreach( $menu as $key => $value ) {
-			if( !( isset( $value[2] ) && $value[2] === "edit.php?post_type={$post_type}" ) )continue;
+			if( !isset( $value[2] ) || $value[2] !== "edit.php?post_type={$post_type}" )continue;
 
-			$awaiting_mod = wp_count_posts( $post_type );
-			$awaiting_mod = $awaiting_mod->pending;
+			$postCount = wp_count_posts( $post_type );
 
 			$menu[ $key ][0] .= sprintf( ' <span class="awaiting-mod count-%d"><span class="pending-count">%s</span></span>',
-				absint( $awaiting_mod ),
-				number_format_i18n( $awaiting_mod )
+				absint( $postCount->pending ),
+				number_format_i18n( $postCount->pending )
 			);
 
 			if( $typenow === $post_type ) {
@@ -147,12 +148,16 @@ class MainController extends BaseController
 	}
 
 	/**
+	 * @param string $post_type
+	 *
 	 * @return void
 	 *
 	 * @action add_meta_boxes_review
 	 */
-	public function registerMetaBox()
+	public function registerMetaBox( $post_type )
 	{
+		if( $post_type != $this->app->post_type )return;
+
 		add_meta_box( "{$this->app->id}_review", __( 'Details', 'site-reviews' ), [ $this, 'renderMetaBox'], null, 'side' );
 	}
 
@@ -165,7 +170,7 @@ class MainController extends BaseController
 	{
 		$command = new RegisterPointers([[
 			'id'       => 'glsr-pointer-pinned',
-			'screen'   => 'site-review',
+			'screen'   => $this->app->post_type,
 			'target'   => '#misc-pub-pinned',
 			'title'    => __( 'Pin Your Reviews', 'site-reviews' ),
 			'content'  => __( 'You can pin exceptional reviews so that they are always shown first in your widgets and shortcodes.', 'site-reviews' ),
@@ -185,23 +190,22 @@ class MainController extends BaseController
 	 */
 	public function registerPostType()
 	{
-		if( !$this->app->verify() )return;
+		if( !$this->app->hasPermission() )return;
 
 		$command = new RegisterPostType([
-			'post_type'   => 'site-review',
-			'slug'        => 'reviews',
 			'single'      => __( 'Review', 'site-reviews' ),
 			'plural'      => __( 'Reviews', 'site-reviews' ),
 			'menu_name'   => __( 'Site Reviews', 'site-reviews' ),
 			'menu_icon'   => 'dashicons-star-half',
 			'public'      => false,
 			'has_archive' => false,
-			'show_ui'     => false,
-			'labels'      => (new Strings)->post_type_labels(),
+			'show_ui'     => true,
+			'labels'      => glsr_resolve( 'Strings' )->post_type_labels(),
 			'columns'     => [
 				'title'    => '', // empty values use the default label
-				'reviewer' => __( 'Reviewer', 'site-reviews' ),
-				'site'     => __( 'Type', 'site-reviews' ),
+				'category' => '',
+				'reviewer' => __( 'Author', 'site-reviews' ),
+				'type'     => __( 'Type', 'site-reviews' ),
 				'stars'    => __( 'Rating', 'site-reviews' ),
 				'sticky'   => __( 'Pinned', 'site-reviews' ),
 				'date'     => '',
@@ -220,7 +224,7 @@ class MainController extends BaseController
 	 */
 	public function registerRowActions( array $actions, WP_Post $post )
 	{
-		if( $post->post_type !== 'site-review' || $post->post_status === 'trash' ) {
+		if( $post->post_type !== $this->app->post_type || $post->post_status === 'trash' ) {
 			return $actions;
 		}
 
@@ -240,8 +244,9 @@ class MainController extends BaseController
 		$newActions = [];
 
 		foreach( $atts as $key => $values ) {
-			$newActions[ $key ] = sprintf( '<a href="%s" aria-label="%s">%s</a>',
+			$newActions[ $key ] = sprintf( '<a href="%s" class="change-%s-status" aria-label="%s">%s</a>',
 				$values['href'],
+				$this->app->post_type,
 				$values['aria-label'],
 				$values['text']
 			);
@@ -260,11 +265,39 @@ class MainController extends BaseController
 	 */
 	public function registerSettings()
 	{
-		register_setting( "{$this->app->id}-settings", "{$this->app->prefix}_settings", [ $this, 'sanitizeSettings'] );
-		register_setting( "{$this->app->id}-logging", "{$this->app->prefix}_logging", [ $this, 'sanitizeLogging'] );
+		$optionName = $this->db->getOptionName();
 
-		// register the settings form fields
+		$settings = apply_filters( 'site-reviews/settings', ['logging', 'settings'] );
+
+		foreach( $settings as $setting ) {
+			register_setting( sprintf( '%s-%s', $this->app->id, $setting ), $optionName, [ $this, 'sanitizeSettings' ] );
+		}
+
 		$this->app->make( 'Settings' )->register();
+	}
+
+	/**
+	 * @return void
+	 *
+	 * @action admin_init
+	 */
+	public function registerShortcodeButtons()
+	{
+		$site_reviews      = esc_html__( 'Recent Site Reviews', 'site-reviews' );
+		$site_reviews_form = esc_html__( 'Submit a Site Review', 'site-reviews' );
+
+		$command = new registerShortcodeButtons([
+			'site_reviews' => [
+				'title' => $site_reviews,
+				'label' => $site_reviews,
+			],
+			'site_reviews_form' => [
+				'title' => $site_reviews_form,
+				'label' => $site_reviews_form,
+			],
+		]);
+
+		$this->execute( $command );
 	}
 
 	/**
@@ -305,8 +338,28 @@ class MainController extends BaseController
 
 			if( !is_callable( $callback ) )continue;
 
-			add_submenu_page( 'edit.php?post_type=site-review', $title, $title, 'customize', $slug, $callback );
+			add_submenu_page( sprintf( 'edit.php?post_type=%s', $this->app->post_type ), $title, $title, 'customize', $slug, $callback );
 		}
+	}
+
+	/**
+	 * @return void
+	 *
+	 * @action init
+	 */
+	public function registerTaxonomy()
+	{
+		if( !$this->app->hasPermission() )return;
+
+		$command = new RegisterTaxonomy([
+			'hierarchical'      => true,
+			'meta_box_cb'       => [ $this, 'renderTaxonomyMetabox' ],
+			'public'            => false,
+			'show_admin_column' => true,
+			'show_ui'           => true,
+		]);
+
+		$this->execute( $command );
 	}
 
 	/**
@@ -327,15 +380,15 @@ class MainController extends BaseController
 	public function registerWidgets()
 	{
 		$command = new RegisterWidgets([
-			'reviews_form' => [
-				'title'       => __( 'Submit a Site Review', 'site-reviews' ),
-				'description' => __( 'A "submit a review" form for your site.', 'site-reviews' ),
-				'class'       => 'glsr-widget glsr-widget-reviews-form',
-			],
-			'recent_reviews' => [
+			'site-reviews' => [
 				'title'       => __( 'Recent Site Reviews', 'site-reviews' ),
 				'description' => __( 'Your site’s most recent Local Reviews.', 'site-reviews' ),
 				'class'       => 'glsr-widget glsr-widget-recent-reviews',
+			],
+			'site-reviews-form' => [
+				'title'       => __( 'Submit a Site Review', 'site-reviews' ),
+				'description' => __( 'A "submit a review" form for your site.', 'site-reviews' ),
+				'class'       => 'glsr-widget glsr-widget-reviews-form',
 			],
 		]);
 
@@ -407,9 +460,9 @@ class MainController extends BaseController
 	 */
 	public function renderMetaBox( WP_Post $post )
 	{
-		if( $post->post_type != 'site-review' )return;
+		if( $post->post_type != $this->app->post_type )return;
 
-		$this->render( 'edit/meta', ['post' => $post ] );
+		$this->render( 'edit/metabox-details', ['post' => $post ] );
 	}
 
 	/**
@@ -421,7 +474,7 @@ class MainController extends BaseController
 	{
 		global $post;
 
-		if( $post->post_type != 'site-review' )return;
+		if( $post->post_type != $this->app->post_type )return;
 
 		$pinned = get_post_meta( $post->ID, 'pinned', true );
 
@@ -435,9 +488,9 @@ class MainController extends BaseController
 	 */
 	public function renderReview( WP_Post $post )
 	{
-		if( $post->post_type != 'site-review' )return;
-		if( post_type_supports( 'site-review', 'title' ) )return;
-		if( get_post_meta( $post->ID, 'site_name', true ) == 'local' )return;
+		if( $post->post_type != $this->app->post_type )return;
+		if( post_type_supports( $this->app->post_type, 'title' ) )return;
+		if( get_post_meta( $post->ID, 'review_type', true ) == 'local' )return;
 
 		$this->render( 'edit/review', ['post' => $post ] );
 	}
@@ -449,14 +502,14 @@ class MainController extends BaseController
 	 */
 	public function renderReviewNotice( WP_Post $post )
 	{
-		if( $post->post_type != 'site-review' )return;
-		if( post_type_supports( 'site-review', 'title' ) )return;
+		if( $post->post_type != $this->app->post_type )return;
+		if( post_type_supports( $this->app->post_type, 'title' ))return;
 
-		$type = get_post_meta( $post->ID, 'site_name', true );
+		$reviewType = get_post_meta( $post->ID, 'review_type', true );
 
-		if( $type == 'local' )return;
+		if( $reviewType == 'local' )return;
 
-		$this->notices->addWarning( sprintf( __( '%s reviews are read-only.', 'site-reviews' ), ucfirst( $type ) ) );
+		$this->notices->addWarning( sprintf( __( '%s reviews are read-only.', 'site-reviews' ), ucfirst( $reviewType )));
 		$this->render( 'edit/notice' );
 	}
 
@@ -469,8 +522,9 @@ class MainController extends BaseController
 	{
 		// allow addons to add their own setting sections
 		$sections = apply_filters( 'site-reviews/addon/settings/sections', [
-			'general' => 'General',
-			'form'    => 'Submission Form',
+			'general'      => 'General',
+			'reviews'      => 'Reviews',
+			'reviews-form' => 'Submission Form',
 		]);
 
 		$this->renderMenu( 'settings', [
@@ -485,21 +539,48 @@ class MainController extends BaseController
 	}
 
 	/**
-	 * register_setting() callback
+	 * register_taxonomy() 'meta_box_cb' callback
 	 *
-	 * @param int $input
-	 *
-	 * @return int
+	 * @return void
 	 */
-	public function sanitizeLogging( $input )
+	public function renderTaxonomyMetabox( $post, $box )
 	{
-		$message = $input
-			? __( 'Logging enabled.', 'site-reviews' )
-			: __( 'Logging disabled.', 'site-reviews' );
+		if( $post->post_type != $this->app->post_type )return;
 
-		$this->notices->addSuccess( $message );
+		$taxonomy = isset( $box['args']['taxonomy'] )
+			? $box['args']['taxonomy']
+			: $this->app->taxonomy;
 
-		return $input;
+		$this->render( 'edit/metabox-categories', [
+			'post'     => $post,
+			'tax_name' => esc_attr( $taxonomy ),
+			'taxonomy' => get_taxonomy( $taxonomy ),
+		]);
+	}
+
+	/**
+	 * Adds the shortcode button above the TinyMCE Editor on add/edit screens
+	 *
+	 * @return null|void
+	 *
+	 * @action media_buttons
+	 */
+	public function renderTinymceButton()
+	{
+		$screen = get_current_screen();
+
+		if( $screen->base != 'post' )return;
+
+		$shortcodes = [];
+
+		foreach( $this->app->mceShortcodes as $shortcode => $values ) {
+			if( !apply_filters( sanitize_title( $shortcode ) . '_condition', true ) )continue;
+			$shortcodes[ $shortcode ] = $values;
+		}
+
+		if( empty( $shortcodes ) )return;
+
+		$this->render( 'edit/tinymce', ['shortcodes' => $shortcodes ] );
 	}
 
 	/**
@@ -509,12 +590,25 @@ class MainController extends BaseController
 	 */
 	public function sanitizeSettings( array $input )
 	{
-		$settings = $this->db->getOption();
+		$key = key( $input );
+		$message = '';
 
-		$this->notices->addSuccess( __( 'Settings updated.', 'site-reviews' ) );
+		if( $key == 'logging' ) {
+			$message = $input[ $key ]
+				? __( 'Logging enabled.', 'site-reviews' )
+				: __( 'Logging disabled.', 'site-reviews' );
+		}
+		else if( $key == 'settings' ) {
+			$message = __( 'Settings updated.', 'site-reviews' );
+		}
 
-		// Merge the settings tab section arrays
-		return array_merge( $settings, $input );
+		$message = apply_filters( 'site-reviews/settings/notice', $message, $key );
+
+		if( $message ) {
+			$this->notices->addSuccess( $message );
+		}
+
+		return array_replace_recursive( $this->db->getOptions(), $input );
 	}
 
 	/**

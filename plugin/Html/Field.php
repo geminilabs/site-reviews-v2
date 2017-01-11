@@ -3,7 +3,7 @@
 /**
  * @package   GeminiLabs\SiteReviews
  * @copyright Copyright (c) 2016, Paul Ryley
- * @license   GPLv2 or later
+ * @license   GPLv3
  * @since     1.0.0
  * -------------------------------------------------------------------------------------------------
  */
@@ -95,6 +95,7 @@ class Field
 			'label'       => '',
 			'name'        => '',
 			'options'     => [],
+			'path'        => '',
 			'placeholder' => '',
 			'prefix'      => '',
 			'render'      => true,
@@ -111,6 +112,7 @@ class Field
 		$args['type']       = $this->parseType( $atts );
 		$args['name']       = $this->parseName( $atts );
 		$args['options']    = (array) $atts['options']; // make sure this is always an array
+		$args['path']       = $atts['name'];
 		$args['prefix']     = $this->parsePrefix( $atts );
 		$args['value']      = $this->parseValue( $atts );
 
@@ -285,7 +287,7 @@ class Field
 		$prefix = $args['prefix'];
 
 		return ( '' === trim( $prefix ) && $prefix !== false )
-			? "{$this->app->prefix}_settings"
+			? $this->app->make( 'Database' )->getOptionName()
 			: $prefix;
 	}
 
@@ -321,7 +323,7 @@ class Field
 
 		return ( !empty( $value ) || !$name || $prefix === false )
 			? $value
-			: $this->app->make( 'Database' )->getOption( $name, $default );
+			: $default;
 	}
 
 	/**
@@ -332,6 +334,33 @@ class Field
 	public function getDataDepends()
 	{
 		return $this->setDataDepends();
+	}
+
+	/**
+	 * Set the field value
+	 *
+	 * @return self
+	 */
+	public function setValue()
+	{
+		$name    = $this->args['path'];
+		$default = $this->args['default'];
+
+		if( !$name ) {
+			return $this;
+		}
+
+		if( $default == ':placeholder' ) {
+			$default = '';
+		}
+
+		$value = glsr_resolve( 'Database' )->getOption( $name, $default );
+
+		if( !empty( $value ) ) {
+			$this->args['value'] = $value;
+		}
+
+		return $this;
 	}
 
 	/**

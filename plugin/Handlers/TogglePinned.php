@@ -3,7 +3,7 @@
 /**
  * @package   GeminiLabs\SiteReviews
  * @copyright Copyright (c) 2016, Paul Ryley
- * @license   GPLv2 or later
+ * @license   GPLv3
  * @since     1.0.0
  * -------------------------------------------------------------------------------------------------
  */
@@ -25,6 +25,9 @@ class TogglePinned
 		$this->notices = $notices;
 	}
 
+	/**
+	 * @return bool
+	 */
 	public function handle( Command $command )
 	{
 		if( !get_post( $command->id ) ) {

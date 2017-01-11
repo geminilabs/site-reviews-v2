@@ -1,14 +1,16 @@
-/* jshint browser:true, globalstrict:true, esversion:6 */
-/* global console, ActiveXObject, XMLHttpRequest */
-
+/** global: XMLHttpRequest, ActiveXObject */
 "use strict";
 
 var GLSR = {};
 
 GLSR.addClass = function( el, className )
 {
-	if( el.classList ) el.classList.add( className );
-	else if( !GLSR.hasClass( el, className )) el.className += ' ' + className;
+	if( el.classList ) {
+		el.classList.add( className );
+	}
+	else if( !GLSR.hasClass( el, className )) {
+		el.className += ' ' + className;
+	}
 };
 
 GLSR.convertValue = function( value )
@@ -31,8 +33,11 @@ GLSR.convertValue = function( value )
 
 GLSR.hasClass = function( el, className )
 {
-	if( el.classList ) return el.classList.contains( className );
-	else return new RegExp( '\\b' + className + '\\b' ).test( el.className );
+	if( el.classList ) {
+		return el.classList.contains( className );
+	}
+
+	return new RegExp( '\\b' + className + '\\b' ).test( el.className );
 };
 
 GLSR.inArray = function( needle, haystack )
@@ -55,16 +60,24 @@ GLSR.isNumeric = function( value )
 GLSR.on = function( type, el, handler )
 {
 	[].forEach.call( document.querySelectorAll( el ), function( node ) {
-		if( node.attachEvent ) node.attachEvent( 'on' + type, handler );
-		else node.addEventListener( type, handler );
+		if( node.attachEvent ) {
+			node.attachEvent( 'on' + type, handler );
+		}
+		else {
+			node.addEventListener( type, handler );
+		}
 	});
 };
 
 GLSR.off = function( type, el, handler )
 {
 	[].forEach.call( document.querySelectorAll( el ), function( node ) {
-		if( node.detachEvent ) node.detachEvent( 'on' + type, handler );
-		else node.removeEventListener( type, handler );
+		if( node.detachEvent ) {
+			node.detachEvent( 'on' + type, handler );
+		}
+		else {
+			node.removeEventListener( type, handler );
+		}
 	});
 };
 
@@ -166,19 +179,31 @@ GLSR.ready = function( fn )
 	if( typeof fn !== "function" )return;
 
 	// in case the document is already rendered
-	if( document.readyState !== 'loading' ) fn();
+	if( document.readyState !== 'loading' ) {
+		fn();
+	}
 	// modern browsers
-	else if( document.addEventListener ) document.addEventListener( 'DOMContentLoaded', fn );
+	else if( document.addEventListener ) {
+		document.addEventListener( 'DOMContentLoaded', fn );
+	}
 	// IE <= 8
-	else document.attachEvent( 'onreadystatechange', function() {
-		if( document.readyState === 'complete' ) fn();
-	});
+	else {
+		document.attachEvent( 'onreadystatechange', function() {
+			if( document.readyState === 'complete' ) {
+				fn();
+			}
+		});
+	}
 };
 
 GLSR.removeClass = function( el, className )
 {
-	if( el.classList ) el.classList.remove( className );
-	else el.className = el.className.replace( new RegExp( '\\b' + className + '\\b', 'g' ), '' );
+	if( el.classList ) {
+		el.classList.remove( className );
+	}
+	else {
+		el.className = el.className.replace( new RegExp( '\\b' + className + '\\b', 'g' ), '' );
+	}
 };
 
 GLSR.serialize = function( obj, prefix )
@@ -191,7 +216,7 @@ GLSR.serialize = function( obj, prefix )
 		var key = prefix ? prefix + "[" + property + "]" : property;
 		var value = obj[ property ];
 
-		str.push( typeof value == "object" ?
+		str.push( typeof value === "object" ?
 			GLSR.serialize( value, key ) :
 			encodeURIComponent( key ) + "=" + encodeURIComponent( value )
 		);
@@ -223,6 +248,7 @@ GLSR.createEl = function( tag, attributes )
 	attributes = attributes || {};
 
 	for( var key in attributes ) {
+		if( !attributes.hasOwnProperty( key ) )continue;
 		el.setAttribute( key, attributes[ key ] );
 	}
 

@@ -32,6 +32,8 @@ GLSR.showFormErrors = function( formEl, errors )
 
 	for( var error in errors ) {
 
+		if( !errors.hasOwnProperty( error ) )continue;
+
 		fieldEl = formEl.querySelector( '[name="' + error + '"]' ).closest( '.glsr-field' );
 		errorsEl = fieldEl.querySelector( '.glsr-field-errors' );
 

@@ -3,7 +3,7 @@
 /**
  * @package   GeminiLabs\SiteReviews\Tests
  * @copyright Copyright (c) 2016, Paul Ryley
- * @license   GPLv2 or later
+ * @license   GPLv3
  * @since     1.0.0
  * -------------------------------------------------------------------------------------------------
  */
@@ -45,6 +45,7 @@ class TestAjax extends WP_Ajax_UnitTestCase
 		catch( WPAjaxDieContinueException $e ) {
 		}
 		catch( WPAjaxDieStopException $e ) {
+			error_log( print_r( 'WPAjaxDieStopException', 1 ) );
 		}
 
 		$response = json_decode( $this->_last_response );

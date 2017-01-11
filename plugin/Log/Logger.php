@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * @package   GeminiLabs\SiteReviews
+ * @copyright Copyright (c) 2016, Paul Ryley
+ * @license   GPLv3
+ * @since     1.0.0
+ * -------------------------------------------------------------------------------------------------
+ */
+
 namespace GeminiLabs\SiteReviews\Log;
 
 use GeminiLabs\SiteReviews\Log\LoggerInterface;
@@ -182,7 +190,7 @@ class Logger implements LoggerInterface
 	public function log( $level, $message, array $context = [] )
 	{
 		// Check if logging is enabled
-		if( get_option( "{$this->prefix}_logging" ) != 1 )return;
+		if( glsr_resolve( 'Database' )->getOption( 'logging' ) != 1 )return;
 
 		$reflection = new \ReflectionClass( __NAMESPACE__ . '\LogLevel' );
 

@@ -3,7 +3,7 @@
 /**
  * @package   GeminiLabs\SiteReviews
  * @copyright Copyright (c) 2016, Paul Ryley
- * @license   GPLv2 or later
+ * @license   GPLv3
  * @since     1.0.0
  * -------------------------------------------------------------------------------------------------
  */
@@ -34,7 +34,7 @@ if( !function_exists( 'glsr_deactivate_plugin' ) ) {
 			$s      = filter_input( INPUT_GET, 's' );
 			$status = filter_input( INPUT_GET, 'plugin_status' );
 
-			wp_redirect( self_admin_url( sprintf( 'plugins.php?plugin_status=%s&paged=%s&s=%s', $status, $paged, $s ) ) );
+			wp_safe_redirect( self_admin_url( sprintf( 'plugins.php?plugin_status=%s&paged=%s&s=%s', $status, $paged, $s ) ) );
 			die;
 		}
 

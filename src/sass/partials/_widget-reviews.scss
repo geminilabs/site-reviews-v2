@@ -16,9 +16,7 @@
 .glsr-reviews-wrap {}
 
 .glsr-review {
-	margin-bottom: 2em;
-
-	// a {}
+	margin-bottom: 3em;
 
 	p {
 		margin: 0 0 1em;
@@ -39,16 +37,42 @@
 	}
 	&-rating {}
 	&-title {}
+
+	&-avatar {
+		float: left;
+		margin: -8px 12px 0 0;
+		width: 36px;
+		height: 36px;
+
+		img {
+			height: 100%;
+			object-fit: cover;
+		}
+	}
 }
+
 
 [class*=glsr-star-] {
 	display: inline-block;
-	width: 16px;
-	height: 16px;
+	width: 20px;
+	height: 20px;
 	font-size: 16px;
-	vertical-align: text-top;
+	vertical-align: sub;
 	background-repeat: no-repeat;
-	background-size: 16px;
+	background-size: 20px;
+}
+
+@media screen and (min-width: 56.875em) {
+	.glsr-widget [class*=glsr-star-] {
+		width: 16px;
+		height: 16px;
+		background-size: 16px;
+	}
+
+	.glsr-widget .glsr-review-avatar {
+		width: 30px;
+		height: 30px;
+	}
 }
 
 .glsr-star {

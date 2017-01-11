@@ -3,7 +3,7 @@
 /**
  * @package   GeminiLabs\SiteReviews\Tests
  * @copyright Copyright (c) 2016, Paul Ryley
- * @license   GPLv2 or later
+ * @license   GPLv3
  * @since     1.0.0
  * -------------------------------------------------------------------------------------------------
  */
@@ -29,7 +29,7 @@ class TestEmail extends WP_UnitTestCase
 			'subject'  => 'Test Email',
 			'template' => 'review-notification',
 			'template-tags' => [
-				'review_author'  => $this->review['reviewer'],
+				'review_author'  => $this->review['name'],
 				'review_content' => $this->review['content'],
 				'review_email'   => $this->review['email'],
 				'review_ip'      => '127.0.0.1',

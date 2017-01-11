@@ -4,35 +4,39 @@ Donate link: http://geminilabs.io/donate
 Tags: best reviews, business ratings, business reviews, curated reviews, moderated reviews, rating widget, rating, ratings shortcode, review widget, reviews login, reviews shortcode, reviews, simple reviews, site reviews, star rating, star review, submit review, testimonial, user rating, user review, user reviews, wp rating, wp review, wp testimonials
 Requires at least: 4.0.0
 Tested up to: 4.7
-Stable tag: 1.2.2
-License: GPLv2 or later
+Stable tag: 2.0.0
+License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Site Reviews is a WordPress plugin which allows you to easily receive and display reviews for your business or website.
+Site Reviews is a WordPress plugin which allows you to easily receive and display reviews for your website and business.
 
 == Description ==
 
-Site Reviews is a plugin that allows your visitors to submit site reviews with a 1-5 star rating on your website, similar to the way you would on TripAdvisor or Yelp, and display them using a widget or shortcode.
+Site Reviews is a plugin that allows your visitors to submit site reviews with a 1-5 star rating on your website, similar to the way you would on TripAdvisor or Yelp, and then allows you to display them using a widget or shortcode.
 
 You can pin your best reviews so that they are always shown first, require approval before new review submissions are published, require visitors to be logged-in in order to write a review, send custom notifications on a new submission, and more. The plugin provides both widgets and shortcodes along with full shortcode documentation.
 
-Add-ons will be released shortly that allow you to sync your TripAdvisor and Yelp reviews in order to display them locally on your own website.
+Add-ons are being developed to support syncing your TripAdvisor and Yelp reviews in order to display them locally on your website, as well as Post/Page/CPT/Comment ratings/reviews.
 
-The plugin [roadmap](https://github.com/geminilabs/site-reviews/blob/develop/ROADMAP.md) defines the upcoming features which include support for custom review categories, webhook notifications, paginated reviews, allowing visitors to up/down vote submitted reviews, reviewer avatars, percentage/fraction ratings, and more.
+The plugin [roadmap](https://github.com/geminilabs/site-reviews/blob/develop/ROADMAP.md) includes tentative upcoming features.
 
 Follow plugin development on github at: https://github.com/geminilabs/site-reviews/
 
 = Current Features =
 
-* [new] Webhook notifications for Slack
+* [new] Helper functions to easily access review meta
+* [new] MCE shortcode button dropdown
+* [new] Review avatars (gravatar.com)
+* [new] Review categories
 * Actively developed and supported
 * Clean and easy-to-configure user interface
 * Configurable Widgets
+* Custom notifications (including Slack support)
 * Easy setup and implementation
 * Filter reviews by rating
 * Logging
 * Minimal widget styling (tested with all official WP themes)
-* Review Pagination
+* Review pagination
 * Shortcodes: Display reviews in your post content and templates
 * WordPress.org support
 * WP Filter Hooks
@@ -56,20 +60,7 @@ Download the Site Reviews plugin and uploading it to your server via your favori
 
 == Frequently Asked Questions ==
 
-= I don't want form placeholders. How do I remove them? =
-
-To remove the form placeholders, go to "Settings" -> "Submission Form" and replace all placeholder text with a single space character. Placeholders no more!
-
-= How do I disable the plugin CSS and/or Javascript? =
-
-To disable the plugin stylesheet or javascript from loading on your website, copy and paste the following WordPress Filter Hooks into your theme's functions.php file:
-
-`add_filter( 'site-reviews/assets/css', '__return_false' );`
-`add_filter( 'site-reviews/assets/js', '__return_false' );`
-
-= The widgets look funny in my sidebar. What's happening? =
-
-Some themes may have very small sidebars and/or CSS styles that conflict or alter the styles within Site Reviews. To correct any styling errors you can either disable the plugin's CSS altogether, or override the CSS selectors in use to make the widget or shortcode appear how you'd like. CSS-related issues are not actively supported as there are too many variations between the thousands of WordPress themes available.
+All documentation and FAQ can be found in the "Get Help" page of the plugin.
 
 == Screenshots ==
 
@@ -77,23 +68,44 @@ Some themes may have very small sidebars and/or CSS styles that conflict or alte
 
 2. A view of the Edit Review page
 
-3. A view of the Site Reviews &gt; Settings page
+3. A view of the MCE shortcode dropdown button
 
-4. A view of the Site Reviews &gt; Get Help &gt; Documentation tab
+4. A view of the Site Reviews &gt; Settings &gt; General page
 
-5. A view of the Site Reviews &gt; Get Help &gt; System Info tab
+5. A view of the Site Reviews &gt; Settings &gt; Reviews page
 
-6. A view of the Site Reviews &gt; Add-Ons page
+6. A view of the Site Reviews &gt; Get Help &gt; Documentation tab
 
-7. A view of the Recent Site Reviews widget settings
+7. A view of the Site Reviews &gt; Get Help &gt; System Info tab
 
-8. A view of the Submit a Site Review widget settings
+8. A view of the Recent Site Reviews widget settings
 
-9. How the Recent Site Reviews widget looks like using the Twenty Sixteen WordPress theme
+9. A view of the Submit a Site Review widget settings
 
-10. How the Submit a Site Review widget looks like using the Twenty Sixteen WordPress theme
+10. How the Recent Site Reviews widget looks like using the Twenty Sixteen WordPress theme
+
+11. How the Submit a Site Review widget looks like using the Twenty Sixteen WordPress theme
+
+12. How the Slack notifications look like
+
+13. Add-Ons are being built to extend the functionality on the Site Reviews plugin
 
 == Changelog ==
+
+= 2.0.0 (2017-01-10) =
+
+* [feature] Helper functions to easily access review meta
+* [feature] MCE shortcode button dropdown
+* [feature] Review avatars (gravatar.com)
+* [feature] Review categories
+* [breaking] Changed internal widget/shortcode hook names
+* [breaking] Changed shortcode variables
+* [breaking] Consolidated all plugin settings into a single setting variable
+* Ajaxified approve/unapprove
+* Custom Published/Pending labels
+* New settings page for reviews
+* Removed "site-reviews/reviews/excerpt_length" filter hook
+* Removed "site-reviews/reviews/use_excerpt" filter hook
 
 = 1.2.2 (2017-01-06) =
 

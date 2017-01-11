@@ -3,7 +3,7 @@
 /**
  * @package   GeminiLabs\SiteReviews
  * @copyright Copyright (c) 2016, Paul Ryley
- * @license   GPLv2 or later
+ * @license   GPLv3
  * @since     1.0.0
  * -------------------------------------------------------------------------------------------------
  */
@@ -11,6 +11,7 @@
 namespace GeminiLabs\SiteReviews\Html\Partials;
 
 use GeminiLabs\SiteReviews\App;
+use GeminiLabs\SiteReviews\Database;
 
 abstract class Base
 {
@@ -20,13 +21,19 @@ abstract class Base
 	public $app;
 
 	/**
+	 * @var Database
+	 */
+	public $db;
+
+	/**
 	 * @var array
 	 */
 	public $args = [];
 
-	public function __construct( App $app )
+	public function __construct( App $app, Database $db )
 	{
 		$this->app = $app;
+		$this->db  = $db;
 	}
 
 	/**

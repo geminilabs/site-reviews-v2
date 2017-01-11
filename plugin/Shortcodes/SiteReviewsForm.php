@@ -1,11 +1,11 @@
 <?php
 
 /**
- * = Reviews Form shortcode
+ * Site Reviews Form shortcode
  *
  * @package   GeminiLabs\SiteReviews
  * @copyright Copyright (c) 2016, Paul Ryley
- * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @license   GPLv3
  * @since     1.0.0
  * -------------------------------------------------------------------------------------------------
  */
@@ -13,26 +13,24 @@
 namespace GeminiLabs\SiteReviews\Shortcodes;
 
 use GeminiLabs\SiteReviews\Shortcode;
+use GeminiLabs\SiteReviews\Traits\SiteReviewsForm as Common;
 
 class SiteReviewsForm extends Shortcode
 {
+	use Common;
+
+	/**
+	 * @var bool|string
+	 */
+	public $id = false;
+
 	/**
 	 * @return null|string
 	 */
 	public function printShortcode( $atts = [] )
 	{
-		$requireUser = glsr_resolve( 'Database' )->getOption( 'general.require.login', false );
-
-		if( $requireUser && !is_user_logged_in() ) {
-			$message = sprintf(
-				__( 'You must be <a href="%s">logged in</a> to submit a review.', 'site-reviews' ),
-				wp_login_url( get_permalink() )
-			);
-			echo wpautop( $message );
-			return;
-		}
-
 		$defaults = [
+			'category'    => '',
 			'class'       => '',
 			'description' => '',
 			'hide'        => '',
@@ -41,55 +39,48 @@ class SiteReviewsForm extends Shortcode
 
 		$atts = shortcode_atts( $defaults, $atts );
 
-		$fields = explode( ',', $atts['hide'] );
-		$fields = array_filter( $fields, function( $value ) {
+		$atts = $this->makeCompatible( $atts );
+
+		$atts['hide'] = explode( ',', $atts['hide'] );
+		$atts['hide'] = array_filter( $atts['hide'], function( $value ) {
 			return in_array( $value, [
-				'title',
-				'reviewer',
 				'email',
-				'terms'
+				'name',
+				'terms',
+				'title',
 			]);
 		});
-
-		$formId = $this->generate_id( $atts );
-
-		$errors  = $this->session->get( "{$formId}-errors", [], 'and then remove errors' );
-		$message = $this->session->get( "{$formId}-message", [], 'and then remove message' );
-
-		$values  = !empty( $errors )
-			? $this->session->get( "{$formId}-values", [], 'and then remove values' )
-			: [];
 
 		ob_start();
 
 		echo '<div class="shortcode-reviews-form">';
 
 		if( !empty( $atts['title'] ) ) {
-			printf( '<h3 class="glsr-form-title">%s</h3>', $atts['title'] );
+			printf( '<h3 class="glsr-shortcode-title">%s</h3>', $atts['title'] );
 		}
 
-		if( !empty( $atts['description'] ) ) {
-			printf( '<p class="glsr-form-description">%s</p>', $atts['description'] );
+		if( !$this->renderRequireLogin() ) {
+			echo $this->renderForm( $atts );
 		}
-
-		$this->app->make( 'Controllers\ReviewController' )->render( 'submit/index', [
-			'class'   => trim( 'glsr-submit-review-form ' . $atts['class'] ),
-			'errors'  => $errors,
-			'exclude' => $fields,
-			'form_id' => $formId,
-			'message' => $message,
-			'values'  => shortcode_atts([
-				'rating'   => '',
-				'title'    => '',
-				'content'  => '',
-				'reviewer' => '',
-				'email'    => '',
-				'terms'    => '',
-			], $values ),
-		]);
 
 		echo '</div>';
 
 		return ob_get_clean();
+	}
+
+	/**
+	 * Maintain backwards compatibility with version <= v1.2.1
+	 *
+	 * @return array
+	 */
+	protected function makeCompatible( array $args )
+	{
+		$args['hide'] = str_replace( 'reviewer', 'name', $args['hide'] );
+
+		$hide = explode( ',', $args['hide'] );
+
+		$args['hide'] = implode( ',', array_unique( array_map( 'trim', $hide ) ) );
+
+		return $args;
 	}
 }
