@@ -2,6 +2,10 @@
 // Partials -> WP List Table
 // =============================================================================
 
+.hide-column-tog + .pinned-icon + svg {
+	display: none;
+}
+
 .post-type-site-review .wp-list-table {
 
 	.approve,
