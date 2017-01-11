@@ -13,6 +13,7 @@ namespace GeminiLabs\SiteReviews\Controllers;
 use GeminiLabs\SiteReviews\Commands\SubmitReview;
 use GeminiLabs\SiteReviews\Controllers\BaseController;
 use GeminiLabs\SiteReviews\Strings;
+use WP_Screen;
 
 class ReviewController extends BaseController
 {
@@ -35,15 +36,15 @@ class ReviewController extends BaseController
 	/**
 	 * Remove the autosave functionality
 	 *
-	 * @return null|void
+	 * @return void
 	 *
-	 * @action admin_print_scripts-post.php
+	 * @action admin_print_scripts
 	 */
 	public function modifyAutosave()
 	{
-		if( $this->canEditReview() )return;
-
-		wp_deregister_script( 'autosave' );
+		if( $this->isEditReview() && !$this->canEditReview()) {
+			wp_deregister_script( 'autosave' );
+		}
 	}
 
 	/**
@@ -78,7 +79,7 @@ class ReviewController extends BaseController
 	 */
 	public function modifyEditorTextarea( $html )
 	{
-		if( $this->canEditReview() ) {
+		if( $this->canEditReview()) {
 			$html = str_replace( '<textarea', '<div id="ed_toolbar"></div><textarea', $html );
 		}
 
@@ -91,10 +92,14 @@ class ReviewController extends BaseController
 	 * @todo: Move this to addons
 	 *
 	 * @return void
+	 *
+	 * @action current_screen
 	 */
-	public function modifyFeatures()
+	public function modifyFeatures( WP_Screen $screen )
 	{
-		if( $this->canEditReview() )return;
+		if( $this->canEditReview()
+			|| $screen->post_type != $this->app->post_type
+		)return;
 
 		remove_post_type_support( $this->app->post_type, 'title' );
 		remove_post_type_support( $this->app->post_type, 'editor' );
@@ -110,6 +115,8 @@ class ReviewController extends BaseController
 	 * @param string $domain
 	 *
 	 * @return string
+	 *
+	 * @filter ngettext
 	 */
 	public function modifyStatusFilter( $translation, $single, $plural, $number, $domain )
 	{
@@ -143,6 +150,8 @@ class ReviewController extends BaseController
 	 * Customize the updated messages array for this post_type
 	 *
 	 * @return array
+	 *
+	 * @filter post_updated_messages
 	 */
 	public function modifyUpdateMessages( array $messages )
 	{
@@ -182,6 +191,8 @@ class ReviewController extends BaseController
 	 * Customize the bulk updated messages array for this post_type
 	 *
 	 * @return array
+	 *
+	 * @filter bulk_post_updated_messages
 	 */
 	public function modifyUpdateMessagesBulk( array $messages, array $counts )
 	{
@@ -300,21 +311,13 @@ class ReviewController extends BaseController
 	 */
 	protected function canEditReview()
 	{
-		$screen = get_current_screen();
-
-		$action = filter_input( INPUT_GET, 'action' );
 		$postId = filter_input( INPUT_GET, 'post' );
-
-		if( $action != 'edit'
-			|| $postId < 1
-			|| $screen->base != 'post'
-			|| $screen->post_type != $this->app->post_type ) {
-			return false;
-		}
 
 		$reviewType = get_post_meta( $postId, 'review_type', true );
 
-		return 'local' === $reviewType;
+		return $postId > 0
+			&& $reviewType == 'local'
+			&& $this->isEditReview();
 	}
 
 	/**
@@ -332,6 +335,18 @@ class ReviewController extends BaseController
 			&& $current_screen->base == 'edit'
 			&& $current_screen->post_type == $this->app->post_type
 			&& $domain == 'default';
+	}
+
+	/**
+	 * @return bool
+	 */
+	protected function isEditReview()
+	{
+		$screen = get_current_screen();
+
+		return $screen->base == 'post'
+			&& $screen->id == $this->app->post_type
+			&& $screen->post_type == $this->app->post_type;
 	}
 
 	/**

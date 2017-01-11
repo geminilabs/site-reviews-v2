@@ -100,7 +100,7 @@ class Settings
 	}
 
 	/**
-	 * @param string $formID
+	 * @param string $formId
 	 *
 	 * @return array
 	 */

@@ -25,6 +25,9 @@ class RegisterTaxonomy
 		$this->app = $app;
 	}
 
+	/**
+	 * @return void
+	 */
 	public function handle( Command $command )
 	{
 		register_taxonomy( $this->app->taxonomy, $this->app->post_type, $command->args );

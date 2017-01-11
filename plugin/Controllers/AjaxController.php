@@ -46,7 +46,7 @@ class AjaxController extends BaseController
 	 */
 	public function ajaxTogglePinned( $request )
 	{
-		$response = $this->execute( new TogglePinned( $request ) );
+		$response = $this->execute( new TogglePinned( $request ));
 
 		wp_send_json([
 			'notices' => $this->notices->show( false ),

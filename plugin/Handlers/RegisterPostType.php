@@ -38,6 +38,9 @@ class RegisterPostType
 		$this->db  = $app->make( 'Database' );
 	}
 
+	/**
+	 * @return void
+	 */
 	public function handle( Command $command )
 	{
 		extract( $command->args );

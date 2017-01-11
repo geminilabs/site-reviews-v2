@@ -41,8 +41,8 @@ final class App extends Container
 
 		$plugin = get_file_data( $file, $data, 'plugin' );
 
-		$this->id      = 'geminilabs-' . $plugin['id'];
 		$this->file    = $file;
+		$this->id      = 'geminilabs-' . $plugin['id'];
 		$this->name    = $plugin['name'];
 		$this->path    = plugin_dir_path( $file );
 		$this->prefix  = str_replace( '-', '_', $this->id );
@@ -85,9 +85,9 @@ final class App extends Container
 		add_action( 'post_submitbox_misc_actions',           [ $main, 'renderMetaBoxPinned'] );
 		add_action( 'edit_form_after_title',                 [ $main, 'renderReview'] );
 		add_action( 'edit_form_top',                         [ $main, 'renderReviewNotice'] );
-		add_action( 'media_buttons',                         [ $main, 'renderTinymceButton'] );
+		add_action( 'media_buttons',                         [ $main, 'renderTinymceButton'], 11 );
 		add_action( 'admin_action_approve',                  [ $review, 'approve'] );
-		add_action( 'admin_print_scripts-post.php',          [ $review, 'modifyAutosave'], 999 );
+		add_action( 'admin_print_scripts',                   [ $review, 'modifyAutosave'], 999 );
 		add_action( 'current_screen',                        [ $review, 'modifyFeatures'] );
 		add_action( 'admin_menu',                            [ $review, 'removeMetaBoxes'] );
 		add_action( 'admin_action_revert',                   [ $review, 'revert'] );
@@ -155,7 +155,9 @@ final class App extends Container
 			// Allow addons to modify the default settings
 			$this->defaults = apply_filters( 'site-reviews/addon/defaults', $this->defaults );
 
-			if( empty( $this->make( 'Database' )->getOptions() )) {
+			$options = $this->make( 'Database' )->getOptions();
+
+			if( empty( $options )) {
 				$this->upgrade();
 			}
 		}

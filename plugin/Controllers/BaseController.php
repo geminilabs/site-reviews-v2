@@ -56,7 +56,7 @@ abstract class BaseController
 	 *
 	 * @param object $command
 	 *
-	 * @return void
+	 * @return void|null|array|bool
 	 */
 	public function execute( $command )
 	{
