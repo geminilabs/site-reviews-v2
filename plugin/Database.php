@@ -277,7 +277,7 @@ class Database implements OptionsContract
 			'pagination'   => false,
 			'post__in'     => [],
 			'post__not_in' => [],
-			'rating'       => 5,
+			'rating'       => '',
 			'type'         => '',
 		];
 
@@ -285,18 +285,17 @@ class Database implements OptionsContract
 
 		extract( $args );
 
-		if( !empty( $type ) && $type != 'all' ) {
-			$meta_query[] = [
+		$meta_query = $this->app->make( 'Query' )->buildMeta([
+			'type' => [
 				'key'   => 'review_type',
 				'value' => $type,
-			];
-		}
-
-		$meta_query[] = [
-			'key'     => 'rating',
-			'value'   => $rating,
-			'compare' => '>=',
-		];
+			],
+			'rating' => [
+				'key'     => 'rating',
+				'value'   => $rating,
+				'compare' => '>=',
+			],
+		]);
 
 		$query = [
 			'meta_key'       => 'pinned',

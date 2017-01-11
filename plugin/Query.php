@@ -27,6 +27,31 @@ class Query
 	}
 
 	/**
+	 * Build a WP_Query meta_query
+	 *
+	 * @return array
+	 */
+	public function buildMeta( array $meta = [] )
+	{
+		$metaQuery = [];
+
+		foreach( $meta as $key => $query ) {
+			if( $key == 'type'
+				&& !in_array( $query['value'], ['','all'] )) {
+				$metaQuery[] = $query;
+			}
+
+			if( $key == 'rating'
+				&& is_numeric( $query['value'] )
+				&& in_array((int) $query['value'], range(2,5))) {
+				$metaQuery[] = $query;
+			}
+		}
+
+		return $metaQuery;
+	}
+
+	/**
 	 * Build a SQL 'OR' string from an array
 	 *
 	 * $values can either be an array or a comma-separated string
