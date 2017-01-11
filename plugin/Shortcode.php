@@ -60,9 +60,7 @@ abstract class Shortcode
 	 */
 	public function addHelpTabs()
 	{
-		$screen = get_current_screen();
-
-		$screen->add_help_tab([
+		get_current_screen()->add_help_tab([
 			'id'      => $this->app->id . '-shortcodes',
 			'title'   => $this->app->name . ' Shortcodes',
 			'content' => $this->helpContent(),

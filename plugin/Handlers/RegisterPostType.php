@@ -166,8 +166,7 @@ class RegisterPostType
 	{
 		// WP < 4.4 support
 		if( !$post_type ) {
-			$screen = get_current_screen();
-			$post_type = $screen->post_type;
+			$post_type = get_current_screen()->post_type;
 		}
 
 		if( $post_type !== $this->app->post_type )return;

@@ -76,10 +76,8 @@ class RegisterTaxonomy
 	{
 		global $wp_query;
 
-		$screen = get_current_screen();
-
 		if( apply_filters( 'site-reviews/disable/filter/category', false )
-			|| !is_object_in_taxonomy( $screen->post_type, $this->app->taxonomy )
+			|| !is_object_in_taxonomy( get_current_screen()->post_type, $this->app->taxonomy )
 		)return;
 
 		printf( '<label class="screen-reader-text" for="%s">%s</label>', $this->app->taxonomy, __( 'Filter by category', 'site-reviews' ) );
