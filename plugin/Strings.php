@@ -13,12 +13,12 @@ namespace GeminiLabs\SiteReviews;
 class Strings
 {
 	/**
-	 * @param string $key
-	 * @param string $fallback
+	 * @param string|null $key
+	 * @param string      $fallback
 	 *
 	 * @return array|string
 	 */
-	public function post_type_labels( $key = '', $fallback = ''  )
+	public function post_type_labels( $key = null, $fallback = ''  )
 	{
 		return $this->result( $key, $fallback, [
 			'add_new_item'          => __( 'Add New Review', 'site-reviews' ),
@@ -36,12 +36,12 @@ class Strings
 	}
 
 	/**
-	 * @param string $key
-	 * @param string $fallback
+	 * @param string|null $key
+	 * @param string      $fallback
 	 *
 	 * @return array|string
 	 */
-	public function post_updated_messages( $key = '', $fallback = ''  )
+	public function post_updated_messages( $key = null, $fallback = ''  )
 	{
 		return $this->result( $key, $fallback, [
 			'approved'      => __( 'Review has been approved and published.', 'site-reviews' ),
@@ -60,14 +60,14 @@ class Strings
 	}
 
 	/**
-	 * @param string $key
-	 * @param string $fallback
+	 * @param string|null $key
+	 * @param string      $fallback
 	 *
 	 * @return array|string
 	 *
 	 * @since 2.0.0
 	 */
-	public function review_types( $key = '', $fallback = ''  )
+	public function review_types( $key = null, $fallback = ''  )
 	{
 		return $this->result( $key, $fallback, apply_filters( 'site-reviews/addon/types', [
 			'local' => __( 'Local', 'site-reviews' ),
@@ -75,12 +75,12 @@ class Strings
 	}
 
 	/**
-	 * @param string $key
-	 * @param string $fallback
+	 * @param string|null $key
+	 * @param string      $fallback
 	 *
 	 * @return array|string
 	 */
-	public function validation( $key = '', $fallback = '' )
+	public function validation( $key = null, $fallback = '' )
 	{
 		return $this->result( $key, $fallback, [
 			'accepted'        => _x( 'The :attribute must be accepted.', ':attribute is a placeholder and should not be translated.', 'site-reviews' ),
@@ -97,8 +97,8 @@ class Strings
 	}
 
 	/**
-	 * @param string $key
-	 * @param string $fallback
+	 * @param string|null $key
+	 * @param string      $fallback
 	 *
 	 * @return array|string
 	 *
@@ -106,7 +106,7 @@ class Strings
 	 */
 	protected function result( $key, $fallback, array $values )
 	{
-		if( !empty( $key )) {
+		if( is_string( $key )) {
 			return isset( $values[ $key ] )
 				? $values[ $key ]
 				: $fallback;

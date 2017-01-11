@@ -107,6 +107,8 @@ final class App extends Container
 		add_filter( 'ngettext',                        [ $review, 'modifyStatusFilter'], 10, 5 );
 		add_filter( 'post_updated_messages',           [ $review, 'modifyUpdateMessages'] );
 		add_filter( 'bulk_post_updated_messages',      [ $review, 'modifyUpdateMessagesBulk'], 10, 2 );
+
+		$this->getDefaults();
 	}
 
 	/**
@@ -116,7 +118,7 @@ final class App extends Container
 	 */
 	public function activate()
 	{
-		$this->updateVersion();
+		$this->upgrade();
 
 		$this->make( 'Database' )->setDefaults();
 		$this->make( 'Database' )->setOption( 'logging', 0 );
@@ -155,11 +157,7 @@ final class App extends Container
 			// Allow addons to modify the default settings
 			$this->defaults = apply_filters( 'site-reviews/addon/defaults', $this->defaults );
 
-			$options = $this->make( 'Database' )->getOptions();
-
-			if( empty( $options )) {
-				$this->upgrade();
-			}
+			$this->upgrade();
 		}
 
 		return $this->defaults;
@@ -220,11 +218,13 @@ final class App extends Container
 
 		if( version_compare( $version, '2.0.0', '<' ) ) {
 
+			error_log( print_r( 'upgrade', 1 ) );
+
 			$upgrade = $this->make( 'Upgrade' );
 
 			$upgrade->options_200();
+			$upgrade->reviewType_200();
 			$upgrade->sidebarWidgets_200();
-			$upgrade->siteName_200();
 			$upgrade->themeMods_200();
 			$upgrade->widgetSiteReviews_200();
 			$upgrade->widgetSiteReviewsForm_200();

@@ -2,9 +2,12 @@
 
 <?php
 	$reviewType = get_post_meta( $post->ID, 'review_type', true );
-	$reviewType = sprintf( __( '%s review', 'site-reviews' ),
-		glsr_resolve( 'Strings' )->review_types( $reviewType, ucfirst( $reviewType ))
-	);
+
+	$reviewType = empty( $reviewType )
+		? __( 'Unknown', 'site-reviews' )
+		: sprintf( __( '%s review', 'site-reviews' ),
+			glsr_resolve( 'Strings' )->review_types( $reviewType, ucfirst( $reviewType ))
+		);
 
 	$reviewUrl = get_post_meta( $post->ID, 'url', true );
 

@@ -62,9 +62,28 @@ class Upgrade
 		$newOptions = get_option( $this->db->getOptionName(), [] );
 		$newOptions = array_replace_recursive( $oldOptions, $newOptions );
 
+		// save migrated plugin options
 		update_option( $this->db->getOptionName(), $newOptions );
 
+		// set any new defaults
 		$this->db->setDefaults();
+	}
+
+	/**
+	 * @return void
+	 */
+	public function reviewType_200()
+	{
+		global $wpdb;
+
+		$query = "UPDATE {$wpdb->postmeta} AS pm " .
+		"INNER JOIN {$wpdb->posts} AS p ON pm.post_id = p.ID " .
+		"SET pm.meta_key = 'review_type' " .
+		"WHERE pm.meta_key = 'site_name' " .
+		"AND pm.meta_value = 'local' " .
+		"AND p.post_type = '{$this->app->post_type}'";
+
+		$wpdb->query( $query );
 	}
 
 	/**
@@ -77,23 +96,6 @@ class Upgrade
 		$sidebarWidgets = $this->replaceWidgetNames_200( $sidebarWidgets );
 
 		update_option( 'sidebars_widgets', $sidebarWidgets );
-	}
-
-	/**
-	 * @return void
-	 */
-	public function siteName_200()
-	{
-		global $wpdb;
-
-		$query = "UPDATE {$wpdb->postmeta} AS pm " .
-		"INNER JOIN {$wpdb->posts} AS p ON pm.post_id = p.ID " .
-		"SET pm.meta_key = 'review_type' " .
-		"WHERE pm.meta_key = 'site_name' " .
-		"AND pm.meta_value = 'local' " .
-		"AND p.post_type = '{$this->app->post_type}'";
-
-		$wpdb->query( $query );
 	}
 
 	/**
@@ -122,13 +124,13 @@ class Upgrade
 	 */
 	public function widgetSiteReviews_200()
 	{
-		$oldWidget = get_option( "widget_{$this->app->id}recent_reviews" );
+		$oldWidget = get_option( "widget_{$this->app->id}_recent_reviews" );
 
 		if( !$oldWidget )return;
 
 		foreach( $oldWidget as &$widget ) {
 
-			if( !is_array( $widget ) )continue;
+			if( !is_array( $widget ))continue;
 
 			$hide = [];
 
@@ -139,9 +141,9 @@ class Upgrade
 				$hide[] = 'title';
 			}
 
-			if( isset( $widget['show'] ) ) {
+			if( isset( $widget['show'] )) {
 				foreach( ['author','date','rating'] as $value ) {
-					if( in_array( 'show_' . $value, $widget['show'] ) )continue;
+					if( in_array( 'show_' . $value, $widget['show'] ))continue;
 					$hide[] = $value;
 				}
 			}
@@ -152,14 +154,14 @@ class Upgrade
 			$widget['rating']  = $widget['min_rating'];
 
 			foreach( ['max_reviews','min_rating','order_by','show','type'] as $value ) {
-				if( isset( $widget[ $value ] ) ) {
+				if( isset( $widget[ $value ] )) {
 					unset( $widget[ $value ] );
 				}
 			}
 		}
 
 		update_option( "widget_{$this->app->id}_site-reviews", $oldWidget );
-		delete_option( "widget_{$this->app->id}recent_reviews" );
+		delete_option( "widget_{$this->app->id}_recent_reviews" );
 	}
 
 	/**
@@ -167,15 +169,15 @@ class Upgrade
 	 */
 	public function widgetSiteReviewsForm_200()
 	{
-		$oldWidget = get_option( "widget_{$this->app->id}reviews_form" );
+		$oldWidget = get_option( "widget_{$this->app->id}_reviews_form" );
 
 		if( !$oldWidget )return;
 
 		foreach( $oldWidget as &$widget ) {
 
-			if( !is_array( $widget ) )continue;
+			if( !is_array( $widget ))continue;
 
-			if( isset( $widget['fields'] ) && is_array( $widget['fields'] ) ) {
+			if( isset( $widget['fields'] ) && is_array( $widget['fields'] )) {
 
 				if(( $key = array_search( 'reviewer', $widget['fields'] )) !== false ) {
 					$widget['fields'][ $key ] = 'name';
@@ -187,7 +189,7 @@ class Upgrade
 		}
 
 		update_option( "widget_{$this->app->id}_site-reviews-form", $oldWidget );
-		delete_option( "widget_{$this->app->id}reviews_form" );
+		delete_option( "widget_{$this->app->id}_reviews_form" );
 	}
 
 	/**
@@ -205,6 +207,25 @@ class Upgrade
 	}
 
 	/**
+	 * @param string $search
+	 * @param string $replace
+	 *
+	 * @return array
+	 */
+	protected function replaceWidgetName( $search, $replace, array $widgetNames )
+	{
+		$search = $this->app->id . $search;
+		$replace = $this->app->id . $replace;
+
+		foreach( $widgetNames as $index => $widgetName ) {
+			if( strpos( $widgetName, $search ) === false )continue;
+			$widgetNames[ $index ] = str_replace( $search, $replace, $widgetName );
+		}
+
+		return $widgetNames;
+	}
+
+	/**
 	 * @return array
 	 */
 	protected function replaceWidgetNames_200( array $widgets )
@@ -213,21 +234,10 @@ class Upgrade
 
 			if( !is_array( $values ) )continue;
 
-			foreach( $values as $index => $widget ) {
-
-				$widget1 = $this->app->id . 'recent_reviews';
-				$widget2 = $this->app->id . '_recent_reviews';
-				$widget3 = $this->app->id . 'reviews_form';
-				$widget4 = $this->app->id . '_reviews_form';
-
-				if( strpos( $widget , $widget1 ) !== false || strpos( $widget , $widget2 ) !== false ) {
-					$values[ $index ] = str_replace( [ $widget1, $widget2 ], $this->app->id . '_site-reviews', $widget );
-				}
-
-				if( strpos( $widget , $widget3 ) !== false || strpos( $widget , $widget4 ) !== false ) {
-					$values[ $index ] = str_replace( [ $widget3, $widget4 ], $this->app->id . '_site-reviews-form', $widget );
-				}
-			}
+			$values = $this->replaceWidgetName( '_recent_reviews', '_site-reviews', $values );
+			$values = $this->replaceWidgetName( 'recent_reviews', '_site-reviews', $values );
+			$values = $this->replaceWidgetName( '_reviews_form', '_site-reviews-form', $values );
+			$values = $this->replaceWidgetName( 'reviews_form', '_site-reviews-form', $values );
 		}
 
 		return $widgets;
