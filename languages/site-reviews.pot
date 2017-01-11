@@ -163,15 +163,15 @@ msgstr ""
 msgid "Licenses"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:598
+#: plugin/Controllers/MainController.php:596
 msgid "Logging enabled."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:599
+#: plugin/Controllers/MainController.php:597
 msgid "Logging disabled."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:602
+#: plugin/Controllers/MainController.php:600
 msgid "Settings updated."
 msgstr ""
 
@@ -233,29 +233,29 @@ msgstr ""
 msgid "Edit &#8220;%s&#8221;"
 msgstr ""
 
-#: plugin/Handlers/RegisterPostType.php:310
+#: plugin/Handlers/RegisterPostType.php:309
 msgid "%s star"
 msgid_plural "%s stars"
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Handlers/RegisterPostType.php:314
+#: plugin/Handlers/RegisterPostType.php:313
 msgid "All ratings"
 msgstr ""
 
-#: plugin/Handlers/RegisterPostType.php:316
+#: plugin/Handlers/RegisterPostType.php:315
 msgid "Filter by rating"
 msgstr ""
 
-#: plugin/Handlers/RegisterPostType.php:333
+#: plugin/Handlers/RegisterPostType.php:332
 msgid "All types"
 msgstr ""
 
-#: plugin/Handlers/RegisterPostType.php:339
+#: plugin/Handlers/RegisterPostType.php:338
 msgid "Filter by type"
 msgstr ""
 
-#: plugin/Handlers/RegisterTaxonomy.php:85
+#: plugin/Handlers/RegisterTaxonomy.php:83
 msgid "Filter by category"
 msgstr ""
 

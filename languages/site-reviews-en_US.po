@@ -185,15 +185,15 @@ msgstr "%s reviews are read-only."
 msgid "Licenses"
 msgstr "Licenses"
 
-#: plugin/Controllers/MainController.php:598
+#: plugin/Controllers/MainController.php:596
 msgid "Logging enabled."
 msgstr "Logging enabled."
 
-#: plugin/Controllers/MainController.php:599
+#: plugin/Controllers/MainController.php:597
 msgid "Logging disabled."
 msgstr "Logging disabled."
 
-#: plugin/Controllers/MainController.php:602
+#: plugin/Controllers/MainController.php:600
 msgid "Settings updated."
 msgstr "Settings updated."
 
@@ -255,29 +255,29 @@ msgstr "%s reviews"
 msgid "Edit &#8220;%s&#8221;"
 msgstr "Edit &#8220;%s&#8221;"
 
-#: plugin/Handlers/RegisterPostType.php:310
+#: plugin/Handlers/RegisterPostType.php:309
 msgid "%s star"
 msgid_plural "%s stars"
 msgstr[0] "%s star"
 msgstr[1] "%s stars"
 
-#: plugin/Handlers/RegisterPostType.php:314
+#: plugin/Handlers/RegisterPostType.php:313
 msgid "All ratings"
 msgstr "All ratings"
 
-#: plugin/Handlers/RegisterPostType.php:316
+#: plugin/Handlers/RegisterPostType.php:315
 msgid "Filter by rating"
 msgstr "Filter by rating"
 
-#: plugin/Handlers/RegisterPostType.php:333
+#: plugin/Handlers/RegisterPostType.php:332
 msgid "All types"
 msgstr "All types"
 
-#: plugin/Handlers/RegisterPostType.php:339
+#: plugin/Handlers/RegisterPostType.php:338
 msgid "Filter by type"
 msgstr "Filter by type"
 
-#: plugin/Handlers/RegisterTaxonomy.php:85
+#: plugin/Handlers/RegisterTaxonomy.php:83
 msgid "Filter by category"
 msgstr "Filter by category"
 
