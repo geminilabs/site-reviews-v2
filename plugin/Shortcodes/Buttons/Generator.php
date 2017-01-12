@@ -201,12 +201,8 @@ abstract class Generator
 		$listbox = [];
 
 		foreach( $args as $key => $value ) {
-			if( $key == 'value' && empty( $value )) {
-				$listbox[ $key ] = $args['name'];
-			}
-			else if( $value ) {
-				$listbox[ $key ] = $value;
-			}
+			if( !$value )continue;
+			$listbox[ $key ] = $value;
 		}
 
 		$field['placeholder'] ?: $field['placeholder'] = esc_attr__( '- Select -', 'site-reviews' );
