@@ -61,6 +61,15 @@ function glsr_get_option( $option_path = '', $fallback = '' ) {
 }
 
 /**
+ * Global helper to get all plugin options
+ *
+ * @return array
+ */
+function glsr_get_options() {
+	return App::load()->make( 'Helper' )->get( 'options' );
+}
+
+/**
  * Global helper to get a single review
  *
  * @return null|object
