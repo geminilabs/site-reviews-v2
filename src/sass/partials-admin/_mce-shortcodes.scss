@@ -45,7 +45,8 @@
 	}
 }
 
-.mce-glsr-mce-primary.mce-btn button {
+.mce-glsr-btn.mce-btn button {
+	box-sizing: border-box;
 	padding: 0 8px;
 }
 
@@ -101,4 +102,21 @@ button.glsr-mce-button {
 
 div.sc-wrap {
 	margin-right: 1px;
+}
+
+/* WordPress compatibility
+-------------------------------------------------------------------- */
+
+body.branch-4,
+body.branch-4-1,
+body.branch-4-2 {
+
+	i.mce-i-checkbox {
+		background-image: none;
+	}
+
+	.glsr-mce-menu .glsr-mce-menu-item:hover {
+		background: #0073aa;
+		color: #fff;
+	}
 }

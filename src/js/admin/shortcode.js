@@ -88,7 +88,7 @@ GLSR.shortcode.create = function( editor_id )
 
 		var buttons = [{
 			text    : response.ok,
-			classes : 'primary glsr-mce-primary',
+			classes : 'btn glsr-btn primary',
 			onclick : function() {
 				var field, required, valid, win;
 				// Get the top most window object
