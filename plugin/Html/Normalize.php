@@ -264,7 +264,7 @@ class Normalize
 			// if data attributes, use single quotes in case of json encoded values
 			$quotes = false !== stripos( $key, 'data-' ) ? "'" : '"';
 
-			if( is_array( $value ) ) {
+			if( is_array( $value )) {
 				$value = json_encode( $value );
 				$quotes = "'";
 			}
@@ -313,7 +313,7 @@ class Normalize
 
 		// normalize truthy boolean attributes
 		foreach( $filtered as $key => $value ) {
-			if( !in_array( $key, $this->booleanAttributes ) )continue;
+			if( !in_array( $key, $this->booleanAttributes ))continue;
 
 			if( $value !== false ) {
 				$filtered[ $key ] = '';
@@ -331,7 +331,7 @@ class Normalize
 			);
 		});
 
-		return array_intersect_key( $filtered, array_flip( $filteredKeys ) );
+		return array_intersect_key( $filtered, array_flip( $filteredKeys ));
 	}
 
 	/**
@@ -352,9 +352,9 @@ class Normalize
 
 				if( $result ) {
 					// only allow data attributes to have an empty value
-					if( $wildcard != 'data-' && empty( $value ) )continue;
+					if( $wildcard != 'data-' && empty( $value ))continue;
 
-					if( is_array( $value ) ) {
+					if( is_array( $value )) {
 
 						if( $wildcard != 'data-' )continue;
 
@@ -374,7 +374,7 @@ class Normalize
 	 */
 	protected function filterInputType()
 	{
-		if( !isset( $this->args['type'] ) || !in_array( $this->args['type'], $this->inputTypes ) ) {
+		if( !isset( $this->args['type'] ) || !in_array( $this->args['type'], $this->inputTypes )) {
 			$this->args['type'] = 'text';
 		}
 	}
@@ -384,7 +384,7 @@ class Normalize
 	 */
 	protected function parseAttributes( array $attributes, array $args = [] )
 	{
-		if( !empty( $args ) ) {
+		if( !empty( $args )) {
 			$this->args = array_change_key_case( $args );
 		}
 

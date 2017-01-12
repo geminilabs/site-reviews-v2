@@ -94,7 +94,7 @@ abstract class Base
 	 */
 	public function generateLabel()
 	{
-		if( empty( $this->args['label'] ) )return;
+		if( empty( $this->args['label'] ))return;
 
 		$for = !!$this->args['id']
 			? " for=\"{$this->args['id']}\""
@@ -119,9 +119,9 @@ abstract class Base
 	 */
 	protected function camelCase( $value )
 	{
-		$value = ucwords( str_replace( ['-', '_'], ' ', $value ) );
+		$value = ucwords( str_replace( ['-', '_'], ' ', $value ));
 
-		return lcfirst( str_replace( ' ', '', $value ) );
+		return lcfirst( str_replace( ' ', '', $value ));
 	}
 
 	/**
@@ -153,7 +153,7 @@ abstract class Base
 
 		if( $method === 'singleInput' ) {
 
-			if( !isset( $this->args['options'] ) || empty( $this->args['options'] ) )return;
+			if( !isset( $this->args['options'] ) || empty( $this->args['options'] ))return;
 
 			// hack to make sure unset single checkbox values start at 1 instead of 0
 			if( key( $this->args['options'] ) === 0 ) {
@@ -182,7 +182,7 @@ abstract class Base
 
 		$normalize = new Normalize;
 
-		return ( $this->element && method_exists( $normalize, $this->element ) )
+		return ( $this->element && method_exists( $normalize, $this->element ))
 			? $normalize->{$this->element}( $args, $implode )
 			: ( !!$implode ? '' : [] );
 	}
@@ -196,7 +196,7 @@ abstract class Base
 	{
 		// similar to array_merge except overwrite empty values
 		foreach( $defaults as $key => $value ) {
-			if( isset( $this->args[ $key ] ) && !empty( $this->args[ $key ] ) )continue;
+			if( isset( $this->args[ $key ] ) && !empty( $this->args[ $key ] ))continue;
 			$this->args[ $key ] = $value;
 		}
 
@@ -257,11 +257,11 @@ abstract class Base
 
 		$value = $this->args['options'][ $optionName ];
 
-		if( is_array( $value ) ) {
+		if( is_array( $value )) {
 			$args = $value;
 		}
 
-		if( is_string( $value ) ) {
+		if( is_string( $value )) {
 			$label = $value;
 		}
 
@@ -279,8 +279,8 @@ abstract class Base
 			return $value !== '';
 		});
 
-		if( is_array( $this->args['value'] ) ) {
-			if( in_array( $args['value'], $this->args['value'] ) ) {
+		if( is_array( $this->args['value'] )) {
+			if( in_array( $args['value'], $this->args['value'] )) {
 				$this->args['default'] = $args['value'];
 			}
 		}

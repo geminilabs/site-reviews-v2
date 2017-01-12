@@ -51,7 +51,7 @@ class Logger implements LoggerInterface
 	 */
 	public function download()
 	{
-		if( !current_user_can( 'install_plugins' ) )return;
+		if( !current_user_can( 'install_plugins' ))return;
 
 		nocache_headers();
 
@@ -197,12 +197,12 @@ class Logger implements LoggerInterface
 		$levels = $reflection->getConstants();
 
 		$custom_levels = array_intersect( apply_filters( 'site-reviews/logger/levels', $levels ), $levels );
-		$custom_levels = array_keys( array_flip( $custom_levels ) );
+		$custom_levels = array_keys( array_flip( $custom_levels ));
 
 		$levels = empty( $custom_levels ) ? $levels : $custom_levels;
 
 		// Check if log level is allowed.
-		if( !in_array( $level, $levels, true ) )return;
+		if( !in_array( $level, $levels, true ))return;
 
 		$date    = get_date_from_gmt( gmdate('Y-m-d H:i:s') );
 		$level   = strtoupper( $level );
@@ -285,7 +285,7 @@ class Logger implements LoggerInterface
 	 */
 	protected function interpolate( $message, array $context = [] )
 	{
-		if( is_array( $message ) ) {
+		if( is_array( $message )) {
 			return $message;
 		}
 
@@ -297,10 +297,10 @@ class Logger implements LoggerInterface
 			if( is_object( $val ) && get_class( $val ) === 'DateTime' ) {
 				$val = $val->format( 'Y-m-d H:i:s' );
 			}
-			else if( is_object( $val ) || is_array( $val ) ) {
+			else if( is_object( $val ) || is_array( $val )) {
 				$val = json_encode( $val );
 			}
-			else if( is_resource( $val ) ) {
+			else if( is_resource( $val )) {
 				$val = (string) $val;
 			}
 

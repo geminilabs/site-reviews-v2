@@ -41,7 +41,7 @@
 
 	if( $logging_enabled == 1 ) {
 		printf( '<input type="hidden" name="%s[logging]" value="0">', glsr_resolve( 'Database' )->getOptionName() );
-		submit_button( __( 'Disable Logging', 'site-reviews' ) );
+		submit_button( __( 'Disable Logging', 'site-reviews' ));
 	}
 	else {
 		printf( '<input type="hidden" name="%s[logging]" value="1">', glsr_resolve( 'Database' )->getOptionName() );

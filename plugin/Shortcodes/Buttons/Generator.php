@@ -76,10 +76,10 @@ abstract class Generator
 		$errors = [];
 		$fields = $this->setFields( $this->fields() );
 
-		if( !empty( $this->errors ) ) {
+		if( !empty( $this->errors )) {
 
 			foreach( $this->required as $name => $alert ) {
-				if( false === array_search( $name, array_column( $fields, 'name' ) ) ) {
+				if( false === array_search( $name, array_column( $fields, 'name' )) ) {
 					$errors[] = $this->errors[ $name ];
 				}
 			}
@@ -101,7 +101,7 @@ abstract class Generator
 	 */
 	protected function setFields( $defined_fields )
 	{
-		if( !is_array( $defined_fields ) )return;
+		if( !is_array( $defined_fields ))return;
 
 		$fields = [];
 
@@ -119,7 +119,7 @@ abstract class Generator
 			$field  = wp_parse_args( (array) $field, $defaults );
 			$method = glsr_resolve( 'Helper' )->buildMethodName( $field['type'], 'generate' );
 
-			if( method_exists( $this, $method ) ) {
+			if( method_exists( $this, $method )) {
 
 				$field = call_user_func( array( $this, $method ), $field );
 
@@ -141,7 +141,7 @@ abstract class Generator
 	 */
 	protected function generateCheckbox( $field )
 	{
-		if( !$this->validate( $field ) )return;
+		if( !$this->validate( $field ))return;
 
 		$textbox = shortcode_atts( array(
 			'checked'   => false,
@@ -169,9 +169,9 @@ abstract class Generator
 	 */
 	protected function generateContainer( $field )
 	{
-		if( !array_key_exists( 'html', $field ) && !array_key_exists( 'items', $field ) )return;
+		if( !array_key_exists( 'html', $field ) && !array_key_exists( 'items', $field ))return;
 
-		if( isset( $field['items'] ) && is_array( $field['items'] ) ) {
+		if( isset( $field['items'] ) && is_array( $field['items'] )) {
 			$field['items'] = $this->setFields( $field['items'] );
 		}
 
@@ -187,7 +187,7 @@ abstract class Generator
 	 */
 	protected function generateListbox( $field )
 	{
-		if( !$this->validate( $field ) )return;
+		if( !$this->validate( $field ))return;
 
 		$args = shortcode_atts([
 			'label'    => '',
@@ -201,7 +201,7 @@ abstract class Generator
 		$listbox = [];
 
 		foreach( $args as $key => $value ) {
-			if( $key == 'value' && empty( $value ) ) {
+			if( $key == 'value' && empty( $value )) {
 				$listbox[ $key ] = $args['name'];
 			}
 			else if( $value ) {
@@ -271,7 +271,7 @@ abstract class Generator
 	 */
 	protected function generateTextbox( $field )
 	{
-		if( !$this->validate( $field ) )return;
+		if( !$this->validate( $field ))return;
 
 		$textbox = shortcode_atts([
 			'hidden'    => false,
@@ -317,7 +317,7 @@ abstract class Generator
 
 		extract( $vars );
 
-		if( isset( $required['error'] ) ) {
+		if( isset( $required['error'] )) {
 			$error = [
 				'type' => 'container',
 				'html' => $required['error'],
@@ -326,14 +326,14 @@ abstract class Generator
 			$this->errors[ $name ] = $this->generateContainer( $error );
 		}
 
-		if( !!$required || is_array( $required ) ) {
+		if( !!$required || is_array( $required )) {
 
 			$alert = esc_html__( 'Some of the shortcode options are required.', 'site-reviews' );
 
-			if( isset( $required['alert'] ) ) {
+			if( isset( $required['alert'] )) {
 				$alert = $required['alert'];
 			}
-			else if( !empty( $label ) ) {
+			else if( !empty( $label )) {
 				$alert = sprintf(
 					esc_html_x( 'The "%s" option is required.', 'the option label', 'site-reviews' ),
 					str_replace( ':', '', $label )

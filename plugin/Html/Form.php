@@ -213,7 +213,7 @@ class Form
 
 			if( $multi ) {
 				if( $depends = $formField->getDataDepends() ) {
-					$depends = sprintf( ' data-depends=\'%s\'', json_encode( $depends ) );
+					$depends = sprintf( ' data-depends=\'%s\'', json_encode( $depends ));
 				}
 
 				$legend = $label ? sprintf( $stringLegend, $label ) : '';
@@ -276,12 +276,12 @@ class Form
 	 */
 	protected function isFieldHidden( $field )
 	{
-		if( !( $dependsOn = $field->getDataDepends() ) )return;
+		if( !( $dependsOn = $field->getDataDepends() ))return;
 
 		foreach( $this->fields as $formField ) {
 			if( $dependsOn['name'] !== $formField->args['name'] )continue;
 
-			if( is_array( $dependsOn['value'] ) ) {
+			if( is_array( $dependsOn['value'] )) {
 				return !in_array( $formField->args['value'], $dependsOn['value'] );
 			}
 

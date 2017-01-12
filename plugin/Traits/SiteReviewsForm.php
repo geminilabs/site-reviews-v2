@@ -30,7 +30,7 @@ trait SiteReviewsForm
 			$from = $this->id;
 		}
 
-		return substr( md5( serialize( $from ) ), 0, 8 );
+		return substr( md5( serialize( $from )), 0, 8 );
 	}
 
 	/**
@@ -49,7 +49,7 @@ trait SiteReviewsForm
 
 		ob_start();
 
-		if( !empty( $atts['description'] ) ) {
+		if( !empty( $atts['description'] )) {
 			printf( '<p class="glsr-form-description">%s</p>', $atts['description'] );
 		}
 

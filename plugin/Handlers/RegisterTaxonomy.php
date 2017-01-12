@@ -80,7 +80,7 @@ class RegisterTaxonomy
 			|| !is_object_in_taxonomy( get_current_screen()->post_type, $this->app->taxonomy )
 		)return;
 
-		printf( '<label class="screen-reader-text" for="%s">%s</label>', $this->app->taxonomy, __( 'Filter by category', 'site-reviews' ) );
+		printf( '<label class="screen-reader-text" for="%s">%s</label>', $this->app->taxonomy, __( 'Filter by category', 'site-reviews' ));
 
 		$selected = isset( $wp_query->query[ $this->app->taxonomy ] )
 			? $wp_query->query[ $this->app->taxonomy ]
@@ -95,7 +95,7 @@ class RegisterTaxonomy
 			'orderby'         => 'name',
 			'selected'        => $selected,
 			'show_count'      => false,
-			'show_option_all' => ucfirst( strtolower( get_taxonomy( $this->app->taxonomy )->labels->all_items ) ),
+			'show_option_all' => ucfirst( strtolower( get_taxonomy( $this->app->taxonomy )->labels->all_items )),
 			'taxonomy'        => $this->app->taxonomy,
 			'value_field'     => 'slug',
 		]);

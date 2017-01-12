@@ -107,7 +107,7 @@ class SiteReviewsForm extends Widget
 
 		echo $args['before_widget'];
 
-		if( !empty( $title ) ) {
+		if( !empty( $title )) {
 			echo $args['before_title'] . $title . $args['after_title'];
 		}
 

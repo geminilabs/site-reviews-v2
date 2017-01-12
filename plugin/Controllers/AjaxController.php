@@ -77,11 +77,11 @@ class AjaxController extends BaseController
 	{
 		$shortcode = $request['shortcode'];
 
-		if( array_key_exists( $shortcode, glsr_app()->mceShortcodes ) ) {
+		if( array_key_exists( $shortcode, glsr_app()->mceShortcodes )) {
 
 			$data = glsr_app()->mceShortcodes[ $shortcode ];
 
-			if( !empty( $data['errors'] ) ) {
+			if( !empty( $data['errors'] )) {
 				$data['btn_okay'] = [ esc_html__( 'Okay', 'site-reviews' ) ];
 			}
 

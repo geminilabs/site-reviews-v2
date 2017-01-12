@@ -32,7 +32,7 @@ abstract class Container
 	 */
 	public static function load()
 	{
-		if( is_null( static::$instance ) ) {
+		if( is_null( static::$instance )) {
 			static::$instance = new static;
 		}
 
@@ -54,11 +54,11 @@ abstract class Container
 	 */
 	public function __get( $service )
 	{
-		if( !isset( $this->services[ $service ] ) ) {
+		if( !isset( $this->services[ $service ] )) {
 			return null;
 		}
 
-		if( !is_callable( $this->services[ $service ] ) ) {
+		if( !is_callable( $this->services[ $service ] )) {
 			return $this->services[ $service ];
 		}
 
@@ -99,7 +99,7 @@ abstract class Container
 	 */
 	public function singleton( $alias, $binding )
 	{
-		$this->bind( $alias, $this->make( $binding ) );
+		$this->bind( $alias, $this->make( $binding ));
 	}
 
 	/**
@@ -144,21 +144,21 @@ abstract class Container
 	 */
 	public function make( $alias, $prefixed = false )
 	{
-		if( isset( $this->services[ $alias ] ) && is_callable( $this->services[ $alias ] ) ) {
-			return call_user_func_array( $this->services[ $alias ], [ $this ] );
+		if( isset( $this->services[ $alias ] ) && is_callable( $this->services[ $alias ] )) {
+			return call_user_func_array( $this->services[ $alias ], [ $this ]);
 		}
 
-		if( isset( $this->services[ $alias ] ) && is_object( $this->services[ $alias ] ) ) {
+		if( isset( $this->services[ $alias ] ) && is_object( $this->services[ $alias ] )) {
 			return $this->services[ $alias ];
 		}
 
-		if( isset( $this->services[ $alias ] ) && class_exists( $this->services[ $alias ] ) ) {
-			return $this->resolve( $this->services[ $alias ] );
+		if( isset( $this->services[ $alias ] ) && class_exists( $this->services[ $alias ] )) {
+			return $this->resolve( $this->services[ $alias ]);
 		}
 
 		// Allow unbound aliases that omit the root namespace
 		// i.e. 'Html\Field' translates to 'GeminiLabs\SiteReviews\Html\Field'
-		if( $prefixed === false && strpos( $alias, __NAMESPACE__ ) === false && !class_exists( $alias ) ) {
+		if( $prefixed === false && strpos( $alias, __NAMESPACE__ ) === false && !class_exists( $alias )) {
 			return $this->make( __NAMESPACE__ . "\\$alias" , 'prefix alias with the namespace' );
 		}
 
@@ -186,7 +186,7 @@ abstract class Container
 		$constructor = $reflector->getConstructor();
 
 		// No constructor means no dependencies so we can just resolve the instance right away.
-		if( is_null( $constructor ) ) {
+		if( is_null( $constructor )) {
 			return new $class;
 		}
 
@@ -203,7 +203,7 @@ abstract class Container
 			}
 
 			// This will throw a TypeError if parameter is not a class
-			if( is_null( $parameter->getClass() ) ) {
+			if( is_null( $parameter->getClass() )) {
 				$newInstanceParameters[] = null;
 				continue;
 			}

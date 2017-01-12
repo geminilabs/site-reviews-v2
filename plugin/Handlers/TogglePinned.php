@@ -30,11 +30,11 @@ class TogglePinned
 	 */
 	public function handle( Command $command )
 	{
-		if( !get_post( $command->id ) ) {
+		if( !get_post( $command->id )) {
 			return false;
 		}
 
-		if( is_null( $command->pinned ) ) {
+		if( is_null( $command->pinned )) {
 			$meta = get_post_meta( $command->id, 'pinned', true );
 			$command->pinned = !wp_validate_boolean( $meta );
 		}

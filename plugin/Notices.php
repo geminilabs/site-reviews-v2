@@ -32,7 +32,7 @@ class Notices
 	 */
 	public function add( $type, $message, array $args = [] )
 	{
-		if( empty( $type ) || empty( $message ) )return;
+		if( empty( $type ) || empty( $message ))return;
 
 		$defaults = [
 			'dismissible' => true,
@@ -96,21 +96,21 @@ class Notices
 
 		$settings_updated = filter_input( INPUT_GET, 'settings-updated' );
 
-		if( $hide_on_update && !empty( $settings_updated ) )return;
+		if( $hide_on_update && !empty( $settings_updated ))return;
 
 		$settings_errors = get_settings_errors( $this->app->id, $sanitize );
 
 		// make sure each notice is unique
-		$unique_notices = array_map( 'unserialize', array_unique( array_map( 'serialize', $settings_errors ) ) );
+		$unique_notices = array_map( 'unserialize', array_unique( array_map( 'serialize', $settings_errors )));
 
-		if( empty( $unique_notices ) )return;
+		if( empty( $unique_notices ))return;
 
 		// Empty $wp_settings_errors in case ajax is being used (we don't want to keep old notices)
 		$wp_settings_errors = [];
 		$notices = [];
 
 		foreach( $unique_notices as $key => $notice ) {
-			if( is_string( $notice['message'] ) ) {
+			if( is_string( $notice['message'] )) {
 				$notices[] = $this->returnNotice( $notice['type'], true, true, $notice['message'] );
 			}
 			else {
@@ -148,11 +148,11 @@ class Notices
 		$type = $type == 'updated' ? 'success' : $type;
 
 		// WP 4.0 support
-		if( version_compare( $wp_version, '4.1', '<' ) ) {
+		if( version_compare( $wp_version, '4.1', '<' )) {
 			$type = $type == 'error' ? 'error error' : "$type updated";
 		}
 
-		if( is_string( $messages ) ) {
+		if( is_string( $messages )) {
 			$messages = (array) $messages;
 		}
 

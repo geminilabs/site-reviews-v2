@@ -55,7 +55,7 @@ class SiteReviewsForm extends Shortcode
 
 		echo '<div class="shortcode-reviews-form">';
 
-		if( !empty( $atts['title'] ) ) {
+		if( !empty( $atts['title'] )) {
 			printf( '<h3 class="glsr-shortcode-title">%s</h3>', $atts['title'] );
 		}
 
@@ -79,7 +79,7 @@ class SiteReviewsForm extends Shortcode
 
 		$hide = explode( ',', $args['hide'] );
 
-		$args['hide'] = implode( ',', array_unique( array_map( 'trim', $hide ) ) );
+		$args['hide'] = implode( ',', array_unique( array_map( 'trim', $hide )) );
 
 		return $args;
 	}

@@ -66,7 +66,7 @@ class RegisterPostType
 	 */
 	protected function normalizeColumns( array $columns )
 	{
-		if( array_key_exists( 'category', $columns ) ) {
+		if( array_key_exists( 'category', $columns )) {
 
 			$keys = array_keys( $columns );
 

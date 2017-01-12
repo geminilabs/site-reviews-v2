@@ -26,11 +26,11 @@ class Colorpicker extends Text
 		$hex_color = '(([a-fA-F0-9]){3}){1,2}$';
 
 		// Prepend "#" if it's missing
-		if( preg_match( '/^' . $hex_color . '/i', $value ) ) {
+		if( preg_match( '/^' . $hex_color . '/i', $value )) {
 			$this->args['value'] = "#{$value}";
 		}
 		// Reset value if it's bad
-		else if( !preg_match( '/^#' . $hex_color . '/i', $value ) ) {
+		else if( !preg_match( '/^#' . $hex_color . '/i', $value )) {
 			$this->args['value'] = '';
 		}
 

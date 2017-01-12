@@ -66,7 +66,7 @@ class Session
 
 		if( $cookieId ) {
 
-			$cookie = explode( '||', stripslashes( $cookieId ) );
+			$cookie = explode( '||', stripslashes( $cookieId ));
 
 			$this->sessionId   = $cookie[0];
 			$this->expiry      = $cookie[1];
@@ -208,11 +208,11 @@ class Session
 		$secure   = apply_filters( 'site-reviews/session/cookie/secure', false );
 		$httponly = apply_filters( 'site-reviews/session/cookie/httponly', false );
 
-		if( !defined( 'COOKIEPATH' ) ) {
-			define( 'COOKIEPATH', preg_replace( '|https?://[^/]+|i', '', get_option( 'home' ) . '/' ) );
+		if( !defined( 'COOKIEPATH' )) {
+			define( 'COOKIEPATH', preg_replace( '|https?://[^/]+|i', '', get_option( 'home' ) . '/' ));
 		}
 
-		if( !defined( 'COOKIE_DOMAIN' ) ) {
+		if( !defined( 'COOKIE_DOMAIN' )) {
 			define( 'COOKIE_DOMAIN', false );
 		}
 
@@ -259,7 +259,7 @@ class Session
 			"LIMIT 0, %d", absint( $limit )
 		));
 
-		if( empty( $sessions ) ) {
+		if( empty( $sessions )) {
 			return 0;
 		}
 
@@ -270,7 +270,7 @@ class Session
 		foreach( $sessions as $session ) {
 			if( $now <= $session->expiry )continue;
 
-			$session_id = addslashes( substr( $session->name, 20 ) );
+			$session_id = addslashes( substr( $session->name, 20 ));
 
 			$expired[] = $session->name;
 			$expired[] = "{$this->prefix}_{$session_id}";
@@ -279,7 +279,7 @@ class Session
 		}
 
 		// Delete expired sessions
-		if( !empty( $expired ) ) {
+		if( !empty( $expired )) {
 			$session_names = implode( "','", $expired );
 
 			$wpdb->query(
@@ -327,7 +327,7 @@ class Session
 	 */
 	protected function updateSession()
 	{
-		if( false === get_option( "{$this->prefix}_{$this->sessionId}" ) ) {
+		if( false === get_option( "{$this->prefix}_{$this->sessionId}" )) {
 			$this->resetSessionExpiration();
 		}
 

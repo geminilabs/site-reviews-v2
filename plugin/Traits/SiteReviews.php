@@ -19,7 +19,7 @@ trait SiteReviews
 	 */
 	public function renderReviews( array $args )
 	{
-		if( !is_array( $args['hide'] ) ) {
+		if( !is_array( $args['hide'] )) {
 			$args['hide'] = array_map( 'trim', array_filter( explode( ',', $args['hide'] )));
 		}
 

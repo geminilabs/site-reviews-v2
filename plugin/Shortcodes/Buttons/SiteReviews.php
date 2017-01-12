@@ -47,7 +47,7 @@ class SiteReviews extends Generator
 		return [
 			[
 				'type' => 'container',
-				'html' => sprintf( '<p class="strong">%s</p>', esc_html__( 'All settings are optional.', 'site-reviews' ) ),
+				'html' => sprintf( '<p class="strong">%s</p>', esc_html__( 'All settings are optional.', 'site-reviews' )),
 				'minWidth' => 320,
 			],[
 				'type'     => 'textbox',

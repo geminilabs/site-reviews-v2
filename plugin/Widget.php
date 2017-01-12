@@ -20,15 +20,15 @@ abstract class Widget extends WP_Widget
 	{
 		$control_options = $widget_options = [];
 
-		if( isset( $values['class'] ) ) {
+		if( isset( $values['class'] )) {
 			$widget_options['classname'] = $values['class'];
 		}
 
-		if( isset( $values['description'] ) ) {
+		if( isset( $values['description'] )) {
 			$widget_options['description'] = $values['description'];
 		}
 
-		if( isset( $values['width'] ) ) {
+		if( isset( $values['width'] )) {
 			$control_options['width'] = $values['width'];
 		}
 
@@ -86,7 +86,7 @@ abstract class Widget extends WP_Widget
 		$atts['prefix'] = false;
 		$atts['name']   = $this->get_field_name( $atts['name'] );
 
-		if( isset( $atts['depends'] ) ) {
+		if( isset( $atts['depends'] )) {
 			$atts['depends'] = $this->get_field_name( $atts['depends'] );
 		}
 

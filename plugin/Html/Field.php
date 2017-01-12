@@ -62,13 +62,13 @@ class Field
 	 */
 	public function getField( array $args = [] )
 	{
-		if( empty( $args ) ) {
+		if( empty( $args )) {
 			$args = $this->args;
 		}
 
-		$className = sprintf( 'GeminiLabs\SiteReviews\Html\Fields\%s', ucfirst( $args['type'] ) );
+		$className = sprintf( 'GeminiLabs\SiteReviews\Html\Fields\%s', ucfirst( $args['type'] ));
 
-		if( !class_exists( $className ) ) {
+		if( !class_exists( $className )) {
 			throw new ReflectionException( "Class does not exist: {$className}" );
 		}
 
@@ -146,7 +146,7 @@ class Field
 		$renderedString = '%s';
 
 		if( ( isset( $field->args['required'] ) && $field->args['required'] )
-			|| ( isset( $field->args['attributes']['required'] ) || in_array( 'required', $field->args['attributes'] ) ) ) {
+			|| ( isset( $field->args['attributes']['required'] ) || in_array( 'required', $field->args['attributes'] )) ) {
 			$class .= ' glsr-required';
 		}
 
@@ -192,7 +192,7 @@ class Field
 	{
 		$args = $this->args;
 
-		if( !array_key_exists( $atts['name'], $args['errors'] ) ) {
+		if( !array_key_exists( $atts['name'], $args['errors'] )) {
 			$this->args['errors'] = ''; // set to an empty string
 			return;
 		}
@@ -213,16 +213,16 @@ class Field
 	 */
 	protected function parseAttributes( array $args )
 	{
-		if( empty( $args['attributes'] ) ) {
+		if( empty( $args['attributes'] )) {
 			return [];
 		}
 
 		$attributes = (array) $args['attributes'];
 
 		foreach( $attributes as $key => $value ) {
-			if( is_string( $key ) )continue;
+			if( is_string( $key ))continue;
 			unset( $attributes[ $key ] );
-			if( !isset( $attributes[ $value ] ) ) {
+			if( !isset( $attributes[ $value ] )) {
 				$attributes[ $value ] = '';
 			}
 		}
@@ -356,7 +356,7 @@ class Field
 
 		$value = glsr_resolve( 'Database' )->getOption( $name, $default );
 
-		if( !empty( $value ) ) {
+		if( !empty( $value )) {
 			$this->args['value'] = $value;
 		}
 
@@ -370,12 +370,12 @@ class Field
 	 */
 	protected function setDataDepends()
 	{
-		if( !( $depends = $this->args['depends'] ) )return;
+		if( !( $depends = $this->args['depends'] ))return;
 
 		$name  = $depends;
 		$value = true;
 
-		if( is_array( $depends ) ) {
+		if( is_array( $depends )) {
 			reset( $depends );
 			$name  = key( $depends );
 			$value = $depends[ $name ];

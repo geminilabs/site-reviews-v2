@@ -44,7 +44,7 @@ class SiteReviews extends Shortcode
 
 		echo '<div class="shortcode-site-reviews">';
 
-		if( !empty( $args['title'] ) ) {
+		if( !empty( $args['title'] )) {
 			printf( '<h3 class="glsr-shortcode-title">%s</h3>', $args['title'] );
 		}
 
@@ -63,9 +63,9 @@ class SiteReviews extends Shortcode
 	protected function makeCompatible( array $args )
 	{
 		$hide    = ['title','excerpt','author','date','rating'];
-		$display = array_map( 'trim', explode( ',', $args['display'] ) );
+		$display = array_map( 'trim', explode( ',', $args['display'] ));
 
-		if( count( array_intersect( $hide, $display ) ) > 0 ) {
+		if( count( array_intersect( $hide, $display )) > 0 ) {
 			$args['hide']    = array_diff( $hide, $display );
 			$args['display'] = '';
 		}

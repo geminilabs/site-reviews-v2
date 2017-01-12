@@ -49,7 +49,7 @@ class MainController extends BaseController
 	public function postClearLog()
 	{
 		$this->log->clear();
-		$this->notices->addSuccess( __( 'Log was cleared.', 'site-reviews' ) );
+		$this->notices->addSuccess( __( 'Log was cleared.', 'site-reviews' ));
 	}
 
 	/**
@@ -85,7 +85,7 @@ class MainController extends BaseController
 	{
 		$settings_url = admin_url( 'edit.php?post_type=site-review&page=settings' );
 
-		$links[] = sprintf( '<a href="%s">%s</a>', $settings_url, __( 'Settings', 'site-reviews' ) );
+		$links[] = sprintf( '<a href="%s">%s</a>', $settings_url, __( 'Settings', 'site-reviews' ));
 
 		return $links;
 	}
@@ -107,7 +107,7 @@ class MainController extends BaseController
 		}
 
 		$text = _n( '%s Review', '%s Reviews', $num_posts->publish, 'site-reviews' );
-		$text = sprintf( $text, number_format_i18n( $num_posts->publish ) );
+		$text = sprintf( $text, number_format_i18n( $num_posts->publish ));
 
 		$post_type_object = get_post_type_object( $post_type );
 
@@ -231,12 +231,12 @@ class MainController extends BaseController
 		$atts = [
 			'approve' => [
 				'aria-label' => esc_attr__( 'Approve this review', 'site-reviews' ),
-				'href'       => wp_nonce_url( admin_url( sprintf( 'post.php?post=%s&action=approve', $post->ID ) ), 'approve-review_' . $post->ID ),
+				'href'       => wp_nonce_url( admin_url( sprintf( 'post.php?post=%s&action=approve', $post->ID )), 'approve-review_' . $post->ID ),
 				'text'       => __( 'Approve', 'site-reviews' ),
 			],
 			'unapprove' => [
 				'aria-label' => esc_attr__( 'Unapprove this review', 'site-reviews' ),
-				'href'       => wp_nonce_url( admin_url( sprintf( 'post.php?post=%s&action=unapprove', $post->ID ) ), 'unapprove-review_' . $post->ID ),
+				'href'       => wp_nonce_url( admin_url( sprintf( 'post.php?post=%s&action=unapprove', $post->ID )), 'unapprove-review_' . $post->ID ),
 				'text'       => __( 'Unapprove', 'site-reviews' ),
 			],
 		];
@@ -332,11 +332,11 @@ class MainController extends BaseController
 
 		foreach( $pages as $slug => $title ) {
 
-			$method = sprintf( 'render%sMenu', ucfirst( $slug ) );
+			$method = sprintf( 'render%sMenu', ucfirst( $slug ));
 
 			$callback = apply_filters( 'site-reviews/addon/submenu/callback', [ $this, $method ], $slug );
 
-			if( !is_callable( $callback ) )continue;
+			if( !is_callable( $callback ))continue;
 
 			add_submenu_page( sprintf( 'edit.php?post_type=%s', $this->app->post_type ), $title, $title, 'customize', $slug, $callback );
 		}
@@ -450,7 +450,7 @@ class MainController extends BaseController
 
 		$data = apply_filters( 'site-reviews/addon/menu/data', $data, $defaults );
 
-		$this->render( 'menu/index', wp_parse_args( $data, $defaults ) );
+		$this->render( 'menu/index', wp_parse_args( $data, $defaults ));
 	}
 
 	/**
@@ -489,7 +489,7 @@ class MainController extends BaseController
 	public function renderReview( WP_Post $post )
 	{
 		if( $post->post_type != $this->app->post_type )return;
-		if( post_type_supports( $this->app->post_type, 'title' ) )return;
+		if( post_type_supports( $this->app->post_type, 'title' ))return;
 		if( get_post_meta( $post->ID, 'review_type', true ) == 'local' )return;
 
 		$this->render( 'edit/review', ['post' => $post ] );
@@ -572,11 +572,11 @@ class MainController extends BaseController
 		$shortcodes = [];
 
 		foreach( $this->app->mceShortcodes as $shortcode => $values ) {
-			if( !apply_filters( sanitize_title( $shortcode ) . '_condition', true ) )continue;
+			if( !apply_filters( sanitize_title( $shortcode ) . '_condition', true ))continue;
 			$shortcodes[ $shortcode ] = $values;
 		}
 
-		if( empty( $shortcodes ) )return;
+		if( empty( $shortcodes ))return;
 
 		$this->render( 'edit/tinymce', ['shortcodes' => $shortcodes ] );
 	}
@@ -620,7 +620,7 @@ class MainController extends BaseController
 	{
 		$section = filter_input( INPUT_GET, 'section' );
 
-		if( !$section || !isset( $tabs[ $tab ]['sections'][ $section ] ) ) {
+		if( !$section || !isset( $tabs[ $tab ]['sections'][ $section ] )) {
 			$section = isset( $tabs[ $tab ]['sections'] )
 				? key( $tabs[ $tab ]['sections'] )
 				: '';
@@ -638,7 +638,7 @@ class MainController extends BaseController
 	{
 		$tab = filter_input( INPUT_GET, 'tab' );
 
-		if( !$tab || !array_key_exists( $tab, $tabs ) ) {
+		if( !$tab || !array_key_exists( $tab, $tabs )) {
 			$tab = key( $tabs );
 		}
 
@@ -653,10 +653,10 @@ class MainController extends BaseController
 	protected function normalizeTabs( array $tabs )
 	{
 		foreach( $tabs as $key => $value ) {
-			if( !is_array( $value ) ) {
+			if( !is_array( $value )) {
 				$tabs[ $key ] = ['title' => $value ];
 			}
-			if( $key == 'licenses' && !apply_filters( 'site-reviews/addon/licenses', false ) ) {
+			if( $key == 'licenses' && !apply_filters( 'site-reviews/addon/licenses', false )) {
 				unset( $tabs[ $key ] );
 			}
 		}

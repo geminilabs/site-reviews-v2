@@ -30,12 +30,12 @@ class Filterby extends Base
 
 		extract( $args );
 
-		if( !$name || empty( $values ) )return;
+		if( !$name || empty( $values ))return;
 
 		$options  = '';
 
 		foreach( $values as $value => $title ) {
-			$options .= $this->selectOption( $value, $title, filter_input( INPUT_GET, $name ) );
+			$options .= $this->selectOption( $value, $title, filter_input( INPUT_GET, $name ));
 		}
 
 		printf( '<select name="%s">%s</select>', $name, $options );

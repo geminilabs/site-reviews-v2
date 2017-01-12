@@ -56,7 +56,7 @@ class Partial
 	 */
 	public function render( $print = true )
 	{
-		$className = sprintf( 'GeminiLabs\SiteReviews\Html\Partials\%s', ucfirst( $this->args['partial'] ) );
+		$className = sprintf( 'GeminiLabs\SiteReviews\Html\Partials\%s', ucfirst( $this->args['partial'] ));
 
 		$instance = $this->app->make( $className );
 

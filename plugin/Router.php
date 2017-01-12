@@ -36,19 +36,19 @@ class Router
 			return strtoupper( $matches[1] );
 		};
 
-		return $prefix . preg_replace_callback( '/[-_](.)/', $callback, strtolower( $action ) );
+		return $prefix . preg_replace_callback( '/[-_](.)/', $callback, strtolower( $action ));
 	}
 
 	public function routeAjaxRequests()
 	{
 		// Nonce url is localized in "GeminiLabs\SiteReviews\Handlers\EnqueueAssets"
-		check_ajax_referer( sprintf( '%s-ajax-nonce', $this->app->id ) );
+		check_ajax_referer( sprintf( '%s-ajax-nonce', $this->app->id ));
 
 		$ajaxController = $this->app->make( 'Controllers\AjaxController' );
 		$request        = $this->normalizeAjaxRequest();
 		$method         = $this->getMethodName( 'ajax', $request['action'] );
 
-		if( is_callable([ $ajaxController, $method ]) ) {
+		if( is_callable( [ $ajaxController, $method ] )) {
 			$ajaxController->$method( $request );
 		}
 		else {
@@ -63,7 +63,7 @@ class Router
 		// get the request data that is prefixed with the app prefix
 		$request = filter_input( INPUT_POST, $this->app->prefix, FILTER_DEFAULT , FILTER_REQUIRE_ARRAY );
 
-		if( !isset( $request['action'] ) )return;
+		if( !isset( $request['action'] ))return;
 
 		$nonce = ( filter_input( INPUT_POST, 'option_page' ) == $request['action'] && filter_input( INPUT_POST, 'action' ) == 'update' )
 			? $request['action'] . '-options'
@@ -96,7 +96,7 @@ class Router
 
 	public function routeWebhookRequests()
 	{
-		$request = filter_input( INPUT_GET, sprintf( '%s-hook', $this->app->id ) );
+		$request = filter_input( INPUT_GET, sprintf( '%s-hook', $this->app->id ));
 
 		if( !$request )return;
 
@@ -112,11 +112,11 @@ class Router
 
 		// All ajax requests are triggered by a single action hook,
 		// each route is determined by the request["action"].
-		if( !isset( $request['action'] ) ) {
+		if( !isset( $request['action'] )) {
 			wp_die();
 		}
 
-		if( isset( $request[ $this->app->prefix ]['action'] ) ) {
+		if( isset( $request[ $this->app->prefix ]['action'] )) {
 			$request = $request[ $this->app->prefix ];
 		}
 

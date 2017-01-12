@@ -108,7 +108,7 @@ class Email
 	 */
 	public function buildPlainTextMessage( $phpmailer )
 	{
-		if( $phpmailer->ContentType === 'text/plain' || !empty( $phpmailer->AltBody ) )return;
+		if( $phpmailer->ContentType === 'text/plain' || !empty( $phpmailer->AltBody ))return;
 
 		$message = $this->stripHtmlTags( $phpmailer->Body );
 
@@ -127,7 +127,7 @@ class Email
 			'reply-to',
 		];
 
-		$headers = array_intersect_key( $email, array_flip( $allowed ) );
+		$headers = array_intersect_key( $email, array_flip( $allowed ));
 		$headers = array_filter( $headers );
 
 		foreach( $headers as $key => $value ) {
@@ -147,16 +147,16 @@ class Email
 	{
 		$html = $this->app->make( 'Html' );
 
-		$template = trim( $this->app->make( 'Database' )->getOption( 'settings.general.notification_message' ) );
+		$template = trim( $this->app->make( 'Database' )->getOption( 'settings.general.notification_message' ));
 
-		if( !empty( $template ) ) {
+		if( !empty( $template )) {
 			$message = $html->renderTemplateString( $template, $email['template-tags'], 'return' );
 		}
 		else if( $email['template'] ) {
 			$message = $html->renderTemplate( "email/templates/{$email['template']}", $email['template-tags'], 'return' );
 		}
 
-		if( !isset( $message ) ) {
+		if( !isset( $message )) {
 			$message = $email['message'];
 		}
 

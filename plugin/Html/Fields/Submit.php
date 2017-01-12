@@ -19,7 +19,7 @@ class Submit extends Text
 	 */
 	public function render()
 	{
-		if( isset( $this->args['name'] ) ) {
+		if( isset( $this->args['name'] )) {
 			$this->args['name'] = 'submit';
 		}
 

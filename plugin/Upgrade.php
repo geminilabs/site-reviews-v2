@@ -118,7 +118,7 @@ class Upgrade
 
 			$themeMod = get_option( $theme );
 
-			if( !isset( $themeMod['sidebars_widgets']['data'] ) )continue;
+			if( !isset( $themeMod['sidebars_widgets']['data'] ))continue;
 
 			$themeMod['sidebars_widgets']['data'] = $this->replaceWidgetNames_200( $themeMod['sidebars_widgets']['data'] );
 
@@ -234,7 +234,7 @@ class Upgrade
 	{
 		foreach( $widgets as &$values ) {
 
-			if( !is_array( $values ) )continue;
+			if( !is_array( $values ))continue;
 
 			$values = $this->replaceWidgetName( '_recent_reviews', '_site-reviews', $values );
 			$values = $this->replaceWidgetName( 'recent_reviews', '_site-reviews', $values );

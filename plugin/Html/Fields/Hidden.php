@@ -19,15 +19,15 @@ class Hidden extends Text
 	 */
 	public function render()
 	{
-		if( isset( $this->args['label'] ) ) {
+		if( isset( $this->args['label'] )) {
 			unset( $this->args['label'] );
 		}
 
-		if( isset( $this->args['desc'] ) ) {
+		if( isset( $this->args['desc'] )) {
 			unset( $this->args['desc'] );
 		}
 
-		if( isset( $this->args['id'] ) ) {
+		if( isset( $this->args['id'] )) {
 			unset( $this->args['id'] );
 		}
 

@@ -42,7 +42,7 @@ class Reviews extends Base
 
 		$args = shortcode_atts( $defaults, $this->args );
 
-		if( $this->hideReviews( $args ) )return;
+		if( $this->hideReviews( $args ))return;
 
 		$reviews = $this->db->getReviews( $args );
 
@@ -116,7 +116,7 @@ class Reviews extends Base
 		$paged = $this->app->make( 'Query' )->getPaged();
 		$theme = wp_get_theme()->get( 'TextDomain' );
 
-		if( in_array( $theme, ['twentyten','twentyeleven','twentytwelve','twentythirteen'] ) ) {
+		if( in_array( $theme, ['twentyten','twentyeleven','twentytwelve','twentythirteen'] )) {
 
 			$links = '';
 
@@ -221,7 +221,7 @@ class Reviews extends Base
 	 */
 	protected function reviewAuthor( $reviewAuthor, $hideAuthor )
 	{
-		if( wp_validate_boolean( $hideAuthor ) )return;
+		if( wp_validate_boolean( $hideAuthor ))return;
 
 		$dash = $this->db->getOption( 'settings.reviews.avatars.enabled' ) != 'yes'
 			? '&mdash;'
@@ -283,7 +283,7 @@ class Reviews extends Base
 	 */
 	protected function reviewLink( $hideLink, $reviewLink )
 	{
-		if( wp_validate_boolean( $hideLink ) )return;
+		if( wp_validate_boolean( $hideLink ))return;
 
 		return sprintf( '<span class="glsr-review-link">[<a href="%s" target="_blank">%s</a>]</span>',
 			esc_url( $reviewLink ),
@@ -302,7 +302,7 @@ class Reviews extends Base
 	{
 		$date = '';
 
-		if( !wp_validate_boolean( $args['hide_date'] ) ) {
+		if( !wp_validate_boolean( $args['hide_date'] )) {
 			$format = $this->db->getOption( 'settings.reviews.date.enabled' ) == 'yes'
 				? $this->db->getOption( 'settings.reviews.date.format', 'M j, Y' )
 				: get_option( 'date_format' );

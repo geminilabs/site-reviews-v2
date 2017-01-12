@@ -60,9 +60,9 @@ abstract class BaseController
 	 */
 	public function execute( $command )
 	{
-		$handlerClass = str_replace( 'Commands', 'Handlers', get_class( $command ) );
+		$handlerClass = str_replace( 'Commands', 'Handlers', get_class( $command ));
 
-		if( !class_exists( $handlerClass ) ) {
+		if( !class_exists( $handlerClass )) {
 			throw new InvalidArgumentException( "Handler {$handlerClass} doesn't exist.");
 		}
 
@@ -73,7 +73,7 @@ abstract class BaseController
 		}
 		catch( Exception $e ) {
 			status_header( 400 );
-			$this->notices->addError( new WP_Error( 'reviews_error', $e->getMessage() ) );
+			$this->notices->addError( new WP_Error( 'reviews_error', $e->getMessage() ));
 			$this->log->error( $e->getMessage() );
 		}
 	}
@@ -109,7 +109,7 @@ abstract class BaseController
 
 		$errors = $validator->validate( $request, $rules );
 
-		if( empty( $errors ) ) {
+		if( empty( $errors )) {
 			return true;
 		}
 

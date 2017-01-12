@@ -11,7 +11,7 @@
 defined( 'WPINC' ) || die;
 
 // Wordpress 4.0-4.2 support
-if( !function_exists( 'wp_roles' ) ) {
+if( !function_exists( 'wp_roles' )) {
 	function wp_roles() {
 		global $wp_roles;
 		isset( $wp_roles ) ?: $wp_roles = new WP_Roles;
@@ -20,7 +20,7 @@ if( !function_exists( 'wp_roles' ) ) {
 }
 
 // Wordpress 4.0-4.2 support
-if( !function_exists( 'get_avatar_url' ) ) {
+if( !function_exists( 'get_avatar_url' )) {
 	function get_avatar_url( $id_or_email, $args = null ) {
 		isset( $args['size'] ) ?: $args['size'] = 96;
 		isset( $args['default'] ) ?: $args['default'] = 'mystery';

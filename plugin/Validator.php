@@ -89,7 +89,7 @@ class Validator
 			foreach( $rules as $rule ) {
 				$this->validateAttribute( $attribute, $rule );
 
-				if( $this->shouldStopValidating( $attribute ) )break;
+				if( $this->shouldStopValidating( $attribute ))break;
 			}
 		}
 
@@ -110,7 +110,7 @@ class Validator
 
 		$this->errors[ $attribute ]['errors'][] = $message;
 
-		if( !isset( $this->errors[ $attribute ]['value'] ) ) {
+		if( !isset( $this->errors[ $attribute ]['value'] )) {
 			$this->errors[ $attribute ]['value'] = $this->getValue( $attribute );
 		}
 	}
@@ -153,7 +153,7 @@ class Validator
 	 */
 	protected function getMessage( $attribute, $rule, array $parameters )
 	{
-		if( in_array( $rule, $this->sizeRules ) ) {
+		if( in_array( $rule, $this->sizeRules )) {
 			return $this->getSizeMessage( $attribute, $rule, $parameters );
 		}
 
@@ -172,14 +172,14 @@ class Validator
 	 */
 	protected function getRule( $attribute, $rules )
 	{
-		if( !array_key_exists( $attribute, $this->rules ) )return;
+		if( !array_key_exists( $attribute, $this->rules ))return;
 
 		$rules = (array) $rules;
 
 		foreach( $this->rules[ $attribute ] as $rule ) {
 			list( $rule, $parameters ) = $this->parseRule( $rule );
 
-			if( in_array( $rule, $rules ) ) {
+			if( in_array( $rule, $rules )) {
 				return [ $rule, $parameters ];
 			}
 		}
@@ -200,7 +200,7 @@ class Validator
 		if( is_numeric( $value ) && $hasNumeric ) {
 			return $value;
 		}
-		elseif( is_array( $value ) ) {
+		elseif( is_array( $value )) {
 			return count( $value );
 		}
 
@@ -234,7 +234,7 @@ class Validator
 	 */
 	protected function getValue( $attribute )
 	{
-		if( isset( $this->data[ $attribute ] ) ) {
+		if( isset( $this->data[ $attribute ] )) {
 			return $this->data[ $attribute ];
 		}
 	}
@@ -249,7 +249,7 @@ class Validator
 	 */
 	protected function hasRule( $attribute, $rules )
 	{
-		return !is_null( $this->getRule( $attribute, $rules ) );
+		return !is_null( $this->getRule( $attribute, $rules ));
 	}
 
 	/**
@@ -262,7 +262,7 @@ class Validator
 	protected function normalizeData( $data )
 	{
 		// If an object was provided, get its public properties
-		if( is_object( $data ) ) {
+		if( is_object( $data )) {
 			$this->data = get_object_vars( $data );
 		}
 		else {
@@ -308,7 +308,7 @@ class Validator
 			$parameters = $this->parseParameters( $rule, $parameter );
 		}
 
-		$rule = ucwords( str_replace( ['-', '_'], ' ', trim( $rule ) ) );
+		$rule = ucwords( str_replace( ['-', '_'], ' ', trim( $rule )));
 		$rule = str_replace( ' ', '', $rule );
 
 		return [ $rule, $parameters ];
@@ -405,7 +405,7 @@ class Validator
 	 */
 	protected function snakeCase( $string )
 	{
-		if( !ctype_lower( $string ) ) {
+		if( !ctype_lower( $string )) {
 			$string = preg_replace( '/\s+/u', '', $string );
 			$string = preg_replace( '/(.)(?=[A-Z])/u', '$1_', $string );
 			$string = mb_strtolower( $string, 'UTF-8' );
@@ -435,7 +435,7 @@ class Validator
 
 		$message = str_replace( ':attribute', $attribute, $message );
 
-		if( method_exists( $this, $replacer = "replace{$rule}" ) ) {
+		if( method_exists( $this, $replacer = "replace{$rule}" )) {
 			$message = $this->$replacer( $message, $parameters );
 		}
 
@@ -485,11 +485,11 @@ class Validator
 
 		$method = "validate{$rule}";
 
-		if( !method_exists( $this, $method ) ) {
+		if( !method_exists( $this, $method )) {
 			throw new BadMethodCallException( "Method [$method] does not exist." );
 		}
 
-		if( !$this->$method( $attribute, $value, $parameters ) ) {
+		if( !$this->$method( $attribute, $value, $parameters )) {
 			$this->addFailure( $attribute, $rule, $parameters );
 		}
 	}

@@ -39,7 +39,7 @@ class RegisterPointers
 
 		foreach( $command->pointers as $pointer ) {
 
-			if( $pointer['screen'] != $screen->id || in_array( $pointer['id'], $dismissed ) )continue;
+			if( $pointer['screen'] != $screen->id || in_array( $pointer['id'], $dismissed ))continue;
 
 			$pointers[] = [
 				'id'      => $pointer['id'],
@@ -56,7 +56,7 @@ class RegisterPointers
 			'pointers' => $pointers,
 		]);
 
-		if( empty( $pointers ) )return;
+		if( empty( $pointers ))return;
 
 		wp_enqueue_style( 'wp-pointer' );
 		wp_enqueue_script( 'wp-pointer' );

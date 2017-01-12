@@ -47,7 +47,7 @@ class RegisterPostType
 
 		$post_type = $this->app->post_type;
 
-		if( in_array( $post_type, get_post_types(['_builtin' => true ]) ) )return;
+		if( in_array( $post_type, get_post_types( ['_builtin' => true ] )))return;
 
 		$this->columns = $columns;
 
@@ -94,7 +94,7 @@ class RegisterPostType
 		$this->columns = ['cb' => ''] + $this->columns;
 
 		array_walk( $this->columns, function( &$value, $key ) use ( $columns ) {
-			if( array_key_exists( $key, $columns ) && empty( $value ) ) {
+			if( array_key_exists( $key, $columns ) && empty( $value )) {
 				$value = $columns[ $key ];
 			}
 			else if( $key === 'sticky' ) {
@@ -104,7 +104,7 @@ class RegisterPostType
 				$value = "<span class=\"pinned-icon\">{$value}</span>";
 
 				// WP < 4.4 support
-				if( version_compare( $wp_version, '4.4', '<' ) ) {
+				if( version_compare( $wp_version, '4.4', '<' )) {
 					$value .= file_get_contents( "{$this->app->path}assets/img/pinned.svg" );
 				}
 			}
@@ -112,7 +112,7 @@ class RegisterPostType
 
 		$types = $this->db->getReviewsMeta( 'type' );
 
-		if( count( $types ) < 1 || ( count( $types ) == 1 && $types[0] == 'local' ) ) {
+		if( count( $types ) < 1 || ( count( $types ) == 1 && $types[0] == 'local' )) {
 			unset( $this->columns['type'] );
 		}
 
@@ -210,7 +210,7 @@ class RegisterPostType
 	 */
 	public function setColumnQuery( WP_Query $query )
 	{
-		if( !$this->hasPermission( $query ) )return;
+		if( !$this->hasPermission( $query ))return;
 
 		$this->setMeta( $query, [
 			'rating',
@@ -301,9 +301,9 @@ class RegisterPostType
 	 */
 	protected function renderFilterRatings( $ratings )
 	{
-		if( empty( $ratings ) || apply_filters( 'site-reviews/disable/filter/ratings', false ) )return;
+		if( empty( $ratings ) || apply_filters( 'site-reviews/disable/filter/ratings', false ))return;
 
-		$ratings = array_flip( array_reverse( $ratings ) );
+		$ratings = array_flip( array_reverse( $ratings ));
 
 		array_walk( $ratings, function( &$value, $key ) {
 			$label = _n( '%s star', '%s stars', $key, 'site-reviews' );
@@ -312,7 +312,7 @@ class RegisterPostType
 
 		$ratings = [ __( 'All ratings', 'site-reviews' ) ] + $ratings;
 
-		printf( '<label class="screen-reader-text" for="rating">%s</label>', __( 'Filter by rating', 'site-reviews' ) );
+		printf( '<label class="screen-reader-text" for="rating">%s</label>', __( 'Filter by rating', 'site-reviews' ));
 
 		$this->app->make( 'Html' )->renderPartial( 'filterby', [
 			'name'   => 'rating',
@@ -327,7 +327,7 @@ class RegisterPostType
 	 */
 	protected function renderFilterTypes( $types )
 	{
-		if( empty( $types ) || apply_filters( 'site-reviews/disable/filter/types', false ) )return;
+		if( empty( $types ) || apply_filters( 'site-reviews/disable/filter/types', false ))return;
 
 		$reviewTypes = [ __( 'All types', 'site-reviews' ) ];
 
@@ -335,7 +335,7 @@ class RegisterPostType
 			$reviewTypes[ $type ] = $this->app->make( 'Strings' )->review_types( $type, ucfirst( $type ));
 		}
 
-		printf( '<label class="screen-reader-text" for="type">%s</label>', __( 'Filter by type', 'site-reviews' ) );
+		printf( '<label class="screen-reader-text" for="type">%s</label>', __( 'Filter by type', 'site-reviews' ));
 
 		$this->app->make( 'Html' )->renderPartial( 'filterby', [
 			'name'   => 'review_type',

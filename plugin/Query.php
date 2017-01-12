@@ -82,7 +82,7 @@ class Query
 	{
 		$query = [];
 
-		if( !empty( $terms ) ) {
+		if( !empty( $terms )) {
 			$query[] = [
 				'taxonomy' => $this->app->taxonomy,
 				'field'    => 'id',

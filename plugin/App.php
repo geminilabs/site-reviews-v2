@@ -102,7 +102,7 @@ final class App extends Container
 		add_filter( "plugin_action_links_{$basename}", [ $main, 'registerActionLinks'] );
 		add_filter( 'dashboard_glance_items',          [ $main, 'registerDashboardGlanceItems'] );
 		add_filter( 'post_row_actions',                [ $main, 'registerRowActions'], 10, 2 );
-		add_filter( 'wp_editor_settings',              [ $review, 'modifyEditor' ] );
+		add_filter( 'wp_editor_settings',              [ $review, 'modifyEditor'] );
 		add_filter( 'the_editor',                      [ $review, 'modifyEditorTextarea'] );
 		add_filter( 'ngettext',                        [ $review, 'modifyStatusFilter'], 10, 5 );
 		add_filter( 'post_updated_messages',           [ $review, 'modifyUpdateMessages'] );
@@ -124,7 +124,7 @@ final class App extends Container
 		$this->make( 'Database' )->setOption( 'logging', 0 );
 
 		// Schedule session purge
-		if( !wp_next_scheduled( 'site-reviews/schedule/session/purge' ) ) {
+		if( !wp_next_scheduled( 'site-reviews/schedule/session/purge' )) {
 			wp_schedule_event( time(), 'twicedaily', 'site-reviews/schedule/session/purge' );
 		}
 	}
@@ -216,9 +216,7 @@ final class App extends Container
 	{
 		$version = $this->make( 'Database' )->getOption( 'version' );
 
-		if( version_compare( $version, '2.0.0', '<' ) ) {
-
-			error_log( print_r( 'upgrade', 1 ) );
+		if( version_compare( $version, '2.0.0', '<' )) {
 
 			$upgrade = $this->make( 'Upgrade' );
 

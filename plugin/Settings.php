@@ -136,7 +136,7 @@ class Settings
 	 */
 	public function register()
 	{
-		if( !empty( $this->settings ) )return;
+		if( !empty( $this->settings ))return;
 
 		$methods = (new ReflectionClass( __CLASS__ ))->getMethods( ReflectionMethod::IS_PROTECTED );
 
@@ -182,7 +182,7 @@ class Settings
 			'default' => 'none',
 			'options' => [
 				'none'    => __( 'Do not send review notifications', 'site-reviews' ),
-				'default' => sprintf( __( 'Send to administrator <code>%s</code>', 'site-reviews' ), get_option( 'admin_email' ) ),
+				'default' => sprintf( __( 'Send to administrator <code>%s</code>', 'site-reviews' ), get_option( 'admin_email' )),
 				'custom'  => __( 'Send to one or more email addresses', 'site-reviews' ),
 				'webhook' => __( 'Send to <a href="https://slack.com/">Slack</a>', 'site-reviews' ),
 			],
@@ -367,7 +367,7 @@ class Settings
 			'type'  => 'yesno_inline',
 			'name'  => 'date.enabled',
 			'label' => __( 'Enable Custom Dates', 'site-reviews' ),
-			'desc'  => sprintf( __( 'The default date format is the one set in your <a href="%s">WordPress settings<a>.', 'site-reviews' ), get_admin_url( null, 'options-general.php' ) ),
+			'desc'  => sprintf( __( 'The default date format is the one set in your <a href="%s">WordPress settings<a>.', 'site-reviews' ), get_admin_url( null, 'options-general.php' )),
 		]);
 
 		$this->addSetting( $formId, [

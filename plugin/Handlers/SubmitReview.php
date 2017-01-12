@@ -40,7 +40,7 @@ class SubmitReview
 	 */
 	public function handle( Command $command )
 	{
-		$reviewId = 'local_' . md5( serialize( $command ) );
+		$reviewId = 'local_' . md5( serialize( $command ));
 
 		$review = [
 			'author'      => $command->author,
@@ -90,9 +90,9 @@ class SubmitReview
 	{
 		if( $this->db->getOption( 'settings.general.require.approval' ) == 'yes' ) {
 
-			$review_approve_link = wp_nonce_url( admin_url( sprintf( 'post.php?post=%s&action=approve', $post_id ) ), 'approve-review_' . $post_id );
-			$review_discard_link = wp_nonce_url( admin_url( sprintf( 'post.php?post=%s&action=trash', $post_id ) ), 'trash-post_' . $post_id );
-			// $review_discard_link = esc_url( get_delete_post_link( $post_id, false ) );
+			$review_approve_link = wp_nonce_url( admin_url( sprintf( 'post.php?post=%s&action=approve', $post_id )), 'approve-review_' . $post_id );
+			$review_discard_link = wp_nonce_url( admin_url( sprintf( 'post.php?post=%s&action=trash', $post_id )), 'trash-post_' . $post_id );
+			// $review_discard_link = esc_url( get_delete_post_link( $post_id, false ));
 
 			$after = [];
 
@@ -139,7 +139,7 @@ class SubmitReview
 	{
 		$notificationType = $this->db->getOption( 'settings.general.notification', 'none' );
 
-		if( !in_array( $notificationType, ['default', 'custom', 'webhook'] ) )return;
+		if( !in_array( $notificationType, ['default', 'custom', 'webhook'] ))return;
 
 		$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 
@@ -149,7 +149,7 @@ class SubmitReview
 		);
 
 		$args = [
-			'notification_link'  => esc_url( admin_url( sprintf( 'post.php?post=%s&action=edit', $post_id ) ) ),
+			'notification_link'  => esc_url( admin_url( sprintf( 'post.php?post=%s&action=edit', $post_id )) ),
 			'notification_title' => $notificationTitle,
 			'notification_type'  => $notificationType,
 		];
@@ -169,7 +169,7 @@ class SubmitReview
 			: $this->db->getOption( 'settings.general.notification_email' );
 
 		// no email address has been set
-		if( empty( $args['recipient'] ) )return;
+		if( empty( $args['recipient'] ))return;
 
 		return $this->createNotification( $command, $args )->send();
 	}
@@ -195,10 +195,10 @@ class SubmitReview
 
 		if( $command->author ) {
 			!$command->email ?: $command->email = sprintf( ' <%s>', $command->email );
-			$fields[] = ['value' => trim( sprintf( '%s%s - %s', $command->author, $command->email, $command->ipAddress ) ) ];
+			$fields[] = ['value' => trim( sprintf( '%s%s - %s', $command->author, $command->email, $command->ipAddress )) ];
 		}
 
-		$fields[] = ['value' => sprintf( '<%s|%s>', $args['notification_link'], __( 'View Review', 'site-reviews' ) ) ];
+		$fields[] = ['value' => sprintf( '<%s|%s>', $args['notification_link'], __( 'View Review', 'site-reviews' )) ];
 
 		$notification = json_encode([
 			'icon_url'    => $this->app->url . 'assets/img/icon.png',

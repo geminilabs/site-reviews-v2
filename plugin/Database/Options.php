@@ -33,7 +33,7 @@ trait Options
 
 			$defaultPaths = $this->app->getDefaults();
 
-			if( isset( $defaultPaths[ $path ] ) ) {
+			if( isset( $defaultPaths[ $path ] )) {
 				$option = $defaultPaths[ $path ];
 			}
 		}

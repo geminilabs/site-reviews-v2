@@ -40,7 +40,7 @@ class Html
 	 */
 	public function addField( $formId, array $args = [] )
 	{
-		if( !$this->isForm( $formId ) )return;
+		if( !$this->isForm( $formId ))return;
 
 		return $this->forms[ $formId ]->addField( $args );
 	}
@@ -54,7 +54,7 @@ class Html
 	 */
 	public function createForm( $formId, array $args = [] )
 	{
-		if( !$this->isForm( $formId ) ) {
+		if( !$this->isForm( $formId )) {
 
 			$form = $this->app->make( 'Html\Form' )->normalize( $args );
 
@@ -118,7 +118,7 @@ class Html
 	 */
 	public function renderForm( $formId, $print = 'print' )
 	{
-		if( !$this->isForm( $formId ) )return;
+		if( !$this->isForm( $formId ))return;
 
 		$form = $this->forms[ $formId ];
 
@@ -154,7 +154,7 @@ class Html
 	{
 		$file = $this->app->path . "views/{$templatePath}.php";
 
-		if( !file_exists( $file ) )return;
+		if( !file_exists( $file ))return;
 
 		ob_start();
 		include $file;
@@ -173,7 +173,7 @@ class Html
 	 */
 	public function renderTemplateString( $template, array $args = [], $print = 'print' )
 	{
-		if( !empty( $args ) ) {
+		if( !empty( $args )) {
 			foreach( $args as $key => $value ) {
 				$template = str_replace( '{' . $key . '}', $value, $template );
 			}
@@ -210,7 +210,7 @@ class Html
 	 */
 	public function setFormDependencies( $formId, array $dependencies, $overwrite = false )
 	{
-		if( $this->isForm( $formId ) )return;
+		if( $this->isForm( $formId ))return;
 
 		if( !$overwrite || $overwrite == 'merge' ) {
 			$dependencies = array_unique(
@@ -228,7 +228,7 @@ class Html
 	 */
 	public function switchForm( $formId )
 	{
-		if( $this->isForm( $formId ) ) {
+		if( $this->isForm( $formId )) {
 			return $this->forms[ $formId ];
 		}
 

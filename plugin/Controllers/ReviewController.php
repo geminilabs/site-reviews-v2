@@ -22,7 +22,7 @@ class ReviewController extends BaseController
 	 */
 	public function approve()
 	{
-		check_admin_referer( 'approve-review_' . ( $post_id = $this->getPostId() ) );
+		check_admin_referer( 'approve-review_' . ( $post_id = $this->getPostId() ));
 
 		wp_update_post([
 			'ID'          => $post_id,
@@ -42,7 +42,7 @@ class ReviewController extends BaseController
 	 */
 	public function modifyAutosave()
 	{
-		if( $this->isEditReview() && !$this->canEditReview()) {
+		if( $this->isEditReview() && !$this->canEditReview() ) {
 			wp_deregister_script( 'autosave' );
 		}
 	}
@@ -79,7 +79,7 @@ class ReviewController extends BaseController
 	 */
 	public function modifyEditorTextarea( $html )
 	{
-		if( $this->canEditReview()) {
+		if( $this->canEditReview() ) {
 			$html = str_replace( '<textarea', '<div id="ed_toolbar"></div><textarea', $html );
 		}
 
@@ -120,7 +120,7 @@ class ReviewController extends BaseController
 	 */
 	public function modifyStatusFilter( $translation, $single, $plural, $number, $domain )
 	{
-		if( $this->canModifyTranslation( $domain ) ) {
+		if( $this->canModifyTranslation( $domain )) {
 
 			$search = [
 				'Published',
@@ -165,10 +165,10 @@ class ReviewController extends BaseController
 
 		$restored = filter_input( INPUT_GET, 'revision' );
 		$restored = $restored
-			? sprintf( $strings['restored'], wp_post_revision_title( (int) $restored, false ) )
+			? sprintf( $strings['restored'], wp_post_revision_title( (int) $restored, false ))
 			: false;
 
-		$scheduled_date = date_i18n( 'M j, Y @ H:i', strtotime( $post->post_date ) );
+		$scheduled_date = date_i18n( 'M j, Y @ H:i', strtotime( $post->post_date ));
 
 		$messages[ $this->app->post_type ] = [
 			 1 => $strings['updated'],
@@ -177,7 +177,7 @@ class ReviewController extends BaseController
 			 6 => $strings['published'],
 			 7 => $strings['saved'],
 			 8 => $strings['submitted'],
-			 9 => sprintf( $strings['scheduled'], sprintf( '<strong>%s</strong>', $scheduled_date ) ),
+			 9 => sprintf( $strings['scheduled'], sprintf( '<strong>%s</strong>', $scheduled_date )),
 			10 => $strings['draft_updated'],
 			50 => $strings['approved'],
 			51 => $strings['unapproved'],
@@ -231,7 +231,7 @@ class ReviewController extends BaseController
 			: [];
 
 		// only use the rules for non-excluded values
-		$rules = array_diff_key( $rules, array_flip( $excluded ) );
+		$rules = array_diff_key( $rules, array_flip( $excluded ));
 
 		$user = wp_get_current_user();
 
@@ -240,20 +240,20 @@ class ReviewController extends BaseController
 			'content'  => '',
 			'email'    => ( $user->exists() ? $user->user_email : '' ),
 			'form_id'  => '',
-			'name'     => ( $user->exists() ? $user->display_name : __( 'Anonymous', 'site-reviews' ) ),
+			'name'     => ( $user->exists() ? $user->display_name : __( 'Anonymous', 'site-reviews' )),
 			'rating'   => '',
 			'terms'    => '',
 			'title'    => __( 'No Title', 'site-reviews' ),
 		];
 
-		if( !$this->validate( $request, $rules ) ) {
+		if( !$this->validate( $request, $rules )) {
 			return __( 'Please fix the submission errors.', 'site-reviews' );
 		}
 
 		// normalize the request array
 		$request = array_merge( $defaults, $request );
 
-		return $this->execute( new SubmitReview( $request ) );
+		return $this->execute( new SubmitReview( $request ));
 	}
 
 	/**
@@ -271,7 +271,7 @@ class ReviewController extends BaseController
 	 */
 	public function revert()
 	{
-		check_admin_referer( 'revert-review_' . ( $post_id = $this->getPostId() ) );
+		check_admin_referer( 'revert-review_' . ( $post_id = $this->getPostId() ));
 
 		$this->db->revertReview( $post_id );
 
@@ -295,7 +295,7 @@ class ReviewController extends BaseController
 	 */
 	public function unapprove()
 	{
-		check_admin_referer( 'unapprove-review_' . ( $post_id = $this->getPostId() ) );
+		check_admin_referer( 'unapprove-review_' . ( $post_id = $this->getPostId() ));
 
 		wp_update_post([
 			'ID'          => $post_id,
@@ -396,8 +396,8 @@ class ReviewController extends BaseController
 
 
 		$redirect = !$hasReferer
-			? add_query_arg( ['message' => $message_index ], get_edit_post_link( $post_id, false ) )
-			: add_query_arg( ['message' => $message_index ], remove_query_arg( ['trashed', 'untrashed', 'deleted', 'ids'], $referer ) );
+			? add_query_arg( ['message' => $message_index ], get_edit_post_link( $post_id, false ))
+			: add_query_arg( ['message' => $message_index ], remove_query_arg( ['trashed', 'untrashed', 'deleted', 'ids'], $referer ));
 
 		wp_safe_redirect( $redirect );
 		exit;

@@ -44,7 +44,7 @@ class SystemInfo
 	 */
 	public function download( $system_info )
 	{
-		if( !current_user_can( 'install_plugins' ) )return;
+		if( !current_user_can( 'install_plugins' ))return;
 
 		nocache_headers();
 
@@ -85,7 +85,7 @@ class SystemInfo
 	 */
 	public function getBrowser( $title = 'Browser Details' )
 	{
-		if( !$this->title( $title ) )return;
+		if( !$this->title( $title ))return;
 
 		$browser = new Browser;
 		$userAgent = $browser->getUserAgent();
@@ -108,7 +108,7 @@ class SystemInfo
 	 */
 	public function getPlugin( $title = 'Plugin Details' )
 	{
-		if( !$this->title( $title ) )return;
+		if( !$this->title( $title ))return;
 
 		$this->sysinfo[ $title ]['Current version'] = $this->app->version;
 		$this->sysinfo[ $title ]['Previous version'] = 'None';
@@ -125,7 +125,7 @@ class SystemInfo
 	 */
 	public function getWordpress( $title = 'WordPress Configuration' )
 	{
-		if( !$this->title( $title ) )return;
+		if( !$this->title( $title ))return;
 
 		global $wpdb;
 
@@ -145,7 +145,7 @@ class SystemInfo
 		$this->sysinfo[ $title ]['Remote Post'] = $this->testRemotePost();
 		$this->sysinfo[ $title ]['Show On Front'] = get_option( 'show_on_front' );
 		$this->sysinfo[ $title ]['Site URL'] = site_url();
-		$this->sysinfo[ $title ]['Table Prefix'] = sprintf( '%s (%d)', $wp_prefix_status, strlen( $wpdb->prefix ) );
+		$this->sysinfo[ $title ]['Table Prefix'] = sprintf( '%s (%d)', $wp_prefix_status, strlen( $wpdb->prefix ));
 		$this->sysinfo[ $title ]['Timezone'] = get_option( 'timezone_string' );
 		$this->sysinfo[ $title ]['Version'] = get_bloginfo( 'version' );
 		$this->sysinfo[ $title ]['WP Debug'] = defined( 'WP_DEBUG' ) ? WP_DEBUG : 'Not set';
@@ -168,13 +168,13 @@ class SystemInfo
 
 		$active = get_site_option( 'active_sitewide_plugins', [] );
 
-		if( !$this->title( $title ) || !count( $active ) )return;
+		if( !$this->title( $title ) || !count( $active ))return;
 
 		$plugins = wp_get_active_network_plugins();
 
 		foreach( $plugins as $plugin_path ) {
 
-			if( !in_array( plugin_basename( $plugin_path ), $active ) )continue;
+			if( !in_array( plugin_basename( $plugin_path ), $active ))continue;
 
 			$plugin = get_plugin_data( $plugin_path );
 
@@ -193,10 +193,10 @@ class SystemInfo
 	 */
 	public function getWordpressMuplugins( $title = 'Must-Use Plugins' )
 	{
-		$auto_plugins = get_plugins( '/../' . basename( WPMU_PLUGIN_DIR ) );
+		$auto_plugins = get_plugins( '/../' . basename( WPMU_PLUGIN_DIR ));
 		$mu_plugins   = get_mu_plugins();
 
-		$plugins = $this->formatPlugins( array_merge( $mu_plugins, $auto_plugins ) );
+		$plugins = $this->formatPlugins( array_merge( $mu_plugins, $auto_plugins ));
 
 		return $this->wordpressPlugins( $title, $plugins );
 	}
@@ -213,12 +213,12 @@ class SystemInfo
 	{
 		$plugins = get_plugins();
 
-		if( !count( $plugins ) )return;
+		if( !count( $plugins ))return;
 
 		$active_plugins = get_option( 'active_plugins', [] );
 
-		$inactive = $this->formatPlugins( array_diff_key( $plugins, array_flip( $active_plugins ) ) );
-		$active   = $this->formatPlugins( array_diff_key( $plugins, $inactive ) );
+		$inactive = $this->formatPlugins( array_diff_key( $plugins, array_flip( $active_plugins )));
+		$active   = $this->formatPlugins( array_diff_key( $plugins, $inactive ));
 
 		$active_plugins   = $this->wordpressPlugins( $active_title, $active );
 		$inactive_plugins = $this->wordpressPlugins( $inactive_title, $inactive );
@@ -235,13 +235,13 @@ class SystemInfo
 	 */
 	public function getWebserver( $title = 'Server configuration' )
 	{
-		if( !$this->title( $title ) )return;
+		if( !$this->title( $title ))return;
 
 		global $wpdb;
 
 		$server_ip = filter_input( INPUT_SERVER, 'SERVER_ADDR' );
 
-		$this->sysinfo[ $title ]['Host Name'] = sprintf( '%s (%s)', $this->webhost(), gethostbyaddr( $server_ip ) );
+		$this->sysinfo[ $title ]['Host Name'] = sprintf( '%s (%s)', $this->webhost(), gethostbyaddr( $server_ip ));
 		$this->sysinfo[ $title ]['MySQL Version'] = $wpdb->db_version();
 		$this->sysinfo[ $title ]['PHP Version'] = PHP_VERSION;
 		$this->sysinfo[ $title ]['Server Info'] = filter_input( INPUT_SERVER, 'SERVER_SOFTWARE' );
@@ -259,7 +259,7 @@ class SystemInfo
 	 */
 	public function getPHPConfig( $title = 'PHP Configuration' )
 	{
-		if( !$this->title( $title ) )return;
+		if( !$this->title( $title ))return;
 
 		$this->sysinfo[ $title ]['Display Errors'] = ini_get( 'display_errors' ) ? 'On (' . ini_get( 'display_errors' ) . ')' : 'N/A';
 		$this->sysinfo[ $title ]['Max Execution Time'] = ini_get( 'max_execution_time' );
@@ -267,9 +267,9 @@ class SystemInfo
 		$this->sysinfo[ $title ]['Max Input Vars'] = ini_get( 'max_input_vars' );
 		$this->sysinfo[ $title ]['Memory Limit'] = ini_get( 'memory_limit' );
 		$this->sysinfo[ $title ]['Post Max Size'] = ini_get( 'post_max_size' );
-		$this->sysinfo[ $title ]['Session Cookie Path'] = esc_html( ini_get( 'session.cookie_path' ) );
-		$this->sysinfo[ $title ]['Session Name'] = esc_html( ini_get( 'session.name' ) );
-		$this->sysinfo[ $title ]['Session Save Path'] = esc_html( ini_get( 'session.save_path' ) );
+		$this->sysinfo[ $title ]['Session Cookie Path'] = esc_html( ini_get( 'session.cookie_path' ));
+		$this->sysinfo[ $title ]['Session Name'] = esc_html( ini_get( 'session.name' ));
+		$this->sysinfo[ $title ]['Session Save Path'] = esc_html( ini_get( 'session.save_path' ));
 		$this->sysinfo[ $title ]['Session Use Cookies'] = ini_get( 'session.use_cookies' ) ? 'On' : 'Off';
 		$this->sysinfo[ $title ]['Session Use Only Cookies'] = ini_get( 'session.use_only_cookies' ) ? 'On' : 'Off';
 		$this->sysinfo[ $title ]['Upload Max Filesize'] = ini_get( 'upload_max_filesize' );
@@ -286,7 +286,7 @@ class SystemInfo
 	 */
 	public function getPHPExtensions( $title = 'PHP Extensions' )
 	{
-		if( !$this->title( $title ) )return;
+		if( !$this->title( $title ))return;
 
 		$this->sysinfo[ $title ]['cURL'] = function_exists( 'curl_init' ) ? 'Supported' : 'Not Supported';
 		$this->sysinfo[ $title ]['fsockopen'] = function_exists( 'fsockopen' ) ? 'Supported' : 'Not Supported';
@@ -323,14 +323,14 @@ class SystemInfo
 	 */
 	protected function implode( $section )
 	{
-		if( !isset( $this->sysinfo[ $section ] ) )return;
+		if( !isset( $this->sysinfo[ $section ] ))return;
 
 		$strings = [];
 
-		$strings[] = sprintf( '[%s]', strtoupper( $section ) );
+		$strings[] = sprintf( '[%s]', strtoupper( $section ));
 
 		foreach( $this->sysinfo[ $section ] as $key => $value ) {
-			if( is_int( $key ) ) {
+			if( is_int( $key )) {
 				$strings[] = " - {$value}";
 				continue;
 			}
@@ -368,7 +368,7 @@ class SystemInfo
 	{
 		$response = wp_remote_post( 'https://api.wordpress.org/stats/php/1.0/' );
 
-		return !is_wp_error( $response ) && in_array( $response['response']['code'], range( 200, 299 ) )
+		return !is_wp_error( $response ) && in_array( $response['response']['code'], range( 200, 299 ))
 			? 'Works'
 			: 'Does not work';
 	}
@@ -401,11 +401,11 @@ class SystemInfo
 		$server_name = filter_input( INPUT_SERVER, 'SERVER_NAME' );
 		$uname       = php_uname();
 
-		if( filter_input( INPUT_SERVER, 'DH_USER' ) ) {
+		if( filter_input( INPUT_SERVER, 'DH_USER' )) {
 			$host = 'DreamHost';
-		} elseif( defined( 'WPE_APIKEY' ) ) {
+		} elseif( defined( 'WPE_APIKEY' )) {
 			$host = 'WP Engine';
-		} elseif( defined( 'PAGELYBIN' ) ) {
+		} elseif( defined( 'PAGELYBIN' )) {
 			$host = 'Pagely';
 		} elseif( DB_HOST == 'localhost:/tmp/mysql5.sock' ) {
 			$host = 'ICDSoft';
@@ -453,9 +453,9 @@ class SystemInfo
 	 */
 	protected function wordpressPlugins( $title, array $plugins )
 	{
-		if( !count( $plugins ) || !$this->title( $title ) )return;
+		if( !count( $plugins ) || !$this->title( $title ))return;
 
-		$pad = max( array_map( 'strlen', $plugins ) );
+		$pad = max( array_map( 'strlen', $plugins ));
 
 		foreach( $plugins as $path => $plugin ) {
 			$this->sysinfo[ $title ][] = sprintf( '%s : %s', $this->pad( $plugin, $pad ), $path );

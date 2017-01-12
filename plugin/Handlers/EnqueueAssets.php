@@ -90,13 +90,13 @@ class EnqueueAssets
 	 */
 	public function enqueuePublic( Command $command )
 	{
-		$currentTheme = sanitize_title( wp_get_theme()->get( 'Name' ) );
+		$currentTheme = sanitize_title( wp_get_theme()->get( 'Name' ));
 
 		$stylesheet = file_exists( $command->path . "css/{$currentTheme}.css" )
 			? $command->url . "css/{$currentTheme}.css"
 			: $command->url . 'css/site-reviews.css';
 
-		if( apply_filters( 'site-reviews/assets/css', true ) ) {
+		if( apply_filters( 'site-reviews/assets/css', true )) {
 			wp_enqueue_style(
 				$command->handle,
 				$stylesheet,
@@ -105,7 +105,7 @@ class EnqueueAssets
 			);
 		}
 
-		if( !apply_filters( 'site-reviews/assets/js', true ) )return;
+		if( !apply_filters( 'site-reviews/assets/js', true ))return;
 
 		wp_enqueue_script(
 			$command->handle,
@@ -123,7 +123,7 @@ class EnqueueAssets
 	 */
 	public function enqueueTinymcePlugins( array $plugins )
 	{
-		if( !current_user_can( 'edit_posts' ) && !current_user_can( 'edit_pages' ) )return;
+		if( !current_user_can( 'edit_posts' ) && !current_user_can( 'edit_pages' ))return;
 
 		$plugins['glsr_shortcode'] = glsr_app()->url . 'assets/js/mce-plugin.js';
 
@@ -138,7 +138,7 @@ class EnqueueAssets
 		$variables = [];
 
 		foreach( glsr_app()->mceShortcodes as $tag => $args ) {
-			if( !empty( $args['required'] ) ) {
+			if( !empty( $args['required'] )) {
 				$variables[ $tag ] = $args['required'];
 			}
 		}

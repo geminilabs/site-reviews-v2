@@ -79,8 +79,8 @@ class Database implements OptionsContract
 
 		$post_id = wp_insert_post( $post_data, true );
 
-		if( is_wp_error( $post_id ) ) {
-			glsr_resolve( 'Log/Logger' )->error( sprintf( '%s (%s)', $post_id->get_error_message(), $metaReviewId ) );
+		if( is_wp_error( $post_id )) {
+			glsr_resolve( 'Log/Logger' )->error( sprintf( '%s (%s)', $post_id->get_error_message(), $metaReviewId ));
 
 			return false;
 		}
@@ -104,7 +104,7 @@ class Database implements OptionsContract
 	{
 		$postId = $this->getReviewId( $metaReviewId );
 
-		if( !empty( $postId ) ) {
+		if( !empty( $postId )) {
 			wp_delete_post( $postId, true );
 		}
 	}
@@ -216,7 +216,7 @@ class Database implements OptionsContract
 			$metaReviewId
 		);
 
-		return intval( $wpdb->get_var( $query ) );
+		return intval( $wpdb->get_var( $query ));
 	}
 
 	/**
@@ -308,7 +308,7 @@ class Database implements OptionsContract
 			'post_status'    => 'publish',
 			'post_type'      => $this->app->post_type,
 			'posts_per_page' => $count ? $count : -1,
-			'tax_query'      => $this->app->make( 'Query' )->buildTerms( $this->normalizeTerms( $category ) ),
+			'tax_query'      => $this->app->make( 'Query' )->buildTerms( $this->normalizeTerms( $category )),
 		];
 
 		$reviews = new WP_Query( $query );
@@ -444,7 +444,7 @@ class Database implements OptionsContract
 	{
 		$metaKey = strtolower( $metaKey );
 
-		if( in_array( $metaKey, ['id', 'type'])) {
+		if( in_array( $metaKey, ['id', 'type'] )) {
 			$metaKey = 'review_' . $metaKey;
 		}
 
@@ -463,14 +463,14 @@ class Database implements OptionsContract
 	{
 		!empty( $taxonomy ) ?: $taxonomy = $this->app->taxonomy;
 
-		$terms = array_map( 'trim', explode( ',', $terms ) );
+		$terms = array_map( 'trim', explode( ',', $terms ));
 		$terms = array_map( function( $term ) use( $taxonomy ) {
 
 			!is_numeric( $term ) ?: $term = intval( $term );
 
 			$term = term_exists( $term, $taxonomy );
 
-			if( isset( $term['term_id'] ) ) {
+			if( isset( $term['term_id'] )) {
 				return intval( $term['term_id'] );
 			}
 
@@ -523,7 +523,7 @@ class Database implements OptionsContract
 
 		$defaultSettings = [];
 		$currentSettings = $args['merge']
-			? $this->removeEmptyValuesFrom( $this->getOptions())
+			? $this->removeEmptyValuesFrom( $this->getOptions() )
 			: [];
 
 		foreach( $args['data'] as $path => $value ) {
@@ -562,7 +562,7 @@ class Database implements OptionsContract
 
 		$terms = $this->normalizeTerms( $terms, $taxonomy );
 
-		if( !empty( $terms ) ) {
+		if( !empty( $terms )) {
 			wp_set_object_terms( $post_id, $terms, $taxonomy );
 		}
 	}

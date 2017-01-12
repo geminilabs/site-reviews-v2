@@ -131,7 +131,7 @@ class SiteReviews extends Widget
 			$new_instance['count'] = 100;
 		}
 
-		if( !is_numeric( $new_instance['count'] ) ) {
+		if( !is_numeric( $new_instance['count'] )) {
 			$new_instance['count'] = 5;
 		}
 
@@ -164,7 +164,7 @@ class SiteReviews extends Widget
 
 		echo $args['before_widget'];
 
-		if( !empty( $title ) ) {
+		if( !empty( $title )) {
 			echo $args['before_title'] . $title . $args['after_title'];
 		}
 

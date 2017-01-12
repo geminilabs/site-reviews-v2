@@ -113,7 +113,7 @@
 		'type'   => 'hidden',
 		'name'   => 'excluded',
 		'prefix' => false,
-		'value'  => esc_attr( json_encode( $exclude ) ),
+		'value'  => esc_attr( json_encode( $exclude )),
 	]);
 
 	wp_nonce_field( 'post-review' );

@@ -10,7 +10,7 @@
 
 defined( 'WPINC' ) || die;
 
-if( !function_exists( 'glsr_version_check' ) ) {
+if( !function_exists( 'glsr_version_check' )) {
 	function glsr_version_check() {
 		global $wp_version;
 		return [
@@ -20,7 +20,7 @@ if( !function_exists( 'glsr_version_check' ) ) {
 	}
 }
 
-if( !function_exists( 'glsr_deactivate_plugin' ) ) {
+if( !function_exists( 'glsr_deactivate_plugin' )) {
 	function glsr_deactivate_plugin( $plugin )
 	{
 		$check = glsr_version_check();
@@ -34,7 +34,7 @@ if( !function_exists( 'glsr_deactivate_plugin' ) ) {
 			$s      = filter_input( INPUT_GET, 's' );
 			$status = filter_input( INPUT_GET, 'plugin_status' );
 
-			wp_safe_redirect( self_admin_url( sprintf( 'plugins.php?plugin_status=%s&paged=%s&s=%s', $status, $paged, $s ) ) );
+			wp_safe_redirect( self_admin_url( sprintf( 'plugins.php?plugin_status=%s&paged=%s&s=%s', $status, $paged, $s )));
 			die;
 		}
 
@@ -53,7 +53,7 @@ if( !function_exists( 'glsr_deactivate_plugin' ) ) {
 		// WordPress check overrides the PHP check
 		if( $check['wordpress'] ) {
 			$msg_1 = __( 'Sorry, this plugin requires WordPress version 4.0.0 or greater in order to work properly.', 'site-reviews' );
-			$msg_2 = sprintf( '<a href="%s">%s</a>', admin_url( 'update-core.php' ), __( 'Update WordPress', 'site-reviews' ) );
+			$msg_2 = sprintf( '<a href="%s">%s</a>', admin_url( 'update-core.php' ), __( 'Update WordPress', 'site-reviews' ));
 		}
 
 		printf( '<div id="message" class="notice notice-error error is-dismissible"><p><strong>%s</strong></p><p>%s</p><p>%s</p></div>',
