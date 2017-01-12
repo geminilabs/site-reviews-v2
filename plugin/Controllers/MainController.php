@@ -416,9 +416,10 @@ class MainController extends BaseController
 	{
 		// allow addons to add their own help sections
 		$sections = apply_filters( 'site-reviews/addon/documentation/sections', [
-			'support'    => 'Support',
-			'shortcodes' => 'Shortcodes',
-			'hooks'      => 'Hooks',
+			'support'    => __( 'Support', 'site-reviews' ),
+			'shortcodes' => __( 'Shortcodes', 'site-reviews' ),
+			'hooks'      => __( 'Hooks', 'site-reviews' ),
+			'helpers'    => __( 'Helper Functions', 'site-reviews' ),
 		]);
 
 		$this->renderMenu( 'help', [
@@ -522,9 +523,9 @@ class MainController extends BaseController
 	{
 		// allow addons to add their own setting sections
 		$sections = apply_filters( 'site-reviews/addon/settings/sections', [
-			'general'      => 'General',
-			'reviews'      => 'Reviews',
-			'reviews-form' => 'Submission Form',
+			'general'      => __( 'General', 'site-reviews' ),
+			'reviews'      => __( 'Reviews', 'site-reviews' ),
+			'reviews-form' => __( 'Submission Form', 'site-reviews' ),
 		]);
 
 		$this->renderMenu( 'settings', [

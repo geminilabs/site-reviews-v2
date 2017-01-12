@@ -81,8 +81,16 @@ class Helper
 	protected function getOption( $optionPath, $fallback )
 	{
 		return !empty( $optionPath )
-			? $this->db->getOption( $optionPath, $fallback )
-			: $this->db->getOptions();
+			? $this->db->getOption( $optionPath, $fallback, 'settings' )
+			: '';
+	}
+
+	/**
+	 * @return array
+	 */
+	protected function getOptions()
+	{
+		return $this->db->getOptions( 'settings' );
 	}
 
 	/**
