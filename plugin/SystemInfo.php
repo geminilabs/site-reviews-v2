@@ -111,7 +111,7 @@ class SystemInfo
 		if( !$this->title( $title ))return;
 
 		$this->sysinfo[ $title ]['Current version'] = $this->app->version;
-		$this->sysinfo[ $title ]['Previous version'] = 'None';
+		$this->sysinfo[ $title ]['Previous version'] = glsr_resolve( 'Database' )->getOption( 'version_upgraded_from' );
 
 		return $this->implode( $title );
 	}
