@@ -327,7 +327,10 @@ class RegisterPostType
 	 */
 	protected function renderFilterTypes( $types )
 	{
-		if( empty( $types ) || apply_filters( 'site-reviews/disable/filter/types', false ))return;
+		if( count( $types ) < 1
+			|| ( count( $types ) == 1 && $types[0] == 'local' )
+			|| apply_filters( 'site-reviews/disable/filter/types', false )
+		)return;
 
 		$reviewTypes = [ __( 'All types', 'site-reviews' ) ];
 
