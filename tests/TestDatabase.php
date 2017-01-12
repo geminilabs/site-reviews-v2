@@ -24,6 +24,8 @@ class TestDatabase extends WP_UnitTestCase
 
 	public function test_get_option()
 	{
+		$this->db->setOption( 'settings.general.require.approval', 'yes' );
+
 		$this->assertEquals(
 			$this->db->getOption( 'settings.general.require.approval' ),
 			'yes'
@@ -82,6 +84,8 @@ class TestDatabase extends WP_UnitTestCase
 
 	public function test_reset_option()
 	{
+		$this->db->setOption( 'general.require.approval', 'yes', true );
+
 		$option = $this->db->resetOption( 'general.require.approval', 'no', 'settings' );
 
 		$this->assertEquals( $option, 'yes' );
