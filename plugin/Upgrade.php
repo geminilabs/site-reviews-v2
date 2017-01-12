@@ -79,6 +79,20 @@ class Upgrade
 	/**
 	 * @return void
 	 */
+	public function reviewSlug_200()
+	{
+		global $wpdb;
+
+		$query = "UPDATE {$wpdb->posts} " .
+		"SET post_name = REPLACE(post_name, 'locallocal', 'local') " .
+		"WHERE post_type = '{$this->app->post_type}'";
+
+		$wpdb->query( $query );
+	}
+
+	/**
+	 * @return void
+	 */
 	public function reviewType_200()
 	{
 		global $wpdb;

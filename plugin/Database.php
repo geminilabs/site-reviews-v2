@@ -67,7 +67,7 @@ class Database implements OptionsContract
 			'ping_status'    => 'closed',
 			'post_content'   => $meta['content'],
 			'post_date'      => $meta['date'],
-			'post_name'      => $meta['review_type'] . str_replace( ['review_', '_'], '-', $metaReviewId ),
+			'post_name'      => sprintf( '%s-%s', $meta['review_type'], $metaReviewId ),
 			'post_status'    => 'publish',
 			'post_title'     => wp_strip_all_tags( $meta['title'] ),
 			'post_type'      => $this->app->post_type,

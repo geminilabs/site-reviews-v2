@@ -221,6 +221,7 @@ final class App extends Container
 			$upgrade = $this->make( 'Upgrade' );
 
 			$upgrade->options_200();
+			$upgrade->reviewSlug_200();
 			$upgrade->reviewType_200();
 			$upgrade->sidebarWidgets_200();
 			$upgrade->themeMods_200();

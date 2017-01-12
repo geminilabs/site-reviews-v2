@@ -40,7 +40,7 @@ class SubmitReview
 	 */
 	public function handle( Command $command )
 	{
-		$reviewId = 'local_' . md5( serialize( $command ));
+		$reviewId = md5( time() . serialize( $command ));
 
 		$review = [
 			'author'      => $command->author,
