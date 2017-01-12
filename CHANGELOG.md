@@ -18,7 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
-## [2.0.0] - 2017-01-10
+## [2.0.0] - 2017-01-12
 
 ### Added
 - [feature] Helper functions to easily access review meta

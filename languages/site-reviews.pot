@@ -41,7 +41,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: plugin/Commands/RegisterPostType.php:21, plugin/Shortcodes/Buttons/SiteReviews.php:109, views/edit/metabox-details.php:45
+#: plugin/Commands/RegisterPostType.php:21, plugin/Shortcodes/Buttons/SiteReviews.php:109, views/edit/metabox-details.php:48
 msgid "Date"
 msgstr ""
 
@@ -57,7 +57,7 @@ msgstr ""
 msgid "Log was cleared."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:88, plugin/Controllers/MainController.php:326, plugin/Controllers/MainController.php:532
+#: plugin/Controllers/MainController.php:88, plugin/Controllers/MainController.php:326, plugin/Controllers/MainController.php:533
 msgid "Settings"
 msgstr ""
 
@@ -83,7 +83,7 @@ msgstr ""
 msgid "Review"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:197, views/menu/status.php:17
+#: plugin/Controllers/MainController.php:197, plugin/Controllers/MainController.php:527, views/menu/status.php:17
 msgid "Reviews"
 msgstr ""
 
@@ -95,11 +95,11 @@ msgstr ""
 msgid "Author"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:208, views/edit/metabox-details.php:41
+#: plugin/Controllers/MainController.php:208, views/edit/metabox-details.php:44
 msgid "Type"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:209, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:119, views/edit/metabox-details.php:37
+#: plugin/Controllers/MainController.php:209, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:119, views/edit/metabox-details.php:40
 msgid "Rating"
 msgstr ""
 
@@ -147,31 +147,55 @@ msgstr ""
 msgid "A \"submit a review\" form for your site."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:426
+#: plugin/Controllers/MainController.php:419
+msgid "Support"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:420
+msgid "Shortcodes"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:421
+msgid "Hooks"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:422
+msgid "Helper Functions"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:427
 msgid "Documentation"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:429
+#: plugin/Controllers/MainController.php:430
 msgid "System Info"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:512
+#: plugin/Controllers/MainController.php:513
 msgid "%s reviews are read-only."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:535
+#: plugin/Controllers/MainController.php:526
+msgid "General"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:528
+msgid "Submission Form"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:536
 msgid "Licenses"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:596
+#: plugin/Controllers/MainController.php:597
 msgid "Logging enabled."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:597
+#: plugin/Controllers/MainController.php:598
 msgid "Logging disabled."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:600
+#: plugin/Controllers/MainController.php:601
 msgid "Settings updated."
 msgstr ""
 
@@ -225,7 +249,7 @@ msgstr ""
 msgid "Please fix the submission errors."
 msgstr ""
 
-#: plugin/Database.php:384
+#: plugin/Database.php:383
 msgid "%s reviews"
 msgstr ""
 
@@ -247,11 +271,11 @@ msgstr ""
 msgid "Filter by rating"
 msgstr ""
 
-#: plugin/Handlers/RegisterPostType.php:332
+#: plugin/Handlers/RegisterPostType.php:335
 msgid "All types"
 msgstr ""
 
-#: plugin/Handlers/RegisterPostType.php:338
+#: plugin/Handlers/RegisterPostType.php:341
 msgid "Filter by type"
 msgstr ""
 
@@ -347,199 +371,199 @@ msgstr ""
 msgid "read more"
 msgstr ""
 
-#: plugin/Settings.php:156, plugin/Settings.php:242, plugin/Settings.php:352
+#: plugin/Settings.php:160, plugin/Settings.php:246, plugin/Settings.php:356
 msgid "Save Settings"
 msgstr ""
 
-#: plugin/Settings.php:162
+#: plugin/Settings.php:166
 msgid "Require approval"
 msgstr ""
 
-#: plugin/Settings.php:164
+#: plugin/Settings.php:168
 msgid "Set the status of new review submissions to pending."
 msgstr ""
 
-#: plugin/Settings.php:170
+#: plugin/Settings.php:174
 msgid "Require login"
 msgstr ""
 
-#: plugin/Settings.php:171
+#: plugin/Settings.php:175
 msgid "Only allow review submissions from registered users."
 msgstr ""
 
-#: plugin/Settings.php:177
+#: plugin/Settings.php:181
 msgid "Notifications"
 msgstr ""
 
-#: plugin/Settings.php:180
+#: plugin/Settings.php:184
 msgid "Do not send review notifications"
 msgstr ""
 
-#: plugin/Settings.php:181
+#: plugin/Settings.php:185
 msgid "Send to administrator <code>%s</code>"
 msgstr ""
 
-#: plugin/Settings.php:182
+#: plugin/Settings.php:186
 msgid "Send to one or more email addresses"
 msgstr ""
 
-#: plugin/Settings.php:183
+#: plugin/Settings.php:187
 msgid "Send to <a href=\"https://slack.com/\">Slack</a>"
 msgstr ""
 
-#: plugin/Settings.php:190
+#: plugin/Settings.php:194
 msgid "Send notification emails to"
 msgstr ""
 
-#: plugin/Settings.php:194
+#: plugin/Settings.php:198
 msgid "Separate multiple emails with a comma"
 msgstr ""
 
-#: plugin/Settings.php:200
+#: plugin/Settings.php:204
 msgid "Webhook URL"
 msgstr ""
 
-#: plugin/Settings.php:205
+#: plugin/Settings.php:209
 msgid "To send notifications to Slack, <a href=\"%s\">create a new Incoming WebHook</a> and then paste the provided Webhook URL in the field above."
 msgstr ""
 
-#: plugin/Settings.php:213
+#: plugin/Settings.php:217
 msgid "Notification template"
 msgstr ""
 
-#: plugin/Settings.php:247
+#: plugin/Settings.php:251
 msgid "Form Labels"
 msgstr ""
 
-#: plugin/Settings.php:248
+#: plugin/Settings.php:252
 msgid "Customize the label text for the review submission form fields."
 msgstr ""
 
-#: plugin/Settings.php:254
+#: plugin/Settings.php:258
 msgid "Rating label"
 msgstr ""
 
-#: plugin/Settings.php:255
+#: plugin/Settings.php:259
 msgid "Your overall rating"
 msgstr ""
 
-#: plugin/Settings.php:262
+#: plugin/Settings.php:266
 msgid "Title label"
 msgstr ""
 
-#: plugin/Settings.php:263
+#: plugin/Settings.php:267
 msgid "Title of your review"
 msgstr ""
 
-#: plugin/Settings.php:270
+#: plugin/Settings.php:274
 msgid "Content label"
 msgstr ""
 
-#: plugin/Settings.php:271
+#: plugin/Settings.php:275
 msgid "Your review"
 msgstr ""
 
-#: plugin/Settings.php:278
+#: plugin/Settings.php:282
 msgid "Name label"
 msgstr ""
 
-#: plugin/Settings.php:279
+#: plugin/Settings.php:283
 msgid "Your name"
 msgstr ""
 
-#: plugin/Settings.php:286
+#: plugin/Settings.php:290
 msgid "Email label"
 msgstr ""
 
-#: plugin/Settings.php:287
+#: plugin/Settings.php:291
 msgid "Your email"
 msgstr ""
 
-#: plugin/Settings.php:294
+#: plugin/Settings.php:298
 msgid "Terms label"
 msgstr ""
 
-#: plugin/Settings.php:295
+#: plugin/Settings.php:299
 msgid "This review is based on my own experience and is my genuine opinion."
 msgstr ""
 
-#: plugin/Settings.php:301
+#: plugin/Settings.php:305
 msgid "Form Placeholders"
 msgstr ""
 
-#: plugin/Settings.php:302
+#: plugin/Settings.php:306
 msgid "Customize the placeholder text for the review submission form fields. Use a single space character to disable the placeholder text."
 msgstr ""
 
-#: plugin/Settings.php:309
+#: plugin/Settings.php:313
 msgid "Title placeholder"
 msgstr ""
 
-#: plugin/Settings.php:310
+#: plugin/Settings.php:314
 msgid "Summarize your review or highlight an interesting detail"
 msgstr ""
 
-#: plugin/Settings.php:318
+#: plugin/Settings.php:322
 msgid "Content placeholder"
 msgstr ""
 
-#: plugin/Settings.php:319
+#: plugin/Settings.php:323
 msgid "Tell people your review"
 msgstr ""
 
-#: plugin/Settings.php:327
+#: plugin/Settings.php:331
 msgid "Name placeholder"
 msgstr ""
 
-#: plugin/Settings.php:328
+#: plugin/Settings.php:332
 msgid "Tell us your name"
 msgstr ""
 
-#: plugin/Settings.php:336
+#: plugin/Settings.php:340
 msgid "Email placeholder"
 msgstr ""
 
-#: plugin/Settings.php:337
+#: plugin/Settings.php:341
 msgid "Tell us your email"
 msgstr ""
 
-#: plugin/Settings.php:358
+#: plugin/Settings.php:362
 msgid "Enable Avatars"
 msgstr ""
 
-#: plugin/Settings.php:359
+#: plugin/Settings.php:363
 msgid "Display reviewer avatars. These are generated from the email address of the reviewer using <a href=\"https://gravatar.com\">Gravatar</a>."
 msgstr ""
 
-#: plugin/Settings.php:365
+#: plugin/Settings.php:369
 msgid "Enable Custom Dates"
 msgstr ""
 
-#: plugin/Settings.php:366
+#: plugin/Settings.php:370
 msgid "The default date format is the one set in your <a href=\"%s\">WordPress settings<a>."
 msgstr ""
 
-#: plugin/Settings.php:372
+#: plugin/Settings.php:376
 msgid "Date Format"
 msgstr ""
 
-#: plugin/Settings.php:374
+#: plugin/Settings.php:378
 msgid "Enter a custom date format (<a href=\"%s\">documentation on date and time formatting</a>)."
 msgstr ""
 
-#: plugin/Settings.php:383
+#: plugin/Settings.php:387
 msgid "Enable Excerpts"
 msgstr ""
 
-#: plugin/Settings.php:384
+#: plugin/Settings.php:388
 msgid "Display an excerpt instead of the full review."
 msgstr ""
 
-#: plugin/Settings.php:390
+#: plugin/Settings.php:394
 msgid "Excerpt Length"
 msgstr ""
 
-#: plugin/Settings.php:392
+#: plugin/Settings.php:396
 msgid "Set the excerpt word length."
 msgstr ""
 
@@ -555,15 +579,15 @@ msgstr ""
 msgid "Shortcode"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/Generator.php:212
+#: plugin/Shortcodes/Buttons/Generator.php:208
 msgid "- Select -"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/Generator.php:331
+#: plugin/Shortcodes/Buttons/Generator.php:327
 msgid "Some of the shortcode options are required."
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/Generator.php:338
+#: plugin/Shortcodes/Buttons/Generator.php:334
 msgctxt "the option label"
 msgid "The \"%s\" option is required."
 msgstr ""
@@ -918,23 +942,27 @@ msgstr ""
 msgid "Most Used"
 msgstr ""
 
-#: views/edit/metabox-details.php:5
+#: views/edit/metabox-details.php:7
+msgid "Unknown"
+msgstr ""
+
+#: views/edit/metabox-details.php:8
 msgid "%s review"
 msgstr ""
 
-#: views/edit/metabox-details.php:26
+#: views/edit/metabox-details.php:29
 msgid "Nothing to Revert"
 msgstr ""
 
-#: views/edit/metabox-details.php:27
+#: views/edit/metabox-details.php:30
 msgid "Revert Changes"
 msgstr ""
 
-#: views/edit/metabox-details.php:49
+#: views/edit/metabox-details.php:52
 msgid "Reviewer"
 msgstr ""
 
-#: views/edit/metabox-details.php:53
+#: views/edit/metabox-details.php:56
 msgid "Avatar"
 msgstr ""
 

@@ -92,7 +92,7 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 
 == Changelog ==
 
-= 2.0.0 (2017-01-10) =
+= 2.0.0 (2017-01-12) =
 
 * [feature] Helper functions to easily access review meta
 * [feature] MCE shortcode button dropdown
