@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.0.1] - 2017-01-23
+
+### Fixed
+- Prevent the taxonomy object from containing recursion
+
 ## [2.0.0] - 2017-01-12
 
 ### Added
