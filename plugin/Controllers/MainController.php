@@ -353,7 +353,7 @@ class MainController extends BaseController
 
 		$command = new RegisterTaxonomy([
 			'hierarchical'      => true,
-			'meta_box_cb'       => [ $this, 'renderTaxonomyMetabox' ],
+			'meta_box_cb'       => 'glsr_categories_meta_box',
 			'public'            => false,
 			'show_admin_column' => true,
 			'show_ui'           => true,
