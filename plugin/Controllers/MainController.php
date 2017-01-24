@@ -463,7 +463,12 @@ class MainController extends BaseController
 	{
 		if( $post->post_type != $this->app->post_type )return;
 
-		$this->render( 'edit/metabox-details', ['post' => $post ] );
+		$review = glsr_resolve( 'Helper' )->get( 'review', $post->ID );
+
+		$this->render( 'edit/metabox-details', [
+			'button'  => $this->getMetaboxButton( $post, $review ),
+			'metabox' => $this->getMetaboxDetails( $review ),
+		]);
 	}
 
 	/**
@@ -644,6 +649,70 @@ class MainController extends BaseController
 		}
 
 		return $tab;
+	}
+
+	/**
+	 * Gets the metabox revert button
+	 *
+	 * @param object $review
+	 *
+	 * @return string
+	 */
+	protected function getMetaboxButton( WP_Post $post, $review )
+	{
+		$modified = false;
+
+		if( $post->post_title !== $review->title
+			|| $post->post_content !== $review->content
+			|| $post->post_date !== $review->date ) {
+			$modified = true;
+		}
+
+		$revertUrl = wp_nonce_url(
+			admin_url( sprintf( 'post.php?post=%s&action=revert', $post->ID )),
+			'revert-review_' . $post->ID
+		);
+
+		$revert = !$modified
+			? __( 'Nothing to Revert', 'site-reviews' )
+			: __( 'Revert Changes', 'site-reviews' );
+
+		return !$modified
+			? sprintf( '<button id="revert" class="button button-large" disabled>%s</button>', $revert )
+			: sprintf( '<a href="%s" id="revert" class="button button-large">%s</a>', $revertUrl, $revert );
+	}
+
+	/**
+	 * Gets the metabox details
+	 *
+	 * @param object $review
+	 *
+	 * @return array
+	 */
+	protected function getMetaboxDetails( $review )
+	{
+		$reviewTypeFallback = empty( $review->review_type )
+			? __( 'Unknown', 'site-reviews' )
+			: ucfirst( $review->review_type );
+
+		$reviewType = sprintf( __( '%s review', 'site-reviews' ),
+			glsr_resolve( 'Strings' )->review_types( $review->review_type, $reviewTypeFallback )
+		);
+
+		if( $review->url ) {
+			$reviewType = sprintf( '<a href="%s" target="_blank">%s</a>', $review->url, $reviewType );
+		}
+
+		$metabox = [
+			__( 'Rating', 'site-reviews' )   => $this->html->renderPartial( 'rating', ['stars' => $review->rating ], 'return' ),
+			__( 'Type', 'site-reviews' )     => $reviewType,
+			__( 'Date', 'site-reviews' )     => get_date_from_gmt( $review->date, 'F j, Y' ),
+			__( 'Reviewer', 'site-reviews' ) => $review->author,
+			__( 'Email', 'site-reviews' )    => $review->email,
+			__( 'Avatar', 'site-reviews' )   => sprintf( '<img src="%s" width="96">', $review->avatar ),
+		];
+
+		return apply_filters( 'site-reviews/metabox/details', $metabox, $review );
 	}
 
 	/**
