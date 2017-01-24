@@ -673,13 +673,9 @@ class MainController extends BaseController
 			'revert-review_' . $post->ID
 		);
 
-		$revert = !$modified
-			? __( 'Nothing to Revert', 'site-reviews' )
-			: __( 'Revert Changes', 'site-reviews' );
-
 		return !$modified
-			? sprintf( '<button id="revert" class="button button-large" disabled>%s</button>', $revert )
-			: sprintf( '<a href="%s" id="revert" class="button button-large">%s</a>', $revertUrl, $revert );
+			? sprintf( '<button id="revert" class="button button-large" disabled>%s</button>', __( 'Nothing to Revert', 'site-reviews' ))
+			: sprintf( '<a href="%s" id="revert" class="button button-large">%s</a>', $revertUrl, __( 'Revert Changes', 'site-reviews' ));
 	}
 
 	/**

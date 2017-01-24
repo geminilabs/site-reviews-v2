@@ -41,7 +41,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: plugin/Commands/RegisterPostType.php:21, plugin/Shortcodes/Buttons/SiteReviews.php:109, views/edit/metabox-details.php:48
+#: plugin/Commands/RegisterPostType.php:21, plugin/Controllers/MainController.php:705, plugin/Shortcodes/Buttons/SiteReviews.php:109
 msgid "Date"
 msgstr ""
 
@@ -57,7 +57,7 @@ msgstr ""
 msgid "Log was cleared."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:88, plugin/Controllers/MainController.php:326, plugin/Controllers/MainController.php:533
+#: plugin/Controllers/MainController.php:88, plugin/Controllers/MainController.php:326, plugin/Controllers/MainController.php:538
 msgid "Settings"
 msgstr ""
 
@@ -83,7 +83,7 @@ msgstr ""
 msgid "Review"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:197, plugin/Controllers/MainController.php:527, views/menu/status.php:17
+#: plugin/Controllers/MainController.php:197, plugin/Controllers/MainController.php:532, views/menu/status.php:17
 msgid "Reviews"
 msgstr ""
 
@@ -95,11 +95,11 @@ msgstr ""
 msgid "Author"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:208, views/edit/metabox-details.php:44
+#: plugin/Controllers/MainController.php:208, plugin/Controllers/MainController.php:704
 msgid "Type"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:209, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:119, views/edit/metabox-details.php:40
+#: plugin/Controllers/MainController.php:209, plugin/Controllers/MainController.php:703, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:119
 msgid "Rating"
 msgstr ""
 
@@ -171,32 +171,60 @@ msgstr ""
 msgid "System Info"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:513
+#: plugin/Controllers/MainController.php:518
 msgid "%s reviews are read-only."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:526
+#: plugin/Controllers/MainController.php:531
 msgid "General"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:528
+#: plugin/Controllers/MainController.php:533
 msgid "Submission Form"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:536
+#: plugin/Controllers/MainController.php:541
 msgid "Licenses"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:597
+#: plugin/Controllers/MainController.php:602
 msgid "Logging enabled."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:598
+#: plugin/Controllers/MainController.php:603
 msgid "Logging disabled."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:601
+#: plugin/Controllers/MainController.php:606
 msgid "Settings updated."
+msgstr ""
+
+#: plugin/Controllers/MainController.php:677
+msgid "Nothing to Revert"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:678
+msgid "Revert Changes"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:691
+msgid "Unknown"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:694
+msgid "%s review"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:706
+msgid "Reviewer"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:707, plugin/Shortcodes/Buttons/SiteReviewsForm.php:70
+msgid "Email"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:708
+msgid "Avatar"
 msgstr ""
 
 #: plugin/Controllers/ReviewController.php:131
@@ -712,10 +740,6 @@ msgstr ""
 msgid "Enter a custom shortcode description."
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:70
-msgid "Email"
-msgstr ""
-
 #: plugin/Shortcodes/Buttons/SiteReviewsForm.php:71
 msgid "Hide the email field?"
 msgstr ""
@@ -940,30 +964,6 @@ msgstr ""
 
 #: views/edit/metabox-categories.php:7
 msgid "Most Used"
-msgstr ""
-
-#: views/edit/metabox-details.php:7
-msgid "Unknown"
-msgstr ""
-
-#: views/edit/metabox-details.php:8
-msgid "%s review"
-msgstr ""
-
-#: views/edit/metabox-details.php:29
-msgid "Nothing to Revert"
-msgstr ""
-
-#: views/edit/metabox-details.php:30
-msgid "Revert Changes"
-msgstr ""
-
-#: views/edit/metabox-details.php:52
-msgid "Reviewer"
-msgstr ""
-
-#: views/edit/metabox-details.php:56
-msgid "Avatar"
 msgstr ""
 
 #: views/edit/pinned.php:21

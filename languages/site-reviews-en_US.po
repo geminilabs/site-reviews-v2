@@ -59,7 +59,7 @@ msgstr "Update WordPress"
 msgid "Title"
 msgstr "Title"
 
-#: plugin/Commands/RegisterPostType.php:21, plugin/Shortcodes/Buttons/SiteReviews.php:109, views/edit/metabox-details.php:48
+#: plugin/Commands/RegisterPostType.php:21, plugin/Controllers/MainController.php:705, plugin/Shortcodes/Buttons/SiteReviews.php:109
 msgid "Date"
 msgstr "Date"
 
@@ -75,7 +75,7 @@ msgstr "Okay"
 msgid "Log was cleared."
 msgstr "Log was cleared."
 
-#: plugin/Controllers/MainController.php:88, plugin/Controllers/MainController.php:326, plugin/Controllers/MainController.php:533
+#: plugin/Controllers/MainController.php:88, plugin/Controllers/MainController.php:326, plugin/Controllers/MainController.php:538
 msgid "Settings"
 msgstr "Settings"
 
@@ -105,7 +105,7 @@ msgstr ""
 msgid "Review"
 msgstr "Review"
 
-#: plugin/Controllers/MainController.php:197, plugin/Controllers/MainController.php:527, views/menu/status.php:17
+#: plugin/Controllers/MainController.php:197, plugin/Controllers/MainController.php:532, views/menu/status.php:17
 msgid "Reviews"
 msgstr "Reviews"
 
@@ -117,11 +117,11 @@ msgstr "Site Reviews"
 msgid "Author"
 msgstr "Author"
 
-#: plugin/Controllers/MainController.php:208, views/edit/metabox-details.php:44
+#: plugin/Controllers/MainController.php:208, plugin/Controllers/MainController.php:704
 msgid "Type"
 msgstr "Type"
 
-#: plugin/Controllers/MainController.php:209, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:119, views/edit/metabox-details.php:40
+#: plugin/Controllers/MainController.php:209, plugin/Controllers/MainController.php:703, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:119
 msgid "Rating"
 msgstr "Rating"
 
@@ -193,33 +193,61 @@ msgstr "Documentation"
 msgid "System Info"
 msgstr "System Info"
 
-#: plugin/Controllers/MainController.php:513
+#: plugin/Controllers/MainController.php:518
 msgid "%s reviews are read-only."
 msgstr "%s reviews are read-only."
 
-#: plugin/Controllers/MainController.php:526
+#: plugin/Controllers/MainController.php:531
 msgid "General"
 msgstr "General"
 
-#: plugin/Controllers/MainController.php:528
+#: plugin/Controllers/MainController.php:533
 msgid "Submission Form"
 msgstr "Submission Form"
 
-#: plugin/Controllers/MainController.php:536
+#: plugin/Controllers/MainController.php:541
 msgid "Licenses"
 msgstr "Licenses"
 
-#: plugin/Controllers/MainController.php:597
+#: plugin/Controllers/MainController.php:602
 msgid "Logging enabled."
 msgstr "Logging enabled."
 
-#: plugin/Controllers/MainController.php:598
+#: plugin/Controllers/MainController.php:603
 msgid "Logging disabled."
 msgstr "Logging disabled."
 
-#: plugin/Controllers/MainController.php:601
+#: plugin/Controllers/MainController.php:606
 msgid "Settings updated."
 msgstr "Settings updated."
+
+#: plugin/Controllers/MainController.php:677
+msgid "Nothing to Revert"
+msgstr "Nothing to Revert"
+
+#: plugin/Controllers/MainController.php:678
+msgid "Revert Changes"
+msgstr "Revert Changes"
+
+#: plugin/Controllers/MainController.php:691
+msgid "Unknown"
+msgstr "Unknown"
+
+#: plugin/Controllers/MainController.php:694
+msgid "%s review"
+msgstr "%s review"
+
+#: plugin/Controllers/MainController.php:706
+msgid "Reviewer"
+msgstr "Reviewer"
+
+#: plugin/Controllers/MainController.php:707, plugin/Shortcodes/Buttons/SiteReviewsForm.php:70
+msgid "Email"
+msgstr "Email"
+
+#: plugin/Controllers/MainController.php:708
+msgid "Avatar"
+msgstr "Avatar"
 
 #: plugin/Controllers/ReviewController.php:131
 msgid "Approved"
@@ -749,10 +777,6 @@ msgstr "Description"
 msgid "Enter a custom shortcode description."
 msgstr "Enter a custom shortcode description."
 
-#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:70
-msgid "Email"
-msgstr "Email"
-
 #: plugin/Shortcodes/Buttons/SiteReviewsForm.php:71
 msgid "Hide the email field?"
 msgstr "Hide the email field?"
@@ -928,30 +952,6 @@ msgstr "Hide the title field"
 #: views/edit/metabox-categories.php:7
 msgid "Most Used"
 msgstr "Most Used"
-
-#: views/edit/metabox-details.php:7
-msgid "Unknown"
-msgstr "Unknown"
-
-#: views/edit/metabox-details.php:8
-msgid "%s review"
-msgstr "%s review"
-
-#: views/edit/metabox-details.php:29
-msgid "Nothing to Revert"
-msgstr "Nothing to Revert"
-
-#: views/edit/metabox-details.php:30
-msgid "Revert Changes"
-msgstr "Revert Changes"
-
-#: views/edit/metabox-details.php:52
-msgid "Reviewer"
-msgstr "Reviewer"
-
-#: views/edit/metabox-details.php:56
-msgid "Avatar"
-msgstr "Avatar"
 
 #: views/edit/pinned.php:21
 msgid "Edit"

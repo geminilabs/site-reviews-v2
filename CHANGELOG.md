@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.0.2] - 2017-01-24
+
+### Added
+- Added hook to filter metabox details
+
 ## [2.0.1] - 2017-01-23
 
 ### Fixed
