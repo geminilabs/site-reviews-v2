@@ -12,13 +12,15 @@ All proposed features are subject to change.
 - [ ] Rating types (star, thumb, emote, percent)
 
 ## v2.3.0
+- [ ] Multiple star-ratings in a review (for rating individual services of a business)
+
+## v2.4.0
 - [ ] Review GEO Location by IP
 - [ ] Review statistics
 
-## v2.4.0
+## v2.5.0
 - [ ] WP REST API support
 
 ## Other
-
 - [ ] Code coverage for each class
 - [ ] Dated log files: http://stackoverflow.com/a/217468/2744691
