@@ -241,7 +241,8 @@ final class App extends Container
 	 */
 	public function upgrader( $upgrader, array $data )
 	{
-		if( !in_array( plugin_basename( $this->file ), $data['packages'] )
+		if( !array_key_exists( 'plugins', $data )
+			|| !in_array( plugin_basename( $this->file ), $data['plugins'] )
 			|| $data['action'] != 'update'
 			|| $data['type'] != 'plugin'
 		)return;
