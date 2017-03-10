@@ -573,7 +573,7 @@ class MainController extends BaseController
 	 */
 	public function renderTinymceButton()
 	{
-		if( get_current_screen()->base != 'post' )return;
+		if( !glsr_current_screen() || glsr_current_screen()->base != 'post' )return;
 
 		$shortcodes = [];
 

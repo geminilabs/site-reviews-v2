@@ -342,9 +342,10 @@ class ReviewController extends BaseController
 	 */
 	protected function isEditReview()
 	{
-		$screen = get_current_screen();
+		$screen = glsr_current_screen();
 
-		return $screen->base == 'post'
+		return $screen
+			&& $screen->base == 'post'
 			&& $screen->id == $this->app->post_type
 			&& $screen->post_type == $this->app->post_type;
 	}

@@ -57,7 +57,7 @@ class EnqueueAssets
 	 */
 	public function enqueueAdmin( Command $command )
 	{
-		$screen = get_current_screen();
+		$screen = glsr_current_screen();
 
 		$dependencies = array_merge( $this->dependencies, ['jquery'] );
 
@@ -68,7 +68,7 @@ class EnqueueAssets
 			$command->version
 		);
 
-		if( !( $screen->post_type == glsr_app()->post_type
+		if( !$screen || !( $screen->post_type == glsr_app()->post_type
 			|| $screen->base == 'post'
 			|| $screen->id == 'dashboard'
 			|| $screen->id == 'widgets'

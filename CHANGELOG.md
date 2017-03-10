@@ -18,6 +18,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.0.4] - 2017-03-09
+
+### Fixed
+
+- Fix WordPress customizer compatibility (see: [`get_current_screen()` usage restrictions](https://codex.wordpress.org/Function_Reference/get_current_screen#Usage_Restrictions))
+
 ## [2.0.3] - 2017-03-09
 
 ### Fixed

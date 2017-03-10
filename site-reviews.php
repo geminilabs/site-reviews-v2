@@ -7,7 +7,7 @@
  * Plugin Name: Site Reviews
  * Plugin URI:  https://wordpress.org/plugins/site-reviews
  * Description: Receive and display site reviews
- * Version:     2.0.3
+ * Version:     2.0.4
  * Author:      Paul Ryley
  * Author URI:  http://geminilabs.io
  * License:     GPL2
@@ -103,7 +103,16 @@ function glsr_resolve( $alias ) {
  *
  * @return void
  */
-function glsr_categories_meta_box( $post, $box )
-{
+function glsr_categories_meta_box( $post, $box ) {
 	App::load()->make( 'Controllers\MainController' )->renderTaxonomyMetabox( $post, $box );
+}
+
+/**
+ * get_current_screen() is unreliable because it is defined on most admin pages, but not all.
+ *
+ * @return WP_Screen|null
+ */
+function glsr_current_screen() {
+	global $current_screen;
+	return isset( $current_screen ) ? $current_screen : null;
 }
