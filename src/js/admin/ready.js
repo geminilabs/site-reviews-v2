@@ -34,6 +34,7 @@ x( function()
 		}
 	});
 
+	x( document ).on( 'change', 'input#assigned_to', GLSR.onChangeAssignedTo );
 	x( document ).on( 'click', '.glsr-mce-button', GLSR.shortcode.toggle );
 	x( document ).on( 'click', '.glsr-mce-menu-item', GLSR.shortcode.trigger );
 	x( document ).on( 'click', 'a.change-site-review-status', GLSR.onChangeStatus );

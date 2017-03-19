@@ -48,6 +48,7 @@ class Database implements OptionsContract
 		// make sure we set post_meta fallback defaults
 		$meta = wp_parse_args( $meta, [
 			'author'      => '',
+			'assigned_to' => '',
 			'avatar'      => '',
 			'content'     => '',
 			'date'        => get_date_from_gmt( gmdate( 'Y-m-d H:i:s' )),
@@ -90,6 +91,8 @@ class Database implements OptionsContract
 			update_post_meta( $post_id, $field, $value );
 		}
 
+		do_action( 'site-reviews/local/review/create', $post_data, $meta );
+
 		return $post_id;
 	}
 
@@ -127,15 +130,17 @@ class Database implements OptionsContract
 			|| $post->post_date != $meta->date;
 
 		$review = (object) [
+			'assigned_to' => $meta->assigned_to,
 			'author'      => $meta->author,
 			'avatar'      => $meta->avatar,
 			'content'     => $post->post_content,
 			'date'        => $post->post_date,
 			'email'       => $meta->email,
+			'ID'          => $post->ID,
 			'ip_address'  => $meta->ip_address,
 			'modified'    => $modified,
 			'pinned'      => $meta->pinned,
-			'post_id'     => $post->ID,
+			'post_id'     => $post->ID, // provided for backwards compatability
 			'rating'      => $meta->rating,
 			'review_id'   => $meta->review_id,
 			'review_type' => $meta->review_type,
@@ -270,6 +275,7 @@ class Database implements OptionsContract
 	public function getReviews( array $args = [] )
 	{
 		$defaults = [
+			'assigned_to'  => '',
 			'category'     => '',
 			'count'        => 10,
 			'order'        => 'DESC',
@@ -286,6 +292,11 @@ class Database implements OptionsContract
 		extract( $args );
 
 		$meta_query = $this->app->make( 'Query' )->buildMeta([
+			'assigned_to' => [
+				'key'   => 'assigned_to',
+				'value' => array_map( 'trim', explode( ',', $assigned_to )),
+				'compare' => 'IN',
+			],
 			'type' => [
 				'key'   => 'review_type',
 				'value' => $type,
@@ -416,6 +427,7 @@ class Database implements OptionsContract
 	{
 		$defaults = [
 			'author'      => '',
+			'assigned_to' => '',
 			'avatar'      => '',
 			'content'     => '',
 			'date'        => '',

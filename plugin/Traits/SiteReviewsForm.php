@@ -54,13 +54,14 @@ trait SiteReviewsForm
 		}
 
 		glsr_resolve( 'Controllers\ReviewController' )->render( 'submit/index', [
-			'category' => $atts['category'],
-			'class'    => trim( 'glsr-submit-review-form ' . $atts['class'] ),
-			'errors'   => $errors,
-			'exclude'  => $atts['hide'],
-			'form_id'  => $formId,
-			'message'  => $message,
-			'values'   => shortcode_atts([
+			'assign_to' => $atts['assign_to'],
+			'category'  => $atts['category'],
+			'class'     => trim( 'glsr-submit-review-form ' . $atts['class'] ),
+			'errors'    => $errors,
+			'exclude'   => $atts['hide'],
+			'form_id'   => $formId,
+			'message'   => $message,
+			'values'    => shortcode_atts([
 				'content' => '',
 				'email'   => '',
 				'name'    => '',

@@ -24,6 +24,7 @@ class Reviews extends Base
 		global $post;
 
 		$defaults = [
+			'assigned_to'  => '',
 			'category'     => '',
 			'class'        => '',
 			'count'        => '',

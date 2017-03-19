@@ -18,10 +18,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.1.0] = 2017-03-19
+
+### Added
+- [feature] Assign reviews to a page/post
+- Added hook that runs immediately after a review has been created
+
+### Deprecated
+- The 'post_id' review key is deprecated in favour of 'ID' in reviews returned from the `glsr_get_review()` and `glsr_get_review()` functions
+
 ## [2.0.4] - 2017-03-09
 
 ### Fixed
-
 - Fix WordPress customizer compatibility (see: [`get_current_screen()` usage restrictions](https://codex.wordpress.org/Function_Reference/get_current_screen#Usage_Restrictions))
 
 ## [2.0.3] - 2017-03-09

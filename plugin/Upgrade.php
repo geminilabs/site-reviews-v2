@@ -222,6 +222,24 @@ class Upgrade
 		delete_option( "widget_{$this->app->id}_reviews_form" );
 	}
 
+	public function reviewAssignedTo_210()
+	{
+		global $wpdb;
+
+		$query = "INSERT INTO gl_postmeta (post_id, meta_key, meta_value) " .
+		"SELECT p.ID, 'assigned_to', '' " .
+		"FROM gl_posts p " .
+		"WHERE NOT EXISTS (" .
+			"SELECT pm.post_id " .
+			"FROM gl_postmeta pm " .
+			"WHERE p.ID = pm.post_id " .
+			"AND pm.meta_key = 'assigned_to'" .
+		") " .
+		"AND p.post_type = 'site-review'";
+
+		$wpdb->query( $query );
+	}
+
 	/**
 	 * @param string $search
 	 * @param string $replace

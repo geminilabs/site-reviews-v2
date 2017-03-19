@@ -74,10 +74,7 @@ class SiteReviews extends Generator
 					'1' => esc_html__( '1 star', 'site-reviews' ),
 				],
 				'tooltip' => esc_attr__( 'What is the minimum rating to display?', 'site-reviews' ),
-			],
-			( isset( $display ) ? $display : [] ),
-			( isset( $category ) ? $category : [] ),
-			[
+			],[
 				'type'    => 'listbox',
 				'name'    => 'pagination',
 				'label'   => esc_html__( 'Pagination', 'site-reviews' ),
@@ -86,6 +83,14 @@ class SiteReviews extends Generator
 					'false' => esc_html__( 'Disable', 'site-reviews' ),
 				],
 				'tooltip' => esc_attr__( 'When using pagination this shortcode can only be used once on a page.', 'site-reviews' ),
+			],
+			( isset( $display ) ? $display : [] ),
+			( isset( $category ) ? $category : [] ),
+			[
+				'type'      => 'textbox',
+				'name'      => 'assigned_to',
+				'label'     => esc_html__( 'Post ID', 'site-reviews' ),
+				'tooltip'   => esc_attr__( "Limit reviews to those assigned to this post ID (separate multiple ID's with a comma).", 'site-reviews' ),
 			],[
 				'type'     => 'textbox',
 				'name'     => 'class',

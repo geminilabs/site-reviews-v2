@@ -29,13 +29,14 @@ class SiteReviews extends Widget
 	public function form( $instance )
 	{
 		$defaults = [
-			'category' => '',
-			'class'    => '',
-			'count'    => '5',
-			'display'  => '',
-			'hide'     => [],
-			'rating'   => '5',
-			'title'    => '',
+			'assigned_to' => '',
+			'category'    => '',
+			'class'       => '',
+			'count'       => '5',
+			'display'     => '',
+			'hide'        => [],
+			'rating'      => '5',
+			'title'       => '',
 		];
 
 		$args = shortcode_atts( $defaults, $instance );
@@ -90,6 +91,15 @@ class SiteReviews extends Widget
 			'class' => 'widefat',
 			'value' => $args['category'],
 			'options' => ['' => __( 'All Categories', 'site-reviews' ) ] + glsr_resolve( 'Database' )->getTerms(),
+		]);
+
+		$this->create_field([
+			'type'    => 'text',
+			'name'    => 'assigned_to',
+			'label'   => __( 'Limit reviews to those assigned to this page/post ID', 'site-reviews' ),
+			'value'   => $args['assigned_to'],
+			'default' => '',
+			'placeholder' => __( "Separate multiple ID's with a comma", 'site-reviews' ),
 		]);
 
 		$this->create_field([
@@ -149,13 +159,14 @@ class SiteReviews extends Widget
 	public function widget( $args, $instance )
 	{
 		$defaults = [
-			'category' => '',
-			'class'    => '',
-			'count'    => '5', // count
-			'display'  => '',
-			'hide'     => [],
-			'rating'   => '5', // rating
-			'title'    => '',
+			'assigned_to' => '',
+			'category'    => '',
+			'class'       => '',
+			'count'       => '5', // count
+			'display'     => '',
+			'hide'        => [],
+			'rating'      => '5', // rating
+			'title'       => '',
 		];
 
 		$instance = shortcode_atts( $defaults, $instance );

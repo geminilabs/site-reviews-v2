@@ -30,6 +30,7 @@ class SiteReviewsForm extends Shortcode
 	public function printShortcode( $atts = [] )
 	{
 		$defaults = [
+			'assign_to'   => '',
 			'category'    => '',
 			'class'       => '',
 			'description' => '',

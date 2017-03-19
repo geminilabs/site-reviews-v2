@@ -70,6 +70,18 @@ GLSR.normalizeValues = function( array )
 	return array.map( GLSR.normalizeValue );
 };
 
+GLSR.onChangeAssignedTo = function( ev )
+{
+	if( !this.value )return;
+	var request = {
+		action: 'change-assigned-to',
+		ID: this.value,
+	};
+	GLSR.postAjax( ev, request, function( response ) {
+		ev.target.nextElementSibling.innerHTML = response;
+	});
+};
+
 GLSR.onChangeStatus = function( ev )
 {
 	var post_id = this.href.match(/post=([0-9]+)/)[1];

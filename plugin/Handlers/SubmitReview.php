@@ -44,6 +44,7 @@ class SubmitReview
 
 		$review = [
 			'author'      => $command->author,
+			'assigned_to' => $command->assignedTo,
 			'avatar'      => get_avatar_url( $command->email ),
 			'content'     => $command->content,
 			'email'       => $command->email,

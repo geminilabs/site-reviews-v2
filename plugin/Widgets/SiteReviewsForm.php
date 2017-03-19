@@ -29,6 +29,7 @@ class SiteReviewsForm extends Widget
 	public function form( $instance )
 	{
 		$defaults = [
+			'assign_to'   => '',
 			'category'    => '',
 			'class'       => '',
 			'description' => sprintf( __( 'Your email address will not be published. Required fields are marked %s*%s', 'site-reviews' ), '<span>', '</span>' ),
@@ -63,6 +64,14 @@ class SiteReviewsForm extends Widget
 		]);
 
 		$this->create_field([
+			'type'    => 'number',
+			'name'    => 'assign_to',
+			'label'   => __( 'Assign reviews to a custom page/post ID', 'site-reviews' ),
+			'value'   => $args['assign_to'],
+			'default' => '',
+		]);
+
+		$this->create_field([
 			'type'  => 'text',
 			'name'  => 'class',
 			'label' => __( 'Enter any custom CSS classes here', 'site-reviews' ),
@@ -93,6 +102,7 @@ class SiteReviewsForm extends Widget
 	public function widget( $args, $instance )
 	{
 		$defaults = [
+			'assign_to'   => '',
 			'category'    => '',
 			'class'       => '',
 			'description' => '',

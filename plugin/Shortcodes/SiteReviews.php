@@ -25,15 +25,16 @@ class SiteReviews extends Shortcode
 	public function printShortcode( $atts = [] )
 	{
 		$defaults = [
-			'category'   => '',
-			'class'      => '',
-			'count'      => 10,
-			'display'    => 'all',
-			'hide'       => '',
-			'pagination' => false,
-			'rating'     => 1,
-			'title'      => '',
-			'type'       => '',
+			'assigned_to' => '',
+			'category'    => '',
+			'class'       => '',
+			'count'       => 10,
+			'display'     => 'all',
+			'hide'        => '',
+			'pagination'  => false,
+			'rating'      => 1,
+			'title'       => '',
+			'type'        => '',
 		];
 
 		$args = shortcode_atts( $defaults, $atts );

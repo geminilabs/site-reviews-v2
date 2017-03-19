@@ -158,6 +158,7 @@ class MainController extends BaseController
 	{
 		if( $post_type != $this->app->post_type )return;
 
+		add_meta_box( "{$this->app->id}_assigned_to", __( 'Assigned To', 'site-reviews' ), [ $this, 'renderAssignedToMetabox'], null, 'side' );
 		add_meta_box( "{$this->app->id}_review", __( 'Details', 'site-reviews' ), [ $this, 'renderMetaBox'], null, 'side' );
 	}
 
@@ -202,13 +203,14 @@ class MainController extends BaseController
 			'show_ui'     => true,
 			'labels'      => glsr_resolve( 'Strings' )->post_type_labels(),
 			'columns'     => [
-				'title'    => '', // empty values use the default label
-				'category' => '',
-				'reviewer' => __( 'Author', 'site-reviews' ),
-				'type'     => __( 'Type', 'site-reviews' ),
-				'stars'    => __( 'Rating', 'site-reviews' ),
-				'sticky'   => __( 'Pinned', 'site-reviews' ),
-				'date'     => '',
+				'title'       => '', // empty values use the default label
+				'category'    => '',
+				'assigned_to' => __( 'Assigned To', 'site-reviews' ),
+				'reviewer'    => __( 'Author', 'site-reviews' ),
+				'type'        => __( 'Type', 'site-reviews' ),
+				'stars'       => __( 'Rating', 'site-reviews' ),
+				'sticky'      => __( 'Pinned', 'site-reviews' ),
+				'date'        => '',
 			],
 		]);
 
@@ -404,6 +406,28 @@ class MainController extends BaseController
 	{
 		$this->renderMenu( 'addons', [
 			'addons' => __( 'Add-Ons', 'site-reviews' ),
+		]);
+	}
+
+	/**
+	 * register_taxonomy() 'meta_box_cb' callback
+	 *
+	 * @return void
+	 */
+	public function renderAssignedToMetabox( $post )
+	{
+		if( $post->post_type != $this->app->post_type )return;
+
+		$assignedTo = get_post_meta( $post->ID, 'assigned_to', true );
+		$permalink = $this->html->renderPartial( 'link', [
+			'post_id' => $assignedTo,
+		], 'return' );
+
+		wp_nonce_field( 'assigned_to', '_nonce-assigned-to', false );
+
+		$this->render( 'edit/metabox-assigned-to', [
+			'ID' => $assignedTo,
+			'permalink' => $permalink,
 		]);
 	}
 

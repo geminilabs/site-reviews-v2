@@ -104,6 +104,13 @@
 
 	$html->renderField([
 		'type'   => 'hidden',
+		'name'   => 'assign_to',
+		'prefix' => false,
+		'value'  => $assign_to,
+	]);
+
+	$html->renderField([
+		'type'   => 'hidden',
 		'name'   => 'category',
 		'prefix' => false,
 		'value'  => $category,

@@ -77,7 +77,7 @@ class RegisterPostType
 		add_action( "manage_{$post_type}_posts_custom_column", [ $this, 'printColumnValues'] );
 		add_action( 'pre_get_posts',                           [ $this, 'setColumnQuery'] );
 
-		add_filter( "manage_{$post_type}_posts_columns",         [ $this, 'modifyColumns'] );
+		add_filter( "manage_{$post_type}_posts_columns",         [ $this, 'modifycolumns'] );
 		add_filter( 'default_hidden_columns',                    [ $this, 'modifyColumnsHidden'], 10, 2 );
 		add_filter( "manage_edit-{$post_type}_sortable_columns", [ $this, 'modifyColumnsSortable'] );
 	}
@@ -145,10 +145,11 @@ class RegisterPostType
 	 */
 	public function modifyColumnsSortable( array $columns )
 	{
-		$columns['reviewer'] = 'reviewer';
-		$columns['stars']    = 'rating';
-		$columns['sticky']   = 'pinned';
-		$columns['type']     = 'review_type';
+		$columns['assigned_to'] = 'assigned_to';
+		$columns['reviewer']    = 'reviewer';
+		$columns['stars']       = 'rating';
+		$columns['sticky']      = 'pinned';
+		$columns['type']        = 'review_type';
 
 		return $columns;
 	}
@@ -223,6 +224,18 @@ class RegisterPostType
 	/**
 	 * @return string
 	 */
+	protected function buildColumnAssignedTo()
+	{
+		global $post;
+		$value = $this->app->make( 'Html' )->renderPartial( 'link', [
+			'post_id' => $this->db->getReviewMeta( $post->ID )->assigned_to,
+		], 'return' );
+		return $value ? $value : '&mdash;';
+	}
+
+	/**
+	 * @return string
+	 */
 	protected function buildColumnReviewer()
 	{
 		global $post;
@@ -236,7 +249,6 @@ class RegisterPostType
 	protected function buildColumnStars()
 	{
 		global $post;
-
 		return $this->app->make( 'Html' )->renderPartial( 'rating', [
 			'stars' => $this->db->getReviewMeta( $post->ID )->rating,
 		], 'return' );
@@ -373,8 +385,8 @@ class RegisterPostType
 	protected function setOrderby( WP_Query $query )
 	{
 		$orderby = $query->get( 'orderby' );
-
 		switch( $orderby ) {
+			case 'assigned_to':
 			case 'author':
 			case 'pinned':
 			case 'rating':
@@ -383,7 +395,6 @@ class RegisterPostType
 				$query->set( 'orderby', 'meta_value' );
 				break;
 		}
-
 		return $this;
 	}
 }

@@ -91,6 +91,7 @@ final class App extends Container
 		add_action( 'current_screen',                        [ $review, 'modifyFeatures'] );
 		add_action( 'admin_menu',                            [ $review, 'removeMetaBoxes'] );
 		add_action( 'admin_action_revert',                   [ $review, 'revert'] );
+		add_action( "save_post_{$this->post_type}",          [ $review, 'saveAssignedToMetabox'] );
 		add_action( 'admin_init',                            [ $review, 'setPermissions'], 999 );
 		add_action( 'admin_action_unapprove',                [ $review, 'unapprove'] );
 		add_action( "wp_ajax_{$this->prefix}_action",        [ $router, 'routeAjaxRequests'] );
@@ -217,9 +218,7 @@ final class App extends Container
 		$version = $this->make( 'Database' )->getOption( 'version' );
 
 		if( version_compare( $version, '2.0.0', '<' )) {
-
 			$upgrade = $this->make( 'Upgrade' );
-
 			$upgrade->options_200();
 			$upgrade->reviewSlug_200();
 			$upgrade->reviewType_200();
@@ -227,6 +226,10 @@ final class App extends Container
 			$upgrade->themeMods_200();
 			$upgrade->widgetSiteReviews_200();
 			$upgrade->widgetSiteReviewsForm_200();
+		}
+		if( version_compare( $version, '2.1.0', '<' )) {
+			$upgrade = $this->make( 'Upgrade' );
+			$upgrade->reviewAssignedTo_210();
 		}
 
 		$this->updateVersion( $version );

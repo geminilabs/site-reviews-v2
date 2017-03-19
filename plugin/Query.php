@@ -36,11 +36,13 @@ class Query
 		$metaQuery = [];
 
 		foreach( $meta as $key => $query ) {
+			if( $key == 'assigned_to' && !empty( $query['value'] )) {
+				$metaQuery[] = $query;
+			}
 			if( $key == 'type'
 				&& !in_array( $query['value'], ['','all'] )) {
 				$metaQuery[] = $query;
 			}
-
 			if( $key == 'rating'
 				&& is_numeric( $query['value'] )
 				&& in_array((int) $query['value'], range(2,5))) {

@@ -29,6 +29,16 @@ class AjaxController extends BaseController
 	}
 
 	/**
+	 * Change the assigned Post ID of a review
+	 */
+	public function ajaxChangeAssignedTo( $request )
+	{
+		wp_send_json( $this->html->renderPartial( 'link', [
+			'post_id' => $request['ID'],
+		], 'return' ));
+	}
+
+	/**
 	 * Clears the log
 	 */
 	public function ajaxClearLog()

@@ -13,6 +13,7 @@ namespace GeminiLabs\SiteReviews\Controllers;
 use GeminiLabs\SiteReviews\Commands\SubmitReview;
 use GeminiLabs\SiteReviews\Controllers\BaseController;
 use GeminiLabs\SiteReviews\Strings;
+use WP_Post;
 use WP_Screen;
 
 class ReviewController extends BaseController
@@ -236,14 +237,15 @@ class ReviewController extends BaseController
 		$user = wp_get_current_user();
 
 		$defaults = [
-			'category' => '',
-			'content'  => '',
-			'email'    => ( $user->exists() ? $user->user_email : '' ),
-			'form_id'  => '',
-			'name'     => ( $user->exists() ? $user->display_name : __( 'Anonymous', 'site-reviews' )),
-			'rating'   => '',
-			'terms'    => '',
-			'title'    => __( 'No Title', 'site-reviews' ),
+			'assign_to' => '',
+			'category'  => '',
+			'content'   => '',
+			'email'     => ( $user->exists() ? $user->user_email : '' ),
+			'form_id'   => '',
+			'name'      => ( $user->exists() ? $user->display_name : __( 'Anonymous', 'site-reviews' )),
+			'rating'    => '',
+			'terms'     => '',
+			'title'     => __( 'No Title', 'site-reviews' ),
 		];
 
 		if( !$this->validate( $request, $rules )) {
@@ -276,6 +278,19 @@ class ReviewController extends BaseController
 		$this->db->revertReview( $post_id );
 
 		$this->redirect( $post_id, 52 );
+	}
+
+	/**
+	 * @param int  $post_id
+	 *
+	 * @return mixed
+	 */
+	public function saveAssignedToMetabox( $post_id )
+	{
+		if( !wp_verify_nonce( filter_input( INPUT_POST, '_nonce-assigned-to' ), 'assigned_to' ))return;
+		$assignedTo = filter_input( INPUT_POST, 'assigned_to' );
+		$assignedTo || $assignedTo = '';
+		update_post_meta( $post_id, 'assigned_to', $assignedTo );
 	}
 
 	/**

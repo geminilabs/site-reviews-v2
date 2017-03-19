@@ -53,6 +53,11 @@ class SiteReviewsForm extends Generator
 			],
 			( isset( $category ) ? $category : [] ),
 			[
+				'type'      => 'textbox',
+				'name'      => 'assign_to',
+				'label'     => esc_html__( 'Post ID', 'site-reviews' ),
+				'tooltip'   => esc_attr__( 'Assign submitted reviews to a custom page/post ID.', 'site-reviews' ),
+			],[
 				'type'     => 'textbox',
 				'name'     => 'class',
 				'label'    => esc_html__( 'Classes', 'site-reviews' ),

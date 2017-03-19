@@ -13,3 +13,11 @@
 	<pre><code>add_filter( 'site-reviews/assets/js', '__return_false' );</code></pre>
 	<p>Use this hook if you want to disable the plugin javascript from loading on your website.</p>
 </div>
+
+<div class="glsr-card card">
+	<h3>Do something immediately after a review has been saved.</h3>
+	<pre><code>add_action( 'site-reviews/local/review/create', function( $post_data, $meta ) {
+	// do something here.
+}, 10, 2 );</code></pre>
+	<p>Use this hook if you want to do something immediately after a review has been saved to the database.</p>
+</div>
