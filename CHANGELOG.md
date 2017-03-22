@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.1.1] = 2017-03-21
+
+### Fixed
+- Fixed a bug causing reviews to not load correctly introduced by v2.1.0 (sorry!)
+
 ## [2.1.0] = 2017-03-19
 
 ### Added

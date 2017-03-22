@@ -4,7 +4,7 @@ Donate link: http://geminilabs.io/donate
 Tags: best reviews, business ratings, business reviews, curated reviews, moderated reviews, rating widget, rating, ratings shortcode, review widget, reviews login, reviews shortcode, reviews, simple reviews, site reviews, star rating, star review, submit review, testimonial, user rating, user review, user reviews, wp rating, wp review, wp testimonials
 Requires at least: 4.0.0
 Tested up to: 4.7.3
-Stable tag: 2.1.0
+Stable tag: 2.1.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,18 +26,19 @@ Follow plugin development on github at: https://github.com/geminilabs/site-revie
 
 = Current Features =
 
-* [new] Helper functions to easily access review meta
-* [new] MCE shortcode button dropdown
-* [new] Review avatars (gravatar.com)
-* [new] Review categories
+* [new] Assign reviews toa Post/Page ID
 * Actively developed and supported
 * Clean and easy-to-configure user interface
 * Configurable Widgets
 * Custom notifications (including Slack support)
 * Easy setup and implementation
 * Filter reviews by rating
+* Helper functions to easily access review meta
 * Logging
+* MCE shortcode button dropdown
 * Minimal widget styling (tested with all official WP themes)
+* Review avatars (gravatar.com)
+* Review categories
 * Review pagination
 * Shortcodes: Display reviews in your post content and templates
 * WordPress.org support
@@ -94,7 +95,10 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 
 == Changelog ==
 
-## [2.1.0] = 2017-03-19
+= 2.1.1 (2017-03-21) =
+- Fixed a bug causing reviews to not load correctly introduced by v2.1.0 (sorry!)
+
+= 2.1.0 (2017-03-19) =
 
 - [feature] Assign reviews to a page/post
 - [deprecated] The 'post_id' review key is deprecated in favour of 'ID' in reviews returned from the `glsr_get_review()` and `glsr_get_review()` functions

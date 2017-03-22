@@ -294,7 +294,7 @@ class Database implements OptionsContract
 		$meta_query = $this->app->make( 'Query' )->buildMeta([
 			'assigned_to' => [
 				'key'   => 'assigned_to',
-				'value' => array_map( 'trim', explode( ',', $assigned_to )),
+				'value' => array_filter( array_map( 'trim', explode( ',', $assigned_to ))),
 				'compare' => 'IN',
 			],
 			'type' => [
