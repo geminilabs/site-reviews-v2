@@ -301,7 +301,7 @@ class ReviewController extends BaseController
 	public function setPermissions()
 	{
 		foreach( wp_roles()->roles as $role => $value ) {
-			wp_roles()->remove_cap( $role, 'create_reviews' );
+			wp_roles()->remove_cap( $role, sprintf( 'create_%s', $this->app::POST_TYPE ));
 		}
 	}
 

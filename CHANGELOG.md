@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 - Fix the category feature to work properly when a user was not logged in
+- Corectly remove the "create_site-review" capability
 
 ## [2.1.3] = 2017-04-01
 
