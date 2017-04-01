@@ -172,7 +172,7 @@ final class App extends Container
 	 */
 	public function hasPermission()
 	{
-		return current_user_can( 'edit_others_pages' );
+		return !is_admin() || ( is_admin() && current_user_can( self::CAPABILITY ));
 	}
 
 	/**

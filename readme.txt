@@ -26,7 +26,7 @@ Follow plugin development on github at: https://github.com/geminilabs/site-revie
 
 = Current Features =
 
-* [new] Assign reviews toa Post/Page ID
+* [new] Assign reviews to a Post/Page ID
 * Actively developed and supported
 * Clean and easy-to-configure user interface
 * Configurable Widgets
@@ -95,8 +95,11 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 
 == Changelog ==
 
+= 2.1.4 (2017-04-01) =
+- Fix the category feature to work properly when a user was not logged in
+
 = 2.1.3 (2017-04-01) =
-- changed capability requirement to "edit_others_pages"
+- Changed capability requirement to "edit_others_pages"
 
 = 2.1.1 (2017-03-21) =
 - Fixed a bug causing reviews to not load correctly introduced by v2.1.0 (sorry!)

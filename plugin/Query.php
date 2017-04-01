@@ -86,9 +86,9 @@ class Query
 
 		if( !empty( $terms )) {
 			$query[] = [
-				'taxonomy' => $this->app->taxonomy,
-				'field'    => 'id',
-				'terms'    => implode( ',', $terms ),
+				'taxonomy' => $this->app::TAXONOMY,
+				'field'    => 'term_id',
+				'terms'    => $terms,
 			];
 		}
 

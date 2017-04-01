@@ -18,10 +18,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.1.4] = 2017-04-01
+
+### Fixed
+- Fix the category feature to work properly when a user was not logged in
+
 ## [2.1.3] = 2017-04-01
 
 ### Changed
-- changed capability requirement to "edit_others_pages"
+- Changed capability requirement to "edit_others_pages"
 
 ## [2.1.1] = 2017-03-21
 
