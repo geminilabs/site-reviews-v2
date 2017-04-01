@@ -7,7 +7,7 @@
  * Plugin Name: Site Reviews
  * Plugin URI:  https://wordpress.org/plugins/site-reviews
  * Description: Receive and display site reviews
- * Version:     2.1.3
+ * Version:     2.1.4
  * Author:      Paul Ryley
  * Author URI:  http://geminilabs.io
  * License:     GPL2
