@@ -311,7 +311,7 @@ msgstr ""
 msgid "Filter by type"
 msgstr ""
 
-#: plugin/Handlers/RegisterTaxonomy.php:83
+#: plugin/Handlers/RegisterTaxonomy.php:82
 msgid "Filter by category"
 msgstr ""
 

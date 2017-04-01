@@ -33,7 +33,7 @@ class RegisterPostType
 			'menu_position'   => 25,
 			'public'          => true,
 			'query_var'       => true,
-			'rewrite'         => ['slug' => glsr_app()->post_type, 'with_front' => false ],
+			'rewrite'         => ['slug' => glsr_app()::POST_TYPE, 'with_front' => false ],
 			'show_in_menu'    => true, //'edit.php?post_type=post'
 			'supports'        => ['title', 'editor'],
 			'taxonomies'      => [],
@@ -70,7 +70,7 @@ class RegisterPostType
 
 			$keys = array_keys( $columns );
 
-			$keys[ array_search( 'category', $keys ) ] = sprintf( 'taxonomy-%s', glsr_app()->taxonomy );
+			$keys[ array_search( 'category', $keys ) ] = sprintf( 'taxonomy-%s', glsr_app()::TAXONOMY );
 
 			$columns = array_combine( $keys, $columns );
 		}

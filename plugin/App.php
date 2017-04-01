@@ -17,6 +17,10 @@ use GeminiLabs\SiteReviews\Container;
  */
 final class App extends Container
 {
+	const CAPABILITY = 'edit_others_pages';
+	const POST_TYPE = 'site-review';
+	const TAXONOMY = 'site-review-category';
+
 	public $defaults;
 	public $file;
 	public $id;
@@ -48,9 +52,6 @@ final class App extends Container
 		$this->prefix  = str_replace( '-', '_', $this->id );
 		$this->url     = plugin_dir_url( $file );
 		$this->version = $plugin['version'];
-
-		$this->post_type = 'site-review';
-		$this->taxonomy  = 'site-review-category';
 	}
 
 	/**
@@ -79,7 +80,7 @@ final class App extends Container
 		add_action( 'admin_init',                            [ $main, 'registerShortcodeButtons'] );
 		add_action( 'init',                                  [ $main, 'registerShortcodes'] );
 		add_action( 'admin_menu',                            [ $main, 'registerSubMenus'] );
-		add_action( 'init',                                  [ $main, 'registerTaxonomy'], 9 );
+		add_action( 'init',                                  [ $main, 'registerTaxonomy'] );
 		add_action( 'init',                                  [ $main, 'registerTextdomain'] );
 		add_action( 'widgets_init',                          [ $main, 'registerWidgets'] );
 		add_action( 'post_submitbox_misc_actions',           [ $main, 'renderMetaBoxPinned'] );
@@ -91,7 +92,7 @@ final class App extends Container
 		add_action( 'current_screen',                        [ $review, 'modifyFeatures'] );
 		add_action( 'admin_menu',                            [ $review, 'removeMetaBoxes'] );
 		add_action( 'admin_action_revert',                   [ $review, 'revert'] );
-		add_action( "save_post_{$this->post_type}",          [ $review, 'saveAssignedToMetabox'] );
+		add_action( 'save_post_' . self::POST_TYPE,          [ $review, 'saveAssignedToMetabox'] );
 		add_action( 'admin_init',                            [ $review, 'setPermissions'], 999 );
 		add_action( 'admin_action_unapprove',                [ $review, 'unapprove'] );
 		add_action( "wp_ajax_{$this->prefix}_action",        [ $router, 'routeAjaxRequests'] );

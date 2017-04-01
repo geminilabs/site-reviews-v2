@@ -68,7 +68,7 @@ class EnqueueAssets
 			$command->version
 		);
 
-		if( !$screen || !( $screen->post_type == glsr_app()->post_type
+		if( !$screen || !( $screen->post_type == glsr_app()::POST_TYPE
 			|| $screen->base == 'post'
 			|| $screen->id == 'dashboard'
 			|| $screen->id == 'widgets'

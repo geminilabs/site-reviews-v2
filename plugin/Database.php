@@ -71,7 +71,7 @@ class Database implements OptionsContract
 			'post_name'      => sprintf( '%s-%s', $meta['review_type'], $metaReviewId ),
 			'post_status'    => 'publish',
 			'post_title'     => wp_strip_all_tags( $meta['title'] ),
-			'post_type'      => $this->app->post_type,
+			'post_type'      => $this->app::POST_TYPE,
 		];
 
 		if( $this->getOption( 'settings.general.require.approval' ) == 'yes' && $meta['review_type'] == 'local' ) {
@@ -120,7 +120,7 @@ class Database implements OptionsContract
 	public function getReview( $post )
 	{
 		if( !isset( $post->ID )
-			|| $post->post_type != $this->app->post_type
+			|| $post->post_type != $this->app::POST_TYPE
 		)return;
 
 		$meta = $this->getReviewMeta( $post->ID );
@@ -164,7 +164,7 @@ class Database implements OptionsContract
 		$metaKey = $this->normalizeMetaKey( $metaKey );
 
 		if( !$metaKey ) {
-			return (array) wp_count_posts( $this->app->post_type );
+			return (array) wp_count_posts( $this->app::POST_TYPE );
 		}
 
 		$counts = wp_cache_get( $this->app->id, $metaKey . '_count' );
@@ -179,7 +179,7 @@ class Database implements OptionsContract
 				"WHERE p.post_type = '%s' " .
 					"AND m.meta_key = '%s' " .
 				"GROUP BY name",
-				$this->app->post_type,
+				$this->app::POST_TYPE,
 				$metaKey
 			));
 
@@ -217,7 +217,7 @@ class Database implements OptionsContract
 			"WHERE p.post_type = '%s' " .
 				"AND m1.meta_key = 'review_id' " .
 				"AND m1.meta_value = '%s'",
-			$this->app->post_type,
+			$this->app::POST_TYPE,
 			$metaReviewId
 		);
 
@@ -244,7 +244,7 @@ class Database implements OptionsContract
 				"AND m1.meta_key = 'review_id' " .
 				"AND m2.meta_key = 'review_type' " .
 				"AND m2.meta_value = '%s'",
-			$this->app->post_type,
+			$this->app::POST_TYPE,
 			$reviewType
 		);
 
@@ -260,7 +260,7 @@ class Database implements OptionsContract
 	 */
 	public function getReviewMeta( $postId )
 	{
-		$meta = get_post_type( $postId ) == $this->app->post_type
+		$meta = get_post_type( $postId ) == $this->app::POST_TYPE
 			? array_map( 'array_shift', (array) get_post_meta( $postId ))
 			: [];
 
@@ -317,7 +317,7 @@ class Database implements OptionsContract
 			'post__in'       => $post__in,
 			'post__not_in'   => $post__not_in,
 			'post_status'    => 'publish',
-			'post_type'      => $this->app->post_type,
+			'post_type'      => $this->app::POST_TYPE,
 			'posts_per_page' => $count ? $count : -1,
 			'tax_query'      => $this->app->make( 'Query' )->buildTerms( $this->normalizeTerms( $category )),
 		];
@@ -360,7 +360,7 @@ class Database implements OptionsContract
 				"AND ({$keys}) " .
 				"AND ({$status}) " .
 			"ORDER BY pm.meta_value",
-			$this->app->post_type
+			$this->app::POST_TYPE
 		);
 
 		return $wpdb->get_col( $query );
@@ -406,7 +406,7 @@ class Database implements OptionsContract
 	 */
 	public function getTerms( $taxonomy = '', array $args = [] )
 	{
-		!empty( $taxonomy ) ?: $taxonomy = $this->app->taxonomy;
+		!empty( $taxonomy ) ?: $taxonomy = $this->app::TAXONOMY;
 
 		$terms = get_terms( $taxonomy, wp_parse_args( $args, [
 			'fields'     => 'id=>name',
@@ -473,7 +473,7 @@ class Database implements OptionsContract
 	 */
 	public function normalizeTerms( $terms, $taxonomy = '' )
 	{
-		!empty( $taxonomy ) ?: $taxonomy = $this->app->taxonomy;
+		!empty( $taxonomy ) ?: $taxonomy = $this->app::TAXONOMY;
 
 		$terms = array_map( 'trim', explode( ',', $terms ));
 		$terms = array_map( function( $term ) use( $taxonomy ) {
@@ -502,7 +502,7 @@ class Database implements OptionsContract
 	{
 		$post = get_post( $postId );
 
-		if( !isset( $post->post_type ) || $post->post_type != $this->app->post_type ) {
+		if( !isset( $post->post_type ) || $post->post_type != $this->app::POST_TYPE ) {
 			return 0;
 		}
 
@@ -570,7 +570,7 @@ class Database implements OptionsContract
 	 */
 	public function setTerms( $post_id, $terms, $taxonomy = '' )
 	{
-		!empty( $taxonomy ) ?: $taxonomy = $this->app->taxonomy;
+		!empty( $taxonomy ) ?: $taxonomy = $this->app::TAXONOMY;
 
 		$terms = $this->normalizeTerms( $terms, $taxonomy );
 

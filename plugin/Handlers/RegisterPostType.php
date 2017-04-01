@@ -45,7 +45,7 @@ class RegisterPostType
 	{
 		extract( $command->args );
 
-		$post_type = $this->app->post_type;
+		$post_type = $this->app::POST_TYPE;
 
 		if( in_array( $post_type, get_post_types( ['_builtin' => true ] )))return;
 
@@ -129,7 +129,7 @@ class RegisterPostType
 	 */
 	public function modifyColumnsHidden( array $hidden, WP_Screen $screen )
 	{
-		if( $screen->id == sprintf( 'edit-%s', $this->app->post_type )) {
+		if( $screen->id == sprintf( 'edit-%s', $this->app::POST_TYPE )) {
 			$hidden = ['reviewer'];
 		}
 
@@ -170,7 +170,7 @@ class RegisterPostType
 			$post_type = get_current_screen()->post_type;
 		}
 
-		if( $post_type !== $this->app->post_type )return;
+		if( $post_type !== $this->app::POST_TYPE )return;
 
 		$status = filter_input( INPUT_GET, 'post_status' );
 		$status ?: $status = 'publish';
@@ -301,7 +301,7 @@ class RegisterPostType
 
 		return !( !is_admin()
 			|| !$query->is_main_query()
-			|| $query->query['post_type'] != $this->app->post_type
+			|| $query->query['post_type'] != $this->app::POST_TYPE
 			|| $pagenow != 'edit.php'
 		);
 	}

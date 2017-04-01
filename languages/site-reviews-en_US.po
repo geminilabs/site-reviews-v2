@@ -333,7 +333,7 @@ msgstr "All types"
 msgid "Filter by type"
 msgstr "Filter by type"
 
-#: plugin/Handlers/RegisterTaxonomy.php:83
+#: plugin/Handlers/RegisterTaxonomy.php:82
 msgid "Filter by category"
 msgstr "Filter by category"
 
