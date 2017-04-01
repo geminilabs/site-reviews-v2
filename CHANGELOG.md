@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.1.3] = 2017-04-01
+
+### Changed
+- changed capability requirement to "edit_others_pages"
+
 ## [2.1.1] = 2017-03-21
 
 ### Fixed

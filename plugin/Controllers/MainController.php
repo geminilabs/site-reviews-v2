@@ -340,7 +340,7 @@ class MainController extends BaseController
 
 			if( !is_callable( $callback ))continue;
 
-			add_submenu_page( sprintf( 'edit.php?post_type=%s', $this->app->post_type ), $title, $title, 'customize', $slug, $callback );
+			add_submenu_page( sprintf( 'edit.php?post_type=%s', $this->app->post_type ), $title, $title, 'edit_others_pages', $slug, $callback );
 		}
 	}
 
