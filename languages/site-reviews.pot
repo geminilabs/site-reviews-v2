@@ -41,7 +41,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: plugin/Commands/RegisterPostType.php:21, plugin/Controllers/MainController.php:729, plugin/Shortcodes/Buttons/SiteReviews.php:114
+#: plugin/Commands/RegisterPostType.php:21, plugin/Controllers/MainController.php:727, plugin/Shortcodes/Buttons/SiteReviews.php:114
 msgid "Date"
 msgstr ""
 
@@ -57,7 +57,7 @@ msgstr ""
 msgid "Log was cleared."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:88, plugin/Controllers/MainController.php:328, plugin/Controllers/MainController.php:562
+#: plugin/Controllers/MainController.php:88, plugin/Controllers/MainController.php:328, plugin/Controllers/MainController.php:560
 msgid "Settings"
 msgstr ""
 
@@ -87,7 +87,7 @@ msgstr ""
 msgid "Review"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:198, plugin/Controllers/MainController.php:556, views/menu/status.php:17
+#: plugin/Controllers/MainController.php:198, plugin/Controllers/MainController.php:554, views/menu/status.php:17
 msgid "Reviews"
 msgstr ""
 
@@ -99,11 +99,11 @@ msgstr ""
 msgid "Author"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:210, plugin/Controllers/MainController.php:728
+#: plugin/Controllers/MainController.php:210, plugin/Controllers/MainController.php:726
 msgid "Type"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:211, plugin/Controllers/MainController.php:727, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:124
+#: plugin/Controllers/MainController.php:211, plugin/Controllers/MainController.php:725, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:124
 msgid "Rating"
 msgstr ""
 
@@ -127,11 +127,11 @@ msgstr ""
 msgid "Unapprove"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:288, plugin/Controllers/MainController.php:386
+#: plugin/Controllers/MainController.php:288, plugin/Controllers/MainController.php:384
 msgid "Recent Site Reviews"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:289, plugin/Controllers/MainController.php:391
+#: plugin/Controllers/MainController.php:289, plugin/Controllers/MainController.php:389
 msgid "Submit a Site Review"
 msgstr ""
 
@@ -139,95 +139,95 @@ msgstr ""
 msgid "Get Help"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:330, plugin/Controllers/MainController.php:408
+#: plugin/Controllers/MainController.php:330, plugin/Controllers/MainController.php:406
 msgid "Add-Ons"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:387
+#: plugin/Controllers/MainController.php:385
 msgid "Your site’s most recent Local Reviews."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:392
+#: plugin/Controllers/MainController.php:390
 msgid "A \"submit a review\" form for your site."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:443
+#: plugin/Controllers/MainController.php:441
 msgid "Support"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:444
+#: plugin/Controllers/MainController.php:442
 msgid "Shortcodes"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:445
+#: plugin/Controllers/MainController.php:443
 msgid "Hooks"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:446
+#: plugin/Controllers/MainController.php:444
 msgid "Helper Functions"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:451
+#: plugin/Controllers/MainController.php:449
 msgid "Documentation"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:454
+#: plugin/Controllers/MainController.php:452
 msgid "System Info"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:542
+#: plugin/Controllers/MainController.php:540
 msgid "%s reviews are read-only."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:555
+#: plugin/Controllers/MainController.php:553
 msgid "General"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:557
+#: plugin/Controllers/MainController.php:555
 msgid "Submission Form"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:565
+#: plugin/Controllers/MainController.php:563
 msgid "Licenses"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:626
+#: plugin/Controllers/MainController.php:624
 msgid "Logging enabled."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:627
+#: plugin/Controllers/MainController.php:625
 msgid "Logging disabled."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:630
+#: plugin/Controllers/MainController.php:628
 msgid "Settings updated."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:701
+#: plugin/Controllers/MainController.php:699
 msgid "Nothing to Revert"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:702
+#: plugin/Controllers/MainController.php:700
 msgid "Revert Changes"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:715
+#: plugin/Controllers/MainController.php:713
 msgid "Unknown"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:718
+#: plugin/Controllers/MainController.php:716
 msgid "%s review"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:730
+#: plugin/Controllers/MainController.php:728
 msgid "Reviewer"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:731, plugin/Shortcodes/Buttons/SiteReviewsForm.php:75
+#: plugin/Controllers/MainController.php:729, plugin/Shortcodes/Buttons/SiteReviewsForm.php:75
 msgid "Email"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:732
+#: plugin/Controllers/MainController.php:730
 msgid "Avatar"
 msgstr ""
 

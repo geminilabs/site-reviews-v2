@@ -81,7 +81,7 @@ class Database implements OptionsContract
 		$post_id = wp_insert_post( $post_data, true );
 
 		if( is_wp_error( $post_id )) {
-			glsr_resolve( 'Log/Logger' )->error( sprintf( '%s (%s)', $post_id->get_error_message(), $metaReviewId ));
+			glsr_resolve( 'Log\Logger' )->error( sprintf( '%s (%s)', $post_id->get_error_message(), $metaReviewId ));
 
 			return false;
 		}
@@ -575,7 +575,10 @@ class Database implements OptionsContract
 		$terms = $this->normalizeTerms( $terms, $taxonomy );
 
 		if( !empty( $terms )) {
-			wp_set_object_terms( $post_id, $terms, $taxonomy );
+			$result = wp_set_object_terms( $post_id, $terms, $taxonomy );
+			if( is_wp_error( $result )) {
+				glsr_resolve( 'Log\Logger' )->error( sprintf( '%s (%s)', $result->get_error_message(), $taxonomy ));
+			}
 		}
 	}
 }

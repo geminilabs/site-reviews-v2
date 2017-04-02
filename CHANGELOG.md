@@ -18,7 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
-## [2.1.5] = 2017-04-02
+## [2.1.6] = 2017-04-02
 
 ### Fixed
 - Fix the category feature to work properly when a user was not logged in

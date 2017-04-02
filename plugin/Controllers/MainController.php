@@ -351,8 +351,6 @@ class MainController extends BaseController
 	 */
 	public function registerTaxonomy()
 	{
-		if( !$this->app->hasPermission() )return;
-
 		$command = new RegisterTaxonomy([
 			'hierarchical'      => true,
 			'meta_box_cb'       => 'glsr_categories_meta_box',
