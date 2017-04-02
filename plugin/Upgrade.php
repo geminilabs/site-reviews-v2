@@ -85,7 +85,7 @@ class Upgrade
 
 		$query = "UPDATE {$wpdb->posts} " .
 		"SET post_name = REPLACE(post_name, 'locallocal', 'local') " .
-		"WHERE post_type = '" . $this->app::POST_TYPE . "'";
+		"WHERE post_type = '" . $this->app->POST_TYPE . "'";
 
 		$wpdb->query( $query );
 	}
@@ -102,7 +102,7 @@ class Upgrade
 		"SET pm.meta_key = 'review_type' " .
 		"WHERE pm.meta_key = 'site_name' " .
 		"AND pm.meta_value = 'local' " .
-		"AND p.post_type = '" . $this->app::POST_TYPE . "'";
+		"AND p.post_type = '" . $this->app->POST_TYPE . "'";
 
 		$wpdb->query( $query );
 	}
