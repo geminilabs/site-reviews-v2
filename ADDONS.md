@@ -2,18 +2,11 @@
 
 ## facebook-reviews
 - [ ] one-way sync of all reviews
-- [ ] scheduling
+- [ ] scheduling?
 
 ## google-reviews
 - [ ] one-way sync of all reviews
-- [ ] scheduling
-
-## page-reviews
-- [ ] Support for Post/Page/CPT/Comment ratings/reviews
-- [ ] Microdata/rich snippets for reviews
-- [ ] Assign reviews to multiple pages/posts/CPT
-- [ ] Master/Slave pages/posts/CPT for review submission
-- [ ] Automatic reviews placement
+- [ ] scheduling?
 
 ## social-reviews
 - [ ] Review threads
@@ -21,8 +14,8 @@
 
 ## tripadvisor-reviews
 - [x] one-way sync of all reviews
-- [ ] scheduling
+- [ ] scheduling?
 
 ## yelp-reviews
 - [x] one-way sync of all reviews
-- [ ] scheduling
+- [ ] scheduling?
