@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.1.7] = 2017-04-11
+
+### Fixed
+- Fix possible JS race condition which breaks the star rating functionality
+
 ## [2.1.6] = 2017-04-02
 
 ### Fixed

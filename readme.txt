@@ -4,7 +4,7 @@ Donate link: http://geminilabs.io/donate
 Tags: best reviews, business ratings, business reviews, curated reviews, moderated reviews, rating widget, rating, ratings shortcode, review widget, reviews login, reviews shortcode, reviews, simple reviews, site reviews, star rating, star review, submit review, testimonial, user rating, user review, user reviews, wp rating, wp review, wp testimonials
 Requires at least: 4.0.0
 Tested up to: 4.7.3
-Stable tag: 2.1.6
+Stable tag: 2.1.7
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -94,6 +94,9 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 13. Add-Ons are being built to extend the functionality on the Site Reviews plugin
 
 == Changelog ==
+
+= 2.1.7 (2017-04-11) =
+- Fix possible JS race condition which breaks the star rating functionality
 
 = 2.1.6 (2017-04-02) =
 - Fix the category feature to work properly when a user was not logged in
