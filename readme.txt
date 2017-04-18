@@ -95,7 +95,8 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 
 == Changelog ==
 
-= 2.1.7 (2017-04-11) =
+= 2.1.7 (2017-04-18) =
+- Fix [site_reviews] shortcode pagination option
 - Fix possible JS race condition which breaks the star rating functionality
 
 = 2.1.6 (2017-04-02) =

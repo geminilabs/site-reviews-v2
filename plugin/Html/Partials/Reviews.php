@@ -64,7 +64,7 @@ class Reviews extends Base
 				__( 'No reviews were found.', 'site-reviews' )
 			);
 		}
-		else if( $args['pagination'] ) {
+		else if( wp_validate_boolean( $args['pagination'] )) {
 			$html .= $this->buildPagination( $reviews->max_num_pages );
 		}
 

@@ -18,9 +18,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
-## [2.1.7] = 2017-04-11
+## [2.1.7] = 2017-04-18
 
 ### Fixed
+- Fix [site_reviews] shortcode pagination option
 - Fix possible JS race condition which breaks the star rating functionality
 
 ## [2.1.6] = 2017-04-02
