@@ -4,7 +4,7 @@ Donate link: http://geminilabs.io/donate
 Tags: best reviews, business ratings, business reviews, curated reviews, moderated reviews, rating widget, rating, ratings shortcode, review widget, reviews login, reviews shortcode, reviews, simple reviews, site reviews, star rating, star review, submit review, testimonial, user rating, user review, user reviews, wp rating, wp review, wp testimonials
 Requires at least: 4.0.0
 Tested up to: 4.7.3
-Stable tag: 2.1.7
+Stable tag: 2.1.8
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,8 +26,8 @@ Follow plugin development on github at: https://github.com/geminilabs/site-revie
 
 = Current Features =
 
-* [new] Assign reviews to a Post/Page ID
 * Actively developed and supported
+* Assign reviews to a Post/Page ID
 * Clean and easy-to-configure user interface
 * Configurable Widgets
 * Custom notifications (including Slack support)
@@ -95,7 +95,7 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 
 == Changelog ==
 
-= 2.1.7 (2017-04-18) =
+= 2.1.8 (2017-04-19) =
 - Fix [site_reviews] shortcode pagination option
 - Fix possible JS race condition which breaks the star rating functionality
 

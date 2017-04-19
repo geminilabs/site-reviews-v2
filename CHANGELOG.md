@@ -18,7 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
-## [2.1.7] = 2017-04-18
+## [2.1.8] = 2017-04-19
 
 ### Fixed
 - Fix [site_reviews] shortcode pagination option
