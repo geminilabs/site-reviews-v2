@@ -3,8 +3,8 @@ Contributors: geminilabs, pryley
 Donate link: http://geminilabs.io/donate
 Tags: best reviews, business ratings, business reviews, curated reviews, moderated reviews, rating widget, rating, ratings shortcode, review widget, reviews login, reviews shortcode, reviews, simple reviews, site reviews, star rating, star review, submit review, testimonial, user rating, user review, user reviews, wp rating, wp review, wp testimonials
 Requires at least: 4.0.0
-Tested up to: 4.7.3
-Stable tag: 2.1.8
+Tested up to: 4.7.4
+Stable tag: 2.2.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,6 +26,7 @@ Follow plugin development on github at: https://github.com/geminilabs/site-revie
 
 = Current Features =
 
+* [new] use Google's Invisible reCAPTCHA on submission forms
 * Actively developed and supported
 * Assign reviews to a Post/Page ID
 * Clean and easy-to-configure user interface
@@ -94,6 +95,9 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 13. Add-Ons are being built to extend the functionality on the Site Reviews plugin
 
 == Changelog ==
+
+= 2.2.0 (2017-05-03) =
+- [feature] use Google's Invisible reCAPTCHA on submission forms
 
 = 2.1.8 (2017-04-19) =
 - Fix [site_reviews] shortcode pagination option

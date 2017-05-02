@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.2.0] = 2017-05-03
+
+### Added
+- [feature] use Google's Invisible reCAPTCHA on submission forms
+
 ## [2.1.8] = 2017-04-19
 
 ### Fixed
