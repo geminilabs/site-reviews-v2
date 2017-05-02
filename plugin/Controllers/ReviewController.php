@@ -12,6 +12,7 @@ namespace GeminiLabs\SiteReviews\Controllers;
 
 use GeminiLabs\SiteReviews\Commands\SubmitReview;
 use GeminiLabs\SiteReviews\Controllers\BaseController;
+use GeminiLabs\SiteReviews\Helper;
 use GeminiLabs\SiteReviews\Strings;
 use WP_Post;
 use WP_Screen;
@@ -216,44 +217,24 @@ class ReviewController extends BaseController
 	 */
 	public function postSubmitReview( array $request )
 	{
-		$minContentLength = apply_filters( 'site-reviews/local/review/content/minLength', '0' );
+		$validatedRequest = $this->validateSubmittedReview( $request );
 
-		$rules = [
-			'content' => 'required|min:' . $minContentLength,
-			'email'   => 'required|email|min:5',
-			'name'    => 'required',
-			'rating'  => 'required|numeric|between:1,5',
-			'terms'   => 'accepted',
-			'title'   => 'required',
-		];
-
-		$excluded = isset( $request['excluded'] )
-			? json_decode( $request['excluded'] )
-			: [];
-
-		// only use the rules for non-excluded values
-		$rules = array_diff_key( $rules, array_flip( $excluded ));
-
-		$user = wp_get_current_user();
-
-		$defaults = [
-			'assign_to' => '',
-			'category'  => '',
-			'content'   => '',
-			'email'     => ( $user->exists() ? $user->user_email : '' ),
-			'form_id'   => '',
-			'name'      => ( $user->exists() ? $user->display_name : __( 'Anonymous', 'site-reviews' )),
-			'rating'    => '',
-			'terms'     => '',
-			'title'     => __( 'No Title', 'site-reviews' ),
-		];
-
-		if( !$this->validate( $request, $rules )) {
+		if( !$validatedRequest ) {
 			return __( 'Please fix the submission errors.', 'site-reviews' );
 		}
 
-		// normalize the request array
-		$request = array_merge( $defaults, $request );
+		if( !empty( $validatedRequest['g-recaptcha-response'] )) {
+			$response = json_decode( wp_remote_retrieve_body( wp_remote_get( add_query_arg([
+				'remoteip' => $this->app->make( 'Helper' )->getIpAddress(),
+				'response' => $validatedRequest['g-recaptcha-response'],
+				'secret' => glsr_get_option( 'reviews-form.recaptcha.secret' ),
+			], 'https://www.google.com/recaptcha/api/siteverify' ))));
+
+			if( empty( $response->success )) {
+				$session->set( "{$validatedRequest['form_id']}-errors", [] );
+				return __( 'the reCAPTCHA verification failed.', 'site-reviews' );
+			}
+		}
 
 		return $this->execute( new SubmitReview( $request ));
 	}
@@ -319,6 +300,47 @@ class ReviewController extends BaseController
 
 		wp_safe_redirect( wp_get_referer() );
 		exit;
+	}
+
+	public function validateSubmittedReview( array $request )
+	{
+		$minContentLength = apply_filters( 'site-reviews/local/review/content/minLength', '0' );
+
+		$rules = [
+			'content' => 'required|min:' . $minContentLength,
+			'email'   => 'required|email|min:5',
+			'name'    => 'required',
+			'rating'  => 'required|numeric|between:1,5',
+			'terms'   => 'accepted',
+			'title'   => 'required',
+		];
+
+		$excluded = isset( $request['excluded'] )
+			? json_decode( $request['excluded'] )
+			: [];
+
+		// only use the rules for non-excluded values
+		$rules = array_diff_key( $rules, array_flip( $excluded ));
+
+		$user = wp_get_current_user();
+
+		$defaults = [
+			'assign_to' => '',
+			'category'  => '',
+			'content'   => '',
+			'email'     => ( $user->exists() ? $user->user_email : '' ),
+			'form_id'   => '',
+			'name'      => ( $user->exists() ? $user->display_name : __( 'Anonymous', 'site-reviews' )),
+			'rating'    => '',
+			'terms'     => '',
+			'title'     => __( 'No Title', 'site-reviews' ),
+		];
+
+		if( !$this->validate( $request, $rules )) {
+			return false;
+		}
+
+		return array_merge( $defaults, $request );
 	}
 
 	/**
