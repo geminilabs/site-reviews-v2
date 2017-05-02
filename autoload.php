@@ -19,6 +19,7 @@ spl_autoload_register( function( $class )
 		'GeminiLabs\\SiteReviews\\'        => __DIR__ . '/plugin/',
 		'GeminiLabs\\SiteReviews\\Tests\\' => __DIR__ . '/tests/',
 		'Sinergi\\BrowserDetector\\'       => __DIR__ . '/vendor/sinergi/browser-detector/src/',
+		'Vectorface\\Whip\\'               => __DIR__ . '/vendor/vectorface/whip/src/',
 	];
 
 	foreach( $namespaces as $prefix => $base_dir ) {
