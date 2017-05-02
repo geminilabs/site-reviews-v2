@@ -26,6 +26,7 @@ elixir.config.publicPath = paths.dest;
 elixir(( mix ) => mix
 	.jshint( paths.src + 'js/*.js' )
 	.scripts( 'mce-plugin.js' )
+	.scripts( 'recaptcha.js' )
 	.scripts([
 		'admin/init.js',
 		'admin/functions.js',

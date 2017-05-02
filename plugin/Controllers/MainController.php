@@ -42,6 +42,18 @@ class MainController extends BaseController
 	}
 
 	/**
+	 * @return string
+	 *
+	 * @filter script_loader_tag
+	 */
+	public function filterEnqueuedScripts( $tag, $handle )
+	{
+		return $handle == $this->app->id . '/google-recaptcha'
+			? str_replace( ' src=', ' async defer src=', $tag )
+			: $tag;
+	}
+
+	/**
 	 * Clears the log
 	 *
 	 * @return void

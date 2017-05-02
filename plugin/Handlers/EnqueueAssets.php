@@ -105,6 +105,10 @@ class EnqueueAssets
 			);
 		}
 
+		if( glsr_get_option( 'reviews-form.recaptcha.enabled' ) == 'yes' ) {
+			$this->enqueueRecaptchaScript( $command );
+		}
+
 		if( !apply_filters( 'site-reviews/assets/js', true ))return;
 
 		wp_enqueue_script(
@@ -114,6 +118,24 @@ class EnqueueAssets
 			$command->version,
 			true
 		);
+	}
+
+	/**
+	 * Enqueue reCAPTCHA script
+	 *
+	 * @return void
+	 */
+	public function enqueueRecaptchaScript( Command $command )
+	{
+		wp_enqueue_script( $command->handle . '/google-recaptcha', add_query_arg([
+			'hl' => apply_filters( 'site-reviews/recaptcha/language', get_locale() ),
+			'onload' => 'glsr_render_recaptcha',
+			'render' => 'explicit',
+		], 'https://www.google.com/recaptcha/api.js' ));
+
+		$inlineScript = file_get_contents( sprintf( '%sjs/recaptcha.js', $command->path ));
+
+		wp_add_inline_script( $command->handle . '/google-recaptcha', $inlineScript, 'before' );
 	}
 
 	/**

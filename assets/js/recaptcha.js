@@ -1,0 +1,1 @@
+var glsr_render_recaptcha=function(){var r;[].forEach.call(document.querySelectorAll(".glsr-submit-review-form"),function(e){if(r=e.querySelector(".glsr-recaptcha-holder")){var c=grecaptcha.render(r,{callback:function(r){GLSR.submitForm(r)}},!0);r.setAttribute("data-id",c)}})};

@@ -30,3 +30,14 @@ if( !function_exists( 'get_avatar_url' )) {
 		return $dom->getElementsByTagName( 'img' )->item(0)->getAttribute( 'src' );
 	}
 }
+
+// Wordpress 4.0 support
+add_filter( 'script_loader_src', function( $src, $handle ) {
+	global $wp_version;
+	if( version_compare( $wp_version, '4.1', '<' )
+		&& strpos( $handle, '/google-recaptcha' ) !== false
+		&& strpos( $src, ' async defer ' ) === false ) {
+		return sprintf( "%s' async defer='defer", $src );
+	}
+	return $src;
+}, 10, 2 );
