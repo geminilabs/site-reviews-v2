@@ -23,9 +23,24 @@ class Submit extends Text
 			$this->args['name'] = 'submit';
 		}
 
-		return parent::render([
+		return $this->recaptcha() . parent::render([
 			'class'  => 'button button-primary',
 			'type'   => 'submit',
 		]);
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function recaptcha()
+	{
+		if( glsr_get_option( 'reviews-form.recaptcha.enabled' ) != 'yes' )return;
+		return sprintf(
+			'<div class="%s" data-sitekey="%s" data-badge="%s" data-size="invisible"></div>',
+			'glsr-recaptcha-holder',
+			sanitize_text_field( glsr_get_option( 'reviews-form.recaptcha.key' )),
+			sanitize_text_field( glsr_get_option( 'reviews-form.recaptcha.position' )),
+			'GLSR.executeRecaptcha'
+		);
 	}
 }
