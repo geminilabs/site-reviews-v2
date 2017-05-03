@@ -30,7 +30,7 @@ class Submit extends Text
 	}
 
 	/**
-	 * @return string
+	 * @return null|string
 	 */
 	protected function recaptcha()
 	{

@@ -97,7 +97,6 @@ GLSR.submitForm = function( recaptchaToken )
 
 	if( recaptchaToken ) {
 		GLSR.activeData.request['g-recaptcha-response'] = recaptchaToken;
-		console.log( GLSR.activeData.request );
 	}
 	GLSR.postAjax( site_reviews.ajaxurl, GLSR.activeData, function( response ) {
 		GLSR.activeForm = null;

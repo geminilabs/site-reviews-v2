@@ -226,12 +226,12 @@ class ReviewController extends BaseController
 		if( !empty( $validatedRequest['g-recaptcha-response'] )) {
 			$response = $this->validateRecaptcha( $validatedRequest['g-recaptcha-response'] );
 			if( !$response ) {
-				$session->set( "{$validatedRequest['form_id']}-errors", [] );
+				$this->app->make( 'Session' )->set( "{$validatedRequest['form_id']}-errors", [] );
 				return __( 'the reCAPTCHA verification failed.', 'site-reviews' );
 			}
 		}
 
-		return $this->execute( new SubmitReview( $request ));
+		return $this->execute( new SubmitReview( $validatedRequest ));
 	}
 
 	/**
