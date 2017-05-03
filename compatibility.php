@@ -36,7 +36,8 @@ add_filter( 'script_loader_src', function( $src, $handle ) {
 	global $wp_version;
 	if( version_compare( $wp_version, '4.1', '<' )
 		&& strpos( $handle, '/google-recaptcha' ) !== false
-		&& strpos( $src, ' async defer ' ) === false ) {
+		&& strpos( $src, ' async defer ' ) === false
+		&& glsr_get_option( 'reviews-form.recaptcha.integration' ) == 'custom' ) {
 		return sprintf( "%s' async defer='defer", $src );
 	}
 	return $src;

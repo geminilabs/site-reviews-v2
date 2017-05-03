@@ -70,11 +70,12 @@ class AjaxController extends BaseController
 	public function ajaxPostReview( $request )
 	{
 		$response = $this->app->make( 'Controllers\ReviewController' )->postSubmitReview( $request );
-		$errors   = $this->app->make( 'Session' )->get( "{$request['form_id']}-errors", false, 'clear errors' );
+		$session  = $this->app->make( 'Session' );
 
 		wp_send_json([
-			'errors'  => $errors,
+			'errors' => $session->get( "{$request['form_id']}-errors", false, true ),
 			'message' => $response,
+			'recaptcha' => $session->get( "{$request['form_id']}-recaptcha", false, true ),
 		]);
 	}
 

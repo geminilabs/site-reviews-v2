@@ -71,7 +71,7 @@ final class App extends Container
 		add_action( 'plugins_loaded',                        [ $this, 'registerAddons'] );
 		add_action( 'upgrader_process_complete',             [ $this, 'upgrader'], 10, 2 );
 		add_action( 'admin_enqueue_scripts',                 [ $main, 'enqueueAssets'] );
-		add_action( 'wp_enqueue_scripts',                    [ $main, 'enqueueAssets'] );
+		add_action( 'wp_enqueue_scripts',                    [ $main, 'enqueueAssets'], 999 );
 		add_action( 'admin_menu',                            [ $main, 'registerMenuCount'] );
 		add_action( 'add_meta_boxes',                        [ $main, 'registerMetaBox'] );
 		add_action( 'admin_enqueue_scripts',                 [ $main, 'registerPointers'], 13 );

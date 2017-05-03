@@ -23,21 +23,29 @@ class Submit extends Text
 			$this->args['name'] = 'submit';
 		}
 
-		return $this->recaptcha() . parent::render([
+		return parent::render([
 			'class'  => 'button button-primary',
 			'type'   => 'submit',
-		]);
+		]) . $this->recaptcha();
 	}
 
 	/**
-	 * @return null|string
+	 * @return void|string
 	 */
 	protected function recaptcha()
 	{
-		if( glsr_get_option( 'reviews-form.recaptcha.enabled' ) != 'yes' )return;
-		return sprintf( '<div class="glsr-recaptcha-holder" data-sitekey="%s" data-badge="%s" data-size="invisible"></div>',
-			sanitize_text_field( glsr_get_option( 'reviews-form.recaptcha.key' )),
-			sanitize_text_field( glsr_get_option( 'reviews-form.recaptcha.position' ))
-		);
+		$integration = glsr_get_option( 'reviews-form.recaptcha.integration' );
+		if( $integration == 'custom' ) {
+			return sprintf( '<div class="glsr-recaptcha-holder" data-sitekey="%s" data-badge="%s" data-size="invisible"></div>',
+				sanitize_text_field( glsr_get_option( 'reviews-form.recaptcha.key' )),
+				sanitize_text_field( glsr_get_option( 'reviews-form.recaptcha.position' ))
+			);
+		}
+		if( $integration == 'invisible-recaptcha' ) {
+			ob_start();
+			do_action( 'google_invre_render_widget_action' );
+			$html = ob_get_clean();
+			return sprintf( '<div class="glsr-recaptcha-holder">%s</div>', $html );
+		}
 	}
 }

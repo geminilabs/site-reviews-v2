@@ -105,7 +105,7 @@ class EnqueueAssets
 			);
 		}
 
-		if( glsr_get_option( 'reviews-form.recaptcha.enabled' ) == 'yes' ) {
+		if( glsr_get_option( 'reviews-form.recaptcha.integration' ) == 'custom' ) {
 			$this->enqueueRecaptchaScript( $command );
 		}
 
@@ -121,7 +121,7 @@ class EnqueueAssets
 	}
 
 	/**
-	 * Enqueue reCAPTCHA script
+	 * Enqueue custom integration reCAPTCHA script
 	 *
 	 * @return void
 	 */

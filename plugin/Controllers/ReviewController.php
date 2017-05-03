@@ -212,23 +212,28 @@ class ReviewController extends BaseController
 	/**
 	 * Submit the review form
 	 *
-	 * @return void
+	 * @return string|null
 	 * @throws Exception
 	 */
 	public function postSubmitReview( array $request )
 	{
 		$validatedRequest = $this->validateSubmittedReview( $request );
-
-		if( !$validatedRequest ) {
+		if( !is_array( $validatedRequest )) {
 			return __( 'Please fix the submission errors.', 'site-reviews' );
 		}
 
-		if( !empty( $validatedRequest['g-recaptcha-response'] )) {
-			$response = $this->validateRecaptcha( $validatedRequest['g-recaptcha-response'] );
-			if( !$response ) {
-				$this->app->make( 'Session' )->set( "{$validatedRequest['form_id']}-errors", [] );
-				return __( 'the reCAPTCHA verification failed.', 'site-reviews' );
-			}
+		$session = $this->app->make( 'Session' );
+		$validateRecaptcha = $this->validateRecaptcha();
+
+		// recaptcha response was empty so it hasn't been set yet
+		if( is_null( $validateRecaptcha )) {
+			$session->set( "{$request['form_id']}-recaptcha", true );
+			return;
+		}
+
+		if( !$validateRecaptcha ) {
+			$session->set( "{$request['form_id']}-errors", [] );
+			return __( 'the reCAPTCHA verification failed. Please try again.', 'site-reviews' );
 		}
 
 		return $this->execute( new SubmitReview( $validatedRequest ));
@@ -398,7 +403,7 @@ class ReviewController extends BaseController
 	/**
 	 * @return bool
 	 */
-	protected function validateRecaptcha( $recaptchaResponse )
+	protected function validateCustomRecaptcha( $recaptchaResponse )
 	{
 		$response = json_decode( wp_remote_retrieve_body( wp_remote_get( add_query_arg([
 			'remoteip' => $this->app->make( 'Helper' )->getIpAddress(),
@@ -409,6 +414,30 @@ class ReviewController extends BaseController
 		return !empty( $response->success )
 			? $response->success
 			: false;
+	}
+
+	/**
+	 * @return bool
+	 */
+	protected function validateRecaptcha()
+	{
+		$integration = glsr_get_option( 'reviews-form.recaptcha.integration' );
+		$recaptchaResponse = filter_input( INPUT_POST, 'g-recaptcha-response' );
+
+		if( !$integration ) {
+			return true;
+		}
+		// if response is empty we need to return null
+		if( empty( $recaptchaResponse ))return;
+
+		if( $integration == 'custom' ) {
+			return $this->validateCustomRecaptcha( $recaptchaResponse );
+		}
+		if( $integration == 'invisible-recaptcha' ) {
+			// if plugin is inactive, return true
+			return apply_filters( 'google_invre_is_valid_request_filter', true );
+		}
+		return false;
 	}
 
 	/**

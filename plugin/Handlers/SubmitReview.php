@@ -56,7 +56,6 @@ class SubmitReview
 		];
 
 		$review = apply_filters( 'site-reviews/local/review', $review, $command );
-
 		$post_id = $this->db->createReview( $reviewId, $review );
 
 		$this->db->setTerms( $post_id, $command->category );
@@ -66,18 +65,13 @@ class SubmitReview
 		$message = __( 'Your review has been submitted!', 'site-reviews' );
 
 		if( $command->ajaxRequest ) {
-
 			$this->app->make( 'Session' )->clear();
-
 			return $message;
 		}
 		else {
 			// set message
 			$this->app->make( 'Session' )->set( "{$command->formId}-message", $message );
-
-			$redirectUrl = filter_input( INPUT_SERVER, 'PHP_SELF' );
-
-			wp_safe_redirect( $redirectUrl );
+			wp_safe_redirect( filter_input( INPUT_SERVER, 'PHP_SELF' ));
 			exit;
 		}
 	}

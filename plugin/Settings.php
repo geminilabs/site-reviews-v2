@@ -253,9 +253,15 @@ class Settings
 		]);
 
 		$this->addSetting( $formId, [
-			'type'  => 'yesno_inline',
-			'name'  => 'recaptcha.enabled',
+			'type'  => 'select',
+			'name'  => 'recaptcha.integration',
 			'label' => __( 'Use reCAPTCHA?', 'site-reviews' ),
+			'options' => [
+				'' => __( 'Do not use reCAPTCHA', 'site-reviews' ),
+				'custom' => __( 'Custom Integration', 'site-reviews' ),
+				'invisible-recaptcha' => _x( 'Plugin: Invisible reCaptcha', 'plugin name', 'site-reviews' ),
+			],
+			'desc'  => __( 'If you are already using a reCAPTCHA plugin listed here, please select it. Otherwise choose "Custom Integration".', 'site-reviews' ),
 		]);
 
 		$this->addSetting( $formId, [
@@ -263,7 +269,7 @@ class Settings
 			'name'  => 'recaptcha.key',
 			'label' => __( 'Site Key', 'site-reviews' ),
 			'depends' => [
-				'recaptcha.enabled' => 'yes',
+				'recaptcha.integration' => 'custom',
 			],
 		]);
 
@@ -272,7 +278,7 @@ class Settings
 			'name'  => 'recaptcha.secret',
 			'label' => __( 'Site Secret', 'site-reviews' ),
 			'depends' => [
-				'recaptcha.enabled' => 'yes',
+				'recaptcha.integration' => 'custom',
 			],
 		]);
 
@@ -286,7 +292,7 @@ class Settings
 				'inline' => 'Inline',
 			],
 			'depends' => [
-				'recaptcha.enabled' => 'yes',
+				'recaptcha.integration' => 'custom',
 			],
 		]);
 

@@ -49,6 +49,7 @@ class MainController extends BaseController
 	public function filterEnqueuedScripts( $tag, $handle )
 	{
 		return $handle == $this->app->id . '/google-recaptcha'
+			&& glsr_get_option( 'reviews-form.recaptcha.integration' ) == 'custom'
 			? str_replace( ' src=', ' async defer src=', $tag )
 			: $tag;
 	}
