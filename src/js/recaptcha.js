@@ -4,6 +4,7 @@ var glsr_render_recaptcha = function() {
 	var id;
 	var recaptchaEl;
 	[].forEach.call( document.querySelectorAll( '.glsr-submit-review-form' ), function( formEl ) {
+		formEl.onsubmit = null;
 		recaptchaEl = formEl.querySelector( '.glsr-recaptcha-holder' );
 		if( !recaptchaEl )return;
 		recaptchaEl.innerHTML = '';
