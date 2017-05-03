@@ -224,13 +224,8 @@ class ReviewController extends BaseController
 		}
 
 		if( !empty( $validatedRequest['g-recaptcha-response'] )) {
-			$response = json_decode( wp_remote_retrieve_body( wp_remote_get( add_query_arg([
-				'remoteip' => $this->app->make( 'Helper' )->getIpAddress(),
-				'response' => $validatedRequest['g-recaptcha-response'],
-				'secret' => glsr_get_option( 'reviews-form.recaptcha.secret' ),
-			], 'https://www.google.com/recaptcha/api/siteverify' ))));
-
-			if( empty( $response->success )) {
+			$response = $this->validateRecaptcha( $validatedRequest['g-recaptcha-response'] );
+			if( !$response ) {
 				$session->set( "{$validatedRequest['form_id']}-errors", [] );
 				return __( 'the reCAPTCHA verification failed.', 'site-reviews' );
 			}
@@ -300,47 +295,6 @@ class ReviewController extends BaseController
 
 		wp_safe_redirect( wp_get_referer() );
 		exit;
-	}
-
-	public function validateSubmittedReview( array $request )
-	{
-		$minContentLength = apply_filters( 'site-reviews/local/review/content/minLength', '0' );
-
-		$rules = [
-			'content' => 'required|min:' . $minContentLength,
-			'email'   => 'required|email|min:5',
-			'name'    => 'required',
-			'rating'  => 'required|numeric|between:1,5',
-			'terms'   => 'accepted',
-			'title'   => 'required',
-		];
-
-		$excluded = isset( $request['excluded'] )
-			? json_decode( $request['excluded'] )
-			: [];
-
-		// only use the rules for non-excluded values
-		$rules = array_diff_key( $rules, array_flip( $excluded ));
-
-		$user = wp_get_current_user();
-
-		$defaults = [
-			'assign_to' => '',
-			'category'  => '',
-			'content'   => '',
-			'email'     => ( $user->exists() ? $user->user_email : '' ),
-			'form_id'   => '',
-			'name'      => ( $user->exists() ? $user->display_name : __( 'Anonymous', 'site-reviews' )),
-			'rating'    => '',
-			'terms'     => '',
-			'title'     => __( 'No Title', 'site-reviews' ),
-		];
-
-		if( !$this->validate( $request, $rules )) {
-			return false;
-		}
-
-		return array_merge( $defaults, $request );
 	}
 
 	/**
@@ -439,5 +393,65 @@ class ReviewController extends BaseController
 
 		wp_safe_redirect( $redirect );
 		exit;
+	}
+
+	/**
+	 * @return bool
+	 */
+	protected function validateRecaptcha( $recaptchaResponse )
+	{
+		$response = json_decode( wp_remote_retrieve_body( wp_remote_get( add_query_arg([
+			'remoteip' => $this->app->make( 'Helper' )->getIpAddress(),
+			'response' => $recaptchaResponse,
+			'secret' => glsr_get_option( 'reviews-form.recaptcha.secret' ),
+		], 'https://www.google.com/recaptcha/api/siteverify' ))));
+
+		return !empty( $response->success )
+			? $response->success
+			: false;
+	}
+
+	/**
+	 * @return false|array
+	 */
+	protected function validateSubmittedReview( array $request )
+	{
+		$minContentLength = apply_filters( 'site-reviews/local/review/content/minLength', '0' );
+
+		$rules = [
+			'content' => 'required|min:' . $minContentLength,
+			'email'   => 'required|email|min:5',
+			'name'    => 'required',
+			'rating'  => 'required|numeric|between:1,5',
+			'terms'   => 'accepted',
+			'title'   => 'required',
+		];
+
+		$excluded = isset( $request['excluded'] )
+			? json_decode( $request['excluded'] )
+			: [];
+
+		// only use the rules for non-excluded values
+		$rules = array_diff_key( $rules, array_flip( $excluded ));
+
+		$user = wp_get_current_user();
+
+		$defaults = [
+			'assign_to' => '',
+			'category'  => '',
+			'content'   => '',
+			'email'     => ( $user->exists() ? $user->user_email : '' ),
+			'form_id'   => '',
+			'name'      => ( $user->exists() ? $user->display_name : __( 'Anonymous', 'site-reviews' )),
+			'rating'    => '',
+			'terms'     => '',
+			'title'     => __( 'No Title', 'site-reviews' ),
+		];
+
+		if( !$this->validate( $request, $rules )) {
+			return false;
+		}
+
+		return array_merge( $defaults, $request );
 	}
 }
