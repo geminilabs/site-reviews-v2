@@ -12,6 +12,7 @@ namespace GeminiLabs\SiteReviews;
 
 use GeminiLabs\SiteReviews\App;
 use GeminiLabs\SiteReviews\Database;
+use Vectorface\Whip\Whip;
 
 class Helper
 {
@@ -70,6 +71,24 @@ class Helper
 		if( !method_exists( $this, $method ))return;
 
 		return call_user_func_array([ $this, $method ], array_slice( func_get_args(), 1 ));
+	}
+
+	/**
+	 * @return null|string
+	 */
+	public function getIpAddress()
+	{
+		$cloudflareIPv4 = array_filter( explode( PHP_EOL, wp_remote_retrieve_body( 'https://www.cloudflare.com/ips-v4' )));
+		$cloudflareIPv6 = array_filter( explode( PHP_EOL, wp_remote_retrieve_body( 'https://www.cloudflare.com/ips-v6' )));
+
+		$ipAddress = ( new Whip( Whip::CLOUDFLARE_HEADERS | Whip::REMOTE_ADDR, [
+			Whip::CLOUDFLARE_HEADERS => [
+				Whip::IPV4 => $cloudflareIPv4,
+				Whip::IPV6 => $cloudflareIPv6,
+			],
+		]))->getValidIpAddress();
+
+		return $ipAddress ? $ipAddress : null;
 	}
 
 	/**

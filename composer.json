@@ -32,6 +32,7 @@
   },
   "require-dev": {
     "phpunit/phpunit": "5.5.*",
-    "sinergi/browser-detector": "^6.0"
+    "sinergi/browser-detector": "^6.0",
+    "vectorface/whip": "^0.3.1"
   }
 }

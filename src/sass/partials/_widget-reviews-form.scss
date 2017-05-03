@@ -55,3 +55,7 @@ $glsr-color-error: #D32F2F !default;
 		visibility: hidden;
 	}
 }
+
+.glsr-recaptcha-holder[data-badge="inline"] {
+	margin-bottom: 1em;
+}

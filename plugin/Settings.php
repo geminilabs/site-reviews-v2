@@ -248,6 +248,50 @@ class Settings
 
 		$this->html->addfield( $formId, [
 			'type'  => 'heading',
+			'value' => __( 'Invisible reCAPTCHA', 'site-reviews' ),
+			'desc'  => __( 'Invisible reCAPTCHA is a free anti-spam service from Google. To use it, you will need to <a href="http://www.google.com/recaptcha/admin" target="_blank">sign up for an API key pair</a> for your site.', 'site-reviews' ),
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'yesno_inline',
+			'name'  => 'recaptcha.enabled',
+			'label' => __( 'Use reCAPTCHA?', 'site-reviews' ),
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'text',
+			'name'  => 'recaptcha.key',
+			'label' => __( 'Site Key', 'site-reviews' ),
+			'depends' => [
+				'recaptcha.enabled' => 'yes',
+			],
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'text',
+			'name'  => 'recaptcha.secret',
+			'label' => __( 'Site Secret', 'site-reviews' ),
+			'depends' => [
+				'recaptcha.enabled' => 'yes',
+			],
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'select',
+			'name'  => 'recaptcha.position',
+			'label' => __( 'Badge Position', 'site-reviews' ),
+			'options' => [
+				'bottomleft' => 'Bottom Left',
+				'bottomright' => 'Bottom Right',
+				'inline' => 'Inline',
+			],
+			'depends' => [
+				'recaptcha.enabled' => 'yes',
+			],
+		]);
+
+		$this->html->addfield( $formId, [
+			'type'  => 'heading',
 			'value' => __( 'Form Labels', 'site-reviews' ),
 			'desc'  => __( 'Customize the label text for the review submission form fields.', 'site-reviews' ),
 		]);

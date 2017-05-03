@@ -13,6 +13,7 @@ Minimum plugin requirements:
 
 #### Features
 
+- [new] use Google's Invisible reCAPTCHA on submission forms
 - Actively developed and supported
 - Assign reviews to a Post/Page ID
 - Clean and easy-to-configure user interface

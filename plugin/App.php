@@ -92,7 +92,7 @@ final class App extends Container
 		add_action( 'current_screen',                        [ $review, 'modifyFeatures'] );
 		add_action( 'admin_menu',                            [ $review, 'removeMetaBoxes'] );
 		add_action( 'admin_action_revert',                   [ $review, 'revert'] );
-		add_action( 'save_post_' . $this->POST_TYPE,          [ $review, 'saveAssignedToMetabox'] );
+		add_action( 'save_post_' . $this->POST_TYPE,         [ $review, 'saveAssignedToMetabox'] );
 		add_action( 'admin_init',                            [ $review, 'setPermissions'], 999 );
 		add_action( 'admin_action_unapprove',                [ $review, 'unapprove'] );
 		add_action( "wp_ajax_{$this->prefix}_action",        [ $router, 'routeAjaxRequests'] );
@@ -101,6 +101,7 @@ final class App extends Container
 		add_action( 'admin_init',                            [ $router, 'routeWebhookRequests'] );
 
 		// Filter Hooks
+		add_filter( 'script_loader_tag',               [ $main, 'filterEnqueuedScripts'], 10, 2 );
 		add_filter( "plugin_action_links_{$basename}", [ $main, 'registerActionLinks'] );
 		add_filter( 'dashboard_glance_items',          [ $main, 'registerDashboardGlanceItems'] );
 		add_filter( 'post_row_actions',                [ $main, 'registerRowActions'], 10, 2 );

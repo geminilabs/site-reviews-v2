@@ -1,5 +1,5 @@
 /* jshint browser:true, globalstrict:true, esversion:6 */
-/* global console, site_reviews, StarRating, GLSR, jQuery, Validatinator */
+/* global console, grecaptcha, site_reviews, StarRating, GLSR, jQuery, Validatinator */
 
 "use strict";
 
@@ -20,9 +20,24 @@ GLSR.clearFieldError = function( el )
 
 GLSR.clearFormErrors = function( formEl )
 {
+	GLSR.clearFormMessages( formEl );
 	for( var i = 0; i < formEl.length; i++ ) {
 		GLSR.clearFieldError( formEl[i] );
 	}
+};
+
+GLSR.clearFormMessages = function( formEl )
+{
+	var messageEl = formEl.querySelector( '.glsr-form-messages' );
+	if( messageEl ) {
+		messageEl.innerHTML = '';
+	}
+};
+
+GLSR.getRecaptchaId = function( formEl )
+{
+	var recaptchaEl = formEl.querySelector( '.glsr-recaptcha-holder' );
+	return recaptchaEl ? recaptchaEl.getAttribute( 'data-id' ) : -1;
 };
 
 GLSR.showFormErrors = function( formEl, errors )
@@ -73,29 +88,52 @@ GLSR.showFormMessage = function( formEl, response )
 	messageEl.innerHTML = '<p>' + response.message + '</p>';
 };
 
-GLSR.submitForm = function( formEl )
+GLSR.submitForm = function( recaptchaToken )
 {
-	var button = formEl.querySelector( 'input[type="submit"]' );
-	var data = {
+	var form = GLSR.activeForm;
+	var button = form.querySelector( '[type="submit"]' );
+
+	button.setAttribute( 'disabled', '' );
+
+	if( recaptchaToken ) {
+		GLSR.activeData.request['g-recaptcha-response'] = recaptchaToken;
+		console.log( GLSR.activeData.request );
+	}
+	GLSR.postAjax( site_reviews.ajaxurl, GLSR.activeData, function( response ) {
+		GLSR.activeForm = null;
+		GLSR.activeData = null;
+		GLSR.showFormMessage( form, response );
+		button.removeAttribute( 'disabled' );
+		if( response.errors !== false ) {
+			return GLSR.showFormErrors( form, response.errors );
+		}
+		form.reset();
+	});
+};
+
+GLSR.validateForm = function()
+{
+	var form = GLSR.activeForm;
+	var button = form.querySelector( '[type="submit"]' );
+
+	button.setAttribute( 'disabled', '' );
+
+	GLSR.activeData = {
 		action : site_reviews.action,
-		request: GLSR.parseFormData( formEl ),
+		request: GLSR.parseFormData( form ),
 	};
-
-	GLSR.postAjax( site_reviews.ajaxurl, data, function( response ) {
-
-		GLSR.clearFormErrors( formEl );
-		GLSR.showFormMessage( formEl, response );
-
-		if( button.disabled ) {
-			button.removeAttribute( 'disabled' );
+	GLSR.postAjax( site_reviews.ajaxurl, GLSR.activeData, function( response ) {
+		if( response.errors === false ) {
+			var recaptchaId = GLSR.getRecaptchaId( form );
+			if( recaptchaId !== -1 ) {
+				button.removeAttribute( 'disabled' );
+				return grecaptcha.execute( recaptchaId );
+			}
+			return GLSR.submitForm();
 		}
-
-		if( !!response.errors ) {
-			GLSR.showFormErrors( formEl, response.errors );
-		}
-		else {
-			formEl.reset();
-		}
+		GLSR.showFormErrors( form, response.errors );
+		GLSR.showFormMessage( form, response );
+		button.removeAttribute( 'disabled' );
 	});
 };
 
@@ -108,13 +146,9 @@ GLSR.on( 'submit', 'form.glsr-submit-review-form', function( ev )
 {
 	ev.preventDefault();
 
-	var button = this.querySelector( 'input[type="submit"]' );
-
-	if( !button.disabled ) {
-		button.setAttribute( 'disabled', '' );
-	}
-
-	GLSR.submitForm( this );
+	GLSR.activeForm = this;
+	GLSR.clearFormErrors( this );
+	GLSR.validateForm();
 });
 
 GLSR.ready( function()

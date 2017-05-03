@@ -21,3 +21,11 @@
 }, 10, 2 );</code></pre>
 	<p>Use this hook if you want to do something immediately after a review has been saved to the database.</p>
 </div>
+
+<div class="glsr-card card">
+	<h3>Change the default <a href="https://developers.google.com/recaptcha/docs/language" target="_blank">reCAPTCHA language</a>.</h3>
+	<pre><code>add_filter( 'site-reviews/recaptcha/language', function( $locale ) {
+	// return a language code here (e.g. "en")
+	return $locale;
+});</code></pre>
+</div>

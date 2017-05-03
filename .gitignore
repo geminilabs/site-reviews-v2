@@ -12,6 +12,7 @@ scrap.md
 /vendor/*/*
 
 !/vendor/sinergi/browser-detector
+!/vendor/vectorface/whip
 
 /_
 /vendor/*.php
