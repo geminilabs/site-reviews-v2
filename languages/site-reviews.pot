@@ -41,7 +41,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: plugin/Commands/RegisterPostType.php:21, plugin/Controllers/MainController.php:727, plugin/Shortcodes/Buttons/SiteReviews.php:114
+#: plugin/Commands/RegisterPostType.php:21, plugin/Controllers/MainController.php:739, plugin/Shortcodes/Buttons/SiteReviews.php:114
 msgid "Date"
 msgstr ""
 
@@ -53,232 +53,236 @@ msgstr ""
 msgid "Okay"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:52
+#: plugin/Controllers/MainController.php:64
 msgid "Log was cleared."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:88, plugin/Controllers/MainController.php:328, plugin/Controllers/MainController.php:560
+#: plugin/Controllers/MainController.php:100, plugin/Controllers/MainController.php:340, plugin/Controllers/MainController.php:572
 msgid "Settings"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:109
+#: plugin/Controllers/MainController.php:121
 msgid "%s Review"
 msgid_plural "%s Reviews"
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Controllers/MainController.php:161, plugin/Controllers/MainController.php:208
+#: plugin/Controllers/MainController.php:173, plugin/Controllers/MainController.php:220
 msgid "Assigned To"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:162
+#: plugin/Controllers/MainController.php:174
 msgid "Details"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:176
+#: plugin/Controllers/MainController.php:188
 msgid "Pin Your Reviews"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:177
+#: plugin/Controllers/MainController.php:189
 msgid "You can pin exceptional reviews so that they are always shown first in your widgets and shortcodes."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:197
+#: plugin/Controllers/MainController.php:209
 msgid "Review"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:198, plugin/Controllers/MainController.php:554, views/menu/status.php:17
+#: plugin/Controllers/MainController.php:210, plugin/Controllers/MainController.php:566, views/menu/status.php:17
 msgid "Reviews"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:199
+#: plugin/Controllers/MainController.php:211
 msgid "Site Reviews"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:209, plugin/Shortcodes/Buttons/SiteReviews.php:109
+#: plugin/Controllers/MainController.php:221, plugin/Shortcodes/Buttons/SiteReviews.php:109
 msgid "Author"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:210, plugin/Controllers/MainController.php:726
+#: plugin/Controllers/MainController.php:222, plugin/Controllers/MainController.php:738
 msgid "Type"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:211, plugin/Controllers/MainController.php:725, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:124
+#: plugin/Controllers/MainController.php:223, plugin/Controllers/MainController.php:737, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:124
 msgid "Rating"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:212, views/edit/pinned.php:17
+#: plugin/Controllers/MainController.php:224, views/edit/pinned.php:17
 msgid "Pinned"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:235
+#: plugin/Controllers/MainController.php:247
 msgid "Approve this review"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:237, plugin/Handlers/SubmitReview.php:100
+#: plugin/Controllers/MainController.php:249, plugin/Handlers/SubmitReview.php:100
 msgid "Approve"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:240
+#: plugin/Controllers/MainController.php:252
 msgid "Unapprove this review"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:242
+#: plugin/Controllers/MainController.php:254
 msgid "Unapprove"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:288, plugin/Controllers/MainController.php:384
+#: plugin/Controllers/MainController.php:300, plugin/Controllers/MainController.php:396
 msgid "Recent Site Reviews"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:289, plugin/Controllers/MainController.php:389
+#: plugin/Controllers/MainController.php:301, plugin/Controllers/MainController.php:401
 msgid "Submit a Site Review"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:329
+#: plugin/Controllers/MainController.php:341
 msgid "Get Help"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:330, plugin/Controllers/MainController.php:406
+#: plugin/Controllers/MainController.php:342, plugin/Controllers/MainController.php:418
 msgid "Add-Ons"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:385
+#: plugin/Controllers/MainController.php:397
 msgid "Your site’s most recent Local Reviews."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:390
+#: plugin/Controllers/MainController.php:402
 msgid "A \"submit a review\" form for your site."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:441
+#: plugin/Controllers/MainController.php:453
 msgid "Support"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:442
+#: plugin/Controllers/MainController.php:454
 msgid "Shortcodes"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:443
+#: plugin/Controllers/MainController.php:455
 msgid "Hooks"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:444
+#: plugin/Controllers/MainController.php:456
 msgid "Helper Functions"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:449
+#: plugin/Controllers/MainController.php:461
 msgid "Documentation"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:452
+#: plugin/Controllers/MainController.php:464
 msgid "System Info"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:540
+#: plugin/Controllers/MainController.php:552
 msgid "%s reviews are read-only."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:553
+#: plugin/Controllers/MainController.php:565
 msgid "General"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:555
+#: plugin/Controllers/MainController.php:567
 msgid "Submission Form"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:563
+#: plugin/Controllers/MainController.php:575
 msgid "Licenses"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:624
+#: plugin/Controllers/MainController.php:636
 msgid "Logging enabled."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:625
+#: plugin/Controllers/MainController.php:637
 msgid "Logging disabled."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:628
+#: plugin/Controllers/MainController.php:640
 msgid "Settings updated."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:699
+#: plugin/Controllers/MainController.php:711
 msgid "Nothing to Revert"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:700
+#: plugin/Controllers/MainController.php:712
 msgid "Revert Changes"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:713
+#: plugin/Controllers/MainController.php:725
 msgid "Unknown"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:716
+#: plugin/Controllers/MainController.php:728
 msgid "%s review"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:728
+#: plugin/Controllers/MainController.php:740
 msgid "Reviewer"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:729, plugin/Shortcodes/Buttons/SiteReviewsForm.php:75
+#: plugin/Controllers/MainController.php:741, plugin/Shortcodes/Buttons/SiteReviewsForm.php:75
 msgid "Email"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:730
+#: plugin/Controllers/MainController.php:742
 msgid "Avatar"
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:132
+#: plugin/Controllers/ReviewController.php:133
 msgid "Approved"
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:133
+#: plugin/Controllers/ReviewController.php:134
 msgid "Unapproved"
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:201
+#: plugin/Controllers/ReviewController.php:202
 msgid "%s review updated."
 msgid_plural "%s reviews updated."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Controllers/ReviewController.php:202
+#: plugin/Controllers/ReviewController.php:203
 msgid "%s review not updated, somebody is editing it."
 msgid_plural "%s reviews not updated, somebody is editing them."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Controllers/ReviewController.php:203
+#: plugin/Controllers/ReviewController.php:204
 msgid "%s review permanently deleted."
 msgid_plural "%s reviews permanently deleted."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Controllers/ReviewController.php:204
+#: plugin/Controllers/ReviewController.php:205
 msgid "%s review moved to the Trash."
 msgid_plural "%s reviews moved to the Trash."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Controllers/ReviewController.php:205
+#: plugin/Controllers/ReviewController.php:206
 msgid "%s review restored from the Trash."
 msgid_plural "%s reviews restored from the Trash."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Controllers/ReviewController.php:245
+#: plugin/Controllers/ReviewController.php:223
+msgid "Please fix the submission errors."
+msgstr ""
+
+#: plugin/Controllers/ReviewController.php:230
+msgid "the reCAPTCHA verification failed."
+msgstr ""
+
+#: plugin/Controllers/ReviewController.php:445
 msgid "Anonymous"
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:248
+#: plugin/Controllers/ReviewController.php:448
 msgid "No Title"
-msgstr ""
-
-#: plugin/Controllers/ReviewController.php:252
-msgid "Please fix the submission errors."
 msgstr ""
 
 #: plugin/Database.php:394
@@ -403,7 +407,7 @@ msgstr ""
 msgid "read more"
 msgstr ""
 
-#: plugin/Settings.php:160, plugin/Settings.php:246, plugin/Settings.php:356
+#: plugin/Settings.php:160, plugin/Settings.php:246, plugin/Settings.php:400
 msgid "Save Settings"
 msgstr ""
 
@@ -464,138 +468,162 @@ msgid "Notification template"
 msgstr ""
 
 #: plugin/Settings.php:251
-msgid "Form Labels"
+msgid "Invisible reCAPTCHA"
 msgstr ""
 
 #: plugin/Settings.php:252
-msgid "Customize the label text for the review submission form fields."
+msgid "Invisible reCAPTCHA is a free anti-spam service from Google. To use it, you will need to <a href=\"http://www.google.com/recaptcha/admin\" target=\"_blank\">sign up for an API key pair</a> for your site."
 msgstr ""
 
 #: plugin/Settings.php:258
-msgid "Rating label"
+msgid "Use reCAPTCHA?"
 msgstr ""
 
-#: plugin/Settings.php:259
-msgid "Your overall rating"
+#: plugin/Settings.php:264
+msgid "Site Key"
 msgstr ""
 
-#: plugin/Settings.php:266
-msgid "Title label"
-msgstr ""
-
-#: plugin/Settings.php:267
-msgid "Title of your review"
-msgstr ""
-
-#: plugin/Settings.php:274
-msgid "Content label"
-msgstr ""
-
-#: plugin/Settings.php:275
-msgid "Your review"
+#: plugin/Settings.php:273
+msgid "Site Secret"
 msgstr ""
 
 #: plugin/Settings.php:282
+msgid "Badge Position"
+msgstr ""
+
+#: plugin/Settings.php:295
+msgid "Form Labels"
+msgstr ""
+
+#: plugin/Settings.php:296
+msgid "Customize the label text for the review submission form fields."
+msgstr ""
+
+#: plugin/Settings.php:302
+msgid "Rating label"
+msgstr ""
+
+#: plugin/Settings.php:303
+msgid "Your overall rating"
+msgstr ""
+
+#: plugin/Settings.php:310
+msgid "Title label"
+msgstr ""
+
+#: plugin/Settings.php:311
+msgid "Title of your review"
+msgstr ""
+
+#: plugin/Settings.php:318
+msgid "Content label"
+msgstr ""
+
+#: plugin/Settings.php:319
+msgid "Your review"
+msgstr ""
+
+#: plugin/Settings.php:326
 msgid "Name label"
 msgstr ""
 
-#: plugin/Settings.php:283
+#: plugin/Settings.php:327
 msgid "Your name"
 msgstr ""
 
-#: plugin/Settings.php:290
+#: plugin/Settings.php:334
 msgid "Email label"
 msgstr ""
 
-#: plugin/Settings.php:291
+#: plugin/Settings.php:335
 msgid "Your email"
 msgstr ""
 
-#: plugin/Settings.php:298
+#: plugin/Settings.php:342
 msgid "Terms label"
 msgstr ""
 
-#: plugin/Settings.php:299
+#: plugin/Settings.php:343
 msgid "This review is based on my own experience and is my genuine opinion."
 msgstr ""
 
-#: plugin/Settings.php:305
+#: plugin/Settings.php:349
 msgid "Form Placeholders"
 msgstr ""
 
-#: plugin/Settings.php:306
+#: plugin/Settings.php:350
 msgid "Customize the placeholder text for the review submission form fields. Use a single space character to disable the placeholder text."
 msgstr ""
 
-#: plugin/Settings.php:313
+#: plugin/Settings.php:357
 msgid "Title placeholder"
 msgstr ""
 
-#: plugin/Settings.php:314
+#: plugin/Settings.php:358
 msgid "Summarize your review or highlight an interesting detail"
 msgstr ""
 
-#: plugin/Settings.php:322
+#: plugin/Settings.php:366
 msgid "Content placeholder"
 msgstr ""
 
-#: plugin/Settings.php:323
+#: plugin/Settings.php:367
 msgid "Tell people your review"
 msgstr ""
 
-#: plugin/Settings.php:331
+#: plugin/Settings.php:375
 msgid "Name placeholder"
 msgstr ""
 
-#: plugin/Settings.php:332
+#: plugin/Settings.php:376
 msgid "Tell us your name"
 msgstr ""
 
-#: plugin/Settings.php:340
+#: plugin/Settings.php:384
 msgid "Email placeholder"
 msgstr ""
 
-#: plugin/Settings.php:341
+#: plugin/Settings.php:385
 msgid "Tell us your email"
 msgstr ""
 
-#: plugin/Settings.php:362
+#: plugin/Settings.php:406
 msgid "Enable Avatars"
 msgstr ""
 
-#: plugin/Settings.php:363
+#: plugin/Settings.php:407
 msgid "Display reviewer avatars. These are generated from the email address of the reviewer using <a href=\"https://gravatar.com\">Gravatar</a>."
 msgstr ""
 
-#: plugin/Settings.php:369
+#: plugin/Settings.php:413
 msgid "Enable Custom Dates"
 msgstr ""
 
-#: plugin/Settings.php:370
+#: plugin/Settings.php:414
 msgid "The default date format is the one set in your <a href=\"%s\">WordPress settings<a>."
 msgstr ""
 
-#: plugin/Settings.php:376
+#: plugin/Settings.php:420
 msgid "Date Format"
 msgstr ""
 
-#: plugin/Settings.php:378
+#: plugin/Settings.php:422
 msgid "Enter a custom date format (<a href=\"%s\">documentation on date and time formatting</a>)."
 msgstr ""
 
-#: plugin/Settings.php:387
+#: plugin/Settings.php:431
 msgid "Enable Excerpts"
 msgstr ""
 
-#: plugin/Settings.php:388
+#: plugin/Settings.php:432
 msgid "Display an excerpt instead of the full review."
 msgstr ""
 
-#: plugin/Settings.php:394
+#: plugin/Settings.php:438
 msgid "Excerpt Length"
 msgstr ""
 
-#: plugin/Settings.php:396
+#: plugin/Settings.php:440
 msgid "Set the excerpt word length."
 msgstr ""
 
