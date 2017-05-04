@@ -183,13 +183,13 @@ GLSR.submitForm = function( recaptchaToken )
 	GLSR.activeForm.querySelector( '[type="submit"]' ).setAttribute( 'disabled', '' );
 
 	GLSR.postAjax( site_reviews.ajaxurl, GLSR.buildFormData( recaptchaToken ), function( response ) {
-		console.log( response );
+		// console.log( response );
 		if( response.recaptcha ) {
-			console.log( 'executing recaptcha' );
+			// console.log( 'executing recaptcha' );
 			return GLSR.recaptcha.execute();
 		}
 		if( response.errors === false ) {
-			console.log( 'reseting recaptcha' );
+			// console.log( 'reseting recaptcha' );
 			GLSR.recaptcha.reset();
 			GLSR.activeForm.reset();
 		}
