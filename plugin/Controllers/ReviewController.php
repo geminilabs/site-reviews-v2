@@ -12,7 +12,6 @@ namespace GeminiLabs\SiteReviews\Controllers;
 
 use GeminiLabs\SiteReviews\Commands\SubmitReview;
 use GeminiLabs\SiteReviews\Controllers\BaseController;
-use GeminiLabs\SiteReviews\Helper;
 use GeminiLabs\SiteReviews\Strings;
 use WP_Post;
 use WP_Screen;
@@ -233,7 +232,8 @@ class ReviewController extends BaseController
 
 		if( !$validateRecaptcha ) {
 			$session->set( "{$request['form_id']}-errors", [] );
-			return __( 'the reCAPTCHA verification failed. Please try again.', 'site-reviews' );
+			$session->set( "{$request['form_id']}-recaptcha", 'reset' );
+			return __( 'The reCAPTCHA verification failed. Please notify the site administrator.', 'site-reviews' );
 		}
 
 		return $this->execute( new SubmitReview( $validatedRequest ));
@@ -411,9 +411,20 @@ class ReviewController extends BaseController
 			'secret' => glsr_get_option( 'reviews-form.recaptcha.secret' ),
 		], 'https://www.google.com/recaptcha/api/siteverify' ))));
 
-		return !empty( $response->success )
-			? $response->success
-			: false;
+		if( !empty( $response->success )) {
+			return $response->success;
+		}
+		$errorCodes = [
+			'missing-input-secret'   => 'The secret parameter is missing.',
+			'invalid-input-secret'   => 'The secret parameter is invalid or malformed.',
+			'missing-input-response' => 'The response parameter is missing.',
+			'invalid-input-response' => 'The response parameter is invalid or malformed.',
+			'bad-request'            => 'The request is invalid or malformed.',
+		];
+		foreach( $response->{'error-codes'} as $error ) {
+			glsr_resolve( 'Log\Logger' )->error( sprintf( 'reCAPTCHA: %s', $errorCodes[$error] ));
+		}
+		return false;
 	}
 
 	/**

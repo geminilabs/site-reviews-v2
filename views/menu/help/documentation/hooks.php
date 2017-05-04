@@ -28,4 +28,5 @@
 	// return a language code here (e.g. "en")
 	return $locale;
 });</code></pre>
+	<p>This hook will only work when using "Custom Integration" reCAPTCHA setting.
 </div>

@@ -16,6 +16,6 @@ var glsr_render_recaptcha = function() {
 				grecaptcha.reset( id );
 			},
 		}, true );
-		recaptchaEl.setAttribute( 'data-id', id );
+		// recaptchaEl.setAttribute( 'data-id', id );
 	});
 };

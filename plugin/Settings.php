@@ -236,6 +236,63 @@ class Settings
 	/**
 	 * @return void
 	 */
+	protected function setReviews()
+	{
+		$formId = 'settings/reviews';
+
+		$this->html->createForm( $formId, [
+			'action' => admin_url( 'options.php' ),
+			'nonce'  => $this->app->id . '-settings',
+			'submit' => __( 'Save Settings', 'site-reviews' ),
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'yesno_inline',
+			'name'  => 'avatars.enabled',
+			'label' => __( 'Enable Avatars', 'site-reviews' ),
+			'desc'  => __( 'Display reviewer avatars. These are generated from the email address of the reviewer using <a href="https://gravatar.com">Gravatar</a>.', 'site-reviews' ),
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'yesno_inline',
+			'name'  => 'date.enabled',
+			'label' => __( 'Enable Custom Dates', 'site-reviews' ),
+			'desc'  => sprintf( __( 'The default date format is the one set in your <a href="%s">WordPress settings<a>.', 'site-reviews' ), get_admin_url( null, 'options-general.php' )),
+		]);
+
+		$this->addSetting( $formId, [
+			'type'    => 'text',
+			'name'    => 'date.format',
+			'label'   => __( 'Date Format', 'site-reviews' ),
+			'default' => get_option( 'date_format' ),
+			'desc'    => sprintf( __( 'Enter a custom date format (<a href="%s">documentation on date and time formatting</a>).', 'site-reviews' ), 'https://codex.wordpress.org/Formatting_Date_and_Time' ),
+			'depends' => [
+				'date.enabled' => 'yes',
+			],
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'yesno_inline',
+			'name'  => 'excerpt.enabled',
+			'label' => __( 'Enable Excerpts', 'site-reviews' ),
+			'desc'  => __( 'Display an excerpt instead of the full review.', 'site-reviews' ),
+		]);
+
+		$this->addSetting( $formId, [
+			'type'    => 'number',
+			'name'    => 'excerpt.length',
+			'label'   => __( 'Excerpt Length', 'site-reviews' ),
+			'default' => '55',
+			'desc'    => __( 'Set the excerpt word length.', 'site-reviews' ),
+			'depends' => [
+				'excerpt.enabled' => 'yes',
+			],
+		]);
+	}
+
+	/**
+	 * @return void
+	 */
 	protected function setReviewsForm()
 	{
 		$formId = 'settings/reviews-form';
@@ -390,63 +447,6 @@ class Settings
 			'label' => __( 'Email placeholder', 'site-reviews' ),
 			'placeholder' => __( 'Tell us your email', 'site-reviews' ),
 			'default' => ':placeholder',
-		]);
-	}
-
-	/**
-	 * @return void
-	 */
-	protected function setReviews()
-	{
-		$formId = 'settings/reviews';
-
-		$this->html->createForm( $formId, [
-			'action' => admin_url( 'options.php' ),
-			'nonce'  => $this->app->id . '-settings',
-			'submit' => __( 'Save Settings', 'site-reviews' ),
-		]);
-
-		$this->addSetting( $formId, [
-			'type'  => 'yesno_inline',
-			'name'  => 'avatars.enabled',
-			'label' => __( 'Enable Avatars', 'site-reviews' ),
-			'desc'  => __( 'Display reviewer avatars. These are generated from the email address of the reviewer using <a href="https://gravatar.com">Gravatar</a>.', 'site-reviews' ),
-		]);
-
-		$this->addSetting( $formId, [
-			'type'  => 'yesno_inline',
-			'name'  => 'date.enabled',
-			'label' => __( 'Enable Custom Dates', 'site-reviews' ),
-			'desc'  => sprintf( __( 'The default date format is the one set in your <a href="%s">WordPress settings<a>.', 'site-reviews' ), get_admin_url( null, 'options-general.php' )),
-		]);
-
-		$this->addSetting( $formId, [
-			'type'    => 'text',
-			'name'    => 'date.format',
-			'label'   => __( 'Date Format', 'site-reviews' ),
-			'default' => get_option( 'date_format' ),
-			'desc'    => sprintf( __( 'Enter a custom date format (<a href="%s">documentation on date and time formatting</a>).', 'site-reviews' ), 'https://codex.wordpress.org/Formatting_Date_and_Time' ),
-			'depends' => [
-				'date.enabled' => 'yes',
-			],
-		]);
-
-		$this->addSetting( $formId, [
-			'type'  => 'yesno_inline',
-			'name'  => 'excerpt.enabled',
-			'label' => __( 'Enable Excerpts', 'site-reviews' ),
-			'desc'  => __( 'Display an excerpt instead of the full review.', 'site-reviews' ),
-		]);
-
-		$this->addSetting( $formId, [
-			'type'    => 'number',
-			'name'    => 'excerpt.length',
-			'label'   => __( 'Excerpt Length', 'site-reviews' ),
-			'default' => '55',
-			'desc'    => __( 'Set the excerpt word length.', 'site-reviews' ),
-			'depends' => [
-				'excerpt.enabled' => 'yes',
-			],
 		]);
 	}
 }

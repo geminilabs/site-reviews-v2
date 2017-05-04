@@ -57,7 +57,7 @@ GLSR.enableSubmitButton = function()
 GLSR.recaptcha.addListeners = function()
 {
 	var overlayEl = GLSR.recaptcha.overlay();
-	if( overlayEl ) {
+	if( Object.prototype.toString.call( overlayEl ) === '[object HTMLDivElement]' ) {
 		overlayEl.addEventListener( 'click', GLSR.enableSubmitButton, false );
 		window.addEventListener( 'keyup', GLSR.recaptcha.onKeyup.bind( overlayEl ), false );
 	}
@@ -184,9 +184,13 @@ GLSR.submitForm = function( recaptchaToken )
 
 	GLSR.postAjax( site_reviews.ajaxurl, GLSR.buildFormData( recaptchaToken ), function( response ) {
 		// console.log( response );
-		if( response.recaptcha ) {
+		if( response.recaptcha === true ) {
 			// console.log( 'executing recaptcha' );
 			return GLSR.recaptcha.execute();
+		}
+		if( response.recaptcha === 'reset' ) {
+			// console.log( 'reseting failed recaptcha' );
+			GLSR.recaptcha.reset();
 		}
 		if( response.errors === false ) {
 			// console.log( 'reseting recaptcha' );
