@@ -4,6 +4,20 @@
 "use strict";
 
 GLSR.activeForm = null;
+GLSR.recaptcha = {};
+
+GLSR.buildFormData = function( recaptchaToken )
+{
+	if( recaptchaToken === undefined ) {
+		recaptchaToken = '';
+	}
+	// console.log( 'recaptchaToken: ' + recaptchaToken );
+	return {
+		action: site_reviews.action,
+		request: GLSR.parseFormData( GLSR.activeForm ),
+		'g-recaptcha-response': recaptchaToken,
+	};
+};
 
 GLSR.clearFieldError = function( el )
 {
@@ -18,23 +32,93 @@ GLSR.clearFieldError = function( el )
 	}
 };
 
-GLSR.clearFormErrors = function( formEl )
+GLSR.clearFormErrors = function()
 {
-	GLSR.clearFormMessages( formEl );
+	var formEl = GLSR.activeForm;
+	GLSR.clearFormMessages();
 	for( var i = 0; i < formEl.length; i++ ) {
 		GLSR.clearFieldError( formEl[i] );
 	}
 };
 
-GLSR.clearFormMessages = function( formEl )
+GLSR.clearFormMessages = function()
 {
-	var messageEl = formEl.querySelector( '.glsr-form-messages' );
+	var messageEl = GLSR.activeForm.querySelector( '.glsr-form-messages' );
 	if( messageEl ) {
 		messageEl.innerHTML = '';
 	}
 };
 
-GLSR.searchRecaptchaObject = function( callback )
+GLSR.enableSubmitButton = function()
+{
+	GLSR.activeForm.querySelector( '[type="submit"]' ).removeAttribute( 'disabled' );
+};
+
+GLSR.recaptcha.addListeners = function()
+{
+	var overlayEl = GLSR.recaptcha.overlay();
+	if( overlayEl ) {
+		overlayEl.addEventListener( 'click', GLSR.enableSubmitButton, false );
+		window.addEventListener( 'keyup', GLSR.recaptcha.onKeyup.bind( overlayEl ), false );
+	}
+};
+
+GLSR.recaptcha.execute = function()
+{
+	var recaptchaId = GLSR.recaptcha.id();
+	if( recaptchaId !== -1 ) {
+		return grecaptcha.execute( recaptchaId );
+	}
+	// recaptcha ID not found so pass through an error
+	return GLSR.submitForm( false );
+};
+
+GLSR.recaptcha.id = function()
+{
+	return GLSR.recaptcha.search( function( value, id ) {
+		if( Object.prototype.toString.call( value ) !== '[object HTMLDivElement]' )return;
+		if( value.closest( 'form' ) === GLSR.activeForm ) {
+			return id;
+		}
+	});
+};
+
+GLSR.recaptcha.onKeyup = function( ev )
+{
+	if( ev.keyCode !== 27 )return;
+	GLSR.enableSubmitButton();
+	GLSR.recaptcha.removeListeners( this );
+};
+
+GLSR.recaptcha.overlay = function()
+{
+	return GLSR.recaptcha.search( function( value ) {
+		if( Object.prototype.toString.call( value ) !== '[object Object]' )return;
+		for( var obj in value) {
+			if( Object.prototype.toString.call( value[obj] ) !== '[object HTMLDivElement]' )continue;
+			if( value[obj].className === '' ) {
+				return value[obj].firstChild;
+			}
+		}
+		return false;
+	});
+};
+
+GLSR.recaptcha.removeListeners = function( overlayEl )
+{
+	overlayEl.removeEventListener( 'click', GLSR.enableSubmitButton, false );
+	window.removeEventListener( 'keyup', GLSR.recaptcha.onKeyup, false );
+};
+
+GLSR.recaptcha.reset = function()
+{
+	var recaptchaId = GLSR.recaptcha.id();
+	if( recaptchaId !== -1 ) {
+		grecaptcha.reset( recaptchaId );
+	}
+};
+
+GLSR.recaptcha.search = function( callback )
 {
 	var result = -1;
 	if( window.hasOwnProperty( '___grecaptcha_cfg' )) {
@@ -50,48 +134,7 @@ GLSR.searchRecaptchaObject = function( callback )
 	return result;
 };
 
-GLSR.getRecaptchaOverlay = function()
-{
-	return GLSR.searchRecaptchaObject( function( value ) {
-		if( Object.prototype.toString.call( value ) !== '[object Object]' )return;
-		for( var obj in value) {
-			if( Object.prototype.toString.call( value[obj] ) !== '[object HTMLDivElement]' )continue;
-			if( value[obj].className === '' ) {
-				return value[obj].firstChild;
-			}
-		}
-	});
-};
-
-GLSR.getRecaptchaId = function( formEl )
-{
-	return GLSR.searchRecaptchaObject( function( value, id ) {
-		if( Object.prototype.toString.call( value ) !== '[object HTMLDivElement]' )return;
-		if( value.closest( 'form' ) === formEl ) {
-			return id;
-		}
-	});
-};
-
-GLSR.executeRecaptcha = function( formEl )
-{
-	var recaptchaId = GLSR.getRecaptchaId( formEl );
-	if( recaptchaId !== -1 ) {
-		return grecaptcha.execute( recaptchaId );
-	}
-	// recaptcha ID not found so pass through an error
-	return GLSR.submitForm( false );
-};
-
-GLSR.resetRecaptcha = function( formEl )
-{
-	var recaptchaId = GLSR.getRecaptchaId( formEl );
-	if( recaptchaId !== -1 ) {
-		grecaptcha.reset( recaptchaId );
-	}
-};
-
-GLSR.showFormErrors = function( formEl, errors )
+GLSR.showFormErrors = function( errors )
 {
 	if( !errors )return;
 
@@ -100,7 +143,7 @@ GLSR.showFormErrors = function( formEl, errors )
 	for( var error in errors ) {
 		if( !errors.hasOwnProperty( error ))continue;
 
-		fieldEl = formEl.querySelector( '[name="' + error + '"]' ).closest( '.glsr-field' );
+		fieldEl = GLSR.activeForm.querySelector( '[name="' + error + '"]' ).closest( '.glsr-field' );
 		GLSR.addClass( fieldEl, 'glsr-has-error' );
 
 		errorsEl = fieldEl.querySelector( '.glsr-field-errors' );
@@ -116,10 +159,10 @@ GLSR.showFormErrors = function( formEl, errors )
 	}
 };
 
-GLSR.showFormMessage = function( formEl, response )
+GLSR.showFormMessage = function( response )
 {
-	var formIdEl  = formEl.querySelector( 'input[name="form_id"]' );
-	var messageEl = formEl.querySelector( '.glsr-form-messages' );
+	var formIdEl  = GLSR.activeForm.querySelector( 'input[name="form_id"]' );
+	var messageEl = GLSR.activeForm.querySelector( '.glsr-form-messages' );
 
 	if( messageEl === null ) {
 		messageEl = GLSR.insertAfter( formIdEl, 'div', {
@@ -135,43 +178,26 @@ GLSR.showFormMessage = function( formEl, response )
 	messageEl.innerHTML = '<p>' + response.message + '</p>';
 };
 
-GLSR.buildFormData = function( recaptchaToken )
-{
-	if( recaptchaToken === undefined ) {
-		recaptchaToken = '';
-	}
-	// console.log( 'recaptchaToken: ' + recaptchaToken );
-	return {
-		action: site_reviews.action,
-		request: GLSR.parseFormData( GLSR.activeForm ),
-		'g-recaptcha-response': recaptchaToken,
-	};
-};
-
 GLSR.submitForm = function( recaptchaToken )
 {
-	var form = GLSR.activeForm;
-	var button = form.querySelector( '[type="submit"]' );
-
-	button.setAttribute( 'disabled', '' );
+	GLSR.activeForm.querySelector( '[type="submit"]' ).setAttribute( 'disabled', '' );
 
 	GLSR.postAjax( site_reviews.ajaxurl, GLSR.buildFormData( recaptchaToken ), function( response ) {
-		// console.log( response );
+		console.log( response );
 		if( response.recaptcha ) {
-			// console.log( 'executing recaptcha' );
-			return GLSR.executeRecaptcha( form );
+			console.log( 'executing recaptcha' );
+			return GLSR.recaptcha.execute();
 		}
 		if( response.errors === false ) {
-			// console.log( 'reseting recaptcha' );
-			GLSR.resetRecaptcha( form );
-			form.reset();
+			console.log( 'reseting recaptcha' );
+			GLSR.recaptcha.reset();
+			GLSR.activeForm.reset();
 		}
 		// console.log( 'submission finished' );
-		GLSR.showFormErrors( form, response.errors );
-		GLSR.showFormMessage( form, response );
+		GLSR.showFormErrors( response.errors );
+		GLSR.showFormMessage( response );
+		GLSR.enableSubmitButton();
 		GLSR.activeForm = null;
-
-		button.removeAttribute( 'disabled' );
 	});
 };
 
@@ -183,10 +209,10 @@ GLSR.on( 'change', 'form.glsr-submit-review-form', function( ev )
 GLSR.on( 'submit', 'form.glsr-submit-review-form', function( ev )
 {
 	ev.preventDefault();
-	// console.log( 'submitting review' );
 
 	GLSR.activeForm = this;
-	GLSR.clearFormErrors( this );
+	GLSR.recaptcha.addListeners();
+	GLSR.clearFormErrors();
 	GLSR.submitForm();
 });
 
