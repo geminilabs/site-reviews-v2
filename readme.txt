@@ -96,7 +96,7 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 
 == Changelog ==
 
-## [2.2.2] = 2017-05-06
+= 2.2.2 (2017-05-06) =
 - Added JS event that is triggered on form submission response (site-reviews/after/submission)
 - Fix form submission without ajax
 
