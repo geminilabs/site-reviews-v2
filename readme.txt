@@ -98,6 +98,7 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 
 = 2.2.1 (2017-05-06) =
 - Added hook that runs immediately after a review has successfully been submitted (site-reviews/local/review/submitted)
+- use new IP detection when submitting a review
 
 = 2.2.0 (2017-05-03) =
 - [feature] use Google's Invisible reCAPTCHA on submission forms

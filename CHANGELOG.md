@@ -23,6 +23,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Added
 - Added hook that runs immediately after a review has successfully been submitted (site-reviews/local/review/submitted)
 
+### Changed
+- use new IP detection when submitting a review
+
 ## [2.2.0] = 2017-05-03
 
 ### Added

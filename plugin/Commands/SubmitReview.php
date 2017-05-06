@@ -33,25 +33,9 @@ class SubmitReview
 		$this->content     = $input['content'];
 		$this->email       = $input['email'];
 		$this->formId      = $input['form_id'];
-		$this->ipAddress   = $this->getIpAddress();
+		$this->ipAddress   = glsr_resolve( 'Helper' )->getIpAddress();
 		$this->rating      = $input['rating'];
 		$this->terms       = isset( $input['terms'] ) ? true : false;
 		$this->title       = $input['title'];
-	}
-
-	/**
-	 * Get the IP address and domain of the review author
-	 *
-	 * @return string|null
-	 */
-	protected function getIpAddress()
-	{
-		$ipAddress = filter_input( INPUT_SERVER, 'REMOTE_ADDR' );
-
-		if( $ipAddress ) {
-			$ipAddress .= ', ' . @gethostbyaddr( $ipAddress );
-		}
-
-		return $ipAddress;
 	}
 }
