@@ -231,14 +231,11 @@ GLSR.on( 'click', '.glsr-field [type="submit"]', function()
 	this.closest( 'form' ).onsubmit = null;
 	HTMLFormElement.prototype._submit = HTMLFormElement.prototype.submit;
 	HTMLFormElement.prototype.submit = function() {
-		if( null === this.querySelector( '.glsr-field' )) {
+		var token = this.querySelector( '#g-recaptcha-response' );
+		if( null === token || null === this.querySelector( '.glsr-field' )) {
 			this._submit();
 		}
-		var token = this.querySelector( '#g-recaptcha-response' );
-		if( token ) {
-			token = token.value;
-		}
-		GLSR.submitForm( token );
+		GLSR.submitForm( token.value );
 	};
 });
 
