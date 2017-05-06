@@ -214,6 +214,8 @@ GLSR.on( 'change', 'form.glsr-submit-review-form', function( ev )
 
 GLSR.on( 'submit', 'form.glsr-submit-review-form', function( ev )
 {
+	if( GLSR.hasClass( this, 'no-ajax' ))return;
+
 	ev.preventDefault();
 
 	GLSR.activeForm = this;

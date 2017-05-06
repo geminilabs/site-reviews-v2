@@ -16,10 +16,13 @@
 
 <div class="glsr-card card">
 	<h3>Do something immediately after a review has been submitted.</h3>
-	<pre><code>add_action( 'site-reviews/local/review/submitted', function( $message, $review ) {
+	<pre><code>add_action( 'site-reviews/local/review/submitted', function( $message, $request ) {
 	// do something here.
 }, 10, 2 );</code></pre>
 	<p>Use this hook if you want to do something immediately after a review has been successfully submitted.</p>
+	<p>The <code>$message</code> is the "successfully submitted" message returned to the user.</p>
+	<p>The <code>$request</code> is the PHP object used to create the review. With this you can also determine the current referrer URI (<code>$request->referrer</code>) or whether the request is an AJAX request or not (<code>$request->ajaxRequest</code>).</p>
+
 </div>
 
 <div class="glsr-card card">

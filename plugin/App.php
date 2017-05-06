@@ -98,6 +98,7 @@ final class App extends Container
 		add_action( "wp_ajax_{$this->prefix}_action",        [ $router, 'routeAjaxRequests'] );
 		add_action( "wp_ajax_nopriv_{$this->prefix}_action", [ $router, 'routeAjaxRequests'] );
 		add_action( 'admin_init',                            [ $router, 'routePostRequests'] );
+		add_action( 'init',                                  [ $router, 'routePublicPostRequests'] );
 		add_action( 'admin_init',                            [ $router, 'routeWebhookRequests'] );
 
 		// Filter Hooks

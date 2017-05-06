@@ -19,10 +19,7 @@ class Submit extends Text
 	 */
 	public function render()
 	{
-		if( isset( $this->args['name'] )) {
-			$this->args['name'] = 'submit';
-		}
-
+		unset( $this->args['name'] );
 		return parent::render([
 			'class'  => 'button button-primary',
 			'type'   => 'submit',

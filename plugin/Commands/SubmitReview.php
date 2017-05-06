@@ -21,6 +21,7 @@ class SubmitReview
 	public $formId;
 	public $ipAddress;
 	public $rating;
+	public $referrer;
 	public $terms;
 	public $title;
 
@@ -35,6 +36,7 @@ class SubmitReview
 		$this->formId      = $input['form_id'];
 		$this->ipAddress   = glsr_resolve( 'Helper' )->getIpAddress();
 		$this->rating      = $input['rating'];
+		$this->referrer    = $input['_wp_http_referer'];
 		$this->terms       = isset( $input['terms'] ) ? true : false;
 		$this->title       = $input['title'];
 	}

@@ -126,7 +126,7 @@
 	wp_nonce_field( 'post-review' );
 
 	if( $message ) {
-		printf( '<div class="glsr-form-messages%s">%s</div>', ( $errors ? ' gslr-has-errors' : '' ), $message );
+		printf( '<div class="glsr-form-messages%s">%s</div>', ( $errors ? ' gslr-has-errors' : '' ), wpautop( $message ));
 	}
 
 	$html->renderField([

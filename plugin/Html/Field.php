@@ -200,7 +200,7 @@ class Field
 		$field_errors = $args['errors'][ $atts['name'] ];
 
 		$errors = array_reduce( $field_errors['errors'], function( $carry, $error ) {
-			return $carry . sprintf( '<span>%s</span> ', $error );
+			return $carry . sprintf( '<span class="glsr-field-error">%s</span> ', $error );
 		});
 
 		$this->args['errors'] = sprintf( '<span class="glsr-field-errors">%s</span>', $errors );

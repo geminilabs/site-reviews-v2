@@ -66,7 +66,7 @@ class SubmitReview
 
 		$message = __( 'Your review has been submitted!', 'site-reviews' );
 
-		do_action( 'site-reviews/local/review/submitted', $message, glsr_get_review( $post_id ));
+		do_action( 'site-reviews/local/review/submitted', $message, $command );
 
 		if( $command->ajaxRequest ) {
 			$this->app->make( 'Session' )->clear();
@@ -75,7 +75,7 @@ class SubmitReview
 		else {
 			// set message
 			$this->app->make( 'Session' )->set( "{$command->formId}-message", $message );
-			wp_safe_redirect( filter_input( INPUT_SERVER, 'PHP_SELF' ));
+			wp_safe_redirect( $command->referrer );
 			exit;
 		}
 	}

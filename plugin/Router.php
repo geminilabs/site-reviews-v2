@@ -94,6 +94,15 @@ class Router
 		}
 	}
 
+	public function routePublicPostRequests()
+	{
+		switch( filter_input( INPUT_POST, 'action' )) {
+			case 'post-review':
+				$this->app->make( 'Controllers\ReviewController' )->postSubmitReview( $this->normalize( $_POST ));
+				break;
+		}
+	}
+
 	public function routeWebhookRequests()
 	{
 		$request = filter_input( INPUT_GET, sprintf( '%s-hook', $this->app->id ));
