@@ -17,7 +17,10 @@ var paths  = {
 	src : 'src/',
 	dest: 'assets/',
 	npm : '../../node_modules/',
-	bump: 'site-reviews.php',
+	bump: {
+		stable: 'readme.txt',
+		version: 'site-reviews.php',
+	},
 };
 
 elixir.config.assetsPath = paths.src;
@@ -110,20 +113,21 @@ gulp.task( 'languages', () => runSequence( 'checktextdomain', 'pot', 'pseudo', '
 /* Version Bump Tasks
  -------------------------------------------------- */
 
-gulp.task( 'bump:patch', () => gulp
-	.src( paths.bump, { base: './' })
-	.pipe( bump())
-	.pipe( gulp.dest( './' ))
-);
+var bumpVersions = function( file, options ) {
+	gulp.src( file ).pipe( bump( options )).pipe( gulp.dest('.'));
+}
 
-gulp.task( 'bump:minor', () => gulp
-	.src( paths.bump, { base: './' })
-	.pipe( bump({ type: 'minor' }))
-	.pipe( gulp.dest( './' ))
-);
+gulp.task( 'bump:patch', function() {
+	bumpVersions( paths.bump.stable, { type: 'patch', key: 'stable tag' });
+	bumpVersions( paths.bump.version, { type: 'patch' });
+});
 
-gulp.task( 'bump:major', () => gulp
-	.src( paths.bump, { base: './' })
-	.pipe( bump({ type: 'major' }))
-	.pipe( gulp.dest( './' ))
-);
+gulp.task( 'bump:minor', function() {
+	bumpVersions( paths.bump.stable, { type: 'minor', key: 'stable tag' });
+	bumpVersions( paths.bump.version, { type: 'minor' });
+});
+
+gulp.task( 'bump:major', function() {
+	bumpVersions( paths.bump.stable, { type: 'major', key: 'stable tag' });
+	bumpVersions( paths.bump.version, { type: 'major' });
+});
