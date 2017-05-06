@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.2.2] = 2017-05-06
+
+### Added
+- Added JS event that is triggered on form submission response (site-reviews/after/submission)
+
 ## [2.2.1] = 2017-05-06
 
 ### Added

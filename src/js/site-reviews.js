@@ -201,6 +201,8 @@ GLSR.submitForm = function( recaptchaToken )
 		GLSR.showFormErrors( response.errors );
 		GLSR.showFormMessage( response );
 		GLSR.enableSubmitButton();
+		response.form = GLSR.activeForm;
+		document.dispatchEvent( new CustomEvent( 'site-reviews/after/submission', { detail: response }));
 		GLSR.activeForm = null;
 	});
 };
