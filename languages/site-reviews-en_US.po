@@ -137,7 +137,7 @@ msgstr "Pinned"
 msgid "Approve this review"
 msgstr "Approve this review"
 
-#: plugin/Controllers/MainController.php:250, plugin/Handlers/SubmitReview.php:94
+#: plugin/Controllers/MainController.php:250, plugin/Handlers/SubmitReview.php:98
 msgid "Approve"
 msgstr "Approve"
 
@@ -341,19 +341,19 @@ msgstr "Filter by type"
 msgid "Filter by category"
 msgstr "Filter by category"
 
-#: plugin/Handlers/SubmitReview.php:65
+#: plugin/Handlers/SubmitReview.php:67
 msgid "Your review has been submitted!"
 msgstr "Your review has been submitted!"
 
-#: plugin/Handlers/SubmitReview.php:95
+#: plugin/Handlers/SubmitReview.php:99
 msgid "Discard"
 msgstr "Discard"
 
-#: plugin/Handlers/SubmitReview.php:143
+#: plugin/Handlers/SubmitReview.php:147
 msgid "New %s-Star Review"
 msgstr "New %s-Star Review"
 
-#: plugin/Handlers/SubmitReview.php:196, plugin/Strings.php:34
+#: plugin/Handlers/SubmitReview.php:200, plugin/Strings.php:34
 msgid "View Review"
 msgstr "View Review"
 

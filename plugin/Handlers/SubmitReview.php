@@ -55,14 +55,18 @@ class SubmitReview
 			'title'       => $command->title,
 		];
 
-		$review = apply_filters( 'site-reviews/local/review', $review, $command );
-		$post_id = $this->db->createReview( $reviewId, $review );
+		$post_id = $this->db->createReview(
+			$reviewId,
+			apply_filters( 'site-reviews/local/review', $review, $command )
+		);
 
 		$this->db->setTerms( $post_id, $command->category );
 
 		$this->sendNotification( $post_id, $command );
 
 		$message = __( 'Your review has been submitted!', 'site-reviews' );
+
+		do_action( 'site-reviews/local/review/submitted', $message, glsr_get_review( $post_id ));
 
 		if( $command->ajaxRequest ) {
 			$this->app->make( 'Session' )->clear();

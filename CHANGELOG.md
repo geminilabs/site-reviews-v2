@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.2.1] = 2017-05-06
+
+### Added
+- Added hook that runs immediately after a review has successfully been submitted (site-reviews/local/review/submitted)
+
 ## [2.2.0] = 2017-05-03
 
 ### Added

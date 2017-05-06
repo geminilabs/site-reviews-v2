@@ -15,11 +15,11 @@
 </div>
 
 <div class="glsr-card card">
-	<h3>Do something immediately after a review has been saved.</h3>
-	<pre><code>add_action( 'site-reviews/local/review/create', function( $post_data, $meta ) {
+	<h3>Do something immediately after a review has been submitted.</h3>
+	<pre><code>add_action( 'site-reviews/local/review/submitted', function( $message, $review ) {
 	// do something here.
 }, 10, 2 );</code></pre>
-	<p>Use this hook if you want to do something immediately after a review has been saved to the database.</p>
+	<p>Use this hook if you want to do something immediately after a review has been successfully submitted.</p>
 </div>
 
 <div class="glsr-card card">
