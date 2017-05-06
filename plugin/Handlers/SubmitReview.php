@@ -36,7 +36,7 @@ class SubmitReview
 	/**
 	 * @todo log any negative result of the sent notification
 	 *
-	 * @return void
+	 * @return string|void
 	 */
 	public function handle( Command $command )
 	{

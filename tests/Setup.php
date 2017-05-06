@@ -35,6 +35,7 @@ trait Setup
 			'rating'   => '5',
 			'terms'    => '1',
 			'title'    => 'Test Review',
+			'_wp_http_referer' => $PHP_SELF,
 		];
 
 		// save initial plugin settings here if needed

@@ -1,5 +1,5 @@
 /* jshint browser:true, globalstrict:true, esversion:6 */
-/* global console, GLSR, grecaptcha, HTMLFormElement, site_reviews, StarRating */
+/* global console, CustomEvent, GLSR, grecaptcha, HTMLFormElement, site_reviews, StarRating */
 
 "use strict";
 
