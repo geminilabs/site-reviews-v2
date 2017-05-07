@@ -407,6 +407,14 @@ class Settings
 			'default' => ':placeholder',
 		]);
 
+		$this->addSetting( $formId, [
+			'type'  => 'text',
+			'name'  => 'submit.label',
+			'label' => __( 'Submit Button label', 'site-reviews' ),
+			'placeholder' => __( 'Submit your review', 'site-reviews' ),
+			'default' => ':placeholder',
+		]);
+
 		$this->html->addfield( $formId, [
 			'type'  => 'heading',
 			'value' => __( 'Form Placeholders', 'site-reviews' ),

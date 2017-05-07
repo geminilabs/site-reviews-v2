@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.2.3] = 2017-05-07
+
+### Added
+- Added option to change submit button text
+
 ## [2.2.2] = 2017-05-06
 
 ### Added

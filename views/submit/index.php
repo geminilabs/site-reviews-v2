@@ -132,7 +132,7 @@
 	$html->renderField([
 		'type'   => 'submit',
 		'prefix' => false,
-		'value'  => __( 'Submit your review', 'site-reviews' ),
+		'value'  => $db->getOption( 'settings.reviews-form.submit.label' ),
 	]);
 
 ?>

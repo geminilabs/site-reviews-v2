@@ -647,11 +647,19 @@ msgstr "Terms label"
 msgid "This review is based on my own experience and is my genuine opinion."
 msgstr "This review is based on my own experience and is my genuine opinion."
 
-#: plugin/Settings.php:412
+#: plugin/Settings.php:413
+msgid "Submit Button label"
+msgstr "Submit Button label"
+
+#: plugin/Settings.php:414
+msgid "Submit your review"
+msgstr "Submit your review"
+
+#: plugin/Settings.php:420
 msgid "Form Placeholders"
 msgstr "Form Placeholders"
 
-#: plugin/Settings.php:413
+#: plugin/Settings.php:421
 msgid ""
 "Customize the placeholder text for the review submission form fields. Use a "
 "single space character to disable the placeholder text."
@@ -659,35 +667,35 @@ msgstr ""
 "Customize the placeholder text for the review submission form fields. Use a "
 "single space character to disable the placeholder text."
 
-#: plugin/Settings.php:420
+#: plugin/Settings.php:428
 msgid "Title placeholder"
 msgstr "Title placeholder"
 
-#: plugin/Settings.php:421
+#: plugin/Settings.php:429
 msgid "Summarize your review or highlight an interesting detail"
 msgstr "Summarize your review or highlight an interesting detail"
 
-#: plugin/Settings.php:429
+#: plugin/Settings.php:437
 msgid "Content placeholder"
 msgstr "Content placeholder"
 
-#: plugin/Settings.php:430
+#: plugin/Settings.php:438
 msgid "Tell people your review"
 msgstr "Tell people your review"
 
-#: plugin/Settings.php:438
+#: plugin/Settings.php:446
 msgid "Name placeholder"
 msgstr "Name placeholder"
 
-#: plugin/Settings.php:439
+#: plugin/Settings.php:447
 msgid "Tell us your name"
 msgstr "Tell us your name"
 
-#: plugin/Settings.php:447
+#: plugin/Settings.php:455
 msgid "Email placeholder"
 msgstr "Email placeholder"
 
-#: plugin/Settings.php:448
+#: plugin/Settings.php:456
 msgid "Tell us your email"
 msgstr "Tell us your email"
 
@@ -1186,10 +1194,6 @@ msgstr "Poor"
 #: views/submit/index.php:22
 msgid "Terrible"
 msgstr "Terrible"
-
-#: views/submit/index.php:135
-msgid "Submit your review"
-msgstr "Submit your review"
 
 #: plugin/Settings.php:319
 msgctxt "plugin name"

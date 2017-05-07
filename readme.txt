@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/pryley
 Tags: best reviews, business ratings, business reviews, curated reviews, moderated reviews, rating widget, rating, ratings shortcode, review widget, reviews login, reviews shortcode, reviews, simple reviews, site reviews, star rating, star review, submit review, testimonial, user rating, user review, user reviews, wp rating, wp review, wp testimonials
 Requires at least: 4.0.0
 Tested up to: 4.7.4
-Stable tag: 2.2.2
+Stable tag: 2.2.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -95,6 +95,9 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 13. Add-Ons are being built to extend the functionality on the Site Reviews plugin
 
 == Changelog ==
+
+= 2.2.3 (2017-05-07) =
+- Added option to change submit button text
 
 = 2.2.2 (2017-05-06) =
 - Added JS event that is triggered on form submission response (site-reviews/after/submission)
