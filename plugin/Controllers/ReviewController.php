@@ -10,6 +10,7 @@
 
 namespace GeminiLabs\SiteReviews\Controllers;
 
+use GeminiLabs\SiteReviews\App;
 use GeminiLabs\SiteReviews\Commands\SubmitReview;
 use GeminiLabs\SiteReviews\Controllers\BaseController;
 use GeminiLabs\SiteReviews\Strings;
@@ -99,11 +100,11 @@ class ReviewController extends BaseController
 	public function modifyFeatures( WP_Screen $screen )
 	{
 		if( $this->canEditReview()
-			|| $screen->post_type != $this->app->POST_TYPE
+			|| $screen->post_type != App::POST_TYPE
 		)return;
 
-		remove_post_type_support( $this->app->POST_TYPE, 'title' );
-		remove_post_type_support( $this->app->POST_TYPE, 'editor' );
+		remove_post_type_support( App::POST_TYPE, 'title' );
+		remove_post_type_support( App::POST_TYPE, 'editor' );
 	}
 
 	/**
@@ -171,7 +172,7 @@ class ReviewController extends BaseController
 
 		$scheduled_date = date_i18n( 'M j, Y @ H:i', strtotime( $post->post_date ));
 
-		$messages[ $this->app->POST_TYPE ] = [
+		$messages[ App::POST_TYPE ] = [
 			 1 => $strings['updated'],
 			 4 => $strings['updated'],
 			 5 => $restored,
@@ -197,7 +198,7 @@ class ReviewController extends BaseController
 	 */
 	public function modifyUpdateMessagesBulk( array $messages, array $counts )
 	{
-		$messages[ $this->app->POST_TYPE ] = [
+		$messages[ App::POST_TYPE ] = [
 			'updated'   => _n( '%s review updated.', '%s reviews updated.', $counts['updated'], 'site-reviews' ),
 			'locked'    => _n( '%s review not updated, somebody is editing it.', '%s reviews not updated, somebody is editing them.', $counts['locked'], 'site-reviews' ),
 			'deleted'   => _n( '%s review permanently deleted.', '%s reviews permanently deleted.', $counts['deleted'], 'site-reviews' ),
@@ -246,7 +247,7 @@ class ReviewController extends BaseController
 	 */
 	public function removeMetaBoxes()
 	{
-		remove_meta_box( 'slugdiv', $this->app->POST_TYPE, 'advanced' );
+		remove_meta_box( 'slugdiv', App::POST_TYPE, 'advanced' );
 	}
 
 	/**
@@ -282,7 +283,7 @@ class ReviewController extends BaseController
 	public function setPermissions()
 	{
 		foreach( wp_roles()->roles as $role => $value ) {
-			wp_roles()->remove_cap( $role, sprintf( 'create_%s', $this->app->POST_TYPE ));
+			wp_roles()->remove_cap( $role, sprintf( 'create_%s', App::POST_TYPE ));
 		}
 	}
 
@@ -329,7 +330,7 @@ class ReviewController extends BaseController
 
 		return isset( $current_screen )
 			&& $current_screen->base == 'edit'
-			&& $current_screen->post_type == $this->app->POST_TYPE
+			&& $current_screen->post_type == App::POST_TYPE
 			&& $domain == 'default';
 	}
 
@@ -342,8 +343,8 @@ class ReviewController extends BaseController
 
 		return $screen
 			&& $screen->base == 'post'
-			&& $screen->id == $this->app->POST_TYPE
-			&& $screen->post_type == $this->app->POST_TYPE;
+			&& $screen->id == App::POST_TYPE
+			&& $screen->post_type == App::POST_TYPE;
 	}
 
 	/**

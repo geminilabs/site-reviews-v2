@@ -10,6 +10,7 @@
 
 namespace GeminiLabs\SiteReviews\Handlers;
 
+use GeminiLabs\SiteReviews\App;
 use GeminiLabs\SiteReviews\Commands\EnqueueAssets as Command;
 
 class EnqueueAssets
@@ -68,7 +69,7 @@ class EnqueueAssets
 			$command->version
 		);
 
-		if( !$screen || !( $screen->post_type == glsr_app()->POST_TYPE
+		if( !$screen || !( $screen->post_type == App::POST_TYPE
 			|| $screen->base == 'post'
 			|| $screen->id == 'dashboard'
 			|| $screen->id == 'widgets'
