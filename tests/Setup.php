@@ -16,9 +16,9 @@ trait Setup
 	{
 		parent::setUp();
 
-		$_SERVER['SERVER_PROTOCbOL'] = 'HTTP/1.1';
-		$_SERVER['SERVER_NAME']      = '';
-		$PHP_SELF                    = $GLOBALS['PHP_SELF'] = $_SERVER['PHP_SELF'] = '/index.php';
+		$_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
+		$_SERVER['SERVER_NAME']     = '';
+		$PHP_SELF                   = $GLOBALS['PHP_SELF'] = $_SERVER['PHP_SELF'] = '/index.php';
 
 		$this->app = glsr_app();
 		$this->db  = glsr_resolve( 'Database' );
