@@ -113,21 +113,12 @@ gulp.task( 'languages', () => runSequence( 'checktextdomain', 'pot', 'pseudo', '
 /* Version Bump Tasks
  -------------------------------------------------- */
 
-var bumpVersions = function( file, options ) {
-	gulp.src( file ).pipe( bump( options )).pipe( gulp.dest('.'));
-}
-
-gulp.task( 'bump:patch', function() {
-	bumpVersions( paths.bump.stable, { type: 'patch', key: 'stable tag' });
-	bumpVersions( paths.bump.version, { type: 'patch' });
-});
-
-gulp.task( 'bump:minor', function() {
-	bumpVersions( paths.bump.stable, { type: 'minor', key: 'stable tag' });
-	bumpVersions( paths.bump.version, { type: 'minor' });
-});
-
-gulp.task( 'bump:major', function() {
-	bumpVersions( paths.bump.stable, { type: 'major', key: 'stable tag' });
-	bumpVersions( paths.bump.version, { type: 'major' });
+gulp.task( 'bump', function() {
+	['patch', 'minor', 'major'].some( function( arg ) {
+		if( !args[arg] )return;
+		for( key in config.bump ) {
+			gulp.src( config.bump[key] ).pipe( bump({ type: arg, key: key })).pipe( gulp.dest('.'));
+		}
+		return true;
+	});
 });
