@@ -10,10 +10,13 @@
 
 namespace GeminiLabs\SiteReviews;
 
+/**
+ * The quality of a 5 star rating depends not only on the average number of stars but also on the number of reviews.
+ */
 class Bayesian
 {
 	/**
-	 * Z scores for confidence percentage intervals
+	 * Z scores for confidence percentage intervals (credible interval)
 	 * @var array
 	 */
 	const Z_SCORE_CONFIDENCE_PERCENTAGE_INTERVALS = [
@@ -53,7 +56,7 @@ class Bayesian
 	 * Get the lower bound for up/down ratings
 	 * Method receives an up/down ratings array: [1, -1, -1, 1, 1, -1]
 	 * @see http://www.evanmiller.org/how-not-to-sort-by-average-rating.html
-	 * @return int|double
+	 * @return int|float
 	 */
 	public function getLowerBound( array $upDownRatings, $confidencePercentage = 95 )
 	{
@@ -84,7 +87,7 @@ class Bayesian
 
 	/**
 	 * Get the average rating for an array of reviews
-	 * @return int|double
+	 * @return int|float
 	 */
 	public function getRatingAverage( array $reviews )
 	{
@@ -92,8 +95,30 @@ class Bayesian
 			return $sum + intval( $review->rating );
 		});
 		return ( $ratingCount = count( $reviews ))
-			? $ratingSum / $ratingCount
+			? round( $ratingSum / $ratingCount, 4 )
 			: 0;
+	}
+
+	/**
+	 * Get the bayesian average rating for an array of reviews
+	 * @see https://www.xkcd.com/937/
+	 * @see https://districtdatalabs.silvrback.com/computing-a-bayesian-estimate-of-star-rating-means
+	 * @see http://fulmicoton.com/posts/bayesian_rating/
+	 * @return float
+	 */
+	public function getRatingAverageBayesian( array $reviews ) {
+		// represents the number of ratings that we expect are needed to begin observing a pattern that would put confidence in the prior
+		// could also be the total number of reviews of all items.
+		$CONFIDENCE = 7;
+		// represents a prior for the average of stars
+		// could also be the average score of all items instead of a fixed value
+		$PRIOR = 5;
+		$numberOfReviews = count( $reviews );
+		$avgRating = $this->getRatingAverage( $reviews );
+		$result = $avgRating > 0
+			? (( $CONFIDENCE * $PRIOR ) + ( $avgRating * $numberOfReviews )) / ( $CONFIDENCE + $numberOfReviews )
+			: 0;
+		return round( $result, 4 );
 	}
 
 	/**
