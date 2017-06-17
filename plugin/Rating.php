@@ -10,7 +10,7 @@
 
 namespace GeminiLabs\SiteReviews;
 
-class Bayesian
+class Rating
 {
 	/**
 	 * @see https://en.wikipedia.org/wiki/Standard_score
