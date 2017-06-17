@@ -10,16 +10,13 @@
 
 namespace GeminiLabs\SiteReviews;
 
-/**
- * The quality of a 5 star rating depends not only on the average number of stars but also on the number of reviews.
- */
 class Bayesian
 {
 	/**
-	 * Z scores for confidence percentage intervals (credible interval)
+	 * @see https://en.wikipedia.org/wiki/Standard_score
 	 * @var array
 	 */
-	const Z_SCORE_CONFIDENCE_PERCENTAGE_INTERVALS = [
+	const CREDIBLE_INTERVAL_Z_SCORE = [
 		50     => 0.67449,
 		70     => 1.04,
 		75     => 1.15035,
@@ -38,9 +35,26 @@ class Bayesian
 	];
 
 	/**
+	 * @var int
+	 */
+	const MAX_RATING = 5;
+
+	/**
+	 * Get the average rating for an array of reviews
+	 * @param int $roundBy
+	 * @return int|float
+	 */
+	public function getAverage( array $reviews, $roundBy = 1 )
+	{
+		return ( $ratingCount = count( $reviews ))
+			? round( $this->getTotal( $reviews ) / $ratingCount, $roundBy )
+			: 0;
+	}
+
+	/**
 	 * @return array
 	 */
-	public function getRatingCounts( array $reviews )
+	public function getCounts( array $reviews )
 	{
 		$counts = array_fill_keys( [5,4,3,2,1], [] );
 		array_walk( $counts, function( &$count, $key ) use( $reviews ) {
@@ -65,70 +79,113 @@ class Bayesian
 		$positiveRatings = count( array_filter( $upDownRatings, function( $value ) {
 			return $value > 0;
 		}));
-		$z = static::Z_SCORE_CONFIDENCE_PERCENTAGE_INTERVALS[$confidencePercentage];
+		$z = static::CREDIBLE_INTERVAL_Z_SCORE[$confidencePercentage];
 		$phat = 1 * $positiveRatings / $numRatings;
 		return ($phat + $z * $z / (2 * $numRatings) - $z * sqrt(($phat * (1 - $phat) + $z * $z / (4 * $numRatings)) / $numRatings))/(1 + $z * $z / $numRatings);
 	}
 
 	/**
-	 * Calculate the ranking of a page by its number of reviews and their rating
-	 * Method receives an array of rating counts: [5=>?, 4=>?, 3=>?, 2=>?, 1=>?]
+	 * Get the overall percentage rating for an array of reviews
+	 * @param int $forRating
+	 * @return float
+	 */
+	public function getPercentage( array $reviews )
+	{
+		return round( $this->getAverage( $reviews ) * 100 / static::MAX_RATING, 2 );
+	}
+
+	/**
+	 * Get the percentage ratings for an array of reviews
+	 * @return array
+	 */
+	public function getPercentages( array $reviews )
+	{
+		$counts = $this->getCounts( $reviews );
+		array_walk( $counts, function( &$count, $rating ) use( $counts ) {
+			$count = $counts[$rating] / array_sum( $counts ) * 100;
+		});
+		return $this->getRoundedPercentages( $counts );
+	}
+
+	/**
+	 * The quality of a 5 star rating depends not only on the average number of stars but also on
+	 * the number of reviews. This method calculates the bayesian ranking of a page by its number
+	 * of reviews and their rating.
 	 * @see http://www.evanmiller.org/ranking-items-with-star-ratings.html
 	 * @return float
 	 */
-	public function getRanking( array $ratingCounts )
+	public function getRanking( array $ratingCounts, $confidencePercentage = 90 )
 	{
 		$ratingCountsSum = array_sum( $ratingCounts ) + count( $ratingCounts );
 		$weight = $this->getWeight( $ratingCounts, $ratingCountsSum );
 		$weightPow2 = $this->getWeight( $ratingCounts, $ratingCountsSum, true );
-		$zScore = static::Z_SCORE_CONFIDENCE_PERCENTAGE_INTERVALS[90];
+		$zScore = static::CREDIBLE_INTERVAL_Z_SCORE[$confidencePercentage];
 		return $weight - $zScore * sqrt(( $weightPow2 - $weight**2 ) / ( $ratingCountsSum + 1 ));
 	}
 
 	/**
-	 * Get the average rating for an array of reviews
-	 * @return int|float
-	 */
-	public function getRatingAverage( array $reviews )
-	{
-		$ratingSum = array_reduce( $reviews, function( $sum, $review ) {
-			return $sum + intval( $review->rating );
-		});
-		return ( $ratingCount = count( $reviews ))
-			? round( $ratingSum / $ratingCount, 4 )
-			: 0;
-	}
-
-	/**
-	 * Get the bayesian average rating for an array of reviews
+	 * Get the bayesian ranking for an array of reviews
+	 * This formula returns the same result as the IMDB formula
 	 * @see https://www.xkcd.com/937/
 	 * @see https://districtdatalabs.silvrback.com/computing-a-bayesian-estimate-of-star-rating-means
 	 * @see http://fulmicoton.com/posts/bayesian_rating/
+	 * @see https://stats.stackexchange.com/questions/93974/is-there-an-equivalent-to-lower-bound-of-wilson-score-confidence-interval-for-va
 	 * @return float
 	 */
-	public function getRatingAverageBayesian( array $reviews ) {
-		// represents the number of ratings that we expect are needed to begin observing a pattern that would put confidence in the prior
-		// could also be the total number of reviews of all items.
-		$CONFIDENCE = 7;
-		// represents a prior for the average of stars
-		// could also be the average score of all items instead of a fixed value
-		$PRIOR = 5;
-		$numberOfReviews = count( $reviews );
-		$avgRating = $this->getRatingAverage( $reviews );
-		$result = $avgRating > 0
-			? (( $CONFIDENCE * $PRIOR ) + ( $avgRating * $numberOfReviews )) / ( $CONFIDENCE + $numberOfReviews )
+	public function getRankingImdb( array $reviews )
+	{
+		// Represents the number of ratings expected to begin observing a pattern that would put
+		// confidence in the prior. Could also be the total number of reviews of all items.
+		$bayesMinimal = 10; // confidence
+		// Represents a prior for the average of stars, could also be the average score of all items
+		// instead of a fixed value.
+		$bayesMean = 3.5; // prior: ( 70 / 100 ) * $maxRating;
+		$numOfReviews = count( $reviews );
+		$avgRating = $this->getAverage( $reviews );
+		return $avgRating > 0
+			? (( $bayesMinimal * $bayesMean ) + ( $avgRating * $numOfReviews )) / ( $bayesMinimal + $numOfReviews )
 			: 0;
-		return round( $result, 4 );
 	}
 
 	/**
-	 * Get the percentage rating for an array of reviews
-	 * @param int $highestRating
-	 * @return float
+	 * Get the sum of all review ratings
+	 * @return int
 	 */
-	public function getRatingPercentage( array $reviews, $highestRating = 5 )
+	public function getTotal( array $reviews )
 	{
-		return round( $this->getRatingAverage( $reviews ) * 100 / $highestRating, 2 );
+		return array_reduce( $reviews, function( $sum, $review ) {
+			return $sum + intval( $review->rating );
+		});
+	}
+
+	/**
+	 * @param int $target The target total percentage
+	 * @return array
+	 */
+	protected function getRoundedPercentages( array $percentages, $target = 100 )
+	{
+		array_walk( $percentages, function( &$value, $index ) {
+			$value = [
+				'index' => $index,
+				'percent' => floor( $value ),
+				'remainder' => fmod( $value, 1 ),
+			];
+		});
+		array_multisort(
+			array_column( $percentages, 'remainder' ), SORT_DESC, SORT_STRING,
+			array_column( $percentages, 'index' ), SORT_DESC,
+			$percentages
+		);
+		$i = 0;
+		while( array_sum( array_column( $percentages, 'percent' )) < $target ) {
+			$percentages[$i]['percent']++;
+			$i++;
+		}
+		array_multisort( array_column( $percentages, 'index' ), SORT_DESC, $percentages );
+		return array_combine(
+			array_column( $percentages, 'index' ),
+			array_column( $percentages, 'percent' )
+		);
 	}
 
 	/**
