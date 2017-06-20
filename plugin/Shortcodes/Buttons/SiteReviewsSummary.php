@@ -58,6 +58,11 @@ class SiteReviewsSummary extends Generator
 				'label'    => esc_html__( 'Labels', 'site-reviews' ),
 				'tooltip'  => __( 'Enter custom labels for the 1-5 star rating levels (from high to low), and separate each with a comma. The defaults labels are: "Excellent,Very good,Average,Poor,Terrible".', 'site-reviews' ),
 			],[
+				'type'     => 'textbox',
+				'name'     => 'summary',
+				'label'    => esc_html__( 'Summary', 'site-reviews' ),
+				'tooltip'  => __( 'Enter a custom summary. Available template tags to use are: {rating}, {max}, and {num}. The default summary is: "{rating} out of {max} stars (based on {num} reviews)".', 'site-reviews' ),
+			],[
 				'type'    => 'listbox',
 				'name'    => 'rating',
 				'label'   => esc_html__( 'Rating', 'site-reviews' ),
@@ -82,6 +87,35 @@ class SiteReviewsSummary extends Generator
 				'name'     => 'class',
 				'label'    => esc_html__( 'Classes', 'site-reviews' ),
 				'tooltip'  => __( 'Add custom CSS classes to the shortcode.', 'site-reviews' ),
+			],[
+				'type'    => 'container',
+				'label'   => esc_html__( 'Hide', 'site-reviews' ),
+				'layout'  => 'grid',
+				'columns' => 2,
+				'spacing' => 5,
+				'items'   => [
+					[
+						'type' => 'checkbox',
+						'name' => 'hide_bars',
+						'text' => esc_html__( 'Bars', 'site-reviews' ),
+						'tooltip' => esc_attr__( 'Hide the percentage bars?', 'site-reviews' ),
+					],[
+						'type' => 'checkbox',
+						'name' => 'hide_rating',
+						'text' => esc_html__( 'Rating', 'site-reviews' ),
+						'tooltip' => esc_attr__( 'Hide the rating?', 'site-reviews' ),
+					],[
+						'type' => 'checkbox',
+						'name' => 'hide_stars',
+						'text' => esc_html__( 'Stars', 'site-reviews' ),
+						'tooltip' => esc_attr__( 'Hide the stars?', 'site-reviews' ),
+					],[
+						'type' => 'checkbox',
+						'name' => 'hide_summary',
+						'text' => esc_html__( 'Summary', 'site-reviews' ),
+						'tooltip' => esc_attr__( 'Hide the summary text?', 'site-reviews' ),
+					],
+				],
 			],
 		];
 	}
