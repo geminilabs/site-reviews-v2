@@ -308,13 +308,13 @@ class MainController extends BaseController
 				'title' => $site_reviews,
 				'label' => $site_reviews,
 			],
-			'site_reviews_form' => [
-				'title' => $site_reviews_form,
-				'label' => $site_reviews_form,
-			],
 			'site_reviews_summary' => [
 				'title' => $site_reviews_summary,
 				'label' => $site_reviews_summary,
+			],
+			'site_reviews_form' => [
+				'title' => $site_reviews_form,
+				'label' => $site_reviews_form,
 			],
 		]);
 
