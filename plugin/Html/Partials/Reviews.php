@@ -338,7 +338,7 @@ class Reviews extends Base
 		$percentages = preg_filter( '/$/', '%', $rating->getPercentages( $reviews ));
 
 		glsr_debug(
-			'rank: ' . $rating->getRanking( $counts ),
+			'rank: ' . $rating->getRanking( $reviews ),
 			'imdb rank: ' . $rating->getRankingImdb( $reviews ),
 			$averageRating . ' out of 5 stars',
 			$count . ' reviews',
