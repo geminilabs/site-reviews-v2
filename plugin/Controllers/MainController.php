@@ -299,7 +299,8 @@ class MainController extends BaseController
 	 */
 	public function registerShortcodeButtons()
 	{
-		$site_reviews      = esc_html__( 'Recent Site Reviews', 'site-reviews' );
+		$site_reviews = esc_html__( 'Recent Site Reviews', 'site-reviews' );
+		$site_reviews_summary = esc_html__( 'Site Reviews Summary', 'site-reviews' );
 		$site_reviews_form = esc_html__( 'Submit a Site Review', 'site-reviews' );
 
 		$command = new registerShortcodeButtons([
@@ -310,6 +311,10 @@ class MainController extends BaseController
 			'site_reviews_form' => [
 				'title' => $site_reviews_form,
 				'label' => $site_reviews_form,
+			],
+			'site_reviews_summary' => [
+				'title' => $site_reviews_summary,
+				'label' => $site_reviews_summary,
 			],
 		]);
 
@@ -326,6 +331,7 @@ class MainController extends BaseController
 		$command = new RegisterShortcodes([
 			'site_reviews',
 			'site_reviews_form',
+			'site_reviews_summary',
 		]);
 
 		$this->execute( $command );
@@ -564,8 +570,8 @@ class MainController extends BaseController
 	{
 		// allow addons to add their own setting sections
 		$sections = apply_filters( 'site-reviews/addon/settings/sections', [
-			'general'      => __( 'General', 'site-reviews' ),
-			'reviews'      => __( 'Reviews', 'site-reviews' ),
+			'general' => __( 'General', 'site-reviews' ),
+			'reviews' => __( 'Reviews', 'site-reviews' ),
 			'reviews-form' => __( 'Submission Form', 'site-reviews' ),
 		]);
 
