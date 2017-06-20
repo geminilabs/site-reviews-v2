@@ -24,22 +24,15 @@ class SiteReviewsSummary extends Shortcode
 	{
 		$this->normalize( $atts );
 		$this->rating = $this->app->make( 'Rating' );
-
 		$reviews = $this->db->getReviews( $this->args );
 		$ratingAverage = $this->rating->getAverage( $reviews->reviews );
-		$ratingCount = count( $reviews->reviews );
-
 		ob_start();
 		echo '<div class="shortcode-site-reviews-summary">';
 		if( !empty( $this->args['title'] )) {
 			printf( '<h3 class="glsr-shortcode-title">%s</h3>', $this->args['title'] );
 		}
-
-		echo $this->buildRating( $ratingAverage );
-		echo wpautop( sprintf( '%s out of 5 stars', $ratingAverage ));
-		echo wpautop( sprintf( '%s reviews', $ratingCount ));
+		echo $this->buildSummary( $ratingAverage, count( $reviews->reviews ));
 		echo $this->buildPercentBars( $reviews->reviews );
-
 		echo '</div>';
 		return ob_get_clean();
 	}
@@ -91,6 +84,34 @@ class SiteReviewsSummary extends Shortcode
 	}
 
 	/**
+	 * @param float $rating
+	 * @param int $count
+	 * @return string
+	 */
+	protected function buildSummary( $rating, $count )
+	{
+		return sprintf( '<div class="glsr-summary"><span class="glsr-summary-rating">%s</span>%s</div>',
+			$rating,
+			$this->buildRating( $rating ) . $this->buildSummaryText( $rating, $count )
+		);
+	}
+
+	/**
+	 * @param float $rating
+	 * @param int $count
+	 * @return string
+	 */
+	protected function buildSummaryText( $rating, $count )
+	{
+		$summary = str_replace(
+			['{rating}','{max}','{num}'],
+			[$rating, Rating::MAX_RATING, $count],
+			$this->args['summary']
+		);
+		return sprintf( '<span class="glsr-summary-text">%s</span>', $summary );
+	}
+
+	/**
 	 * @return void
 	 */
 	protected function normalize( $atts )
@@ -102,6 +123,7 @@ class SiteReviewsSummary extends Shortcode
 			'count'       => -1,
 			'labels'      => '',
 			'rating'      => 1,
+			'summary'     => __( '{rating} out of {max} stars (based on {num} reviews)', 'site-reviews' ),
 			'title'       => '',
 			'type'        => '',
 		];
