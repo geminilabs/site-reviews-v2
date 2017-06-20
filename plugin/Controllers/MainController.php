@@ -736,7 +736,7 @@ class MainController extends BaseController
 		}
 
 		$metabox = [
-			__( 'Rating', 'site-reviews' )   => $this->html->renderPartial( 'rating', ['stars' => $review->rating ], 'return' ),
+			__( 'Rating', 'site-reviews' )   => $this->html->renderPartial( 'star-rating', ['rating' => $review->rating] ),
 			__( 'Type', 'site-reviews' )     => $reviewType,
 			__( 'Date', 'site-reviews' )     => get_date_from_gmt( $review->date, 'F j, Y' ),
 			__( 'Reviewer', 'site-reviews' ) => $review->author,

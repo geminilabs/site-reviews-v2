@@ -32,44 +32,32 @@ class Partial
 	}
 
 	/**
-	 * Normalize the partial arguments
-	 *
 	 * @return $this
 	 */
 	public function normalize( $name, array $args = [] )
 	{
-		$defaults = [
+		$this->args = wp_parse_args( $args, [
 			'partial' => $name,
-		];
-
-		$this->args = wp_parse_args( $args, $defaults );
-
+		]);
 		return $this;
 	}
 
 	/**
-	 * Render the partial
-	 *
 	 * @param mixed $print
-	 *
 	 * @return string|void
 	 */
 	public function render( $print = true )
 	{
-		$className = sprintf( 'GeminiLabs\SiteReviews\Html\Partials\%s', ucfirst( $this->args['partial'] ));
-
+		$className = sprintf( 'GeminiLabs\SiteReviews\Html\Partials\%s',
+			$this->app->make( 'Helper' )->buildClassName( $this->args['partial'] )
+		);
 		$instance = $this->app->make( $className );
-
 		$instance->args = $this->args;
-
 		$rendered = $instance->render();
-
 		$rendered = apply_filters( 'site-reviews/rendered/partial', $rendered, $this->args['partial'] );
-
 		if( !!$print && $print !== 'return' ) {
 			echo $rendered;
 		}
-
 		return $rendered;
 	}
 }

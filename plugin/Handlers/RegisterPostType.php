@@ -249,9 +249,9 @@ class RegisterPostType
 	protected function buildColumnStars()
 	{
 		global $post;
-		return $this->app->make( 'Html' )->renderPartial( 'rating', [
-			'stars' => $this->db->getReviewMeta( $post->ID )->rating,
 		], 'return' );
+		return $this->app->make( 'Html' )->renderPartial( 'star-rating', [
+			'rating' => $this->db->getReviewMeta( $post->ID )->rating,
 	}
 
 	/**
