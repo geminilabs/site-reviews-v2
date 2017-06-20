@@ -13,10 +13,15 @@ namespace GeminiLabs\SiteReviews;
 class Rating
 {
 	/**
+	 * The more sure we are of the confidence interval (the higher the confidence level), the less
+	 * precise the estimation will be as the margin for error will be higher.
+	 * @see http://homepages.math.uic.edu/~bpower6/stat101/Confidence%20Intervals.pdf
+	 * @see https://www.thecalculator.co/math/Confidence-Interval-Calculator-210.html
+	 * @see https://www.youtube.com/watch?v=grodoLzThy4
 	 * @see https://en.wikipedia.org/wiki/Standard_score
 	 * @var array
 	 */
-	const CREDIBLE_INTERVAL_Z_SCORE = [
+	const CONFIDENCE_LEVEL_Z_SCORES = [
 		50     => 0.67449,
 		70     => 1.04,
 		75     => 1.15035,
@@ -70,6 +75,10 @@ class Rating
 	 * Get the lower bound for up/down ratings
 	 * Method receives an up/down ratings array: [1, -1, -1, 1, 1, -1]
 	 * @see http://www.evanmiller.org/how-not-to-sort-by-average-rating.html
+	 * @see https://news.ycombinator.com/item?id=10481507
+	 * @see https://dataorigami.net/blogs/napkin-folding/79030467-an-algorithm-to-sort-top-comments
+	 * @see http://julesjacobs.github.io/2015/08/17/bayesian-scoring-of-ratings.html
+	 * @param int $confidencePercentage
 	 * @return int|float
 	 */
 	public function getLowerBound( array $upDownRatings, $confidencePercentage = 95 )
@@ -79,9 +88,9 @@ class Rating
 		$positiveRatings = count( array_filter( $upDownRatings, function( $value ) {
 			return $value > 0;
 		}));
-		$z = static::CREDIBLE_INTERVAL_Z_SCORE[$confidencePercentage];
+		$z = static::CONFIDENCE_LEVEL_Z_SCORES[$confidencePercentage];
 		$phat = 1 * $positiveRatings / $numRatings;
-		return ($phat + $z * $z / (2 * $numRatings) - $z * sqrt(($phat * (1 - $phat) + $z * $z / (4 * $numRatings)) / $numRatings))/(1 + $z * $z / $numRatings);
+		return ( $phat + $z * $z / ( 2 * $numRatings ) - $z * sqrt(( $phat * ( 1 - $phat ) + $z * $z / ( 4 * $numRatings )) / $numRatings )) / ( 1 + $z * $z / $numRatings );
 	}
 
 	/**
@@ -112,34 +121,38 @@ class Rating
 	 * the number of reviews. This method calculates the bayesian ranking of a page by its number
 	 * of reviews and their rating.
 	 * @see http://www.evanmiller.org/ranking-items-with-star-ratings.html
+	 * @see https://stackoverflow.com/questions/1411199/what-is-a-better-way-to-sort-by-a-5-star-rating/1411268
+	 * @see http://julesjacobs.github.io/2015/08/17/bayesian-scoring-of-ratings.html
+	 * @param int $confidencePercentage
 	 * @return float
 	 */
-	public function getRanking( array $ratingCounts, $confidencePercentage = 90 )
+	public function getRanking( array $reviews, $confidencePercentage = 90 )
 	{
+		$ratingCounts = $this->getCounts( $reviews );
 		$ratingCountsSum = array_sum( $ratingCounts ) + count( $ratingCounts );
 		$weight = $this->getWeight( $ratingCounts, $ratingCountsSum );
 		$weightPow2 = $this->getWeight( $ratingCounts, $ratingCountsSum, true );
-		$zScore = static::CREDIBLE_INTERVAL_Z_SCORE[$confidencePercentage];
+		$zScore = static::CONFIDENCE_LEVEL_Z_SCORES[$confidencePercentage];
 		return $weight - $zScore * sqrt(( $weightPow2 - $weight**2 ) / ( $ratingCountsSum + 1 ));
 	}
 
 	/**
 	 * Get the bayesian ranking for an array of reviews
-	 * This formula returns the same result as the IMDB formula
+	 * This formula is the same one used by IMDB to rank their top 250 films
 	 * @see https://www.xkcd.com/937/
 	 * @see https://districtdatalabs.silvrback.com/computing-a-bayesian-estimate-of-star-rating-means
 	 * @see http://fulmicoton.com/posts/bayesian_rating/
 	 * @see https://stats.stackexchange.com/questions/93974/is-there-an-equivalent-to-lower-bound-of-wilson-score-confidence-interval-for-va
+	 * @param int $confidencePercentage
 	 * @return float
 	 */
-	public function getRankingImdb( array $reviews )
+	public function getRankingImdb( array $reviews, $confidencePercentage = 70 )
 	{
-		// Represents the number of ratings expected to begin observing a pattern that would put
-		// confidence in the prior. Could also be the total number of reviews of all items.
+		// Represents the number of ratings expected to begin observing a pattern that would put confidence in the prior.
 		$bayesMinimal = 10; // confidence
-		// Represents a prior for the average of stars, could also be the average score of all items
-		// instead of a fixed value.
-		$bayesMean = 3.5; // prior: ( 70 / 100 ) * $maxRating;
+		// Represents a prior (your prior opinion without data) for the average star rating. A higher prior also means a higher margin for error.
+		// This could also be the average score of all items instead of a fixed value.
+		$bayesMean = ( $confidencePercentage / 100 ) * static::MAX_RATING; // prior, 70% = 3.5
 		$numOfReviews = count( $reviews );
 		$avgRating = $this->getAverage( $reviews );
 		return $avgRating > 0
