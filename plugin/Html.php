@@ -135,10 +135,9 @@ class Html
 	 *
 	 * @return void|string
 	 */
-	public function renderPartial( $partialName, array $args = [], $print = 'print' )
+	public function renderPartial( $partialName, array $args = [], $print = 'return' )
 	{
 		$partial = $this->app->make( 'Html\Partial' )->normalize( $partialName, $args );
-
 		return $partial->render( $print );
 	}
 

@@ -229,7 +229,7 @@ class RegisterPostType
 		global $post;
 		$value = $this->app->make( 'Html' )->renderPartial( 'link', [
 			'post_id' => $this->db->getReviewMeta( $post->ID )->assigned_to,
-		], 'return' );
+		]);
 		return $value ? $value : '&mdash;';
 	}
 
@@ -249,9 +249,9 @@ class RegisterPostType
 	protected function buildColumnStars()
 	{
 		global $post;
-		], 'return' );
 		return $this->app->make( 'Html' )->renderPartial( 'star-rating', [
 			'rating' => $this->db->getReviewMeta( $post->ID )->rating,
+		]);
 	}
 
 	/**
@@ -326,7 +326,7 @@ class RegisterPostType
 
 		printf( '<label class="screen-reader-text" for="rating">%s</label>', __( 'Filter by rating', 'site-reviews' ));
 
-		$this->app->make( 'Html' )->renderPartial( 'filterby', [
+		echo $this->app->make( 'Html' )->renderPartial( 'filterby', [
 			'name'   => 'rating',
 			'values' => $ratings,
 		]);
@@ -352,7 +352,7 @@ class RegisterPostType
 
 		printf( '<label class="screen-reader-text" for="type">%s</label>', __( 'Filter by type', 'site-reviews' ));
 
-		$this->app->make( 'Html' )->renderPartial( 'filterby', [
+		echo $this->app->make( 'Html' )->renderPartial( 'filterby', [
 			'name'   => 'review_type',
 			'values' => $reviewTypes,
 		]);

@@ -8,13 +8,13 @@
 
 	printf( '<div id="glsr-notices">%s</div>', $notices->show( false ) );
 
-	$html->renderPartial( 'tabs' , [
+	echo $html->renderPartial( 'tabs' , [
 		'page' => $page,
 		'tabs' => $tabs,
 		'tab'  => $tabView,
 	]);
 
-	$html->renderPartial( 'subsubsub' , [
+	echo $html->renderPartial( 'subsubsub' , [
 		'page'    => $page,
 		'tabs'    => $tabs,
 		'tab'     => $tabView,

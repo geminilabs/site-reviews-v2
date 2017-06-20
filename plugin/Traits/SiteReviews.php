@@ -32,6 +32,6 @@ trait SiteReviews
 			$args['type'] = $args['display'];
 		}
 
-		glsr_resolve( 'Html' )->renderPartial( 'reviews', $args );
+		echo glsr_resolve( 'Html' )->renderPartial( 'reviews', $args );
 	}
 }

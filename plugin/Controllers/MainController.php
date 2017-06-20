@@ -433,7 +433,7 @@ class MainController extends BaseController
 		$assignedTo = get_post_meta( $post->ID, 'assigned_to', true );
 		$permalink = $this->html->renderPartial( 'link', [
 			'post_id' => $assignedTo,
-		], 'return' );
+		]);
 
 		wp_nonce_field( 'assigned_to', '_nonce-assigned-to', false );
 

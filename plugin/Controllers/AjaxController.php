@@ -35,7 +35,7 @@ class AjaxController extends BaseController
 	{
 		wp_send_json( $this->html->renderPartial( 'link', [
 			'post_id' => $request['ID'],
-		], 'return' ));
+		]));
 	}
 
 	/**
