@@ -4,6 +4,9 @@
 	<h3>[site_reviews]</h3>
 	<p>This shortcode displays your most recently submitted reviews.</p>
 
+	<code>assigned_to="100,101"</code>
+	<p>Include the "assigned_to" attribute to limit reviews to those assigned to a specific page/post ID. Accepted values are either one or more post/page ID's (separated by commas), or "post_id" which will use the ID of the current page.</p>
+
 	<code>category="13,test"</code>
 	<p>Include the "category" attribute to limit reviews to one or more categories. Accepted values are either a category ID or slug.</p>
 
@@ -27,8 +30,46 @@
 </div>
 
 <div class="glsr-card card">
+	<h3>[site_reviews_summary]</h3>
+	<p>This shortcode displays a summary of your reviews.</p>
+
+	<code>assigned_to="100,101"</code>
+	<p>Include the "assigned_to" attribute to limit the reviews used to calculate the average rating to those assigned to a specific page/post ID. Accepted values are either one or more post/page ID's (separated by commas), or "post_id" which will use the ID of the current page.</p>
+	<p><span class="required">Important:</span> If you are using this shortcode together with the [site_reviews] shortcode, make sure you set this attribute value the same for both shortcodes.</p>
+
+	<code>category="13,test"</code>
+	<p>Include the "category" attribute to limit the reviews used to calculate the average rating to one or more categories. Accepted values are either a category ID or slug.</p>
+	<p><span class="required">Important:</span> If you are using this shortcode together with the [site_reviews] shortcode, make sure you set this attribute value the same for both shortcodes.</p>
+
+	<code>class="my-reviews-summary full-width"</code>
+	<p>Include the "class" attribute to add custom CSS classes to the shortcode.</p>
+
+	<code>count=20</code>
+	<p>By default, the shortcode calculates the average rating for all reviews found in your set criteria. Include the "count" attribute to change the number of reviews that are used.</p>
+
+	<code>hide=bars,rating,stars,summary</code>
+	<p>By default the shortcode displays all fields. Include the "hide" attribute to hide any specific fields you don't want to show. If all fields are hidden, the shortcode will not be displayed.</p>
+
+	<code>labels="5 star,4 star,3 star,2 star,1 star"</code>
+	<p>The "labels" attribute allows you to enter custom labels for the percentage bar levels (from high to low), each level should be separated with a comma. The defaults labels are: "Excellent,Very good,Average,Poor,Terrible"</p>
+
+	<code>rating=1</code>
+	<p>By default, the shortcode uses all 1-5 star reviews to calculate the average rating. Include the "rating" attribute to set the minimum star-rating of reviews to use.</p>
+	<p><span class="required">Important:</span> If you are using this shortcode together with the [site_reviews] shortcode, make sure you set this attribute value the same for both shortcodes.</p>
+
+	<code>title="Overall Rating"</code>
+	<p>By default, the shortcode displays no heading. Include the "title" attribute to display a custom shortcode heading.</p>
+
+	<code>summary="{num} reviews"</code>
+	<p>The "summary" attribute allows you to change the summary text. Available template tags to use are, "{rating}" which represents the calculated average rating, "{max}" which represents the maximum star rating available, and "{num}" which represents the total number of reviews. The default summary text is: "{rating} out of {max} stars (based on {num} reviews)".</p>
+</div>
+
+<div class="glsr-card card">
 	<h3>[site_reviews_form]</h3>
 	<p>This shortcode displays the review submission form.</p>
+
+	<code>assign_to="101"</code>
+	<p>The "assign_to" attribute allows you to automatically assign submitted reviews to a post or page. Accepted values are either one or more post/page ID's (separated by commas), or "post_id" which will assign reviews to the ID of the current page.</p>
 
 	<code>category="13,test"</code>
 	<p>Include the "category" attribute to automatically assign one or more categories to the submitted review. Accepted values are either a category ID or slug.</p>
