@@ -15,13 +15,15 @@ use GeminiLabs\SiteReviews\Html\Partials\Base;
 
 class Reviews extends Base
 {
+	const HIDDEN_KEYS = ['author', 'date', 'excerpt', 'rating', 'title'];
+
 	/**
 	 * @return null|string
 	 */
 	public function render()
 	{
 		$this->normalize();
-		if( $this->shouldHideReviews() )return;
+		if( $this->isHidden() )return;
 		$html = '';
 		$reviews = $this->db->getReviews( $this->args );
 		$schema = $this->getSchema( ' itemprop="review" itemscope itemtype="http://schema.org/Review"' );
@@ -262,9 +264,7 @@ class Reviews extends Base
 	 */
 	protected function getSchema( $schema )
 	{
-		return $this->args['schema']
-			? $schema
-			: '';
+		return $this->args['schema'] ? $schema : '';
 	}
 
 	/**
@@ -309,11 +309,13 @@ class Reviews extends Base
 	/**
 	 * @return bool
 	 */
-	protected function shouldHideReviews()
+	protected function isHidden( array $values = [] )
 	{
-		return !array_diff( ['author', 'date', 'excerpt', 'rating', 'title'], $this->args['hide'] );
+		if( empty( $values )) {
+			$values = static::HIDDEN_KEYS;
+		}
+		return !array_diff( $values, $this->args['hide'] );
 	}
-
 
 
 
