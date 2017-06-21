@@ -54,6 +54,18 @@ GLSR.enableSubmitButton = function()
 	GLSR.activeForm.querySelector( '[type="submit"]' ).removeAttribute( 'disabled' );
 };
 
+GLSR.onClickReadMore = function( ev )
+{
+	ev.preventDefault();
+	var el = ev.target;
+	var hiddenNode = el.parentNode.previousSibling;
+	var text = el.getAttribute( 'data-text' );
+	GLSR.toggleClass( hiddenNode, 'glsr-hidden' );
+	GLSR.toggleClass( hiddenNode, 'glsr-visible' );
+	el.setAttribute( 'data-text', el.innerText );
+	el.innerText = text;
+};
+
 GLSR.recaptcha.addListeners = function()
 {
 	var overlayEl = GLSR.recaptcha.overlay();
@@ -243,13 +255,31 @@ GLSR.on( 'click', '.glsr-field [type="submit"]', function()
 
 GLSR.ready( function()
 {
-	var ratings = document.querySelectorAll( 'select.glsr-star-rating' );
+	var i, ratings, excerpts;
 
-	for( var i = 0; i < ratings.length; i++ ) {
+	ratings = document.querySelectorAll( 'select.glsr-star-rating' );
+	for( i = 0; i < ratings.length; i++ ) {
 		new StarRating( ratings[i], {
 			clearable: false,
 			showText : false,
 			onClick  : GLSR.clearFieldError,
 		});
 	}
+
+	excerpts = document.querySelectorAll( '.glsr-review-excerpt' );
+	for( i = 0; i < excerpts.length; i++ ) {
+		var excerpt = excerpts[i].querySelector( '.glsr-hidden' );
+		if( excerpt ) {
+			var readmore = GLSR.insertAfter( excerpt, 'span', {
+				'class': 'glsr-read-more',
+			});
+			var readmoreLink = GLSR.appendTo( readmore, 'a', {
+				'href': '#',
+				'data-text': excerpt.getAttribute( 'data-show-less' ),
+			});
+			readmoreLink.innerHTML = excerpt.getAttribute( 'data-show-more' );
+		}
+	}
+
+	GLSR.on( 'click', '.glsr-read-more a', GLSR.onClickReadMore );
 });

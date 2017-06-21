@@ -3,8 +3,7 @@
 
 var GLSR = {};
 
-GLSR.addClass = function( el, className )
-{
+GLSR.addClass = function( el, className ) {
 	if( el.classList ) {
 		el.classList.add( className );
 	}
@@ -13,8 +12,7 @@ GLSR.addClass = function( el, className )
 	}
 };
 
-GLSR.convertValue = function( value )
-{
+GLSR.convertValue = function( value ) {
 	if( GLSR.isNumeric( value )) {
 		return parseFloat( value );
 	}
@@ -31,8 +29,7 @@ GLSR.convertValue = function( value )
 	return value;
 };
 
-GLSR.hasClass = function( el, className )
-{
+GLSR.hasClass = function( el, className ) {
 	if( el.classList ) {
 		return el.classList.contains( className );
 	}
@@ -40,8 +37,7 @@ GLSR.hasClass = function( el, className )
 	return new RegExp( '\\b' + className + '\\b' ).test( el.className );
 };
 
-GLSR.inArray = function( needle, haystack )
-{
+GLSR.inArray = function( needle, haystack ) {
 	var length = haystack.length;
 	while( length-- ) {
 		if( haystack[ length ] === needle ) {
@@ -52,40 +48,36 @@ GLSR.inArray = function( needle, haystack )
 	return false;
 };
 
-GLSR.isNumeric = function( value )
-{
+GLSR.isNumeric = function( value ) {
 	return !( isNaN( parseFloat( value )) || !isFinite( value ));
 };
 
-GLSR.on = function( type, el, handler )
-{
-	[].forEach.call( document.querySelectorAll( el ), function( node ) {
-		if( node.attachEvent ) {
-			node.attachEvent( 'on' + type, handler );
-		}
-		else {
-			node.addEventListener( type, handler );
-		}
+GLSR.isString = function( str ) {
+	return Object.prototype.toString.call( str ) === "[object String]";
+};
+
+GLSR.on = function( type, el, handler ) {
+	if( GLSR.isString( el )) {
+		el = document.querySelectorAll( el );
+	}
+	[].forEach.call( el, function( node ) {
+		node.addEventListener( type, handler );
 	});
 };
 
-GLSR.off = function( type, el, handler )
-{
-	[].forEach.call( document.querySelectorAll( el ), function( node ) {
-		if( node.detachEvent ) {
-			node.detachEvent( 'on' + type, handler );
-		}
-		else {
-			node.removeEventListener( type, handler );
-		}
+GLSR.off = function( type, el, handler ) {
+	if( GLSR.isString( el )) {
+		el = document.querySelectorAll( el );
+	}
+	[].forEach.call( el, function( node ) {
+		node.removeEventListener( type, handler );
 	});
 };
 
 /**
  * Adapted from https://github.com/bitovi/jquerypp/blob/master/dom/form_params/form_params.js
  */
-GLSR.parseFormData = function( form, convert )
-{
+GLSR.parseFormData = function( form, convert ) {
 	convert = !!convert || false;
 
 	var keyBreaker = /[^\[\]]+/g; // used to parse bracket notation
@@ -153,8 +145,7 @@ GLSR.parseFormData = function( form, convert )
 	return data;
 };
 
-GLSR.postAjax = function( url, data, success )
-{
+GLSR.postAjax = function( url, data, success ) {
 	var params = typeof data !== 'string' ? GLSR.serialize( data ) : data;
 	var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject( "Microsoft.XMLHTTP" );
 
@@ -174,8 +165,7 @@ GLSR.postAjax = function( url, data, success )
 	return xhr;
 };
 
-GLSR.ready = function( fn )
-{
+GLSR.ready = function( fn ) {
 	if( typeof fn !== "function" )return;
 
 	// in case the document is already rendered
@@ -196,8 +186,7 @@ GLSR.ready = function( fn )
 	}
 };
 
-GLSR.removeClass = function( el, className )
-{
+GLSR.removeClass = function( el, className ) {
 	if( el.classList ) {
 		el.classList.remove( className );
 	}
@@ -206,8 +195,7 @@ GLSR.removeClass = function( el, className )
 	}
 };
 
-GLSR.serialize = function( obj, prefix )
-{
+GLSR.serialize = function( obj, prefix ) {
 	var str = [];
 
 	for( var property in obj ) {
@@ -225,24 +213,26 @@ GLSR.serialize = function( obj, prefix )
 	return str.join( "&" );
 };
 
-GLSR.insertAfter = function( el, tag, attributes )
-{
+GLSR.toggleClass = function( el, className ) {
+	if( !GLSR.hasClass( el, className )) GLSR.addClass( el, className );
+	else GLSR.removeClass( el, className );
+};
+
+GLSR.insertAfter = function( el, tag, attributes ) {
 	var newEl = GLSR.createEl( tag, attributes );
 	el.parentNode.insertBefore( newEl, el.nextSibling );
 
 	return newEl;
 };
 
-GLSR.appendTo = function( el, tag, attributes )
-{
+GLSR.appendTo = function( el, tag, attributes ) {
 	var newEl = GLSR.createEl( tag, attributes );
 	el.appendChild( newEl );
 
 	return newEl;
 };
 
-GLSR.createEl = function( tag, attributes )
-{
+GLSR.createEl = function( tag, attributes ) {
 	var el = ( typeof tag === 'string' ) ? document.createElement( tag ) : tag;
 
 	attributes = attributes || {};

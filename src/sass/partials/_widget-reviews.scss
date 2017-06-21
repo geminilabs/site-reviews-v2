@@ -90,3 +90,18 @@
 	}
 }
 
+.glsr-hidden {
+	display: none;
+}
+
+.glsr-read-more {
+	white-space: nowrap;
+	&::before {
+		content: '\2026';
+		margin-right: 0.5em;
+	}
+}
+
+.glsr-visible + .glsr-read-more::before {
+	content: '';
+}

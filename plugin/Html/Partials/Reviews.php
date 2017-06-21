@@ -218,9 +218,13 @@ class Reviews extends Base
 		$wordCount = $this->db->getOption( 'settings.reviews.excerpt.length', $this->args['word_limit'] );
 		$excerpt = wp_trim_words( $text, $wordCount, '' );
 		$hiddenText = substr( $text, strlen( $excerpt ));
-		return sprintf( '%s<span class="glsr-hidden" data-read-more="%s">%s</span>',
+		if( empty( $hiddenText )) {
+			return $excerpt;
+		}
+		return sprintf( '%s<span class="glsr-hidden" data-show-more="%s" data-show-less="%s">%s</span>',
 			$excerpt,
-			__( 'read more', 'site-reviews' ),
+			__( 'Show more', 'site-reviews' ),
+			__( 'Show less', 'site-reviews' ),
 			$hiddenText
 		);
 	}
