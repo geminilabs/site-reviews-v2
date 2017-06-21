@@ -41,6 +41,10 @@ class SiteReviews extends Shortcode
 
 		$args = $this->makeCompatible( $args );
 
+		if( $args['assigned_to'] == 'post_id' ) {
+			$args['assigned_to'] = intval( get_the_ID() );
+		}
+
 		ob_start();
 
 		echo '<div class="shortcode-site-reviews">';

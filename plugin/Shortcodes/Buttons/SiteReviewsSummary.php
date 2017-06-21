@@ -81,7 +81,7 @@ class SiteReviewsSummary extends Generator
 				'type'      => 'textbox',
 				'name'      => 'assigned_to',
 				'label'     => esc_html__( 'Post ID', 'site-reviews' ),
-				'tooltip'   => __( "Limit reviews to those assigned to this post ID (separate multiple ID's with a comma).", 'site-reviews' ),
+				'tooltip'   => __( "Limit reviews to those assigned to this post ID (separate multiple ID's with a comma). You can also enter 'post_id' to use the ID of the current page.", 'site-reviews' ),
 			],[
 				'type'     => 'textbox',
 				'name'     => 'class',

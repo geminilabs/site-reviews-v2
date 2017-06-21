@@ -56,7 +56,7 @@ class SiteReviewsForm extends Generator
 				'type'      => 'textbox',
 				'name'      => 'assign_to',
 				'label'     => esc_html__( 'Post ID', 'site-reviews' ),
-				'tooltip'   => esc_attr__( 'Assign submitted reviews to a custom page/post ID.', 'site-reviews' ),
+				'tooltip'   => esc_attr__( 'Assign submitted reviews to a custom page/post ID. You can also enter "post_id" to assign reviews to the ID of the current page.', 'site-reviews' ),
 			],[
 				'type'     => 'textbox',
 				'name'     => 'class',

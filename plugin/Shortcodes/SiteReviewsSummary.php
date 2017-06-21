@@ -180,6 +180,15 @@ class SiteReviewsSummary extends Shortcode
 	}
 
 	/**
+	 * @param string $postId
+	 * @return string
+	 */
+	protected function normalizeAssignedTo( $postId )
+	{
+		return $postId == 'post_id' ? intval( get_the_ID() ) : $postId;
+	}
+
+	/**
 	 * @return array
 	 */
 	protected function normalizeHide( $hide )

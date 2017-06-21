@@ -42,6 +42,10 @@ class SiteReviewsForm extends Shortcode
 
 		$atts = $this->makeCompatible( $atts );
 
+		if( $atts['assign_to'] == 'post_id' ) {
+			$atts['assign_to'] = intval( get_the_ID() );
+		}
+
 		$atts['hide'] = explode( ',', $atts['hide'] );
 		$atts['hide'] = array_filter( $atts['hide'], function( $value ) {
 			return in_array( $value, [

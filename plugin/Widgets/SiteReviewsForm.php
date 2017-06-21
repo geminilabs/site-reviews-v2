@@ -113,6 +113,10 @@ class SiteReviewsForm extends Widget
 		// custom widget attributes
 		$instance = shortcode_atts( $defaults, $instance );
 
+		if( $instance['assign_to'] == 'post_id' ) {
+			$instance['assign_to'] = intval( get_the_ID() );
+		}
+
 		$title = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
 
 		echo $args['before_widget'];
