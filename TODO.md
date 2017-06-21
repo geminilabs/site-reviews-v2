@@ -2,7 +2,7 @@
 - [ ] Add Rich Snippets (or Schema) settings page
 - [ ] Add Translations settings page
 - [ ] Add option to set default schema for reviewedItem and itemType
-- [ ] Add option to use relative dates
+- [x] Add option to use relative dates
 - [ ] Add helper functions to access rating methods
 - [ ] Add schema option to [site_reviews_summary]
 - [ ] Add shortcode schema documentation

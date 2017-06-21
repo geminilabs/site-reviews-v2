@@ -16,6 +16,27 @@ namespace GeminiLabs\SiteReviews\Database;
 trait Options
 {
 	/**
+	 * Delete a plugin option using dot notation
+	 * @param string      $path
+	 * @param bool|string $isPluginSetting
+	 * @return bool
+	 */
+	public function deleteOption( $path, $isPluginSetting = false )
+	{
+		$keys = explode( '.', $path );
+		$last = array_pop( $keys );
+		$options = $this->getOptions( $isPluginSetting );
+		$pointer = &$options;
+		foreach( $keys as $key ) {
+			if( isset( $pointer[$key] ) && is_array( $pointer[$key] )) {
+				$pointer = &$pointer[$key];
+			}
+		}
+		unset( $pointer[$last] );
+		return $this->setOptions( $options, $isPluginSetting );
+	}
+
+	/**
 	 * Get an option from the plugin options using dot notation
 	 *
 	 * @param string      $path
@@ -153,6 +174,25 @@ trait Options
 		}
 
 		return update_option( $this->getOptionName(), $options );
+	}
+
+	/**
+	 * Set options array to the plugin settings
+	 *
+	 * @param array       $options
+	 * @param bool|string $isPluginSetting
+	 * @return bool
+	 */
+	public function setOptions( $options, $isPluginSetting = false )
+	{
+		$newOptions = $this->getOptions();
+		if( $isPluginSetting ) {
+			$newOptions['settings'] = $options;
+		}
+		else {
+			$newOptions = $options;
+		}
+		return update_option( $this->getOptionName(), $newOptions );
 	}
 
 	/**

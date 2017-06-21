@@ -219,9 +219,9 @@ final class App extends Container
 	public function upgrade()
 	{
 		$version = $this->make( 'Database' )->getOption( 'version' );
+		$upgrade = $this->make( 'Upgrade' );
 
 		if( version_compare( $version, '2.0.0', '<' )) {
-			$upgrade = $this->make( 'Upgrade' );
 			$upgrade->options_200();
 			$upgrade->reviewSlug_200();
 			$upgrade->reviewType_200();
@@ -231,8 +231,10 @@ final class App extends Container
 			$upgrade->widgetSiteReviewsForm_200();
 		}
 		if( version_compare( $version, '2.1.0', '<' )) {
-			$upgrade = $this->make( 'Upgrade' );
 			$upgrade->reviewAssignedTo_210();
+		}
+		if( version_compare( $version, '2.3.0', '<' )) {
+			$upgrade->options_230();
 		}
 
 		$this->updateVersion( $version );

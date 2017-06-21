@@ -247,28 +247,33 @@ class Settings
 		]);
 
 		$this->addSetting( $formId, [
-			'type'  => 'yesno_inline',
-			'name'  => 'avatars.enabled',
-			'label' => __( 'Enable Avatars', 'site-reviews' ),
-			'desc'  => __( 'Display reviewer avatars. These are generated from the email address of the reviewer using <a href="https://gravatar.com">Gravatar</a>.', 'site-reviews' ),
-		]);
-
-		$this->addSetting( $formId, [
-			'type'  => 'yesno_inline',
-			'name'  => 'date.enabled',
-			'label' => __( 'Enable Custom Dates', 'site-reviews' ),
+			'type'  => 'select',
+			'name'  => 'date.format',
+			'label' => __( 'Date Format', 'site-reviews' ),
+			'options' => [
+				'default' => __( 'Use the default date format', 'site-reviews' ),
+				'relative' => __( 'Use a relative date format', 'site-reviews' ),
+				'custom' => __( 'Use a custom date format', 'site-reviews' ),
+			],
 			'desc'  => sprintf( __( 'The default date format is the one set in your <a href="%s">WordPress settings<a>.', 'site-reviews' ), get_admin_url( null, 'options-general.php' )),
 		]);
 
 		$this->addSetting( $formId, [
 			'type'    => 'text',
-			'name'    => 'date.format',
-			'label'   => __( 'Date Format', 'site-reviews' ),
+			'name'    => 'date.custom',
+			'label'   => __( 'Custom Date Format', 'site-reviews' ),
 			'default' => get_option( 'date_format' ),
 			'desc'    => sprintf( __( 'Enter a custom date format (<a href="%s">documentation on date and time formatting</a>).', 'site-reviews' ), 'https://codex.wordpress.org/Formatting_Date_and_Time' ),
 			'depends' => [
-				'date.enabled' => 'yes',
+				'date.format' => 'custom',
 			],
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'yesno_inline',
+			'name'  => 'avatars.enabled',
+			'label' => __( 'Enable Avatars', 'site-reviews' ),
+			'desc'  => __( 'Display reviewer avatars. These are generated from the email address of the reviewer using <a href="https://gravatar.com">Gravatar</a>.', 'site-reviews' ),
 		]);
 
 		$this->addSetting( $formId, [

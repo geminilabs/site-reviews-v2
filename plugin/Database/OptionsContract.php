@@ -13,6 +13,14 @@ namespace GeminiLabs\SiteReviews\Database;
 interface OptionsContract
 {
 	/**
+	 * Delete a plugin option using dot notation
+	 * @param string      $path
+	 * @param bool|string $isPluginSetting
+	 * @return bool
+	 */
+	public function deleteOption( $path, $isPluginSetting = false );
+
+	/**
 	 * Get an option from the plugin options using dot notation
 	 *
 	 * @param string      $path
@@ -77,6 +85,15 @@ interface OptionsContract
 	 * @return bool
 	 */
 	public function setOption( $path, $value, $isPluginSetting = false );
+
+	/**
+	 * Set options array to the plugin settings
+	 *
+	 * @param array       $options
+	 * @param bool|string $isPluginSetting
+	 * @return bool
+	 */
+	public function setOptions( $options, $isPluginSetting = false );
 
 	/**
 	 * Set a value to an array of values using a dot-notation path as reference

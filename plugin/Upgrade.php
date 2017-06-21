@@ -77,6 +77,24 @@ class Upgrade
 	}
 
 	/**
+	 * Migrate plugin options
+	 *
+	 * @return void
+	 */
+	public function options_230()
+	{
+		$dateEnabled = $this->db->getOption( 'reviews.date.enabled', false, true );
+		if( $dateEnabled === false )return;
+		$dateCustom = $this->db->getOption( 'reviews.date.format', '', true );
+		$dateFormat = $dateEnabled == 'no'
+			? 'default'
+			: 'custom';
+		$this->db->setOption( 'reviews.date.custom', $dateCustom, true );
+		$this->db->setOption( 'reviews.date.format', $dateFormat, true );
+		$this->db->deleteOption( 'reviews.date.enabled', true );
+	}
+
+	/**
 	 * @return void
 	 */
 	public function reviewSlug_200()

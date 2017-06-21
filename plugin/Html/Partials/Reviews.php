@@ -96,12 +96,18 @@ class Reviews extends Base
 		if( $this->args['schema'] && $hidden ) {
 			return sprintf( '<meta%s>', $schema );
 		}
-		if( !$hidden ) {
-			$format = $this->db->getOption( 'settings.reviews.date.enabled' ) == 'yes'
-				? $this->db->getOption( 'settings.reviews.date.format', 'M j, Y' )
-				: get_option( 'date_format' );
-			return sprintf( '<span class="glsr-review-date"%s>%s</span>', $schema, date_i18n( $format, strtotime( $date )));
+		if( $hidden )return;
+		$format = $this->db->getOption( 'settings.reviews.date.format', 'default' );
+		if( $format == 'relative' ) {
+			$date = $this->app->make( 'Date' )->relative( $date );
 		}
+		else {
+			$format = $format == 'custom'
+				? $this->db->getOption( 'settings.reviews.date.custom', 'M j, Y' )
+				: get_option( 'date_format' );
+			$date = date_i18n( $format, strtotime( $date ));
+		}
+		return sprintf( '<span class="glsr-review-date"%s>%s</span>', $schema, $date );
 	}
 
 	/**
