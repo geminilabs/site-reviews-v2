@@ -83,9 +83,8 @@ class SiteReviewsSummary extends Shortcode
 		$bars = '';
 		$ratingLabels = $this->args['labels'];
 		$ratingPercentages = preg_filter( '/$/', '%', $this->rating->getPercentages( $reviews ));
-		$ratingCounts = $this->rating->getCounts( $reviews );
 		for( $i = $maxRating; $i > 0; $i-- ) {
-			$bars .= $this->buildPercentBar( $ratingLabels[$i], $ratingPercentages[$i], $ratingCounts[$i] );
+			$bars .= $this->buildPercentBar( $ratingLabels[$i], $ratingPercentages[$i] );
 		}
 		return sprintf( '<div class="glsr-percentage-bars">%s</div>', $bars );
 	}
