@@ -116,7 +116,7 @@ gulp.task( 'languages', () => runSequence( 'checktextdomain', 'pot', 'pseudo', '
 gulp.task( 'bump', function() {
 	['patch', 'minor', 'major'].some( function( arg ) {
 		if( !args[arg] )return;
-		for( key in config.bump ) {
+		for( var key in config.bump ) {
 			gulp.src( config.bump[key] ).pipe( bump({ type: arg, key: key })).pipe( gulp.dest('.'));
 		}
 		return true;

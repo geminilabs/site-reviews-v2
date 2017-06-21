@@ -20,6 +20,16 @@ class SiteReviewsSummary extends Shortcode
 	const HIDDEN_KEYS = ['bars', 'rating', 'stars', 'summary'];
 
 	/**
+	 * @var array
+	 */
+	public $args;
+
+	/**
+	 * @var Rating
+	 */
+	public $rating;
+
+	/**
 	 * @return null|string
 	 */
 	public function printShortcode( $atts = [] )
@@ -134,6 +144,17 @@ class SiteReviewsSummary extends Shortcode
 	}
 
 	/**
+	 * @return bool
+	 */
+	protected function isHidden( array $values = [] )
+	{
+		if( empty( $values )) {
+			$values = static::HIDDEN_KEYS;
+		}
+		return !array_diff( $values, $this->args['hide'] );
+	}
+
+	/**
 	 * @return void
 	 */
 	protected function normalize( $atts )
@@ -187,16 +208,5 @@ class SiteReviewsSummary extends Shortcode
 			$defaults[$i] = $labels[$i];
 		}
 		return array_combine( [5,4,3,2,1], $defaults );
-	}
-
-	/**
-	 * @return bool
-	 */
-	protected function isHidden( array $values = [] )
-	{
-		if( empty( $values )) {
-			$values = static::HIDDEN_KEYS;
-		}
-		return !array_diff( $values, $this->args['hide'] );
 	}
 }

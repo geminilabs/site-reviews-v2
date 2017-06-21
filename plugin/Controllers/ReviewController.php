@@ -212,7 +212,7 @@ class ReviewController extends BaseController
 	/**
 	 * Submit the review form
 	 *
-	 * @return string|array|null
+	 * @return mixed
 	 * @throws Exception
 	 */
 	public function postSubmitReview( array $request )

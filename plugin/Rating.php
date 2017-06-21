@@ -95,8 +95,7 @@ class Rating
 
 	/**
 	 * Get the overall percentage rating for an array of reviews
-	 * @param int $forRating
-	 * @return float
+	 * @return int|float
 	 */
 	public function getPercentage( array $reviews )
 	{
@@ -144,7 +143,7 @@ class Rating
 	 * @see http://fulmicoton.com/posts/bayesian_rating/
 	 * @see https://stats.stackexchange.com/questions/93974/is-there-an-equivalent-to-lower-bound-of-wilson-score-confidence-interval-for-va
 	 * @param int $confidencePercentage
-	 * @return float
+	 * @return int|float
 	 */
 	public function getRankingImdb( array $reviews, $confidencePercentage = 70 )
 	{
@@ -184,21 +183,17 @@ class Rating
 				'remainder' => fmod( $value, 1 ),
 			];
 		});
-		array_multisort(
-			array_column( $percentages, 'remainder' ), SORT_DESC, SORT_STRING,
-			array_column( $percentages, 'index' ), SORT_DESC,
-			$percentages
-		);
+		$indexes = array_column( $percentages, 'index' );
+		$percents = array_column( $percentages, 'percent' );
+		$remainders = array_column( $percentages, 'remainder' );
+		array_multisort( $remainders, SORT_DESC, SORT_STRING, $indexes, SORT_DESC, $percentages );
 		$i = 0;
-		while( array_sum( array_column( $percentages, 'percent' )) < $target ) {
+		while( array_sum( $percents ) < $target ) {
 			$percentages[$i]['percent']++;
 			$i++;
 		}
-		array_multisort( array_column( $percentages, 'index' ), SORT_DESC, $percentages );
-		return array_combine(
-			array_column( $percentages, 'index' ),
-			array_column( $percentages, 'percent' )
-		);
+		array_multisort( $indexes, SORT_DESC, $percentages );
+		return array_combine( $indexes, $percents );
 	}
 
 	/**

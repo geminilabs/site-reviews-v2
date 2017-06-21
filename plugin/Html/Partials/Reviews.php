@@ -85,7 +85,7 @@ class Reviews extends Base
 
 	/**
 	 * @param string $date
-	 * @return string
+	 * @return null|string
 	 */
 	protected function buildDate( $date )
 	{
@@ -324,7 +324,6 @@ class Reviews extends Base
 		$rating = $this->app->make( 'Rating' );
 
 		$count = count( $reviews );
-		$counts = $rating->getCounts( $reviews );
 		$averageRating = $rating->getAverage( $reviews );
 		$percentages = preg_filter( '/$/', '%', $rating->getPercentages( $reviews ));
 
