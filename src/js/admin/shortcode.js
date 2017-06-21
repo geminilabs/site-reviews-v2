@@ -156,8 +156,9 @@ GLSR.shortcode.create = function( editor_id )
 GLSR.shortcode.normalize = function( data )
 {
 	var shortcodes = {
-		'site_reviews'     : ['author','date','excerpt','rating','title'],
+		'site_reviews' : ['author','date','excerpt','rating','title'],
 		'site_reviews_form': ['email','name','terms','title'],
+		'site_reviews_summary': ['bars','rating','stars','summary'],
 	};
 
 	var hide = [];

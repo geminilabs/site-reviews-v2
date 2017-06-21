@@ -17,12 +17,15 @@ use GeminiLabs\SiteReviews\Rating;
 
 class SiteReviewsSummary extends Shortcode
 {
+	const HIDDEN_KEYS = ['bars', 'rating', 'stars', 'summary'];
+
 	/**
-	 * @return string
+	 * @return null|string
 	 */
 	public function printShortcode( $atts = [] )
 	{
 		$this->normalize( $atts );
+		if( $this->isHidden() )return;
 		$this->rating = $this->app->make( 'Rating' );
 		$reviews = $this->db->getReviews( $this->args );
 		$ratingAverage = $this->rating->getAverage( $reviews->reviews );
@@ -43,25 +46,30 @@ class SiteReviewsSummary extends Shortcode
 	 * @param string $count
 	 * @return string
 	 */
-	protected function buildPercentBar( $label, $percentage, $count )
+	protected function buildPercentBar( $label, $percentage, $count = null )
 	{
+		if( empty( $count )) {
+			$count = $percentage;
+		}
 		return sprintf(
 			'<div class="glsr-bar">' .
-				'<span class="glsr-bar-label">%1$s</span>' .
-				'<span class="glsr-bar-background"><span class="glsr-bar-percent" style="width:%2$s;"></span></span>' .
-				'<span class="glsr-bar-count">%2$s</span>' .
+				'<span class="glsr-bar-label">%s</span>' .
+				'<span class="glsr-bar-background"><span class="glsr-bar-percent" style="width:%s;"></span></span>' .
+				'<span class="glsr-bar-count">%s</span>' .
 			'</div>',
 			$label,
-			$percentage
+			$percentage,
+			$count
 		);
 	}
 
 	/**
 	 * @param int $maxRating
-	 * @return string
+	 * @return null|string
 	 */
 	protected function buildPercentBars( array $reviews, $maxRating = 5 )
 	{
+		if( in_array( 'bars', $this->args['hide'] ))return;
 		$bars = '';
 		$ratingLabels = $this->args['labels'];
 		$ratingPercentages = preg_filter( '/$/', '%', $this->rating->getPercentages( $reviews ));
@@ -74,10 +82,21 @@ class SiteReviewsSummary extends Shortcode
 
 	/**
 	 * @param float $rating
-	 * @return string
+	 * @return null|string
 	 */
 	protected function buildRating( $rating )
 	{
+		if( in_array( 'rating', $this->args['hide'] ))return;
+		return sprintf( '<span class="glsr-summary-rating">%s</span>', $rating );
+	}
+
+	/**
+	 * @param float $rating
+	 * @return null|string
+	 */
+	protected function buildStars( $rating )
+	{
+		if( in_array( 'stars', $this->args['hide'] ))return;
 		return $this->app->make( 'Html' )->renderPartial( 'star-rating', [
 			'rating' => $rating,
 		]);
@@ -86,23 +105,26 @@ class SiteReviewsSummary extends Shortcode
 	/**
 	 * @param float $rating
 	 * @param int $count
-	 * @return string
+	 * @return null|string
 	 */
 	protected function buildSummary( $rating, $count )
 	{
-		return sprintf( '<div class="glsr-summary"><span class="glsr-summary-rating">%s</span>%s</div>',
-			$rating,
-			$this->buildRating( $rating ) . $this->buildSummaryText( $rating, $count )
+		if( $this->isHidden( ['rating', 'stars', 'summary'] ))return;
+		return sprintf( '<div class="glsr-summary">%s</div>',
+			$this->buildRating( $rating ) .
+			$this->buildStars( $rating ) .
+			$this->buildSummaryText( $rating, $count )
 		);
 	}
 
 	/**
 	 * @param float $rating
 	 * @param int $count
-	 * @return string
+	 * @return null|string
 	 */
 	protected function buildSummaryText( $rating, $count )
 	{
+		if( in_array( 'summary', $this->args['hide'] ))return;
 		$summary = str_replace(
 			['{rating}','{max}','{num}'],
 			[$rating, Rating::MAX_RATING, $count],
@@ -121,6 +143,7 @@ class SiteReviewsSummary extends Shortcode
 			'category'    => '',
 			'class'       => '',
 			'count'       => -1,
+			'hide'        => '',
 			'labels'      => '',
 			'rating'      => 1,
 			'summary'     => __( '{rating} out of {max} stars (based on {num} reviews)', 'site-reviews' ),
@@ -128,17 +151,52 @@ class SiteReviewsSummary extends Shortcode
 			'type'        => '',
 		];
 		$this->args = shortcode_atts( $defaults, $atts );
-		$defaultLabels = [
+		array_walk( $this->args, function( &$value, $key ) {
+			$methodName = $this->app->make( 'Helper' )->buildMethodName( $key, 'normalize' );
+			if( !method_exists( $this, $methodName ))return;
+			$value = $this->$methodName( $value );
+		});
+	}
+
+	/**
+	 * @return array
+	 */
+	protected function normalizeHide( $hide )
+	{
+		$hidden = explode( ',', $hide );
+		return array_filter( $hidden, function( $value ) {
+			return in_array( $value, static::HIDDEN_KEYS );
+		});
+	}
+
+	/**
+	 * @return array
+	 */
+	protected function normalizeLabels( $labels )
+	{
+		$defaults = [
 			__( 'Excellent', 'site-reviews' ),
 			__( 'Very good', 'site-reviews' ),
 			__( 'Average', 'site-reviews' ),
 			__( 'Poor', 'site-reviews' ),
 			__( 'Terrible', 'site-reviews' ),
 		];
-		$labels = wp_parse_args(
-			array_filter( explode( ',', $this->args['labels'] )),
-			$defaultLabels
-		);
-		$this->args['labels'] = array_combine( [5,4,3,2,1], array_slice( $labels, 0, 5 ));
+		$labels = explode( ',', $labels );
+		foreach( $defaults as $i => $label ) {
+			if( empty( $labels[$i] ))continue;
+			$defaults[$i] = $labels[$i];
+		}
+		return array_combine( [5,4,3,2,1], $defaults );
+	}
+
+	/**
+	 * @return bool
+	 */
+	protected function isHidden( array $values = [] )
+	{
+		if( empty( $values )) {
+			$values = static::HIDDEN_KEYS;
+		}
+		return !array_diff( $values, $this->args['hide'] );
 	}
 }
