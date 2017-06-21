@@ -58,16 +58,17 @@ class Reviews extends Base
 	 */
 	protected function buildAuthor( $author )
 	{
-		if( $this->args['hide_author'] && $this->args['schema'] ) {
+		$hidden = in_array( 'author', $this->args['hide'] );
+		if( $hidden && $this->args['schema'] ) {
 			return sprintf( '<span itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="%s"></span>', $author );
 		}
 		$dash = $this->db->getOption( 'settings.reviews.avatars.enabled' ) != 'yes'
 			? '&mdash;'
 			: '';
-		if( !$this->args['hide_author'] && $this->args['schema'] ) {
+		if( !$hidden && $this->args['schema'] ) {
 			return sprintf( '<p class="glsr-review-author" itemprop="author" itemscope itemtype="http://schema.org/Person">%s<span itemprop="name">%s</span></p>', $dash, $author );
 		}
-		if( !$this->args['hide_author'] ) {
+		if( !$hidden ) {
 			return sprintf( '<p class="glsr-review-author">%s<span>%s</span></p>', $dash, $author );
 		}
 	}
@@ -88,11 +89,12 @@ class Reviews extends Base
 	 */
 	protected function buildDate( $date )
 	{
+		$hidden = in_array( 'date', $this->args['hide'] );
 		$schema = $this->getSchema( sprintf( ' itemprop="datePublished" content="%s"', date( 'c', strtotime( $date ))));
-		if( $this->args['schema'] && $this->args['hide_date'] ) {
+		if( $this->args['schema'] && $hidden ) {
 			return sprintf( '<meta%s>', $schema );
 		}
-		if( !$this->args['hide_date'] ) {
+		if( !$hidden ) {
 			$format = $this->db->getOption( 'settings.reviews.date.enabled' ) == 'yes'
 				? $this->db->getOption( 'settings.reviews.date.format', 'M j, Y' )
 				: get_option( 'date_format' );
@@ -158,7 +160,7 @@ class Reviews extends Base
 	protected function buildRating( $rating )
 	{
 		return $this->app->make( 'Html' )->renderPartial( 'star-rating', [
-			'hidden' => $this->args['hide_rating'],
+			'hidden' => in_array( 'rating', $this->args['hide'] ),
 			'rating' => $rating,
 			'schema' => $this->args['schema'],
 		]);
@@ -170,15 +172,16 @@ class Reviews extends Base
 	 */
 	protected function buildText( $review )
 	{
+		$hidden = in_array( 'excerpt', $this->args['hide'] );
 		$schema = $this->getSchema( ' itemprop="reviewBody"' );
 		$text = $this->normalizeText( $review->content );
-		if( $this->args['schema'] && $this->args['hide_excerpt'] ) {
+		if( $this->args['schema'] && $hidden ) {
 			return sprintf( '<meta%s content="%s">', $schema, $text );
 		}
 		$text = $this->getExcerpt( $text );
 		$text = apply_filters( 'site-reviews/reviews/review/text', $text, $review, $this->args );
 		$text = wpautop( $text );
-		if( !$this->args['hide_excerpt'] ) {
+		if( !$hidden ) {
 			return sprintf( '<div class="glsr-review-excerpt"%s>%s</div>', $schema, $text );
 		}
 	}
@@ -192,11 +195,12 @@ class Reviews extends Base
 		if( empty( $review->title )) {
 			$review->title = __( 'No Title', 'site-reviews' );
 		}
+		$hidden = in_array( 'title', $this->args['hide'] );
 		$schema = $this->getSchema( ' itemprop="name"' );
-		if( $this->args['schema'] && $this->args['hide_title'] ) {
+		if( $this->args['schema'] && $hidden ) {
 			return sprintf( '<meta%s content="%s">', $schema, $review->title );
 		}
-		if( !$this->args['hide_title'] ) {
+		if( !$hidden ) {
 			$title = sprintf( '<h3 class="glsr-review-title"%s>%s</h3>', $schema, $review->title );
 			return apply_filters( 'site-reviews/reviews/review/title', $title, $review, $this->args );
 		}
@@ -265,30 +269,22 @@ class Reviews extends Base
 	protected function normalize()
 	{
 		$defaults = [
-			'assigned_to'  => '',
-			'category'     => '',
-			'class'        => '',
-			'count'        => '',
-			'hide_author'  => false,
-			'hide_date'    => false,
-			'hide_excerpt' => false,
-			'hide_link'    => true,
-			'hide_rating'  => false,
-			'hide_title'   => false,
-			'orderby'      => 'date',
-			'pagination'   => false,
-			'rating'       => '',
-			'schema'       => true,
-			'type'         => '',
-			'word_limit'   => 55,
+			'assigned_to' => '',
+			'category'    => '',
+			'class'       => '',
+			'count'       => '',
+			'hide'        => '',
+			'orderby'     => 'date',
+			'pagination'  => false,
+			'rating'      => '',
+			'schema'      => true,
+			'type'        => '',
+			'word_limit'  => 55,
 		];
-		$this->args = wp_parse_args( $this->args, $defaults );
-		$conditionals = [
-			'hide_author', 'hide_date', 'hide_excerpt', 'hide_link', 'hide_rating', 'hide_title',
-			'pagination', 'schema',
-		];
-		array_walk( $this->args, function( &$value, $key ) use( $conditionals ) {
-			if( in_array( $key, $conditionals )) {
+		$this->args = shortcode_atts( $defaults, $this->args );
+		$this->args['hide'] = (array) $this->args['hide'];
+		array_walk( $this->args, function( &$value, $key ) {
+			if( in_array( $key, ['pagination','schema'] )) {
 				$value = wp_validate_boolean( $value );
 			}
 		});
@@ -311,12 +307,7 @@ class Reviews extends Base
 	 */
 	protected function shouldHideReviews()
 	{
-		$conditionals = ['hide_author', 'hide_date', 'hide_excerpt', 'hide_rating', 'hide_title'];
-		foreach( $conditionals as $conditional ) {
-			if( $this->args[$conditional] )continue;
-			return false;
-		}
-		return true;
+		return !array_diff( ['author', 'date', 'excerpt', 'rating', 'title'], $this->args['hide'] );
 	}
 
 
