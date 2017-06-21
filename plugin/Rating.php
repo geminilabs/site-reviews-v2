@@ -110,7 +110,10 @@ class Rating
 	{
 		$counts = $this->getCounts( $reviews );
 		array_walk( $counts, function( &$count, $rating ) use( $counts ) {
-			$count = $counts[$rating] / array_sum( $counts ) * 100;
+			$total = array_sum( $counts );
+			$count = !empty( $total ) && !empty( $counts[$rating] )
+				? $counts[$rating] / array_sum( $counts ) * 100
+				: 0;
 		});
 		return $this->getRoundedPercentages( $counts );
 	}
@@ -184,16 +187,17 @@ class Rating
 			];
 		});
 		$indexes = array_column( $percentages, 'index' );
-		$percents = array_column( $percentages, 'percent' );
 		$remainders = array_column( $percentages, 'remainder' );
 		array_multisort( $remainders, SORT_DESC, SORT_STRING, $indexes, SORT_DESC, $percentages );
 		$i = 0;
-		while( array_sum( $percents ) < $target ) {
-			$percentages[$i]['percent']++;
-			$i++;
+		if( array_sum( array_column( $percentages, 'percent' )) > 0 ) {
+			while( array_sum( array_column( $percentages, 'percent' )) < $target ) {
+				$percentages[$i]['percent']++;
+				$i++;
+			}
 		}
 		array_multisort( $indexes, SORT_DESC, $percentages );
-		return array_combine( $indexes, $percents );
+		return array_combine( $indexes, array_column( $percentages, 'percent' ));
 	}
 
 	/**
