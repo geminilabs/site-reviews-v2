@@ -16,7 +16,7 @@
 		'options'    => [
 			''  => __( 'Select a Rating', 'site-reviews' ),
 			'5' => __( 'Excellent', 'site-reviews' ),
-			'4' => __( 'Very Good', 'site-reviews' ),
+			'4' => __( 'Very good', 'site-reviews' ),
 			'3' => __( 'Average', 'site-reviews' ),
 			'2' => __( 'Poor', 'site-reviews' ),
 			'1' => __( 'Terrible', 'site-reviews' ),

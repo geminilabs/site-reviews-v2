@@ -22,6 +22,9 @@ class Date
 		[INF, 3600 * 24 * 265],
 	];
 
+	/**
+	 * @return string
+	 */
 	public function relative( $date )
 	{
 		$diff = time() - strtotime( $date );

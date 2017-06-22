@@ -180,7 +180,7 @@ class SiteReviewsSummary extends Shortcode
 
 	/**
 	 * @param string $postId
-	 * @return string
+	 * @return int|string
 	 */
 	protected function normalizeAssignedTo( $postId )
 	{
