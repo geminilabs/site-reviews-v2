@@ -11,6 +11,7 @@ scrap.md
 /node_modules
 /vendor/*/*
 
+!/vendor/sepia/po-parser
 !/vendor/sinergi/browser-detector
 !/vendor/vectorface/whip
 
@@ -32,3 +33,4 @@ scrap.md
 /vendor/sinergi/browser-detector/src/Device*
 /vendor/sinergi/browser-detector/src/Language*
 /vendor/sinergi/browser-detector/src/Os*
+/vendor/sepia/po-parser/build
