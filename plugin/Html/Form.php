@@ -12,6 +12,7 @@ namespace GeminiLabs\SiteReviews\Html;
 
 use GeminiLabs\SiteReviews\App;
 
+use Closure;
 use Exception;
 
 class Form
@@ -29,6 +30,11 @@ class Form
 	/**
 	 * @var array
 	 */
+	protected $customFields;
+
+	/**
+	 * @var array
+	 */
 	protected $dependencies;
 
 	/**
@@ -40,6 +46,7 @@ class Form
 	{
 		$this->app          = $app;
 		$this->args         = [];
+		$this->customFields = [];
 		$this->dependencies = [];
 		$this->fields       = [];
 	}
@@ -54,6 +61,7 @@ class Form
 	{
 		switch( $property ) {
 			case 'args';
+			case 'customFields':
 			case 'dependencies';
 			case 'fields';
 			return $this->$property;
@@ -73,6 +81,7 @@ class Form
 	{
 		switch( $property ) {
 			case 'args':
+			case 'customFields':
 			case 'dependencies':
 			case 'fields':
 				$this->$property = $value;
@@ -80,6 +89,17 @@ class Form
 			default:
 				throw new Exception( 'Invalid ' . __CLASS__ . ' property: ' . $property );
 		}
+	}
+
+	/**
+	 * Add a field to the form
+	 *
+	 * @return Form
+	 */
+	public function addCustomField( Closure $callback )
+	{
+		$this->customFields[] = $callback();
+		return $this;
 	}
 
 	/**
@@ -137,10 +157,9 @@ class Form
 	 */
 	public function render( $print = true )
 	{
-		$rendered = sprintf( '<form %s>%s%s</form>',
+		$rendered = sprintf( '<form %s>%s</form>',
 			$this->args['attributes'],
-			$this->generateFields(),
-			$this->generateSubmitButton()
+			$this->generateFields() . $this->generateCustomFields() . $this->generateSubmitButton()
 		);
 
 		if( !!$print && $print !== 'return' ) {
@@ -177,6 +196,16 @@ class Form
 		do_settings_sections( $this->args['nonce'] );
 
 		return ob_get_clean();
+	}
+
+	/**
+	 * Generate any custom fields of a front-end form
+	 *
+	 * @return null|string
+	 */
+	protected function generateCustomFields()
+	{
+		return implode( '', $this->customFields );
 	}
 
 	/**
@@ -230,6 +259,10 @@ class Form
 		$hiddenFields .= is_admin()
 			? $this->generateAdminFields()
 			: $this->generatePublicFields();
+
+		if( empty( $fields )) {
+			return $hiddenFields;
+		}
 
 		return sprintf( '<table class="form-table"><tbody>%s</tbody></table>%s', $fields, $hiddenFields );
 	}
