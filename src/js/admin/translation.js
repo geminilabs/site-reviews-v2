@@ -25,6 +25,18 @@ GLSR.translation.clearResults = function()
 /**
  * @return void
  */
+GLSR.translation.deleteRow = function( index )
+{
+	var row = GLSR.translation.entriesEl.children( 'tr' ).eq( index );
+	row.find( 'td' ).css({ backgroundColor:'#faafaa' });
+	row.fadeOut( 350, function() {
+		x( this ).remove();
+	});
+};
+
+/**
+ * @return void
+ */
 GLSR.translation.init = function()
 {
 	GLSR.translation.exclude = [];
@@ -36,6 +48,7 @@ GLSR.translation.init = function()
 		GLSR.translation.searchEl.attr( 'aria-describedby', 'live-search-desc' );
 		GLSR.translation.searchEl.on( 'input', _.debounce( GLSR.translation.onSearchInput, 500 ));
 		GLSR.translation.searchEl.on( 'keyup', GLSR.translation.onSearchKeyup );
+		GLSR.translation.entriesEl.on( 'click', 'a.delete', GLSR.translation.onEntryDelete );
 		x( document ).on( 'click', GLSR.translation.onDocumentClick );
 		x( document ).on( 'keydown', GLSR.translation.onDocumentKeydown );
 	}
@@ -98,6 +111,14 @@ GLSR.translation.onDocumentKeydown = function( ev )
 		GLSR.translation.navigateResults(1);
 		ev.preventDefault();
 	}
+};
+
+/**
+ * @return void
+ */
+GLSR.translation.onEntryDelete = function( ev )
+{
+	GLSR.translation.deleteRow( x( this ).closest( 'tr' ).index() );
 };
 
 /**

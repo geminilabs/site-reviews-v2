@@ -3,7 +3,7 @@
 		<p>{{ data.msgid }}</p>
 		<p>{{ data.msgid_plural }}</p>
 		<p class="row-actions">
-			<span class="delete"><a href="#" class="delete" aria-label="<?= __( 'Delete translation string', 'site-reviews' );?>"><?= __( 'Delete', 'site-reviews' ); ?></a></span>
+			<span class="delete"><a href="#{{ data.index }}" class="delete" aria-label="<?= __( 'Delete translation string', 'site-reviews' );?>"><?= __( 'Delete', 'site-reviews' ); ?></a></span>
 		</p>
 		<button type="button" class="toggle-row">
 			<span class="screen-reader-text"><?= __( 'Show custom translation', 'site-reviews' ); ?></span>

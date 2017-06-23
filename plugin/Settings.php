@@ -476,6 +476,10 @@ class Settings
 			'nonce'  => $this->app->id . '-settings',
 			'submit' => __( 'Save Settings', 'site-reviews' ),
 		]);
+		$this->addSetting( $formId, [
+			'type' => 'hidden',
+			'name' => 'dummyInput',
+		]);
 		$this->html->addCustomField( $formId, function() {
 			return sprintf(
 				'<table class="widefat wp-list-table glsr-translations">' .
