@@ -13,6 +13,8 @@ namespace GeminiLabs\SiteReviews\Providers;
 use GeminiLabs\SiteReviews\App;
 use GeminiLabs\SiteReviews\Log\Logger;
 use GeminiLabs\SiteReviews\Providers\ProviderInterface;
+use Sepia\FileHandler;
+use Sepia\PoParser;
 
 /**
  * Note: We're using the full "namespace\classname" because "::class" isn't supported in PHP 5.4
@@ -21,33 +23,19 @@ class MainProvider implements ProviderInterface
 {
 	public function register( App $app )
 	{
-		// Bind the Reviews instance itself to the container
 		$app->bind( 'GeminiLabs\SiteReviews\App', $app );
 
-		// Initialise logger from log file
-		$app->bind( 'GeminiLabs\SiteReviews\Log\Logger', function( $app )
-		{
+		$app->bind( 'GeminiLabs\SiteReviews\Log\Logger', function( $app ) {
 			return Logger::file( trailingslashit( $app->path ) . 'debug.log', $app->prefix );
 		});
 
-		$app->singleton(
-			'GeminiLabs\SiteReviews\Controllers\AjaxController',
-			'GeminiLabs\SiteReviews\Controllers\AjaxController'
-		);
+		$app->bind( 'Sepia\PoParser', function( $app ) {
+			return new PoParser( new FileHandler( $app->path . 'languages/site-reviews.pot' ));
+		});
 
 		$app->singleton(
 			'GeminiLabs\SiteReviews\Html',
 			'GeminiLabs\SiteReviews\Html'
-		);
-
-		$app->singleton(
-			'GeminiLabs\SiteReviews\Controllers\MainController',
-			'GeminiLabs\SiteReviews\Controllers\MainController'
-		);
-
-		$app->singleton(
-			'GeminiLabs\SiteReviews\Controllers\ReviewController',
-			'GeminiLabs\SiteReviews\Controllers\ReviewController'
 		);
 
 		$app->singleton(
@@ -58,6 +46,27 @@ class MainProvider implements ProviderInterface
 		$app->singleton(
 			'GeminiLabs\SiteReviews\Settings',
 			'GeminiLabs\SiteReviews\Settings'
+		);
+
+		$app->singleton(
+			'GeminiLabs\SiteReviews\Translation',
+			'GeminiLabs\SiteReviews\Translation'
+		);
+
+		// controllers should go last
+		$app->singleton(
+			'GeminiLabs\SiteReviews\Controllers\AjaxController',
+			'GeminiLabs\SiteReviews\Controllers\AjaxController'
+		);
+
+		$app->singleton(
+			'GeminiLabs\SiteReviews\Controllers\MainController',
+			'GeminiLabs\SiteReviews\Controllers\MainController'
+		);
+
+		$app->singleton(
+			'GeminiLabs\SiteReviews\Controllers\ReviewController',
+			'GeminiLabs\SiteReviews\Controllers\ReviewController'
 		);
 	}
 }
