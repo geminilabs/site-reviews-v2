@@ -156,7 +156,7 @@ class Translation
 				: $data['single'];
 			$rendered .= $this->render( 'result', [
 				'entry' => wp_json_encode( $data ),
-				'text' => $text,
+				'text' => wp_strip_all_tags( $text ),
 			]);
 		}
 		if( $resetAfterRender ) {
