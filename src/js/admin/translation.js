@@ -31,6 +31,20 @@ GLSR.translation.deleteRow = function( index )
 	row.find( 'td' ).css({ backgroundColor:'#faafaa' });
 	row.fadeOut( 350, function() {
 		x( this ).remove();
+		GLSR.translation.reIndexRows();
+	});
+};
+
+/**
+ * @return void
+ */
+GLSR.translation.reIndexRows = function()
+{
+	GLSR.translation.entriesEl.children( 'tr' ).each( function( index ) {
+		x( this ).find( '.glsr-string-translation' ).children().filter( ':input' ).each( function() {
+			var name = x( this ).attr( 'name' ).replace( /\[\d+\]/i, '[' + index + ']' );
+			x( this ).attr( 'name', name );
+		});
 	});
 };
 
