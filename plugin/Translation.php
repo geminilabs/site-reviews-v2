@@ -58,8 +58,8 @@ class Translation
 		$translations = $this->getSettings();
 		$entries = $this->filter( $translations, $this->entries )->results();
 		array_walk( $translations, function( &$entry ) use( $entries ) {
-			$entry['msgid'] = $this->getEntryString( $entries[$entry['id']] );
 			$entry['desc'] = $this->getEntryString( $entries[$entry['id']], 'msgctxt' );
+			$entry['msgid'] = $this->getEntryString( $entries[$entry['id']], 'msgid' );
 			if( isset( $entries[$entry['id']]['msgid_plural'] )) {
 				$entry['msgid_plural'] = $entries[$entry['id']]['msgid_plural'];
 			}
@@ -78,7 +78,7 @@ class Translation
 	/**
 	 * @param null|array $entriesToExclude
 	 * @param null|array $entries
-	 * @return array
+	 * @return Translation
 	 */
 	public function exclude( $entriesToExclude = null, $entries = null )
 	{
@@ -117,7 +117,7 @@ class Translation
 		$template = ob_get_clean();
 		foreach( $entry as $key => $value ) {
 			if( is_array( $value ))continue;
-			$template = str_replace( sprintf( '{{ %s }}', $key ), $value, $template );
+			$template = str_replace( sprintf( '{{ data.%s }}', $key ), esc_attr( $value ), $template );
 		}
 		return $template;
 	}
@@ -145,14 +145,19 @@ class Translation
 	{
 		$rendered = '';
 		foreach( $this->results as $id => $entry ) {
-			$entry['id'] = $id;
-			$entry['desc'] = $this->getEntryString( $entry, 'msgctxt' );
-			$entry['value'] = $this->getEntryString( $entry );
-			$entry['plural'] = $this->getEntryString( $entry, 'msgid_plural' );
-			if( !empty( $entry['plural'] )) {
-				$entry['value'] .= sprintf( ' | %s', $entry['plural'] );
-			}
-			$rendered .= $this->render( 'result', $entry );
+			$data = [
+				'desc' => $this->getEntryString( $entry, 'msgctxt' ),
+				'id' => $id,
+				'plural' => $this->getEntryString( $entry, 'msgid_plural' ),
+				'single' => $this->getEntryString( $entry, 'msgid' ),
+			];
+			$text = !empty( $data['plural'] )
+				? sprintf( '%s | %s', $data['single'], $data['plural'] )
+				: $data['single'];
+			$rendered .= $this->render( 'result', [
+				'entry' => wp_json_encode( $data ),
+				'text' => $text,
+			]);
 		}
 		if( $resetAfterRender ) {
 			$this->reset();
@@ -186,24 +191,25 @@ class Translation
 	 */
 	public function search( $needle = '', $threshold = 3, $caseSensitive = false )
 	{
+		$this->reset();
 		$needle = trim( $needle );
-		$results = [];
-		if( strlen( $needle ) < $threshold ) {
-			return $results;
-		}
 		foreach( $this->entries as $key => $entry ) {
-			$single = $this->getEntryString( $entry );
+			$single = $this->getEntryString( $entry, 'msgid' );
 			$plural = $this->getEntryString( $entry, 'msgid_plural' );
 			if( !$caseSensitive ) {
 				$needle = strtolower( $needle );
 				$single = strtolower( $single );
 				$plural = strtolower( $plural );
 			}
-			if( strpos( sprintf( '%s %s', $single, $plural ), $needle ) !== false ) {
-				$results[$key] = $entry;
+			if( strlen( $needle ) < $threshold ) {
+				if( in_array( $needle, [$single, $plural] )) {
+					$this->results[$key] = $entry;
+				}
+			}
+			else if( strpos( sprintf( '%s %s', $single, $plural ), $needle ) !== false ) {
+				$this->results[$key] = $entry;
 			}
 		}
-		$this->results = $results;
 		return $this;
 	}
 
@@ -211,7 +217,7 @@ class Translation
 	 * @param string $key
 	 * @return string
 	 */
-	protected function getEntryString( array $entry, $key = 'msgid' )
+	protected function getEntryString( array $entry, $key )
 	{
 		return isset( $entry[$key] )
 			? implode( '', (array) $entry[$key] )
@@ -246,7 +252,7 @@ class Translation
 	 * @param string $key
 	 * @return array
 	 */
-	protected function normalizeEntryString( array $entry, $key = 'msgid' )
+	protected function normalizeEntryString( array $entry, $key )
 	{
 		if( isset( $entry[$key] )) {
 			$entry[$key] = $this->getEntryString( $entry, $key );

@@ -43,4 +43,6 @@ x( function()
 	x( document ).on( 'click', '.branch-4 .toggle-row, .branch-4-1 .toggle-row, .branch-4-2 .toggle-row', function() {
 		x( this ).closest( 'tr' ).toggleClass( 'is-expanded' );
 	});
+
+	GLSR.translation.init();
 });

@@ -26,19 +26,16 @@ class EnqueueAssets
 	public function handle( Command $command )
 	{
 		$this->dependencies = glsr_resolve( 'Html' )->getDependencies();
-
+		$ajaxNonce = wp_create_nonce( glsr_app()->id . '-ajax-nonce' );
 		$variables = [
 			'action'  => glsr_app()->prefix . '_action',
-			'ajaxurl' => wp_nonce_url( admin_url( 'admin-ajax.php' ), glsr_app()->id . '-ajax-nonce' ),
+			'ajaxurl' => add_query_arg( '_nonce', $ajaxNonce, admin_url( 'admin-ajax.php' )),
+			'ajaxnonce' => $ajaxNonce,
 		];
-
 		if( is_admin() ) {
 			$this->enqueueAdmin( $command );
-
 			if( user_can_richedit() ) {
-
 				add_filter( 'mce_external_plugins', [ $this, 'enqueueTinymcePlugins'], 15 );
-
 				$variables = array_merge( $variables, [
 					'shortcodes' => $this->localizeShortcodes(),
 				]);
@@ -47,7 +44,6 @@ class EnqueueAssets
 		else {
 			$this->enqueuePublic( $command );
 		}
-
 		wp_localize_script( $command->handle, 'site_reviews', $variables );
 	}
 
@@ -60,7 +56,7 @@ class EnqueueAssets
 	{
 		$screen = glsr_current_screen();
 
-		$dependencies = array_merge( $this->dependencies, ['jquery'] );
+		$dependencies = array_merge( $this->dependencies, ['jquery', 'underscore', 'wp-util'] );
 
 		wp_enqueue_style(
 			$command->handle,

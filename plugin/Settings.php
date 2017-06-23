@@ -12,6 +12,7 @@ namespace GeminiLabs\SiteReviews;
 
 use GeminiLabs\SiteReviews\App;
 use GeminiLabs\SiteReviews\Html;
+use GeminiLabs\SiteReviews\Translation;
 use ReflectionClass;
 use ReflectionMethod;
 
@@ -461,5 +462,31 @@ class Settings
 			'placeholder' => __( 'Tell us your email', 'site-reviews' ),
 			'default' => ':placeholder',
 		]);
+	}
+
+	/**
+	 * @return void
+	 */
+	protected function setStrings()
+	{
+		$formId = 'settings/strings';
+		$this->html->createForm( $formId, [
+			'action' => admin_url( 'options.php' ),
+			'class'  => 'glsr-translation-strings',
+			'nonce'  => $this->app->id . '-settings',
+			'submit' => __( 'Save Settings', 'site-reviews' ),
+		]);
+		$this->html->addCustomField( $formId, function() {
+			return sprintf(
+				'<table class="widefat wp-list-table glsr-translations">' .
+				'<thead><tr>' .
+					'<th scope="col" class="manage-column column-primary">Strings</th>' .
+					'<th scope="col" class="manage-column">Custom Strings</th>' .
+				'</tr></thead>' .
+				'<tbody>%s</tbody>' .
+				'</table>',
+				$this->app->make( 'Translation' )->renderAll()
+			);
+		});
 	}
 }

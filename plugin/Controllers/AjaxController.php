@@ -17,6 +17,16 @@ use GeminiLabs\SiteReviews\Commands\TogglePinned;
 class AjaxController extends BaseController
 {
 	/**
+	 * Change the assigned Post ID of a review
+	 */
+	public function ajaxChangeAssignedTo( $request )
+	{
+		wp_send_json( $this->html->renderPartial( 'link', [
+			'post_id' => $request['ID'],
+		]));
+	}
+
+	/**
 	 * Change a review status
 	 *
 	 * @since 2.0.0
@@ -29,16 +39,6 @@ class AjaxController extends BaseController
 	}
 
 	/**
-	 * Change the assigned Post ID of a review
-	 */
-	public function ajaxChangeAssignedTo( $request )
-	{
-		wp_send_json( $this->html->renderPartial( 'link', [
-			'post_id' => $request['ID'],
-		]));
-	}
-
-	/**
 	 * Clears the log
 	 */
 	public function ajaxClearLog()
@@ -48,34 +48,6 @@ class AjaxController extends BaseController
 		wp_send_json([
 			'log'     => __( 'Log is empty', 'site-reviews' ),
 			'notices' => $this->notices->show( false ),
-		]);
-	}
-
-	/**
-	 * Toggle the pinned status of a review
-	 */
-	public function ajaxTogglePinned( $request )
-	{
-		$response = $this->execute( new TogglePinned( $request ));
-
-		wp_send_json([
-			'notices' => $this->notices->show( false ),
-			'pinned'  => (bool) $response,
-		]);
-	}
-
-	/**
-	 * Submit a review
-	 */
-	public function ajaxPostReview( $request )
-	{
-		$response = $this->app->make( 'Controllers\ReviewController' )->postSubmitReview( $request );
-		$session  = $this->app->make( 'Session' );
-
-		wp_send_json([
-			'errors' => $session->get( "{$request['form_id']}-errors", false, true ),
-			'message' => $response,
-			'recaptcha' => $session->get( "{$request['form_id']}-recaptcha", false, true ),
 		]);
 	}
 
@@ -109,5 +81,52 @@ class AjaxController extends BaseController
 		}
 
 		wp_send_json( $response );
+	}
+
+	/**
+	 * Submit a review
+	 */
+	public function ajaxPostReview( $request )
+	{
+		$response = $this->app->make( 'Controllers\ReviewController' )->postSubmitReview( $request );
+		$session  = $this->app->make( 'Session' );
+
+		wp_send_json([
+			'errors' => $session->get( "{$request['form_id']}-errors", false, true ),
+			'message' => $response,
+			'recaptcha' => $session->get( "{$request['form_id']}-recaptcha", false, true ),
+		]);
+	}
+
+	/**
+	 * Search available language strings
+	 */
+	public function ajaxsearchTranslations( $request )
+	{
+		if( empty( $request['exclude'] )) {
+			$request['exclude'] = [];
+		}
+		$results = $this->app->make( 'Translation' )
+			->search( $request['search'] )
+			->exclude()
+			->exclude( $request['exclude'] )
+			->renderResults();
+
+		wp_send_json_success([
+			'items' => $results,
+		]);
+	}
+
+	/**
+	 * Toggle the pinned status of a review
+	 */
+	public function ajaxTogglePinned( $request )
+	{
+		$response = $this->execute( new TogglePinned( $request ));
+
+		wp_send_json([
+			'notices' => $this->notices->show( false ),
+			'pinned'  => (bool) $response,
+		]);
 	}
 }

@@ -573,6 +573,7 @@ class MainController extends BaseController
 			'general' => __( 'General', 'site-reviews' ),
 			'reviews' => __( 'Reviews', 'site-reviews' ),
 			'reviews-form' => __( 'Submission Form', 'site-reviews' ),
+			'strings' => __( 'Translations', 'site-reviews' ),
 		]);
 
 		$this->renderMenu( 'settings', [
@@ -631,11 +632,15 @@ class MainController extends BaseController
 
 	/**
 	 * register_setting() callback
-	 *
+	 * @param array $input
 	 * @return array
 	 */
-	public function sanitizeSettings( array $input )
+	public function sanitizeSettings( $input )
 	{
+		if( !is_array( $input )) {
+			$input = ['settings' => []];
+		}
+
 		$key = key( $input );
 		$message = '';
 
@@ -654,7 +659,12 @@ class MainController extends BaseController
 			$this->notices->addSuccess( $message );
 		}
 
-		return array_replace_recursive( $this->db->getOptions(), $input );
+		$options = array_replace_recursive( $this->db->getOptions(), $input );
+
+		if( isset( $input['strings'] )) {
+			$options['settings']['strings'] = $input['strings'];
+		}
+		return $options;
 	}
 
 	/**
