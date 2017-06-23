@@ -231,17 +231,13 @@ body.branch-4-1 {
 	&:last-of-type {
 		border-bottom-color: #ddd;
 	}
-	&:hover {
-		cursor: pointer;
-		background-color: #00a0d2;
-		color: #fff;
-	}
+	&:hover,
 	&:active,
 	&:focus {
-		border-color: #5b9dd9;
-		box-shadow: 0 0 2px rgba( 30, 140, 190, 0.8 );
+		color: #fff;
+		background-color: #00a0d2;
+		cursor: pointer;
 		outline: none;
-		z-index: 1;
 	}
 }
 

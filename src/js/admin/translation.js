@@ -17,6 +17,7 @@ GLSR.translation.clearResults = function()
 		GLSR.translation.searchRequest.abort();
 	}
 	GLSR.translation.searchEl.value = '';
+	GLSR.translation.results = {};
 	GLSR.translation.resultsEl.empty();
 	x( 'body' ).removeClass( 'glsr-focus loading-content' );
 };
@@ -27,6 +28,7 @@ GLSR.translation.clearResults = function()
 GLSR.translation.init = function()
 {
 	GLSR.translation.exclude = [];
+	GLSR.translation.selectedClass = 'glsr-selected-result';
 	GLSR.translation.searchEl = x( '.glsr-strings-search' );
 	GLSR.translation.resultsEl = x( '.glsr-strings-results' );
 	GLSR.translation.entriesEl = x( '.glsr-translations tbody' );
@@ -34,17 +36,67 @@ GLSR.translation.init = function()
 		GLSR.translation.searchEl.attr( 'aria-describedby', 'live-search-desc' );
 		GLSR.translation.searchEl.on( 'input', _.debounce( GLSR.translation.onSearchInput, 500 ));
 		GLSR.translation.searchEl.on( 'keyup', GLSR.translation.onSearchKeyup );
+		x( document ).on( 'click', GLSR.translation.onDocumentClick );
+		x( document ).on( 'keydown', GLSR.translation.onDocumentKeydown );
 	}
-	x( document ).on( 'keyup', GLSR.translation.onDocumentKeyup );
 };
 
 /**
  * @return void
  */
-GLSR.translation.onDocumentKeyup = function( ev )
+GLSR.translation.navigateResults = function( diff )
 {
-	if( GLSR.keys.ESC === ev.which && GLSR.translation.searchEl.length ) {
+	GLSR.translation.selected += diff;
+	GLSR.translation.results.removeClass( GLSR.translation.selectedClass );
+	if( GLSR.translation.selected >= GLSR.translation.results.length ) {
+		// reached the end (should now allow keydown scroll)
+		GLSR.translation.selected = GLSR.translation.results.length - 1;
+	}
+	if( GLSR.translation.selected < 0 ) {
+		// reached the top (should now allow keydown scroll)
+		GLSR.translation.selected = -1;
+		GLSR.translation.searchEl.focus();
+	}
+	if( GLSR.translation.selected >= 0 ) {
+		GLSR.translation.results.eq( GLSR.translation.selected )
+			.addClass( GLSR.translation.selectedClass )
+			.focus();
+	}
+};
+
+/**
+ * @return void
+ */
+GLSR.translation.onDocumentClick = function( ev )
+{
+	var searchForm = ev.target.closest( '.glsr-strings' );
+	if( !searchForm && x( 'body' ).hasClass( 'glsr-focus' )) {
 		GLSR.translation.clearResults();
+	}
+};
+
+/**
+ * @return void
+ */
+GLSR.translation.onDocumentKeydown = function( ev )
+{
+	if( !GLSR.translation.results )return;
+	if( GLSR.keys.ESC === ev.which ) {
+		GLSR.translation.clearResults();
+	}
+	if( GLSR.keys.ENTER === ev.which || GLSR.keys.SPACE === ev.which ) {
+		var selected = GLSR.translation.resultsEl.find( '.' + GLSR.translation.selectedClass );
+		if( selected ) {
+			selected.trigger( 'click' );
+		}
+	}
+	if( GLSR.keys.UP === ev.which ) {
+		GLSR.translation.navigateResults(-1);
+		ev.preventDefault();
+	}
+	if( GLSR.keys.DOWN === ev.which ) {
+		GLSR.translation.navigateResults(1);
+		ev.preventDefault();
 	}
 };
 
@@ -75,6 +127,7 @@ GLSR.translation.onSearchInput = function( ev )
 	if( GLSR.translation.searchTerm === ev.target.value )return;
 	GLSR.translation.abort();
 	GLSR.translation.resultsEl.empty();
+	GLSR.translation.selected = -1;
 	GLSR.translation.searchTerm = ev.target.value;
 	if( GLSR.translation.searchTerm === '' ) {
 		return GLSR.translation.clearResults();
@@ -91,7 +144,8 @@ GLSR.translation.onSearchInput = function( ev )
 		x( 'body' )[( response.items.length ? 'add' : 'remove' ) + 'Class']( 'glsr-focus' );
 		x( 'body' ).removeClass( 'loading-content' );
 		GLSR.translation.resultsEl.append( response.items );
-		GLSR.translation.resultsEl.children( 'span' ).on( 'click', GLSR.translation.onResultClick );
+		GLSR.translation.results = GLSR.translation.resultsEl.children( 'span' );
+		GLSR.translation.results.on( 'click', GLSR.translation.onResultClick );
 		delete GLSR.translation.searchRequest;
 	});
 };
@@ -113,42 +167,7 @@ GLSR.translation.onSearchKeyup = function( ev )
 
 
 
-// window.displayBoxIndex = -1;
 
-// $('#cityresults').on('click', 'a', function () {
-//     $('#city').val($(this).text());
-//     $('#cityresults').hide('');
-//     $('#citygeonameid').val($(this).parent().attr('data-id'));
-//     return false;
-// });
-
-// var Navigate = function (diff) {
-//     displayBoxIndex += diff;
-//     var oBoxCollection = $("#cityresults ul li a");
-//     if (displayBoxIndex >= oBoxCollection.length) {
-//         displayBoxIndex = 0;
-//     }
-//     if (displayBoxIndex < 0) {
-//         displayBoxIndex = oBoxCollection.length - 1;
-//     }
-//     var cssClass = "display_box_hover";
-//     oBoxCollection.removeClass(cssClass).eq(displayBoxIndex).addClass(cssClass);
-// }
-
-// $(document).on('keypress keyup', function (e) {
-//     if (e.keyCode == 13 || e.keyCode == 32) {
-//         $('.display_box_hover').trigger('click');
-//         return false;
-//     }
-//     if (e.keyCode == 40) {
-//         //down arrow
-//         Navigate(1);
-//     }
-//     if (e.keyCode == 38) {
-//         //up arrow
-//         Navigate(-1);
-//     }
-// });
 
 /**
  * Whether we're waiting for an Ajax request to complete.

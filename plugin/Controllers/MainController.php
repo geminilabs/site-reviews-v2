@@ -661,8 +661,8 @@ class MainController extends BaseController
 
 		$options = array_replace_recursive( $this->db->getOptions(), $input );
 
-		if( isset( $input['strings'] )) {
-			$options['settings']['strings'] = $input['strings'];
+		if( isset( $input['settings']['strings'] )) {
+			$options['settings']['strings'] = array_values( array_filter( $input['settings']['strings'] ));
 		}
 		return $options;
 	}
