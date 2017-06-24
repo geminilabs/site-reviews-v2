@@ -134,11 +134,9 @@ GLSR.translation.onResultClick = function( ev )
 	ev.preventDefault();
 	var result = x( this );
 	var entry = result.data( 'entry' );
-	var template = wp.template( 'glsr-string-' + ( entry.plural ? 'plural' : 'single' ));
+	var template = wp.template( 'glsr-string-' + ( entry.p1 ? 'plural' : 'single' ));
 	entry.index = GLSR.translation._.entriesEl.children().length;
 	entry.prefix = GLSR.translation._.resultsEl.data( 'prefix' );
-	entry.msgid = entry.single;
-	entry.msgid_plural = entry.plural;
 	if( template ) {
 		GLSR.translation._.entriesEl.append( template( entry ));
 		GLSR.translation._.exclude.push({ id: entry.id });
@@ -203,7 +201,7 @@ GLSR.translation.reindexRows = function()
 			var input = x( this );
 			var name = input.attr( 'name' ).replace( /\[\d+\]/i, '[' + index + ']' );
 			input.attr( 'name', name );
-			if( input.attr( 'type' ) === 'hidden' ) {
+			if( input.is( '[data-id]' )) {
 				GLSR.translation._.exclude.push({ id: input.val() })
 			}
 		});

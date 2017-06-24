@@ -1,6 +1,6 @@
 <tr class="glsr-string">
 	<td class="glsr-string-original column-primary">
-		<p>{{ data.msgid }}</p>
+		<p>{{ data.s1 }}</p>
 		<p class="row-actions">
 			<span class="delete"><a href="#{{ data.index }}" class="delete" aria-label="<?= __( 'Delete translation string', 'site-reviews' );?>"><?= __( 'Delete', 'site-reviews' ); ?></a></span>
 		</p>
@@ -9,8 +9,9 @@
 		</button>
 	</td>
 	<td class="glsr-string-translation">
-		<input type="hidden" name="{{ data.prefix }}[settings][strings][{{ data.index }}][id]" value="{{ data.id }}">
-		<textarea rows="2" name="{{ data.prefix }}[settings][strings][{{ data.index }}][single]">{{ data.single }}</textarea>
+		<input type="hidden" name="{{ data.prefix }}[settings][strings][{{ data.index }}][id]" value="{{ data.id }}" data-id>
+		<input type="hidden" name="{{ data.prefix }}[settings][strings][{{ data.index }}][s1]" value="{{ data.s1 }}">
+		<textarea rows="2" name="{{ data.prefix }}[settings][strings][{{ data.index }}][s2]">{{ data.s2 }}</textarea>
 		<span class="description">{{ data.desc }}</span>
 	</td>
 </tr>

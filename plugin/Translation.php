@@ -12,7 +12,7 @@ namespace GeminiLabs\SiteReviews;
 
 use GeminiLabs\SiteReviews\App;
 use GeminiLabs\SiteReviews\Database;
-use Sepia\PoParser;
+use Sepia\PoParser\Parser;
 
 class Translation
 {
@@ -32,37 +32,26 @@ class Translation
 	protected $entries;
 
 	/**
-	 * @var PoParser
-	 */
-	protected $po;
-
-	/**
 	 * @var array
 	 */
 	protected $results;
 
-	public function __construct( App $app, Database $db, PoParser $po )
+	public function __construct( App $app, Database $db )
 	{
 		$this->app = $app;
 		$this->db = $db;
-		$this->po = $po;
-		$this->entries = $this->normalize( $po->parse() );
-		$this->reset();
 	}
 
 	/**
+	 * Returns all saved custom translations with translation context
 	 * @return array
 	 */
 	public function all()
 	{
 		$translations = $this->getSettings();
-		$entries = $this->filter( $translations, $this->entries )->results();
+		$entries = $this->filter( $translations, $this->entries() )->results();
 		array_walk( $translations, function( &$entry ) use( $entries ) {
 			$entry['desc'] = $this->getEntryString( $entries[$entry['id']], 'msgctxt' );
-			$entry['msgid'] = $this->getEntryString( $entries[$entry['id']], 'msgid' );
-			if( isset( $entries[$entry['id']]['msgid_plural'] )) {
-				$entry['msgid_plural'] = $entries[$entry['id']]['msgid_plural'];
-			}
 		});
 		return $translations;
 	}
@@ -72,13 +61,18 @@ class Translation
 	 */
 	public function entries()
 	{
+		if( !is_array( $this->entries )) {
+			$this->entries = $this->normalize(
+				Parser::parseFile( $this->app->path . 'languages/site-reviews.pot' )->getEntries()
+			);
+		}
 		return $this->entries;
 	}
 
 	/**
 	 * @param null|array $entriesToExclude
 	 * @param null|array $entries
-	 * @return Translation
+	 * @return self
 	 */
 	public function exclude( $entriesToExclude = null, $entries = null )
 	{
@@ -89,7 +83,7 @@ class Translation
 	 * @param null|array $filterWith
 	 * @param null|array $entries
 	 * @param bool $intersect
-	 * @return Translation
+	 * @return self
 	 */
 	public function filter( $filterWith = null, $entries = null, $intersect = true )
 	{
@@ -123,6 +117,7 @@ class Translation
 	}
 
 	/**
+	 * Returns a rendered string of all saved custom translations with translation context
 	 * @return string
 	 */
 	public function renderAll()
@@ -131,8 +126,7 @@ class Translation
 		foreach( $this->all() as $index => $entry ) {
 			$entry['index'] = $index;
 			$entry['prefix'] = $this->db->getOptionName();
-			$template = isset( $entry['plural'] ) ? 'plural' : 'single';
-			$rendered .= $this->render( $template, $entry );
+			$rendered .= $this->render( $entry['type'], $entry );
 		}
 		return $rendered;
 	}
@@ -148,12 +142,12 @@ class Translation
 			$data = [
 				'desc' => $this->getEntryString( $entry, 'msgctxt' ),
 				'id' => $id,
-				'plural' => $this->getEntryString( $entry, 'msgid_plural' ),
-				'single' => $this->getEntryString( $entry, 'msgid' ),
+				'p1' => $this->getEntryString( $entry, 'msgid_plural' ),
+				's1' => $this->getEntryString( $entry, 'msgid' ),
 			];
-			$text = !empty( $data['plural'] )
-				? sprintf( '%s | %s', $data['single'], $data['plural'] )
-				: $data['single'];
+			$text = !empty( $data['p1'] )
+				? sprintf( '%s | %s', $data['s1'], $data['p1'] )
+				: $data['s1'];
 			$rendered .= $this->render( 'result', [
 				'entry' => wp_json_encode( $data ),
 				'text' => wp_strip_all_tags( $text ),
@@ -187,13 +181,13 @@ class Translation
 	 * @param string $needle
 	 * @param int $threshold
 	 * @param bool $caseSensitive
-	 * @return Translation
+	 * @return self
 	 */
 	public function search( $needle = '', $threshold = 3, $caseSensitive = false )
 	{
 		$this->reset();
 		$needle = trim( $needle );
-		foreach( $this->entries as $key => $entry ) {
+		foreach( $this->entries() as $key => $entry ) {
 			$single = $this->getEntryString( $entry, 'msgid' );
 			$plural = $this->getEntryString( $entry, 'msgid_plural' );
 			if( !$caseSensitive ) {
@@ -229,7 +223,10 @@ class Translation
 	 */
 	protected function getSettings()
 	{
-		return $this->db->getOption( 'strings', [], true );
+		$settings = $this->db->getOptions( 'settings' );
+		return isset( $settings['strings'] )
+			? $this->normalizeSettings( $settings['strings'] )
+			: [];
 	}
 
 	/**
@@ -258,5 +255,18 @@ class Translation
 			$entry[$key] = $this->getEntryString( $entry, $key );
 		}
 		return $entry;
+	}
+
+	/**
+	 * @return array
+	 */
+	protected function normalizeSettings( array $strings )
+	{
+		$defaults = array_fill_keys( ['id', 's1', 's2', 'p1', 'p2'], '' );
+		foreach( $strings as &$string ) {
+			$string['type'] = isset( $string['p1'] ) ? 'plural' : 'single';
+			$string = wp_parse_args( $string, $defaults );
+		}
+		return $strings;
 	}
 }

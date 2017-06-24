@@ -13,8 +13,6 @@ namespace GeminiLabs\SiteReviews\Providers;
 use GeminiLabs\SiteReviews\App;
 use GeminiLabs\SiteReviews\Log\Logger;
 use GeminiLabs\SiteReviews\Providers\ProviderInterface;
-use Sepia\FileHandler;
-use Sepia\PoParser;
 
 /**
  * Note: We're using the full "namespace\classname" because "::class" isn't supported in PHP 5.4
@@ -27,10 +25,6 @@ class MainProvider implements ProviderInterface
 
 		$app->bind( 'GeminiLabs\SiteReviews\Log\Logger', function( $app ) {
 			return Logger::file( trailingslashit( $app->path ) . 'debug.log', $app->prefix );
-		});
-
-		$app->bind( 'Sepia\PoParser', function( $app ) {
-			return new PoParser( new FileHandler( $app->path . 'languages/site-reviews.pot' ));
 		});
 
 		$app->singleton(

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d5312e3c6518e33b94128912148e4d08",
+    "content-hash": "26cc27788de6966a4d5cc394ed0e0610",
     "packages": [],
     "packages-dev": [
         {
@@ -704,6 +704,108 @@
             "time": "2016-12-08T20:27:08+00:00"
         },
         {
+            "name": "psr/simple-cache",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/simple-cache.git",
+                "reference": "753fa598e8f3b9966c886fe13f370baa45ef0e24"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/753fa598e8f3b9966c886fe13f370baa45ef0e24",
+                "reference": "753fa598e8f3b9966c886fe13f370baa45ef0e24",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\SimpleCache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interfaces for simple caching",
+            "keywords": [
+                "cache",
+                "caching",
+                "psr",
+                "psr-16",
+                "simple-cache"
+            ],
+            "time": "2017-01-02T13:31:39+00:00"
+        },
+        {
+            "name": "qcubed/i18n",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/qcubed/i18n.git",
+                "reference": "549d5da73749bb8d1215393a88316c9663cf3020"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/qcubed/i18n/zipball/549d5da73749bb8d1215393a88316c9663cf3020",
+                "reference": "549d5da73749bb8d1215393a88316c9663cf3020",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0",
+                "psr/simple-cache": "^1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.8.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sepia\\PoParser\\": "src/Sepia/",
+                    "QCubed\\I18n\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Raúl Ferràs",
+                    "email": "raul.ferras@gmail.com",
+                    "role": "developer"
+                },
+                {
+                    "name": "Shannon Pekary",
+                    "email": "spekary@gmail.com",
+                    "role": "developer"
+                }
+            ],
+            "description": "Comprehensive i18n project for translating PHP files.",
+            "homepage": "https://github.com/qcubed/i18n",
+            "keywords": [
+                "gettext",
+                "i10n",
+                "i18n",
+                "po"
+            ],
+            "time": "2017-05-12T00:02:42+00:00"
+        },
+        {
             "name": "sebastian/code-unit-reverse-lookup",
             "version": "1.0.1",
             "source": {
@@ -1217,54 +1319,6 @@
             "time": "2016-10-03T07:35:21+00:00"
         },
         {
-            "name": "sepia/po-parser",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/raulferras/PHP-po-parser.git",
-                "reference": "def825406f4b3d1bd9c266a8e68f2a2a8cdaf706"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/raulferras/PHP-po-parser/zipball/def825406f4b3d1bd9c266a8e68f2a2a8cdaf706",
-                "reference": "def825406f4b3d1bd9c266a8e68f2a2a8cdaf706",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.7.*",
-                "squizlabs/php_codesniffer": "1.5.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Sepia": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Raúl Ferràs",
-                    "email": "raul.ferras@gmail.com",
-                    "role": "developer"
-                }
-            ],
-            "description": "Gettext *.PO file parser for PHP.",
-            "homepage": "https://github.com/raulferras/PHP-po-parser",
-            "keywords": [
-                "gettext",
-                "i10n",
-                "i18n",
-                "po"
-            ],
-            "time": "2016-06-28T07:16:19+00:00"
-        },
-        {
             "name": "sinergi/browser-detector",
             "version": "6.1.2",
             "source": {
@@ -1478,7 +1532,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "sepia/po-parser": 20
+        "qcubed/i18n": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

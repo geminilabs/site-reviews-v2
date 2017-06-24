@@ -13,11 +13,11 @@
 - [x] Drag-to-sort translations
 - [x] Provide "no results found" on no search results
 - [x] hide <thead> if no entries exist
-- [ ] add a gettext filter to load custom translations
+- [x] add a gettext filter to load custom translations
 - [ ] Add upgrade migration for existing custom form label/placeholder text
 - [ ] Test translations with html tags
 
-- [ ] Handle single/plural in summary text
+- [ ] Handle single/plural in [site_reviews_summary] summary text
 
 - [ ] Change from {rating} to :rating for template tags?
 - [ ] Add helper functions to access rating methods

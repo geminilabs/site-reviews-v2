@@ -11,7 +11,7 @@ scrap.md
 /node_modules
 /vendor/*/*
 
-!/vendor/sepia/po-parser
+!/vendor/qcubed/i18n
 !/vendor/sinergi/browser-detector
 !/vendor/vectorface/whip
 
@@ -33,4 +33,8 @@ scrap.md
 /vendor/sinergi/browser-detector/src/Device*
 /vendor/sinergi/browser-detector/src/Language*
 /vendor/sinergi/browser-detector/src/Os*
-/vendor/sepia/po-parser/build
+/vendor/qcubed/i18n/src/*.php
+/vendor/qcubed/i18n/test
+/vendor/qcubed/i18n/tools
+
+# !/vendor/qcubed/i18n/src/Sepia

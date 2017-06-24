@@ -18,7 +18,7 @@ spl_autoload_register( function( $class )
 	$namespaces = [
 		'GeminiLabs\\SiteReviews\\'        => __DIR__ . '/plugin/',
 		'GeminiLabs\\SiteReviews\\Tests\\' => __DIR__ . '/tests/',
-		'Sepia\\'                          => __DIR__ . '/vendor/sepia/po-parser/src/Sepia/',
+		'Sepia\\PoParser\\'                => __DIR__ . '/vendor/qcubed/i18n/src/Sepia/',
 		'Sinergi\\BrowserDetector\\'       => __DIR__ . '/vendor/sinergi/browser-detector/src/',
 		'Vectorface\\Whip\\'               => __DIR__ . '/vendor/vectorface/whip/src/',
 	];
