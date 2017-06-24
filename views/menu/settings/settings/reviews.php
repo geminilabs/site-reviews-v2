@@ -1,3 +1,3 @@
 <?php defined( 'WPINC' ) || die;
 
-$html->renderForm( "{$tabView}/{$tabViewSection}" );
+echo $html->renderForm( "{$tabView}/{$tabViewSection}" );

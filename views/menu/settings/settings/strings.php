@@ -7,7 +7,7 @@
 	<div class="glsr-strings-results" data-prefix="<?= $db->getOptionName(); ?>"></div>
 </div>
 
-<?php $html->renderForm( "{$tabView}/{$tabViewSection}" ); ?>
+<?= $html->renderForm( "{$tabView}/{$tabViewSection}" ); ?>
 
 <script type="text/html" id="tmpl-glsr-string-plural">
 <?php include glsr_app()->path . 'views/strings/plural.php'; ?>

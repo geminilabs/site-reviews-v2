@@ -94,6 +94,6 @@ abstract class Widget extends WP_Widget
 			$atts['class'] = isset( $atts['class'] ) ? trim( "{$atts['class']} widefat" ) : 'widefat';
 		}
 
-		glsr_resolve( 'Html' )->renderField( $atts, 'echo' );
+		echo glsr_resolve( 'Html' )->renderField( $atts );
 	}
 }

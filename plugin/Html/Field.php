@@ -129,12 +129,9 @@ class Field
 
 	/**
 	 * Render the field
-	 *
-	 * @param mixed $print
-	 *
-	 * @return string|void
+	 * @return string
 	 */
-	public function render( $print = true )
+	public function render( $print = false )
 	{
 		if( $this->args['render'] === false )return;
 
@@ -161,14 +158,7 @@ class Field
 			$this->args['after'] .
 			$this->args['errors']
 		);
-
-		$rendered = apply_filters( 'site-reviews/rendered/field', $rendered, $field->args['type'] );
-
-		if( !!$print && $print !== 'return' ) {
-			echo $rendered;
-		}
-
-		return $rendered;
+		return apply_filters( 'site-reviews/rendered/field', $rendered, $field->args['type'] );
 	}
 
 	/**

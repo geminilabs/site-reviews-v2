@@ -150,23 +150,14 @@ class Form
 
 	/**
 	 * Render the form
-	 *
-	 * @param mixed $print
-	 *
-	 * @return string|void
+	 * @return string
 	 */
-	public function render( $print = true )
+	public function render()
 	{
-		$rendered = sprintf( '<form %s>%s</form>',
+		return sprintf( '<form %s>%s</form>',
 			$this->args['attributes'],
 			$this->generateFields() . $this->generateCustomFields() . $this->generateSubmitButton()
 		);
-
-		if( !!$print && $print !== 'return' ) {
-			echo $rendered;
-		}
-
-		return $rendered;
 	}
 
 	/**

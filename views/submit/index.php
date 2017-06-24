@@ -3,7 +3,7 @@
 <form method="post" action="" name="glsr-<?= $form_id; ?>" class="<?= $class; ?>">
 <?php
 
-	$html->renderField([
+	echo $html->renderField([
 		'type'       => 'select',
 		'name'       => 'rating',
 		'class'      => 'glsr-star-rating',
@@ -23,7 +23,7 @@
 		],
 	]);
 
-	$html->renderField([
+	echo $html->renderField([
 		'type'        => 'text',
 		'name'        => 'title',
 		'errors'      => $errors,
@@ -36,7 +36,7 @@
 		'value'       => $values['title'],
 	]);
 
-	$html->renderField([
+	echo $html->renderField([
 		'type'        => 'textarea',
 		'name'        => 'content',
 		'errors'      => $errors,
@@ -50,7 +50,7 @@
 		'value'       => $values['content'],
 	]);
 
-	$html->renderField([
+	echo $html->renderField([
 		'type'        => 'text',
 		'name'        => 'name',
 		'errors'      => $errors,
@@ -63,7 +63,7 @@
 		'value'       => $values['name'],
 	]);
 
-	$html->renderField([
+	echo $html->renderField([
 		'type'        => 'email',
 		'name'        => 'email',
 		'errors'      => $errors,
@@ -76,7 +76,7 @@
 		'value'       => $values['email'],
 	]);
 
-	$html->renderField([
+	echo $html->renderField([
 		'type'       => 'checkbox',
 		'name'       => 'terms',
 		'errors'     => $errors,
@@ -88,35 +88,35 @@
 		'value'      => $values['terms'],
 	]);
 
-	$html->renderField([
+	echo $html->renderField([
 		'type'   => 'hidden',
 		'name'   => 'action',
 		'prefix' => false,
 		'value'  => 'post-review',
 	]);
 
-	$html->renderField([
+	echo $html->renderField([
 		'type'   => 'hidden',
 		'name'   => 'form_id',
 		'prefix' => false,
 		'value'  => $form_id,
 	]);
 
-	$html->renderField([
+	echo $html->renderField([
 		'type'   => 'hidden',
 		'name'   => 'assign_to',
 		'prefix' => false,
 		'value'  => $assign_to,
 	]);
 
-	$html->renderField([
+	echo $html->renderField([
 		'type'   => 'hidden',
 		'name'   => 'category',
 		'prefix' => false,
 		'value'  => $category,
 	]);
 
-	$html->renderField([
+	echo $html->renderField([
 		'type'   => 'hidden',
 		'name'   => 'excluded',
 		'prefix' => false,
@@ -129,7 +129,7 @@
 		printf( '<div class="glsr-form-messages%s">%s</div>', ( $errors ? ' gslr-has-errors' : '' ), wpautop( $message ));
 	}
 
-	$html->renderField([
+	echo $html->renderField([
 		'type'   => 'submit',
 		'prefix' => false,
 		'value'  => __( 'Submit your review', 'site-reviews' ),

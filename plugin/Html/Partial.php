@@ -43,10 +43,9 @@ class Partial
 	}
 
 	/**
-	 * @param mixed $print
-	 * @return string|void
+	 * @return string
 	 */
-	public function render( $print = true )
+	public function render()
 	{
 		$className = sprintf( 'GeminiLabs\SiteReviews\Html\Partials\%s',
 			$this->app->make( 'Helper' )->buildClassName( $this->args['partial'] )
@@ -54,10 +53,6 @@ class Partial
 		$instance = $this->app->make( $className );
 		$instance->args = $this->args;
 		$rendered = $instance->render();
-		$rendered = apply_filters( 'site-reviews/rendered/partial', $rendered, $this->args['partial'] );
-		if( !!$print && $print !== 'return' ) {
-			echo $rendered;
-		}
-		return $rendered;
+		return apply_filters( 'site-reviews/rendered/partial', $rendered, $this->args['partial'] );
 	}
 }

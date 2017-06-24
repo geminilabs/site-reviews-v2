@@ -150,10 +150,10 @@ class Email
 		$template = trim( $this->app->make( 'Database' )->getOption( 'settings.general.notification_message' ));
 
 		if( !empty( $template )) {
-			$message = $html->renderTemplateString( $template, $email['template-tags'], 'return' );
+			$message = $html->renderTemplateString( $template, $email['template-tags'] );
 		}
 		else if( $email['template'] ) {
-			$message = $html->renderTemplate( "email/templates/{$email['template']}", $email['template-tags'], 'return' );
+			$message = $html->renderTemplate( "email/templates/{$email['template']}", $email['template-tags'] );
 		}
 
 		if( !isset( $message )) {
@@ -162,7 +162,7 @@ class Email
 
 		$message = $email['before'] . $message . $email['after'];
 
-		$body = $html->renderTemplate( 'email/index', [], 'return' );
+		$body = $html->renderTemplate( 'email/index', [] );
 
 		$message = strip_shortcodes( $message );
 		$message = wptexturize( $message );
