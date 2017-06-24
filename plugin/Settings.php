@@ -183,9 +183,9 @@ class Settings
 			'default' => 'none',
 			'options' => [
 				'none'    => __( 'Do not send review notifications', 'site-reviews' ),
-				'default' => sprintf( __( 'Send to administrator <code>%s</code>', 'site-reviews' ), get_option( 'admin_email' )),
+				'default' => __( 'Send to administrator', 'site-reviews' ) . sprintf( ' <code>%s</code>', get_option( 'admin_email' )),
 				'custom'  => __( 'Send to one or more email addresses', 'site-reviews' ),
-				'webhook' => __( 'Send to <a href="https://slack.com/">Slack</a>', 'site-reviews' ),
+				'webhook' => sprintf( __( 'Send to %s', 'site-reviews' ), '<a href="https://slack.com/">Slack</a>' ),
 			],
 		]);
 
@@ -206,9 +206,8 @@ class Settings
 			'depends' => [
 				'notification' => 'webhook',
 			],
-			'desc' => sprintf(
-				__( 'To send notifications to Slack, <a href="%s">create a new Incoming WebHook</a> and then paste the provided Webhook URL in the field above.', 'site-reviews' ),
-				esc_url( 'https://slack.com/apps/new/A0F7XDUAZ-incoming-webhooks' )
+			'desc' => sprintf( __( 'To send notifications to Slack, create a new %s and then paste the provided Webhook URL in the field above.', 'site-reviews' ),
+				sprintf( '<a href="%s">%s</a>', esc_url( 'https://slack.com/apps/new/A0F7XDUAZ-incoming-webhooks' ), __( 'Incoming WebHook', 'site-reviews' ))
 			),
 		]);
 
@@ -256,7 +255,9 @@ class Settings
 				'relative' => __( 'Use a relative date format', 'site-reviews' ),
 				'custom' => __( 'Use a custom date format', 'site-reviews' ),
 			],
-			'desc'  => sprintf( __( 'The default date format is the one set in your <a href="%s">WordPress settings<a>.', 'site-reviews' ), get_admin_url( null, 'options-general.php' )),
+			'desc'  => sprintf( __( 'The default date format is the one set in your %s.', 'site-reviews' ),
+				sprintf( '<a href="%s">%s<a>', get_admin_url( null, 'options-general.php' ), __( 'WordPress settings', 'site-reviews' ))
+			),
 		]);
 
 		$this->addSetting( $formId, [
@@ -264,7 +265,9 @@ class Settings
 			'name'    => 'date.custom',
 			'label'   => __( 'Custom Date Format', 'site-reviews' ),
 			'default' => get_option( 'date_format' ),
-			'desc'    => sprintf( __( 'Enter a custom date format (<a href="%s">documentation on date and time formatting</a>).', 'site-reviews' ), 'https://codex.wordpress.org/Formatting_Date_and_Time' ),
+			'desc'    => sprintf( __( 'Enter a custom date format (%s).', 'site-reviews' ),
+				sprintf( '<a href="https://codex.wordpress.org/Formatting_Date_and_Time">%s</a>', __( 'documentation on date and time formatting', 'site-reviews' ))
+			),
 			'depends' => [
 				'date.format' => 'custom',
 			],
@@ -274,7 +277,9 @@ class Settings
 			'type'  => 'yesno_inline',
 			'name'  => 'avatars.enabled',
 			'label' => __( 'Enable Avatars', 'site-reviews' ),
-			'desc'  => __( 'Display reviewer avatars. These are generated from the email address of the reviewer using <a href="https://gravatar.com">Gravatar</a>.', 'site-reviews' ),
+			'desc'  => sprintf( __( 'Display reviewer avatars. These are generated from the email address of the reviewer using %s.', 'site-reviews' ),
+				sprintf( '<a href="https://gravatar.com">%s</a>', __( 'Gravatar', 'site-reviews' ))
+			),
 		]);
 
 		$this->addSetting( $formId, [

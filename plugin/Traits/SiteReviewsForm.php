@@ -82,9 +82,8 @@ trait SiteReviewsForm
 		$requireUser = glsr_resolve( 'Database' )->getOption( 'settings.general.require.login' );
 
 		if( $requireUser == 'yes' && !is_user_logged_in() ) {
-			$message = sprintf(
-				__( 'You must be <a href="%s">logged in</a> to submit a review.', 'site-reviews' ),
-				wp_login_url( get_permalink() )
+			$message = sprintf( __( 'You must be %s to submit a review.', 'site-reviews' ),
+				sprintf( '<a href="%s">%s</a>', wp_login_url( get_permalink() ), __( 'logged in', 'site-reviews' ))
 			);
 
 			echo wpautop( $message );

@@ -134,15 +134,15 @@ class Reviews extends Base
 		if( in_array( $theme, ['twentyten','twentyeleven','twentytwelve','twentythirteen'] )) {
 			$links = '';
 			if( $paged > 1 ) {
-				$links .= sprintf( '<div class="nav-previous"><a href="%s">%s</a></div>',
+				$links .= sprintf( '<div class="nav-previous"><a href="%s"><span class="meta-nav">&larr;</span> %s</a></div>',
 					get_pagenum_link( $paged - 1 ),
-					__( '<span class="meta-nav">&larr;</span> Previous', 'site-reviews' )
+					__( 'Previous', 'site-reviews' )
 				);
 			}
 			if( $paged < $maxPageNum ) {
-				$links .= sprintf( '<div class="nav-next"><a href="%s">%s</a></div>',
+				$links .= sprintf( '<div class="nav-next"><a href="%s">%s <span class="meta-nav">&rarr;</span></a></div>',
 					get_pagenum_link( $paged + 1 ),
-					__( 'Next <span class="meta-nav">&rarr;</span>', 'site-reviews' )
+					__( 'Next', 'site-reviews' )
 				);
 			}
 		}

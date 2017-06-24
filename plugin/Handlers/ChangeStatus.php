@@ -28,7 +28,7 @@ class ChangeStatus
 
 		$link = sprintf( '<a class="row-title" href="%s" title="%s">%s</a>',
 			get_edit_post_link( $postId ),
-			esc_attr( sprintf( __( 'Edit &#8220;%s&#8221;', 'site-reviews' ), $title )),
+			esc_attr( sprintf( '%s &#8220;%s&#8221;', __( 'Edit', 'site-reviews' ), $title )),
 			$title
 		);
 

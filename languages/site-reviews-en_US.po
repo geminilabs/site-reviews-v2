@@ -67,7 +67,7 @@ msgstr "Date"
 msgid "Log is empty"
 msgstr "Log is empty"
 
-#: plugin/Controllers/AjaxController.php:96
+#: plugin/Controllers/AjaxController.php:68
 msgid "Okay"
 msgstr "Okay"
 
@@ -109,7 +109,7 @@ msgstr ""
 msgid "Review"
 msgstr "Review"
 
-#: plugin/Controllers/MainController.php:212, plugin/Controllers/MainController.php:574, views/menu/status.php:17
+#: plugin/Controllers/MainController.php:212, plugin/Controllers/MainController.php:574, views/menu/status.php:16
 msgid "Reviews"
 msgstr "Reviews"
 
@@ -361,9 +361,9 @@ msgid_plural "%s years ago"
 msgstr[0] "%s year ago"
 msgstr[1] "%s years ago"
 
-#: plugin/Handlers/ChangeStatus.php:31
-msgid "Edit &#8220;%s&#8221;"
-msgstr "Edit &#8220;%s&#8221;"
+#: plugin/Handlers/ChangeStatus.php:31, views/edit/pinned.php:21
+msgid "Edit"
+msgstr "Edit"
 
 #: plugin/Handlers/RegisterPostType.php:321
 msgid "%s star"
@@ -452,12 +452,12 @@ msgid "No reviews were found."
 msgstr "No reviews were found."
 
 #: plugin/Html/Partials/Reviews.php:139
-msgid "<span class=\"meta-nav\">&larr;</span> Previous"
-msgstr "<span class=\"meta-nav\">&larr;</span> Previous"
+msgid "Previous"
+msgstr "Previous"
 
 #: plugin/Html/Partials/Reviews.php:145
-msgid "Next <span class=\"meta-nav\">&rarr;</span>"
-msgstr "Next <span class=\"meta-nav\">&rarr;</span>"
+msgid "Next"
+msgstr "Next"
 
 #: plugin/Html/Partials/Reviews.php:151
 msgid "Page"
@@ -483,7 +483,7 @@ msgstr "Show less"
 msgid "Site Reviews navigation"
 msgstr "Site Reviews navigation"
 
-#: plugin/Settings.php:161, plugin/Settings.php:247, plugin/Settings.php:309, plugin/Settings.php:477
+#: plugin/Settings.php:161, plugin/Settings.php:246, plugin/Settings.php:314, plugin/Settings.php:484
 msgid "Save Settings"
 msgstr "Save Settings"
 
@@ -512,16 +512,16 @@ msgid "Do not send review notifications"
 msgstr "Do not send review notifications"
 
 #: plugin/Settings.php:186
-msgid "Send to administrator <code>%s</code>"
-msgstr "Send to administrator <code>%s</code>"
+msgid "Send to administrator"
+msgstr "Send to administrator"
 
 #: plugin/Settings.php:187
 msgid "Send to one or more email addresses"
 msgstr "Send to one or more email addresses"
 
 #: plugin/Settings.php:188
-msgid "Send to <a href=\"https://slack.com/\">Slack</a>"
-msgstr "Send to <a href=\"https://slack.com/\">Slack</a>"
+msgid "Send to %s"
+msgstr "Send to %s"
 
 #: plugin/Settings.php:195
 msgid "Send notification emails to"
@@ -535,197 +535,207 @@ msgstr "Separate multiple emails with a comma"
 msgid "Webhook URL"
 msgstr "Webhook URL"
 
-#: plugin/Settings.php:210
+#: plugin/Settings.php:209
 msgid ""
-"To send notifications to Slack, <a href=\"%s\">create a new Incoming "
-"WebHook</a> and then paste the provided Webhook URL in the field above."
+"To send notifications to Slack, create a new %s and then paste the provided "
+"Webhook URL in the field above."
 msgstr ""
-"To send notifications to Slack, <a href=\"%s\">create a new Incoming "
-"WebHook</a> and then paste the provided Webhook URL in the field above."
+"To send notifications to Slack, create a new %s and then paste the provided "
+"Webhook URL in the field above."
 
-#: plugin/Settings.php:218
+#: plugin/Settings.php:210
+msgid "Incoming WebHook"
+msgstr "Incoming WebHook"
+
+#: plugin/Settings.php:217
 msgid "Notification template"
 msgstr "Notification template"
 
-#: plugin/Settings.php:253
+#: plugin/Settings.php:252
 msgid "Date Format"
 msgstr "Date Format"
 
-#: plugin/Settings.php:255
+#: plugin/Settings.php:254
 msgid "Use the default date format"
 msgstr "Use the default date format"
 
-#: plugin/Settings.php:256
+#: plugin/Settings.php:255
 msgid "Use a relative date format"
 msgstr "Use a relative date format"
 
-#: plugin/Settings.php:257
+#: plugin/Settings.php:256
 msgid "Use a custom date format"
 msgstr "Use a custom date format"
 
-#: plugin/Settings.php:259
-msgid ""
-"The default date format is the one set in your <a href=\"%s\">WordPress "
-"settings<a>."
-msgstr ""
-"The default date format is the one set in your <a href=\"%s\">WordPress "
-"settings<a>."
+#: plugin/Settings.php:258
+msgid "The default date format is the one set in your %s."
+msgstr "The default date format is the one set in your %s."
 
-#: plugin/Settings.php:265
+#: plugin/Settings.php:259
+msgid "WordPress settings"
+msgstr "WordPress settings"
+
+#: plugin/Settings.php:266
 msgid "Custom Date Format"
 msgstr "Custom Date Format"
 
-#: plugin/Settings.php:267
-msgid ""
-"Enter a custom date format (<a href=\"%s\">documentation on date and time "
-"formatting</a>)."
-msgstr ""
-"Enter a custom date format (<a href=\"%s\">documentation on date and time "
-"formatting</a>)."
+#: plugin/Settings.php:268
+msgid "Enter a custom date format (%s)."
+msgstr "Enter a custom date format (%s)."
 
-#: plugin/Settings.php:276
+#: plugin/Settings.php:269
+msgid "documentation on date and time formatting"
+msgstr "documentation on date and time formatting"
+
+#: plugin/Settings.php:279
 msgid "Enable Avatars"
 msgstr "Enable Avatars"
 
-#: plugin/Settings.php:277
+#: plugin/Settings.php:280
 msgid ""
 "Display reviewer avatars. These are generated from the email address of the "
-"reviewer using <a href=\"https://gravatar.com\">Gravatar</a>."
+"reviewer using %s."
 msgstr ""
 "Display reviewer avatars. These are generated from the email address of the "
-"reviewer using <a href=\"https://gravatar.com\">Gravatar</a>."
+"reviewer using %s."
 
-#: plugin/Settings.php:283
+#: plugin/Settings.php:281
+msgid "Gravatar"
+msgstr "Gravatar"
+
+#: plugin/Settings.php:288
 msgid "Enable Excerpts"
 msgstr "Enable Excerpts"
 
-#: plugin/Settings.php:284
+#: plugin/Settings.php:289
 msgid "Display an excerpt instead of the full review."
 msgstr "Display an excerpt instead of the full review."
 
-#: plugin/Settings.php:290
+#: plugin/Settings.php:295
 msgid "Excerpt Length"
 msgstr "Excerpt Length"
 
-#: plugin/Settings.php:292
+#: plugin/Settings.php:297
 msgid "Set the excerpt word length."
 msgstr "Set the excerpt word length."
 
-#: plugin/Settings.php:314
+#: plugin/Settings.php:319
 msgid "Invisible reCAPTCHA"
 msgstr "Invisible reCAPTCHA"
 
-#: plugin/Settings.php:315
+#: plugin/Settings.php:320
 msgid ""
 "Invisible reCAPTCHA is a free anti-spam service from Google. To use it, you "
-"will need to <a href=\"http://www.google.com/recaptcha/admin\" "
-"target=\"_blank\">sign up for an API key pair</a> for your site."
+"will need to %s for an API key pair for your site."
 msgstr ""
 "Invisible reCAPTCHA is a free anti-spam service from Google. To use it, you "
-"will need to <a href=\"http://www.google.com/recaptcha/admin\" "
-"target=\"_blank\">sign up for an API key pair</a> for your site."
+"will need to %s for an API key pair for your site."
 
 #: plugin/Settings.php:321
+msgid "sign up"
+msgstr "sign up"
+
+#: plugin/Settings.php:328
 msgid "Use reCAPTCHA?"
 msgstr "Use reCAPTCHA?"
 
-#: plugin/Settings.php:323
+#: plugin/Settings.php:330
 msgid "Do not use reCAPTCHA"
 msgstr "Do not use reCAPTCHA"
 
-#: plugin/Settings.php:324
-msgid "Custom Integration"
-msgstr "Custom Integration"
+#: plugin/Settings.php:331
+msgid "Use reCAPTCHA"
+msgstr "Use reCAPTCHA"
 
-#: plugin/Settings.php:327
+#: plugin/Settings.php:334
 msgid ""
-"If you are already using a reCAPTCHA plugin listed here, please select it. "
-"Otherwise choose \"Custom Integration\"."
+"If you are already using a reCAPTCHA plugin listed here, please select it; "
+"otherwise choose \"Use reCAPTCHA\"."
 msgstr ""
-"If you are already using a reCAPTCHA plugin listed here, please select it. "
-"Otherwise choose \"Custom Integration\"."
+"If you are already using a reCAPTCHA plugin listed here, please select it; "
+"otherwise choose \"Use reCAPTCHA\"."
 
-#: plugin/Settings.php:333
+#: plugin/Settings.php:340
 msgid "Site Key"
 msgstr "Site Key"
 
-#: plugin/Settings.php:342
+#: plugin/Settings.php:349
 msgid "Site Secret"
 msgstr "Site Secret"
 
-#: plugin/Settings.php:351
+#: plugin/Settings.php:358
 msgid "Badge Position"
 msgstr "Badge Position"
 
-#: plugin/Settings.php:364
+#: plugin/Settings.php:371
 msgid "Form Labels"
 msgstr "Form Labels"
 
-#: plugin/Settings.php:365
+#: plugin/Settings.php:372
 msgid "Customize the label text for the review submission form fields."
 msgstr "Customize the label text for the review submission form fields."
 
-#: plugin/Settings.php:371
+#: plugin/Settings.php:378
 msgid "Rating label"
 msgstr "Rating label"
 
-#: plugin/Settings.php:372
+#: plugin/Settings.php:379
 msgid "Your overall rating"
 msgstr "Your overall rating"
 
-#: plugin/Settings.php:379
+#: plugin/Settings.php:386
 msgid "Title label"
 msgstr "Title label"
 
-#: plugin/Settings.php:380
+#: plugin/Settings.php:387
 msgid "Title of your review"
 msgstr "Title of your review"
 
-#: plugin/Settings.php:387
+#: plugin/Settings.php:394
 msgid "Content label"
 msgstr "Content label"
 
-#: plugin/Settings.php:388
+#: plugin/Settings.php:395
 msgid "Your review"
 msgstr "Your review"
 
-#: plugin/Settings.php:395
+#: plugin/Settings.php:402
 msgid "Name label"
 msgstr "Name label"
 
-#: plugin/Settings.php:396
+#: plugin/Settings.php:403
 msgid "Your name"
 msgstr "Your name"
 
-#: plugin/Settings.php:403
+#: plugin/Settings.php:410
 msgid "Email label"
 msgstr "Email label"
 
-#: plugin/Settings.php:404
+#: plugin/Settings.php:411
 msgid "Your email"
 msgstr "Your email"
 
-#: plugin/Settings.php:411
+#: plugin/Settings.php:418
 msgid "Terms label"
 msgstr "Terms label"
 
-#: plugin/Settings.php:412
+#: plugin/Settings.php:419
 msgid "This review is based on my own experience and is my genuine opinion."
 msgstr "This review is based on my own experience and is my genuine opinion."
 
-#: plugin/Settings.php:419
+#: plugin/Settings.php:426
 msgid "Submit Button label"
 msgstr "Submit Button label"
 
-#: plugin/Settings.php:420
+#: plugin/Settings.php:427
 msgid "Submit your review"
 msgstr "Submit your review"
 
-#: plugin/Settings.php:426
+#: plugin/Settings.php:433
 msgid "Form Placeholders"
 msgstr "Form Placeholders"
 
-#: plugin/Settings.php:427
+#: plugin/Settings.php:434
 msgid ""
 "Customize the placeholder text for the review submission form fields. Use a "
 "single space character to disable the placeholder text."
@@ -733,35 +743,35 @@ msgstr ""
 "Customize the placeholder text for the review submission form fields. Use a "
 "single space character to disable the placeholder text."
 
-#: plugin/Settings.php:434
+#: plugin/Settings.php:441
 msgid "Title placeholder"
 msgstr "Title placeholder"
 
-#: plugin/Settings.php:435
+#: plugin/Settings.php:442
 msgid "Summarize your review or highlight an interesting detail"
 msgstr "Summarize your review or highlight an interesting detail"
 
-#: plugin/Settings.php:443
+#: plugin/Settings.php:450
 msgid "Content placeholder"
 msgstr "Content placeholder"
 
-#: plugin/Settings.php:444
+#: plugin/Settings.php:451
 msgid "Tell people your review"
 msgstr "Tell people your review"
 
-#: plugin/Settings.php:452
+#: plugin/Settings.php:459
 msgid "Name placeholder"
 msgstr "Name placeholder"
 
-#: plugin/Settings.php:453
+#: plugin/Settings.php:460
 msgid "Tell us your name"
 msgstr "Tell us your name"
 
-#: plugin/Settings.php:461
+#: plugin/Settings.php:468
 msgid "Email placeholder"
 msgstr "Email placeholder"
 
-#: plugin/Settings.php:462
+#: plugin/Settings.php:469
 msgid "Tell us your email"
 msgstr "Tell us your email"
 
@@ -1123,9 +1133,17 @@ msgstr "View review"
 msgid "Local"
 msgstr "Local"
 
+#: plugin/Traits/SiteReviewsForm.php:85
+msgid "You must be %s to submit a review."
+msgstr "You must be %s to submit a review."
+
 #: plugin/Traits/SiteReviewsForm.php:86
-msgid "You must be <a href=\"%s\">logged in</a> to submit a review."
-msgstr "You must be <a href=\"%s\">logged in</a> to submit a review."
+msgid "logged in"
+msgstr "logged in"
+
+#: plugin/Translation.php:166
+msgid "Nothing found."
+msgstr "Nothing found."
 
 #: plugin/Widgets/SiteReviews.php:54
 msgid "How many reviews would you like to display? "
@@ -1198,10 +1216,6 @@ msgstr "Enter a Page/Post ID here to assign this review to it."
 #: views/edit/metabox-categories.php:7
 msgid "Most Used"
 msgstr "Most Used"
-
-#: views/edit/pinned.php:21
-msgid "Edit"
-msgstr "Edit"
 
 #: views/edit/pinned.php:22
 msgid "Edit pinned status"
@@ -1283,62 +1297,70 @@ msgstr "Enable Logging"
 msgid "Search for translatable text"
 msgstr "Search for translatable text"
 
-#: views/menu/settings/settings/strings.php:5
+#: views/menu/settings/settings/strings.php:6
 msgid "Search for translatable text..."
 msgstr "Search for translatable text..."
 
 #: views/menu/status.php:7
-msgid ""
-"All dates and times shown here use the WordPress <a href='%s'>configured "
-"timezone</a>."
-msgstr ""
-"All dates and times shown here use the WordPress <a href='%s'>configured "
-"timezone</a>."
+msgid "configured timezone"
+msgstr "configured timezone"
 
-#: views/menu/status.php:16
+#: views/menu/status.php:15
 msgid "Site"
 msgstr "Site"
 
-#: views/menu/status.php:18, views/menu/status.php:35
+#: views/menu/status.php:17, views/menu/status.php:34
 msgid "Last fetch"
 msgstr "Last fetch"
 
-#: views/menu/status.php:19, views/menu/status.php:38
+#: views/menu/status.php:18, views/menu/status.php:37
 msgid "Next scheduled fetch"
 msgstr "Next scheduled fetch"
 
-#: views/menu/status.php:36
+#: views/menu/status.php:35
 msgid "No fetch has been completed"
 msgstr "No fetch has been completed"
 
-#: views/menu/status.php:39
+#: views/menu/status.php:38
 msgid "Nothing currently scheduled"
 msgstr "Nothing currently scheduled"
 
-#: views/menu/status.php:59
+#: views/menu/status.php:58
 msgid "Fetch reviews from"
 msgstr "Fetch reviews from"
 
-#: views/menu/status.php:66
+#: views/menu/status.php:65
 msgid "Fetch status"
 msgstr "Fetch status"
 
-#: views/menu/status.php:67
+#: views/menu/status.php:66
 msgid "Fetching reviews..."
 msgstr "Fetching reviews..."
 
-#: views/menu/status.php:79
+#: views/menu/status.php:78
 msgid "Fetch Reviews"
 msgstr "Fetch Reviews"
+
+#: views/strings/plural.php:6, views/strings/single.php:5
+msgid "Delete translation string"
+msgstr "Delete translation string"
+
+#: views/strings/plural.php:6, views/strings/single.php:5
+msgid "Delete"
+msgstr "Delete"
+
+#: views/strings/plural.php:9, views/strings/single.php:8
+msgid "Show custom translation"
+msgstr "Show custom translation"
 
 #: views/submit/index.php:17
 msgid "Select a Rating"
 msgstr "Select a Rating"
 
-#: plugin/Settings.php:325
+#: plugin/Settings.php:332
 msgctxt "plugin name"
-msgid "Plugin: Invisible reCaptcha"
-msgstr "Plugin: Invisible reCaptcha"
+msgid "Use 3rd-party plugin: Invisible reCaptcha"
+msgstr "Use 3rd-party plugin: Invisible reCaptcha"
 
 #: plugin/Shortcodes/Buttons/Generator.php:334
 msgctxt "the option label"
@@ -1394,3 +1416,8 @@ msgstr "The :attribute must be at least :min."
 msgctxt ":attribute and :min are placeholders and should not be translated."
 msgid "The :attribute must be at least :min characters."
 msgstr "The :attribute must be at least :min characters."
+
+#: views/menu/status.php:6
+msgctxt "configured timezone"
+msgid "All dates and times shown here use the WordPress %s."
+msgstr "All dates and times shown here use the WordPress %s."
