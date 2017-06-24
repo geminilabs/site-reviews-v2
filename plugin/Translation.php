@@ -162,9 +162,7 @@ class Translation
 		if( $resetAfterRender ) {
 			$this->reset();
 		}
-		return empty( $rendered )
-			? sprintf( '<div>%s</div>', __( 'Nothing found.', 'site-reviews' ))
-			: $rendered;
+		return $rendered;
 	}
 
 	/**

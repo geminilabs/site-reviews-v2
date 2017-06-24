@@ -367,27 +367,28 @@ class Settings
 	protected function setStrings()
 	{
 		$formId = 'settings/strings';
+
 		$this->html->createForm( $formId, [
 			'action' => admin_url( 'options.php' ),
 			'class'  => 'glsr-translation-strings',
 			'nonce'  => $this->app->id . '-settings',
 			'submit' => __( 'Save Settings', 'site-reviews' ),
 		]);
+
 		$this->addSetting( $formId, [
 			'type' => 'hidden',
 			'name' => 'dummyInput',
 		]);
+
 		$this->html->addCustomField( $formId, function() {
-			return sprintf(
-				'<table class="widefat wp-list-table glsr-translations">' .
-				'<thead><tr>' .
-					'<th scope="col" class="manage-column column-primary">Strings</th>' .
-					'<th scope="col" class="manage-column">Custom Strings</th>' .
-				'</tr></thead>' .
-				'<tbody>%s</tbody>' .
-				'</table>',
-				$this->app->make( 'Translation' )->renderAll()
-			);
+			$translations = $this->app->make( 'Translation' )->renderAll();
+			$class = empty( $translations )
+				? 'glsr-hidden'
+				: '';
+			return $this->html->renderTemplate( 'strings/translations', [
+				'class' => $class,
+				'translations' => $translations,
+			]);
 		});
 	}
 }

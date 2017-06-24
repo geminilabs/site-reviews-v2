@@ -1,73 +1,66 @@
 /** global: _, GLSR, site_reviews, wp, x */
 
-/**
- * @return void
- */
 GLSR.translation.abort = function()
 {
-	if( 'undefined' !== typeof GLSR.translation.searchRequest ) {
-		GLSR.translation.searchRequest.abort();
-	}
+	if( 'undefined' === typeof GLSR.translation.searchRequest )return;
+	GLSR.translation.searchRequest.abort();
 };
 
-/**
- * @return void
- */
 GLSR.translation.clearResults = function()
 {
-	if( 'undefined' !== typeof GLSR.translation.searchRequest ) {
-		GLSR.translation.searchRequest.abort();
-	}
-	GLSR.translation.searchEl.value = '';
-	GLSR.translation.results = {};
-	GLSR.translation.resultsEl.empty();
+	GLSR.translation.abort();
+	GLSR.translation._.resultsEl.empty();
 	x( 'body' ).removeClass( 'glsr-focus loading-content' );
 };
 
-/**
- * @return void
- */
-GLSR.translation.deleteRow = function( index )
+GLSR.translation.deleteEntry = function( index )
 {
-	var row = GLSR.translation.entriesEl.children( 'tr' ).eq( index );
+	var row = GLSR.translation._.entriesEl.children( 'tr' ).eq( index );
 	row.find( 'td' ).css({ backgroundColor:'#faafaa' });
 	row.fadeOut( 350, function() {
 		x( this ).remove();
-		GLSR.translation.reIndexRows();
+		GLSR.translation._.results = {};
+		GLSR.translation.reindexRows();
+		GLSR.translation.setVisibility();
 	});
 };
 
-/**
- * @return void
- */
+GLSR.translation.displayResults = function( items )
+{
+	x( 'body' ).addClass( 'glsr-focus' );
+	GLSR.translation._.resultsEl.append( items );
+	GLSR.translation._.resultsEl.children( 'span' ).on( 'click', GLSR.translation.onResultClick );
+}
+
 GLSR.translation.init = function()
 {
-	GLSR.translation.exclude = [];
-	GLSR.translation.selectedClass = 'glsr-selected-result';
-	GLSR.translation.searchEl = x( '.glsr-strings-search' );
-	GLSR.translation.resultsEl = x( '.glsr-strings-results' );
-	GLSR.translation.entriesEl = x( '.glsr-translations tbody' );
-	if( GLSR.translation.searchEl.length ) {
+	GLSR.translation._ = {
+		entriesEl: x( '.glsr-translations tbody' ),
+		exclude: [],
+		noResults: '',
+		results: {},
+		resultsEl: x( '.glsr-strings-results' ),
+		searchEl: x( '.glsr-strings-search' ),
+		selected: -1,
+		selectedClass: 'glsr-selected-result',
+	};
+	if( GLSR.translation._.searchEl.length ) {
 		GLSR.translation.makeSortable();
-		GLSR.translation.searchEl.attr( 'aria-describedby', 'live-search-desc' );
-		GLSR.translation.searchEl.on( 'input', _.debounce( GLSR.translation.onSearchInput, 500 ));
-		GLSR.translation.searchEl.on( 'keyup', GLSR.translation.onSearchKeyup );
-		GLSR.translation.entriesEl.on( 'click', 'a.delete', GLSR.translation.onEntryDelete );
+		GLSR.translation._.searchEl.attr( 'aria-describedby', 'live-search-desc' );
+		GLSR.translation._.searchEl.on( 'input', _.debounce( GLSR.translation.onSearchInput, 500 ));
+		GLSR.translation._.searchEl.on( 'keyup', GLSR.translation.onSearchKeyup );
+		GLSR.translation._.entriesEl.on( 'click', 'a.delete', GLSR.translation.onEntryDelete );
 		x( document ).on( 'click', GLSR.translation.onDocumentClick );
 		x( document ).on( 'keydown', GLSR.translation.onDocumentKeydown );
 	}
 };
 
-/**
- * @return void
- */
 GLSR.translation.makeSortable = function()
 {
-	GLSR.translation.entriesEl.sortable({
+	GLSR.translation._.entriesEl.sortable({
 		axis: 'y',
 		items: 'tr',
 		tolerance: 'pointer',
-		forcePlaceholderSize: true,
 		start: function( ev, ui ) {
 			ui.placeholder.height( ui.helper[0].scrollHeight );
 		},
@@ -80,32 +73,26 @@ GLSR.translation.makeSortable = function()
 	});
 };
 
-/**
- * @return void
- */
 GLSR.translation.navigateResults = function( diff )
 {
-	GLSR.translation.selected += diff;
-	GLSR.translation.results.removeClass( GLSR.translation.selectedClass );
-	if( GLSR.translation.selected >= GLSR.translation.results.length ) {
-		// reached the end (should now allow keydown scroll)
-		GLSR.translation.selected = GLSR.translation.results.length - 1;
-	}
-	if( GLSR.translation.selected < 0 ) {
+	GLSR.translation._.selected += diff;
+	GLSR.translation._.results.removeClass( GLSR.translation._.selectedClass );
+	if( GLSR.translation._.selected < 0 ) {
 		// reached the top (should now allow keydown scroll)
-		GLSR.translation.selected = -1;
-		GLSR.translation.searchEl.focus();
+		GLSR.translation._.selected = -1;
+		GLSR.translation._.searchEl.focus();
 	}
-	if( GLSR.translation.selected >= 0 ) {
-		GLSR.translation.results.eq( GLSR.translation.selected )
-			.addClass( GLSR.translation.selectedClass )
+	if( GLSR.translation._.selected >= GLSR.translation._.results.length ) {
+		// reached the end (should now allow keydown scroll)
+		GLSR.translation._.selected = GLSR.translation._.results.length - 1;
+	}
+	if( GLSR.translation._.selected >= 0 ) {
+		GLSR.translation._.results.eq( GLSR.translation._.selected )
+			.addClass( GLSR.translation._.selectedClass )
 			.focus();
 	}
 };
 
-/**
- * @return void
- */
 GLSR.translation.onDocumentClick = function( ev )
 {
 	var searchForm = ev.target.closest( '.glsr-strings' );
@@ -114,17 +101,14 @@ GLSR.translation.onDocumentClick = function( ev )
 	}
 };
 
-/**
- * @return void
- */
 GLSR.translation.onDocumentKeydown = function( ev )
 {
-	if( !GLSR.translation.results )return;
+	if( !GLSR.translation._.results )return;
 	if( GLSR.keys.ESC === ev.which ) {
 		GLSR.translation.clearResults();
 	}
 	if( GLSR.keys.ENTER === ev.which || GLSR.keys.SPACE === ev.which ) {
-		var selected = GLSR.translation.resultsEl.find( '.' + GLSR.translation.selectedClass );
+		var selected = GLSR.translation._.resultsEl.find( '.' + GLSR.translation._.selectedClass );
 		if( selected ) {
 			selected.trigger( 'click' );
 		}
@@ -139,88 +123,95 @@ GLSR.translation.onDocumentKeydown = function( ev )
 	}
 };
 
-/**
- * @return void
- */
-GLSR.translation.onEntryDelete = function()
+GLSR.translation.onEntryDelete = function( ev )
 {
-	GLSR.translation.deleteRow( x( this ).closest( 'tr' ).index() );
+	ev.preventDefault();
+	GLSR.translation.deleteEntry( x( this ).closest( 'tr' ).index() );
 };
 
-/**
- * @return void
- */
 GLSR.translation.onResultClick = function( ev )
 {
 	ev.preventDefault();
-	var entry = JSON.parse( ev.target.getAttribute( 'data-entry' ));
+	var result = x( this );
+	var entry = result.data( 'entry' );
 	var template = wp.template( 'glsr-string-' + ( entry.plural ? 'plural' : 'single' ));
-	entry.index = GLSR.translation.entriesEl.children().length;
-	entry.prefix = GLSR.translation.resultsEl.data( 'prefix' );
+	entry.index = GLSR.translation._.entriesEl.children().length;
+	entry.prefix = GLSR.translation._.resultsEl.data( 'prefix' );
 	entry.msgid = entry.single;
 	entry.msgid_plural = entry.plural;
 	if( template ) {
-		GLSR.translation.entriesEl.append( template( entry ));
+		GLSR.translation._.entriesEl.append( template( entry ));
+		GLSR.translation._.exclude.push({ id: entry.id });
+		GLSR.translation._.results = GLSR.translation._.results.filter( function( i, el ) {
+			return el !== result.get(0);
+		});
 	}
-	GLSR.translation.exclude.push({ id: entry.id })
+	GLSR.translation.setVisibility();
 	GLSR.translation.clearResults();
 };
 
-/**
- * @return void
- */
 GLSR.translation.onSearchInput = function( ev )
 {
-	if( GLSR.translation.searchTerm === ev.target.value )return;
 	GLSR.translation.abort();
-	GLSR.translation.resultsEl.empty();
-	GLSR.translation.selected = -1;
+	if( GLSR.translation.searchTerm === ev.target.value && GLSR.translation._.results.length ) {
+		return GLSR.translation.displayResults( GLSR.translation._.results );
+	}
+	GLSR.translation._.resultsEl.empty();
+	GLSR.translation._.selected = -1;
 	GLSR.translation.searchTerm = ev.target.value;
 	if( GLSR.translation.searchTerm === '' ) {
-		return GLSR.translation.clearResults();
+		return GLSR.translation.reset();
 	}
 	x( 'body' ).addClass( 'loading-content' );
 	GLSR.translation.searchRequest = wp.ajax.post( site_reviews.action, {
 		_nonce: site_reviews.ajaxnonce,
 		request: {
 			action: 'search-translations',
-			exclude: GLSR.translation.exclude,
+			exclude: GLSR.translation._.exclude,
 			search: ev.target.value,
 		},
 	}).done( function( response ) {
-		x( 'body' )[( response.items.length ? 'add' : 'remove' ) + 'Class']( 'glsr-focus' );
 		x( 'body' ).removeClass( 'loading-content' );
-		GLSR.translation.resultsEl.append( response.items );
-		GLSR.translation.results = GLSR.translation.resultsEl.children( 'span' );
-		GLSR.translation.results.on( 'click', GLSR.translation.onResultClick );
+		GLSR.translation.displayResults( response.items ? response.items : response.empty );
+		GLSR.translation._.results = GLSR.translation._.resultsEl.children();
 		delete GLSR.translation.searchRequest;
 	});
 };
 
-/**
- * @return void
- */
 GLSR.translation.onSearchKeyup = function( ev )
 {
 	if( GLSR.keys.ESC === ev.which ) {
-		ev.target.value = '';
+		GLSR.translation.reset();
 	}
 	if( GLSR.keys.ENTER === ev.which ) {
-		GLSR.translation.abort();
-		GLSR.translation.searchTerm = '';
 		GLSR.translation.onSearchInput( ev );
 	}
 }
 
-/**
- * @return void
- */
-GLSR.translation.reIndexRows = function()
+GLSR.translation.reset = function()
 {
-	GLSR.translation.entriesEl.children( 'tr' ).each( function( index ) {
+	GLSR.translation.clearResults();
+	GLSR.translation._.results = {};
+	GLSR.translation._.searchEl.val( '' );
+};
+
+GLSR.translation.reindexRows = function()
+{
+	GLSR.translation._.exclude = [];
+	GLSR.translation._.entriesEl.children( 'tr' ).each( function( index ) {
 		x( this ).find( '.glsr-string-translation' ).children().filter( ':input' ).each( function() {
-			var name = x( this ).attr( 'name' ).replace( /\[\d+\]/i, '[' + index + ']' );
-			x( this ).attr( 'name', name );
+			var input = x( this );
+			var name = input.attr( 'name' ).replace( /\[\d+\]/i, '[' + index + ']' );
+			input.attr( 'name', name );
+			if( input.attr( 'type' ) === 'hidden' ) {
+				GLSR.translation._.exclude.push({ id: input.val() })
+			}
 		});
 	});
+};
+
+GLSR.translation.setVisibility = function()
+{
+	var action = GLSR.translation._.entriesEl.children().length > 0 ? 'remove' : 'add';
+	GLSR.translation._.entriesEl.parent()[action + 'Class']( 'glsr-hidden' );
 };

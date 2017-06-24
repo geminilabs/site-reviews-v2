@@ -113,6 +113,7 @@ class AjaxController extends BaseController
 			->renderResults();
 
 		wp_send_json_success([
+			'empty' => sprintf( '<div>%s</div>', __( 'Nothing found.', 'site-reviews' )),
 			'items' => $results,
 		]);
 	}

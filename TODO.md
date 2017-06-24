@@ -12,6 +12,7 @@
 - [x] Reindex translations on deletion
 - [x] Drag-to-sort translations
 - [x] Provide "no results found" on no search results
+- [x] hide <thead> if no entries exist
 - [ ] add a gettext filter to load custom translations
 - [ ] Add upgrade migration for existing custom form label/placeholder text
 - [ ] Test translations with html tags
