@@ -7,14 +7,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## [Unreleased]
 
 ### Added
+- [feature] Reviews Summary shortcode: [site_reviews_summary]
+- [feature] Relative dates option
+- [feature] Rich snippets for reviews (schema.org)
+- [feature] Translate any plugin text
+- Extended "assign_to" and "assigned_to" attributes in the widgets and shortcodes to accept "post_id" as a value which automatically equals the current post ID
+- Review excerpts now have a "show more" link
 
 ### Changed
 
 ### Deprecated
 
 ### Removed
+- removed "Submission Form" custom text options (replaced by the new Translation options)
 
 ### Fixed
+- Fix tinymce shortcode dialog tooltips
 
 ### Security
 
