@@ -56,7 +56,7 @@ class EnqueueAssets
 	{
 		$screen = glsr_current_screen();
 
-		$dependencies = array_merge( $this->dependencies, ['jquery', 'underscore', 'wp-util'] );
+		$dependencies = array_merge( $this->dependencies, ['jquery', 'jquery-ui-sortable', 'underscore', 'wp-util'] );
 
 		wp_enqueue_style(
 			$command->handle,

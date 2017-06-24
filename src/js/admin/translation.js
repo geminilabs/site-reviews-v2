@@ -1,3 +1,5 @@
+/** global: _, GLSR, site_reviews, wp, x */
+
 /**
  * @return void
  */
@@ -38,19 +40,6 @@ GLSR.translation.deleteRow = function( index )
 /**
  * @return void
  */
-GLSR.translation.reIndexRows = function()
-{
-	GLSR.translation.entriesEl.children( 'tr' ).each( function( index ) {
-		x( this ).find( '.glsr-string-translation' ).children().filter( ':input' ).each( function() {
-			var name = x( this ).attr( 'name' ).replace( /\[\d+\]/i, '[' + index + ']' );
-			x( this ).attr( 'name', name );
-		});
-	});
-};
-
-/**
- * @return void
- */
 GLSR.translation.init = function()
 {
 	GLSR.translation.exclude = [];
@@ -59,6 +48,7 @@ GLSR.translation.init = function()
 	GLSR.translation.resultsEl = x( '.glsr-strings-results' );
 	GLSR.translation.entriesEl = x( '.glsr-translations tbody' );
 	if( GLSR.translation.searchEl.length ) {
+		GLSR.translation.makeSortable();
 		GLSR.translation.searchEl.attr( 'aria-describedby', 'live-search-desc' );
 		GLSR.translation.searchEl.on( 'input', _.debounce( GLSR.translation.onSearchInput, 500 ));
 		GLSR.translation.searchEl.on( 'keyup', GLSR.translation.onSearchKeyup );
@@ -66,6 +56,28 @@ GLSR.translation.init = function()
 		x( document ).on( 'click', GLSR.translation.onDocumentClick );
 		x( document ).on( 'keydown', GLSR.translation.onDocumentKeydown );
 	}
+};
+
+/**
+ * @return void
+ */
+GLSR.translation.makeSortable = function()
+{
+	GLSR.translation.entriesEl.sortable({
+		axis: 'y',
+		items: 'tr',
+		tolerance: 'pointer',
+		forcePlaceholderSize: true,
+		start: function( ev, ui ) {
+			ui.placeholder.height( ui.helper[0].scrollHeight );
+		},
+		sort: function( ev, ui ) {
+			var top = ev.pageY - x( this ).offsetParent().offset().top - ( ui.helper.outerHeight( true ) / 2 );
+			ui.helper.css({
+				top: top + 'px',
+			});
+		},
+	});
 };
 
 /**
@@ -130,7 +142,7 @@ GLSR.translation.onDocumentKeydown = function( ev )
 /**
  * @return void
  */
-GLSR.translation.onEntryDelete = function( ev )
+GLSR.translation.onEntryDelete = function()
 {
 	GLSR.translation.deleteRow( x( this ).closest( 'tr' ).index() );
 };
@@ -200,12 +212,15 @@ GLSR.translation.onSearchKeyup = function( ev )
 	}
 }
 
-
-
-
-
 /**
- * Whether we're waiting for an Ajax request to complete.
- * @type {bool}
+ * @return void
  */
-// GLSR.strings.ajaxLocked = false;
+GLSR.translation.reIndexRows = function()
+{
+	GLSR.translation.entriesEl.children( 'tr' ).each( function( index ) {
+		x( this ).find( '.glsr-string-translation' ).children().filter( ':input' ).each( function() {
+			var name = x( this ).attr( 'name' ).replace( /\[\d+\]/i, '[' + index + ']' );
+			x( this ).attr( 'name', name );
+		});
+	});
+};
