@@ -208,6 +208,101 @@ class Translation
 	}
 
 	/**
+	 * @param string $original
+	 * @param string $domain
+	 * @return string
+	 */
+	public function translate( $original, $domain, array $args )
+	{
+		if( $domain != 'site-reviews' ) {
+			return $original;
+		}
+		extract( $this->normalizeTranslationArgs( $args ));
+		$strings = $this->getSettings();
+		$strings = array_filter( $strings, function( $string ) use( $single, $plural ) {
+			return $string['s1'] == $single && $string['p1'] == $plural;
+		});
+		if( empty( $strings )) {
+			return $original;
+		}
+		$string = current( $strings );
+		if( !empty( $string['s2'] )) {
+			$single = $string['s2'];
+		}
+		if( !empty( $string['p2'] )) {
+			$plural = $string['p2'];
+		}
+		$translations = get_translations_for_domain( $domain );
+		return $string['type'] == 'plural'
+			? $translations->translate_plural( $single, $plural, $number, $context )
+			: $translations->translate( $single, $context );
+	}
+
+	/**
+	 * @param string $translation
+	 * @param string $text
+	 * @param string $domain
+	 * @return string
+	 */
+	public function translateGettext( $translation, $text, $domain )
+	{
+		return $this->translate( $translation, $domain, [
+			'single' => $text,
+		]);
+	}
+
+	/**
+	 * @param string $translation
+	 * @param string $text
+	 * @param string $context
+	 * @param string $domain
+	 * @return string
+	 */
+	public function translateGettextWithContext( $translation, $text, $context, $domain )
+	{
+		return $this->translate( $translation, $domain, [
+			'context' => $context,
+			'single' => $text,
+		]);
+	}
+
+	/**
+	 * @param string $translation
+	 * @param string $single
+	 * @param string $plural
+	 * @param int $number
+	 * @param string $domain
+	 * @return string
+	 */
+	public function translateNgettext( $translation, $single, $plural, $number, $domain )
+	{
+		return $this->translate( $translation, $domain, [
+			'number' => $number,
+			'plural' => $plural,
+			'single' => $single,
+		]);
+	}
+
+	/**
+	 * @param string $translation
+	 * @param string $single
+	 * @param string $plural
+	 * @param int $number
+	 * @param string $context
+	 * @param string $domain
+	 * @return string
+	 */
+	public function translateNgettextWithContext( $translation, $single, $plural, $number, $context, $domain )
+	{
+		return $this->translate( $translation, $domain, [
+			'context' => $context,
+			'number' => $number,
+			'plural' => $plural,
+			'single' => $single,
+		]);
+	}
+
+	/**
 	 * @param string $key
 	 * @return string
 	 */
@@ -268,5 +363,19 @@ class Translation
 			$string = wp_parse_args( $string, $defaults );
 		}
 		return $strings;
+	}
+
+	/**
+	 * @return array
+	 */
+	protected function normalizeTranslationArgs( array $args )
+	{
+		$defaults = [
+			'context' => '',
+			'number' => 1,
+			'plural' => '',
+			'single' => '',
+		];
+		return shortcode_atts( $defaults, $args );
 	}
 }

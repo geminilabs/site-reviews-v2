@@ -63,9 +63,10 @@ final class App extends Container
 	{
 		$basename = plugin_basename( $this->file );
 
-		$main   = $this->make( 'Controllers\MainController' );
+		$main = $this->make( 'Controllers\MainController' );
 		$review = $this->make( 'Controllers\ReviewController' );
 		$router = $this->make( 'Router' );
+		$translator = $this->make( 'Translation' );
 
 		// Action Hooks
 		add_action( 'plugins_loaded',                        [ $this, 'registerAddons'] );
@@ -111,6 +112,10 @@ final class App extends Container
 		add_filter( 'ngettext',                        [ $review, 'modifyStatusFilter'], 10, 5 );
 		add_filter( 'post_updated_messages',           [ $review, 'modifyUpdateMessages'] );
 		add_filter( 'bulk_post_updated_messages',      [ $review, 'modifyUpdateMessagesBulk'], 10, 2 );
+		add_filter( 'gettext',                         [ $translator, 'translateGettext'], 10, 3 );
+		add_filter( 'gettext_with_context',            [ $translator, 'translateGettextWithContext'], 10, 4 );
+		add_filter( 'ngettext',                        [ $translator, 'translateNgettext'], 10, 5 );
+		add_filter( 'ngettext_with_context',           [ $translator, 'translateNgettextWithContext'], 10, 6 );
 
 		$this->getDefaults();
 	}
