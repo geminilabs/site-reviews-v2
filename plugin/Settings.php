@@ -12,7 +12,7 @@ namespace GeminiLabs\SiteReviews;
 
 use GeminiLabs\SiteReviews\App;
 use GeminiLabs\SiteReviews\Html;
-use GeminiLabs\SiteReviews\Translation;
+use GeminiLabs\SiteReviews\Translator;
 use ReflectionClass;
 use ReflectionMethod;
 
@@ -381,7 +381,7 @@ class Settings
 		]);
 
 		$this->html->addCustomField( $formId, function() {
-			$translations = $this->app->make( 'Translation' )->renderAll();
+			$translations = $this->app->make( 'Translator' )->renderAll();
 			$class = empty( $translations )
 				? 'glsr-hidden'
 				: '';

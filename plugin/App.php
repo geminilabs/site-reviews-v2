@@ -66,7 +66,7 @@ final class App extends Container
 		$main = $this->make( 'Controllers\MainController' );
 		$review = $this->make( 'Controllers\ReviewController' );
 		$router = $this->make( 'Router' );
-		$translator = $this->make( 'Translation' );
+		$translator = $this->make( 'Translator' );
 
 		// Action Hooks
 		add_action( 'plugins_loaded',                        [ $this, 'registerAddons'] );

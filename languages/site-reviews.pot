@@ -1173,6 +1173,24 @@ msgstr ""
 msgid "Search for translatable text..."
 msgstr ""
 
+#: views/menu/settings/settings/strings.php:21, views/menu/settings/settings/strings.php:24
+msgid "%s fuck"
+msgid_plural "%s fucks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: views/menu/settings/settings/strings.php:22
+msgctxt "the number of fucks given."
+msgid "%s fuck"
+msgid_plural "%s fucks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: views/menu/settings/settings/strings.php:23
+msgctxt "one fuck given."
+msgid "%s fuck"
+msgstr ""
+
 #: views/menu/status.php:6
 msgctxt "configured timezone"
 msgid "All dates and times shown here use the WordPress %s."
@@ -1228,6 +1246,14 @@ msgstr ""
 
 #: views/strings/plural.php:9, views/strings/single.php:8
 msgid "Show custom translation"
+msgstr ""
+
+#: views/strings/plural.php:16
+msgid "singlar"
+msgstr ""
+
+#: views/strings/plural.php:17
+msgid "plural"
 msgstr ""
 
 #: views/strings/translations.php:4

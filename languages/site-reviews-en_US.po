@@ -1185,6 +1185,12 @@ msgstr "Search for translatable text"
 msgid "Search for translatable text..."
 msgstr "Search for translatable text..."
 
+#: views/menu/settings/settings/strings.php:21, views/menu/settings/settings/strings.php:24
+msgid "%s fuck"
+msgid_plural "%s fucks"
+msgstr[0] "%s fuck"
+msgstr[1] "%s fucks"
+
 #: views/menu/status.php:7
 msgid "configured timezone"
 msgstr "configured timezone"
@@ -1236,6 +1242,14 @@ msgstr "Delete"
 #: views/strings/plural.php:9, views/strings/single.php:8
 msgid "Show custom translation"
 msgstr "Show custom translation"
+
+#: views/strings/plural.php:16
+msgid "singlar"
+msgstr "singlar"
+
+#: views/strings/plural.php:17
+msgid "plural"
+msgstr "plural"
 
 #: views/strings/translations.php:4
 msgid "Strings"
@@ -1352,6 +1366,18 @@ msgstr "The :attribute must be at least :min."
 msgctxt ":attribute and :min are placeholders and should not be translated."
 msgid "The :attribute must be at least :min characters."
 msgstr "The :attribute must be at least :min characters."
+
+#: views/menu/settings/settings/strings.php:22
+msgctxt "the number of fucks given."
+msgid "%s fuck"
+msgid_plural "%s fucks"
+msgstr[0] "%s fuck"
+msgstr[1] "%s fucks"
+
+#: views/menu/settings/settings/strings.php:23
+msgctxt "one fuck given."
+msgid "%s fuck"
+msgstr "%s fuck"
 
 #: views/menu/status.php:6
 msgctxt "configured timezone"

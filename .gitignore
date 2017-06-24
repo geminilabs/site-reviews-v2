@@ -36,5 +36,3 @@ scrap.md
 /vendor/qcubed/i18n/src/*.php
 /vendor/qcubed/i18n/test
 /vendor/qcubed/i18n/tools
-
-# !/vendor/qcubed/i18n/src/Sepia

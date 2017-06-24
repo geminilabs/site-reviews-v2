@@ -14,7 +14,7 @@ use GeminiLabs\SiteReviews\App;
 use GeminiLabs\SiteReviews\Database;
 use Sepia\PoParser\Parser;
 
-class Translation
+class Translator
 {
 	/**
 	 * @var App

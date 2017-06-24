@@ -106,7 +106,7 @@ class AjaxController extends BaseController
 		if( empty( $request['exclude'] )) {
 			$request['exclude'] = [];
 		}
-		$results = $this->app->make( 'Translation' )
+		$results = $this->app->make( 'Translator' )
 			->search( $request['search'] )
 			->exclude()
 			->exclude( $request['exclude'] )

@@ -43,8 +43,8 @@ class MainProvider implements ProviderInterface
 		);
 
 		$app->singleton(
-			'GeminiLabs\SiteReviews\Translation',
-			'GeminiLabs\SiteReviews\Translation'
+			'GeminiLabs\SiteReviews\Translator',
+			'GeminiLabs\SiteReviews\Translator'
 		);
 
 		// controllers should go last
