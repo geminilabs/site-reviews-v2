@@ -1,3 +1,5 @@
+- [x] Rename reCAPTCHA options
+- [x] Remove custom form text options
 
 - [x] Add option to use relative dates
 - [x] Add documentation for [site_reviews_summary]
@@ -5,15 +7,14 @@
 - [x] Add Translations settings page
 - [x] Serialize/json_encode translations strings in attributes
 - [x] Search result max-height and scrollable
-- [ ] Delete translations
-- [ ] Drag-to-sort translations / reindex translations on save
-- [ ] Provide "no results found" on no search results
-- [ ] Keyboard navigation for results
+- [x] Keyboard navigation for results
+- [x] Delete translations
+- [x] Reindex translations on deletion
+- [x] Drag-to-sort translations
+- [x] Provide "no results found" on no search results
+- [ ] add a gettext filter to load custom translations
 - [ ] Add upgrade migration for existing custom form label/placeholder text
 - [ ] Test translations with html tags
-
-- [ ] Rename reCAPTCHA options
-- [ ] Remove custom form text options
 
 - [ ] Handle single/plural in summary text
 
