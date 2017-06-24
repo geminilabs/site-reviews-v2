@@ -312,7 +312,9 @@ class Settings
 		$this->html->addfield( $formId, [
 			'type'  => 'heading',
 			'value' => __( 'Invisible reCAPTCHA', 'site-reviews' ),
-			'desc'  => __( 'Invisible reCAPTCHA is a free anti-spam service from Google. To use it, you will need to <a href="http://www.google.com/recaptcha/admin" target="_blank">sign up for an API key pair</a> for your site.', 'site-reviews' ),
+			'desc'  => sprintf( __( 'Invisible reCAPTCHA is a free anti-spam service from Google. To use it, you will need to %s for an API key pair for your site.', 'site-reviews' ),
+				sprintf( '<a href="http://www.google.com/recaptcha/admin" target="_blank">%s</a>', __( 'sign up', 'site-reviews' ))
+			),
 		]);
 
 		$this->addSetting( $formId, [
@@ -321,10 +323,10 @@ class Settings
 			'label' => __( 'Use reCAPTCHA?', 'site-reviews' ),
 			'options' => [
 				'' => __( 'Do not use reCAPTCHA', 'site-reviews' ),
-				'custom' => __( 'Custom Integration', 'site-reviews' ),
-				'invisible-recaptcha' => _x( 'Plugin: Invisible reCaptcha', 'plugin name', 'site-reviews' ),
+				'custom' => __( 'Use reCAPTCHA', 'site-reviews' ),
+				'invisible-recaptcha' => _x( 'Use 3rd-party plugin: Invisible reCaptcha', 'plugin name', 'site-reviews' ),
 			],
-			'desc'  => __( 'If you are already using a reCAPTCHA plugin listed here, please select it. Otherwise choose "Custom Integration".', 'site-reviews' ),
+			'desc'  => __( 'If you are already using a reCAPTCHA plugin listed here, please select it; otherwise choose "Use reCAPTCHA".', 'site-reviews' ),
 		]);
 
 		$this->addSetting( $formId, [
