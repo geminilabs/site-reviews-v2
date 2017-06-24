@@ -314,24 +314,18 @@ class Settings
 			'submit' => __( 'Save Settings', 'site-reviews' ),
 		]);
 
-		$this->html->addfield( $formId, [
-			'type'  => 'heading',
-			'value' => __( 'Invisible reCAPTCHA', 'site-reviews' ),
-			'desc'  => sprintf( __( 'Invisible reCAPTCHA is a free anti-spam service from Google. To use it, you will need to %s for an API key pair for your site.', 'site-reviews' ),
-				sprintf( '<a href="http://www.google.com/recaptcha/admin" target="_blank">%s</a>', __( 'sign up', 'site-reviews' ))
-			),
-		]);
-
 		$this->addSetting( $formId, [
 			'type'  => 'select',
 			'name'  => 'recaptcha.integration',
-			'label' => __( 'Use reCAPTCHA?', 'site-reviews' ),
+			'label' => __( 'Invisible reCAPTCHA', 'site-reviews' ),
 			'options' => [
 				'' => __( 'Do not use reCAPTCHA', 'site-reviews' ),
 				'custom' => __( 'Use reCAPTCHA', 'site-reviews' ),
 				'invisible-recaptcha' => _x( 'Use 3rd-party plugin: Invisible reCaptcha', 'plugin name', 'site-reviews' ),
 			],
-			'desc'  => __( 'If you are already using a reCAPTCHA plugin listed here, please select it; otherwise choose "Use reCAPTCHA".', 'site-reviews' ),
+			'desc'  => sprintf( __( 'Invisible reCAPTCHA is a free anti-spam service from Google. To use it, you will need to %s for an API key pair for your site. If you are already using a reCAPTCHA plugin listed here, please select it; otherwise choose "Use reCAPTCHA".', 'site-reviews' ),
+				sprintf( '<a href="http://www.google.com/recaptcha/admin" target="_blank">%s</a>', __( 'sign up', 'site-reviews' ))
+			),
 		]);
 
 		$this->addSetting( $formId, [
@@ -364,110 +358,6 @@ class Settings
 			'depends' => [
 				'recaptcha.integration' => 'custom',
 			],
-		]);
-
-		$this->html->addfield( $formId, [
-			'type'  => 'heading',
-			'value' => __( 'Form Labels', 'site-reviews' ),
-			'desc'  => __( 'Customize the label text for the review submission form fields.', 'site-reviews' ),
-		]);
-
-		$this->addSetting( $formId, [
-			'type'  => 'text',
-			'name'  => 'rating.label',
-			'label' => __( 'Rating label', 'site-reviews' ),
-			'placeholder' => __( 'Your overall rating', 'site-reviews' ),
-			'default' => ':placeholder',
-		]);
-
-		$this->addSetting( $formId, [
-			'type'  => 'text',
-			'name'  => 'title.label',
-			'label' => __( 'Title label', 'site-reviews' ),
-			'placeholder' => __( 'Title of your review', 'site-reviews' ),
-			'default' => ':placeholder',
-		]);
-
-		$this->addSetting( $formId, [
-			'type'  => 'text',
-			'name'  => 'content.label',
-			'label' => __( 'Content label', 'site-reviews' ),
-			'placeholder' => __( 'Your review', 'site-reviews' ),
-			'default' => ':placeholder',
-		]);
-
-		$this->addSetting( $formId, [
-			'type'  => 'text',
-			'name'  => 'name.label',
-			'label' => __( 'Name label', 'site-reviews' ),
-			'placeholder' => __( 'Your name', 'site-reviews' ),
-			'default' => ':placeholder',
-		]);
-
-		$this->addSetting( $formId, [
-			'type'  => 'text',
-			'name'  => 'email.label',
-			'label' => __( 'Email label', 'site-reviews' ),
-			'placeholder' => __( 'Your email', 'site-reviews' ),
-			'default' => ':placeholder',
-		]);
-
-		$this->addSetting( $formId, [
-			'type'  => 'textarea',
-			'name'  => 'terms.label',
-			'label' => __( 'Terms label', 'site-reviews' ),
-			'placeholder' => __( 'This review is based on my own experience and is my genuine opinion.', 'site-reviews' ),
-			'default' => ':placeholder',
-		]);
-
-		$this->addSetting( $formId, [
-			'type'  => 'text',
-			'name'  => 'submit.label',
-			'label' => __( 'Submit Button label', 'site-reviews' ),
-			'placeholder' => __( 'Submit your review', 'site-reviews' ),
-			'default' => ':placeholder',
-		]);
-
-		$this->html->addfield( $formId, [
-			'type'  => 'heading',
-			'value' => __( 'Form Placeholders', 'site-reviews' ),
-			'desc'  => __( 'Customize the placeholder text for the review submission form fields. Use a single space character to disable the placeholder text.', 'site-reviews' ),
-		]);
-
-		$this->addSetting( $formId, [
-			'type'  => 'text',
-			'name'  => 'title.placeholder',
-			'class' => 'large-text',
-			'label' => __( 'Title placeholder', 'site-reviews' ),
-			'placeholder' => __( 'Summarize your review or highlight an interesting detail', 'site-reviews' ),
-			'default' => ':placeholder',
-		]);
-
-		$this->addSetting( $formId, [
-			'type'  => 'text',
-			'name'  => 'content.placeholder',
-			'class' => 'large-text',
-			'label' => __( 'Content placeholder', 'site-reviews' ),
-			'placeholder' => __( 'Tell people your review', 'site-reviews' ),
-			'default' => ':placeholder',
-		]);
-
-		$this->addSetting( $formId, [
-			'type'  => 'text',
-			'name'  => 'name.placeholder',
-			'class' => 'large-text',
-			'label' => __( 'Name placeholder', 'site-reviews' ),
-			'placeholder' => __( 'Tell us your name', 'site-reviews' ),
-			'default' => ':placeholder',
-		]);
-
-		$this->addSetting( $formId, [
-			'type'  => 'text',
-			'name'  => 'email.placeholder',
-			'class' => 'large-text',
-			'label' => __( 'Email placeholder', 'site-reviews' ),
-			'placeholder' => __( 'Tell us your email', 'site-reviews' ),
-			'default' => ':placeholder',
 		]);
 	}
 

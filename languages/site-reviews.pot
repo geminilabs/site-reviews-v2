@@ -461,7 +461,7 @@ msgstr ""
 msgid "Site Reviews navigation"
 msgstr ""
 
-#: plugin/Settings.php:161, plugin/Settings.php:246, plugin/Settings.php:314, plugin/Settings.php:484
+#: plugin/Settings.php:161, plugin/Settings.php:246, plugin/Settings.php:314, plugin/Settings.php:374
 msgid "Save Settings"
 msgstr ""
 
@@ -589,153 +589,41 @@ msgstr ""
 msgid "Set the excerpt word length."
 msgstr ""
 
-#: plugin/Settings.php:319
+#: plugin/Settings.php:320
 msgid "Invisible reCAPTCHA"
 msgstr ""
 
-#: plugin/Settings.php:320
-msgid "Invisible reCAPTCHA is a free anti-spam service from Google. To use it, you will need to %s for an API key pair for your site."
-msgstr ""
-
-#: plugin/Settings.php:321
-msgid "sign up"
-msgstr ""
-
-#: plugin/Settings.php:328
-msgid "Use reCAPTCHA?"
-msgstr ""
-
-#: plugin/Settings.php:330
+#: plugin/Settings.php:322
 msgid "Do not use reCAPTCHA"
 msgstr ""
 
-#: plugin/Settings.php:331
+#: plugin/Settings.php:323
 msgid "Use reCAPTCHA"
 msgstr ""
 
-#: plugin/Settings.php:332
+#: plugin/Settings.php:324
 msgctxt "plugin name"
 msgid "Use 3rd-party plugin: Invisible reCaptcha"
 msgstr ""
 
-#: plugin/Settings.php:334
-msgid "If you are already using a reCAPTCHA plugin listed here, please select it; otherwise choose \"Use reCAPTCHA\"."
+#: plugin/Settings.php:326
+msgid "Invisible reCAPTCHA is a free anti-spam service from Google. To use it, you will need to %s for an API key pair for your site. If you are already using a reCAPTCHA plugin listed here, please select it; otherwise choose \"Use reCAPTCHA\"."
 msgstr ""
 
-#: plugin/Settings.php:340
+#: plugin/Settings.php:327
+msgid "sign up"
+msgstr ""
+
+#: plugin/Settings.php:334
 msgid "Site Key"
 msgstr ""
 
-#: plugin/Settings.php:349
+#: plugin/Settings.php:343
 msgid "Site Secret"
 msgstr ""
 
-#: plugin/Settings.php:358
+#: plugin/Settings.php:352
 msgid "Badge Position"
-msgstr ""
-
-#: plugin/Settings.php:371
-msgid "Form Labels"
-msgstr ""
-
-#: plugin/Settings.php:372
-msgid "Customize the label text for the review submission form fields."
-msgstr ""
-
-#: plugin/Settings.php:378
-msgid "Rating label"
-msgstr ""
-
-#: plugin/Settings.php:379
-msgid "Your overall rating"
-msgstr ""
-
-#: plugin/Settings.php:386
-msgid "Title label"
-msgstr ""
-
-#: plugin/Settings.php:387
-msgid "Title of your review"
-msgstr ""
-
-#: plugin/Settings.php:394
-msgid "Content label"
-msgstr ""
-
-#: plugin/Settings.php:395
-msgid "Your review"
-msgstr ""
-
-#: plugin/Settings.php:402
-msgid "Name label"
-msgstr ""
-
-#: plugin/Settings.php:403
-msgid "Your name"
-msgstr ""
-
-#: plugin/Settings.php:410
-msgid "Email label"
-msgstr ""
-
-#: plugin/Settings.php:411
-msgid "Your email"
-msgstr ""
-
-#: plugin/Settings.php:418
-msgid "Terms label"
-msgstr ""
-
-#: plugin/Settings.php:419
-msgid "This review is based on my own experience and is my genuine opinion."
-msgstr ""
-
-#: plugin/Settings.php:426
-msgid "Submit Button label"
-msgstr ""
-
-#: plugin/Settings.php:427
-msgid "Submit your review"
-msgstr ""
-
-#: plugin/Settings.php:433
-msgid "Form Placeholders"
-msgstr ""
-
-#: plugin/Settings.php:434
-msgid "Customize the placeholder text for the review submission form fields. Use a single space character to disable the placeholder text."
-msgstr ""
-
-#: plugin/Settings.php:441
-msgid "Title placeholder"
-msgstr ""
-
-#: plugin/Settings.php:442
-msgid "Summarize your review or highlight an interesting detail"
-msgstr ""
-
-#: plugin/Settings.php:450
-msgid "Content placeholder"
-msgstr ""
-
-#: plugin/Settings.php:451
-msgid "Tell people your review"
-msgstr ""
-
-#: plugin/Settings.php:459
-msgid "Name placeholder"
-msgstr ""
-
-#: plugin/Settings.php:460
-msgid "Tell us your name"
-msgstr ""
-
-#: plugin/Settings.php:468
-msgid "Email placeholder"
-msgstr ""
-
-#: plugin/Settings.php:469
-msgid "Tell us your email"
 msgstr ""
 
 #: plugin/Shortcodes/Buttons/Generator.php:55
@@ -1342,6 +1230,50 @@ msgstr ""
 msgid "Show custom translation"
 msgstr ""
 
+#: views/submit/index.php:11
+msgid "Your overall rating"
+msgstr ""
+
 #: views/submit/index.php:17
 msgid "Select a Rating"
+msgstr ""
+
+#: views/submit/index.php:30
+msgid "Title of your review"
+msgstr ""
+
+#: views/submit/index.php:31
+msgid "Summarize your review or highlight an interesting detail"
+msgstr ""
+
+#: views/submit/index.php:43
+msgid "Your review"
+msgstr ""
+
+#: views/submit/index.php:44
+msgid "Tell people your review"
+msgstr ""
+
+#: views/submit/index.php:57
+msgid "Your name"
+msgstr ""
+
+#: views/submit/index.php:58
+msgid "Tell us your name"
+msgstr ""
+
+#: views/submit/index.php:70
+msgid "Your email"
+msgstr ""
+
+#: views/submit/index.php:71
+msgid "Tell us your email"
+msgstr ""
+
+#: views/submit/index.php:83
+msgid "This review is based on my own experience and is my genuine opinion."
+msgstr ""
+
+#: views/submit/index.php:135
+msgid "Submit your review"
 msgstr ""
