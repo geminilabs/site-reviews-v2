@@ -131,7 +131,7 @@ class Field
 	 * Render the field
 	 * @return string
 	 */
-	public function render( $print = false )
+	public function render()
 	{
 		if( $this->args['render'] === false )return;
 

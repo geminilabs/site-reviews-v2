@@ -135,8 +135,8 @@ class SiteReviewsSummary extends Shortcode
 	{
 		if( in_array( 'summary', $this->args['hide'] ))return;
 		$summary = _nx(
-			'{rating} out of {max} stars (based on %s review)',
-			'{rating} out of {max} stars (based on %s reviews)',
+			'{rating} out of {max} stars (based on %d review)',
+			'{rating} out of {max} stars (based on %d reviews)',
 			$count,
 			'Do not translate {rating} and {max}, they are template tags.',
 			'site-reviews'

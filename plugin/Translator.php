@@ -217,7 +217,8 @@ class Translator
 		if( $domain != 'site-reviews' ) {
 			return $original;
 		}
-		extract( $this->normalizeTranslationArgs( $args ));
+		$args = $this->normalizeTranslationArgs( $args );
+		extract( $args );
 		$strings = $this->getSettings();
 		$strings = array_filter( $strings, function( $string ) use( $single, $plural ) {
 			return $string['s1'] == $single && $string['p1'] == $plural;

@@ -59,7 +59,7 @@ msgstr "Update WordPress"
 msgid "Title"
 msgstr "Title"
 
-#: plugin/Commands/RegisterPostType.php:23, plugin/Controllers/MainController.php:757, plugin/Shortcodes/Buttons/SiteReviews.php:114
+#: plugin/Commands/RegisterPostType.php:23, plugin/Controllers/MainController.php:765, plugin/Shortcodes/Buttons/SiteReviews.php:114
 msgid "Date"
 msgstr "Date"
 
@@ -125,11 +125,11 @@ msgstr "Site Reviews"
 msgid "Author"
 msgstr "Author"
 
-#: plugin/Controllers/MainController.php:224, plugin/Controllers/MainController.php:756
+#: plugin/Controllers/MainController.php:224, plugin/Controllers/MainController.php:764
 msgid "Type"
 msgstr "Type"
 
-#: plugin/Controllers/MainController.php:225, plugin/Controllers/MainController.php:755, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:124, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:63, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:100
+#: plugin/Controllers/MainController.php:225, plugin/Controllers/MainController.php:763, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:124, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:63, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:100
 msgid "Rating"
 msgstr "Rating"
 
@@ -237,31 +237,31 @@ msgstr "Logging disabled."
 msgid "Settings updated."
 msgstr "Settings updated."
 
-#: plugin/Controllers/MainController.php:729
+#: plugin/Controllers/MainController.php:737
 msgid "Nothing to Revert"
 msgstr "Nothing to Revert"
 
-#: plugin/Controllers/MainController.php:730
+#: plugin/Controllers/MainController.php:738
 msgid "Revert Changes"
 msgstr "Revert Changes"
 
-#: plugin/Controllers/MainController.php:743
+#: plugin/Controllers/MainController.php:751
 msgid "Unknown"
 msgstr "Unknown"
 
-#: plugin/Controllers/MainController.php:746
+#: plugin/Controllers/MainController.php:754
 msgid "%s review"
 msgstr "%s review"
 
-#: plugin/Controllers/MainController.php:758
+#: plugin/Controllers/MainController.php:766
 msgid "Reviewer"
 msgstr "Reviewer"
 
-#: plugin/Controllers/MainController.php:759, plugin/Shortcodes/Buttons/SiteReviewsForm.php:75
+#: plugin/Controllers/MainController.php:767, plugin/Shortcodes/Buttons/SiteReviewsForm.php:75
 msgid "Email"
 msgstr "Email"
 
-#: plugin/Controllers/MainController.php:760
+#: plugin/Controllers/MainController.php:768
 msgid "Avatar"
 msgstr "Avatar"
 
@@ -1224,8 +1224,8 @@ msgid "Show custom translation"
 msgstr "Show custom translation"
 
 #: views/strings/plural.php:16
-msgid "singlar"
-msgstr "singlar"
+msgid "singular"
+msgstr "singular"
 
 #: views/strings/plural.php:17
 msgid "plural"
@@ -1299,10 +1299,10 @@ msgstr "The \"%s\" option is required."
 
 #: plugin/Shortcodes/SiteReviewsSummary.php:137
 msgctxt "Do not translate {rating} and {max}, they are template tags."
-msgid "{rating} out of {max} stars (based on %s review)"
-msgid_plural "{rating} out of {max} stars (based on %s reviews)"
-msgstr[0] "{rating} out of {max} stars (based on %s review)"
-msgstr[1] "{rating} out of {max} stars (based on %s reviews)"
+msgid "{rating} out of {max} stars (based on %d review)"
+msgid_plural "{rating} out of {max} stars (based on %d reviews)"
+msgstr[0] "{rating} out of {max} stars (based on %d review)"
+msgstr[1] "{rating} out of {max} stars (based on %d reviews)"
 
 #: plugin/Strings.php:86
 msgctxt ":attribute is a placeholder and should not be translated."
