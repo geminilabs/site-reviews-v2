@@ -1,5 +1,6 @@
 "use strict";
 
+var args            = require( 'yargs' ).argv;
 var gulp            = require( 'gulp' );
 var bump            = require( 'gulp-bump' );
 var checktextdomain = require( 'gulp-checktextdomain' );
@@ -18,8 +19,8 @@ var paths  = {
 	dest: 'assets/',
 	npm : '../../node_modules/',
 	bump: {
-		stable: 'readme.txt',
-		version: 'site-reviews.php',
+		'stable tag': 'readme.txt',
+		'version': 'site-reviews.php',
 	},
 };
 
@@ -117,8 +118,8 @@ gulp.task( 'languages', () => runSequence( 'checktextdomain', 'pot', 'pseudo', '
 gulp.task( 'bump', function() {
 	['patch', 'minor', 'major'].some( function( arg ) {
 		if( !args[arg] )return;
-		for( var key in config.bump ) {
-			gulp.src( config.bump[key] ).pipe( bump({ type: arg, key: key })).pipe( gulp.dest('.'));
+		for( var key in paths.bump ) {
+			gulp.src( paths.bump[key] ).pipe( bump({ type: arg, key: key })).pipe( gulp.dest('.'));
 		}
 		return true;
 	});

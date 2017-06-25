@@ -18,8 +18,6 @@
 - [ ] Test translations with html tags
 
 - [ ] Handle single/plural in [site_reviews_summary] summary text
-
-- [ ] Change from {rating} to :rating for template tags?
 - [ ] Add helper functions to access rating methods
 
 - [ ] Add Rich Snippets (or Schema) settings page
