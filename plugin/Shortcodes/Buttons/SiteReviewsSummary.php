@@ -58,11 +58,6 @@ class SiteReviewsSummary extends Generator
 				'label'    => esc_html__( 'Labels', 'site-reviews' ),
 				'tooltip'  => __( 'Enter custom labels for the 1-5 star rating levels (from high to low), and separate each with a comma. The defaults labels are: "Excellent,Very good,Average,Poor,Terrible".', 'site-reviews' ),
 			],[
-				'type'     => 'textbox',
-				'name'     => 'summary',
-				'label'    => esc_html__( 'Summary', 'site-reviews' ),
-				'tooltip'  => __( 'Enter a custom summary. Available template tags to use are: {rating}, {max}, and {num}. The default summary is: "{rating} out of {max} stars (based on {num} reviews)".', 'site-reviews' ),
-			],[
 				'type'    => 'listbox',
 				'name'    => 'rating',
 				'label'   => esc_html__( 'Rating', 'site-reviews' ),

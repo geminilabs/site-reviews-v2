@@ -134,11 +134,15 @@ class SiteReviewsSummary extends Shortcode
 	protected function buildSummaryText( $rating, $count )
 	{
 		if( in_array( 'summary', $this->args['hide'] ))return;
-		$summary = str_replace(
-			['{rating}','{max}','{num}'],
-			[$rating, Rating::MAX_RATING, $count],
-			$this->args['summary']
+		$summary = _nx(
+			'{rating} out of {max} stars (based on %s review)',
+			'{rating} out of {max} stars (based on %s reviews)',
+			$count,
+			'Do not translate {rating} and {max}, they are template tags.',
+			'site-reviews'
 		);
+		$summary = str_replace( ['{rating}','{max}'], [$rating, Rating::MAX_RATING], $summary );
+		$summary = sprintf( $summary, $count );
 		return sprintf( '<span class="glsr-summary-text">%s</span>', $summary );
 	}
 
@@ -166,7 +170,6 @@ class SiteReviewsSummary extends Shortcode
 			'hide'        => '',
 			'labels'      => '',
 			'rating'      => 1,
-			'summary'     => __( '{rating} out of {max} stars (based on {num} reviews)', 'site-reviews' ),
 			'title'       => '',
 			'type'        => '',
 		];

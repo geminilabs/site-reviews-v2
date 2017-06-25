@@ -107,7 +107,7 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:225, plugin/Controllers/MainController.php:755, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:124, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:68, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:105
+#: plugin/Controllers/MainController.php:225, plugin/Controllers/MainController.php:755, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:124, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:63, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:100
 msgid "Rating"
 msgstr ""
 
@@ -687,23 +687,23 @@ msgstr ""
 msgid "How many reviews would you like to display (default: 10)?"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:70, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:70, plugin/Widgets/SiteReviews.php:66
+#: plugin/Shortcodes/Buttons/SiteReviews.php:70, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:65, plugin/Widgets/SiteReviews.php:66
 msgid "5 stars"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:71, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:71, plugin/Widgets/SiteReviews.php:67
+#: plugin/Shortcodes/Buttons/SiteReviews.php:71, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:66, plugin/Widgets/SiteReviews.php:67
 msgid "4 stars"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:72, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:72, plugin/Widgets/SiteReviews.php:68
+#: plugin/Shortcodes/Buttons/SiteReviews.php:72, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:67, plugin/Widgets/SiteReviews.php:68
 msgid "3 stars"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:73, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:73, plugin/Widgets/SiteReviews.php:69
+#: plugin/Shortcodes/Buttons/SiteReviews.php:73, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:68, plugin/Widgets/SiteReviews.php:69
 msgid "2 stars"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:74, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:74, plugin/Widgets/SiteReviews.php:70
+#: plugin/Shortcodes/Buttons/SiteReviews.php:74, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:69, plugin/Widgets/SiteReviews.php:70
 msgid "1 star"
 msgstr ""
 
@@ -727,23 +727,23 @@ msgstr ""
 msgid "When using pagination this shortcode can only be used once on a page."
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:92, plugin/Shortcodes/Buttons/SiteReviewsForm.php:58, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:83
+#: plugin/Shortcodes/Buttons/SiteReviews.php:92, plugin/Shortcodes/Buttons/SiteReviewsForm.php:58, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:78
 msgid "Post ID"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:93, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:84
+#: plugin/Shortcodes/Buttons/SiteReviews.php:93, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:79
 msgid "Limit reviews to those assigned to this post ID (separate multiple ID's with a comma). You can also enter 'post_id' to use the ID of the current page."
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:97, plugin/Shortcodes/Buttons/SiteReviewsForm.php:63, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:88
+#: plugin/Shortcodes/Buttons/SiteReviews.php:97, plugin/Shortcodes/Buttons/SiteReviewsForm.php:63, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:83
 msgid "Classes"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:98, plugin/Shortcodes/Buttons/SiteReviewsForm.php:64, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:89
+#: plugin/Shortcodes/Buttons/SiteReviews.php:98, plugin/Shortcodes/Buttons/SiteReviewsForm.php:64, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:84
 msgid "Add custom CSS classes to the shortcode."
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:101, plugin/Shortcodes/Buttons/SiteReviewsForm.php:67, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:92
+#: plugin/Shortcodes/Buttons/SiteReviews.php:101, plugin/Shortcodes/Buttons/SiteReviewsForm.php:67, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:87
 msgid "Hide"
 msgstr ""
 
@@ -819,63 +819,62 @@ msgstr ""
 msgid "Enter custom labels for the 1-5 star rating levels (from high to low), and separate each with a comma. The defaults labels are: \"Excellent,Very good,Average,Poor,Terrible\"."
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviewsSummary.php:63, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:115
-msgid "Summary"
-msgstr ""
-
-#: plugin/Shortcodes/Buttons/SiteReviewsSummary.php:64
-msgid "Enter a custom summary. Available template tags to use are: {rating}, {max}, and {num}. The default summary is: \"{rating} out of {max} stars (based on {num} reviews)\"."
-msgstr ""
-
-#: plugin/Shortcodes/Buttons/SiteReviewsSummary.php:76
+#: plugin/Shortcodes/Buttons/SiteReviewsSummary.php:71
 msgid "What is the minimum rating?"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviewsSummary.php:100
+#: plugin/Shortcodes/Buttons/SiteReviewsSummary.php:95
 msgid "Bars"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviewsSummary.php:101
+#: plugin/Shortcodes/Buttons/SiteReviewsSummary.php:96
 msgid "Hide the percentage bars?"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviewsSummary.php:106
+#: plugin/Shortcodes/Buttons/SiteReviewsSummary.php:101
 msgid "Hide the rating?"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviewsSummary.php:110
+#: plugin/Shortcodes/Buttons/SiteReviewsSummary.php:105
 msgid "Stars"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviewsSummary.php:111
+#: plugin/Shortcodes/Buttons/SiteReviewsSummary.php:106
 msgid "Hide the stars?"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviewsSummary.php:116
+#: plugin/Shortcodes/Buttons/SiteReviewsSummary.php:110
+msgid "Summary"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviewsSummary.php:111
 msgid "Hide the summary text?"
 msgstr ""
 
-#: plugin/Shortcodes/SiteReviewsSummary.php:169
-msgid "{rating} out of {max} stars (based on {num} reviews)"
-msgstr ""
+#: plugin/Shortcodes/SiteReviewsSummary.php:137
+msgctxt "Do not translate {rating} and {max}, they are template tags."
+msgid "{rating} out of {max} stars (based on %s review)"
+msgid_plural "{rating} out of {max} stars (based on %s reviews)"
+msgstr[0] ""
+msgstr[1] ""
 
-#: plugin/Shortcodes/SiteReviewsSummary.php:207, views/submit/index.php:18
+#: plugin/Shortcodes/SiteReviewsSummary.php:210, views/submit/index.php:18
 msgid "Excellent"
 msgstr ""
 
-#: plugin/Shortcodes/SiteReviewsSummary.php:208, views/submit/index.php:19
+#: plugin/Shortcodes/SiteReviewsSummary.php:211, views/submit/index.php:19
 msgid "Very good"
 msgstr ""
 
-#: plugin/Shortcodes/SiteReviewsSummary.php:209, views/submit/index.php:20
+#: plugin/Shortcodes/SiteReviewsSummary.php:212, views/submit/index.php:20
 msgid "Average"
 msgstr ""
 
-#: plugin/Shortcodes/SiteReviewsSummary.php:210, views/submit/index.php:21
+#: plugin/Shortcodes/SiteReviewsSummary.php:213, views/submit/index.php:21
 msgid "Poor"
 msgstr ""
 
-#: plugin/Shortcodes/SiteReviewsSummary.php:211, views/submit/index.php:22
+#: plugin/Shortcodes/SiteReviewsSummary.php:214, views/submit/index.php:22
 msgid "Terrible"
 msgstr ""
 
@@ -1171,24 +1170,6 @@ msgstr ""
 
 #: views/menu/settings/settings/strings.php:6
 msgid "Search for translatable text..."
-msgstr ""
-
-#: views/menu/settings/settings/strings.php:21, views/menu/settings/settings/strings.php:24
-msgid "%s fuck"
-msgid_plural "%s fucks"
-msgstr[0] ""
-msgstr[1] ""
-
-#: views/menu/settings/settings/strings.php:22
-msgctxt "the number of fucks given."
-msgid "%s fuck"
-msgid_plural "%s fucks"
-msgstr[0] ""
-msgstr[1] ""
-
-#: views/menu/settings/settings/strings.php:23
-msgctxt "one fuck given."
-msgid "%s fuck"
 msgstr ""
 
 #: views/menu/status.php:6
