@@ -12,8 +12,6 @@ Site Reviews is a WordPress plugin which allows you to easily receive and displa
 
 == Description ==
 
-IMPORTANT: v2.0.0 is not fully backwards compatible with v1.2.2 and below. If you downgrade to v1 after upgrading to v2, you will lose all your settings and will have to reconfigure the plugin.
-
 Site Reviews is a plugin that allows your visitors to submit site reviews with a 1-5 star rating on your website, similar to the way you would on TripAdvisor or Yelp, and then allows you to display them using a widget or shortcode.
 
 You can pin your best reviews so that they are always shown first, require approval before new review submissions are published, require visitors to be logged-in in order to write a review, send custom notifications on a new submission, and more. The plugin provides both widgets and shortcodes along with full shortcode documentation.
@@ -26,31 +24,35 @@ Follow plugin development on github at: https://github.com/geminilabs/site-revie
 
 = Current Features =
 
-* [new] use Google's Invisible reCAPTCHA on submission forms
-* Actively developed and supported
-* Assign reviews to a Post/Page ID
-* Clean and easy-to-configure user interface
-* Configurable Widgets
-* Custom notifications (including Slack support)
-* Easy setup and implementation
-* Filter reviews by rating
-* Helper functions to easily access review meta
-* Logging
-* MCE shortcode button dropdown
-* Minimal widget styling (tested with all official WP themes)
-* Review avatars (gravatar.com)
-* Review categories
-* Review pagination
-* Shortcodes: Display reviews in your post content and templates
-* WordPress.org support
-* WP Filter Hooks
+- [new] Relative dates option
+- [new] Reviews Summary shortcode: [site_reviews_summary]
+- [new] Rich snippets for reviews (schema.org)
+- [new] Translate any plugin text
+- Actively developed and supported
+- Assign reviews to a Post/Page ID
+- Clean and easy-to-configure user interface
+- Configurable Widgets
+- Custom notifications (including Slack support)
+- Easy setup and implementation
+- Filter reviews by rating
+- Helper functions to easily access review meta
+- Logging
+- MCE shortcode button dropdown
+- Minimal widget styling (tested with all official WP themes)
+- Review avatars (gravatar.com)
+- Review categories
+- Review pagination
+- Shortcodes: Display reviews in your post content and templates
+- Use Google's Invisible reCAPTCHA on submission forms
+- WordPress.org support
+- WP Filter Hooks
 
 == Installation ==
 
 = Minimum plugin requirements =
 
-* WordPress 4.0.0
-* PHP 5.4
+- WordPress 4.0.0
+- PHP 5.4
 
 = Automatic installation =
 
@@ -96,6 +98,16 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 
 == Changelog ==
 
+= 2.3.0 (2017-06-26) =
+- [feature] Reviews Summary shortcode: [site_reviews_summary]
+- [feature] Relative dates option
+- [feature] Rich snippets for reviews (schema.org)
+- [feature] Translate any plugin text
+- Added "show more" links to review excerpts
+- Extended "assign_to" and "assigned_to" attributes in the widgets and shortcodes to accept "post_id" as a value which automatically equals the current post ID
+- Removed "Submission Form" custom text options (replaced by the new Translation options)
+- Fix tinymce shortcode dialog tooltips
+
 = 2.2.3 (2017-05-07) =
 - Added option to change submit button text
 
@@ -105,7 +117,7 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 
 = 2.2.1 (2017-05-06) =
 - Added hook that runs immediately after a review has successfully been submitted (site-reviews/local/review/submitted)
-- use new IP detection when submitting a review
+- Use new IP detection when submitting a review
 
 = 2.2.0 (2017-05-03) =
 - [feature] use Google's Invisible reCAPTCHA on submission forms
@@ -132,81 +144,81 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 
 = 2.0.4 (2017-03-09) =
 
-* Fix WordPress customizer compatibility (see: https://codex.wordpress.org/Function_Reference/get_current_screen#Usage_Restrictions)
+- Fix WordPress customizer compatibility (see: https://codex.wordpress.org/Function_Reference/get_current_screen#Usage_Restrictions)
 
 = 2.0.3 (2017-03-09) =
 
-* Fix incorrect plugin update check
+- Fix incorrect plugin update check
 
 = 2.0.2 (2017-01-24) =
 
-* Added hook to filter metabox details
+- Added hook to filter metabox details
 
 = 2.0.1 (2017-01-23) =
 
-* Prevent the taxonomy object from containing recursion
+- Prevent the taxonomy object from containing recursion
 
 = 2.0.0 (2017-01-12) =
 
-* [feature] Helper functions to easily access review meta
-* [feature] MCE shortcode button dropdown
-* [feature] Review avatars (gravatar.com)
-* [feature] Review categories
-* [breaking] Changed internal widget/shortcode hook names
-* [breaking] Changed shortcode variables
-* [breaking] Consolidated all plugin settings into a single setting variable
-* Ajaxified approve/unapprove
-* Custom Published/Pending labels
-* New settings page for reviews
-* Removed "site-reviews/reviews/excerpt_length" filter hook
-* Removed "site-reviews/reviews/use_excerpt" filter hook
+- [feature] Helper functions to easily access review meta
+- [feature] MCE shortcode button dropdown
+- [feature] Review avatars (gravatar.com)
+- [feature] Review categories
+- [breaking] Changed internal widget/shortcode hook names
+- [breaking] Changed shortcode variables
+- [breaking] Consolidated all plugin settings into a single setting variable
+- Ajaxified approve/unapprove
+- Custom Published/Pending labels
+- New settings page for reviews
+- Removed "site-reviews/reviews/excerpt_length" filter hook
+- Removed "site-reviews/reviews/use_excerpt" filter hook
 
 = 1.2.2 (2017-01-06) =
 
-* Added hook to change excerpt length
-* Added hook to disable the excerpt and instead display the full review content
+- Added hook to change excerpt length
+- Added hook to disable the excerpt and instead display the full review content
 
 = 1.2.1 (2016-12-28) =
 
-* Fix PHP 5.4 compatibility regression
+- Fix PHP 5.4 compatibility regression
 
 = 1.2.0 (2016-12-27) =
 
-* [feature] Send notifications to Slack
-* Fix notifications to use the email template setting
+- [feature] Send notifications to Slack
+- Fix notifications to use the email template setting
 
 = 1.1.1 (2016-12-05) =
 
-* Remove ".star-rating" class on frontend which conflicts with the woocommerce plugin CSS
-* Added hooks to modify rendered fields/partials HTML
+- Remove ".star-rating" class on frontend which conflicts with the woocommerce plugin CSS
+- Added hooks to modify rendered fields/partials HTML
 
 = 1.1.0 (2016-11-16) =
 
-* [feature] Pagination
-* [breaking] Changed internal widget hook names
-* [breaking] Changed text-domain to "site-reviews"
-* Set post_meta defaults when creating a review
-* [addon support] Display read-only reviews
-* [addon support] Display widget link options (conditional field)
-* [addon support] Show all review types by default in widgets and shortcodes
+- [feature] Pagination
+- [breaking] Changed internal widget hook names
+- [breaking] Changed text-domain to "site-reviews"
+- Set post_meta defaults when creating a review
+- [addon support] Display read-only reviews
+- [addon support] Display widget link options (conditional field)
+- [addon support] Show all review types by default in widgets and shortcodes
 
 = 1.0.4 (2016-11-14) =
 
-* use the logged-in user's display_name by default instead of "Anonymous" when submitting reviews
-* Fix shortcodes to insert in the_content correctly
+- use the logged-in user's display_name by default instead of "Anonymous" when submitting reviews
+- Fix shortcodes to insert in the_content correctly
 
 = 1.0.3 (2016-11-09) =
 
-* Updated plugin description
-* Fix plain-text emails
-* Fix inconsistencies with plugin settings form fields
-* Fix internal add-on integration code
+- Updated plugin description
+- Fix plain-text emails
+- Fix inconsistencies with plugin settings form fields
+- Fix internal add-on integration code
 
 = 1.0.2 (2016-10-24) =
 
-* Set widget and settings defaults
-* Fix PHP error that is thrown when settings have not yet been saved to DB
+- Set widget and settings defaults
+- Fix PHP error that is thrown when settings have not yet been saved to DB
 
 = 1.0.0 (2016-10-21) =
 
-* Initial plugin release
+- Initial plugin release

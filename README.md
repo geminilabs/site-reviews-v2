@@ -13,7 +13,10 @@ Minimum plugin requirements:
 
 #### Features
 
-- [new] use Google's Invisible reCAPTCHA on submission forms
+- [new] Relative dates option
+- [new] Reviews Summary shortcode: [site_reviews_summary]
+- [new] Rich snippets for reviews (schema.org)
+- [new] Translate any plugin text
 - Actively developed and supported
 - Assign reviews to a Post/Page ID
 - Clean and easy-to-configure user interface
@@ -29,5 +32,6 @@ Minimum plugin requirements:
 - Review categories
 - Review pagination
 - Shortcodes: Display reviews in your post content and templates
+- Use Google's Invisible reCAPTCHA on submission forms
 - WordPress.org support
 - WP Filter Hooks
