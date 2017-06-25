@@ -299,6 +299,122 @@ class Settings
 				'excerpt.enabled' => 'yes',
 			],
 		]);
+
+		$this->html->addfield( $formId, [
+			'type'  => 'heading',
+			'value' => __( 'Rich Snippets (schema.org)', 'site-reviews' ),
+			'desc'  => __( 'Review snippets appear in Google Search results and include the star rating and other summary info from your reviews.', 'site-reviews' ),
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'select',
+			'name'  => 'schema.itemtype.default',
+			'label' => __( 'Default Schema Type', 'site-reviews' ),
+			'default' => 'local_business',
+			'options' => [
+				'LocalBusiness' => __( 'Local Business', 'site-reviews' ),
+				'Product' => __( 'Product', 'site-reviews' ),
+				'custom' => __( 'Custom', 'site-reviews' ),
+			],
+			'desc' => __( 'This is the default schema type for the item being reviewed.', 'site-reviews' ),
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'text',
+			'name'  => 'schema.itemtype.custom',
+			'label' => __( 'Custom Schema Type', 'site-reviews' ),
+			'depends' => [
+				'schema.itemtype.default' => 'custom',
+			],
+			'desc' => sprintf(
+				__( 'Google supports review ratings for the following schema content types: Local businesses, Movies, Books, Music, and Products. Each of these have sub-types which you can use to be more specific. %s', 'site-reviews' ),
+				sprintf( '<a href="https://schema.org/docs/schemas.html">%s</a>', __( 'View more information on schema types here.', 'site-reviews' ))
+			),
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'select',
+			'name'  => 'schema.name.default',
+			'label' => __( 'Default Name', 'site-reviews' ),
+			'default' => 'post',
+			'options' => [
+				'post' => __( 'Use the assigned or current page title', 'site-reviews' ),
+				'custom' => __( 'Enter a custom title', 'site-reviews' ),
+			],
+			'desc' => __( 'This is the default name of the item being reviewed.', 'site-reviews' ),
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'text',
+			'name'  => 'schema.name.custom',
+			'label' => __( 'Custom Name', 'site-reviews' ),
+			'depends' => [
+				'schema.name.default' => 'custom',
+			],
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'select',
+			'name'  => 'schema.description.default',
+			'label' => __( 'Default Description', 'site-reviews' ),
+			'default' => 'post',
+			'options' => [
+				'post' => __( 'Use the assigned or current page excerpt', 'site-reviews' ),
+				'custom' => __( 'Enter a custom description', 'site-reviews' ),
+			],
+			'desc' => __( 'This is the default description for the item being reviewed.', 'site-reviews' ),
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'text',
+			'name'  => 'schema.description.custom',
+			'label' => __( 'Custom Description', 'site-reviews' ),
+			'depends' => [
+				'schema.description.default' => 'custom',
+			],
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'select',
+			'name'  => 'schema.url.default',
+			'label' => __( 'Default URL', 'site-reviews' ),
+			'default' => 'post',
+			'options' => [
+				'post' => __( 'Use the assigned or current page URL', 'site-reviews' ),
+				'custom' => __( 'Enter a custom URL', 'site-reviews' ),
+			],
+			'desc' => __( 'This is the default URL for the item being reviewed.', 'site-reviews' ),
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'text',
+			'name'  => 'schema.url.custom',
+			'label' => __( 'Custom URL', 'site-reviews' ),
+			'depends' => [
+				'schema.url.default' => 'custom',
+			],
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'select',
+			'name'  => 'schema.photo.default',
+			'label' => __( 'Default Photo', 'site-reviews' ),
+			'default' => 'post',
+			'options' => [
+				'post' => __( 'Use the featured image of the assigned or current page', 'site-reviews' ),
+				'custom' => __( 'Enter a custom image URL', 'site-reviews' ),
+			],
+			'desc' => __( 'This is the default photo for the item being reviewed.', 'site-reviews' ),
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'text',
+			'name'  => 'schema.photo.custom',
+			'label' => __( 'Custom Photo URL', 'site-reviews' ),
+			'depends' => [
+				'schema.photo.default' => 'custom',
+			],
+		]);
 	}
 
 	/**
