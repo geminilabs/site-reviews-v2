@@ -131,9 +131,7 @@ class Upgrade
 	public function sidebarWidgets_200()
 	{
 		$sidebarWidgets = get_option( 'sidebars_widgets' );
-
 		$sidebarWidgets = $this->replaceWidgetNames_200( $sidebarWidgets );
-
 		update_option( 'sidebars_widgets', $sidebarWidgets );
 	}
 
@@ -143,19 +141,53 @@ class Upgrade
 	public function themeMods_200()
 	{
 		global $wpdb;
-
 		$themeMods = $wpdb->get_col( "SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE '%theme_mods_%'" );
-
 		foreach( $themeMods as $theme ) {
-
 			$themeMod = get_option( $theme );
-
 			if( !isset( $themeMod['sidebars_widgets']['data'] ))continue;
-
 			$themeMod['sidebars_widgets']['data'] = $this->replaceWidgetNames_200( $themeMod['sidebars_widgets']['data'] );
-
 			update_option( $theme, $themeMod );
 		}
+	}
+
+	/**
+	 * @return void
+	 */
+	public function translations_230()
+	{
+		$options = $this->db->getOptions();
+		if( !isset( $options['settings']['reviews-form'] ))return;
+		$defaults = array_fill_keys( ['rating', 'title', 'content', 'name', 'email', 'terms', 'submit'], [] );
+		$reviewsForm = shortcode_atts( $defaults, $options['settings']['reviews-form'] );
+		foreach( $reviewsForm as &$option ) {
+			$option = wp_parse_args( $option, ['label' => '', 'placeholder' => ''] );
+		}
+		$strings = [];
+		$migrate = array_filter([
+			'Your overall rating' => $reviewsForm['rating']['label'],
+			'Title of your review' => $reviewsForm['title']['label'],
+			'Your review' => $reviewsForm['content']['label'],
+			'Your name' => $reviewsForm['name']['label'],
+			'Your email' => $reviewsForm['email']['label'],
+			'This review is based on my own experience and is my genuine opinion.' => $reviewsForm['terms']['label'],
+			'Submit your review' => $reviewsForm['submit']['label'],
+			'Summarize your review or highlight an interesting detail' => $reviewsForm['title']['placeholder'],
+			'Tell people your review' => $reviewsForm['content']['placeholder'],
+			'Tell us your name' => $reviewsForm['name']['placeholder'],
+			'Tell us your email' => $reviewsForm['email']['placeholder'],
+		]);
+		foreach( $migrate as $id => $translation ) {
+			$strings[] = [
+				'id' => $id,
+				's1' => $id,
+				's2' => $translation,
+			];
+		}
+		foreach( $defaults as $key => $value ) {
+			unset( $options['settings']['reviews-form'][$key] );
+		}
+		$options['settings']['strings'] = $strings;
+		$this->db->setOptions( $options['settings'], true );
 	}
 
 	/**

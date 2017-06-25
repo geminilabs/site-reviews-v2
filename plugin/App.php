@@ -240,6 +240,7 @@ final class App extends Container
 		}
 		if( version_compare( $version, '2.3.0', '<' )) {
 			$upgrade->options_230();
+			$upgrade->translations_230();
 		}
 
 		$this->updateVersion( $version );

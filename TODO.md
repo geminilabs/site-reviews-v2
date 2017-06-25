@@ -14,7 +14,7 @@
 - [x] Provide "no results found" on no search results
 - [x] hide <thead> if no entries exist
 - [x] add a gettext filter to load custom translations
-- [ ] Add upgrade migration for existing custom form label/placeholder text
+- [x] Add upgrade migration for existing custom form label/placeholder text
 - [ ] Test translations with html tags
 
 - [ ] Handle single/plural in [site_reviews_summary] summary text
