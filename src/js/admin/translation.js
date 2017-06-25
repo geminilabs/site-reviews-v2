@@ -35,7 +35,7 @@ GLSR.translation.displayResults = function( items )
 GLSR.translation.init = function()
 {
 	GLSR.translation._ = {
-		entriesEl: x( '.glsr-translations tbody' ),
+		entriesEl: x( '.glsr-strings-table tbody' ),
 		exclude: [],
 		noResults: '',
 		results: {},
@@ -58,7 +58,6 @@ GLSR.translation.init = function()
 GLSR.translation.makeSortable = function()
 {
 	GLSR.translation._.entriesEl.sortable({
-		axis: 'y',
 		items: 'tr',
 		tolerance: 'pointer',
 		start: function( ev, ui ) {
@@ -95,8 +94,8 @@ GLSR.translation.navigateResults = function( diff )
 
 GLSR.translation.onDocumentClick = function( ev )
 {
-	var searchForm = ev.target.closest( '.glsr-strings' );
-	if( !searchForm && x( 'body' ).hasClass( 'glsr-focus' )) {
+	var searchbox = ev.target.closest( '.glsr-strings-searchbox' );
+	if( !searchbox && x( 'body' ).hasClass( 'glsr-focus' )) {
 		GLSR.translation.clearResults();
 	}
 };
@@ -197,7 +196,7 @@ GLSR.translation.reindexRows = function()
 {
 	GLSR.translation._.exclude = [];
 	GLSR.translation._.entriesEl.children( 'tr' ).each( function( index ) {
-		x( this ).find( '.glsr-string-translation' ).children().filter( ':input' ).each( function() {
+		x( this ).find( '.glsr-string-td2' ).children().filter( ':input' ).each( function() {
 			var input = x( this );
 			var name = input.attr( 'name' ).replace( /\[\d+\]/i, '[' + index + ']' );
 			input.attr( 'name', name );

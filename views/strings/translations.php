@@ -1,4 +1,4 @@
-<table class="wp-list-table widefat glsr-translations {class}">
+<table class="glsr-strings-table wp-list-table widefat {class}">
 	<thead>
 		<tr>
 			<th scope="col" class="manage-column column-primary"><?= __( 'Strings', 'site-reviews' ); ?></th>

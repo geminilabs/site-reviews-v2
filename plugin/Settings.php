@@ -370,7 +370,7 @@ class Settings
 
 		$this->html->createForm( $formId, [
 			'action' => admin_url( 'options.php' ),
-			'class'  => 'glsr-translation-strings',
+			'class'  => 'glsr-strings-form',
 			'nonce'  => $this->app->id . '-settings',
 			'submit' => __( 'Save Settings', 'site-reviews' ),
 		]);

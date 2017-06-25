@@ -1,6 +1,6 @@
 <?php defined( 'WPINC' ) || die; ?>
 
-<div class="glsr-strings">
+<div class="glsr-strings-searchbox">
 	<span class="screen-reader-text"><?= __( 'Search for translatable text', 'site-reviews' ); ?></span>
 	<div class="glsr-spinner"><span class="spinner"></span></div>
 	<input type="search" class="glsr-strings-search" autocomplete="off" placeholder="<?= __( 'Search for translatable text...', 'site-reviews' ); ?>">

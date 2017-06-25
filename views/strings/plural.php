@@ -1,5 +1,5 @@
-<tr class="glsr-string">
-	<td class="glsr-string-original column-primary">
+<tr class="glsr-string-tr">
+	<td class="glsr-string-td1 column-primary">
 		<p>{{ data.s1 }}</p>
 		<p>{{ data.p1 }}</p>
 		<p class="row-actions">
@@ -9,7 +9,7 @@
 			<span class="screen-reader-text"><?= __( 'Show custom translation', 'site-reviews' ); ?></span>
 		</button>
 	</td>
-	<td class="glsr-string-translation">
+	<td class="glsr-string-td2">
 		<input type="hidden" name="{{ data.prefix }}[settings][strings][{{ data.index }}][id]" value="{{ data.id }}" data-id>
 		<input type="hidden" name="{{ data.prefix }}[settings][strings][{{ data.index }}][s1]" value="{{ data.s1 }}">
 		<input type="hidden" name="{{ data.prefix }}[settings][strings][{{ data.index }}][p1]" value="{{ data.p1 }}">
