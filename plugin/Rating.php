@@ -45,6 +45,11 @@ class Rating
 	const MAX_RATING = 5;
 
 	/**
+	 * @var int
+	 */
+	const MIN_RATING = 1;
+
+	/**
 	 * Get the average rating for an array of reviews
 	 * @param int $roundBy
 	 * @return int|float
