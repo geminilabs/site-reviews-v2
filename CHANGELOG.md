@@ -28,6 +28,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Extended "assign_to" and "assigned_to" attributes in the widgets and shortcodes to accept "post_id" as a value which automatically equals the current post ID
 - Review excerpts now have a "show more" link
 
+### Changed
+- The default minimum rating for displaying reviews has been changed to 1 (instead of 5)
+
 ### Removed
 - removed "Submission Form" custom text options (replaced by the new Translation options)
 

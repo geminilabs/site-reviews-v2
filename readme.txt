@@ -104,6 +104,7 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 - [feature] Rich snippets for reviews (schema.org)
 - [feature] Translate any plugin text
 - Added "show more" links to review excerpts
+- [changed] The default minimum rating for displaying reviews has been changed to 1 (instead of 5)
 - Extended "assign_to" and "assigned_to" attributes in the widgets and shortcodes to accept "post_id" as a value which automatically equals the current post ID
 - Removed "Submission Form" custom text options (replaced by the new Translation options)
 - Fix tinymce shortcode dialog tooltips

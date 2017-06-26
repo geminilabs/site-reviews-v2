@@ -35,7 +35,7 @@ class SiteReviews extends Widget
 			'count'       => '5',
 			'display'     => '',
 			'hide'        => [],
-			'rating'      => '5',
+			'rating'      => '1',
 			'title'       => '',
 		];
 
@@ -63,11 +63,11 @@ class SiteReviews extends Widget
 			'label' => __( 'What is the minimum rating to display? ', 'site-reviews' ),
 			'value' => $args['rating'],
 			'options' => [
-				'5' => __( '5 stars', 'site-reviews' ),
-				'4' => __( '4 stars', 'site-reviews' ),
-				'3' => __( '3 stars', 'site-reviews' ),
-				'2' => __( '2 stars', 'site-reviews' ),
-				'1' => __( '1 star', 'site-reviews' ),
+				'5' => sprintf( _n( '%s star', '%s stars', 5, 'site-reviews' ), 5 ),
+				'4' => sprintf( _n( '%s star', '%s stars', 4, 'site-reviews' ), 4 ),
+				'3' => sprintf( _n( '%s star', '%s stars', 3, 'site-reviews' ), 3 ),
+				'2' => sprintf( _n( '%s star', '%s stars', 2, 'site-reviews' ), 2 ),
+				'1' => sprintf( _n( '%s star', '%s stars', 1, 'site-reviews' ), 1 ),
 			],
 		]);
 
@@ -165,7 +165,7 @@ class SiteReviews extends Widget
 			'count'       => '5', // count
 			'display'     => '',
 			'hide'        => [],
-			'rating'      => '5', // rating
+			'rating'      => '1', // rating
 			'title'       => '',
 		];
 
