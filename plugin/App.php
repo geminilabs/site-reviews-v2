@@ -21,16 +21,14 @@ final class App extends Container
 	const POST_TYPE = 'site-review';
 	const TAXONOMY = 'site-review-category';
 
-	public $defaults;
-	public $file;
-	public $id;
-	public $name;
-	public $path;
-	public $post_type;
-	public $prefix;
-	public $taxonomy;
-	public $url;
-	public $version;
+	protected $defaults;
+	protected $file;
+	protected $id;
+	protected $name;
+	protected $path;
+	protected $prefix;
+	protected $url;
+	protected $version;
 
 	public function __construct()
 	{

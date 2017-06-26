@@ -10,12 +10,20 @@
 
 namespace GeminiLabs\SiteReviews;
 
+use Closure;
 use Exception;
 use GeminiLabs\SiteReviews\Providers\ProviderInterface;
 use ReflectionClass;
+use ReflectionParameter;
 
 abstract class Container
 {
+	const PROTECTED_PROPERTIES = [
+		'instance',
+		'services',
+		'storage',
+	];
+
 	/**
 	 * The current globally available container (if any).
 	 *
@@ -23,7 +31,19 @@ abstract class Container
 	 */
 	protected static $instance;
 
+	/**
+	 * The container's bound services
+	 *
+	 * @var array
+	 */
 	protected $services = [];
+
+	/**
+	 * The container's storage items
+	 *
+	 * @var array
+	 */
+	protected $storage = [];
 
 	/**
 	 * Set/get the globally available instance of the container.
@@ -35,8 +55,43 @@ abstract class Container
 		if( is_null( static::$instance )) {
 			static::$instance = new static;
 		}
-
 		return static::$instance;
+	}
+
+	/**
+	 * Dynamically access container properties.
+	 *
+	 * @param string $item
+	 * @return mixed
+	 */
+	public function __get( $property )
+	{
+		if( property_exists( $this, $property ) && !in_array( $property, static::PROTECTED_PROPERTIES )) {
+			return $this->$property;
+		}
+		return isset( $this->storage[$property] )
+			? $this->storage[$property]
+			: null;
+	}
+
+	/**
+	 * Dynamically set container properties.
+	 *
+	 * @param string $property
+	 * @param string $value
+	 * @return void
+	 */
+	public function __set( $property, $value )
+	{
+		if( !property_exists( $this, $property ) || in_array( $property, static::PROTECTED_PROPERTIES )) {
+			$this->storage[$property] = $value;
+		}
+		else if( !isset( $this->$property )) {
+			$this->$property = $value;
+		}
+		else {
+			throw new Exception( sprintf( 'The "%s" property cannot be changed once set.', $property ));
+		}
 	}
 
 	/**
@@ -47,40 +102,41 @@ abstract class Container
 	abstract public function init();
 
 	/**
+	 * Bind a service to the container.
 	 *
-	 * @param string $service
-	 *
+	 * @param string $alias
+	 * @param mixed $concrete
 	 * @return mixed
 	 */
-	public function __get( $service )
+	public function bind( $alias, $concrete )
 	{
-		if( !isset( $this->services[ $service ] )) {
-			return null;
-		}
-
-		if( !is_callable( $this->services[ $service ] )) {
-			return $this->services[ $service ];
-		}
-
-		return $this->services[ $service ]( $this );
+		$this->services[$alias] = $concrete;
 	}
 
 	/**
+	 * Resolve the given type from the container and allow unbound aliases that omit the
+	 * root namespace. i.e. 'Controller' translates to 'GeminiLabs\Pollux\Controller'
 	 *
-	 * @param string $service
-	 * @param string $callback
-	 *
-	 * @return void
+	 * @param mixed $abstract
+	 * @return mixed
 	 */
-	public function __set( $service, $callback )
+	public function make( $abstract )
 	{
-		$this->services[ $service ] = $callback;
+		$service = isset( $this->services[$abstract] )
+			? $this->services[$abstract]
+			: $this->addNamespace( $abstract );
+
+		if( is_callable( $service )) {
+			return call_user_func_array( $service, [$this] );
+		}
+		if( is_object( $service )) {
+			return $service;
+		}
+		return $this->resolve( $service );
 	}
 
-   /**
+	/**
 	 * Register a Provider.
-	 *
-	 * @param ProviderInterface $provider
 	 *
 	 * @return void
 	 */
@@ -90,129 +146,112 @@ abstract class Container
 	}
 
 	/**
-	 * Bind a singleton instance to the container.
+	 * Register a shared binding in the container.
 	 *
-	 * @param string $alias
-	 * @param string $binding
-	 *
+	 * @param string $abstract
+	 * @param callable|string|null $concrete
 	 * @return void
 	 */
-	public function singleton( $alias, $binding )
+	public function singleton( $abstract, $concrete )
 	{
-		$this->bind( $alias, $this->make( $binding ));
+		$this->bind( $abstract, $this->make( $concrete ));
 	}
 
 	/**
-	 * Bind a listener to an event.
+	 * Prefix the current namespace to the abstract if absent
 	 *
-	 * @param string $tag
-	 * @param string $listener
-	 * @param int    $priority
-	 * @param int    $acceptedArgs
-	 *
-	 * @return void
+	 * @param string $abstract
+	 * @return string
 	 */
-	public function addListener( $tag, $listener, $priority = 10, $acceptedArgs = 1 )
+	protected function addNamespace( $abstract )
 	{
-		$app = $this;
-
-		add_action( $tag, function( $event ) use ( $listener, $app ) {
-			$app->make( $listener )->handle( $event );
-		}, $priority, $acceptedArgs );
+		if( strpos( $abstract, __NAMESPACE__ ) === false && !class_exists( $abstract )) {
+			$abstract = __NAMESPACE__ . "\\$abstract";
+		}
+		return $abstract;
 	}
 
 	/**
-	 * Bind a service to the container.
+	 * Throw an exception that the concrete is not instantiable.
 	 *
-	 * @param string $alias
-	 * @param mixed  $concrete
+	 * @param string $concrete
+	 * @throws Exception
+	 */
+	protected function notInstantiable( $concrete )
+	{
+		$message = "Target [$concrete] is not instantiable.";
+		throw new Exception( $message );
+	}
+
+	/**
+	 * Resolve a class based dependency from the container.
 	 *
+	 * @param mixed $concrete
 	 * @return mixed
+	 * @throws Exception
 	 */
-	public function bind( $alias, $concrete )
+	protected function resolve( $concrete )
 	{
-		$this->services[ $alias ] = $concrete;
-	}
-
-	/**
-	 * Request a service from the container.
-	 *
-	 * @param string      $alias
-	 * @param bool|string $prefixed
-	 *
-	 * @return mixed
-	 */
-	public function make( $alias, $prefixed = false )
-	{
-		if( isset( $this->services[ $alias ] ) && is_callable( $this->services[ $alias ] )) {
-			return call_user_func_array( $this->services[ $alias ], [ $this ]);
+		if( $concrete instanceof Closure ) {
+			return $concrete( $this );
 		}
-
-		if( isset( $this->services[ $alias ] ) && is_object( $this->services[ $alias ] )) {
-			return $this->services[ $alias ];
-		}
-
-		if( isset( $this->services[ $alias ] ) && class_exists( $this->services[ $alias ] )) {
-			return $this->resolve( $this->services[ $alias ]);
-		}
-
-		// Allow unbound aliases that omit the root namespace
-		// i.e. 'Html\Field' translates to 'GeminiLabs\SiteReviews\Html\Field'
-		if( $prefixed === false && strpos( $alias, __NAMESPACE__ ) === false && !class_exists( $alias )) {
-			return $this->make( __NAMESPACE__ . "\\$alias" , 'prefix alias with the namespace' );
-		}
-
-		return $this->resolve( $alias );
-	}
-
-	/**
-	 * Resolve class dependencies automatically
-	 *
-	 * @param string $class
-	 *
-	 * @return mixed
-	 */
-	private function resolve( $class )
-	{
-		$reflector = new ReflectionClass( $class );
-
-        // If the type is not instantiable (i.e. interface/abstract class) then bail.
+		$reflector = new ReflectionClass( $concrete );
 		if( !$reflector->isInstantiable() ) {
-			$message = "Target [$class] is not instantiable.";
-
-			throw new Exception( $message );
+			return $this->notInstantiable( $concrete );
 		}
-
-		$constructor = $reflector->getConstructor();
-
-		// No constructor means no dependencies so we can just resolve the instance right away.
-		if( is_null( $constructor )) {
-			return new $class;
+		if( is_null(( $constructor = $reflector->getConstructor() ))) {
+			return new $concrete;
 		}
+		return $reflector->newInstanceArgs(
+			$this->resolveDependencies( $constructor->getParameters() )
+		);
+	}
 
-		$parameters = $constructor->getParameters();
-
-		$newInstanceParameters = [];
-
-		foreach( $parameters as $parameter ) {
-
-			// Allow array parameters if they have a default value
-			if( $parameter->isArray() && $parameter->isDefaultValueAvailable() ) {
-				$newInstanceParameters[] = $parameter->getDefaultValue();
-				continue;
+	/**
+	 * Resolve a class based dependency from the container.
+	 *
+	 * @return mixed
+	 * @throws Exception
+	 */
+	protected function resolveClass( ReflectionParameter $parameter )
+	{
+		try {
+			return $this->make( $parameter->getClass()->name );
+		}
+		catch( Exception $error ) {
+			if( $parameter->isOptional() ) {
+				return $parameter->getDefaultValue();
 			}
-
-			// This will throw a TypeError if parameter is not a class
-			if( is_null( $parameter->getClass() )) {
-				$newInstanceParameters[] = null;
-				continue;
-			}
-
-			$newInstanceParameters[] = $this->make(
-				$parameter->getClass()->getName()
-			);
+			throw $error;
 		}
+	}
 
-		return $reflector->newInstanceArgs( $newInstanceParameters );
+	/**
+	 * Resolve all of the dependencies from the ReflectionParameters.
+	 *
+	 * @return array
+	 */
+	protected function resolveDependencies( array $dependencies )
+	{
+		$results = [];
+		foreach( $dependencies as $dependency ) {
+			$results[] = !is_null( $class = $dependency->getClass() )
+				? $this->resolveClass( $dependency )
+				: $this->resolveDependency( $dependency );
+		}
+		return $results;
+	}
+
+	/**
+	 * Resolve a single ReflectionParameter dependency.
+	 *
+	 * @return array|null
+	 */
+	protected function resolveDependency( ReflectionParameter $parameter )
+	{
+		if( $parameter->isArray() && $parameter->isDefaultValueAvailable() ) {
+			return $parameter->getDefaultValue();
+		}
+		return null;
 	}
 }
