@@ -562,6 +562,16 @@ class MainController extends BaseController
 	}
 
 	/**
+	 * @return void
+	 *
+	 * @action wp_footer
+	 */
+	public function renderSchema()
+	{
+		echo $this->app->make( 'Schema' )->render();
+	}
+
+	/**
 	 * add_submenu_page() callback
 	 *
 	 * @return void

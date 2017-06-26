@@ -86,6 +86,7 @@ final class App extends Container
 		add_action( 'edit_form_after_title',                 [ $main, 'renderReview'] );
 		add_action( 'edit_form_top',                         [ $main, 'renderReviewNotice'] );
 		add_action( 'media_buttons',                         [ $main, 'renderTinymceButton'], 11 );
+		add_action( 'wp_footer',                             [ $main, 'renderSchema'] );
 		add_action( 'admin_action_approve',                  [ $review, 'approve'] );
 		add_action( 'admin_print_scripts',                   [ $review, 'modifyAutosave'], 999 );
 		add_action( 'current_screen',                        [ $review, 'modifyFeatures'] );

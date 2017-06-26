@@ -34,7 +34,7 @@ abstract class BaseType implements Type
     public function __call( $method, array $arguments )
     {
         if( !method_exists( $this, $method ) && !in_array( $method, $this->allowed )) {
-            throw new BadMethodCallException;
+            throw new BadMethodCallException( sprintf( '"%s" property not found in "%s"', $method, $this->getType() ));
         }
         $argument = isset( $arguments[0] ) ? $arguments[0] : '';
         return $this->setProperty( $method, $argument );

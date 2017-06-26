@@ -12,6 +12,7 @@ namespace GeminiLabs\SiteReviews;
 
 use DateTime;
 use GeminiLabs\SchemaOrg\Schema as SchemaOrg;
+use GeminiLabs\SchemaOrg\Review as ReviewSchema;
 use GeminiLabs\SiteReviews\App;
 use GeminiLabs\SiteReviews\Database;
 use GeminiLabs\SiteReviews\Rating;
@@ -27,6 +28,11 @@ class Schema
 	 * @var array
 	 */
 	protected $args;
+
+	/**
+	 * @var array
+	 */
+	protected $currentReview;
 
 	/**
 	 * @var Database
@@ -50,29 +56,42 @@ class Schema
 		$this->rating = $rating;
 	}
 
+	/**
+	 * @return void
+	 */
 	public function build( array $args = [] )
 	{
 		$this->args = $args;
-		return $this->graph();
+		$schemas = (array) $this->app->schemas;
+		foreach( $this->getReviews() as $review ) {
+			$schemas[] = $this->buildReviewSchema( $review );
+		}
+		$schemas[] = $this->buildSummarySchema();
+		$this->app->schemas = array_map( 'unserialize', array_unique( array_map( 'serialize', $schemas )));
 	}
 
 	/**
+	 * @param object $review
 	 * @return array
 	 */
-	public function buildReviewSchema()
+	public function buildReviewSchema( $review )
 	{
 		return SchemaOrg::Review()
-			->name( $this->getReviewName() )
-			->reviewBody( $this->getReviewBody() )
-			->datePublished( $this->getReviewDatePublished() )
+			->doIf( !in_array( 'title', $this->args['hide'] ), function( ReviewSchema $schema ) use( $review ) {
+				$schema->name( $review->title );
+			})
+			->doIf( !in_array( 'excerpt', $this->args['hide'] ), function( ReviewSchema $schema ) use( $review ) {
+				$schema->reviewBody( $review->content );
+			})
+			->datePublished(( new DateTime( $review->date ))->format( DateTime::ISO8601 ))
 			->author( SchemaOrg::Person()
-				->name( $this->getReviewAuthor() )
+				->name( $review->author )
 			)
 			->itemReviewed( $this->getSchemaType()
 				->name( $this->getThingName() )
 			)
 			->reviewRating( SchemaOrg::Rating()
-				->ratingValue( $this->getReviewRatingValue() )
+				->ratingValue( $review->rating )
 				->bestRating( Rating::MAX_RATING )
 				->worstRating( Rating::MIN_RATING )
 			)
@@ -87,7 +106,7 @@ class Schema
 		return $this->getSchemaType()
 			->name( $this->getThingName() )
 			->description( $this->getThingDescription() )
-			->photo( $this->getThingPhoto() )
+			->image( $this->getThingPhoto() )
 			->url( $this->getThingUrl() )
 			->aggregateRating( SchemaOrg::AggregateRating()
 				->ratingValue( $this->getRatingValue() )
@@ -96,8 +115,12 @@ class Schema
 			->toArray();
 	}
 
-	public function graph()
+	/**
+	 * @return string
+	 */
+	public function render()
 	{
+		return sprintf( '<script type="application/ld+json">%s</script>', json_encode( $this->app->schemas ));
 	}
 
 	/**
@@ -109,44 +132,12 @@ class Schema
 	}
 
 	/**
-	 * @return string
-	 */
-	protected function getReviewAuthor()
-	{}
-
-	/**
-	 * @return string
-	 */
-	protected function getReviewBody()
-	{}
-
-	/**
 	 * @return int
 	 */
 	protected function getReviewCount()
 	{
 		return count( $this->reviews );
 	}
-
-	/**
-	 * @return string
-	 */
-	protected function getReviewDatePublished()
-	{
-		return ( new DateTime( 'now' ))->format( DateTime::ISO8601 );
-	}
-
-	/**
-	 * @return string
-	 */
-	protected function getReviewName()
-	{}
-
-	/**
-	 * @return int
-	 */
-	protected function getReviewRatingValue()
-	{}
 
 	/**
 	 * @return array
@@ -175,23 +166,31 @@ class Schema
 	 * @return string
 	 */
 	protected function getThingDescription()
-	{}
+	{
+		return 'THING_DESCRIPTION';
+	}
 
 	/**
 	 * @return string
 	 */
 	protected function getThingName()
-	{}
+	{
+		return 'THING_NAME';
+	}
 
 	/**
 	 * @return string
 	 */
 	protected function getThingPhoto()
-	{}
+	{
+		return 'THING_PHOTO';
+	}
 
 	/**
 	 * @return string
 	 */
 	protected function getThingUrl()
-	{}
+	{
+		return 'THING_URL';
+	}
 }

@@ -67,12 +67,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/geminilabs/schema-org.git",
-                "reference": "442144c4443fa7cdf7ee95954076a0ad5ad49f33"
+                "reference": "c11feed14dc4045c1394a3a85f4da7385ca4e2d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/geminilabs/schema-org/zipball/442144c4443fa7cdf7ee95954076a0ad5ad49f33",
-                "reference": "442144c4443fa7cdf7ee95954076a0ad5ad49f33",
+                "url": "https://api.github.com/repos/geminilabs/schema-org/zipball/c11feed14dc4045c1394a3a85f4da7385ca4e2d1",
+                "reference": "c11feed14dc4045c1394a3a85f4da7385ca4e2d1",
                 "shasum": ""
             },
             "require": {
@@ -133,7 +133,7 @@
             "support": {
                 "source": "https://github.com/geminilabs/schema-org/tree/master"
             },
-            "time": "2017-06-26T17:29:55+00:00"
+            "time": "2017-06-26T20:25:57+00:00"
         },
         {
             "name": "myclabs/deep-copy",
