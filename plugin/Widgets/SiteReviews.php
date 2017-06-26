@@ -72,6 +72,7 @@ class SiteReviews extends Widget
 		]);
 
 		$types = glsr_resolve( 'Database' )->getReviewTypes();
+		$terms = glsr_resolve( 'Database' )->getTerms();
 
 		if( count( $types ) > 1 ) {
 			$this->create_field([
@@ -84,14 +85,16 @@ class SiteReviews extends Widget
 			]);
 		}
 
-		$this->create_field([
-			'type'  => 'select',
-			'name'  => 'category',
-			'label' => __( 'Limit reviews to this category', 'site-reviews' ),
-			'class' => 'widefat',
-			'value' => $args['category'],
-			'options' => ['' => __( 'All Categories', 'site-reviews' ) ] + glsr_resolve( 'Database' )->getTerms(),
-		]);
+		if( !empty( $terms )) {
+			$this->create_field([
+				'type'  => 'select',
+				'name'  => 'category',
+				'label' => __( 'Limit reviews to this category', 'site-reviews' ),
+				'class' => 'widefat',
+				'value' => $args['category'],
+				'options' => ['' => __( 'All Categories', 'site-reviews' ) ] + glsr_resolve( 'Database' )->getTerms(),
+			]);
+		}
 
 		$this->create_field([
 			'type'    => 'text',

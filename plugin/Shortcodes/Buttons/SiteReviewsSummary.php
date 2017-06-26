@@ -26,18 +26,18 @@ class SiteReviewsSummary extends Generator
 
 		if( count( $types ) > 1 ) {
 			$display = [
-				'type'    => 'listbox',
-				'name'    => 'display',
-				'label'   => esc_html__( 'Display', 'site-reviews' ),
+				'type' => 'listbox',
+				'name' => 'display',
+				'label' => esc_html__( 'Display', 'site-reviews' ),
 				'options' => $types,
 				'tooltip' => __( 'Which reviews would you like to display?', 'site-reviews' ),
 			];
 		}
 		if( !empty( $terms )) {
 			$category = [
-				'type'    => 'listbox',
-				'name'    => 'category',
-				'label'   => esc_html__( 'Category', 'site-reviews' ),
+				'type' => 'listbox',
+				'name' => 'category',
+				'label' => esc_html__( 'Category', 'site-reviews' ),
 				'options' => $terms,
 				'tooltip' => __( 'Limit reviews to this category.', 'site-reviews' ),
 			];
@@ -48,15 +48,15 @@ class SiteReviewsSummary extends Generator
 				'html' => sprintf( '<p class="strong">%s</p>', esc_html__( 'All settings are optional.', 'site-reviews' )),
 				'minWidth' => 320,
 			],[
-				'type'     => 'textbox',
-				'name'     => 'title',
-				'label'    => esc_html__( 'Title', 'site-reviews' ),
-				'tooltip'  => __( 'Enter a custom shortcode heading.', 'site-reviews' ),
+				'type' => 'textbox',
+				'name' => 'title',
+				'label' => esc_html__( 'Title', 'site-reviews' ),
+				'tooltip' => __( 'Enter a custom shortcode heading.', 'site-reviews' ),
 			],[
-				'type'     => 'textbox',
-				'name'     => 'labels',
-				'label'    => esc_html__( 'Labels', 'site-reviews' ),
-				'tooltip'  => __( 'Enter custom labels for the 1-5 star rating levels (from high to low), and separate each with a comma. The defaults labels are: "Excellent,Very good,Average,Poor,Terrible".', 'site-reviews' ),
+				'type' => 'textbox',
+				'name' => 'labels',
+				'label' => esc_html__( 'Labels', 'site-reviews' ),
+				'tooltip' => __( 'Enter custom labels for the 1-5 star rating levels (from high to low), and separate each with a comma. The defaults labels are: "Excellent,Very good,Average,Poor,Terrible".', 'site-reviews' ),
 			],[
 				'type' => 'listbox',
 				'name' => 'rating',
@@ -73,10 +73,10 @@ class SiteReviewsSummary extends Generator
 			( isset( $display ) ? $display : [] ),
 			( isset( $category ) ? $category : [] ),
 			[
-				'type'      => 'textbox',
-				'name'      => 'assigned_to',
-				'label'     => esc_html__( 'Post ID', 'site-reviews' ),
-				'tooltip'   => __( "Limit reviews to those assigned to this post ID (separate multiple ID's with a comma). You can also enter 'post_id' to use the ID of the current page.", 'site-reviews' ),
+				'type' => 'textbox',
+				'name' => 'assigned_to',
+				'label' => esc_html__( 'Post ID', 'site-reviews' ),
+				'tooltip' => __( "Limit reviews to those assigned to this post ID (separate multiple ID's with a comma). You can also enter 'post_id' to use the ID of the current page.", 'site-reviews' ),
 			],[
 				'type' => 'listbox',
 				'name' => 'schema',
@@ -92,12 +92,12 @@ class SiteReviewsSummary extends Generator
 				'label' => esc_html__( 'Classes', 'site-reviews' ),
 				'tooltip' => __( 'Add custom CSS classes to the shortcode.', 'site-reviews' ),
 			],[
-				'type'    => 'container',
-				'label'   => esc_html__( 'Hide', 'site-reviews' ),
-				'layout'  => 'grid',
+				'type' => 'container',
+				'label' => esc_html__( 'Hide', 'site-reviews' ),
+				'layout' => 'grid',
 				'columns' => 2,
 				'spacing' => 5,
-				'items'   => [
+				'items' => [
 					[
 						'type' => 'checkbox',
 						'name' => 'hide_bars',
