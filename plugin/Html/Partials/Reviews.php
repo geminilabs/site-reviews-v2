@@ -10,7 +10,6 @@
 
 namespace GeminiLabs\SiteReviews\Html\Partials;
 
-use GeminiLabs\SiteReviews\Rating;
 use GeminiLabs\SiteReviews\Html\Partials\Base;
 
 class Reviews extends Base
@@ -23,14 +22,12 @@ class Reviews extends Base
 	public function render()
 	{
 		$this->normalize();
+		$this->buildSchema();
 		if( $this->isHidden() )return;
 		$html = '';
 		$reviews = $this->db->getReviews( $this->args );
-		$schema = $this->getSchema( ' itemprop="review" itemscope itemtype="http://schema.org/Review"' );
-
 		foreach( $reviews->reviews as $review ) {
-			$html .= sprintf( '<div class="glsr-review"%s>%s</div>',
-				$schema,
+			$html .= sprintf( '<div class="glsr-review">%s</div>',
 				$this->buildTitle( $review ) .
 				$this->buildMeta( $review ) .
 				$this->buildText( $review ) .
@@ -47,10 +44,9 @@ class Reviews extends Base
 			$html .= $this->buildPagination( $reviews->max_num_pages );
 		}
 		return sprintf(
-			'<div class="glsr-reviews-wrap"><div class="glsr-reviews %s">%s</div>%s</div>',
+			'<div class="glsr-reviews-wrap"><div class="glsr-reviews %s">%s</div></div>',
 			$this->args['class'],
-			$html,
-			$this->buildSchema()
+			$html
 		);
 	}
 
@@ -60,19 +56,11 @@ class Reviews extends Base
 	 */
 	protected function buildAuthor( $author )
 	{
-		$hidden = in_array( 'author', $this->args['hide'] );
-		if( $hidden && $this->args['schema'] ) {
-			return sprintf( '<span itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="%s"></span>', $author );
-		}
+		if( in_array( 'author', $this->args['hide'] ))return;
 		$dash = $this->db->getOption( 'settings.reviews.avatars.enabled' ) != 'yes'
 			? '&mdash;'
 			: '';
-		if( !$hidden && $this->args['schema'] ) {
-			return sprintf( '<p class="glsr-review-author" itemprop="author" itemscope itemtype="http://schema.org/Person">%s<span itemprop="name">%s</span></p>', $dash, $author );
-		}
-		if( !$hidden ) {
-			return sprintf( '<p class="glsr-review-author">%s<span>%s</span></p>', $dash, $author );
-		}
+		return sprintf( '<p class="glsr-review-author">%s<span>%s</span></p>', $dash, $author );
 	}
 
 	/**
@@ -91,23 +79,18 @@ class Reviews extends Base
 	 */
 	protected function buildDate( $date )
 	{
-		$hidden = in_array( 'date', $this->args['hide'] );
-		$schema = $this->getSchema( sprintf( ' itemprop="datePublished" content="%s"', date( 'c', strtotime( $date ))));
-		if( $this->args['schema'] && $hidden ) {
-			return sprintf( '<meta%s>', $schema );
-		}
-		if( $hidden )return;
-		$format = $this->db->getOption( 'settings.reviews.date.format', 'default' );
-		if( $format == 'relative' ) {
+		if( in_array( 'date', $this->args['hide'] ))return;
+		$dateFormat = $this->db->getOption( 'settings.reviews.date.format', 'default' );
+		if( $dateFormat == 'relative' ) {
 			$date = $this->app->make( 'Date' )->relative( $date );
 		}
 		else {
-			$format = $format == 'custom'
+			$format = $dateFormat == 'custom'
 				? $this->db->getOption( 'settings.reviews.date.custom', 'M j, Y' )
 				: get_option( 'date_format' );
 			$date = date_i18n( $format, strtotime( $date ));
 		}
-		return sprintf( '<span class="glsr-review-date"%s>%s</span>', $schema, $date );
+		return sprintf( '<span class="glsr-review-date">%s</span>', $date );
 	}
 
 	/**
@@ -170,8 +153,16 @@ class Reviews extends Base
 		return $this->app->make( 'Html' )->renderPartial( 'star-rating', [
 			'hidden' => in_array( 'rating', $this->args['hide'] ),
 			'rating' => $rating,
-			'schema' => $this->args['schema'],
 		]);
+	}
+
+	/**
+	 * @return void
+	 */
+	protected function buildSchema()
+	{
+		if( !$this->args['schema'] )return;
+		$this->app->make( 'Schema' )->build( wp_parse_args( ['count' => -1], $this->args ));
 	}
 
 	/**
@@ -180,18 +171,12 @@ class Reviews extends Base
 	 */
 	protected function buildText( $review )
 	{
-		$hidden = in_array( 'excerpt', $this->args['hide'] );
-		$schema = $this->getSchema( ' itemprop="reviewBody"' );
+		if( in_array( 'excerpt', $this->args['hide'] ))return;
 		$text = $this->normalizeText( $review->content );
-		if( $this->args['schema'] && $hidden ) {
-			return sprintf( '<meta%s content="%s">', $schema, $text );
-		}
 		$text = $this->getExcerpt( $text );
 		$text = apply_filters( 'site-reviews/reviews/review/text', $text, $review, $this->args );
 		$text = wpautop( $text );
-		if( !$hidden ) {
-			return sprintf( '<div class="glsr-review-excerpt"%s>%s</div>', $schema, $text );
-		}
+		return sprintf( '<div class="glsr-review-excerpt">%s</div>', $text );
 	}
 
 	/**
@@ -200,18 +185,12 @@ class Reviews extends Base
 	 */
 	protected function buildTitle( $review )
 	{
+		if( in_array( 'title', $this->args['hide'] ))return;
 		if( empty( $review->title )) {
 			$review->title = __( 'No Title', 'site-reviews' );
 		}
-		$hidden = in_array( 'title', $this->args['hide'] );
-		$schema = $this->getSchema( ' itemprop="name"' );
-		if( $this->args['schema'] && $hidden ) {
-			return sprintf( '<meta%s content="%s">', $schema, $review->title );
-		}
-		if( !$hidden ) {
-			$title = sprintf( '<h3 class="glsr-review-title"%s>%s</h3>', $schema, $review->title );
-			return apply_filters( 'site-reviews/reviews/review/title', $title, $review, $this->args );
-		}
+		$title = sprintf( '<h3 class="glsr-review-title">%s</h3>', $review->title );
+		return apply_filters( 'site-reviews/reviews/review/title', $title, $review, $this->args );
 	}
 
 	/**
@@ -265,15 +244,6 @@ class Reviews extends Base
 	}
 
 	/**
-	 * @param string $schema
-	 * @return string
-	 */
-	protected function getSchema( $schema )
-	{
-		return $this->args['schema'] ? $schema : '';
-	}
-
-	/**
 	 * @return void
 	 */
 	protected function normalize()
@@ -286,18 +256,41 @@ class Reviews extends Base
 			'hide'        => '',
 			'orderby'     => 'date',
 			'pagination'  => false,
-			'rating'      => '',
-			'schema'      => true,
+			'rating'      => '1',
+			'schema'      => false,
 			'type'        => '',
 			'word_limit'  => 55,
 		];
 		$this->args = shortcode_atts( $defaults, $this->args );
-		$this->args['hide'] = (array) $this->args['hide'];
 		array_walk( $this->args, function( &$value, $key ) {
-			if( in_array( $key, ['pagination','schema'] )) {
-				$value = wp_validate_boolean( $value );
-			}
+			$methodName = $this->app->make( 'Helper' )->buildMethodName( $key, 'normalize' );
+			if( !method_exists( $this, $methodName ))return;
+			$value = $this->$methodName( $value );
 		});
+	}
+
+	/**
+	 * @return array
+	 */
+	protected function normalizeHide( $hide )
+	{
+		return array_filter(( array ) $hide );
+	}
+
+	/**
+	 * @return bool
+	 */
+	protected function normalizePagination( $pagination )
+	{
+		return wp_validate_boolean( $pagination );
+	}
+
+	/**
+	 * @return bool
+	 */
+	protected function normalizeSchema( $schema )
+	{
+		return wp_validate_boolean( $schema );
 	}
 
 	/**
@@ -321,35 +314,5 @@ class Reviews extends Base
 			$values = static::HIDDEN_KEYS;
 		}
 		return !array_diff( $values, $this->args['hide'] );
-	}
-
-
-
-
-
-	protected function buildSchema()
-	{
-		$args = $this->args;
-		$args['count'] = false;
-		$reviews = $this->db->getReviews( $args )->reviews;
-
-		$rating = $this->app->make( 'Rating' );
-
-		$count = count( $reviews );
-		$averageRating = $rating->getAverage( $reviews );
-		$percentages = preg_filter( '/$/', '%', $rating->getPercentages( $reviews ));
-
-		glsr_debug(
-			'rank: ' . $rating->getRanking( $reviews ),
-			'imdb rank: ' . $rating->getRankingImdb( $reviews ),
-			$averageRating . ' out of 5 stars',
-			$count . ' reviews',
-			'Excellent: ' . $percentages[5],
-			'Very good: ' . $percentages[4],
-			'Average: ' . $percentages[3],
-			'Poor: ' . $percentages[2],
-			'Terrible: ' . $percentages[1]
-		);
-		return;
 	}
 }

@@ -33,11 +33,18 @@
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/geminilabs/schema-org.git"
+    }
+  ],
   "require": {
     "php": ">=5.4"
   },
   "require-dev": {
     "phpunit/phpunit": "5.5.*",
+    "geminilabs/schema-org": "dev-master as 1.3.0",
     "qcubed/i18n": "dev-master",
     "sinergi/browser-detector": "^6.0",
     "vectorface/whip": "^0.3.1"

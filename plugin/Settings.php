@@ -308,9 +308,9 @@ class Settings
 
 		$this->addSetting( $formId, [
 			'type'  => 'select',
-			'name'  => 'schema.itemtype.default',
+			'name'  => 'schema.type.default',
 			'label' => __( 'Default Schema Type', 'site-reviews' ),
-			'default' => 'local_business',
+			'default' => 'LocalBusiness',
 			'options' => [
 				'LocalBusiness' => __( 'Local Business', 'site-reviews' ),
 				'Product' => __( 'Product', 'site-reviews' ),
@@ -321,10 +321,10 @@ class Settings
 
 		$this->addSetting( $formId, [
 			'type'  => 'text',
-			'name'  => 'schema.itemtype.custom',
+			'name'  => 'schema.type.custom',
 			'label' => __( 'Custom Schema Type', 'site-reviews' ),
 			'depends' => [
-				'schema.itemtype.default' => 'custom',
+				'schema.type.default' => 'custom',
 			],
 			'desc' => sprintf(
 				__( 'Google supports review ratings for the following schema content types: Local businesses, Movies, Books, Music, and Products. Each of these have sub-types which you can use to be more specific. %s', 'site-reviews' ),

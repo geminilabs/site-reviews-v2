@@ -92,6 +92,15 @@ class SiteReviews extends Generator
 				'label'     => esc_html__( 'Post ID', 'site-reviews' ),
 				'tooltip'   => __( "Limit reviews to those assigned to this post ID (separate multiple ID's with a comma). You can also enter 'post_id' to use the ID of the current page.", 'site-reviews' ),
 			],[
+				'type' => 'listbox',
+				'name' => 'schema',
+				'label' => esc_html__( 'Schema', 'site-reviews' ),
+				'options' => [
+					'true' => esc_html__( 'Enable rich snippets', 'site-reviews' ),
+					'false' => esc_html__( 'Disable rich snippets', 'site-reviews' ),
+				],
+				'tooltip' => __( 'Rich snippets are enabled by default.', 'site-reviews' ),
+			],[
 				'type'     => 'textbox',
 				'name'     => 'class',
 				'label'    => esc_html__( 'Classes', 'site-reviews' ),

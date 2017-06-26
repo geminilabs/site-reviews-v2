@@ -12,8 +12,8 @@
 
 namespace GeminiLabs\SiteReviews\Shortcodes;
 
-use GeminiLabs\SiteReviews\Shortcode;
 use GeminiLabs\SiteReviews\Rating;
+use GeminiLabs\SiteReviews\Shortcode;
 
 class SiteReviewsSummary extends Shortcode
 {
@@ -35,6 +35,7 @@ class SiteReviewsSummary extends Shortcode
 	public function printShortcode( $atts = [] )
 	{
 		$this->normalize( $atts );
+		$this->buildSchema();
 		if( $this->isHidden() )return;
 		$this->rating = $this->app->make( 'Rating' );
 		$reviews = $this->db->getReviews( $this->args );
@@ -97,6 +98,15 @@ class SiteReviewsSummary extends Shortcode
 	{
 		if( in_array( 'rating', $this->args['hide'] ))return;
 		return sprintf( '<span class="glsr-summary-rating">%s</span>', $rating );
+	}
+
+	/**
+	 * @return void
+	 */
+	protected function buildSchema()
+	{
+		if( !$this->args['schema'] )return;
+		$this->app->make( 'Schema' )->build( wp_parse_args( ['count' => -1], $this->args ));
 	}
 
 	/**
@@ -170,6 +180,7 @@ class SiteReviewsSummary extends Shortcode
 			'hide'        => '',
 			'labels'      => '',
 			'rating'      => 1,
+			'schema'      => true,
 			'title'       => '',
 			'type'        => '',
 		];
@@ -219,5 +230,13 @@ class SiteReviewsSummary extends Shortcode
 			$defaults[$i] = $labels[$i];
 		}
 		return array_combine( [5,4,3,2,1], $defaults );
+	}
+
+	/**
+	 * @return bool
+	 */
+	protected function normalizeSchema( $schema )
+	{
+		return wp_validate_boolean( $schema );
 	}
 }
