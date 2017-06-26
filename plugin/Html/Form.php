@@ -12,7 +12,6 @@ namespace GeminiLabs\SiteReviews\Html;
 
 use GeminiLabs\SiteReviews\App;
 
-use Closure;
 use Exception;
 
 class Form
@@ -96,7 +95,7 @@ class Form
 	 *
 	 * @return Form
 	 */
-	public function addCustomField( Closure $callback )
+	public function addCustomField( callable $callback )
 	{
 		$this->customFields[] = $callback();
 		return $this;
