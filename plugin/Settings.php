@@ -316,7 +316,8 @@ class Settings
 				'Product' => __( 'Product', 'site-reviews' ),
 				'custom' => __( 'Custom', 'site-reviews' ),
 			],
-			'desc' => sprintf( __( 'This is the default schema type for the item being reviewed. You can override this option on a per-post/page basis by adding a <code>schema_type</code> metadata value using %s.', 'site-reviews' ),
+			'desc' => sprintf( __( 'This is the default schema type for the item being reviewed. You can override this option on a per-post/page basis by adding a %s metadata value using %s.', 'site-reviews' ),
+				'<code>schema_type</code>',
 				sprintf( '<a href="https://codex.wordpress.org/Using_Custom_Fields#Usage">%s</a>', __( 'Custom Fields', 'site-reviews' ))
 			),
 		]);
@@ -343,7 +344,8 @@ class Settings
 				'post' => __( 'Use the assigned or current page title', 'site-reviews' ),
 				'custom' => __( 'Enter a custom title', 'site-reviews' ),
 			],
-			'desc' => sprintf( __( 'This is the default name of the item being reviewed. You can override this option on a per-post/page basis by adding a <code>schema_type</code> metadata value using %s.', 'site-reviews' ),
+			'desc' => sprintf( __( 'This is the default name of the item being reviewed. You can override this option on a per-post/page basis by adding a %s metadata value using %s.', 'site-reviews' ),
+				'<code>schema_name</code>',
 				sprintf( '<a href="https://codex.wordpress.org/Using_Custom_Fields#Usage">%s</a>', __( 'Custom Fields', 'site-reviews' ))
 			),
 		]);
@@ -366,7 +368,8 @@ class Settings
 				'post' => __( 'Use the assigned or current page excerpt', 'site-reviews' ),
 				'custom' => __( 'Enter a custom description', 'site-reviews' ),
 			],
-			'desc' => sprintf( __( 'This is the default description for the item being reviewed. You can override this option on a per-post/page basis by adding a <code>schema_type</code> metadata value using %s.', 'site-reviews' ),
+			'desc' => sprintf( __( 'This is the default description for the item being reviewed. You can override this option on a per-post/page basis by adding a %s metadata value using %s.', 'site-reviews' ),
+				'<code>schema_description</code>',
 				sprintf( '<a href="https://codex.wordpress.org/Using_Custom_Fields#Usage">%s</a>', __( 'Custom Fields', 'site-reviews' ))
 			),
 		]);
@@ -389,7 +392,8 @@ class Settings
 				'post' => __( 'Use the assigned or current page URL', 'site-reviews' ),
 				'custom' => __( 'Enter a custom URL', 'site-reviews' ),
 			],
-			'desc' => sprintf( __( 'This is the default URL for the item being reviewed. You can override this option on a per-post/page basis by adding a <code>schema_type</code> metadata value using %s.', 'site-reviews' ),
+			'desc' => sprintf( __( 'This is the default URL for the item being reviewed. You can override this option on a per-post/page basis by adding a %s metadata value using %s.', 'site-reviews' ),
+				'<code>schema_url</code>',
 				sprintf( '<a href="https://codex.wordpress.org/Using_Custom_Fields#Usage">%s</a>', __( 'Custom Fields', 'site-reviews' ))
 			),
 		]);
@@ -412,7 +416,8 @@ class Settings
 				'post' => __( 'Use the featured image of the assigned or current page', 'site-reviews' ),
 				'custom' => __( 'Enter a custom image URL', 'site-reviews' ),
 			],
-			'desc' => sprintf( __( 'This is the default image for the item being reviewed. You can override this option on a per-post/page basis by adding a <code>schema_type</code> metadata value using %s.', 'site-reviews' ),
+			'desc' => sprintf( __( 'This is the default image for the item being reviewed. You can override this option on a per-post/page basis by adding a %s metadata value using %s.', 'site-reviews' ),
+				'<code>schema_image</code>',
 				sprintf( '<a href="https://codex.wordpress.org/Using_Custom_Fields#Usage">%s</a>', __( 'Custom Fields', 'site-reviews' ))
 			),
 		]);

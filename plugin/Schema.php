@@ -11,8 +11,8 @@
 namespace GeminiLabs\SiteReviews;
 
 use DateTime;
-use GeminiLabs\SchemaOrg\Schema as SchemaOrg;
 use GeminiLabs\SchemaOrg\Review as ReviewSchema;
+use GeminiLabs\SchemaOrg\Schema as SchemaOrg;
 use GeminiLabs\SiteReviews\App;
 use GeminiLabs\SiteReviews\Database;
 use GeminiLabs\SiteReviews\Rating;
@@ -120,7 +120,8 @@ class Schema
 				->reviewCount( $this->getReviewCount() )
 			)
 			->toArray();
-		return apply_filters( sprintf( 'site-reviews/schema/%s', $schema['@type'] ), $schema, $this->args );
+		$args = wp_parse_args( ['count' => -1], $this->args );
+		return apply_filters( sprintf( 'site-reviews/schema/%s', $schema['@type'] ), $schema, $args );
 	}
 
 	/**
