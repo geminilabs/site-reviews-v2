@@ -205,7 +205,7 @@ class Schema
 			case 'description':
 				return get_the_excerpt( get_the_ID() );
 			case 'image':
-				return get_the_post_thumbnail_url( get_the_ID(), 'large' );
+				return get_the_post_thumbnail_url( get_the_ID(), 'large' ) . '';
 			case 'name':
 				return get_the_title( get_the_ID() );
 			case 'url':
