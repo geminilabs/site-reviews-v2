@@ -59,7 +59,7 @@ msgstr "Update WordPress"
 msgid "Title"
 msgstr "Title"
 
-#: plugin/Commands/RegisterPostType.php:23, plugin/Controllers/MainController.php:765, plugin/Shortcodes/Buttons/SiteReviews.php:123
+#: plugin/Commands/RegisterPostType.php:23, plugin/Controllers/MainController.php:775, plugin/Shortcodes/Buttons/SiteReviews.php:123
 msgid "Date"
 msgstr "Date"
 
@@ -79,7 +79,7 @@ msgstr "Nothing found."
 msgid "Log was cleared."
 msgstr "Log was cleared."
 
-#: plugin/Controllers/MainController.php:102, plugin/Controllers/MainController.php:348, plugin/Controllers/MainController.php:581
+#: plugin/Controllers/MainController.php:102, plugin/Controllers/MainController.php:348, plugin/Controllers/MainController.php:591
 msgid "Settings"
 msgstr "Settings"
 
@@ -113,7 +113,7 @@ msgstr ""
 msgid "Review"
 msgstr "Review"
 
-#: plugin/Controllers/MainController.php:212, plugin/Controllers/MainController.php:574, views/menu/status.php:16
+#: plugin/Controllers/MainController.php:212, plugin/Controllers/MainController.php:584, views/menu/status.php:16
 msgid "Reviews"
 msgstr "Reviews"
 
@@ -125,11 +125,11 @@ msgstr "Site Reviews"
 msgid "Author"
 msgstr "Author"
 
-#: plugin/Controllers/MainController.php:224, plugin/Controllers/MainController.php:764
+#: plugin/Controllers/MainController.php:224, plugin/Controllers/MainController.php:774
 msgid "Type"
 msgstr "Type"
 
-#: plugin/Controllers/MainController.php:225, plugin/Controllers/MainController.php:763, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:133, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:63, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:109
+#: plugin/Controllers/MainController.php:225, plugin/Controllers/MainController.php:773, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:133, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:63, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:109
 msgid "Rating"
 msgstr "Rating"
 
@@ -209,59 +209,59 @@ msgstr "System Info"
 msgid "%s reviews are read-only."
 msgstr "%s reviews are read-only."
 
-#: plugin/Controllers/MainController.php:573
+#: plugin/Controllers/MainController.php:583
 msgid "General"
 msgstr "General"
 
-#: plugin/Controllers/MainController.php:575
+#: plugin/Controllers/MainController.php:585
 msgid "Submission Form"
 msgstr "Submission Form"
 
-#: plugin/Controllers/MainController.php:576
+#: plugin/Controllers/MainController.php:586
 msgid "Translations"
 msgstr "Translations"
 
-#: plugin/Controllers/MainController.php:584
+#: plugin/Controllers/MainController.php:594
 msgid "Licenses"
 msgstr "Licenses"
 
-#: plugin/Controllers/MainController.php:649
+#: plugin/Controllers/MainController.php:659
 msgid "Logging enabled."
 msgstr "Logging enabled."
 
-#: plugin/Controllers/MainController.php:650
+#: plugin/Controllers/MainController.php:660
 msgid "Logging disabled."
 msgstr "Logging disabled."
 
-#: plugin/Controllers/MainController.php:653
+#: plugin/Controllers/MainController.php:663
 msgid "Settings updated."
 msgstr "Settings updated."
 
-#: plugin/Controllers/MainController.php:737
+#: plugin/Controllers/MainController.php:747
 msgid "Nothing to Revert"
 msgstr "Nothing to Revert"
 
-#: plugin/Controllers/MainController.php:738
+#: plugin/Controllers/MainController.php:748
 msgid "Revert Changes"
 msgstr "Revert Changes"
 
-#: plugin/Controllers/MainController.php:751
+#: plugin/Controllers/MainController.php:761
 msgid "Unknown"
 msgstr "Unknown"
 
-#: plugin/Controllers/MainController.php:754
+#: plugin/Controllers/MainController.php:764
 msgid "%s review"
 msgstr "%s review"
 
-#: plugin/Controllers/MainController.php:766
+#: plugin/Controllers/MainController.php:776
 msgid "Reviewer"
 msgstr "Reviewer"
 
-#: plugin/Controllers/MainController.php:767, plugin/Shortcodes/Buttons/SiteReviewsForm.php:75
+#: plugin/Controllers/MainController.php:777, plugin/Shortcodes/Buttons/SiteReviewsForm.php:75
 msgid "Email"
 msgstr "Email"
 
-#: plugin/Controllers/MainController.php:768
+#: plugin/Controllers/MainController.php:778
 msgid "Avatar"
 msgstr "Avatar"
 
@@ -315,7 +315,7 @@ msgstr "The reCAPTCHA verification failed. Please notify the site administrator.
 msgid "Anonymous"
 msgstr "Anonymous"
 
-#: plugin/Controllers/ReviewController.php:489, plugin/Html/Partials/Reviews.php:190
+#: plugin/Controllers/ReviewController.php:489, plugin/Html/Partials/Reviews.php:191
 msgid "No Title"
 msgstr "No Title"
 
@@ -323,43 +323,43 @@ msgstr "No Title"
 msgid "%s reviews"
 msgstr "%s reviews"
 
-#: plugin/Date.php:35
+#: plugin/Date.php:44
 msgid "%s second ago"
 msgid_plural "%s seconds ago"
 msgstr[0] "%s second ago"
 msgstr[1] "%s seconds ago"
 
-#: plugin/Date.php:36
+#: plugin/Date.php:45
 msgid "%s minute ago"
 msgid_plural "%s minutes ago"
 msgstr[0] "%s minute ago"
 msgstr[1] "%s minutes ago"
 
-#: plugin/Date.php:37
+#: plugin/Date.php:46
 msgid "an hour ago"
 msgid_plural "%s hours ago"
 msgstr[0] "an hour ago"
 msgstr[1] "%s hours ago"
 
-#: plugin/Date.php:38
+#: plugin/Date.php:47
 msgid "yesterday"
 msgid_plural "%s days ago"
 msgstr[0] "yesterday"
 msgstr[1] "%s days ago"
 
-#: plugin/Date.php:39
+#: plugin/Date.php:48
 msgid "a week ago"
 msgid_plural "%s weeks ago"
 msgstr[0] "a week ago"
 msgstr[1] "%s weeks ago"
 
-#: plugin/Date.php:40
+#: plugin/Date.php:49
 msgid "%s month ago"
 msgid_plural "%s months ago"
 msgstr[0] "%s month ago"
 msgstr[1] "%s months ago"
 
-#: plugin/Date.php:41
+#: plugin/Date.php:50
 msgid "%s year ago"
 msgid_plural "%s years ago"
 msgstr[0] "%s year ago"
@@ -475,19 +475,19 @@ msgstr "Next &rarr;"
 msgid "&larr; Previous"
 msgstr "&larr; Previous"
 
-#: plugin/Html/Partials/Reviews.php:213
+#: plugin/Html/Partials/Reviews.php:214
 msgid "Show more"
 msgstr "Show more"
 
-#: plugin/Html/Partials/Reviews.php:214
+#: plugin/Html/Partials/Reviews.php:215
 msgid "Show less"
 msgstr "Show less"
 
-#: plugin/Html/Partials/Reviews.php:242
+#: plugin/Html/Partials/Reviews.php:243
 msgid "Site Reviews navigation"
 msgstr "Site Reviews navigation"
 
-#: plugin/Settings.php:161, plugin/Settings.php:246, plugin/Settings.php:430, plugin/Settings.php:491
+#: plugin/Settings.php:161, plugin/Settings.php:246, plugin/Settings.php:445, plugin/Settings.php:506
 msgid "Save Settings"
 msgstr "Save Settings"
 
@@ -652,120 +652,146 @@ msgid "Custom"
 msgstr "Custom"
 
 #: plugin/Settings.php:319
-msgid "This is the default schema type for the item being reviewed."
-msgstr "This is the default schema type for the item being reviewed."
+msgid ""
+"This is the default schema type for the item being reviewed. You can "
+"override this option on a per-post/page basis by adding a %s metadata value "
+"using %s."
+msgstr ""
+"This is the default schema type for the item being reviewed. You can "
+"override this option on a per-post/page basis by adding a %s metadata value "
+"using %s."
 
-#: plugin/Settings.php:325
+#: plugin/Settings.php:321, plugin/Settings.php:349, plugin/Settings.php:373, plugin/Settings.php:397, plugin/Settings.php:421
+msgid "Custom Fields"
+msgstr "Custom Fields"
+
+#: plugin/Settings.php:328
 msgid "Custom Schema Type"
 msgstr "Custom Schema Type"
 
-#: plugin/Settings.php:330
+#: plugin/Settings.php:333
 msgid ""
 "Google supports review ratings for the following schema content types: "
-"Local businesses, Movies, Books, Music, and Products. Each of these have "
-"sub-types which you can use to be more specific. %s"
+"Local businesses, Movies, Books, Music, and Products. %s"
 msgstr ""
 "Google supports review ratings for the following schema content types: "
-"Local businesses, Movies, Books, Music, and Products. Each of these have "
-"sub-types which you can use to be more specific. %s"
+"Local businesses, Movies, Books, Music, and Products. %s"
 
-#: plugin/Settings.php:331
+#: plugin/Settings.php:334
 msgid "View more information on schema types here."
 msgstr "View more information on schema types here."
 
-#: plugin/Settings.php:338
+#: plugin/Settings.php:341
 msgid "Default Name"
 msgstr "Default Name"
 
-#: plugin/Settings.php:341
+#: plugin/Settings.php:344
 msgid "Use the assigned or current page title"
 msgstr "Use the assigned or current page title"
 
-#: plugin/Settings.php:342
+#: plugin/Settings.php:345
 msgid "Enter a custom title"
 msgstr "Enter a custom title"
 
-#: plugin/Settings.php:344
-msgid "This is the default name of the item being reviewed."
-msgstr "This is the default name of the item being reviewed."
+#: plugin/Settings.php:347
+msgid ""
+"This is the default name of the item being reviewed. You can override this "
+"option on a per-post/page basis by adding a %s metadata value using %s."
+msgstr ""
+"This is the default name of the item being reviewed. You can override this "
+"option on a per-post/page basis by adding a %s metadata value using %s."
 
-#: plugin/Settings.php:350
+#: plugin/Settings.php:356
 msgid "Custom Name"
 msgstr "Custom Name"
 
-#: plugin/Settings.php:359
+#: plugin/Settings.php:365
 msgid "Default Description"
 msgstr "Default Description"
 
-#: plugin/Settings.php:362
+#: plugin/Settings.php:368
 msgid "Use the assigned or current page excerpt"
 msgstr "Use the assigned or current page excerpt"
 
-#: plugin/Settings.php:363
+#: plugin/Settings.php:369
 msgid "Enter a custom description"
 msgstr "Enter a custom description"
 
-#: plugin/Settings.php:365
-msgid "This is the default description for the item being reviewed."
-msgstr "This is the default description for the item being reviewed."
-
 #: plugin/Settings.php:371
+msgid ""
+"This is the default description for the item being reviewed. You can "
+"override this option on a per-post/page basis by adding a %s metadata value "
+"using %s."
+msgstr ""
+"This is the default description for the item being reviewed. You can "
+"override this option on a per-post/page basis by adding a %s metadata value "
+"using %s."
+
+#: plugin/Settings.php:380
 msgid "Custom Description"
 msgstr "Custom Description"
 
-#: plugin/Settings.php:380
+#: plugin/Settings.php:389
 msgid "Default URL"
 msgstr "Default URL"
 
-#: plugin/Settings.php:383
+#: plugin/Settings.php:392
 msgid "Use the assigned or current page URL"
 msgstr "Use the assigned or current page URL"
 
-#: plugin/Settings.php:384
+#: plugin/Settings.php:393
 msgid "Enter a custom URL"
 msgstr "Enter a custom URL"
 
-#: plugin/Settings.php:386
-msgid "This is the default URL for the item being reviewed."
-msgstr "This is the default URL for the item being reviewed."
+#: plugin/Settings.php:395
+msgid ""
+"This is the default URL for the item being reviewed. You can override this "
+"option on a per-post/page basis by adding a %s metadata value using %s."
+msgstr ""
+"This is the default URL for the item being reviewed. You can override this "
+"option on a per-post/page basis by adding a %s metadata value using %s."
 
-#: plugin/Settings.php:392
+#: plugin/Settings.php:404
 msgid "Custom URL"
 msgstr "Custom URL"
 
-#: plugin/Settings.php:401
-msgid "Default Photo"
-msgstr "Default Photo"
+#: plugin/Settings.php:413
+msgid "Default Image"
+msgstr "Default Image"
 
-#: plugin/Settings.php:404
+#: plugin/Settings.php:416
 msgid "Use the featured image of the assigned or current page"
 msgstr "Use the featured image of the assigned or current page"
 
-#: plugin/Settings.php:405
+#: plugin/Settings.php:417
 msgid "Enter a custom image URL"
 msgstr "Enter a custom image URL"
 
-#: plugin/Settings.php:407
-msgid "This is the default photo for the item being reviewed."
-msgstr "This is the default photo for the item being reviewed."
+#: plugin/Settings.php:419
+msgid ""
+"This is the default image for the item being reviewed. You can override "
+"this option on a per-post/page basis by adding a %s metadata value using %s."
+msgstr ""
+"This is the default image for the item being reviewed. You can override "
+"this option on a per-post/page basis by adding a %s metadata value using %s."
 
-#: plugin/Settings.php:413
-msgid "Custom Photo URL"
-msgstr "Custom Photo URL"
+#: plugin/Settings.php:428
+msgid "Custom Image URL"
+msgstr "Custom Image URL"
 
-#: plugin/Settings.php:436
+#: plugin/Settings.php:451
 msgid "Invisible reCAPTCHA"
 msgstr "Invisible reCAPTCHA"
 
-#: plugin/Settings.php:438
+#: plugin/Settings.php:453
 msgid "Do not use reCAPTCHA"
 msgstr "Do not use reCAPTCHA"
 
-#: plugin/Settings.php:439
+#: plugin/Settings.php:454
 msgid "Use reCAPTCHA"
 msgstr "Use reCAPTCHA"
 
-#: plugin/Settings.php:442
+#: plugin/Settings.php:457
 msgid ""
 "Invisible reCAPTCHA is a free anti-spam service from Google. To use it, you "
 "will need to %s for an API key pair for your site. If you are already using "
@@ -777,19 +803,19 @@ msgstr ""
 "a reCAPTCHA plugin listed here, please select it; otherwise choose \"Use "
 "reCAPTCHA\"."
 
-#: plugin/Settings.php:443
+#: plugin/Settings.php:458
 msgid "sign up"
 msgstr "sign up"
 
-#: plugin/Settings.php:450
+#: plugin/Settings.php:465
 msgid "Site Key"
 msgstr "Site Key"
 
-#: plugin/Settings.php:459
+#: plugin/Settings.php:474
 msgid "Site Secret"
 msgstr "Site Secret"
 
-#: plugin/Settings.php:468
+#: plugin/Settings.php:483
 msgid "Badge Position"
 msgstr "Badge Position"
 
@@ -866,8 +892,8 @@ msgid "1 star"
 msgstr "1 star"
 
 #: plugin/Shortcodes/Buttons/SiteReviews.php:76
-msgid "What is the minimum rating to display?"
-msgstr "What is the minimum rating to display?"
+msgid "What is the minimum rating to display (default: 1 star)?"
+msgstr "What is the minimum rating to display (default: 1 star)?"
 
 #: plugin/Shortcodes/Buttons/SiteReviews.php:80
 msgid "Pagination"
@@ -882,22 +908,24 @@ msgid "Disable"
 msgstr "Disable"
 
 #: plugin/Shortcodes/Buttons/SiteReviews.php:85
-msgid "When using pagination this shortcode can only be used once on a page."
-msgstr "When using pagination this shortcode can only be used once on a page."
+msgid ""
+"When using pagination this shortcode can only be used once on a page. "
+"(default: disable)"
+msgstr ""
+"When using pagination this shortcode can only be used once on a page. "
+"(default: disable)"
 
 #: plugin/Shortcodes/Buttons/SiteReviews.php:92, plugin/Shortcodes/Buttons/SiteReviewsForm.php:58, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:78
 msgid "Post ID"
 msgstr "Post ID"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:93, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:79
+#: plugin/Shortcodes/Buttons/SiteReviews.php:93
 msgid ""
-"Limit reviews to those assigned to this post ID (separate multiple ID's "
-"with a comma). You can also enter 'post_id' to use the ID of the current "
-"page."
+"Limit reviews to those assigned to this post ID (separate multiple IDs with "
+"a comma). You can also enter \"post_id\" to use the ID of the current page."
 msgstr ""
-"Limit reviews to those assigned to this post ID (separate multiple ID's "
-"with a comma). You can also enter 'post_id' to use the ID of the current "
-"page."
+"Limit reviews to those assigned to this post ID (separate multiple IDs with "
+"a comma). You can also enter \"post_id\" to use the ID of the current page."
 
 #: plugin/Shortcodes/Buttons/SiteReviews.php:97, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:83
 msgid "Schema"
@@ -912,8 +940,8 @@ msgid "Disable rich snippets"
 msgstr "Disable rich snippets"
 
 #: plugin/Shortcodes/Buttons/SiteReviews.php:102, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:88
-msgid "Rich snippets are enabled by default."
-msgstr "Rich snippets are enabled by default."
+msgid "Rich snippets are disabled by default."
+msgstr "Rich snippets are disabled by default."
 
 #: plugin/Shortcodes/Buttons/SiteReviews.php:106, plugin/Shortcodes/Buttons/SiteReviewsForm.php:63, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:92
 msgid "Classes"
@@ -1002,16 +1030,26 @@ msgstr "Labels"
 #: plugin/Shortcodes/Buttons/SiteReviewsSummary.php:59
 msgid ""
 "Enter custom labels for the 1-5 star rating levels (from high to low), and "
-"separate each with a comma. The defaults labels are: \"Excellent,Very "
-"good,Average,Poor,Terrible\"."
+"separate each with a comma. The defaults labels are: \"Excellent, Very "
+"good, Average, Poor, Terrible\"."
 msgstr ""
 "Enter custom labels for the 1-5 star rating levels (from high to low), and "
-"separate each with a comma. The defaults labels are: \"Excellent,Very "
-"good,Average,Poor,Terrible\"."
+"separate each with a comma. The defaults labels are: \"Excellent, Very "
+"good, Average, Poor, Terrible\"."
 
 #: plugin/Shortcodes/Buttons/SiteReviewsSummary.php:71
-msgid "What is the minimum rating? Default is 1 star."
-msgstr "What is the minimum rating? Default is 1 star."
+msgid "What is the minimum rating? (default: 1 star)"
+msgstr "What is the minimum rating? (default: 1 star)"
+
+#: plugin/Shortcodes/Buttons/SiteReviewsSummary.php:79
+msgid ""
+"Limit reviews to those assigned to this post ID (separate multiple ID's "
+"with a comma). You can also enter 'post_id' to use the ID of the current "
+"page."
+msgstr ""
+"Limit reviews to those assigned to this post ID (separate multiple ID's "
+"with a comma). You can also enter 'post_id' to use the ID of the current "
+"page."
 
 #: plugin/Shortcodes/Buttons/SiteReviewsSummary.php:104
 msgid "Bars"
@@ -1041,23 +1079,23 @@ msgstr "Summary"
 msgid "Hide the summary text?"
 msgstr "Hide the summary text?"
 
-#: plugin/Shortcodes/SiteReviewsSummary.php:221, views/submit/index.php:18
+#: plugin/Shortcodes/SiteReviewsSummary.php:222, views/submit/index.php:18
 msgid "Excellent"
 msgstr "Excellent"
 
-#: plugin/Shortcodes/SiteReviewsSummary.php:222, views/submit/index.php:19
+#: plugin/Shortcodes/SiteReviewsSummary.php:223, views/submit/index.php:19
 msgid "Very good"
 msgstr "Very good"
 
-#: plugin/Shortcodes/SiteReviewsSummary.php:223, views/submit/index.php:20
+#: plugin/Shortcodes/SiteReviewsSummary.php:224, views/submit/index.php:20
 msgid "Average"
 msgstr "Average"
 
-#: plugin/Shortcodes/SiteReviewsSummary.php:224, views/submit/index.php:21
+#: plugin/Shortcodes/SiteReviewsSummary.php:225, views/submit/index.php:21
 msgid "Poor"
 msgstr "Poor"
 
-#: plugin/Shortcodes/SiteReviewsSummary.php:225, views/submit/index.php:22
+#: plugin/Shortcodes/SiteReviewsSummary.php:226, views/submit/index.php:22
 msgid "Terrible"
 msgstr "Terrible"
 
@@ -1433,7 +1471,7 @@ msgstr "This review is based on my own experience and is my genuine opinion."
 msgid "Submit your review"
 msgstr "Submit your review"
 
-#: plugin/Settings.php:440
+#: plugin/Settings.php:455
 msgctxt "plugin name"
 msgid "Use 3rd-party plugin: Invisible reCaptcha"
 msgstr "Use 3rd-party plugin: Invisible reCaptcha"
@@ -1443,7 +1481,7 @@ msgctxt "the option label"
 msgid "The \"%s\" option is required."
 msgstr "The \"%s\" option is required."
 
-#: plugin/Shortcodes/SiteReviewsSummary.php:147
+#: plugin/Shortcodes/SiteReviewsSummary.php:148
 msgctxt "Do not translate {rating} and {max}, they are template tags."
 msgid "{rating} out of {max} stars (based on %d review)"
 msgid_plural "{rating} out of {max} stars (based on %d reviews)"
