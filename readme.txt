@@ -78,7 +78,7 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 
 4. A view of the Site Reviews &gt; Settings &gt; General page
 
-5. A view of the Site Reviews &gt; Settings &gt; Reviews page
+5. A view of the Site Reviews &gt; Settings &gt; Translations page
 
 6. A view of the Site Reviews &gt; Get Help &gt; Documentation tab
 
@@ -88,13 +88,15 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 
 9. A view of the Submit a Site Review widget settings
 
-10. How the Recent Site Reviews widget looks like using the Twenty Sixteen WordPress theme
+10. How the Recent Site Reviews widget/shortcode looks like using the Twenty Sixteen WordPress theme
 
-11. How the Submit a Site Review widget looks like using the Twenty Sixteen WordPress theme
+11. How the Submit a Site Review widget/shortcode looks like using the Twenty Sixteen WordPress theme
 
-12. How the Slack notifications look like
+12. How the Site Reviews Summary shortcode looks like using the Twenty Sixteen WordPress theme
 
-13. Add-Ons are being built to extend the functionality on the Site Reviews plugin
+13. How the Slack notifications look like
+
+14. Add-Ons are being built to extend the functionality on the Site Reviews plugin
 
 == Changelog ==
 
