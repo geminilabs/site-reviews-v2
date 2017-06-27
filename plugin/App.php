@@ -13,6 +13,14 @@ namespace GeminiLabs\SiteReviews;
 use GeminiLabs\SiteReviews\Container;
 
 /**
+ * @property string $file
+ * @property string $id
+ * @property string $name
+ * @property string $path
+ * @property string $prefix
+ * @property string $url
+ * @property string $version
+ * @property array $defaults
  * @property array $mceShortcodes
  */
 final class App extends Container

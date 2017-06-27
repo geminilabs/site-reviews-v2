@@ -61,7 +61,7 @@ abstract class Container
 	/**
 	 * Dynamically access container properties.
 	 *
-	 * @param string $item
+	 * @param string $property
 	 * @return mixed
 	 */
 	public function __get( $property )
