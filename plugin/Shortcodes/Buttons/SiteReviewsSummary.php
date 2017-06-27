@@ -56,7 +56,7 @@ class SiteReviewsSummary extends Generator
 				'type' => 'textbox',
 				'name' => 'labels',
 				'label' => esc_html__( 'Labels', 'site-reviews' ),
-				'tooltip' => __( 'Enter custom labels for the 1-5 star rating levels (from high to low), and separate each with a comma. The defaults labels are: "Excellent,Very good,Average,Poor,Terrible".', 'site-reviews' ),
+				'tooltip' => __( 'Enter custom labels for the 1-5 star rating levels (from high to low), and separate each with a comma. The defaults labels are: "Excellent, Very good, Average, Poor, Terrible".', 'site-reviews' ),
 			],[
 				'type' => 'listbox',
 				'name' => 'rating',
@@ -68,7 +68,7 @@ class SiteReviewsSummary extends Generator
 					'2' => esc_html( sprintf( _n( '%s star', '%s stars', 2, 'site-reviews' ), 2 )),
 					'1' => esc_html( sprintf( _n( '%s star', '%s stars', 1, 'site-reviews' ), 1 )),
 				],
-				'tooltip' => __( 'What is the minimum rating? Default is 1 star.', 'site-reviews' ),
+				'tooltip' => __( 'What is the minimum rating? (default: 1 star)', 'site-reviews' ),
 			],
 			( isset( $display ) ? $display : [] ),
 			( isset( $category ) ? $category : [] ),

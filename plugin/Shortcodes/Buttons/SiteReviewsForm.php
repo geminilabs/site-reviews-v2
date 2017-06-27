@@ -29,7 +29,7 @@ class SiteReviewsForm extends Generator
 				'name'    => 'category',
 				'label'   => esc_html__( 'Category', 'site-reviews' ),
 				'options' => $terms,
-				'tooltip' => esc_attr__( 'Automatically assign a category to reviews submitted with this shortcode.', 'site-reviews' ),
+				'tooltip' => __( 'Automatically assign a category to reviews submitted with this shortcode.', 'site-reviews' ),
 			];
 		}
 
@@ -41,12 +41,12 @@ class SiteReviewsForm extends Generator
 				'type'    => 'textbox',
 				'name'    => 'title',
 				'label'   => esc_html__( 'Title', 'site-reviews' ),
-				'tooltip' => esc_attr__( 'Enter a custom shortcode heading.', 'site-reviews' ),
+				'tooltip' => __( 'Enter a custom shortcode heading.', 'site-reviews' ),
 			],[
 				'type'    => 'textbox',
 				'name'    => 'description',
 				'label'   => esc_html__( 'Description', 'site-reviews' ),
-				'tooltip' => esc_attr__( 'Enter a custom shortcode description.', 'site-reviews' ),
+				'tooltip' => __( 'Enter a custom shortcode description.', 'site-reviews' ),
 				'minWidth' => 240,
 				'minHeight' => 60,
 				'multiline' => true,
@@ -56,12 +56,12 @@ class SiteReviewsForm extends Generator
 				'type'      => 'textbox',
 				'name'      => 'assign_to',
 				'label'     => esc_html__( 'Post ID', 'site-reviews' ),
-				'tooltip'   => esc_attr__( 'Assign submitted reviews to a custom page/post ID. You can also enter "post_id" to assign reviews to the ID of the current page.', 'site-reviews' ),
+				'tooltip'   => __( 'Assign submitted reviews to a custom page/post ID. You can also enter "post_id" to assign reviews to the ID of the current page.', 'site-reviews' ),
 			],[
 				'type'     => 'textbox',
 				'name'     => 'class',
 				'label'    => esc_html__( 'Classes', 'site-reviews' ),
-				'tooltip'  => esc_attr__( 'Add custom CSS classes to the shortcode.', 'site-reviews' ),
+				'tooltip'  => __( 'Add custom CSS classes to the shortcode.', 'site-reviews' ),
 			],[
 				'type'    => 'container',
 				'label'   => esc_html__( 'Hide', 'site-reviews' ),
@@ -73,22 +73,22 @@ class SiteReviewsForm extends Generator
 						'type' => 'checkbox',
 						'name' => 'hide_email',
 						'text' => esc_html__( 'Email', 'site-reviews' ),
-						'tooltip' => esc_attr__( 'Hide the email field?', 'site-reviews' ),
+						'tooltip' => __( 'Hide the email field?', 'site-reviews' ),
 					],[
 						'type' => 'checkbox',
 						'name' => 'hide_name',
 						'text' => esc_html__( 'Name', 'site-reviews' ),
-						'tooltip' => esc_attr__( 'Hide the name field?', 'site-reviews' ),
+						'tooltip' => __( 'Hide the name field?', 'site-reviews' ),
 					],[
 						'type' => 'checkbox',
 						'name' => 'hide_terms',
 						'text' => esc_html__( 'Terms', 'site-reviews' ),
-						'tooltip' => esc_attr__( 'Hide the terms field?', 'site-reviews' ),
+						'tooltip' => __( 'Hide the terms field?', 'site-reviews' ),
 					],[
 						'type' => 'checkbox',
 						'name' => 'hide_title',
 						'text' => esc_html__( 'Title', 'site-reviews' ),
-						'tooltip' => esc_attr__( 'Hide the title field?', 'site-reviews' ),
+						'tooltip' => __( 'Hide the title field?', 'site-reviews' ),
 					],
 				],
 			],[

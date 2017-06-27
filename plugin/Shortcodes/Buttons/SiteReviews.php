@@ -73,7 +73,7 @@ class SiteReviews extends Generator
 					'2' => esc_html__( '2 stars', 'site-reviews' ),
 					'1' => esc_html__( '1 star', 'site-reviews' ),
 				],
-				'tooltip' => __( 'What is the minimum rating to display?', 'site-reviews' ),
+				'tooltip' => __( 'What is the minimum rating to display (default: 1 star)?', 'site-reviews' ),
 			],[
 				'type'    => 'listbox',
 				'name'    => 'pagination',
@@ -82,7 +82,7 @@ class SiteReviews extends Generator
 					'true'  => esc_html__( 'Enable', 'site-reviews' ),
 					'false' => esc_html__( 'Disable', 'site-reviews' ),
 				],
-				'tooltip' => __( 'When using pagination this shortcode can only be used once on a page.', 'site-reviews' ),
+				'tooltip' => __( 'When using pagination this shortcode can only be used once on a page. (default: disable)', 'site-reviews' ),
 			],
 			( isset( $display ) ? $display : [] ),
 			( isset( $category ) ? $category : [] ),
@@ -90,7 +90,7 @@ class SiteReviews extends Generator
 				'type'      => 'textbox',
 				'name'      => 'assigned_to',
 				'label'     => esc_html__( 'Post ID', 'site-reviews' ),
-				'tooltip'   => __( "Limit reviews to those assigned to this post ID (separate multiple ID's with a comma). You can also enter 'post_id' to use the ID of the current page.", 'site-reviews' ),
+				'tooltip'   => __( 'Limit reviews to those assigned to this post ID (separate multiple IDs with a comma). You can also enter "post_id" to use the ID of the current page.', 'site-reviews' ),
 			],[
 				'type' => 'listbox',
 				'name' => 'schema',
