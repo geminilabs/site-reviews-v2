@@ -2,29 +2,24 @@
 
 All proposed features are subject to change.
 
-## v2.2.0
-- [ ] Bayesian calculation for average rating
-- [ ] Fraction ratings (i.e. 5/5)
-- [ ] Percentage ratings (i.e. 85/100 or 85%)
+## Proposed features
 
-## v2.3.0
-- [ ] Microdata/rich snippets for pages with assigned reviews
-
-## v2.4.0
+- [ ] Add a Honeypot to the submission form
+- [x] Bayesian calculation for page ranking based on assigned reviews
+- [ ] Bulk assign post_id to reviews
+- [ ] Custom importer to correctly map assigned post_ids
+- [ ] Customization of stars, fonts, colors, etc.
 - [ ] Drag-drop order of review fields
 - [ ] Drag-drop order of submission form fields
-
-## v2.5.0
-- [ ] Customization of stars, fonts, colors, etc.
-
-## v2.6.0
+- [ ] Helper functions to access rating methods
+- [ ] Integrate with Akismet to catch spam submissions
+- [ ] Integrate with WordPress comment system
 - [ ] Multiple star-ratings in a review (for rating individual services of a business)
-
-## v2.7.0
-- [ ] Store the review GEO location by IP
-
-## v3.0.0
+- [ ] Protect review metadata from Custom Fields
 - [ ] Review statistics
+- [ ] Store the review GEO location by IP
+- [ ] Throttle anonymous review submissions
+- [ ] Up/Down ratings
 - [ ] WP REST API support
 
 ## Other
