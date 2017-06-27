@@ -33,6 +33,7 @@ class SiteReviews extends Shortcode
 			'hide'        => '',
 			'pagination'  => false,
 			'rating'      => 1,
+			'schema'      => false,
 			'title'       => '',
 			'type'        => '',
 		];

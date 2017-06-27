@@ -180,7 +180,7 @@ class SiteReviewsSummary extends Shortcode
 			'hide'        => '',
 			'labels'      => '',
 			'rating'      => 1,
-			'schema'      => true,
+			'schema'      => false,
 			'title'       => '',
 			'type'        => '',
 		];

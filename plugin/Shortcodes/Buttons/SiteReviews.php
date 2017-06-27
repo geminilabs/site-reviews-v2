@@ -99,7 +99,7 @@ class SiteReviews extends Generator
 					'true' => esc_html__( 'Enable rich snippets', 'site-reviews' ),
 					'false' => esc_html__( 'Disable rich snippets', 'site-reviews' ),
 				],
-				'tooltip' => __( 'Rich snippets are enabled by default.', 'site-reviews' ),
+				'tooltip' => __( 'Rich snippets are disabled by default.', 'site-reviews' ),
 			],[
 				'type'     => 'textbox',
 				'name'     => 'class',
