@@ -316,7 +316,9 @@ class Settings
 				'Product' => __( 'Product', 'site-reviews' ),
 				'custom' => __( 'Custom', 'site-reviews' ),
 			],
-			'desc' => __( 'This is the default schema type for the item being reviewed.', 'site-reviews' ),
+			'desc' => sprintf( __( 'This is the default schema type for the item being reviewed. You can override this option on a per-post/page basis by adding a <code>schema_type</code> metadata value using %s.', 'site-reviews' ),
+				sprintf( '<a href="https://codex.wordpress.org/Using_Custom_Fields#Usage">%s</a>', __( 'Custom Fields', 'site-reviews' ))
+			),
 		]);
 
 		$this->addSetting( $formId, [
@@ -327,7 +329,7 @@ class Settings
 				'schema.type.default' => 'custom',
 			],
 			'desc' => sprintf(
-				__( 'Google supports review ratings for the following schema content types: Local businesses, Movies, Books, Music, and Products. Each of these have sub-types which you can use to be more specific. %s', 'site-reviews' ),
+				__( 'Google supports review ratings for the following schema content types: Local businesses, Movies, Books, Music, and Products. %s', 'site-reviews' ),
 				sprintf( '<a href="https://schema.org/docs/schemas.html">%s</a>', __( 'View more information on schema types here.', 'site-reviews' ))
 			),
 		]);
@@ -341,7 +343,9 @@ class Settings
 				'post' => __( 'Use the assigned or current page title', 'site-reviews' ),
 				'custom' => __( 'Enter a custom title', 'site-reviews' ),
 			],
-			'desc' => __( 'This is the default name of the item being reviewed.', 'site-reviews' ),
+			'desc' => sprintf( __( 'This is the default name of the item being reviewed. You can override this option on a per-post/page basis by adding a <code>schema_type</code> metadata value using %s.', 'site-reviews' ),
+				sprintf( '<a href="https://codex.wordpress.org/Using_Custom_Fields#Usage">%s</a>', __( 'Custom Fields', 'site-reviews' ))
+			),
 		]);
 
 		$this->addSetting( $formId, [
@@ -362,7 +366,9 @@ class Settings
 				'post' => __( 'Use the assigned or current page excerpt', 'site-reviews' ),
 				'custom' => __( 'Enter a custom description', 'site-reviews' ),
 			],
-			'desc' => __( 'This is the default description for the item being reviewed.', 'site-reviews' ),
+			'desc' => sprintf( __( 'This is the default description for the item being reviewed. You can override this option on a per-post/page basis by adding a <code>schema_type</code> metadata value using %s.', 'site-reviews' ),
+				sprintf( '<a href="https://codex.wordpress.org/Using_Custom_Fields#Usage">%s</a>', __( 'Custom Fields', 'site-reviews' ))
+			),
 		]);
 
 		$this->addSetting( $formId, [
@@ -383,7 +389,9 @@ class Settings
 				'post' => __( 'Use the assigned or current page URL', 'site-reviews' ),
 				'custom' => __( 'Enter a custom URL', 'site-reviews' ),
 			],
-			'desc' => __( 'This is the default URL for the item being reviewed.', 'site-reviews' ),
+			'desc' => sprintf( __( 'This is the default URL for the item being reviewed. You can override this option on a per-post/page basis by adding a <code>schema_type</code> metadata value using %s.', 'site-reviews' ),
+				sprintf( '<a href="https://codex.wordpress.org/Using_Custom_Fields#Usage">%s</a>', __( 'Custom Fields', 'site-reviews' ))
+			),
 		]);
 
 		$this->addSetting( $formId, [
@@ -397,22 +405,24 @@ class Settings
 
 		$this->addSetting( $formId, [
 			'type'  => 'select',
-			'name'  => 'schema.photo.default',
-			'label' => __( 'Default Photo', 'site-reviews' ),
+			'name'  => 'schema.image.default',
+			'label' => __( 'Default Image', 'site-reviews' ),
 			'default' => 'post',
 			'options' => [
 				'post' => __( 'Use the featured image of the assigned or current page', 'site-reviews' ),
 				'custom' => __( 'Enter a custom image URL', 'site-reviews' ),
 			],
-			'desc' => __( 'This is the default photo for the item being reviewed.', 'site-reviews' ),
+			'desc' => sprintf( __( 'This is the default image for the item being reviewed. You can override this option on a per-post/page basis by adding a <code>schema_type</code> metadata value using %s.', 'site-reviews' ),
+				sprintf( '<a href="https://codex.wordpress.org/Using_Custom_Fields#Usage">%s</a>', __( 'Custom Fields', 'site-reviews' ))
+			),
 		]);
 
 		$this->addSetting( $formId, [
 			'type'  => 'text',
-			'name'  => 'schema.photo.custom',
-			'label' => __( 'Custom Photo URL', 'site-reviews' ),
+			'name'  => 'schema.image.custom',
+			'label' => __( 'Custom Image URL', 'site-reviews' ),
 			'depends' => [
-				'schema.photo.default' => 'custom',
+				'schema.image.default' => 'custom',
 			],
 		]);
 	}

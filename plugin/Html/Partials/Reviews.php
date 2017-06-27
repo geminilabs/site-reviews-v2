@@ -162,7 +162,8 @@ class Reviews extends Base
 	protected function buildSchema()
 	{
 		if( !$this->args['schema'] )return;
-		$this->app->make( 'Schema' )->build( wp_parse_args( ['count' => -1], $this->args ));
+		$schema = $this->app->make( 'Schema' );
+		$schema->store( $schema->build( $this->args ));
 	}
 
 	/**

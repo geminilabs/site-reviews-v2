@@ -44,7 +44,7 @@ abstract class BaseType implements Type
     {
         $this->allowed = [];
         $this->properties = [];
-        $this->type = $type;
+        $this->type = ucfirst( $type );
         $this->setAllowedProperties();
     }
 
@@ -104,7 +104,7 @@ abstract class BaseType implements Type
     {
         $type = ( new ReflectionClass( $this ))->getShortName();
         if( !empty( $this->type ) && $type != $this->type ) {
-            return ucfirst( $this->type );
+            return $this->type;
         }
         return $type == 'Unknown' ? 'Thing' : $type;
     }

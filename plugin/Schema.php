@@ -30,11 +30,6 @@ class Schema
 	protected $args;
 
 	/**
-	 * @var array
-	 */
-	protected $currentReview;
-
-	/**
 	 * @var Database
 	 */
 	protected $db;
@@ -57,26 +52,33 @@ class Schema
 	}
 
 	/**
-	 * @return void
+	 * @return array
 	 */
 	public function build( array $args = [] )
 	{
 		$this->args = $args;
-		$schemas = (array) $this->app->schemas;
-		foreach( $this->getReviews() as $review ) {
-			$schemas[] = $this->buildReviewSchema( $review );
+		$schema = $this->buildSummary( $args, false );
+		$reviews = [];
+		foreach( $this->db->getReviews( $this->args )->reviews as $review ) {
+			$reviews[] = $this->buildReview( $review, false );
 		}
-		$schemas[] = $this->buildSummarySchema();
-		$this->app->schemas = array_map( 'unserialize', array_unique( array_map( 'serialize', $schemas )));
+		if( !empty( $reviews )) {
+			array_walk( $reviews, function( &$review ) {
+				unset( $review['@context'] );
+				unset( $review['itemReviewed'] );
+			});
+			$schema['review'] = $reviews;
+		}
+		return $schema;
 	}
 
 	/**
 	 * @param object $review
 	 * @return array
 	 */
-	public function buildReviewSchema( $review )
+	public function buildReview( $review )
 	{
-		return SchemaOrg::Review()
+		$schema = SchemaOrg::Review()
 			->doIf( !in_array( 'title', $this->args['hide'] ), function( ReviewSchema $schema ) use( $review ) {
 				$schema->name( $review->title );
 			})
@@ -96,23 +98,30 @@ class Schema
 				->worstRating( Rating::MIN_RATING )
 			)
 			->toArray();
+		return apply_filters( 'site-reviews/schema/Review', $schema, $review, $this->args );
 	}
 
 	/**
+	 * @param null|array $args
 	 * @return array
 	 */
-	public function buildSummarySchema()
+	public function buildSummary( $args = null )
 	{
-		return $this->getSchemaType()
+		if( is_array( $args )) {
+			$this->args = $args;
+		}
+		$schemaType = $this->getSchemaType();
+		$schema = $schemaType
 			->name( $this->getThingName() )
 			->description( $this->getThingDescription() )
-			->image( $this->getThingPhoto() )
+			->image( $this->getThingImage() )
 			->url( $this->getThingUrl() )
 			->aggregateRating( SchemaOrg::AggregateRating()
 				->ratingValue( $this->getRatingValue() )
 				->reviewCount( $this->getReviewCount() )
 			)
 			->toArray();
+		return apply_filters( sprintf( 'site-reviews/schema/%s', $schemaType ), $schema, $this->args );
 	}
 
 	/**
@@ -120,7 +129,20 @@ class Schema
 	 */
 	public function render()
 	{
-		return sprintf( '<script type="application/ld+json">%s</script>', json_encode( $this->app->schemas ));
+		if( is_null( $this->app->schemas ))return;
+		return sprintf( '<script type="application/ld+json">%s</script>', json_encode(
+			apply_filters( 'site-reviews/schema/all', $this->app->schemas )
+		));
+	}
+
+	/**
+	 * @return void
+	 */
+	public function store( array $schema )
+	{
+		$schemas = (array) $this->app->schemas;
+		$schemas[] = $schema;
+		$this->app->schemas = array_map( 'unserialize', array_unique( array_map( 'serialize', $schemas )));
 	}
 
 	/**
@@ -128,7 +150,7 @@ class Schema
 	 */
 	protected function getRatingValue()
 	{
-		return $this->rating->getAverage( $this->reviews );
+		return $this->rating->getAverage( $this->getReviews() );
 	}
 
 	/**
@@ -136,18 +158,60 @@ class Schema
 	 */
 	protected function getReviewCount()
 	{
-		return count( $this->reviews );
+		return count( $this->getReviews() );
 	}
 
 	/**
+	 * Get all reviews possible for given args
 	 * @return array
 	 */
-	protected function getReviews()
+	protected function getReviews( $force = false )
 	{
-		if( !is_array( $this->reviews )) {
-			$this->reviews = $this->db->getReviews( $this->args )->reviews;
+		if( !is_array( $this->reviews ) || $force ) {
+			$this->reviews = $this->db->getReviews( wp_parse_args( ['count' => -1], $this->args ))->reviews;
 		}
 		return $this->reviews;
+	}
+
+	/**
+	 * @param string $option
+	 * @param string $fallback
+	 * @return string
+	 */
+	protected function getSchemaOption( $option, $fallback )
+	{
+		if( $schemaOption = trim( get_post_meta( get_the_ID(), sprintf( 'schema_%s', $option ), true ))) {
+			return $schemaOption;
+		}
+		$path = 'settings.reviews.schema.%s.%s';
+		$default = $this->db->getOption( sprintf( $path, $option, 'default' ), $fallback );
+		return $default == 'custom'
+			? $this->db->getOption( sprintf( $path, $option, 'custom' ), $fallback )
+			: $default;
+	}
+
+	/**
+	 * @param string $option
+	 * @param string $fallback
+	 * @return null|string
+	 */
+	protected function getSchemaOptionValue( $option, $fallback = 'post' )
+	{
+		$value = $this->getSchemaOption( $option, $fallback );
+		if( $value != $fallback ) {
+			return $value;
+		}
+		if( !is_single() && !is_page() )return;
+		switch( $option ) {
+			case 'description':
+				return get_the_excerpt( get_the_ID() );
+			case 'image':
+				return get_the_post_thumbnail_url( get_the_ID(), 'large' );
+			case 'name':
+				return get_the_title( get_the_ID() );
+			case 'url':
+				return get_the_excerpt( get_the_ID() );
+		}
 	}
 
 	/**
@@ -155,42 +219,39 @@ class Schema
 	 */
 	protected function getSchemaType()
 	{
-		$type = $this->db->getOption( 'settings.review.schema.type', 'LocalBusiness' );
-		if( $type == 'custom' ) {
-			$type = $this->db->getOption( 'settings.review.schema.custom', 'LocalBusiness' );
-		}
+		$type = $this->getSchemaOption( 'type', 'LocalBusiness' );
 		return SchemaOrg::$type( $type );
 	}
 
 	/**
-	 * @return string
+	 * @return null|string
 	 */
 	protected function getThingDescription()
 	{
-		return 'THING_DESCRIPTION';
+		return $this->getSchemaOptionValue( 'description' );
 	}
 
 	/**
-	 * @return string
+	 * @return null|string
+	 */
+	protected function getThingImage()
+	{
+		return $this->getSchemaOptionValue( 'image' );
+	}
+
+	/**
+	 * @return null|string
 	 */
 	protected function getThingName()
 	{
-		return 'THING_NAME';
+		return $this->getSchemaOptionValue( 'name' );
 	}
 
 	/**
-	 * @return string
-	 */
-	protected function getThingPhoto()
-	{
-		return 'THING_PHOTO';
-	}
-
-	/**
-	 * @return string
+	 * @return null|string
 	 */
 	protected function getThingUrl()
 	{
-		return 'THING_URL';
+		return $this->getSchemaOptionValue( 'url' );
 	}
 }
