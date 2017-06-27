@@ -3,7 +3,7 @@
 <form method="post" action="">
 
 	<?php
-		echo $html->p( sprintf( _x( "All dates and times shown here use the WordPress %s.", 'configured timezone', 'site-reviews' ),
+		echo $html->p( sprintf( _x( 'All dates and times shown here use the WordPress %s.', 'configured timezone', 'site-reviews' ),
 			sprintf( '<a href="%s">%s</a>', admin_url( 'options-general.php' ), __( 'configured timezone', 'site-reviews' ))
 		));
 	?>

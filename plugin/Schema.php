@@ -57,10 +57,10 @@ class Schema
 	public function build( array $args = [] )
 	{
 		$this->args = $args;
-		$schema = $this->buildSummary( $args, false );
+		$schema = $this->buildSummary( $args );
 		$reviews = [];
 		foreach( $this->db->getReviews( $this->args )->reviews as $review ) {
-			$reviews[] = $this->buildReview( $review, false );
+			$reviews[] = $this->buildReview( $review );
 		}
 		if( !empty( $reviews )) {
 			array_walk( $reviews, function( &$review ) {
@@ -110,8 +110,7 @@ class Schema
 		if( is_array( $args )) {
 			$this->args = $args;
 		}
-		$schemaType = $this->getSchemaType();
-		$schema = $schemaType
+		$schema = $this->getSchemaType()
 			->name( $this->getThingName() )
 			->description( $this->getThingDescription() )
 			->image( $this->getThingImage() )
@@ -121,11 +120,11 @@ class Schema
 				->reviewCount( $this->getReviewCount() )
 			)
 			->toArray();
-		return apply_filters( sprintf( 'site-reviews/schema/%s', $schemaType ), $schema, $this->args );
+		return apply_filters( sprintf( 'site-reviews/schema/%s', $schema['@type'] ), $schema, $this->args );
 	}
 
 	/**
-	 * @return string
+	 * @return null|string
 	 */
 	public function render()
 	{
@@ -215,7 +214,7 @@ class Schema
 	}
 
 	/**
-	 * @return string
+	 * @return \GeminiLabs\SchemaOrg\Type
 	 */
 	protected function getSchemaType()
 	{
