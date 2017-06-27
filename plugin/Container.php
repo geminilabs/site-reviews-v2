@@ -122,17 +122,19 @@ abstract class Container
 	 */
 	public function make( $abstract )
 	{
-		$service = isset( $this->services[$abstract] )
-			? $this->services[$abstract]
-			: $this->addNamespace( $abstract );
-
-		if( is_callable( $service )) {
-			return call_user_func_array( $service, [$this] );
+		if( !isset( $this->services[$abstract] )) {
+			$abstract = $this->addNamespace( $abstract );
 		}
-		if( is_object( $service )) {
-			return $service;
+		if( isset( $this->services[$abstract] )) {
+			$abstract = $this->services[$abstract];
 		}
-		return $this->resolve( $service );
+		if( is_callable( $abstract )) {
+			return call_user_func_array( $abstract, [$this] );
+		}
+		if( is_object( $abstract )) {
+			return $abstract;
+		}
+		return $this->resolve( $abstract );
 	}
 
 	/**
