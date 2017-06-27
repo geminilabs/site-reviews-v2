@@ -1,5 +1,6 @@
 $glsr-summary-max-width: 400px;
-$glsr-summary-font-size: 14px;
+$glsr-summary-font-size: 16px;
+$glsr-summary-font-size-small: 14px;
 $glsr-summary-bar-height: 12px;
 $glsr-summary-spacing: 10px;
 $glsr-summary-star-size: 24px;
@@ -32,6 +33,7 @@ $glsr-summary-star-size: 24px;
 
 .glsr-summary-text {
 	display: block;
+	font-size: $glsr-summary-font-size-small;
 }
 
 .glsr-percentage-bars {
@@ -77,6 +79,6 @@ $glsr-summary-star-size: 24px;
 }
 .glsr-bar-count {
 	text-align: right;
-	font-size: 12px;
+	font-size: $glsr-summary-font-size-small;
 	padding-left: $glsr-summary-spacing;
 }
