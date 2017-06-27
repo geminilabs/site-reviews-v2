@@ -23,7 +23,11 @@
 	<p>Include the "pagination" attribute to display reviews in multiple pages (i.e. Page 1, Page 2, etc.). When using pagination, only one [site_reviews] shortcode can be used on a page at a time.</p>
 
 	<code>rating=4</code>
-	<p>By default, the shortcode displays only 5-star reviews. Include the "rating" attribute to set the minimum star-rating of reviews to display.</p>
+	<p>By default, the shortcode displays all 1-5 star reviews. Include the "rating" attribute to set the minimum star-rating of reviews to display.</p>
+
+	<code>schema=true</code>
+	<p>Include the "schema" attribute to enable rich snippets for your reviews, this is disabled by default. The difference between this and the schema option in the [site_reviews_summary] shortcode is that this one generates both the overall reviews rating schema and the schema for each individual review, while the other only generates the overall reviews rating schema.</p>
+	<p><span class="required">Important:</span> This attribute should only be used once on a page to avoid duplicate schemas; keep that in mind if you are using more than one [site_reviews] and/or [site_reviews_summary] shortcodes on the same page.</p>
 
 	<code>title="Our Reviews"</code>
 	<p>By default, the shortcode displays no heading. Include the "title" attribute to display a custom shortcode heading.</p>
@@ -57,11 +61,16 @@
 	<p>By default, the shortcode uses all 1-5 star reviews to calculate the average rating. Include the "rating" attribute to set the minimum star-rating of reviews to use.</p>
 	<p><span class="required">Important:</span> If you are using this shortcode together with the [site_reviews] shortcode, make sure you set this attribute value the same for both shortcodes.</p>
 
+	<code>schema=true</code>
+	<p>Include the "schema" attribute to enable rich snippets for your reviews, this is disabled by default. The difference between this and the schema option in the [site_reviews] shortcode is that this one only generates the overall reviews rating schema, while the other generates both the overall reviews rating schema and the schema for each individual review. If you have the choice, better to enable this attribute on the [site_reviews] shortcode instead.</p>
+	<p><span class="required">Important:</span> This attribute should only be used once on a page to avoid duplicate schemas; keep that in mind if you are using more than one [site_reviews] and/or [site_reviews_summary] shortcodes on the same page.</p>
+
+	<code>summary="{rating} out of {max} stars"</code>
+	<p>The "summary" attribute allows you to change the summary text. Available template tags to use are, "{rating}" which represents the calculated average rating, "{max}" which represents the maximum star rating available, and "%s" which represents the total number of reviews. However, rather than using this attribute to change the summary, it's recommended to instead create a custom translation for it in the "Site Reviews -> Settings -> Translation page". That way, you will be able to customize both the singular (1 review) and plural (2 reviews) summary texts.</p>
+	<p>The default summary text is: "{rating} out of {max} stars (based on %s reviews)".</p>
+
 	<code>title="Overall Rating"</code>
 	<p>By default, the shortcode displays no heading. Include the "title" attribute to display a custom shortcode heading.</p>
-
-	<code>summary="{num} reviews"</code>
-	<p>The "summary" attribute allows you to change the summary text. Available template tags to use are, "{rating}" which represents the calculated average rating, "{max}" which represents the maximum star rating available, and "{num}" which represents the total number of reviews. The default summary text is: "{rating} out of {max} stars (based on {num} reviews)".</p>
 </div>
 
 <div class="glsr-card card">

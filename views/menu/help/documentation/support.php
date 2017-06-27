@@ -23,7 +23,7 @@
 		</li>
 		<li>
 			<p><strong>Switch to the default “Twenty Sixteen” WordPress Theme.</strong></p>
-			<p>If you have jQuery or Javascript errors on your page, try switching to the default “&quot;Twenty Sixteen” WordPress Theme and then see if you are still experiencing problems with the plugin. This is especially true if you have purchased a third party theme or had a theme developed by someone else. Theme authors are notorious for improperly adding their own Javascript and/or jQuery.</p>
+			<p>If you have jQuery or Javascript errors on your page, try switching to the default “Twenty Sixteen” WordPress Theme and then see if you are still experiencing problems with the plugin. This is especially true if you have purchased a third party theme or had a theme developed by someone else. Theme authors are notorious for improperly adding their own Javascript and/or jQuery.</p>
 		</li>
 		<li>
 			<p><strong>Deactivate all of your plugins.</strong></p>
