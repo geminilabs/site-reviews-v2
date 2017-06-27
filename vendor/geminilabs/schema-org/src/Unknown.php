@@ -12,7 +12,7 @@ class Unknown extends Thing
     /**
      * @see http://schema.org/{PROPERTY_NAME}
      */
-    const PROPERTIES = [
+    protected static $PROPERTIES = [
         'aggregateRating',
     ];
 }

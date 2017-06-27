@@ -11,7 +11,7 @@ use ReflectionClass;
 
 abstract class BaseType implements Type
 {
-    const PROPERTIES = [];
+    protected static $PROPERTIES = [];
 
     /**
      * @var array
@@ -114,10 +114,10 @@ abstract class BaseType implements Type
      */
     public function setAllowedProperties()
     {
-        $this->allowed = static::PROPERTIES;
+        $this->allowed = static::$PROPERTIES;
         $parent = get_parent_class( $this );
         while( $parent ) {
-            $this->allowed = array_values( array_unique( array_merge( $parent::PROPERTIES, $this->allowed )));
+            $this->allowed = array_values( array_unique( array_merge( $parent::$PROPERTIES, $this->allowed )));
             $parent = get_parent_class( $parent );
         }
     }

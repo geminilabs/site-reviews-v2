@@ -16,7 +16,7 @@ class Review extends CreativeWork
     /**
      * @see http://schema.org/{PROPERTY_NAME}
      */
-    const PROPERTIES = [
+    protected static $PROPERTIES = [
         'itemReviewed',
         'reviewBody',
         'reviewRating',

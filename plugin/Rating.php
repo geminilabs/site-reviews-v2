@@ -21,7 +21,7 @@ class Rating
 	 * @see https://en.wikipedia.org/wiki/Standard_score
 	 * @var array
 	 */
-	const CONFIDENCE_LEVEL_Z_SCORES = [
+	protected static $CONFIDENCE_LEVEL_Z_SCORES = [
 		50     => 0.67449,
 		70     => 1.04,
 		75     => 1.15035,
@@ -93,7 +93,7 @@ class Rating
 		$positiveRatings = count( array_filter( $upDownRatings, function( $value ) {
 			return $value > 0;
 		}));
-		$z = static::CONFIDENCE_LEVEL_Z_SCORES[$confidencePercentage];
+		$z = static::$CONFIDENCE_LEVEL_Z_SCORES[$confidencePercentage];
 		$phat = 1 * $positiveRatings / $numRatings;
 		return ( $phat + $z * $z / ( 2 * $numRatings ) - $z * sqrt(( $phat * ( 1 - $phat ) + $z * $z / ( 4 * $numRatings )) / $numRatings )) / ( 1 + $z * $z / $numRatings );
 	}
@@ -139,8 +139,8 @@ class Rating
 		$ratingCountsSum = array_sum( $ratingCounts ) + count( $ratingCounts );
 		$weight = $this->getWeight( $ratingCounts, $ratingCountsSum );
 		$weightPow2 = $this->getWeight( $ratingCounts, $ratingCountsSum, true );
-		$zScore = static::CONFIDENCE_LEVEL_Z_SCORES[$confidencePercentage];
-		return $weight - $zScore * sqrt(( $weightPow2 - $weight**2 ) / ( $ratingCountsSum + 1 ));
+		$zScore = static::$CONFIDENCE_LEVEL_Z_SCORES[$confidencePercentage];
+		return $weight - $zScore * sqrt(( $weightPow2 - pow( $weight, 2 )) / ( $ratingCountsSum + 1 ));
 	}
 
 	/**
@@ -214,7 +214,7 @@ class Rating
 	{
 		return array_reduce( array_keys( $ratingCounts ),
 			function( $count, $rating ) use( $ratingCounts, $ratingCountsSum, $powerOf2 ) {
-				$ratingLevel = $powerOf2 ? $rating**2 : $rating;
+				$ratingLevel = $powerOf2 ? pow( $rating, 2 ) : $rating;
 				return $count + ( $ratingLevel * ( $ratingCounts[$rating] + 1 )) / $ratingCountsSum;
 			}
 		);

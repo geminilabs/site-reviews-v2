@@ -18,7 +18,7 @@ use ReflectionParameter;
 
 abstract class Container
 {
-	const PROTECTED_PROPERTIES = [
+	protected static $PROTECTED_PROPERTIES = [
 		'instance',
 		'services',
 		'storage',
@@ -66,7 +66,7 @@ abstract class Container
 	 */
 	public function __get( $property )
 	{
-		if( property_exists( $this, $property ) && !in_array( $property, static::PROTECTED_PROPERTIES )) {
+		if( property_exists( $this, $property ) && !in_array( $property, static::$PROTECTED_PROPERTIES )) {
 			return $this->$property;
 		}
 		return isset( $this->storage[$property] )
@@ -83,7 +83,7 @@ abstract class Container
 	 */
 	public function __set( $property, $value )
 	{
-		if( !property_exists( $this, $property ) || in_array( $property, static::PROTECTED_PROPERTIES )) {
+		if( !property_exists( $this, $property ) || in_array( $property, static::$PROTECTED_PROPERTIES )) {
 			$this->storage[$property] = $value;
 		}
 		else if( !isset( $this->$property )) {

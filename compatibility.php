@@ -42,3 +42,12 @@ add_filter( 'script_loader_src', function( $src, $handle ) {
 	}
 	return $src;
 }, 10, 2 );
+
+// PHP 5.4 support
+if( !function_exists( 'array_column' )) {
+	function array_column( $array, $column_name ) {
+		return array_map( function( $element ) use( $column_name ){
+			return $element[$column_name];
+		}, $array );
+	}
+}

@@ -14,7 +14,7 @@ use GeminiLabs\SiteReviews\Html\Partials\Base;
 
 class Reviews extends Base
 {
-	const HIDDEN_KEYS = ['author', 'date', 'excerpt', 'rating', 'title'];
+	protected static $HIDDEN_KEYS = ['author', 'date', 'excerpt', 'rating', 'title'];
 
 	/**
 	 * @return null|string
@@ -312,7 +312,7 @@ class Reviews extends Base
 	protected function isHidden( array $values = [] )
 	{
 		if( empty( $values )) {
-			$values = static::HIDDEN_KEYS;
+			$values = static::$HIDDEN_KEYS;
 		}
 		return !array_diff( $values, $this->args['hide'] );
 	}

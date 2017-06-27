@@ -95,7 +95,7 @@ class CreativeWork extends Thing
     /**
      * @see http://schema.org/{PROPERTY_NAME}
      */
-    const PROPERTIES = [
+    protected static $PROPERTIES = [
         'schemaVersion',
         'about',
         'accessibilityAPI',

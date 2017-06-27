@@ -17,7 +17,7 @@ use GeminiLabs\SiteReviews\Shortcode;
 
 class SiteReviewsSummary extends Shortcode
 {
-	const HIDDEN_KEYS = ['bars', 'rating', 'stars', 'summary'];
+	protected static $HIDDEN_KEYS = ['bars', 'rating', 'stars', 'summary'];
 
 	/**
 	 * @var array
@@ -163,7 +163,7 @@ class SiteReviewsSummary extends Shortcode
 	protected function isHidden( array $values = [] )
 	{
 		if( empty( $values )) {
-			$values = static::HIDDEN_KEYS;
+			$values = static::$HIDDEN_KEYS;
 		}
 		return !array_diff( $values, $this->args['hide'] );
 	}
@@ -209,7 +209,7 @@ class SiteReviewsSummary extends Shortcode
 	{
 		$hidden = explode( ',', $hide );
 		return array_filter( $hidden, function( $value ) {
-			return in_array( $value, static::HIDDEN_KEYS );
+			return in_array( $value, static::$HIDDEN_KEYS );
 		});
 	}
 

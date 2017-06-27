@@ -24,7 +24,7 @@ class Thing extends BaseType
     /**
      * @see http://schema.org/{PROPERTY_NAME}
      */
-    const PROPERTIES = [
+    protected static $PROPERTIES = [
         'additionalType',
         'alternateName',
         'description',
