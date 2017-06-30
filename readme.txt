@@ -100,6 +100,9 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 
 == Changelog ==
 
+= 2.3.1 (2017-06-30) =
+- Fix hooks documentation
+
 = 2.3.0 (2017-06-26) =
 - [feature] Reviews Summary shortcode: [site_reviews_summary]
 - [feature] Relative dates option

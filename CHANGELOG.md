@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.3.1] = 2017-06-30
+
+### Fixed
+- Fix hooks documentation
+
 ## [2.3.0] = 2017-06-26
 
 ### Added

@@ -57,7 +57,7 @@ class Rating
 	public function getAverage( array $reviews, $roundBy = 1 )
 	{
 		return ( $ratingCount = count( $reviews ))
-			? round( $this->getTotal( $reviews ) / $ratingCount, $roundBy )
+			? round( $this->getTotal( $reviews ) / $ratingCount, intval( $roundBy ))
 			: 0;
 	}
 

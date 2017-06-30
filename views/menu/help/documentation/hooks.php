@@ -39,7 +39,7 @@
 add_filter( "site-reviews/schema/{$schemaType}", function( array $schema, array $args ) {
 	// do something here.
 	return $schema;
-});</code></pre>
+}, 10, 2 );</code></pre>
 	<p>Use this hook if you would like to modify the primary schema type properties. For example, suppose you have set "LocalBusiness" as the default schema type. You may want to add other properties to it such as "address", "priceRange", and "telephone"; this is the hook to use in order to do that.</p>
 	<p>The <code>$schema</code> variable is the existing schema type array. The <code>$args</code> variable is the array of arguments used to query the reviews in order to calculate the average rating and review count. You can pass this variable to the <code>glsr_get_reviews()</code> function to return the exact same array of reviews.</p>
 	<p>Make sure to use Google's <a href="https://search.google.com/structured-data/testing-tool">Structured Data Testing Tool</a> to test the schema after any custom modifications have been made.</p>
