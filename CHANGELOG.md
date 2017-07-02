@@ -21,7 +21,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## [2.3.2] = 2017-07-02
 
 ### Fixed
-- Catch translation errors and log them
+- Fix a possible translation error from occurring
 
 ## [2.3.1] = 2017-06-30
 

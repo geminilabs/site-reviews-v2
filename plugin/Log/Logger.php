@@ -58,7 +58,7 @@ class Logger implements LoggerInterface
 		header( 'Content-Type: text/plain' );
 		header( 'Content-Disposition: attachment; filename="log.txt"' );
 
-		echo wp_strip_all_tags( $this->log );
+		echo html_entity_decode( wp_strip_all_tags( $this->log ));
 
 		exit;
 	}

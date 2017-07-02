@@ -101,7 +101,7 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 == Changelog ==
 
 = 2.3.2 (2017-07-02) =
-- Catch translation errors and log them
+- Fix a possible translation error from occurring
 
 = 2.3.1 (2017-06-30) =
 - Fix hooks documentation

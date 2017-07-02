@@ -51,14 +51,6 @@ class Translator
 		$translations = $this->getSettings();
 		$entries = $this->filter( $translations, $this->entries() )->results();
 		array_walk( $translations, function( &$entry ) use( $entries ) {
-			if( empty( $entries[$entry['id']] )) {
-				glsr_resolve( 'Log\Logger' )->debug([
-					'error' => sprintf( '$entry[\'id\'] ("%s") not found in filtered translations', $entry['id'] ),
-					'entry' => $entry,
-					'translations' => $entries,
-				]);
-				return;
-			}
 			$entry['desc'] = $this->getEntryString( $entries[$entry['id']], 'msgctxt' );
 		});
 		return $translations;
@@ -366,12 +358,14 @@ class Translator
 	 */
 	protected function normalizeSettings( array $strings )
 	{
-		$defaults = array_fill_keys( ['id', 's1', 's2', 'p1', 'p2'], '' );
+		$defaultString = array_fill_keys( ['id', 's1', 's2', 'p1', 'p2'], '' );
 		foreach( $strings as &$string ) {
 			$string['type'] = isset( $string['p1'] ) ? 'plural' : 'single';
-			$string = wp_parse_args( $string, $defaults );
+			$string = wp_parse_args( $string, $defaultString );
 		}
-		return $strings;
+		return array_filter( $strings, function( $string ) {
+			return !empty( $string['id'] );
+		});
 	}
 
 	/**
