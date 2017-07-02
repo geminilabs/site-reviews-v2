@@ -239,6 +239,15 @@ class Logger implements LoggerInterface
 	}
 
 	/**
+	 * @param array $array
+	 * @return string
+	 */
+	public function print_array( $array )
+	{
+		return htmlspecialchars( print_r( $array, true ), ENT_QUOTES, 'UTF-8' );
+	}
+
+	/**
 	 * Wrapper for print_r()
 	 *
 	 * @param mixed $value ...
@@ -248,9 +257,7 @@ class Logger implements LoggerInterface
 	public function print_r( $value )
 	{
 		if( func_num_args() == 1 ) {
-			printf( '<div class="print__r"><pre>%s</pre></div>',
-				htmlspecialchars( print_r( $value, true ), ENT_QUOTES, 'UTF-8' )
-			);
+			printf( '<div class="print__r"><pre>%s</pre></div>', $this->print_array( $value ));
 		}
 		else {
 			echo '<div class="print__r_group">';
@@ -286,7 +293,7 @@ class Logger implements LoggerInterface
 	protected function interpolate( $message, array $context = [] )
 	{
 		if( is_array( $message )) {
-			return $message;
+			return $this->print_array( $message );
 		}
 
 		// build a replacement array with braces around the context keys
