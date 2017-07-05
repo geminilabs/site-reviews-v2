@@ -100,6 +100,9 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 
 == Changelog ==
 
+= 2.4.0 (2017-07-05) =
+- Allow multi-line reviews
+
 = 2.3.2 (2017-07-02) =
 - Fix a possible translation error from occurring
 

@@ -176,8 +176,7 @@ class Reviews extends Base
 		$text = $this->normalizeText( $review->content );
 		$text = $this->getExcerpt( $text );
 		$text = apply_filters( 'site-reviews/reviews/review/text', $text, $review, $this->args );
-		$text = wpautop( $text );
-		return sprintf( '<div class="glsr-review-excerpt">%s</div>', $text );
+		return sprintf( '<div class="glsr-review-excerpt"><p>%s</p></div>', $text );
 	}
 
 	/**
@@ -203,18 +202,23 @@ class Reviews extends Base
 		if( $this->db->getOption( 'settings.reviews.excerpt.enabled' ) != 'yes' ) {
 			return $text;
 		}
-		$wordCount = $this->db->getOption( 'settings.reviews.excerpt.length', $this->args['word_limit'] );
-		$excerpt = wp_trim_words( $text, $wordCount, '' );
-		$hiddenText = substr( $text, strlen( $excerpt ));
-		if( empty( $hiddenText )) {
-			return $excerpt;
+		$limit = $this->db->getOption( 'settings.reviews.excerpt.length', $this->args['word_limit'] );
+
+		if( str_word_count( $text, 0 ) > $limit ) {
+			$words = str_word_count( $text, 2 );
+			$pos = array_keys( $words );
+			$excerpt = ltrim( substr( $text, 0, $pos[$limit] ));
+			$hiddenText = substr( $text, strlen( $excerpt ));
 		}
-		return sprintf( '%s<span class="glsr-hidden" data-show-more="%s" data-show-less="%s">%s</span>',
+		if( empty( $hiddenText )) {
+			return $text;
+		}
+		return nl2br( sprintf( '%s<span class="glsr-hidden glsr-hidden-text" data-show-more="%s" data-show-less="%s">%s</span>',
 			$excerpt,
 			__( 'Show more', 'site-reviews' ),
 			__( 'Show less', 'site-reviews' ),
 			$hiddenText
-		);
+		));
 	}
 
 	/**
@@ -299,6 +303,11 @@ class Reviews extends Base
 	 */
 	protected function normalizeText( $text )
 	{
+		$text = wp_kses( $text, [
+			'a' => ['href' => [], 'title' => []],
+			'em' => [],
+			'strong' => [],
+		]);
 		$text = strip_shortcodes( $text );
 		$text = wptexturize( $text );
 		$text = convert_smilies( $text );

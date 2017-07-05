@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.4.0] = 2017-07-05
+
+### Changed
+- Allow multi-line reviews
+
 ## [2.3.2] = 2017-07-02
 
 ### Fixed

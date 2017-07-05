@@ -266,19 +266,16 @@ GLSR.ready( function()
 		});
 	}
 
-	excerpts = document.querySelectorAll( '.glsr-review-excerpt' );
+	excerpts = document.querySelectorAll( '.glsr-hidden-text' );
 	for( i = 0; i < excerpts.length; i++ ) {
-		var excerpt = excerpts[i].querySelector( '.glsr-hidden' );
-		if( excerpt ) {
-			var readmore = GLSR.insertAfter( excerpt, 'span', {
-				'class': 'glsr-read-more',
-			});
-			var readmoreLink = GLSR.appendTo( readmore, 'a', {
-				'href': '#',
-				'data-text': excerpt.getAttribute( 'data-show-less' ),
-			});
-			readmoreLink.innerHTML = excerpt.getAttribute( 'data-show-more' );
-		}
+		var readmore = GLSR.insertAfter( excerpts[i], 'span', {
+			'class': 'glsr-read-more',
+		});
+		var readmoreLink = GLSR.appendTo( readmore, 'a', {
+			'href': '#',
+			'data-text': excerpts[i].getAttribute( 'data-show-less' ),
+		});
+		readmoreLink.innerHTML = excerpts[i].getAttribute( 'data-show-more' );
 	}
 
 	GLSR.on( 'click', '.glsr-read-more a', GLSR.onClickReadMore );
