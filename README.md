@@ -13,10 +13,7 @@ Minimum plugin requirements:
 
 #### Features
 
-- [new] Relative dates option
-- [new] Reviews Summary shortcode: [site_reviews_summary]
-- [new] Rich snippets for reviews (schema.org)
-- [new] Translate any plugin text
+- [new] Publicly respond to a review
 - Actively developed and supported
 - Assign reviews to a Post/Page ID
 - Clean and easy-to-configure user interface
@@ -28,10 +25,14 @@ Minimum plugin requirements:
 - Logging
 - MCE shortcode button dropdown
 - Minimal widget styling (tested with all official WP themes)
+- Relative dates option
 - Review avatars (gravatar.com)
 - Review categories
 - Review pagination
+- Reviews Summary shortcode: [site_reviews_summary]
+- Rich snippets for reviews (schema.org)
 - Shortcodes: Display reviews in your post content and templates
+- Translate any plugin text
 - Use Google's Invisible reCAPTCHA on submission forms
 - WordPress.org support
 - WP Filter Hooks

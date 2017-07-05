@@ -36,3 +36,10 @@ $twenty-thirteen-success: #21759b;
 		width: 100%;
 	}
 }
+
+#secondary .glsr-review-response {
+	background-color: rgba(255,255,255,0.075);
+	&::before {
+		border-color: rgba(255,255,255,0.075) transparent;
+	}
+}

@@ -117,11 +117,12 @@ class SiteReviews extends Widget
 			'name'  => 'hide',
 			'value' => $args['hide'],
 			'options' => [
-				'author'  => __( 'Hide the review author?', 'site-reviews' ),
-				'date'    => __( 'Hide the review date?', 'site-reviews' ),
+				'author' => __( 'Hide the review author?', 'site-reviews' ),
+				'date' => __( 'Hide the review date?', 'site-reviews' ),
 				'excerpt' => __( 'Hide the review excerpt?', 'site-reviews' ),
-				'rating'  => __( 'Hide the review rating?', 'site-reviews' ),
-				'title'   => __( 'Hide the review title?', 'site-reviews' ),
+				'rating' => __( 'Hide the review rating?', 'site-reviews' ),
+				'response' => __( 'Hide the review response?', 'site-reviews' ),
+				'title' => __( 'Hide the review title?', 'site-reviews' ),
 			],
 		]);
 	}

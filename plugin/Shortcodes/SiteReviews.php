@@ -68,7 +68,7 @@ class SiteReviews extends Shortcode
 	 */
 	protected function makeCompatible( array $args )
 	{
-		$hide    = ['title','excerpt','author','date','rating'];
+		$hide    = ['author','date','excerpt','rating','response','title'];
 		$display = array_map( 'trim', explode( ',', $args['display'] ));
 
 		if( count( array_intersect( $hide, $display )) > 0 ) {

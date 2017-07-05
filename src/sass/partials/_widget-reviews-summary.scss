@@ -68,7 +68,7 @@ $glsr-summary-star-size: 24px;
 		width: 100%;
 		height: $glsr-summary-bar-height;
 		content: '';
-		background: #ececec;
+		background: rgba(0,0,0,0.075);
 	}
 }
 .glsr-bar-percent {

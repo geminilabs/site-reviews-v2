@@ -142,6 +142,7 @@ class Database implements OptionsContract
 			'pinned'      => $meta->pinned,
 			'post_id'     => $post->ID, // provided for backwards compatability
 			'rating'      => $meta->rating,
+			'response'    => $meta->response,
 			'review_id'   => $meta->review_id,
 			'review_type' => $meta->review_type,
 			'status'      => $post->post_status,
@@ -435,6 +436,7 @@ class Database implements OptionsContract
 			'ip_address'  => '',
 			'pinned'      => '',
 			'rating'      => '',
+			'response'    => '',
 			'review_id'   => '',
 			'review_type' => '',
 			'status'      => '',

@@ -20,6 +20,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [2.4.0] = 2017-07-05
 
+### Added
+- [feature] Publicly respond to a review
+
 ### Changed
 - Allow multi-line reviews
 

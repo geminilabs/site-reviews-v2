@@ -263,7 +263,7 @@ class ReviewController extends BaseController
 	}
 
 	/**
-	 * @param int  $post_id
+	 * @param int $post_id
 	 *
 	 * @return mixed
 	 */
@@ -273,6 +273,34 @@ class ReviewController extends BaseController
 		$assignedTo = filter_input( INPUT_POST, 'assigned_to' );
 		$assignedTo || $assignedTo = '';
 		update_post_meta( $post_id, 'assigned_to', $assignedTo );
+	}
+
+	/**
+	 * @param int $post_id
+	 *
+	 * @return mixed
+	 */
+	public function saveEditedReview( $post_id )
+	{
+		$this->saveAssignedToMetabox( $post_id );
+		$this->saveResponseMetabox( $post_id );
+	}
+
+	/**
+	 * @param int $post_id
+	 *
+	 * @return mixed
+	 */
+	public function saveResponseMetabox( $post_id )
+	{
+		if( !wp_verify_nonce( filter_input( INPUT_POST, '_nonce-response' ), 'response' ))return;
+		$response = filter_input( INPUT_POST, 'response' );
+		$response || $response = '';
+		update_post_meta( $post_id, 'response', trim( wp_kses( $response, [
+			'a' => ['href' => [], 'title' => []],
+			'em' => [],
+			'strong' => [],
+		])));
 	}
 
 	/**

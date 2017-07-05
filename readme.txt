@@ -3,8 +3,8 @@ Contributors: geminilabs, pryley
 Donate link: https://www.paypal.me/pryley
 Tags: best reviews, business ratings, business reviews, curated reviews, moderated reviews, rating widget, rating, ratings shortcode, review widget, reviews login, reviews shortcode, reviews, simple reviews, site reviews, star rating, star review, submit review, testimonial, user rating, user review, user reviews, wp rating, wp review, wp testimonials
 Requires at least: 4.0.0
-Tested up to: 4.7.4
-Stable tag: 2.3.2
+Tested up to: 4.8.0
+Stable tag: 2.4.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,10 +24,7 @@ Follow plugin development on github at: https://github.com/geminilabs/site-revie
 
 = Current Features =
 
-- [new] Relative dates option
-- [new] Reviews Summary shortcode: [site_reviews_summary]
-- [new] Rich snippets for reviews (schema.org)
-- [new] Translate any plugin text
+- [new] Publicly respond to a review
 - Actively developed and supported
 - Assign reviews to a Post/Page ID
 - Clean and easy-to-configure user interface
@@ -39,10 +36,14 @@ Follow plugin development on github at: https://github.com/geminilabs/site-revie
 - Logging
 - MCE shortcode button dropdown
 - Minimal widget styling (tested with all official WP themes)
+- Relative dates option
 - Review avatars (gravatar.com)
 - Review categories
 - Review pagination
+- Reviews Summary shortcode: [site_reviews_summary]
+- Rich snippets for reviews (schema.org)
 - Shortcodes: Display reviews in your post content and templates
+- Translate any plugin text
 - Use Google's Invisible reCAPTCHA on submission forms
 - WordPress.org support
 - WP Filter Hooks
@@ -101,6 +102,7 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 == Changelog ==
 
 = 2.4.0 (2017-07-05) =
+- [feature] Publicly respond to a review
 - Allow multi-line reviews
 
 = 2.3.2 (2017-07-02) =

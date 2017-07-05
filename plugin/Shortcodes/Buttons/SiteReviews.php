@@ -134,6 +134,11 @@ class SiteReviews extends Generator
 						'tooltip' => __( 'Hide the review rating?', 'site-reviews' ),
 					],[
 						'type' => 'checkbox',
+						'name' => 'hide_response',
+						'text' => esc_html__( 'Response', 'site-reviews' ),
+						'tooltip' => __( 'Hide the review response?', 'site-reviews' ),
+					],[
+						'type' => 'checkbox',
 						'name' => 'hide_title',
 						'text' => esc_html__( 'Title', 'site-reviews' ),
 						'tooltip' => __( 'Hide the review title?', 'site-reviews' ),

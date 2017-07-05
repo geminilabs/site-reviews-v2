@@ -61,3 +61,11 @@ h3.glsr-form-title {
 		}
 	}
 }
+
+.primary-sidebar .glsr-review-response,
+.footer-sidebar .glsr-review-response {
+	background-color: rgba(255,255,255,0.075);
+	&::before {
+		border-color: rgba(255,255,255,0.075) transparent;
+	}
+}

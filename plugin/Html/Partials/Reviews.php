@@ -32,7 +32,8 @@ class Reviews extends Base
 				$this->buildMeta( $review ) .
 				$this->buildText( $review ) .
 				$this->buildAvatar( $review->avatar ) .
-				$this->buildAuthor( $review->author )
+				$this->buildAuthor( $review->author ) .
+				$this->buildResponse( $review->response )
 			);
 		}
 		if( empty( $reviews->reviews )) {
@@ -157,6 +158,22 @@ class Reviews extends Base
 	}
 
 	/**
+	 * @param string $response
+	 * @return null|string
+	 */
+	protected function buildResponse( $response )
+	{
+		if( in_array( 'response', $this->args['hide'] ) || empty( $response ))return;
+		$title = sprintf( __( 'Response from %s', 'site-reviews' ), get_bloginfo( 'name' ));
+		$text = $this->normalizeText( $response );
+		$text = $this->getExcerpt( $text );
+		return sprintf( '<div class="glsr-review-response"><p><strong>%s</strong></p><p>%s</p></div>',
+			$title,
+			$text
+		);
+	}
+
+	/**
 	 * @return void
 	 */
 	protected function buildSchema()
@@ -203,7 +220,7 @@ class Reviews extends Base
 			return $text;
 		}
 		$limit = $this->db->getOption( 'settings.reviews.excerpt.length', $this->args['word_limit'] );
-
+		$excerpt = $text;
 		if( str_word_count( $text, 0 ) > $limit ) {
 			$words = str_word_count( $text, 2 );
 			$pos = array_keys( $words );

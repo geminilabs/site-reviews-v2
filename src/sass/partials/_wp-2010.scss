@@ -60,3 +60,11 @@ $twenty-ten-sans-serif: "Helvetica Neue", Arial, Helvetica, "Nimbus Sans L", san
 		width: 98%;
 	}
 }
+
+#content .glsr-review-response p {
+	margin-bottom: 1em;
+
+	&:last-of-type {
+		margin-bottom: 0;
+	}
+}

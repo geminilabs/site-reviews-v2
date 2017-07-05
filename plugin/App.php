@@ -100,7 +100,7 @@ final class App extends Container
 		add_action( 'current_screen',                        [ $review, 'modifyFeatures'] );
 		add_action( 'admin_menu',                            [ $review, 'removeMetaBoxes'] );
 		add_action( 'admin_action_revert',                   [ $review, 'revert'] );
-		add_action( 'save_post_' . static::POST_TYPE,        [ $review, 'saveAssignedToMetabox'] );
+		add_action( 'save_post_' . static::POST_TYPE,        [ $review, 'saveEditedReview'] );
 		add_action( 'admin_init',                            [ $review, 'setPermissions'], 999 );
 		add_action( 'admin_action_unapprove',                [ $review, 'unapprove'] );
 		add_action( "wp_ajax_{$this->prefix}_action",        [ $router, 'routeAjaxRequests'] );

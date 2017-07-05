@@ -16,7 +16,7 @@
 	<code>count=10</code>
 	<p>By default, the shortcode displays the latest 10 reviews. Include the "count" attribute to change the number of reviews that are displayed.</p>
 
-	<code>hide=author,content,date,rating,title,url</code>
+	<code>hide=author,content,date,rating,response,title,url</code>
 	<p>By default the shortcode displays all review fields. Include the "hide" attribute to hide any specific fields you don't want to show. If all fields are hidden, the shortcode will not be displayed.</p>
 
 	<code>pagination=true</code>

@@ -105,3 +105,28 @@
 .glsr-visible + .glsr-read-more::before {
 	content: '';
 }
+
+.glsr-review-response {
+	position: relative;
+	font-size: 0.875em;
+	background-color: rgba(0,0,0,0.075);
+	border-radius: 2px;
+	padding: 1em;
+	margin-top: 1.5rem;
+
+	p:last-of-type {
+		margin-bottom: 0;
+	}
+	&::before {
+		content: '';
+		display: block;
+		position: absolute;
+		top: -18px;
+		left: 50px;
+		height: 0;
+		width: 0;
+		border-style: solid;
+		border-color: rgba(0,0,0,0.075) transparent;
+		border-width: 0 24px 18px 0;
+	}
+}

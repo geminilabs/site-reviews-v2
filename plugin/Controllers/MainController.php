@@ -174,6 +174,7 @@ class MainController extends BaseController
 
 		add_meta_box( "{$this->app->id}_assigned_to", __( 'Assigned To', 'site-reviews' ), [ $this, 'renderAssignedToMetabox'], null, 'side' );
 		add_meta_box( "{$this->app->id}_review", __( 'Details', 'site-reviews' ), [ $this, 'renderMetaBox'], null, 'side' );
+		add_meta_box( "{$this->app->id}_response", __( 'Respond Publicly', 'site-reviews' ), [ $this, 'renderResponseMetaBox'], null, 'normal' );
 	}
 
 	/**
@@ -527,6 +528,24 @@ class MainController extends BaseController
 		$pinned = get_post_meta( $post->ID, 'pinned', true );
 
 		$this->render( 'edit/pinned', ['pinned' => $pinned ] );
+	}
+
+	/**
+	 * add_meta_box() callback
+	 *
+	 * @return void
+	 */
+	public function renderResponseMetaBox( WP_Post $post )
+	{
+		if( $post->post_type != App::POST_TYPE )return;
+
+		$review = glsr_resolve( 'Helper' )->get( 'review', $post->ID );
+
+		wp_nonce_field( 'response', '_nonce-response', false );
+
+		$this->render( 'edit/metabox-response', [
+			'response' => $review->response,
+		]);
 	}
 
 	/**
