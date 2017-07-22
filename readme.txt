@@ -103,6 +103,7 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 
 = 2.4.1 (2017-07-22) =
 - Fix the schema URL for a page
+- Update screenshots
 
 = 2.4.0 (2017-07-05) =
 - [feature] Publicly respond to a review
