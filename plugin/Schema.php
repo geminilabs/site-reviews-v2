@@ -210,7 +210,7 @@ class Schema
 			case 'name':
 				return get_the_title( get_the_ID() );
 			case 'url':
-				return get_the_excerpt( get_the_ID() );
+				return get_the_permalink( get_the_ID() );
 		}
 	}
 

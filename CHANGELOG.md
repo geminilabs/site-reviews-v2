@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.4.1] = 2017-07-22
+
+### Fixed
+- Fix the schema URL for a page
+
 ## [2.4.0] = 2017-07-05
 
 ### Added
