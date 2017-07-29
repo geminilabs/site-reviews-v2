@@ -321,7 +321,7 @@ class Translator
 	{
 		$settings = $this->db->getOptions( 'settings' );
 		return isset( $settings['strings'] )
-			? $this->normalizeSettings( $settings['strings'] )
+			? $this->normalizeSettings( (array) $settings['strings'] )
 			: [];
 	}
 
@@ -359,8 +359,8 @@ class Translator
 	protected function normalizeSettings( array $strings )
 	{
 		$defaultString = array_fill_keys( ['id', 's1', 's2', 'p1', 'p2'], '' );
+		$strings = array_filter( $strings, 'is_array' );
 		foreach( $strings as &$string ) {
-			if( !is_array( $string ))continue;
 			$string['type'] = isset( $string['p1'] ) ? 'plural' : 'single';
 			$string = wp_parse_args( $string, $defaultString );
 		}
