@@ -18,7 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
-## [2.4.2] = 2017-07-29
+## [2.4.3] = 2017-07-29
 
 ### Fixed
 - Fix a possible Translator bug
