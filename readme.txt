@@ -103,6 +103,7 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 
 = 2.4.2 (2017-07-29) =
 - Fix a possible Translator bug
+- Fix "Assigned To" input from updating page on Enter key
 - Show plugin settings in system info
 
 = 2.4.1 (2017-07-22) =

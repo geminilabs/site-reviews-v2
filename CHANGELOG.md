@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 - Fix a possible Translator bug
+- Fix "Assigned To" input from updating page on Enter key
 
 ### Changed
 - Show plugin settings in system info

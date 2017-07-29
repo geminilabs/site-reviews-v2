@@ -35,6 +35,7 @@ x( function()
 	});
 
 	x( document ).on( 'change', 'input#assigned_to', GLSR.onChangeAssignedTo );
+	x( document ).on( 'keypress', 'input#assigned_to', GLSR.onKeypressAssignedTo );
 	x( document ).on( 'click', '.glsr-mce-button', GLSR.shortcode.toggle );
 	x( document ).on( 'click', '.glsr-mce-menu-item', GLSR.shortcode.trigger );
 	x( document ).on( 'click', 'a.change-site-review-status', GLSR.onChangeStatus );

@@ -72,13 +72,19 @@ GLSR.normalizeValues = function( array )
 
 GLSR.onChangeAssignedTo = function( ev )
 {
-	if( !this.value )return;
+	if( !this.value ) {
+		ev.target.nextElementSibling.innerHTML = '';
+		return;
+	}
+	var spinner = x( ev.target.previousElementSibling );
 	var request = {
 		action: 'change-assigned-to',
 		ID: this.value,
 	};
+	spinner.addClass( 'is-active' );
 	GLSR.postAjax( ev, request, function( response ) {
 		ev.target.nextElementSibling.innerHTML = response;
+		spinner.removeClass( 'is-active' );
 	});
 };
 
@@ -150,6 +156,14 @@ GLSR.onFieldChange = function()
 		catch( e ) {
 			console.error( 'JSON Error: ' + depends[i] );
 		}
+	}
+};
+
+GLSR.onKeypressAssignedTo = function( ev )
+{
+	if( ev.keyCode === 13 ) {
+		ev.preventDefault();
+		ev.target.blur();
 	}
 };
 
