@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Fixed
 - Fix a possible Translator bug
 - Fix "Assigned To" input from updating page on Enter key
+- Fix "hide_response" from showing unnecessarily with the TMCE button [site_reviews] shortcode
 
 ### Changed
 - Show plugin settings in system info

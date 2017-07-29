@@ -155,8 +155,8 @@ GLSR.shortcode.create = function( editor_id )
 
 GLSR.shortcode.normalize = function( data )
 {
-	var shortcodes = {
-		'site_reviews' : ['author','date','excerpt','rating','title'],
+	var shortcodeHiddenFields = {
+		'site_reviews' : ['author','date','excerpt','rating','response','title'],
 		'site_reviews_form': ['email','name','terms','title'],
 		'site_reviews_summary': ['bars','rating','stars','summary'],
 	};
@@ -167,7 +167,7 @@ GLSR.shortcode.normalize = function( data )
 
 		if( !data.hasOwnProperty( key ) )continue;
 
-		if( shortcodes.hasOwnProperty( GLSR.shortcode.current ) ) {
+		if( shortcodeHiddenFields.hasOwnProperty( GLSR.shortcode.current ) ) {
 
 			var value = '';
 
@@ -175,7 +175,7 @@ GLSR.shortcode.normalize = function( data )
 				value = key.substring(5);
 			}
 
-			if( shortcodes[ GLSR.shortcode.current ].indexOf( value ) > -1 ) {
+			if( shortcodeHiddenFields[ GLSR.shortcode.current ].indexOf( value ) > -1 ) {
 				if( data[ key ] ) {
 					hide.push( value );
 				}
