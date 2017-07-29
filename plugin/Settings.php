@@ -506,9 +506,10 @@ class Settings
 			'submit' => __( 'Save Settings', 'site-reviews' ),
 		]);
 
+		// This exists for when there are no custom translations
 		$this->addSetting( $formId, [
 			'type' => 'hidden',
-			'name' => 'dummyInput',
+			'name' => '',
 		]);
 
 		$this->html->addCustomField( $formId, function() {
