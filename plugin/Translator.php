@@ -360,6 +360,7 @@ class Translator
 	{
 		$defaultString = array_fill_keys( ['id', 's1', 's2', 'p1', 'p2'], '' );
 		foreach( $strings as &$string ) {
+			if( !is_array( $string ))continue;
 			$string['type'] = isset( $string['p1'] ) ? 'plural' : 'single';
 			$string = wp_parse_args( $string, $defaultString );
 		}

@@ -72,7 +72,8 @@ class SystemInfo
 			$this->getWordpress() .
 			$this->getWordpressMuplugins() .
 			$this->getWordpressPlugins() .
-			$this->getWordpressMultisitePlugins()
+			$this->getWordpressMultisitePlugins() .
+			$this->getSettings()
 		);
 	}
 
@@ -461,6 +462,18 @@ class SystemInfo
 			$this->sysinfo[ $title ][] = sprintf( '%s : %s', $this->pad( $plugin, $pad ), $path );
 		}
 
+		return $this->implode( $title );
+	}
+
+	/**
+	 * Get the plugin settings
+	 *
+	 * @return string
+	 */
+	protected function getSettings( $title = 'Plugin Settings' )
+	{
+		if( !$this->title( $title ))return;
+		$this->sysinfo[ $title ][] = $this->app->make( 'Log\Logger' )->print_array( glsr_get_options() );
 		return $this->implode( $title );
 	}
 }

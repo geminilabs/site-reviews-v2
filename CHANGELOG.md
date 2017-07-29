@@ -18,6 +18,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.4.2] = 2017-07-29
+
+### Fixed
+- Fix a possible Translator bug
+
+### Changed
+- Show plugin settings in system info
+
 ## [2.4.1] = 2017-07-22
 
 ### Changed
