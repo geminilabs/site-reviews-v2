@@ -5,6 +5,7 @@ All proposed features are subject to change.
 ## Proposed features
 
 - [ ] Add a Honeypot to the submission form
+- [ ] Ajax pagination
 - [ ] Autocomplete "assign to ID" field for reviews
 - [x] Bayesian calculation for page ranking based on assigned reviews
 - [ ] Bulk assign post_id to reviews

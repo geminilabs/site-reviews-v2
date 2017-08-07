@@ -18,7 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
-## [2.4.4] = 2017-08-07
+## [2.4.5] = 2017-08-07
 
 ### Fixed
 - Fix Translator to correctly handle htmlentities in plugin strings
