@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.4.4] = 2017-08-07
+
+### Fixed
+- Fix Translator to correctly handle htmlentities in plugin strings
+
 ## [2.4.3] = 2017-07-29
 
 ### Fixed

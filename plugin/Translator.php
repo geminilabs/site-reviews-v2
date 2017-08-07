@@ -51,7 +51,9 @@ class Translator
 		$translations = $this->getSettings();
 		$entries = $this->filter( $translations, $this->entries() )->results();
 		array_walk( $translations, function( &$entry ) use( $entries ) {
-			$entry['desc'] = $this->getEntryString( $entries[$entry['id']], 'msgctxt' );
+			$entry['desc'] = array_key_exists( $entry['id'], $entries )
+				? $this->getEntryString( $entries[$entry['id']], 'msgctxt' )
+				: '';
 		});
 		return $translations;
 	}
@@ -62,9 +64,12 @@ class Translator
 	public function entries()
 	{
 		if( !is_array( $this->entries )) {
-			$this->entries = $this->normalize(
+			$entries = $this->normalize(
 				Parser::parseFile( $this->app->path . 'languages/site-reviews.pot' )->getEntries()
 			);
+			foreach( $entries as $key => $entry ) {
+				$this->entries[html_entity_decode( $key )] = $entry;
+			}
 		}
 		return $this->entries;
 	}
@@ -221,7 +226,8 @@ class Translator
 		extract( $args );
 		$strings = $this->getSettings();
 		$strings = array_filter( $strings, function( $string ) use( $single, $plural ) {
-			return $string['s1'] == $single && $string['p1'] == $plural;
+			return $string['s1'] == html_entity_decode( $single )
+				&& $string['p1'] == html_entity_decode( $plural );
 		});
 		if( empty( $strings )) {
 			return $original;
