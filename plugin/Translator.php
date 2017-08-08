@@ -68,7 +68,7 @@ class Translator
 				Parser::parseFile( $this->app->path . 'languages/site-reviews.pot' )->getEntries()
 			);
 			foreach( $entries as $key => $entry ) {
-				$this->entries[html_entity_decode( $key )] = $entry;
+				$this->entries[html_entity_decode( $key, ENT_COMPAT, 'UTF-8' )] = $entry;
 			}
 		}
 		return $this->entries;
@@ -226,8 +226,8 @@ class Translator
 		extract( $args );
 		$strings = $this->getSettings();
 		$strings = array_filter( $strings, function( $string ) use( $single, $plural ) {
-			return $string['s1'] == html_entity_decode( $single )
-				&& $string['p1'] == html_entity_decode( $plural );
+			return $string['s1'] == html_entity_decode( $single, ENT_COMPAT, 'UTF-8' )
+				&& $string['p1'] == html_entity_decode( $plural, ENT_COMPAT, 'UTF-8' );
 		});
 		if( empty( $strings )) {
 			return $original;
