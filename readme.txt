@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/pryley
 Tags: best reviews, business ratings, business reviews, curated reviews, moderated reviews, rating widget, rating, ratings shortcode, review widget, reviews login, reviews shortcode, reviews, simple reviews, site reviews, star rating, star review, submit review, testimonial, user rating, user review, user reviews, wp rating, wp review, wp testimonials
 Requires at least: 4.0.0
 Tested up to: 4.8.0
-Stable tag: 2.4.5
+Stable tag: 2.5.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,7 +24,7 @@ Follow plugin development on github at: https://github.com/geminilabs/site-revie
 
 = Current Features =
 
-- [new] Publicly respond to a review
+- [new] Honeypot (spam trap) implemented in the submission form
 - Actively developed and supported
 - Assign reviews to a Post/Page ID
 - Clean and easy-to-configure user interface
@@ -36,6 +36,7 @@ Follow plugin development on github at: https://github.com/geminilabs/site-revie
 - Logging
 - MCE shortcode button dropdown
 - Minimal widget styling (tested with all official WP themes)
+- Publicly respond to a review
 - Relative dates option
 - Review avatars (gravatar.com)
 - Review categories
@@ -100,6 +101,10 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 14. Add-Ons are being built to extend the functionality on the Site Reviews plugin
 
 == Changelog ==
+
+= 2.5.0 (2017-08-08) =
+- [feature] Added a Honeypot (spam trap) to the submission form
+- Fix Translator to use UTF-8 encoding when converting html entities
 
 = 2.4.5 (2017-08-07) =
 - Fix Translator to correctly handle htmlentities in plugin strings

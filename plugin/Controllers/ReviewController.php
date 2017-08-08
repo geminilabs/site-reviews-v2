@@ -222,6 +222,12 @@ class ReviewController extends BaseController
 			return __( 'Please fix the submission errors.', 'site-reviews' );
 		}
 
+		if( !empty( $request['gotcha'] )) {
+			glsr_resolve( 'Log\Logger' )->warning( 'The Honeypot caught a bad submission:' );
+			glsr_resolve( 'Log\Logger' )->warning( $request );
+			return __( 'The review submission failed. Please notify the site administrator.', 'site-reviews' );
+		}
+
 		$session = $this->app->make( 'Session' );
 		$validateRecaptcha = $this->validateRecaptcha();
 

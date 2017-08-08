@@ -3,6 +3,8 @@
 <form method="post" action="" name="glsr-<?= $form_id; ?>" class="<?= $class; ?>">
 <?php
 
+	echo $html->renderField(['type' => 'honeypot']);
+
 	echo $html->renderField([
 		'type'       => 'select',
 		'name'       => 'rating',

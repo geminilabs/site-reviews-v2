@@ -289,15 +289,19 @@ msgstr[1] ""
 msgid "Please fix the submission errors."
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:237
+#: plugin/Controllers/ReviewController.php:228
+msgid "The review submission failed. Please notify the site administrator."
+msgstr ""
+
+#: plugin/Controllers/ReviewController.php:243
 msgid "The reCAPTCHA verification failed. Please notify the site administrator."
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:514
+#: plugin/Controllers/ReviewController.php:520
 msgid "Anonymous"
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:517, plugin/Html/Partials/Reviews.php:207
+#: plugin/Controllers/ReviewController.php:523, plugin/Html/Partials/Reviews.php:207
 msgid "No Title"
 msgstr ""
 
@@ -1018,23 +1022,23 @@ msgid_plural "{rating} out of {max} stars (based on %d reviews)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Shortcodes/SiteReviewsSummary.php:222, views/submit/index.php:18
+#: plugin/Shortcodes/SiteReviewsSummary.php:222, views/submit/index.php:20
 msgid "Excellent"
 msgstr ""
 
-#: plugin/Shortcodes/SiteReviewsSummary.php:223, views/submit/index.php:19
+#: plugin/Shortcodes/SiteReviewsSummary.php:223, views/submit/index.php:21
 msgid "Very good"
 msgstr ""
 
-#: plugin/Shortcodes/SiteReviewsSummary.php:224, views/submit/index.php:20
+#: plugin/Shortcodes/SiteReviewsSummary.php:224, views/submit/index.php:22
 msgid "Average"
 msgstr ""
 
-#: plugin/Shortcodes/SiteReviewsSummary.php:225, views/submit/index.php:21
+#: plugin/Shortcodes/SiteReviewsSummary.php:225, views/submit/index.php:23
 msgid "Poor"
 msgstr ""
 
-#: plugin/Shortcodes/SiteReviewsSummary.php:226, views/submit/index.php:22
+#: plugin/Shortcodes/SiteReviewsSummary.php:226, views/submit/index.php:24
 msgid "Terrible"
 msgstr ""
 
@@ -1405,50 +1409,50 @@ msgstr ""
 msgid "Custom Strings"
 msgstr ""
 
-#: views/submit/index.php:11
+#: views/submit/index.php:13
 msgid "Your overall rating"
 msgstr ""
 
-#: views/submit/index.php:17
+#: views/submit/index.php:19
 msgid "Select a Rating"
 msgstr ""
 
-#: views/submit/index.php:30
+#: views/submit/index.php:32
 msgid "Title of your review"
 msgstr ""
 
-#: views/submit/index.php:31
+#: views/submit/index.php:33
 msgid "Summarize your review or highlight an interesting detail"
 msgstr ""
 
-#: views/submit/index.php:43
+#: views/submit/index.php:45
 msgid "Your review"
 msgstr ""
 
-#: views/submit/index.php:44
+#: views/submit/index.php:46
 msgid "Tell people your review"
 msgstr ""
 
-#: views/submit/index.php:57
+#: views/submit/index.php:59
 msgid "Your name"
 msgstr ""
 
-#: views/submit/index.php:58
+#: views/submit/index.php:60
 msgid "Tell us your name"
 msgstr ""
 
-#: views/submit/index.php:70
+#: views/submit/index.php:72
 msgid "Your email"
 msgstr ""
 
-#: views/submit/index.php:71
+#: views/submit/index.php:73
 msgid "Tell us your email"
 msgstr ""
 
-#: views/submit/index.php:83
+#: views/submit/index.php:85
 msgid "This review is based on my own experience and is my genuine opinion."
 msgstr ""
 
-#: views/submit/index.php:135
+#: views/submit/index.php:137
 msgid "Submit your review"
 msgstr ""

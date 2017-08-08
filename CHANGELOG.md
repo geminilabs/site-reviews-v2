@@ -18,6 +18,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.5.0] = 2017-08-08
+
+### Added
+- [feature] Added a Honeypot (spam trap) to the submission form
+
+### Fixed
+- Fix Translator to use UTF-8 encoding when converting html entities
+
 ## [2.4.5] = 2017-08-07
 
 ### Fixed

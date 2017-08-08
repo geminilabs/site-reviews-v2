@@ -13,7 +13,7 @@ Minimum plugin requirements:
 
 #### Features
 
-- [new] Publicly respond to a review
+- [new] Honeypot (spam trap) implemented in the submission form
 - Actively developed and supported
 - Assign reviews to a Post/Page ID
 - Clean and easy-to-configure user interface
@@ -25,6 +25,7 @@ Minimum plugin requirements:
 - Logging
 - MCE shortcode button dropdown
 - Minimal widget styling (tested with all official WP themes)
+- Publicly respond to a review
 - Relative dates option
 - Review avatars (gravatar.com)
 - Review categories

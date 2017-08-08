@@ -17,23 +17,20 @@ class Hidden extends Text
 	/**
 	 * @return string
 	 */
-	public function render()
+	public function render( array $defaults = [] )
 	{
+		$defaults = wp_parse_args( $defaults, [
+			'class' => '',
+		]);
 		if( isset( $this->args['label'] )) {
 			unset( $this->args['label'] );
 		}
-
 		if( isset( $this->args['desc'] )) {
 			unset( $this->args['desc'] );
 		}
-
 		if( isset( $this->args['id'] )) {
 			unset( $this->args['id'] );
 		}
-
-		return parent::render([
-			'class' => '',
-			'type'  => 'hidden',
-		]);
+		return parent::render( $defaults );
 	}
 }

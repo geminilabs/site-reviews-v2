@@ -147,7 +147,7 @@ class Field
 			$class .= ' glsr-required';
 		}
 
-		if( $field->args['type'] !== 'hidden' ) {
+		if( !in_array( $field->args['type'], ['hidden', 'honeypot'] )) {
 			$renderedString = sprintf( '<div class="%s">%%s</div>', $class );
 		}
 

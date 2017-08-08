@@ -4,17 +4,17 @@ All proposed features are subject to change.
 
 ## Proposed features
 
-- [ ] Add a Honeypot to the submission form
+- [x] Add a Honeypot to the submission form
+- [x] Bayesian calculation for page ranking based on assigned reviews
 - [ ] Ajax pagination
 - [ ] Autocomplete "assign to ID" field for reviews
-- [x] Bayesian calculation for page ranking based on assigned reviews
 - [ ] Bulk assign post_id to reviews
 - [ ] Custom importer to correctly map assigned post_ids
 - [ ] Customization of stars, fonts, colors, etc.
 - [ ] Drag-drop order of review fields
 - [ ] Drag-drop order of submission form fields
 - [ ] Helper functions to access rating methods
-- [ ] Integrate with Akismet to catch spam submissions
+- [ ] Integrate with Akismet to catch spam submissions (i.e. https://contactform7.com/spam-filtering-with-akismet/)
 - [ ] Integrate with WordPress comment system
 - [ ] Multiple star-ratings in a review (for rating individual services of a business)
 - [ ] Protect review metadata from Custom Fields
