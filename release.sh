@@ -81,7 +81,7 @@ read -p "PRESS [ENTER] TO DEPLOY BRANCH "${BRANCH:-$DEFAULT_GIT_BRANCH}
 cd $ROOT_PATH$SVN_REPO_DIR
 
 # COPY ASSETS to SVN DIR
-cp $ROOT_PATH/src/assets/* ./assets/
+cp $ROOT_PATH/src/assets/* $ROOT_PATH$SVN_REPO_DIR/assets/
 
 # UPDATE SVN
 echo "Updating SVN"
@@ -89,10 +89,10 @@ svn update || { echo "Unable to update SVN."; exit 1; }
 
 # DELETE TRUNK
 echo "Replacing trunk"
-rm -Rf trunk/
+rm -Rf $ROOT_PATH$SVN_REPO_DIR/trunk/
 
 # COPY GIT DIR TO TRUNK
-cp -R $ROOT_PATH$TEMP_GITHUB_REPO trunk/
+cp -R $ROOT_PATH$TEMP_GITHUB_REPO $ROOT_PATH$SVN_REPO_DIR/trunk/
 
 # DO THE ADD ALL NOT KNOWN FILES UNIX COMMAND
 svn add --force * --auto-props --parents --depth infinity -q
