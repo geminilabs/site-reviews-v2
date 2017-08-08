@@ -262,6 +262,7 @@ class SystemInfo
 	{
 		if( !$this->title( $title ))return;
 
+		$this->sysinfo[ $title ]['Default Charset'] = ini_get( 'default_charset' );
 		$this->sysinfo[ $title ]['Display Errors'] = ini_get( 'display_errors' ) ? 'On (' . ini_get( 'display_errors' ) . ')' : 'N/A';
 		$this->sysinfo[ $title ]['Max Execution Time'] = ini_get( 'max_execution_time' );
 		$this->sysinfo[ $title ]['Max Input Nesting Level'] = ini_get( 'max_input_nesting_level' );
