@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/pryley
 Tags: best reviews, business ratings, business reviews, curated reviews, moderated reviews, rating widget, rating, ratings shortcode, review widget, reviews login, reviews shortcode, reviews, simple reviews, site reviews, star rating, star review, submit review, testimonial, user rating, user review, user reviews, wp rating, wp review, wp testimonials
 Requires at least: 4.0.0
 Tested up to: 4.8.0
-Stable tag: 2.5.0
+Stable tag: 2.5.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -101,6 +101,9 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 14. Add-Ons are being built to extend the functionality on the Site Reviews plugin
 
 == Changelog ==
+
+= 2.5.1 (2017-08-10) =
+- added "site-reviews/validate/review/submission" hook
 
 = 2.5.0 (2017-08-08) =
 - [feature] Added a Honeypot (spam trap) to the submission form

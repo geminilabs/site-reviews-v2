@@ -285,23 +285,23 @@ msgid_plural "%s reviews restored from the Trash."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Controllers/ReviewController.php:222
+#: plugin/Controllers/ReviewController.php:224
 msgid "Please fix the submission errors."
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:228
+#: plugin/Controllers/ReviewController.php:230, plugin/Controllers/ReviewController.php:239
 msgid "The review submission failed. Please notify the site administrator."
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:243
+#: plugin/Controllers/ReviewController.php:253
 msgid "The reCAPTCHA verification failed. Please notify the site administrator."
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:520
+#: plugin/Controllers/ReviewController.php:530
 msgid "Anonymous"
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:523, plugin/Html/Partials/Reviews.php:207
+#: plugin/Controllers/ReviewController.php:533, plugin/Html/Partials/Reviews.php:207
 msgid "No Title"
 msgstr ""
 

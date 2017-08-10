@@ -217,6 +217,8 @@ class ReviewController extends BaseController
 	 */
 	public function postSubmitReview( array $request )
 	{
+		$session = $this->app->make( 'Session' );
+
 		$validatedRequest = $this->validateSubmittedReview( $request );
 		if( !is_array( $validatedRequest )) {
 			return __( 'Please fix the submission errors.', 'site-reviews' );
@@ -228,7 +230,15 @@ class ReviewController extends BaseController
 			return __( 'The review submission failed. Please notify the site administrator.', 'site-reviews' );
 		}
 
-		$session = $this->app->make( 'Session' );
+		$customValidation = apply_filters( 'site-reviews/validate/review/submission', true, $validatedRequest );
+		if( $customValidation !== true ) {
+			$session->set( "{$validatedRequest['form_id']}-errors", [] );
+			$session->set( "{$validatedRequest['form_id']}-values", $validatedRequest );
+			return is_string( $customValidation )
+				? $customValidation
+				: __( 'The review submission failed. Please notify the site administrator.', 'site-reviews' );
+		}
+
 		$validateRecaptcha = $this->validateRecaptcha();
 
 		// recaptcha response was empty so it hasn't been set yet
