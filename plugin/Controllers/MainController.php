@@ -386,16 +386,6 @@ class MainController extends BaseController
 	/**
 	 * @return void
 	 *
-	 * @action init
-	 */
-	public function registerTextdomain()
-	{
-		load_plugin_textdomain( $this->app->id, false, "{$this->app->path}languages" );
-	}
-
-	/**
-	 * @return void
-	 *
 	 * @action widgets_init
 	 */
 	public function registerWidgets()
@@ -612,7 +602,7 @@ class MainController extends BaseController
 			],
 			'licenses' => __( 'Licenses', 'site-reviews' ),
 		],[
-			'settings' => $this->app->getDefaults(),
+			'settings' => $this->app->getDefaultSettings(),
 		]);
 	}
 

@@ -533,7 +533,7 @@ class Database implements OptionsContract
 
 		$args = shortcode_atts( $defaults, $args );
 
-		is_array( $args['data'] ) ?: $args['data'] = $this->app->getDefaults();
+		is_array( $args['data'] ) ?: $args['data'] = $this->app->getDefaultSettings();
 
 		$defaultSettings = [];
 		$currentSettings = $args['merge']

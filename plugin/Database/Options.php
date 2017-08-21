@@ -52,7 +52,7 @@ trait Options
 		// fallback to default settings
 		if( $isPluginSetting && empty( $option )) {
 
-			$defaultPaths = $this->app->getDefaults();
+			$defaultPaths = $this->app->getDefaultSettings();
 
 			if( isset( $defaultPaths[ $path ] )) {
 				$option = $defaultPaths[ $path ];

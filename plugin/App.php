@@ -75,7 +75,9 @@ final class App extends Container
 		$translator = $this->make( 'Translator' );
 
 		// Action Hooks
+		add_action( 'plugins_loaded',                        [ $this, 'getDefaultSettings'], 11 );
 		add_action( 'plugins_loaded',                        [ $this, 'registerAddons'] );
+		add_action( 'plugins_loaded',                        [ $this, 'registerLanguages'] );
 		add_action( 'upgrader_process_complete',             [ $this, 'upgrader'], 10, 2 );
 		add_action( 'admin_enqueue_scripts',                 [ $main, 'enqueueAssets'] );
 		add_action( 'wp_enqueue_scripts',                    [ $main, 'enqueueAssets'], 999 );
@@ -88,7 +90,6 @@ final class App extends Container
 		add_action( 'init',                                  [ $main, 'registerShortcodes'] );
 		add_action( 'admin_menu',                            [ $main, 'registerSubMenus'] );
 		add_action( 'init',                                  [ $main, 'registerTaxonomy'] );
-		add_action( 'init',                                  [ $main, 'registerTextdomain'] );
 		add_action( 'widgets_init',                          [ $main, 'registerWidgets'] );
 		add_action( 'post_submitbox_misc_actions',           [ $main, 'renderMetaBoxPinned'] );
 		add_action( 'edit_form_after_title',                 [ $main, 'renderReview'] );
@@ -123,8 +124,6 @@ final class App extends Container
 		add_filter( 'gettext_with_context',            [ $translator, 'translateGettextWithContext'], 10, 4 );
 		add_filter( 'ngettext',                        [ $translator, 'translateNgettext'], 10, 5 );
 		add_filter( 'ngettext_with_context',           [ $translator, 'translateNgettextWithContext'], 10, 6 );
-
-		$this->getDefaults();
 	}
 
 	/**
@@ -164,7 +163,7 @@ final class App extends Container
 	 *
 	 * @return array
 	 */
-	public function getDefaults()
+	public function getDefaultSettings()
 	{
 		if( !$this->defaults ) {
 
@@ -197,6 +196,16 @@ final class App extends Container
 	public function registerAddons()
 	{
 		do_action( 'site-reviews/addon/register', $this );
+	}
+
+	/**
+	 * Register available languages
+	 *
+	 * @return void
+	 */
+	public function registerLanguages()
+	{
+		load_plugin_textdomain( 'site-reviews', false, plugin_basename( $this->path ) . '/languages/' );
 	}
 
 	/**
