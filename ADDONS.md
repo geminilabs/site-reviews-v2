@@ -1,5 +1,9 @@
 # Add-ons
 
+## etsy-reviews
+- [ ] one-way sync of all reviews
+- [ ] scheduling?
+
 ## facebook-reviews
 - [ ] one-way sync of all reviews
 - [ ] scheduling?

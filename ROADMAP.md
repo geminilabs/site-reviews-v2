@@ -11,6 +11,7 @@ All proposed features are subject to change.
 - [ ] Bulk assign post_id to reviews
 - [ ] Custom importer to correctly map assigned post_ids
 - [ ] Customization of stars, fonts, colors, etc.
+- [ ] Custom review fields
 - [ ] Drag-drop order of review fields
 - [ ] Drag-drop order of submission form fields
 - [ ] Helper functions to access rating methods
