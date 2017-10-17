@@ -227,10 +227,17 @@ abstract class Base
 			$attributes .= sprintf( '%s="%s" ', $key, $val );
 		}
 
+		$value = $args['value'];
+		if( is_array( $value )) {
+			$value = in_array( $args['attributes']['value'], $value )
+				? $args['attributes']['value']
+				: false;
+		}
+
 		return sprintf( '<li><label for="%s"><input %s%s/> %s</label></li>',
 			$args['attributes']['id'],
 			$attributes,
-			checked( $args['value'], $args['attributes']['value'], false ),
+			checked( $value, $args['attributes']['value'], false ),
 			$args['label']
 		);
 	}
@@ -280,9 +287,9 @@ abstract class Base
 		});
 
 		if( is_array( $this->args['value'] )) {
-			if( in_array( $args['value'], $this->args['value'] )) {
-				$this->args['default'] = $args['value'];
-			}
+			// if( in_array( $args['value'], $this->args['value'] )) {
+			$this->args['default'] = $this->args['value'];
+			// }
 		}
 		else if( $this->args['value'] ) {
 			$this->args['default'] = $this->args['value'];

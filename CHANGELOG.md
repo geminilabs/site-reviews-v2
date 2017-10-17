@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## [Unreleased]
 
 ### Added
+- [feature] Set whether or not a field is required
 - Added "site-reviews/rendered/review" hook
 - Added $post_id of review to 'site-reviews/local/review/create' hook
 
@@ -19,6 +20,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Fixed
 
 ### Security
+
 
 ## [2.5.2] = 2017-08-21
 

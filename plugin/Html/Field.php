@@ -346,7 +346,7 @@ class Field
 
 		$value = glsr_resolve( 'Database' )->getOption( $name, $default );
 
-		if( !empty( $value )) {
+		if( !empty( $value ) || $this->args['type'] == 'checkbox' ) {
 			$this->args['value'] = $value;
 		}
 

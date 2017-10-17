@@ -446,6 +446,19 @@ class Settings
 		]);
 
 		$this->addSetting( $formId, [
+			'type'    => 'checkbox',
+			'name'    => 'required',
+			'label'   => __( 'Required Fields', 'site-reviews' ),
+			'default' => ['title','content','name','email'],
+			'options' => [
+				'title' => __( 'Title', 'site-reviews' ),
+				'content' => __( 'Review', 'site-reviews' ),
+				'name' => __( 'Name', 'site-reviews' ),
+				'email' => __( 'Email', 'site-reviews' ),
+			],
+		]);
+
+		$this->addSetting( $formId, [
 			'type'  => 'select',
 			'name'  => 'recaptcha.integration',
 			'label' => __( 'Invisible reCAPTCHA', 'site-reviews' ),

@@ -33,7 +33,7 @@
 		'placeholder' => __( 'Summarize your review or highlight an interesting detail', 'site-reviews' ),
 		'prefix'      => false,
 		'render'      => !in_array( 'title', $exclude ),
-		'required'    => true,
+		'required'    => in_array( 'title', glsr_get_option( 'reviews-form.required', [] )),
 		'suffix'      => $form_id,
 		'value'       => $values['title'],
 	]);
@@ -47,7 +47,7 @@
 		'prefix'      => false,
 		'rows'        => 5,
 		'render'      => !in_array( 'content', $exclude ),
-		'required'    => true,
+		'required'    => in_array( 'content', glsr_get_option( 'reviews-form.required', [] )),
 		'suffix'      => $form_id,
 		'value'       => $values['content'],
 	]);
@@ -60,7 +60,7 @@
 		'placeholder' => __( 'Tell us your name', 'site-reviews' ),
 		'prefix'      => false,
 		'render'      => !in_array( 'name', $exclude ),
-		'required'    => true,
+		'required'    => in_array( 'name', glsr_get_option( 'reviews-form.required', [] )),
 		'suffix'      => $form_id,
 		'value'       => $values['name'],
 	]);
@@ -73,7 +73,7 @@
 		'placeholder' => __( 'Tell us your email', 'site-reviews' ),
 		'prefix'      => false,
 		'render'      => !in_array( 'email', $exclude ),
-		'required'    => true,
+		'required'    => in_array( 'email', glsr_get_option( 'reviews-form.required', [] )),
 		'suffix'      => $form_id,
 		'value'       => $values['email'],
 	]);

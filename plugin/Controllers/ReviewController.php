@@ -503,7 +503,7 @@ class ReviewController extends BaseController
 	{
 		$minContentLength = apply_filters( 'site-reviews/local/review/content/minLength', '0' );
 
-		$rules = [
+		$defaultRules = [
 			'content' => 'required|min:' . $minContentLength,
 			'email'   => 'required|email|min:5',
 			'name'    => 'required',
@@ -511,6 +511,11 @@ class ReviewController extends BaseController
 			'terms'   => 'accepted',
 			'title'   => 'required',
 		];
+
+		$rules = array_intersect_key(
+			$defaultRules,
+			array_flip( array_merge( ['rating','terms'], glsr_get_option( 'reviews-form.required', [] )))
+		);
 
 		$excluded = isset( $request['excluded'] )
 			? json_decode( $request['excluded'] )
@@ -530,11 +535,15 @@ class ReviewController extends BaseController
 			'name'      => ( $user->exists() ? $user->display_name : __( 'Anonymous', 'site-reviews' )),
 			'rating'    => '',
 			'terms'     => '',
-			'title'     => __( 'No Title', 'site-reviews' ),
+			'title'     => '',
 		];
 
 		if( !$this->validate( $request, $rules )) {
 			return false;
+		}
+
+		if( empty( $request['title'] )) {
+			$request['title'] = __( 'No Title', 'site-reviews' );
 		}
 
 		return array_merge( $defaults, $request );
