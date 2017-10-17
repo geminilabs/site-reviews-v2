@@ -91,7 +91,7 @@ class Database implements OptionsContract
 			update_post_meta( $post_id, $field, $value );
 		}
 
-		do_action( 'site-reviews/local/review/create', $post_data, $meta );
+		do_action( 'site-reviews/local/review/create', $post_data, $meta, $post_id );
 
 		return $post_id;
 	}

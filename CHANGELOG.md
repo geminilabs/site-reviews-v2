@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 - Added "site-reviews/rendered/review" hook
+- Added $post_id of review to 'site-reviews/local/review/create' hook
 
 ### Changed
 
