@@ -27,14 +27,7 @@ class Reviews extends Base
 		$html = '';
 		$reviews = $this->db->getReviews( $this->args );
 		foreach( $reviews->reviews as $review ) {
-			$html .= sprintf( '<div class="glsr-review">%s</div>',
-				$this->buildTitle( $review ) .
-				$this->buildMeta( $review ) .
-				$this->buildText( $review ) .
-				$this->buildAvatar( $review->avatar ) .
-				$this->buildAuthor( $review->author ) .
-				$this->buildResponse( $review->response )
-			);
+			$html .= $this->renderReview( $review );
 		}
 		if( empty( $reviews->reviews )) {
 			$html = sprintf( '<p class="glsr-review glsr-no-reviews">%s</p>',
@@ -49,6 +42,25 @@ class Reviews extends Base
 			$this->args['class'],
 			$html
 		);
+	}
+
+	protected function renderReview( $review )
+	{
+		$rendered = [
+			'title' => $this->buildTitle( $review ),
+			'meta' => $this->buildMeta( $review ),
+			'review' => $this->buildText( $review ),
+			'avatar' => $this->buildAvatar( $review->avatar ),
+			'author' => $this->buildAuthor( $review->author ),
+			'response' => $this->buildResponse( $review->response ),
+		]);
+
+		$renderedReview = sprintf( '<div class="glsr-review">%s</div>',
+			array_reduce( $rendered, function( $carry, $part ) {
+				return $carry . $part;
+			})
+		);
+		return apply_filters( 'site-reviews/rendered/review', $renderedReview, $rendered );
 	}
 
 	/**
