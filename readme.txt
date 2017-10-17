@@ -4,6 +4,7 @@ Donate link: https://www.paypal.me/pryley
 Tags: best reviews, business ratings, business reviews, curated reviews, moderated reviews, rating widget, rating, ratings shortcode, review widget, reviews login, reviews shortcode, reviews, simple reviews, site reviews, star rating, star review, submit review, testimonial, user rating, user review, user reviews, wp rating, wp review, wp testimonials
 Requires at least: 4.0.0
 Tested up to: 4.8.1
+Requires PHP: 5.4
 Stable tag: 2.5.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
