@@ -55,6 +55,8 @@ function glsr_debug() {
 /**
  * Global helper to get a plugin option
  *
+ * @param string $option_path
+ * @param mixed $fallback
  * @return mixed
  */
 function glsr_get_option( $option_path = '', $fallback = '' ) {
@@ -73,6 +75,7 @@ function glsr_get_options() {
 /**
  * Global helper to get a single review
  *
+ * @param int $post_id
  * @return null|object
  */
 function glsr_get_review( $post_id ) {
@@ -91,6 +94,7 @@ function glsr_get_reviews( array $args = [] ) {
 /**
  * Global helper to resolve a class instance where $app is not accessible
  *
+ * @param string $alias
  * @return class
  */
 function glsr_resolve( $alias ) {
