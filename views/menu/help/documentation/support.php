@@ -3,8 +3,8 @@
 <div class="glsr-card card">
 	<h3>F.A.Q.</h3>
 	<dl>
-		<dt>I don't want form placeholders. How do I remove them?</dt>
-		<dd>To remove the form placeholders, go to <code><a href="<?= admin_url( 'edit.php?post_type=site-review&page=settings&tab=settings&section=form' ); ?>">Settings -> Submission Form</a></code> and replace all placeholder text with a single space character. Placeholders no more!</dd>
+		<dt>How do I change the placeholder/label text?</dt>
+		<dd>All text strings in the plugin can be customized in the <code><a href="<?= admin_url( 'edit.php?post_type=site-review&page=settings&tab=settings&section=strings' ); ?>">Settings -> Translations</a></code> page.</dd>
 
 		<dt>How do I disable the plugin CSS and/or Javascript?</dt>
 		<dd>To disable the plugin stylesheet or javascript from loading on your website, copy and paste the provided <code><a href="<?= admin_url( 'edit.php?post_type=site-review&page=help&tab=documentation&section=hooks' ); ?>">WordPress Filter Hooks</a></code> into your theme's <code>functions.php</code> file.</dd>
@@ -22,8 +22,8 @@
 			<p>Site Reviews is updated frequently with bug patches, security updates, code improvements, and new features. It’s always best to be on the latest version of Site Reviews, and if you are not, chances are that if you are experiencing a real bug it has already been fixed.</p>
 		</li>
 		<li>
-			<p><strong>Switch to the default “Twenty Sixteen” WordPress Theme.</strong></p>
-			<p>If you have jQuery or Javascript errors on your page, try switching to the default “Twenty Sixteen” WordPress Theme and then see if you are still experiencing problems with the plugin. This is especially true if you have purchased a third party theme or had a theme developed by someone else. Theme authors are notorious for improperly adding their own Javascript and/or jQuery.</p>
+			<p><strong>Switch to the default “Twenty Seventeen” WordPress Theme.</strong></p>
+			<p>If you have jQuery or Javascript errors on your page, try switching to the default “Twenty Seventeen” WordPress Theme and then see if you are still experiencing problems with the plugin. This is especially true if you have purchased a third party theme or had a theme developed by someone else. Theme authors are notorious for improperly adding their own Javascript and/or jQuery.</p>
 		</li>
 		<li>
 			<p><strong>Deactivate all of your plugins.</strong></p>
