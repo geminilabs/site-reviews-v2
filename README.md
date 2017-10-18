@@ -13,7 +13,6 @@ Minimum plugin requirements:
 
 #### Features
 
-- [new] Honeypot (spam trap) implemented in the submission form
 - Actively developed and supported
 - Assign reviews to a Post/Page ID
 - Clean and easy-to-configure user interface
@@ -22,6 +21,7 @@ Minimum plugin requirements:
 - Easy setup and implementation
 - Filter reviews by rating
 - Helper functions to easily access review meta
+- Honeypot (spam trap) implemented in the submission form
 - Logging
 - MCE shortcode button dropdown
 - Minimal widget styling (tested with all official WP themes)
