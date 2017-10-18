@@ -790,7 +790,7 @@ class MainController extends BaseController
 			__( 'Type', 'site-reviews' )     => $reviewType,
 			__( 'Date', 'site-reviews' )     => get_date_from_gmt( $review->date, 'F j, Y' ),
 			__( 'Reviewer', 'site-reviews' ) => $review->author,
-			__( 'Email', 'site-reviews' )    => sprintf( '<a href="mailto:%1$s">%1$s</a>', $review->email ),
+			__( 'Email', 'site-reviews' )    => $review->email ? sprintf( '<a href="mailto:%1$s">%1$s</a>', $review->email ) : '&mdash;',
 			__( 'Avatar', 'site-reviews' )   => sprintf( '<img src="%s" width="96">', $review->avatar ),
 		];
 
