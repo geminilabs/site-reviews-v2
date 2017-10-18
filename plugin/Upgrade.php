@@ -95,6 +95,16 @@ class Upgrade
 	}
 
 	/**
+	 * Migrate plugin options
+	 *
+	 * @return void
+	 */
+	public function options_260()
+	{
+		$this->db->setOption( 'reviews-form.required', ['title','content','name','email'], true );
+	}
+
+	/**
 	 * @return void
 	 */
 	public function reviewSlug_200()

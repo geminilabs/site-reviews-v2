@@ -258,6 +258,9 @@ final class App extends Container
 			$upgrade->options_230();
 			$upgrade->translations_230();
 		}
+		if( version_compare( $version, '2.6.0', '<' )) {
+			$upgrade->options_260();
+		}
 
 		$this->updateVersion( $version );
 	}
