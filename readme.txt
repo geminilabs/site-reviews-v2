@@ -3,9 +3,9 @@ Contributors: geminilabs, pryley
 Donate link: https://www.paypal.me/pryley
 Tags: best reviews, business ratings, business reviews, curated reviews, moderated reviews, rating widget, rating, ratings shortcode, review widget, reviews login, reviews shortcode, reviews, simple reviews, site reviews, star rating, star review, submit review, testimonial, user rating, user review, user reviews, wp rating, wp review, wp testimonials
 Requires at least: 4.0.0
-Tested up to: 4.8.1
+Tested up to: 4.8.2
 Requires PHP: 5.4
-Stable tag: 2.5.2
+Stable tag: 2.6.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -102,6 +102,11 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 14. Add-Ons are being built to extend the functionality on the Site Reviews plugin
 
 == Changelog ==
+
+= 2.6.0 (2017-10-17) =
+- [feature] Set whether or not a field is required
+- Added "site-reviews/rendered/review" hook
+- Added post_id of review to 'site-reviews/local/review/create' hook
 
 = 2.5.2 (2017-08-21) =
 - Fix plugin localization

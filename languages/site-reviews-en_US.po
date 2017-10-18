@@ -55,11 +55,11 @@ msgstr ""
 msgid "Update WordPress"
 msgstr "Update WordPress"
 
-#: plugin/Commands/RegisterPostType.php:22, plugin/Shortcodes/Buttons/SiteReviews.php:55, plugin/Shortcodes/Buttons/SiteReviews.php:143, plugin/Shortcodes/Buttons/SiteReviewsForm.php:43, plugin/Shortcodes/Buttons/SiteReviewsForm.php:90, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:53, plugin/Widgets/SiteReviews.php:47, plugin/Widgets/SiteReviewsForm.php:45
+#: plugin/Commands/RegisterPostType.php:22, plugin/Settings.php:454, plugin/Shortcodes/Buttons/SiteReviews.php:55, plugin/Shortcodes/Buttons/SiteReviews.php:143, plugin/Shortcodes/Buttons/SiteReviewsForm.php:43, plugin/Shortcodes/Buttons/SiteReviewsForm.php:90, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:53, plugin/Widgets/SiteReviews.php:47, plugin/Widgets/SiteReviewsForm.php:45
 msgid "Title"
 msgstr "Title"
 
-#: plugin/Commands/RegisterPostType.php:23, plugin/Controllers/MainController.php:784, plugin/Shortcodes/Buttons/SiteReviews.php:123
+#: plugin/Commands/RegisterPostType.php:23, plugin/Controllers/MainController.php:791, plugin/Shortcodes/Buttons/SiteReviews.php:123
 msgid "Date"
 msgstr "Date"
 
@@ -113,7 +113,7 @@ msgstr ""
 "You can pin exceptional reviews so that they are always shown first in your "
 "widgets and shortcodes."
 
-#: plugin/Controllers/MainController.php:212
+#: plugin/Controllers/MainController.php:212, plugin/Settings.php:455
 msgid "Review"
 msgstr "Review"
 
@@ -129,11 +129,11 @@ msgstr "Site Reviews"
 msgid "Author"
 msgstr "Author"
 
-#: plugin/Controllers/MainController.php:225, plugin/Controllers/MainController.php:783
+#: plugin/Controllers/MainController.php:225, plugin/Controllers/MainController.php:790
 msgid "Type"
 msgstr "Type"
 
-#: plugin/Controllers/MainController.php:226, plugin/Controllers/MainController.php:782, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:133, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:63, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:109
+#: plugin/Controllers/MainController.php:226, plugin/Controllers/MainController.php:789, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:133, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:63, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:109
 msgid "Rating"
 msgstr "Rating"
 
@@ -241,31 +241,31 @@ msgstr "Logging disabled."
 msgid "Settings updated."
 msgstr "Settings updated."
 
-#: plugin/Controllers/MainController.php:756
+#: plugin/Controllers/MainController.php:763
 msgid "Nothing to Revert"
 msgstr "Nothing to Revert"
 
-#: plugin/Controllers/MainController.php:757
+#: plugin/Controllers/MainController.php:764
 msgid "Revert Changes"
 msgstr "Revert Changes"
 
-#: plugin/Controllers/MainController.php:770
+#: plugin/Controllers/MainController.php:777
 msgid "Unknown"
 msgstr "Unknown"
 
-#: plugin/Controllers/MainController.php:773
+#: plugin/Controllers/MainController.php:780
 msgid "%s review"
 msgstr "%s review"
 
-#: plugin/Controllers/MainController.php:785
+#: plugin/Controllers/MainController.php:792
 msgid "Reviewer"
 msgstr "Reviewer"
 
-#: plugin/Controllers/MainController.php:786, plugin/Shortcodes/Buttons/SiteReviewsForm.php:75
+#: plugin/Controllers/MainController.php:793, plugin/Settings.php:457, plugin/Shortcodes/Buttons/SiteReviewsForm.php:75
 msgid "Email"
 msgstr "Email"
 
-#: plugin/Controllers/MainController.php:787
+#: plugin/Controllers/MainController.php:794
 msgid "Avatar"
 msgstr "Avatar"
 
@@ -319,11 +319,11 @@ msgstr "The review submission failed. Please notify the site administrator."
 msgid "The reCAPTCHA verification failed. Please notify the site administrator."
 msgstr "The reCAPTCHA verification failed. Please notify the site administrator."
 
-#: plugin/Controllers/ReviewController.php:530
+#: plugin/Controllers/ReviewController.php:535
 msgid "Anonymous"
 msgstr "Anonymous"
 
-#: plugin/Controllers/ReviewController.php:533, plugin/Html/Partials/Reviews.php:207
+#: plugin/Controllers/ReviewController.php:546, plugin/Html/Partials/Reviews.php:218
 msgid "No Title"
 msgstr "No Title"
 
@@ -459,47 +459,47 @@ msgstr "Save Changes"
 msgid "More Info"
 msgstr "More Info"
 
-#: plugin/Html/Partials/Reviews.php:41
+#: plugin/Html/Partials/Reviews.php:34
 msgid "No reviews were found."
 msgstr "No reviews were found."
 
-#: plugin/Html/Partials/Reviews.php:123
+#: plugin/Html/Partials/Reviews.php:134
 msgid "Previous"
 msgstr "Previous"
 
-#: plugin/Html/Partials/Reviews.php:129
+#: plugin/Html/Partials/Reviews.php:140
 msgid "Next"
 msgstr "Next"
 
-#: plugin/Html/Partials/Reviews.php:135
+#: plugin/Html/Partials/Reviews.php:146
 msgid "Page"
 msgstr "Page"
 
-#: plugin/Html/Partials/Reviews.php:138
+#: plugin/Html/Partials/Reviews.php:149
 msgid "Next &rarr;"
 msgstr "Next &rarr;"
 
-#: plugin/Html/Partials/Reviews.php:139
+#: plugin/Html/Partials/Reviews.php:150
 msgid "&larr; Previous"
 msgstr "&larr; Previous"
 
-#: plugin/Html/Partials/Reviews.php:167
+#: plugin/Html/Partials/Reviews.php:178
 msgid "Response from %s"
 msgstr "Response from %s"
 
-#: plugin/Html/Partials/Reviews.php:235
+#: plugin/Html/Partials/Reviews.php:246
 msgid "Show more"
 msgstr "Show more"
 
-#: plugin/Html/Partials/Reviews.php:236
+#: plugin/Html/Partials/Reviews.php:247
 msgid "Show less"
 msgstr "Show less"
 
-#: plugin/Html/Partials/Reviews.php:264
+#: plugin/Html/Partials/Reviews.php:275
 msgid "Site Reviews navigation"
 msgstr "Site Reviews navigation"
 
-#: plugin/Settings.php:161, plugin/Settings.php:246, plugin/Settings.php:445, plugin/Settings.php:506
+#: plugin/Settings.php:161, plugin/Settings.php:246, plugin/Settings.php:445, plugin/Settings.php:519
 msgid "Save Settings"
 msgstr "Save Settings"
 
@@ -792,18 +792,26 @@ msgid "Custom Image URL"
 msgstr "Custom Image URL"
 
 #: plugin/Settings.php:451
+msgid "Required Fields"
+msgstr "Required Fields"
+
+#: plugin/Settings.php:456, plugin/Shortcodes/Buttons/SiteReviewsForm.php:80
+msgid "Name"
+msgstr "Name"
+
+#: plugin/Settings.php:464
 msgid "Invisible reCAPTCHA"
 msgstr "Invisible reCAPTCHA"
 
-#: plugin/Settings.php:453
+#: plugin/Settings.php:466
 msgid "Do not use reCAPTCHA"
 msgstr "Do not use reCAPTCHA"
 
-#: plugin/Settings.php:454
+#: plugin/Settings.php:467
 msgid "Use reCAPTCHA"
 msgstr "Use reCAPTCHA"
 
-#: plugin/Settings.php:457
+#: plugin/Settings.php:470
 msgid ""
 "Invisible reCAPTCHA is a free anti-spam service from Google. To use it, you "
 "will need to %s for an API key pair for your site. If you are already using "
@@ -815,19 +823,19 @@ msgstr ""
 "a reCAPTCHA plugin listed here, please select it; otherwise choose \"Use "
 "reCAPTCHA\"."
 
-#: plugin/Settings.php:458
+#: plugin/Settings.php:471
 msgid "sign up"
 msgstr "sign up"
 
-#: plugin/Settings.php:465
+#: plugin/Settings.php:478
 msgid "Site Key"
 msgstr "Site Key"
 
-#: plugin/Settings.php:474
+#: plugin/Settings.php:487
 msgid "Site Secret"
 msgstr "Site Secret"
 
-#: plugin/Settings.php:483
+#: plugin/Settings.php:496
 msgid "Badge Position"
 msgstr "Badge Position"
 
@@ -1022,10 +1030,6 @@ msgstr ""
 #: plugin/Shortcodes/Buttons/SiteReviewsForm.php:76
 msgid "Hide the email field?"
 msgstr "Hide the email field?"
-
-#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:80
-msgid "Name"
-msgstr "Name"
 
 #: plugin/Shortcodes/Buttons/SiteReviewsForm.php:81
 msgid "Hide the name field?"
@@ -1491,7 +1495,7 @@ msgstr "This review is based on my own experience and is my genuine opinion."
 msgid "Submit your review"
 msgstr "Submit your review"
 
-#: plugin/Settings.php:455
+#: plugin/Settings.php:468
 msgctxt "plugin name"
 msgid "Use 3rd-party plugin: Invisible reCaptcha"
 msgstr "Use 3rd-party plugin: Invisible reCaptcha"
