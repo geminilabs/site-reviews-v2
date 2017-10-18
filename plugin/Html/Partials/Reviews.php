@@ -53,8 +53,7 @@ class Reviews extends Base
 			'avatar' => $this->buildAvatar( $review->avatar ),
 			'author' => $this->buildAuthor( $review->author ),
 			'response' => $this->buildResponse( $review->response ),
-		]);
-
+		];
 		$renderedReview = sprintf( '<div class="glsr-review">%s</div>',
 			array_reduce( $rendered, function( $carry, $part ) {
 				return $carry . $part;
