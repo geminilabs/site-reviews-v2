@@ -37,11 +37,10 @@ class StarRating extends Base
 	}
 
 	/**
-	 * @param int $maxStars
-	 * @param int $minStars
+	 * @param int $numberOfStars
 	 * @return string
 	 */
-	protected function buildStars( $maxStars = 5, $minStars = 1 )
+	protected function buildStars( $numberOfStars = 5 )
 	{
 		$rating = '';
 
@@ -51,7 +50,7 @@ class StarRating extends Base
 
 			$roundedRating = floor( round( $this->args['rating'], 1 ) * 2 ) / 2;
 
-			for( $i = 0; $i < $maxStars; $i++ ) {
+			for( $i = 0; $i < $numberOfStars; $i++ ) {
 				if( $roundedRating == ( $i + 0.5 )) {
 					$rating .= sprintf( $star, '-half' );
 				}

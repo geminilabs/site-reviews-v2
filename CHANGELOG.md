@@ -18,6 +18,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.6.2] = 2017-10-19
+
+### Fixed
+- Only build rating schema for reviews with a rating
+- Prevent HTML from being generated for empty review fields
+
+### Removed
+- Remove obsolete schema meta tags
+
 ## [2.6.1] = 2017-10-19
 
 ### Added
