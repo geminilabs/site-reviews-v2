@@ -111,6 +111,7 @@ class Reviews extends Base
 	 */
 	protected function buildMeta( $review )
 	{
+		if( in_array( 'date', $this->args['hide'] ) && empty( $review->rating ))return;
 		return sprintf( '<p class="glsr-review-meta">%s%s</p>',
 			$this->buildRating( $review->rating ),
 			$this->buildDate( $review->date )
@@ -205,6 +206,7 @@ class Reviews extends Base
 		$text = $this->normalizeText( $review->content );
 		$text = $this->getExcerpt( $text );
 		$text = apply_filters( 'site-reviews/reviews/review/text', $text, $review, $this->args );
+		if( empty( $text ))return;
 		return sprintf( '<div class="glsr-review-excerpt"><p>%s</p></div>', $text );
 	}
 
