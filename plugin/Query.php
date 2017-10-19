@@ -45,7 +45,7 @@ class Query
 			}
 			if( $key == 'rating'
 				&& is_numeric( $query['value'] )
-				&& in_array((int) $query['value'], range(2,5))) {
+				&& in_array((int) $query['value'], range(1,5))) {
 				$metaQuery[] = $query;
 			}
 		}

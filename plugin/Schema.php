@@ -91,14 +91,15 @@ class Schema
 			)
 			->itemReviewed( $this->getSchemaType()
 				->name( $this->getThingName() )
-			)
-			->reviewRating( SchemaOrg::Rating()
+			);
+		if( !empty( $review->rating )) {
+			$schema->reviewRating( SchemaOrg::Rating()
 				->ratingValue( $review->rating )
 				->bestRating( Rating::MAX_RATING )
 				->worstRating( Rating::MIN_RATING )
-			)
-			->toArray();
-		return apply_filters( 'site-reviews/schema/Review', $schema, $review, $this->args );
+			);
+		}
+		return apply_filters( 'site-reviews/schema/Review', $schema->toArray(), $review, $this->args );
 	}
 
 	/**
@@ -114,12 +115,15 @@ class Schema
 			->name( $this->getThingName() )
 			->description( $this->getThingDescription() )
 			->image( $this->getThingImage() )
-			->url( $this->getThingUrl() )
-			->aggregateRating( SchemaOrg::AggregateRating()
+			->url( $this->getThingUrl() );
+		$count = $this->getReviewCount();
+		if( !empty( $count )) {
+			$schema->aggregateRating( SchemaOrg::AggregateRating()
 				->ratingValue( $this->getRatingValue() )
-				->reviewCount( $this->getReviewCount() )
-			)
-			->toArray();
+				->reviewCount( $count )
+			);
+		}
+		$schema = $schema->toArray();
 		$args = wp_parse_args( ['count' => -1], $this->args );
 		return apply_filters( sprintf( 'site-reviews/schema/%s', $schema['@type'] ), $schema, $args );
 	}
