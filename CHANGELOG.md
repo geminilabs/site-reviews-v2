@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.6.1] = 2017-10-19
+
+### Added
+- Added "site-reviews/validation/rules" hook
+
 ## [2.6.0] = 2017-10-17
 
 ### Added

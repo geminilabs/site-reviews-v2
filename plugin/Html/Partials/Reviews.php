@@ -162,6 +162,7 @@ class Reviews extends Base
 	 */
 	protected function buildRating( $rating )
 	{
+		if( empty( $rating ))return;
 		return $this->app->make( 'Html' )->renderPartial( 'star-rating', [
 			'hidden' => in_array( 'rating', $this->args['hide'] ),
 			'rating' => $rating,

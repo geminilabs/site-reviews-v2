@@ -503,14 +503,14 @@ class ReviewController extends BaseController
 	{
 		$minContentLength = apply_filters( 'site-reviews/local/review/content/minLength', '0' );
 
-		$defaultRules = [
+		$defaultRules = apply_filters( 'site-reviews/validation/rules', [
 			'content' => 'required|min:' . $minContentLength,
 			'email'   => 'required|email|min:5',
 			'name'    => 'required',
 			'rating'  => 'required|numeric|between:1,5',
 			'terms'   => 'accepted',
 			'title'   => 'required',
-		];
+		]);
 
 		$rules = array_intersect_key(
 			$defaultRules,
@@ -533,7 +533,7 @@ class ReviewController extends BaseController
 			'email'     => ( $user->exists() ? $user->user_email : '' ),
 			'form_id'   => '',
 			'name'      => ( $user->exists() ? $user->display_name : __( 'Anonymous', 'site-reviews' )),
-			'rating'    => '',
+			'rating'    => 0,
 			'terms'     => '',
 			'title'     => '',
 		];

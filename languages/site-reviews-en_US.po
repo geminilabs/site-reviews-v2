@@ -323,7 +323,7 @@ msgstr "The reCAPTCHA verification failed. Please notify the site administrator.
 msgid "Anonymous"
 msgstr "Anonymous"
 
-#: plugin/Controllers/ReviewController.php:546, plugin/Html/Partials/Reviews.php:218
+#: plugin/Controllers/ReviewController.php:546, plugin/Html/Partials/Reviews.php:219
 msgid "No Title"
 msgstr "No Title"
 
@@ -483,19 +483,19 @@ msgstr "Next &rarr;"
 msgid "&larr; Previous"
 msgstr "&larr; Previous"
 
-#: plugin/Html/Partials/Reviews.php:178
+#: plugin/Html/Partials/Reviews.php:179
 msgid "Response from %s"
 msgstr "Response from %s"
 
-#: plugin/Html/Partials/Reviews.php:246
+#: plugin/Html/Partials/Reviews.php:247
 msgid "Show more"
 msgstr "Show more"
 
-#: plugin/Html/Partials/Reviews.php:247
+#: plugin/Html/Partials/Reviews.php:248
 msgid "Show less"
 msgstr "Show less"
 
-#: plugin/Html/Partials/Reviews.php:275
+#: plugin/Html/Partials/Reviews.php:276
 msgid "Site Reviews navigation"
 msgstr "Site Reviews navigation"
 

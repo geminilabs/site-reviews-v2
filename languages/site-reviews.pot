@@ -301,7 +301,7 @@ msgstr ""
 msgid "Anonymous"
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:546, plugin/Html/Partials/Reviews.php:218
+#: plugin/Controllers/ReviewController.php:546, plugin/Html/Partials/Reviews.php:219
 msgid "No Title"
 msgstr ""
 
@@ -461,19 +461,19 @@ msgstr ""
 msgid "&larr; Previous"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:178
+#: plugin/Html/Partials/Reviews.php:179
 msgid "Response from %s"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:246
+#: plugin/Html/Partials/Reviews.php:247
 msgid "Show more"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:247
+#: plugin/Html/Partials/Reviews.php:248
 msgid "Show less"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:275
+#: plugin/Html/Partials/Reviews.php:276
 msgid "Site Reviews navigation"
 msgstr ""
 
