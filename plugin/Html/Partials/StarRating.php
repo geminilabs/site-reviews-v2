@@ -63,11 +63,6 @@ class StarRating extends Base
 				}
 			}
 		}
-		if( !is_admin() && wp_validate_boolean( $this->args['schema'] )) {
-			$rating .= sprintf( '<meta itemprop="ratingValue" content="%s">', $this->args['rating'] );
-			$rating .= sprintf( '<meta itemprop="bestRating" content="%s">', $maxStars );
-			$rating .= sprintf( '<meta itemprop="worstRating" content="%s">', $minStars );
-		}
 		return $rating;
 	}
 }
