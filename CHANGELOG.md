@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.7.1] = 2017-10-24
+
+### Fixed
+- Fix [site_reviews_summary] class attribute
+
 ## [2.7.0] = 2017-10-24
 
 ### Added

@@ -41,7 +41,7 @@ class SiteReviewsSummary extends Shortcode
 		$reviews = $this->db->getReviews( $this->args );
 		$ratingAverage = $this->rating->getAverage( $reviews->reviews );
 		ob_start();
-		echo '<div class="shortcode-site-reviews-summary">';
+		printf( '<div class="shortcode-site-reviews-summary %s">', $this->args['class'] );
 		if( !empty( $this->args['title'] )) {
 			printf( '<h3 class="glsr-shortcode-title">%s</h3>', $this->args['title'] );
 		}
