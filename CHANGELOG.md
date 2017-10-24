@@ -18,6 +18,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.7.0] = 2017-10-24
+
+### Added
+- Added option to show a register link when login is required to submit a review
+- Added "site-reviews/rendered/review-form/login-register" hook
+
 ## [2.6.2] = 2017-10-19
 
 ### Fixed

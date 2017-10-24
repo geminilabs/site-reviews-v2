@@ -177,6 +177,18 @@ class Settings
 		]);
 
 		$this->addSetting( $formId, [
+			'type'    => 'yesno_inline',
+			'name'    => 'require.login_register',
+			'label'   => __( 'Show registration link', 'site-reviews' ),
+			'depends' => [
+				'require.login' => 'yes',
+			],
+			'desc' => sprintf( __( 'Show a link for a new user to register. The %s Membership option must be enabled in General Settings for this to work.', 'site-reviews' ),
+				sprintf( '<a href="%s">%s</a>', admin_url( 'options-general.php' ), __( 'Anyone can register', 'site-reviews' ))
+			),
+		]);
+
+		$this->addSetting( $formId, [
 			'type'    => 'radio',
 			'name'    => 'notification',
 			'label'   => __( 'Notifications', 'site-reviews' ),

@@ -80,17 +80,18 @@ trait SiteReviewsForm
 	public function renderRequireLogin()
 	{
 		$requireUser = glsr_resolve( 'Database' )->getOption( 'settings.general.require.login' );
-
-		if( $requireUser == 'yes' && !is_user_logged_in() ) {
-			$message = sprintf( __( 'You must be %s to submit a review.', 'site-reviews' ),
-				sprintf( '<a href="%s">%s</a>', wp_login_url( get_permalink() ), __( 'logged in', 'site-reviews' ))
-			);
-
-			echo wpautop( $message );
-
-			return true;
+		if( $requireUser != 'yes' || is_user_logged_in() ) {
+			return false;
 		}
-
-		return false;
+		$login = sprintf( __( 'You must be %s to submit a review.', 'site-reviews' ),
+			sprintf( '<a href="%s">%s</a>', wp_login_url( get_permalink() ), __( 'logged in', 'site-reviews' ))
+		);
+		if( get_option( 'users_can_register' ) && glsr_resolve( 'Database' )->getOption( 'settings.general.require.login_register' ) == 'yes' ) {
+			$login .= ' '.sprintf( __( 'You may also %s for an account.', 'site-reviews' ),
+				sprintf( '<a href="%s">%s</a>', wp_registration_url(), __( 'register', 'site-reviews' ))
+			);
+		}
+		echo apply_filters( 'site-reviews/rendered/review-form/login-register', wpautop( trim( $login )));
+		return true;
 	}
 }

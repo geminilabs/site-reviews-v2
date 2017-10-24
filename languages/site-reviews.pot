@@ -37,7 +37,7 @@ msgstr ""
 msgid "Update WordPress"
 msgstr ""
 
-#: plugin/Commands/RegisterPostType.php:22, plugin/Settings.php:454, plugin/Shortcodes/Buttons/SiteReviews.php:55, plugin/Shortcodes/Buttons/SiteReviews.php:143, plugin/Shortcodes/Buttons/SiteReviewsForm.php:43, plugin/Shortcodes/Buttons/SiteReviewsForm.php:90, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:53, plugin/Widgets/SiteReviews.php:47, plugin/Widgets/SiteReviewsForm.php:45
+#: plugin/Commands/RegisterPostType.php:22, plugin/Settings.php:466, plugin/Shortcodes/Buttons/SiteReviews.php:55, plugin/Shortcodes/Buttons/SiteReviews.php:143, plugin/Shortcodes/Buttons/SiteReviewsForm.php:43, plugin/Shortcodes/Buttons/SiteReviewsForm.php:90, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:53, plugin/Widgets/SiteReviews.php:47, plugin/Widgets/SiteReviewsForm.php:45
 msgid "Title"
 msgstr ""
 
@@ -91,7 +91,7 @@ msgstr ""
 msgid "You can pin exceptional reviews so that they are always shown first in your widgets and shortcodes."
 msgstr ""
 
-#: plugin/Controllers/MainController.php:212, plugin/Settings.php:455
+#: plugin/Controllers/MainController.php:212, plugin/Settings.php:467
 msgid "Review"
 msgstr ""
 
@@ -239,7 +239,7 @@ msgstr ""
 msgid "Reviewer"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:793, plugin/Settings.php:457, plugin/Shortcodes/Buttons/SiteReviewsForm.php:75
+#: plugin/Controllers/MainController.php:793, plugin/Settings.php:469, plugin/Shortcodes/Buttons/SiteReviewsForm.php:75
 msgid "Email"
 msgstr ""
 
@@ -477,7 +477,7 @@ msgstr ""
 msgid "Site Reviews navigation"
 msgstr ""
 
-#: plugin/Settings.php:161, plugin/Settings.php:246, plugin/Settings.php:445, plugin/Settings.php:519
+#: plugin/Settings.php:161, plugin/Settings.php:258, plugin/Settings.php:457, plugin/Settings.php:531
 msgid "Save Settings"
 msgstr ""
 
@@ -498,279 +498,291 @@ msgid "Only allow review submissions from registered users."
 msgstr ""
 
 #: plugin/Settings.php:182
-msgid "Notifications"
-msgstr ""
-
-#: plugin/Settings.php:185
-msgid "Do not send review notifications"
+msgid "Show registration link"
 msgstr ""
 
 #: plugin/Settings.php:186
-msgid "Send to administrator"
+msgid "Show a link for a new user to register. The %s Membership option must be enabled in General Settings for this to work."
 msgstr ""
 
 #: plugin/Settings.php:187
-msgid "Send to one or more email addresses"
+msgid "Anyone can register"
 msgstr ""
 
-#: plugin/Settings.php:188
-msgid "Send to %s"
+#: plugin/Settings.php:194
+msgid "Notifications"
 msgstr ""
 
-#: plugin/Settings.php:195
-msgid "Send notification emails to"
+#: plugin/Settings.php:197
+msgid "Do not send review notifications"
+msgstr ""
+
+#: plugin/Settings.php:198
+msgid "Send to administrator"
 msgstr ""
 
 #: plugin/Settings.php:199
+msgid "Send to one or more email addresses"
+msgstr ""
+
+#: plugin/Settings.php:200
+msgid "Send to %s"
+msgstr ""
+
+#: plugin/Settings.php:207
+msgid "Send notification emails to"
+msgstr ""
+
+#: plugin/Settings.php:211
 msgid "Separate multiple emails with a comma"
 msgstr ""
 
-#: plugin/Settings.php:205
+#: plugin/Settings.php:217
 msgid "Webhook URL"
 msgstr ""
 
-#: plugin/Settings.php:209
+#: plugin/Settings.php:221
 msgid "To send notifications to Slack, create a new %s and then paste the provided Webhook URL in the field above."
 msgstr ""
 
-#: plugin/Settings.php:210
+#: plugin/Settings.php:222
 msgid "Incoming WebHook"
 msgstr ""
 
-#: plugin/Settings.php:217
+#: plugin/Settings.php:229
 msgid "Notification template"
 msgstr ""
 
-#: plugin/Settings.php:252
+#: plugin/Settings.php:264
 msgid "Date Format"
 msgstr ""
 
-#: plugin/Settings.php:254
+#: plugin/Settings.php:266
 msgid "Use the default date format"
 msgstr ""
 
-#: plugin/Settings.php:255
+#: plugin/Settings.php:267
 msgid "Use a relative date format"
 msgstr ""
 
-#: plugin/Settings.php:256
+#: plugin/Settings.php:268
 msgid "Use a custom date format"
 msgstr ""
 
-#: plugin/Settings.php:258
+#: plugin/Settings.php:270
 msgid "The default date format is the one set in your %s."
 msgstr ""
 
-#: plugin/Settings.php:259
+#: plugin/Settings.php:271
 msgid "WordPress settings"
 msgstr ""
 
-#: plugin/Settings.php:266
+#: plugin/Settings.php:278
 msgid "Custom Date Format"
 msgstr ""
 
-#: plugin/Settings.php:268
+#: plugin/Settings.php:280
 msgid "Enter a custom date format (%s)."
 msgstr ""
 
-#: plugin/Settings.php:269
+#: plugin/Settings.php:281
 msgid "documentation on date and time formatting"
 msgstr ""
 
-#: plugin/Settings.php:279
+#: plugin/Settings.php:291
 msgid "Enable Avatars"
 msgstr ""
 
-#: plugin/Settings.php:280
+#: plugin/Settings.php:292
 msgid "Display reviewer avatars. These are generated from the email address of the reviewer using %s."
 msgstr ""
 
-#: plugin/Settings.php:281
+#: plugin/Settings.php:293
 msgid "Gravatar"
 msgstr ""
 
-#: plugin/Settings.php:288
+#: plugin/Settings.php:300
 msgid "Enable Excerpts"
 msgstr ""
 
-#: plugin/Settings.php:289
+#: plugin/Settings.php:301
 msgid "Display an excerpt instead of the full review."
 msgstr ""
 
-#: plugin/Settings.php:295
+#: plugin/Settings.php:307
 msgid "Excerpt Length"
 msgstr ""
 
-#: plugin/Settings.php:297
+#: plugin/Settings.php:309
 msgid "Set the excerpt word length."
 msgstr ""
 
-#: plugin/Settings.php:305
+#: plugin/Settings.php:317
 msgid "Rich Snippets (schema.org)"
 msgstr ""
 
-#: plugin/Settings.php:306
+#: plugin/Settings.php:318
 msgid "Review snippets appear in Google Search results and include the star rating and other summary info from your reviews."
 msgstr ""
 
-#: plugin/Settings.php:312
+#: plugin/Settings.php:324
 msgid "Default Schema Type"
 msgstr ""
 
-#: plugin/Settings.php:315
+#: plugin/Settings.php:327
 msgid "Local Business"
 msgstr ""
 
-#: plugin/Settings.php:316
+#: plugin/Settings.php:328
 msgid "Product"
 msgstr ""
 
-#: plugin/Settings.php:317
+#: plugin/Settings.php:329
 msgid "Custom"
 msgstr ""
 
-#: plugin/Settings.php:319
+#: plugin/Settings.php:331
 msgid "This is the default schema type for the item being reviewed. You can override this option on a per-post/page basis by adding a %s metadata value using %s."
 msgstr ""
 
-#: plugin/Settings.php:321, plugin/Settings.php:349, plugin/Settings.php:373, plugin/Settings.php:397, plugin/Settings.php:421
+#: plugin/Settings.php:333, plugin/Settings.php:361, plugin/Settings.php:385, plugin/Settings.php:409, plugin/Settings.php:433
 msgid "Custom Fields"
 msgstr ""
 
-#: plugin/Settings.php:328
+#: plugin/Settings.php:340
 msgid "Custom Schema Type"
 msgstr ""
 
-#: plugin/Settings.php:333
+#: plugin/Settings.php:345
 msgid "Google supports review ratings for the following schema content types: Local businesses, Movies, Books, Music, and Products. %s"
 msgstr ""
 
-#: plugin/Settings.php:334
+#: plugin/Settings.php:346
 msgid "View more information on schema types here."
 msgstr ""
 
-#: plugin/Settings.php:341
+#: plugin/Settings.php:353
 msgid "Default Name"
 msgstr ""
 
-#: plugin/Settings.php:344
+#: plugin/Settings.php:356
 msgid "Use the assigned or current page title"
 msgstr ""
 
-#: plugin/Settings.php:345
+#: plugin/Settings.php:357
 msgid "Enter a custom title"
 msgstr ""
 
-#: plugin/Settings.php:347
+#: plugin/Settings.php:359
 msgid "This is the default name of the item being reviewed. You can override this option on a per-post/page basis by adding a %s metadata value using %s."
 msgstr ""
 
-#: plugin/Settings.php:356
+#: plugin/Settings.php:368
 msgid "Custom Name"
 msgstr ""
 
-#: plugin/Settings.php:365
+#: plugin/Settings.php:377
 msgid "Default Description"
 msgstr ""
 
-#: plugin/Settings.php:368
+#: plugin/Settings.php:380
 msgid "Use the assigned or current page excerpt"
 msgstr ""
 
-#: plugin/Settings.php:369
+#: plugin/Settings.php:381
 msgid "Enter a custom description"
 msgstr ""
 
-#: plugin/Settings.php:371
+#: plugin/Settings.php:383
 msgid "This is the default description for the item being reviewed. You can override this option on a per-post/page basis by adding a %s metadata value using %s."
 msgstr ""
 
-#: plugin/Settings.php:380
+#: plugin/Settings.php:392
 msgid "Custom Description"
 msgstr ""
 
-#: plugin/Settings.php:389
+#: plugin/Settings.php:401
 msgid "Default URL"
 msgstr ""
 
-#: plugin/Settings.php:392
+#: plugin/Settings.php:404
 msgid "Use the assigned or current page URL"
 msgstr ""
 
-#: plugin/Settings.php:393
+#: plugin/Settings.php:405
 msgid "Enter a custom URL"
 msgstr ""
 
-#: plugin/Settings.php:395
+#: plugin/Settings.php:407
 msgid "This is the default URL for the item being reviewed. You can override this option on a per-post/page basis by adding a %s metadata value using %s."
 msgstr ""
 
-#: plugin/Settings.php:404
+#: plugin/Settings.php:416
 msgid "Custom URL"
 msgstr ""
 
-#: plugin/Settings.php:413
+#: plugin/Settings.php:425
 msgid "Default Image"
 msgstr ""
 
-#: plugin/Settings.php:416
+#: plugin/Settings.php:428
 msgid "Use the featured image of the assigned or current page"
 msgstr ""
 
-#: plugin/Settings.php:417
+#: plugin/Settings.php:429
 msgid "Enter a custom image URL"
 msgstr ""
 
-#: plugin/Settings.php:419
+#: plugin/Settings.php:431
 msgid "This is the default image for the item being reviewed. You can override this option on a per-post/page basis by adding a %s metadata value using %s."
 msgstr ""
 
-#: plugin/Settings.php:428
+#: plugin/Settings.php:440
 msgid "Custom Image URL"
 msgstr ""
 
-#: plugin/Settings.php:451
+#: plugin/Settings.php:463
 msgid "Required Fields"
 msgstr ""
 
-#: plugin/Settings.php:456, plugin/Shortcodes/Buttons/SiteReviewsForm.php:80
+#: plugin/Settings.php:468, plugin/Shortcodes/Buttons/SiteReviewsForm.php:80
 msgid "Name"
 msgstr ""
 
-#: plugin/Settings.php:464
+#: plugin/Settings.php:476
 msgid "Invisible reCAPTCHA"
 msgstr ""
 
-#: plugin/Settings.php:466
+#: plugin/Settings.php:478
 msgid "Do not use reCAPTCHA"
 msgstr ""
 
-#: plugin/Settings.php:467
+#: plugin/Settings.php:479
 msgid "Use reCAPTCHA"
 msgstr ""
 
-#: plugin/Settings.php:468
+#: plugin/Settings.php:480
 msgctxt "plugin name"
 msgid "Use 3rd-party plugin: Invisible reCaptcha"
 msgstr ""
 
-#: plugin/Settings.php:470
+#: plugin/Settings.php:482
 msgid "Invisible reCAPTCHA is a free anti-spam service from Google. To use it, you will need to %s for an API key pair for your site. If you are already using a reCAPTCHA plugin listed here, please select it; otherwise choose \"Use reCAPTCHA\"."
 msgstr ""
 
-#: plugin/Settings.php:471
+#: plugin/Settings.php:483
 msgid "sign up"
 msgstr ""
 
-#: plugin/Settings.php:478
+#: plugin/Settings.php:490
 msgid "Site Key"
 msgstr ""
 
-#: plugin/Settings.php:487
+#: plugin/Settings.php:499
 msgid "Site Secret"
 msgstr ""
 
-#: plugin/Settings.php:496
+#: plugin/Settings.php:508
 msgid "Badge Position"
 msgstr ""
 
@@ -1188,12 +1200,20 @@ msgctxt ":attribute is a placeholder and should not be translated."
 msgid "The :attribute field is required."
 msgstr ""
 
-#: plugin/Traits/SiteReviewsForm.php:85
+#: plugin/Traits/SiteReviewsForm.php:86
 msgid "You must be %s to submit a review."
 msgstr ""
 
-#: plugin/Traits/SiteReviewsForm.php:86
+#: plugin/Traits/SiteReviewsForm.php:87
 msgid "logged in"
+msgstr ""
+
+#: plugin/Traits/SiteReviewsForm.php:90
+msgid "You may also %s for an account."
+msgstr ""
+
+#: plugin/Traits/SiteReviewsForm.php:91
+msgid "register"
 msgstr ""
 
 #: plugin/Widgets/SiteReviews.php:54
