@@ -474,7 +474,13 @@ class SystemInfo
 	protected function getSettings( $title = 'Plugin Settings' )
 	{
 		if( !$this->title( $title ))return;
-		$this->sysinfo[ $title ][] = $this->app->make( 'Log\Logger' )->print_array( glsr_get_options() );
+		$settings = glsr_get_options();
+		foreach( ['key','secret'] as $key ) {
+			if( isset( $settings['reviews-form']['recaptcha'][$key] )) {
+				$settings['reviews-form']['recaptcha'][$key] = '[removed]';
+			}
+		}
+		$this->sysinfo[ $title ][] = $this->app->make( 'Log\Logger' )->print_array( $settings );
 		return $this->implode( $title );
 	}
 }
