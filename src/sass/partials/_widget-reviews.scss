@@ -51,8 +51,9 @@
 	}
 }
 
-
-[class*=glsr-star-] {
+.glsr-star-full,
+.glsr-star-empty,
+.glsr-star-half {
 	display: inline-block;
 	width: 20px;
 	height: 20px;

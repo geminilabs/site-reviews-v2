@@ -5,7 +5,7 @@ Tags: best reviews, business ratings, business reviews, curated reviews, moderat
 Requires at least: 4.0.0
 Tested up to: 4.8.2
 Requires PHP: 5.4
-Stable tag: 2.7.1
+Stable tag: 2.7.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -102,6 +102,10 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 14. Add-Ons are being built to extend the functionality on the Site Reviews plugin
 
 == Changelog ==
+
+= 2.7.2 (2017-10-31) =
+- Fix compatibilty with some themes that use javascript to modify form elements
+- Remove recaptcha key/secret from the systemlog
 
 = 2.7.1 (2017-10-24) =
 - Fix [site_reviews_summary] class attribute

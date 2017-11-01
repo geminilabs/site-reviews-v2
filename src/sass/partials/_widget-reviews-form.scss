@@ -52,7 +52,11 @@ $glsr-color-error: #D32F2F !default;
 	select[name="rating"] {
 		display: block;
 		height: 26px;
-		visibility: hidden;
+		visibility: hidden !important;
+		&::before,
+		&::after {
+			display: none !important;
+		}
 	}
 }
 

@@ -18,6 +18,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.7.2] = 2017-10-31
+
+### Fixed
+- Fix compatibilty with some themes that use javascript to modify form elements
+
+### Security
+- Remove recaptcha key/secret from the systemlog
+
 ## [2.7.1] = 2017-10-24
 
 ### Fixed
