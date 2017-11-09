@@ -37,7 +37,7 @@ msgstr ""
 msgid "Update WordPress"
 msgstr ""
 
-#: plugin/Commands/RegisterPostType.php:22, plugin/Settings.php:466, plugin/Shortcodes/Buttons/SiteReviews.php:55, plugin/Shortcodes/Buttons/SiteReviews.php:143, plugin/Shortcodes/Buttons/SiteReviewsForm.php:43, plugin/Shortcodes/Buttons/SiteReviewsForm.php:90, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:53, plugin/Widgets/SiteReviews.php:47, plugin/Widgets/SiteReviewsForm.php:45
+#: plugin/Commands/RegisterPostType.php:22, plugin/Settings.php:466, plugin/Shortcodes/Buttons/SiteReviews.php:55, plugin/Shortcodes/Buttons/SiteReviews.php:143, plugin/Shortcodes/Buttons/SiteReviewsForm.php:43, plugin/Shortcodes/Buttons/SiteReviewsForm.php:90, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:53, plugin/Widgets/SiteReviews.php:38, plugin/Widgets/SiteReviewsForm.php:38
 msgid "Title"
 msgstr ""
 
@@ -355,7 +355,7 @@ msgstr[1] ""
 msgid "Edit"
 msgstr ""
 
-#: plugin/Handlers/RegisterPostType.php:321, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:65, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:66, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:67, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:68, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:69, plugin/Widgets/SiteReviews.php:66, plugin/Widgets/SiteReviews.php:67, plugin/Widgets/SiteReviews.php:68, plugin/Widgets/SiteReviews.php:69, plugin/Widgets/SiteReviews.php:70
+#: plugin/Handlers/RegisterPostType.php:321, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:65, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:66, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:67, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:68, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:69, plugin/Widgets/SiteReviews.php:57, plugin/Widgets/SiteReviews.php:58, plugin/Widgets/SiteReviews.php:59, plugin/Widgets/SiteReviews.php:60, plugin/Widgets/SiteReviews.php:61
 msgid "%s star"
 msgid_plural "%s stars"
 msgstr[0] ""
@@ -919,11 +919,11 @@ msgstr ""
 msgid "Hide"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:119, plugin/Widgets/SiteReviews.php:120
+#: plugin/Shortcodes/Buttons/SiteReviews.php:119, plugin/Widgets/SiteReviews.php:109
 msgid "Hide the review author?"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:124, plugin/Widgets/SiteReviews.php:121
+#: plugin/Shortcodes/Buttons/SiteReviews.php:124, plugin/Widgets/SiteReviews.php:110
 msgid "Hide the review date?"
 msgstr ""
 
@@ -931,11 +931,11 @@ msgstr ""
 msgid "Excerpt"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:129, plugin/Widgets/SiteReviews.php:122
+#: plugin/Shortcodes/Buttons/SiteReviews.php:129, plugin/Widgets/SiteReviews.php:111
 msgid "Hide the review excerpt?"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:134, plugin/Widgets/SiteReviews.php:123
+#: plugin/Shortcodes/Buttons/SiteReviews.php:134, plugin/Widgets/SiteReviews.php:112
 msgid "Hide the review rating?"
 msgstr ""
 
@@ -943,11 +943,11 @@ msgstr ""
 msgid "Response"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:139, plugin/Widgets/SiteReviews.php:124
+#: plugin/Shortcodes/Buttons/SiteReviews.php:139, plugin/Widgets/SiteReviews.php:113
 msgid "Hide the review response?"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:144, plugin/Widgets/SiteReviews.php:125
+#: plugin/Shortcodes/Buttons/SiteReviews.php:144, plugin/Widgets/SiteReviews.php:114
 msgid "Hide the review title?"
 msgstr ""
 
@@ -955,7 +955,7 @@ msgstr ""
 msgid "Automatically assign a category to reviews submitted with this shortcode."
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:48, plugin/Widgets/SiteReviewsForm.php:53
+#: plugin/Shortcodes/Buttons/SiteReviewsForm.php:48, plugin/Widgets/SiteReviewsForm.php:46
 msgid "Description"
 msgstr ""
 
@@ -1062,7 +1062,7 @@ msgstr ""
 msgid "Add New Review"
 msgstr ""
 
-#: plugin/Strings.php:25, plugin/Widgets/SiteReviews.php:84
+#: plugin/Strings.php:25, plugin/Widgets/SiteReviews.php:72
 msgid "All Reviews"
 msgstr ""
 
@@ -1200,83 +1200,91 @@ msgctxt ":attribute is a placeholder and should not be translated."
 msgid "The :attribute field is required."
 msgstr ""
 
-#: plugin/Traits/SiteReviewsForm.php:86
+#: plugin/Traits/SiteReviewsForm.php:105
 msgid "You must be %s to submit a review."
 msgstr ""
 
-#: plugin/Traits/SiteReviewsForm.php:87
+#: plugin/Traits/SiteReviewsForm.php:106
 msgid "logged in"
 msgstr ""
 
-#: plugin/Traits/SiteReviewsForm.php:90
+#: plugin/Traits/SiteReviewsForm.php:109
 msgid "You may also %s for an account."
 msgstr ""
 
-#: plugin/Traits/SiteReviewsForm.php:91
+#: plugin/Traits/SiteReviewsForm.php:110
 msgid "register"
 msgstr ""
 
-#: plugin/Widgets/SiteReviews.php:54
+#: plugin/Widgets/SiteReviews.php:45
 msgid "How many reviews would you like to display? "
 msgstr ""
 
-#: plugin/Widgets/SiteReviews.php:63
+#: plugin/Widgets/SiteReviews.php:54
 msgid "What is the minimum rating to display? "
 msgstr ""
 
-#: plugin/Widgets/SiteReviews.php:81
+#: plugin/Widgets/SiteReviews.php:69
 msgid "Which reviews would you like to display? "
 msgstr ""
 
-#: plugin/Widgets/SiteReviews.php:92
+#: plugin/Widgets/SiteReviews.php:80
 msgid "Limit reviews to this category"
 msgstr ""
 
-#: plugin/Widgets/SiteReviews.php:95
+#: plugin/Widgets/SiteReviews.php:83
 msgid "All Categories"
 msgstr ""
 
-#: plugin/Widgets/SiteReviews.php:102
+#: plugin/Widgets/SiteReviews.php:90
 msgid "Limit reviews to those assigned to this page/post ID"
 msgstr ""
 
-#: plugin/Widgets/SiteReviews.php:105
+#: plugin/Widgets/SiteReviews.php:93
 msgid "Separate multiple ID's with a comma"
 msgstr ""
 
-#: plugin/Widgets/SiteReviews.php:111, plugin/Widgets/SiteReviewsForm.php:77
+#: plugin/Widgets/SiteReviews.php:94
+msgid "You may also enter %s to limit assigned reviews to the current page."
+msgstr ""
+
+#: plugin/Widgets/SiteReviews.php:100, plugin/Widgets/SiteReviewsForm.php:71
 msgid "Enter any custom CSS classes here"
 msgstr ""
 
-#: plugin/Widgets/SiteReviewsForm.php:35
+#: plugin/Widgets/SiteReviewsForm.php:32
 msgid "Your email address will not be published. Required fields are marked %s*%s"
 msgstr ""
 
-#: plugin/Widgets/SiteReviewsForm.php:60
+#: plugin/Widgets/SiteReviewsForm.php:53
 msgid "Automatically assign a category"
 msgstr ""
 
-#: plugin/Widgets/SiteReviewsForm.php:62
+#: plugin/Widgets/SiteReviewsForm.php:55
 msgid "Do not assign a category"
 msgstr ""
 
-#: plugin/Widgets/SiteReviewsForm.php:69
+#: plugin/Widgets/SiteReviewsForm.php:62
 msgid "Assign reviews to a custom page/post ID"
 msgstr ""
 
-#: plugin/Widgets/SiteReviewsForm.php:86
+#: plugin/Widgets/SiteReviewsForm.php:65
+msgid "You may also enter %s to assign to the current post."
+msgstr ""
+
+#: plugin/Widgets/SiteReviewsForm.php:80
 msgid "Hide the email field"
 msgstr ""
 
-#: plugin/Widgets/SiteReviewsForm.php:87
+#: plugin/Widgets/SiteReviewsForm.php:81
 msgid "Hide the name field"
 msgstr ""
 
-#: plugin/Widgets/SiteReviewsForm.php:88
+#: plugin/Widgets/SiteReviewsForm.php:82
 msgid "Hide the terms field"
 msgstr ""
 
-#: plugin/Widgets/SiteReviewsForm.php:89
+#: plugin/Widgets/SiteReviewsForm.php:83
 msgid "Hide the title field"
 msgstr ""
 

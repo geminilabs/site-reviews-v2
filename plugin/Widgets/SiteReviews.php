@@ -28,18 +28,9 @@ class SiteReviews extends Widget
 	 */
 	public function form( $instance )
 	{
-		$defaults = [
-			'assigned_to' => '',
-			'category'    => '',
-			'class'       => '',
-			'count'       => '5',
-			'display'     => '',
-			'hide'        => [],
-			'rating'      => '1',
-			'title'       => '',
-		];
-
-		$args = shortcode_atts( $defaults, $instance );
+		$args = $this->normalize( $instance );
+		$types = glsr_resolve( 'Database' )->getReviewTypes();
+		$terms = glsr_resolve( 'Database' )->getTerms();
 
 		$this->create_field([
 			'type'  => 'text',
@@ -70,9 +61,6 @@ class SiteReviews extends Widget
 				'1' => sprintf( _n( '%s star', '%s stars', 1, 'site-reviews' ), 1 ),
 			],
 		]);
-
-		$types = glsr_resolve( 'Database' )->getReviewTypes();
-		$terms = glsr_resolve( 'Database' )->getTerms();
 
 		if( count( $types ) > 1 ) {
 			$this->create_field([
@@ -140,15 +128,12 @@ class SiteReviews extends Widget
 		if( $new_instance['count'] < 0 ) {
 			$new_instance['count'] = 0;
 		}
-
 		if( $new_instance['count'] > 100 ) {
 			$new_instance['count'] = 100;
 		}
-
 		if( !is_numeric( $new_instance['count'] )) {
 			$new_instance['count'] = 5;
 		}
-
 		return parent::update( $new_instance, $old_instance );
 	}
 
@@ -162,29 +147,18 @@ class SiteReviews extends Widget
 	 */
 	public function widget( $args, $instance )
 	{
-		$defaults = [
-			'assigned_to' => '',
-			'category'    => '',
-			'class'       => '',
-			'count'       => '5', // count
-			'display'     => '',
-			'hide'        => [],
-			'rating'      => '1', // rating
-			'title'       => '',
-		];
-
-		$instance = shortcode_atts( $defaults, $instance );
-
+		$instance = $this->normalize( $instance );
 		$title = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
 
-		echo $args['before_widget'];
+		if( $instance['assigned_to'] == 'post_id' ) {
+			$instance['assigned_to'] = intval( get_the_ID() );
+		}
 
+		echo $args['before_widget'];
 		if( !empty( $title )) {
 			echo $args['before_title'] . $title . $args['after_title'];
 		}
-
 		$this->renderReviews( $instance );
-
 		echo $args['after_widget'];
 	}
 }

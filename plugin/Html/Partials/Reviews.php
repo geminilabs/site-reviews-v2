@@ -46,14 +46,14 @@ class Reviews extends Base
 
 	protected function renderReview( $review )
 	{
-		$rendered = [
+		$rendered = apply_filters( 'site-reviews/rendered/review/order', [
 			'title' => $this->buildTitle( $review ),
 			'meta' => $this->buildMeta( $review ),
 			'review' => $this->buildText( $review ),
 			'avatar' => $this->buildAvatar( $review->avatar ),
 			'author' => $this->buildAuthor( $review->author ),
 			'response' => $this->buildResponse( $review->response ),
-		];
+		]);
 		$renderedReview = sprintf( '<div class="glsr-review">%s</div>',
 			array_reduce( $rendered, function( $carry, $part ) {
 				return $carry . $part;

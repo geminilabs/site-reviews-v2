@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.7.3] = 2017-11-09
+
+### Fixed
+- Fix "assign_to" and "assigned_to" widget options
+
 ## [2.7.2] = 2017-10-31
 
 ### Fixed

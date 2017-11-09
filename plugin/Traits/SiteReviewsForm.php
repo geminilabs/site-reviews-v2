@@ -34,6 +34,25 @@ trait SiteReviewsForm
 	}
 
 	/**
+	 * @return array
+	 */
+	public function normalize( array $args, array $defaults = [] )
+	{
+		$defaults = wp_parse_args( $defaults, [
+			'assign_to' => '',
+			'category' => '',
+			'class' => '',
+			'description' => '',
+			'hide' => [],
+			'title' => '',
+		]);
+		$atts = shortcode_atts( $defaults, $args );
+		$atts = $this->makeCompatible( $atts );
+		$atts['hide'] = $this->normalizeHiddenFields( $atts['hide'] );
+		return $atts;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function renderForm( array $atts )
@@ -93,5 +112,39 @@ trait SiteReviewsForm
 		}
 		echo apply_filters( 'site-reviews/rendered/review-form/login-register', wpautop( trim( $login )));
 		return true;
+	}
+
+	/**
+	 * Maintain backwards compatibility with version <= v1.2.1
+	 *
+	 * @return array
+	 */
+	protected function makeCompatible( array $args )
+	{
+		if( is_string( $args['hide'] )) {
+			$args['hide'] = str_replace( 'reviewer', 'name', $args['hide'] );
+			$hide = explode( ',', $args['hide'] );
+			$args['hide'] = array_unique( array_map( 'trim', $hide ));
+		}
+		return $args;
+	}
+
+	/**
+	 * @param string|array $hiddenFields
+	 * @return array
+	 */
+	protected function normalizeHiddenFields( $hiddenFields )
+	{
+		if( is_string( $hiddenFields )) {
+			$hiddenFields = explode( ',', $hiddenFields );
+		}
+		return array_filter( $hiddenFields, function( $value ) {
+			return in_array( $value, [
+				'email',
+				'name',
+				'terms',
+				'title',
+			]);
+		});
 	}
 }

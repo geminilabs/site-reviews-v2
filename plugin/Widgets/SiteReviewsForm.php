@@ -28,16 +28,9 @@ class SiteReviewsForm extends Widget
 	 */
 	public function form( $instance )
 	{
-		$defaults = [
-			'assign_to'   => '',
-			'category'    => '',
-			'class'       => '',
+		$args = $this->normalize( $instance, [
 			'description' => sprintf( __( 'Your email address will not be published. Required fields are marked %s*%s', 'site-reviews' ), '<span>', '</span>' ),
-			'hide'        => [],
-			'title'       => '',
-		];
-
-		$args = shortcode_atts( $defaults, $instance );
+		]);
 
 		$this->create_field([
 			'type'  => 'text',
@@ -64,7 +57,7 @@ class SiteReviewsForm extends Widget
 		]);
 
 		$this->create_field([
-			'type'    => 'number',
+			'type'    => 'text',
 			'name'    => 'assign_to',
 			'label'   => __( 'Assign reviews to a custom page/post ID', 'site-reviews' ),
 			'value'   => $args['assign_to'],
@@ -101,34 +94,20 @@ class SiteReviewsForm extends Widget
 	 */
 	public function widget( $args, $instance )
 	{
-		$defaults = [
-			'assign_to'   => '',
-			'category'    => '',
-			'class'       => '',
-			'description' => '',
-			'hide'        => [],
-			'title'       => '',
-		];
-
-		// custom widget attributes
-		$instance = shortcode_atts( $defaults, $instance );
+		$instance = $this->normalize( $instance );
+		$title = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
 
 		if( $instance['assign_to'] == 'post_id' ) {
 			$instance['assign_to'] = intval( get_the_ID() );
 		}
 
-		$title = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
-
 		echo $args['before_widget'];
-
 		if( !empty( $title )) {
 			echo $args['before_title'] . $title . $args['after_title'];
 		}
-
 		if( !$this->renderRequireLogin() ) {
 			echo $this->renderForm( $instance );
 		}
-
 		echo $args['after_widget'];
 	}
 }
