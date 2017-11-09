@@ -91,6 +91,7 @@ class SiteReviews extends Widget
 			'value'   => $args['assigned_to'],
 			'default' => '',
 			'placeholder' => __( "Separate multiple ID's with a comma", 'site-reviews' ),
+			'description' => sprintf( __( 'You may also enter %s to limit assigned reviews to the current page.', 'site-reviews' ), '<code>post_id</code>' ),
 		]);
 
 		$this->create_field([

@@ -62,6 +62,7 @@ class SiteReviewsForm extends Widget
 			'label'   => __( 'Assign reviews to a custom page/post ID', 'site-reviews' ),
 			'value'   => $args['assign_to'],
 			'default' => '',
+			'description' => sprintf( __( 'You may also enter %s to assign to the current post.', 'site-reviews' ), '<code>post_id</code>' ),
 		]);
 
 		$this->create_field([

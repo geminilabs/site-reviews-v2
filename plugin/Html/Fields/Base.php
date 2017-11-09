@@ -80,11 +80,12 @@ abstract class Base
 	 */
 	public function generateDescription( $paragraph = true )
 	{
-		if( !isset( $this->args['desc'] ) || !$this->args['desc'] )return;
-
-		$tag = ( !!$paragraph || $paragraph == 'p' ) ? 'p' : 'span';
-
-		return sprintf( '<%1$s class="description">%2$s</%1$s>', $tag, $this->args['desc'] );
+		if( !empty( $this->args['desc'] )) {
+			return sprintf( '<p class="description">%s</p>', $this->args['desc'] );
+		}
+		else if( !empty( $this->args['description'] )) {
+			return sprintf( '<small>%s</small>', $this->args['description'] );
+		}
 	}
 
 	/**
