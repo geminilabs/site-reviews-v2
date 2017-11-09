@@ -3,7 +3,7 @@ Contributors: geminilabs, pryley
 Donate link: https://www.paypal.me/pryley
 Tags: best reviews, business ratings, business reviews, curated reviews, moderated reviews, rating widget, rating, ratings shortcode, review widget, reviews login, reviews shortcode, reviews, simple reviews, site reviews, star rating, star review, submit review, testimonial, user rating, user review, user reviews, wp rating, wp review, wp testimonials
 Requires at least: 4.0.0
-Tested up to: 4.8.2
+Tested up to: 4.8.3
 Requires PHP: 5.4
 Stable tag: 2.7.3
 License: GPLv3
