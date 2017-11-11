@@ -107,6 +107,7 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 
 = 2.7.4 (2017-11-11) =
 - Fix activation notice for unsupported PHP and WordPress versions
+- Fix database upgrade for people using Site Reviews v2.1.0 or earlier
 - Fix deletion of plugin for unsupported PHP versions
 
 = 2.7.3 (2017-11-09) =

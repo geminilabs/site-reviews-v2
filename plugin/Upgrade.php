@@ -286,12 +286,12 @@ class Upgrade
 	{
 		global $wpdb;
 
-		$query = "INSERT INTO gl_postmeta (post_id, meta_key, meta_value) " .
+		$query = "INSERT INTO {$wpdb->postmeta} (post_id, meta_key, meta_value) " .
 		"SELECT p.ID, 'assigned_to', '' " .
-		"FROM gl_posts p " .
+		"FROM {$wpdb->posts} p " .
 		"WHERE NOT EXISTS (" .
 			"SELECT pm.post_id " .
-			"FROM gl_postmeta pm " .
+			"FROM {$wpdb->postmeta} pm " .
 			"WHERE p.ID = pm.post_id " .
 			"AND pm.meta_key = 'assigned_to'" .
 		") " .
