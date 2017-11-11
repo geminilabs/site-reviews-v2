@@ -22,6 +22,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 - Fix activation notice for unsupported PHP and WordPress versions
+- Fix deletion of plugin for unsupported PHP versions
+
 ## [2.7.3] = 2017-11-09
 
 ### Fixed

@@ -107,6 +107,8 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 
 = 2.7.4 (2017-11-11) =
 - Fix activation notice for unsupported PHP and WordPress versions
+- Fix deletion of plugin for unsupported PHP versions
+
 = 2.7.3 (2017-11-09) =
 - Fix "assign_to" and "assigned_to" widget options
 
