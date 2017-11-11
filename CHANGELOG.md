@@ -18,6 +18,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.7.4] = 2017-11-11
+
+### Fixed
+- Fix activation notice for unsupported PHP and WordPress versions
 ## [2.7.3] = 2017-11-09
 
 ### Fixed

@@ -5,13 +5,15 @@ Tags: best reviews, business ratings, business reviews, curated reviews, moderat
 Requires at least: 4.0.0
 Tested up to: 4.8.3
 Requires PHP: 5.4
-Stable tag: 2.7.3
+Stable tag: 2.7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Site Reviews is a WordPress plugin which allows you to easily receive and display reviews for your website and business.
 
 == Description ==
+
+ATTENTION: This plugin requires that your server is running a minimum of PHP v5.4 and WordPress 4.0.0. If your server does not meet theses minimum requirements, the plugin will not work.
 
 Site Reviews is a plugin that allows your visitors to submit site reviews with a 1-5 star rating on your website, similar to the way you would on TripAdvisor or Yelp, and then allows you to display them using a widget or shortcode.
 
@@ -103,6 +105,8 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 
 == Changelog ==
 
+= 2.7.4 (2017-11-11) =
+- Fix activation notice for unsupported PHP and WordPress versions
 = 2.7.3 (2017-11-09) =
 - Fix "assign_to" and "assigned_to" widget options
 

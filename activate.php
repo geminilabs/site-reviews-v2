@@ -11,19 +11,20 @@
 defined( 'WPINC' ) || die;
 
 if( !function_exists( 'glsr_version_check' )) {
-	function glsr_version_check() {
+	function glsr_version_check( $returnArray = false ) {
 		global $wp_version;
-		return [
-			'php' => version_compare( PHP_VERSION, '5.4.0', '<' ),
-			'wordpress' => version_compare( $wp_version, '4.0', '<' ),
-		];
+		$php = version_compare( PHP_VERSION, '5.4.0', '<' );
+		$wordpress = version_compare( $wp_version, '4.0', '<' );
+		return !$returnArray
+			? !( $php || $wordpress )
+			: array( 'php' => $php, 'wordpress' => $wordpress );
 	}
 }
 
 if( !function_exists( 'glsr_deactivate_plugin' )) {
 	function glsr_deactivate_plugin( $plugin )
 	{
-		$check = glsr_version_check();
+		$check = glsr_version_check( true );
 
 		if( !$check['php'] && !$check['wordpress'] )return;
 
@@ -64,10 +65,8 @@ if( !function_exists( 'glsr_deactivate_plugin' )) {
 	}
 }
 
-$check = glsr_version_check();
-
 // PHP >= 5.4.0 and WordPress version >= 4.0.0 check
-if( $check['php'] || $check['wordpress'] ) {
+if( !glsr_version_check() ) {
 	add_action( 'activated_plugin', 'glsr_deactivate_plugin' );
 	add_action( 'admin_notices', 'glsr_deactivate_plugin' );
 }
