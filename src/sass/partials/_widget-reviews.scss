@@ -15,6 +15,15 @@
 
 .glsr-reviews-wrap {}
 
+.glsr-reviews {
+	opacity: 1;
+	transition: opacity 500ms;
+}
+
+.glsr-hide {
+	opacity: 0 !important;
+}
+
 .glsr-review {
 	margin-bottom: 3em;
 

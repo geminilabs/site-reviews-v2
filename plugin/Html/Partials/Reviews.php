@@ -38,8 +38,9 @@ class Reviews extends Base
 			$html .= $this->buildPagination( $reviews->max_num_pages );
 		}
 		return sprintf(
-			'<div class="glsr-reviews-wrap"><div class="glsr-reviews %s">%s</div></div>',
+			'<div class="glsr-reviews-wrap"><div class="glsr-reviews %s" id="%s">%s</div></div>',
 			$this->args['class'],
+			$this->args['id'],
 			$html
 		);
 	}
@@ -259,20 +260,22 @@ class Reviews extends Base
 	protected function getPaginationTemplate( $links )
 	{
 		$theme = wp_get_theme()->get( 'TextDomain' );
+		$class = $this->args['pagination'] === 'ajax'
+			? 'glsr-ajax-navigation navigation '
+			: 'glsr-navigation navigation ';
 		switch( $theme ) {
 			case 'twentyten':
 			case 'twentyeleven':
 			case 'twentytwelve':
-				$class = '';
-				$template = '<nav class="navigation" role="navigation">%3$s</nav>';
+				$template = '<nav class="%1$s" role="navigation">%3$s</nav>';
 				break;
 			case 'twentyfourteen':
-				$class = 'paging-navigation';
-				$template = '<nav class="navigation %1$s" role="navigation"><h2 class="screen-reader-text">%2$s</h2><div class="pagination loop-pagination">%3$s</div></nav>';
+				$class .= 'paging-navigation';
+				$template = '<nav class="%1$s" role="navigation"><h2 class="screen-reader-text">%2$s</h2><div class="pagination loop-pagination">%3$s</div></nav>';
 				break;
 			default:
-				$class = 'pagination';
-				$template = '<nav class="navigation %1$s" role="navigation"><h2 class="screen-reader-text">%2$s</h2><div class="nav-links">%3$s</div></nav>';
+				$class .= 'pagination';
+				$template = '<nav class="%1$s" role="navigation"><h2 class="screen-reader-text">%2$s</h2><div class="nav-links">%3$s</div></nav>';
 		}
 		$template = apply_filters( 'navigation_markup_template', $template, $class );
 		$screenReaderText = __( 'Site Reviews navigation', 'site-reviews' );
@@ -290,6 +293,7 @@ class Reviews extends Base
 			'class'       => '',
 			'count'       => '',
 			'hide'        => '',
+			'id'          => '',
 			'orderby'     => 'date',
 			'pagination'  => false,
 			'rating'      => '1',
@@ -318,7 +322,10 @@ class Reviews extends Base
 	 */
 	protected function normalizePagination( $pagination )
 	{
-		return wp_validate_boolean( $pagination );
+		if( $pagination !== 'ajax' ) {
+			$pagination = wp_validate_boolean( $pagination );
+		}
+		return $pagination;
 	}
 
 	/**

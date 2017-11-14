@@ -26,6 +26,7 @@ trait SiteReviews
 			'count'       => 5,
 			'display'     => '',
 			'hide'        => [],
+			'id'          => '',
 			'rating'      => 1,
 			'title'       => '',
 			'type'        => '',
@@ -36,6 +37,9 @@ trait SiteReviews
 		// "type" takes precedence over "display"
 		if( empty( $args['type'] )) {
 			$args['type'] = $args['display'];
+		}
+		if( $args['id'] ) {
+			$args['id'] = sanitize_title( $args['id'] );
 		}
 		return $args;
 	}

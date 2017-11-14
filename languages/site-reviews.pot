@@ -37,11 +37,11 @@ msgstr ""
 msgid "Update WordPress"
 msgstr ""
 
-#: plugin/Commands/RegisterPostType.php:22, plugin/Settings.php:466, plugin/Shortcodes/Buttons/SiteReviews.php:55, plugin/Shortcodes/Buttons/SiteReviews.php:143, plugin/Shortcodes/Buttons/SiteReviewsForm.php:43, plugin/Shortcodes/Buttons/SiteReviewsForm.php:90, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:53, plugin/Widgets/SiteReviews.php:38, plugin/Widgets/SiteReviewsForm.php:38
+#: plugin/Commands/RegisterPostType.php:22, plugin/Settings.php:466, plugin/Shortcodes/Buttons/SiteReviews.php:55, plugin/Shortcodes/Buttons/SiteReviews.php:144, plugin/Shortcodes/Buttons/SiteReviewsForm.php:43, plugin/Shortcodes/Buttons/SiteReviewsForm.php:90, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:53, plugin/Widgets/SiteReviews.php:38, plugin/Widgets/SiteReviewsForm.php:38
 msgid "Title"
 msgstr ""
 
-#: plugin/Commands/RegisterPostType.php:23, plugin/Controllers/MainController.php:791, plugin/Shortcodes/Buttons/SiteReviews.php:123
+#: plugin/Commands/RegisterPostType.php:23, plugin/Controllers/MainController.php:791, plugin/Shortcodes/Buttons/SiteReviews.php:124
 msgid "Date"
 msgstr ""
 
@@ -103,7 +103,7 @@ msgstr ""
 msgid "Site Reviews"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:224, plugin/Shortcodes/Buttons/SiteReviews.php:118
+#: plugin/Controllers/MainController.php:224, plugin/Shortcodes/Buttons/SiteReviews.php:119
 msgid "Author"
 msgstr ""
 
@@ -111,7 +111,7 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:226, plugin/Controllers/MainController.php:789, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:133, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:63, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:109
+#: plugin/Controllers/MainController.php:226, plugin/Controllers/MainController.php:789, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:134, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:63, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:109
 msgid "Rating"
 msgstr ""
 
@@ -301,7 +301,7 @@ msgstr ""
 msgid "Anonymous"
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:546, plugin/Html/Partials/Reviews.php:221
+#: plugin/Controllers/ReviewController.php:546, plugin/Html/Partials/Reviews.php:222
 msgid "No Title"
 msgstr ""
 
@@ -441,39 +441,39 @@ msgstr ""
 msgid "No reviews were found."
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:135
+#: plugin/Html/Partials/Reviews.php:136
 msgid "Previous"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:141
+#: plugin/Html/Partials/Reviews.php:142
 msgid "Next"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:147
+#: plugin/Html/Partials/Reviews.php:148
 msgid "Page"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:150
+#: plugin/Html/Partials/Reviews.php:151
 msgid "Next &rarr;"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:151
+#: plugin/Html/Partials/Reviews.php:152
 msgid "&larr; Previous"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:180
+#: plugin/Html/Partials/Reviews.php:181
 msgid "Response from %s"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:249
+#: plugin/Html/Partials/Reviews.php:250
 msgid "Show more"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:250
+#: plugin/Html/Partials/Reviews.php:251
 msgid "Show less"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:278
+#: plugin/Html/Partials/Reviews.php:281
 msgid "Site Reviews navigation"
 msgstr ""
 
@@ -876,78 +876,82 @@ msgid "Enable"
 msgstr ""
 
 #: plugin/Shortcodes/Buttons/SiteReviews.php:83
+msgid "Enable (using ajax)"
+msgstr ""
+
+#: plugin/Shortcodes/Buttons/SiteReviews.php:84
 msgid "Disable"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:85
+#: plugin/Shortcodes/Buttons/SiteReviews.php:86
 msgid "When using pagination this shortcode can only be used once on a page. (default: disable)"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:92, plugin/Shortcodes/Buttons/SiteReviewsForm.php:58, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:78
+#: plugin/Shortcodes/Buttons/SiteReviews.php:93, plugin/Shortcodes/Buttons/SiteReviewsForm.php:58, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:78
 msgid "Post ID"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:93
+#: plugin/Shortcodes/Buttons/SiteReviews.php:94
 msgid "Limit reviews to those assigned to this post ID (separate multiple IDs with a comma). You can also enter \"post_id\" to use the ID of the current page."
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:97, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:83
+#: plugin/Shortcodes/Buttons/SiteReviews.php:98, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:83
 msgid "Schema"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:99, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:85
+#: plugin/Shortcodes/Buttons/SiteReviews.php:100, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:85
 msgid "Enable rich snippets"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:100, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:86
+#: plugin/Shortcodes/Buttons/SiteReviews.php:101, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:86
 msgid "Disable rich snippets"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:102, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:88
+#: plugin/Shortcodes/Buttons/SiteReviews.php:103, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:88
 msgid "Rich snippets are disabled by default."
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:106, plugin/Shortcodes/Buttons/SiteReviewsForm.php:63, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:92
+#: plugin/Shortcodes/Buttons/SiteReviews.php:107, plugin/Shortcodes/Buttons/SiteReviewsForm.php:63, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:92
 msgid "Classes"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:107, plugin/Shortcodes/Buttons/SiteReviewsForm.php:64, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:93
+#: plugin/Shortcodes/Buttons/SiteReviews.php:108, plugin/Shortcodes/Buttons/SiteReviewsForm.php:64, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:93
 msgid "Add custom CSS classes to the shortcode."
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:110, plugin/Shortcodes/Buttons/SiteReviewsForm.php:67, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:96
+#: plugin/Shortcodes/Buttons/SiteReviews.php:111, plugin/Shortcodes/Buttons/SiteReviewsForm.php:67, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:96
 msgid "Hide"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:119, plugin/Widgets/SiteReviews.php:109
+#: plugin/Shortcodes/Buttons/SiteReviews.php:120, plugin/Widgets/SiteReviews.php:109
 msgid "Hide the review author?"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:124, plugin/Widgets/SiteReviews.php:110
+#: plugin/Shortcodes/Buttons/SiteReviews.php:125, plugin/Widgets/SiteReviews.php:110
 msgid "Hide the review date?"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:128
+#: plugin/Shortcodes/Buttons/SiteReviews.php:129
 msgid "Excerpt"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:129, plugin/Widgets/SiteReviews.php:111
+#: plugin/Shortcodes/Buttons/SiteReviews.php:130, plugin/Widgets/SiteReviews.php:111
 msgid "Hide the review excerpt?"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:134, plugin/Widgets/SiteReviews.php:112
+#: plugin/Shortcodes/Buttons/SiteReviews.php:135, plugin/Widgets/SiteReviews.php:112
 msgid "Hide the review rating?"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:138
+#: plugin/Shortcodes/Buttons/SiteReviews.php:139
 msgid "Response"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:139, plugin/Widgets/SiteReviews.php:113
+#: plugin/Shortcodes/Buttons/SiteReviews.php:140, plugin/Widgets/SiteReviews.php:113
 msgid "Hide the review response?"
 msgstr ""
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:144, plugin/Widgets/SiteReviews.php:114
+#: plugin/Shortcodes/Buttons/SiteReviews.php:145, plugin/Widgets/SiteReviews.php:114
 msgid "Hide the review title?"
 msgstr ""
 
@@ -1200,19 +1204,19 @@ msgctxt ":attribute is a placeholder and should not be translated."
 msgid "The :attribute field is required."
 msgstr ""
 
-#: plugin/Traits/SiteReviewsForm.php:105
+#: plugin/Traits/SiteReviewsForm.php:100
 msgid "You must be %s to submit a review."
 msgstr ""
 
-#: plugin/Traits/SiteReviewsForm.php:106
+#: plugin/Traits/SiteReviewsForm.php:101
 msgid "logged in"
 msgstr ""
 
-#: plugin/Traits/SiteReviewsForm.php:109
+#: plugin/Traits/SiteReviewsForm.php:104
 msgid "You may also %s for an account."
 msgstr ""
 
-#: plugin/Traits/SiteReviewsForm.php:110
+#: plugin/Traits/SiteReviewsForm.php:105
 msgid "register"
 msgstr ""
 

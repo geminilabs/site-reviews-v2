@@ -80,6 +80,7 @@ class SiteReviews extends Generator
 				'label'   => esc_html__( 'Pagination', 'site-reviews' ),
 				'options' => [
 					'true'  => esc_html__( 'Enable', 'site-reviews' ),
+					'ajax' => esc_html__( 'Enable (using ajax)', 'site-reviews' ),
 					'false' => esc_html__( 'Disable', 'site-reviews' ),
 				],
 				'tooltip' => __( 'When using pagination this shortcode can only be used once on a page. (default: disable)', 'site-reviews' ),
@@ -144,6 +145,10 @@ class SiteReviews extends Generator
 						'tooltip' => __( 'Hide the review title?', 'site-reviews' ),
 					],
 				],
+			],[
+				'type'   => 'textbox',
+				'name'   => 'id',
+				'hidden' => true,
 			],
 		];
 	}

@@ -21,16 +21,11 @@ trait SiteReviewsForm
 	 * Generate a unique ID string
 	 *
 	 * @param mixed $from
-	 *
 	 * @return string
 	 */
 	public function generateId( $from = [] )
 	{
-		if( $this->id ) {
-			$from = $this->id;
-		}
-
-		return substr( md5( serialize( $from )), 0, 8 );
+		return substr( md5( serialize( $this->id ? $this->id : $from )), 0, 8 );
 	}
 
 	/**

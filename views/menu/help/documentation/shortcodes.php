@@ -20,7 +20,7 @@
 	<p>By default the shortcode displays all review fields. Include the "hide" attribute to hide any specific fields you don't want to show. If all fields are hidden, the shortcode will not be displayed.</p>
 
 	<code>pagination=true</code>
-	<p>Include the "pagination" attribute to display reviews in multiple pages (i.e. Page 1, Page 2, etc.). When using pagination, only one [site_reviews] shortcode can be used on a page at a time.</p>
+	<p>Include the "pagination" attribute to display reviews in multiple pages (i.e. Page 1, Page 2, etc.). The value can be "true", "ajax", or "false". The "ajax" value allows you to load the next page of reviews without loading a whole new page. When using pagination, only one [site_reviews] shortcode can be used on a page at a time.</p>
 
 	<code>rating=4</code>
 	<p>By default, the shortcode displays all 1-5 star reviews. Include the "rating" attribute to set the minimum star-rating of reviews to display.</p>
@@ -28,6 +28,9 @@
 	<code>schema=true</code>
 	<p>Include the "schema" attribute to enable rich snippets for your reviews, this is disabled by default. The difference between this and the schema option in the [site_reviews_summary] shortcode is that this one generates both the overall reviews rating schema and the schema for each individual review, while the other only generates the overall reviews rating schema.</p>
 	<p><span class="required">Important:</span> This attribute should only be used once on a page to avoid duplicate schemas; keep that in mind if you are using more than one [site_reviews] and/or [site_reviews_summary] shortcodes on the same page.</p>
+
+	<code>id="type some random text here"</code>
+	<p>Include the "id" attribute to add a custom ID attribute to the shortcode. This is especially useful when using pagination with the ajax option.</p>
 
 	<code>title="Our Reviews"</code>
 	<p>By default, the shortcode displays no heading. Include the "title" attribute to display a custom shortcode heading.</p>

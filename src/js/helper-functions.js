@@ -29,6 +29,19 @@ GLSR.convertValue = function( value ) {
 	return value;
 };
 
+GLSR.getAjax = function( url, success ) {
+	var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject( 'Microsoft.XMLHTTP' );
+	xhr.open( 'GET', url );
+	xhr.onreadystatechange = function() {
+		if( xhr.readyState > 3 && xhr.status === 200 ) {
+			success( xhr.responseText );
+		}
+	};
+	xhr.setRequestHeader( 'X-Requested-With', 'XMLHttpRequest' );
+	xhr.send();
+	return xhr;
+};
+
 GLSR.hasClass = function( el, className ) {
 	if( el.classList ) {
 		return el.classList.contains( className );
@@ -148,20 +161,15 @@ GLSR.parseFormData = function( form, convert ) {
 GLSR.postAjax = function( url, data, success ) {
 	var params = typeof data !== 'string' ? GLSR.serialize( data ) : data;
 	var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject( "Microsoft.XMLHTTP" );
-
 	xhr.open( 'POST', url ); // asynchronously
-
 	xhr.onreadystatechange = function() {
 		if( xhr.readyState > 3 && xhr.status === 200 ) {
 			success( JSON.parse( xhr.responseText ));
 		}
 	};
-
 	xhr.setRequestHeader( 'X-Requested-With', 'XMLHttpRequest' );
 	xhr.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8' );
-
 	xhr.send( params );
-
 	return xhr;
 };
 
@@ -221,26 +229,21 @@ GLSR.toggleClass = function( el, className ) {
 GLSR.insertAfter = function( el, tag, attributes ) {
 	var newEl = GLSR.createEl( tag, attributes );
 	el.parentNode.insertBefore( newEl, el.nextSibling );
-
 	return newEl;
 };
 
 GLSR.appendTo = function( el, tag, attributes ) {
 	var newEl = GLSR.createEl( tag, attributes );
 	el.appendChild( newEl );
-
 	return newEl;
 };
 
 GLSR.createEl = function( tag, attributes ) {
 	var el = ( typeof tag === 'string' ) ? document.createElement( tag ) : tag;
-
 	attributes = attributes || {};
-
 	for( var key in attributes ) {
 		if( !attributes.hasOwnProperty( key ) )continue;
 		el.setAttribute( key, attributes[ key ] );
 	}
-
 	return el;
 };

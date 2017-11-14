@@ -54,6 +54,34 @@ GLSR.enableSubmitButton = function()
 	GLSR.activeForm.querySelector( '[type="submit"]' ).removeAttribute( 'disabled' );
 };
 
+GLSR.getSelectorOfElement = function( el )
+{
+	return el.nodeName.toLowerCase() +
+		( el.id ? '#' + el.id : '' ) +
+		( el.className ? '.' + el.className.replace( /\s+/g, '.' ) : '' );
+};
+
+GLSR.onClickPagination = function( ev )
+{
+	ev.preventDefault();
+	var parentEl = this.closest( '.glsr-reviews' );
+	var selector = GLSR.getSelectorOfElement( parentEl );
+	GLSR.addClass( parentEl, 'glsr-hide' );
+	GLSR.getAjax( this.href, function( response ) {
+		var html = document.implementation.createHTMLDocument( 'new' );
+		html.documentElement.innerHTML = response;
+		var newParentEl = html.querySelectorAll( selector );
+		if( newParentEl.length === 1 ) {
+			parentEl.innerHTML = newParentEl[0].innerHTML;
+			GLSR.removeClass( parentEl, 'glsr-hide' );
+			GLSR.on( 'click', '.glsr-ajax-navigation a', GLSR.onClickPagination );
+			window.history.pushState( null, '', ev.target.href );
+			return;
+		}
+		window.location = ev.target.href;
+	});
+};
+
 GLSR.onClickReadMore = function( ev )
 {
 	ev.preventDefault();
@@ -227,9 +255,7 @@ GLSR.on( 'change', 'form.glsr-submit-review-form', function( ev )
 GLSR.on( 'submit', 'form.glsr-submit-review-form', function( ev )
 {
 	if( GLSR.hasClass( this, 'no-ajax' ))return;
-
 	ev.preventDefault();
-
 	GLSR.activeForm = this;
 	GLSR.recaptcha.addListeners();
 	GLSR.clearFormErrors();
@@ -252,6 +278,8 @@ GLSR.on( 'click', '.glsr-field [type="submit"]', function()
 		GLSR.submitForm( token.value );
 	};
 });
+
+GLSR.on( 'click', '.glsr-ajax-navigation a', GLSR.onClickPagination );
 
 GLSR.ready( function()
 {

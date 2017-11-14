@@ -5,7 +5,7 @@ Tags: best reviews, business ratings, business reviews, curated reviews, moderat
 Requires at least: 4.0.0
 Tested up to: 4.8.3
 Requires PHP: 5.4
-Stable tag: 2.7.4
+Stable tag: 2.8.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,6 +27,7 @@ Follow plugin development on github at: https://github.com/geminilabs/site-revie
 
 = Current Features =
 
+- [new] Ajax pagination of reviews
 - Actively developed and supported
 - Assign reviews to a Post/Page ID
 - Clean and easy-to-configure user interface
@@ -104,6 +105,9 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 14. Add-Ons are being built to extend the functionality on the Site Reviews plugin
 
 == Changelog ==
+
+= 2.8.0 (2017-11-13) =
+- [feature] Allow ajax pagination of reviews
 
 = 2.7.4 (2017-11-11) =
 - Fix activation notice for unsupported PHP and WordPress versions

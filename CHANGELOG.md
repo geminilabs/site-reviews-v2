@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.8.0] = 2017-11-13
+
+### Added
+- [feature] Allow ajax pagination of reviews
+
 ## [2.7.4] = 2017-11-11
 
 ### Fixed
