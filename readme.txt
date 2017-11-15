@@ -5,7 +5,7 @@ Tags: best reviews, business ratings, business reviews, curated reviews, moderat
 Requires at least: 4.0.0
 Tested up to: 4.8.3
 Requires PHP: 5.4
-Stable tag: 2.8.0
+Stable tag: 2.8.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,7 +21,7 @@ You can pin your best reviews so that they are always shown first, require appro
 
 Add-ons are being developed to support syncing your TripAdvisor and Yelp reviews in order to display them locally on your website, as well as Post/Page/CPT/Comment ratings/reviews.
 
-The plugin [roadmap](https://github.com/geminilabs/site-reviews/blob/develop/ROADMAP.md) includes tentative upcoming features.
+The plugin [roadmap](https://github.com/geminilabs/site-reviews/blob/master/ROADMAP.md) includes tentative upcoming features.
 
 Follow plugin development on github at: https://github.com/geminilabs/site-reviews/
 
@@ -105,6 +105,9 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 14. Add-Ons are being built to extend the functionality on the Site Reviews plugin
 
 == Changelog ==
+
+= 2.8.1 (2017-11-15) =
+- Fix ajax pagination when the HTMLElement class attribute has a trailing space
 
 = 2.8.0 (2017-11-13) =
 - [feature] Allow ajax pagination of reviews

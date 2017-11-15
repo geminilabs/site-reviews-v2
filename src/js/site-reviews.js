@@ -56,21 +56,22 @@ GLSR.enableSubmitButton = function()
 
 GLSR.getSelectorOfElement = function( el )
 {
+	if( !el || el.nodeType !== el.ELEMENT_NODE )return;
 	return el.nodeName.toLowerCase() +
-		( el.id ? '#' + el.id : '' ) +
-		( el.className ? '.' + el.className.replace( /\s+/g, '.' ) : '' );
+		( el.id ? '#' + el.id.trim() : '' ) +
+		( el.className ? '.' + el.className.trim().replace( /\s+/g, '.' ) : '' );
 };
 
 GLSR.onClickPagination = function( ev )
 {
 	ev.preventDefault();
 	var parentEl = this.closest( '.glsr-reviews' );
-	var selector = GLSR.getSelectorOfElement( parentEl );
+	var parentSelector = GLSR.getSelectorOfElement( parentEl );
 	GLSR.addClass( parentEl, 'glsr-hide' );
 	GLSR.getAjax( this.href, function( response ) {
 		var html = document.implementation.createHTMLDocument( 'new' );
 		html.documentElement.innerHTML = response;
-		var newParentEl = html.querySelectorAll( selector );
+		var newParentEl = parentSelector ? html.querySelectorAll( parentSelector ) : '';
 		if( newParentEl.length === 1 ) {
 			parentEl.innerHTML = newParentEl[0].innerHTML;
 			GLSR.removeClass( parentEl, 'glsr-hide' );

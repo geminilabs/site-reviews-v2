@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.8.1] = 2017-11-15
+
+### Fixed
+- Fix ajax pagination when the HTMLElement class attribute has a trailing space
+
 ## [2.8.0] = 2017-11-13
 
 ### Added
