@@ -3,6 +3,7 @@
 
 "use strict";
 
+GLSR.SCROLL_TIME = 468;
 GLSR.activeForm = null;
 GLSR.recaptcha = {};
 
@@ -62,6 +63,11 @@ GLSR.getSelectorOfElement = function( el )
 		( el.className ? '.' + el.className.trim().replace( /\s+/g, '.' ) : '' );
 };
 
+GLSR.now = function()
+{
+	return ( window.performance && window.performance.now ) ? window.performance.now() : Date.now();
+};
+
 GLSR.onClickPagination = function( ev )
 {
 	ev.preventDefault();
@@ -74,6 +80,7 @@ GLSR.onClickPagination = function( ev )
 		var newParentEl = parentSelector ? html.querySelectorAll( parentSelector ) : '';
 		if( newParentEl.length === 1 ) {
 			parentEl.innerHTML = newParentEl[0].innerHTML;
+			GLSR.scrollToTop( parentEl );
 			GLSR.removeClass( parentEl, 'glsr-hide' );
 			GLSR.on( 'click', '.glsr-ajax-navigation a', GLSR.onClickPagination );
 			window.history.pushState( null, '', ev.target.href );
@@ -173,6 +180,39 @@ GLSR.recaptcha.search = function( callback )
 		}
 	}
 	return result;
+};
+
+GLSR.scrollToTop = function( el, offset )
+{
+	offset = offset || 16;
+	var wpadminbar = document.querySelector( '#wpadminbar' );
+	if( wpadminbar && window.getComputedStyle( wpadminbar ).getPropertyValue( 'position' ) === 'fixed' ) {
+		offset = offset + wpadminbar.clientHeight;
+	}
+	var clientBounds = el.getBoundingClientRect();
+	var offsetTop = clientBounds.top - offset;
+	if( 'requestAnimationFrame' in window === false ) {
+		window.scroll( 0, window.pageYOffset + offsetTop );
+		return;
+	}
+	GLSR.scrollToTopStep({
+		endY: offsetTop,
+		offset: window.pageYOffset,
+		startTime: GLSR.now(),
+		startY: el.scrollTop,
+	});
+};
+
+GLSR.scrollToTopStep = function( context )
+{
+	var elapsed = ( GLSR.now() - context.startTime ) / GLSR.SCROLL_TIME;
+	elapsed = elapsed > 1 ? 1 : elapsed;
+	var easedValue = 0.5 * ( 1 - Math.cos( Math.PI * elapsed ));
+	var currentY = context.startY + ( context.endY - context.startY ) * easedValue;
+	window.scroll( 0, context.offset + currentY );
+	if( currentY !== context.endY ) {
+		window.requestAnimationFrame( GLSR.scrollToTopStep.bind( window, context ));
+	}
 };
 
 GLSR.showFormErrors = function( errors )

@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.8.2] = 2017-11-15
+
+### Added
+- Added ajax pagination automatic scrolling and loader animation
+
 ## [2.8.1] = 2017-11-15
 
 ### Fixed

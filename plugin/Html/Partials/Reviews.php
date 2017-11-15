@@ -279,7 +279,7 @@ class Reviews extends Base
 		}
 		$template = apply_filters( 'navigation_markup_template', $template, $class );
 		$screenReaderText = __( 'Site Reviews navigation', 'site-reviews' );
-		return sprintf( $template, $class, $screenReaderText, $links );
+		return sprintf( $template, $class, $screenReaderText, $links ) . '<div class="glsr-loader"></div>';
 	}
 
 	/**

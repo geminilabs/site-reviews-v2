@@ -53,6 +53,7 @@ elixir(( mix ) => mix
 	.sass( 'twenty-fourteen.scss' )
 	.sass( 'twenty-fifteen.scss' )
 	.sass( 'twenty-sixteen.scss' )
+	.sass( 'twenty-seventeen.scss' )
 );
 
 /* Language Tasks

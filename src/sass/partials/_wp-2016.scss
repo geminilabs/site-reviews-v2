@@ -89,3 +89,22 @@ $twenty-sixteen-serif: Merriweather, Georgia, serif;
 		font-family: $twenty-sixteen-serif;
 	}
 }
+
+.glsr-loader {
+	bottom: 2.947368421em;
+	font-size: 1.1875rem;
+	margin: 14px 0;
+}
+
+@media screen and (min-width: 44.375em) {
+	.glsr-loader {
+		bottom: 4.421052632em;
+	}
+}
+
+@media screen and (min-width: 61.5625em) {
+	.glsr-loader {
+		bottom: 5.894736842em;
+	}
+}
+
