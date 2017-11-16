@@ -3,9 +3,9 @@ Contributors: geminilabs, pryley
 Donate link: https://www.paypal.me/pryley
 Tags: best reviews, business ratings, business reviews, curated reviews, moderated reviews, rating widget, rating, ratings shortcode, review widget, reviews login, reviews shortcode, reviews, simple reviews, site reviews, star rating, star review, submit review, testimonial, user rating, user review, user reviews, wp rating, wp review, wp testimonials
 Requires at least: 4.0.0
-Tested up to: 4.8.3
+Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.8.3
+Stable tag: 2.8.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,7 +13,7 @@ Site Reviews is a WordPress plugin which allows you to easily receive and displa
 
 == Description ==
 
-ATTENTION: This plugin requires that your server is running a minimum of PHP v5.4 and WordPress 4.0.0. If your server does not meet theses minimum requirements, the plugin will not work.
+*ATTENTION:* This plugin requires that your server is running a minimum of PHP v5.4 and WordPress 4.0.0. If your server does not meet these minimum requirements, the plugin will not work.
 
 Site Reviews is a plugin that allows your visitors to submit site reviews with a 1-5 star rating on your website, similar to the way you would on TripAdvisor or Yelp, and then allows you to display them using a widget or shortcode.
 
@@ -105,6 +105,9 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 14. Add-Ons are being built to extend the functionality on the Site Reviews plugin
 
 == Changelog ==
+
+= 2.8.4 (2017-11-16) =
+- Added "site-reviews/enqueue/localize" filter hook so that the "ajaxpagination" selector array for fixed elements can be modified.
 
 = 2.8.3 (2017-11-15) =
 - Fix a PHP type error when a shortcode contains no arguments

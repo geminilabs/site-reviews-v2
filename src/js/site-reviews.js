@@ -184,10 +184,13 @@ GLSR.recaptcha.search = function( callback )
 
 GLSR.scrollToTop = function( el, offset )
 {
-	offset = offset || 16;
-	var wpadminbar = document.querySelector( '#wpadminbar' );
-	if( wpadminbar && window.getComputedStyle( wpadminbar ).getPropertyValue( 'position' ) === 'fixed' ) {
-		offset = offset + wpadminbar.clientHeight;
+	offset = offset || 16; // 1rem
+	var fixedElement;
+	for( var i = 0; i < site_reviews.ajaxpagination.length; i++ ) {
+		fixedElement = document.querySelector( site_reviews.ajaxpagination[i] );
+		if( fixedElement && window.getComputedStyle( fixedElement ).getPropertyValue( 'position' ) === 'fixed' ) {
+			offset = offset + fixedElement.clientHeight;
+		}
 	}
 	var clientBounds = el.getBoundingClientRect();
 	var offsetTop = clientBounds.top - offset;

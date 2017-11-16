@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.8.4] = 2017-11-16
+
+### Added
+- Added "site-reviews/enqueue/localize" filter hook so that the "ajaxpagination" selector array for fixed elements can be modified.
+
 ## [2.8.3] = 2017-11-15
 
 ### Fixed
