@@ -31,6 +31,7 @@ class EnqueueAssets
 			'action'  => glsr_app()->prefix . '_action',
 			'ajaxurl' => add_query_arg( '_nonce', $ajaxNonce, admin_url( 'admin-ajax.php' )),
 			'ajaxnonce' => $ajaxNonce,
+			'ajaxpagination' => ['#wpadminbar','.site-navigation-fixed'],
 		];
 		if( is_admin() ) {
 			$this->enqueueAdmin( $command );
@@ -44,7 +45,7 @@ class EnqueueAssets
 		else {
 			$this->enqueuePublic( $command );
 		}
-		wp_localize_script( $command->handle, 'site_reviews', $variables );
+		wp_localize_script( $command->handle, 'site_reviews', apply_filters( 'site-reviews/enqueue/localize', $variables ));
 	}
 
 	/**
@@ -101,20 +102,18 @@ class EnqueueAssets
 				$command->version
 			);
 		}
-
 		if( glsr_get_option( 'reviews-form.recaptcha.integration' ) == 'custom' ) {
 			$this->enqueueRecaptchaScript( $command );
 		}
-
-		if( !apply_filters( 'site-reviews/assets/js', true ))return;
-
-		wp_enqueue_script(
-			$command->handle,
-			$command->url . 'js/site-reviews.js',
-			['jquery'],
-			$command->version,
-			true
-		);
+		if( apply_filters( 'site-reviews/assets/js', true )) {
+			wp_enqueue_script(
+				$command->handle,
+				$command->url . 'js/site-reviews.js',
+				['jquery'],
+				$command->version,
+				true
+			);
+		}
 	}
 
 	/**
