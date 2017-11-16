@@ -84,6 +84,6 @@ abstract class Shortcode
 	 */
 	public function helpTabsHook()
 	{
-		add_action( 'in_admin_header', [ $this, 'addHelpTabs'] );
+		add_action( 'in_admin_header', [$this, 'addHelpTabs'] );
 	}
 }

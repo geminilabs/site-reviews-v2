@@ -15,21 +15,22 @@ namespace GeminiLabs\SiteReviews\Traits;
 trait SiteReviews
 {
 	/**
+	 * @param array|string $args
 	 * @return array
 	 */
-	public function normalize( array $args, array $defaults = [] )
+	public function normalize( $args, array $defaults = [] )
 	{
 		$defaults = wp_parse_args( $defaults, [
 			'assigned_to' => '',
-			'category'    => '',
-			'class'       => '',
-			'count'       => 5,
-			'display'     => '',
-			'hide'        => [],
-			'id'          => '',
-			'rating'      => 1,
-			'title'       => '',
-			'type'        => '',
+			'category' => '',
+			'class' => '',
+			'count' => 5,
+			'display' => '',
+			'hide' => [],
+			'id' => '',
+			'rating' => 1,
+			'title' => '',
+			'type' => '',
 		]);
 		$args = shortcode_atts( $defaults, $args );
 		$args = $this->makeCompatible( $args );

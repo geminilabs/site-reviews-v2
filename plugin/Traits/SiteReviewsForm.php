@@ -29,9 +29,10 @@ trait SiteReviewsForm
 	}
 
 	/**
+	 * @param array|string $args
 	 * @return array
 	 */
-	public function normalize( array $args, array $defaults = [] )
+	public function normalize( $args, array $defaults = [] )
 	{
 		$defaults = wp_parse_args( $defaults, [
 			'assign_to' => '',

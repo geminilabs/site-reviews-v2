@@ -55,7 +55,7 @@ msgstr ""
 msgid "Update WordPress"
 msgstr "Update WordPress"
 
-#: plugin/Commands/RegisterPostType.php:22, plugin/Settings.php:466, plugin/Shortcodes/Buttons/SiteReviews.php:55, plugin/Shortcodes/Buttons/SiteReviews.php:144, plugin/Shortcodes/Buttons/SiteReviewsForm.php:43, plugin/Shortcodes/Buttons/SiteReviewsForm.php:90, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:53, plugin/Widgets/SiteReviews.php:38, plugin/Widgets/SiteReviewsForm.php:38
+#: plugin/Commands/RegisterPostType.php:22, plugin/Settings.php:466, plugin/Shortcodes/Buttons/SiteReviews.php:55, plugin/Shortcodes/Buttons/SiteReviews.php:144, plugin/Shortcodes/Buttons/SiteReviewsForm.php:43, plugin/Shortcodes/Buttons/SiteReviewsForm.php:90, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:53, plugin/Widgets/SiteReviews.php:37, plugin/Widgets/SiteReviewsForm.php:38
 msgid "Title"
 msgstr "Title"
 
@@ -377,7 +377,7 @@ msgstr[1] "%s years ago"
 msgid "Edit"
 msgstr "Edit"
 
-#: plugin/Handlers/RegisterPostType.php:321, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:65, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:66, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:67, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:68, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:69, plugin/Widgets/SiteReviews.php:57, plugin/Widgets/SiteReviews.php:58, plugin/Widgets/SiteReviews.php:59, plugin/Widgets/SiteReviews.php:60, plugin/Widgets/SiteReviews.php:61
+#: plugin/Handlers/RegisterPostType.php:321, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:65, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:66, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:67, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:68, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:69, plugin/Widgets/SiteReviews.php:56, plugin/Widgets/SiteReviews.php:57, plugin/Widgets/SiteReviews.php:58, plugin/Widgets/SiteReviews.php:59, plugin/Widgets/SiteReviews.php:60
 msgid "%s star"
 msgid_plural "%s stars"
 msgstr[0] "%s star"
@@ -995,11 +995,11 @@ msgstr "Add custom CSS classes to the shortcode."
 msgid "Hide"
 msgstr "Hide"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:120, plugin/Widgets/SiteReviews.php:109
+#: plugin/Shortcodes/Buttons/SiteReviews.php:120, plugin/Widgets/SiteReviews.php:108
 msgid "Hide the review author?"
 msgstr "Hide the review author?"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:125, plugin/Widgets/SiteReviews.php:110
+#: plugin/Shortcodes/Buttons/SiteReviews.php:125, plugin/Widgets/SiteReviews.php:109
 msgid "Hide the review date?"
 msgstr "Hide the review date?"
 
@@ -1007,11 +1007,11 @@ msgstr "Hide the review date?"
 msgid "Excerpt"
 msgstr "Excerpt"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:130, plugin/Widgets/SiteReviews.php:111
+#: plugin/Shortcodes/Buttons/SiteReviews.php:130, plugin/Widgets/SiteReviews.php:110
 msgid "Hide the review excerpt?"
 msgstr "Hide the review excerpt?"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:135, plugin/Widgets/SiteReviews.php:112
+#: plugin/Shortcodes/Buttons/SiteReviews.php:135, plugin/Widgets/SiteReviews.php:111
 msgid "Hide the review rating?"
 msgstr "Hide the review rating?"
 
@@ -1019,11 +1019,11 @@ msgstr "Hide the review rating?"
 msgid "Response"
 msgstr "Response"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:140, plugin/Widgets/SiteReviews.php:113
+#: plugin/Shortcodes/Buttons/SiteReviews.php:140, plugin/Widgets/SiteReviews.php:112
 msgid "Hide the review response?"
 msgstr "Hide the review response?"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:145, plugin/Widgets/SiteReviews.php:114
+#: plugin/Shortcodes/Buttons/SiteReviews.php:145, plugin/Widgets/SiteReviews.php:113
 msgid "Hide the review title?"
 msgstr "Hide the review title?"
 
@@ -1147,7 +1147,7 @@ msgstr "Terrible"
 msgid "Add New Review"
 msgstr "Add New Review"
 
-#: plugin/Strings.php:25, plugin/Widgets/SiteReviews.php:72
+#: plugin/Strings.php:25, plugin/Widgets/SiteReviews.php:71
 msgid "All Reviews"
 msgstr "All Reviews"
 
@@ -1235,55 +1235,55 @@ msgstr "View review"
 msgid "Local"
 msgstr "Local"
 
-#: plugin/Traits/SiteReviewsForm.php:100
+#: plugin/Traits/SiteReviewsForm.php:101
 msgid "You must be %s to submit a review."
 msgstr "You must be %s to submit a review."
 
-#: plugin/Traits/SiteReviewsForm.php:101
+#: plugin/Traits/SiteReviewsForm.php:102
 msgid "logged in"
 msgstr "logged in"
 
-#: plugin/Traits/SiteReviewsForm.php:104
+#: plugin/Traits/SiteReviewsForm.php:105
 msgid "You may also %s for an account."
 msgstr "You may also %s for an account."
 
-#: plugin/Traits/SiteReviewsForm.php:105
+#: plugin/Traits/SiteReviewsForm.php:106
 msgid "register"
 msgstr "register"
 
-#: plugin/Widgets/SiteReviews.php:45
+#: plugin/Widgets/SiteReviews.php:44
 msgid "How many reviews would you like to display? "
 msgstr "How many reviews would you like to display? "
 
-#: plugin/Widgets/SiteReviews.php:54
+#: plugin/Widgets/SiteReviews.php:53
 msgid "What is the minimum rating to display? "
 msgstr "What is the minimum rating to display? "
 
-#: plugin/Widgets/SiteReviews.php:69
+#: plugin/Widgets/SiteReviews.php:68
 msgid "Which reviews would you like to display? "
 msgstr "Which reviews would you like to display? "
 
-#: plugin/Widgets/SiteReviews.php:80
+#: plugin/Widgets/SiteReviews.php:79
 msgid "Limit reviews to this category"
 msgstr "Limit reviews to this category"
 
-#: plugin/Widgets/SiteReviews.php:83
+#: plugin/Widgets/SiteReviews.php:82
 msgid "All Categories"
 msgstr "All Categories"
 
-#: plugin/Widgets/SiteReviews.php:90
+#: plugin/Widgets/SiteReviews.php:89
 msgid "Limit reviews to those assigned to this page/post ID"
 msgstr "Limit reviews to those assigned to this page/post ID"
 
-#: plugin/Widgets/SiteReviews.php:93
+#: plugin/Widgets/SiteReviews.php:92
 msgid "Separate multiple ID's with a comma"
 msgstr "Separate multiple ID's with a comma"
 
-#: plugin/Widgets/SiteReviews.php:94
+#: plugin/Widgets/SiteReviews.php:93
 msgid "You may also enter %s to limit assigned reviews to the current page."
 msgstr "You may also enter %s to limit assigned reviews to the current page."
 
-#: plugin/Widgets/SiteReviews.php:100, plugin/Widgets/SiteReviewsForm.php:71
+#: plugin/Widgets/SiteReviews.php:99, plugin/Widgets/SiteReviewsForm.php:71
 msgid "Enter any custom CSS classes here"
 msgstr "Enter any custom CSS classes here"
 

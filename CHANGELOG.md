@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.8.3] = 2017-11-15
+
+### Fixed
+- Fix a PHP type error when a shortcode contains no arguments
+
 ## [2.8.2] = 2017-11-15
 
 ### Added

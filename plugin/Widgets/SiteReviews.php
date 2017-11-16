@@ -23,7 +23,6 @@ class SiteReviews extends Widget
 	 * Display the widget form
 	 *
 	 * @param array $instance
-	 *
 	 * @return void
 	 */
 	public function form( $instance )
@@ -121,7 +120,6 @@ class SiteReviews extends Widget
 	 *
 	 * @param array $new_instance
 	 * @param array $old_instance
-	 *
 	 * @return array
 	 */
 	public function update( $new_instance, $old_instance )
@@ -143,7 +141,6 @@ class SiteReviews extends Widget
 	 *
 	 * @param array $args
 	 * @param array $instance
-	 *
 	 * @return void
 	 */
 	public function widget( $args, $instance )
