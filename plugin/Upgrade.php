@@ -77,34 +77,6 @@ class Upgrade
 	}
 
 	/**
-	 * Migrate plugin options
-	 *
-	 * @return void
-	 */
-	public function options_230()
-	{
-		$dateEnabled = $this->db->getOption( 'reviews.date.enabled', false, true );
-		if( $dateEnabled === false )return;
-		$dateCustom = $this->db->getOption( 'reviews.date.format', '', true );
-		$dateFormat = $dateEnabled == 'no'
-			? 'default'
-			: 'custom';
-		$this->db->setOption( 'reviews.date.custom', $dateCustom, true );
-		$this->db->setOption( 'reviews.date.format', $dateFormat, true );
-		$this->db->deleteOption( 'reviews.date.enabled', true );
-	}
-
-	/**
-	 * Migrate plugin options
-	 *
-	 * @return void
-	 */
-	public function options_260()
-	{
-		$this->db->setOption( 'reviews-form.required', ['title','content','name','email'], true );
-	}
-
-	/**
 	 * @return void
 	 */
 	public function reviewSlug_200()
@@ -158,46 +130,6 @@ class Upgrade
 			$themeMod['sidebars_widgets']['data'] = $this->replaceWidgetNames_200( $themeMod['sidebars_widgets']['data'] );
 			update_option( $theme, $themeMod );
 		}
-	}
-
-	/**
-	 * @return void
-	 */
-	public function translations_230()
-	{
-		$options = $this->db->getOptions();
-		if( !isset( $options['settings']['reviews-form'] ))return;
-		$defaults = array_fill_keys( ['rating', 'title', 'content', 'name', 'email', 'terms', 'submit'], [] );
-		$reviewsForm = shortcode_atts( $defaults, $options['settings']['reviews-form'] );
-		foreach( $reviewsForm as &$option ) {
-			$option = wp_parse_args( $option, ['label' => '', 'placeholder' => ''] );
-		}
-		$strings = [];
-		$migrate = array_filter([
-			'Your overall rating' => $reviewsForm['rating']['label'],
-			'Title of your review' => $reviewsForm['title']['label'],
-			'Your review' => $reviewsForm['content']['label'],
-			'Your name' => $reviewsForm['name']['label'],
-			'Your email' => $reviewsForm['email']['label'],
-			'This review is based on my own experience and is my genuine opinion.' => $reviewsForm['terms']['label'],
-			'Submit your review' => $reviewsForm['submit']['label'],
-			'Summarize your review or highlight an interesting detail' => $reviewsForm['title']['placeholder'],
-			'Tell people your review' => $reviewsForm['content']['placeholder'],
-			'Tell us your name' => $reviewsForm['name']['placeholder'],
-			'Tell us your email' => $reviewsForm['email']['placeholder'],
-		]);
-		foreach( $migrate as $id => $translation ) {
-			$strings[] = [
-				'id' => $id,
-				's1' => $id,
-				's2' => $translation,
-			];
-		}
-		foreach( $defaults as $key => $value ) {
-			unset( $options['settings']['reviews-form'][$key] );
-		}
-		$options['settings']['strings'] = $strings;
-		$this->db->setOptions( $options['settings'], true );
 	}
 
 	/**
@@ -298,6 +230,74 @@ class Upgrade
 		"AND p.post_type = 'site-review'";
 
 		$wpdb->query( $query );
+	}
+
+	/**
+	 * Migrate plugin options
+	 *
+	 * @return void
+	 */
+	public function options_230()
+	{
+		$dateEnabled = $this->db->getOption( 'reviews.date.enabled', false, true );
+		if( $dateEnabled === false )return;
+		$dateCustom = $this->db->getOption( 'reviews.date.format', '', true );
+		$dateFormat = $dateEnabled == 'no'
+			? 'default'
+			: 'custom';
+		$this->db->setOption( 'reviews.date.custom', $dateCustom, true );
+		$this->db->setOption( 'reviews.date.format', $dateFormat, true );
+		$this->db->deleteOption( 'reviews.date.enabled', true );
+	}
+
+	/**
+	 * @return void
+	 */
+	public function translations_230()
+	{
+		$options = $this->db->getOptions();
+		if( !isset( $options['settings']['reviews-form'] ))return;
+		$defaults = array_fill_keys( ['rating', 'title', 'content', 'name', 'email', 'terms', 'submit'], [] );
+		$reviewsForm = shortcode_atts( $defaults, $options['settings']['reviews-form'] );
+		foreach( $reviewsForm as &$option ) {
+			$option = wp_parse_args( $option, ['label' => '', 'placeholder' => ''] );
+		}
+		$strings = [];
+		$migrate = array_filter([
+			'Your overall rating' => $reviewsForm['rating']['label'],
+			'Title of your review' => $reviewsForm['title']['label'],
+			'Your review' => $reviewsForm['content']['label'],
+			'Your name' => $reviewsForm['name']['label'],
+			'Your email' => $reviewsForm['email']['label'],
+			'This review is based on my own experience and is my genuine opinion.' => $reviewsForm['terms']['label'],
+			'Submit your review' => $reviewsForm['submit']['label'],
+			'Summarize your review or highlight an interesting detail' => $reviewsForm['title']['placeholder'],
+			'Tell people your review' => $reviewsForm['content']['placeholder'],
+			'Tell us your name' => $reviewsForm['name']['placeholder'],
+			'Tell us your email' => $reviewsForm['email']['placeholder'],
+		]);
+		foreach( $migrate as $id => $translation ) {
+			$strings[] = [
+				'id' => $id,
+				's1' => $id,
+				's2' => $translation,
+			];
+		}
+		foreach( $defaults as $key => $value ) {
+			unset( $options['settings']['reviews-form'][$key] );
+		}
+		$options['settings']['strings'] = $strings;
+		$this->db->setOptions( $options['settings'], true );
+	}
+
+	/**
+	 * Migrate plugin options
+	 *
+	 * @return void
+	 */
+	public function options_260()
+	{
+		$this->db->setOption( 'reviews-form.required', ['title','content','name','email'], true );
 	}
 
 	/**
