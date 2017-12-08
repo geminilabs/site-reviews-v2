@@ -60,6 +60,16 @@ class Helper
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function compareArrays( array $arr1, array $arr2 )
+	{
+		sort( $arr1 );
+		sort( $arr2 );
+		return $arr1 == $arr2;
+	}
+
+	/**
 	 * @param string $name
 	 *
 	 * @return mixed

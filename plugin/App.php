@@ -99,6 +99,8 @@ final class App extends Container
 		add_action( 'admin_action_approve',                  [ $review, 'approve'] );
 		add_action( 'admin_print_scripts',                   [ $review, 'modifyAutosave'], 999 );
 		add_action( 'current_screen',                        [ $review, 'modifyFeatures'] );
+		add_action( 'save_post_' . static::POST_TYPE,        [ $review, 'onSaveReview'], 20, 2 );
+		add_action( 'before_delete_post',                    [ $review, 'onDeleteReview'] );
 		add_action( 'admin_menu',                            [ $review, 'removeMetaBoxes'] );
 		add_action( 'bulk_edit_custom_box',                  [ $review, 'renderBulkEditFields'], 10, 2 );
 		add_action( 'admin_action_revert',                   [ $review, 'revert'] );
@@ -262,6 +264,9 @@ final class App extends Container
 		}
 		if( version_compare( $version, '2.6.0', '<' )) {
 			$upgrade->options_260();
+		}
+		if( version_compare( $version, '2.9.0', '<' )) {
+			$upgrade->reviewAssignedTo_290();
 		}
 
 		$this->updateVersion( $version );

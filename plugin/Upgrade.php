@@ -301,6 +301,42 @@ class Upgrade
 	}
 
 	/**
+	 * Add review IDs and ranking to posts with assigned reviews
+	 *
+	 * @return void
+	 */
+	public function reviewAssignedTo_290()
+	{
+		global $wpdb;
+		$assignedPostIds = [];
+		$reviews = (array) $wpdb->get_results(
+			"SELECT p.ID, m.meta_value AS post " .
+			"FROM {$wpdb->posts} AS p " .
+			"INNER JOIN {$wpdb->postmeta} AS m ON p.ID = m.post_id " .
+			"WHERE p.post_type = 'site-review' " .
+			"AND p.post_status = 'publish' " .
+			"AND m.meta_key = 'assigned_to' " .
+			"AND m.meta_value > '0' " .
+			"GROUP BY p.ID"
+		);
+		foreach( $reviews as $review ) {
+			$assignedPostIds[$review->post][] = $review->ID;
+		}
+		foreach( $assignedPostIds as $postId => $reviewIds ) {
+			if( !get_post( $postId ))continue;
+			$existingReviewIds = get_post_meta( $postId, '_glsr_review_id' );
+			array_walk( $reviewIds, function( $id ) use( $postId, $existingReviewIds ) {
+				if( !in_array( $id, $existingReviewIds )) {
+					add_post_meta( $postId, '_glsr_review_id', $id );
+				}
+			});
+			update_post_meta( $postId, '_glsr_ranking',
+				$this->app->make( 'Controllers\ReviewController' )->recalculatePostRanking( $reviewIds )
+			);
+		}
+	}
+
+	/**
 	 * @param string $search
 	 * @param string $replace
 	 *

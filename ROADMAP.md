@@ -19,6 +19,7 @@ All proposed features are subject to change and sorted alphabetically rather tha
 - [ ] Multiple star-ratings in a review (for rating individual services of a business)
 - [ ] Protect review metadata from Custom Fields @v3
 - [ ] Review statistics
+- [x] Store the bayesian ranking to posts/pages with assigned reviews (can be used for query sorting)
 - [ ] Store the review GEO location by IP
 - [ ] Throttle anonymous review submissions
 - [ ] Up/Down ratings

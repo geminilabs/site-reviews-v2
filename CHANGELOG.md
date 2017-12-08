@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 - [feature] Assign a post ID to multiple reviews in bulk
+- [feature] Bayesian ranking values are stored in posts that have assigned reviews (can be used for query sorting)
 
 ### Fixed
 - Fix CSS for themes that do not implement the `.screen-reader-text` class

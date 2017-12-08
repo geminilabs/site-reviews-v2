@@ -210,6 +210,28 @@ class ReviewController extends BaseController
 	}
 
 	/**
+	 * @param int $post_id
+	 * @return void
+	 */
+	public function onDeleteReview( $post_id )
+	{
+		$review = get_post( $post_id );
+		if( !$review || $review->post_type !== App::POST_TYPE )return;
+		$review->post_status = 'deleted'; // important to change the post_status here first!
+		$this->updateAssignedToPost( $review );
+	}
+
+	/**
+	 * @param int $post_id
+	 * @param WP_Post $review
+	 * @return void
+	 */
+	public function onSaveReview( $post_id, $review )
+	{
+		$this->updateAssignedToPost( $review );
+	}
+
+	/**
 	 * Submit the review form
 	 *
 	 * @return mixed
@@ -254,6 +276,21 @@ class ReviewController extends BaseController
 		}
 
 		return $this->execute( new SubmitReview( $validatedRequest ));
+	}
+
+	/**
+	 * @return int|float
+	 */
+	public function recalculatePostRanking( array $reviewIds )
+	{
+		$reviews = $this->db->getReviews([
+			'count' => -1,
+			'post__in' => $reviewIds,
+		]);
+		return apply_filters( 'site-reviews/bayesian/ranking',
+			$this->app->make( 'Rating' )->getRankingImdb( $reviews->reviews ),
+			$reviews->reviews
+		);
 	}
 
 	/**
@@ -422,6 +459,20 @@ class ReviewController extends BaseController
 	}
 
 	/**
+	 * @param int $post_id
+	 * @return WP_Post|false
+	 */
+	protected function getAssignedToPost( $post_id )
+	{
+		if( $assignedTo = get_post_meta( $post_id, 'assigned_to', true )) {
+			$assignedToPost = get_post( $assignedTo );
+		}
+		return !empty( $assignedToPost )
+			? $assignedToPost
+			: false;
+	}
+
+	/**
 	 * @return int
 	 */
 	protected function getPostId()
@@ -473,6 +524,37 @@ class ReviewController extends BaseController
 
 		wp_safe_redirect( $redirect );
 		exit;
+	}
+
+	/**
+	 * @return void
+	 */
+	protected function updateAssignedToPost( WP_Post $review )
+	{
+		if( !( $post = $this->getAssignedToPost( $review->ID )))return;
+		$reviewIds = get_post_meta( $post->ID, '_glsr_review_id' );
+		$this->updateReviewIdOfPost( $post, $review, $reviewIds );
+		$updatedReviewIds = array_filter( get_post_meta( $post->ID, '_glsr_review_id' ));
+		if( empty( $updatedReviewIds )) {
+			delete_post_meta( $post->ID, '_glsr_ranking' );
+			delete_post_meta( $post->ID, '_glsr_review_id' );
+		}
+		else if( !$this->app->make( 'Helper' )->compareArrays( $reviewIds, $updatedReviewIds )) {
+			update_post_meta( $post->ID, '_glsr_ranking', $this->recalculatePostRanking( $updatedReviewIds ));
+		}
+	}
+
+	/**
+	 * @return void
+	 */
+	protected function updateReviewIdOfPost( WP_Post $post, WP_Post $review, array $reviewIds )
+	{
+		if( $review->post_status != 'publish' ) {
+			delete_post_meta( $post->ID, '_glsr_review_id', $review->ID );
+		}
+		else if( !in_array( $review->ID, $reviewIds )) {
+			add_post_meta( $post->ID, '_glsr_review_id', $review->ID );
+		}
 	}
 
 	/**
