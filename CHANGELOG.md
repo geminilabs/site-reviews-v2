@@ -18,6 +18,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.9.0] = 2017-12-08
+
+### Added
+- [feature] Assign a post ID to multiple reviews in bulk
 ## [2.8.4] = 2017-11-16
 
 ### Added

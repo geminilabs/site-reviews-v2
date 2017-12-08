@@ -100,7 +100,9 @@ final class App extends Container
 		add_action( 'admin_print_scripts',                   [ $review, 'modifyAutosave'], 999 );
 		add_action( 'current_screen',                        [ $review, 'modifyFeatures'] );
 		add_action( 'admin_menu',                            [ $review, 'removeMetaBoxes'] );
+		add_action( 'bulk_edit_custom_box',                  [ $review, 'renderBulkEditFields'], 10, 2 );
 		add_action( 'admin_action_revert',                   [ $review, 'revert'] );
+		add_action( 'save_post_' . static::POST_TYPE,        [ $review, 'saveBulkEditFields'] );
 		add_action( 'save_post_' . static::POST_TYPE,        [ $review, 'saveEditedReview'] );
 		add_action( 'admin_init',                            [ $review, 'setPermissions'], 999 );
 		add_action( 'admin_action_unapprove',                [ $review, 'unapprove'] );

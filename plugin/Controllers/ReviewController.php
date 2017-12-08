@@ -267,6 +267,19 @@ class ReviewController extends BaseController
 	}
 
 	/**
+	 * @param string $columnName
+	 * @param string $postType
+	 * @return void
+	 * @action bulk_edit_custom_box
+	 */
+	public function renderBulkEditFields( $columnName, $postType )
+	{
+		if( $columnName == 'assigned_to' && $postType == App::POST_TYPE ) {
+			$this->render( 'edit/bulk-edit-assigned-to' );
+		};
+	}
+
+	/**
 	 * @return void
 	 */
 	public function revert()
@@ -288,7 +301,24 @@ class ReviewController extends BaseController
 		if( !wp_verify_nonce( filter_input( INPUT_POST, '_nonce-assigned-to' ), 'assigned_to' ))return;
 		$assignedTo = filter_input( INPUT_POST, 'assigned_to' );
 		$assignedTo || $assignedTo = '';
+		if( get_post_meta( $post_id, 'assigned_to', true ) != $assignedTo ) {
+			$this->onDeleteReview( $post_id );
+		}
 		update_post_meta( $post_id, 'assigned_to', $assignedTo );
+	}
+
+	/**
+	 * @param int $post_id
+	 * @return void
+	 * @action save_post_{static::POST_TYPE}
+	 */
+	public function saveBulkEditFields( $post_id )
+	{
+		$assignedTo = filter_input( INPUT_GET, 'assigned_to' );
+		if( !current_user_can( 'edit_posts' ))return;
+		if( $assignedTo && get_post( $assignedTo )) {
+			update_post_meta( $post_id, 'assigned_to', $assignedTo );
+		}
 	}
 
 	/**
