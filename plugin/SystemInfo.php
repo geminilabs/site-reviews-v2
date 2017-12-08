@@ -237,17 +237,21 @@ class SystemInfo
 	public function getWebserver( $title = 'Server configuration' )
 	{
 		if( !$this->title( $title ))return;
-
 		global $wpdb;
-
-		$server_ip = filter_input( INPUT_SERVER, 'SERVER_ADDR' );
-
-		$this->sysinfo[ $title ]['Host Name'] = sprintf( '%s (%s)', $this->webhost(), gethostbyaddr( $server_ip ));
+		$server_addr = filter_input( INPUT_SERVER, 'SERVER_ADDR' );
+		if( strstr( $server_addr, ',' )) {
+			$ipaddresses = explode( ',', $server_addr);
+			$ipaddresses = array_map( 'trim', $ipaddresses );
+			$server_addr = array_shift( $ipaddresses );
+		}
+		$webhost = !empty( $server_addr )
+			? gethostbyaddr( $server_addr )
+			: '';
+		$this->sysinfo[ $title ]['Host Name'] = sprintf( '%s (%s)', $this->webhost(), $webhost );
 		$this->sysinfo[ $title ]['MySQL Version'] = $wpdb->db_version();
 		$this->sysinfo[ $title ]['PHP Version'] = PHP_VERSION;
 		$this->sysinfo[ $title ]['Server Info'] = filter_input( INPUT_SERVER, 'SERVER_SOFTWARE' );
-		$this->sysinfo[ $title ]['Server IP Address'] = $server_ip;
-
+		$this->sysinfo[ $title ]['Server IP Address'] = filter_input( INPUT_SERVER, 'SERVER_ADDR' );
 		return $this->implode( $title );
 	}
 

@@ -108,6 +108,8 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 
 = 2.9.0 (2017-12-08) =
 - [feature] Assign a post ID to multiple reviews in bulk
+- Fix system info PHP error when detecting server IP address
+
 = 2.8.4 (2017-11-16) =
 - Added "site-reviews/enqueue/localize" filter hook so that the "ajaxpagination" selector array for fixed elements can be modified.
 

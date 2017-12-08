@@ -22,6 +22,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 - [feature] Assign a post ID to multiple reviews in bulk
+
+### Fixed
+- Fix system info PHP error when detecting server IP address
+
 ## [2.8.4] = 2017-11-16
 
 ### Added
