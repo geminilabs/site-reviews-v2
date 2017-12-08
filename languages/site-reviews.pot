@@ -71,7 +71,7 @@ msgid_plural "%s Reviews"
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Controllers/MainController.php:175, plugin/Controllers/MainController.php:223
+#: plugin/Controllers/MainController.php:175, plugin/Controllers/MainController.php:223, views/edit/bulk-edit-assigned-to.php:7
 msgid "Assigned To"
 msgstr ""
 
@@ -285,23 +285,23 @@ msgid_plural "%s reviews restored from the Trash."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Controllers/ReviewController.php:224
+#: plugin/Controllers/ReviewController.php:246
 msgid "Please fix the submission errors."
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:230, plugin/Controllers/ReviewController.php:239
+#: plugin/Controllers/ReviewController.php:252, plugin/Controllers/ReviewController.php:261
 msgid "The review submission failed. Please notify the site administrator."
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:253
+#: plugin/Controllers/ReviewController.php:275
 msgid "The reCAPTCHA verification failed. Please notify the site administrator."
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:535
+#: plugin/Controllers/ReviewController.php:647
 msgid "Anonymous"
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:546, plugin/Html/Partials/Reviews.php:222
+#: plugin/Controllers/ReviewController.php:658, plugin/Html/Partials/Reviews.php:222
 msgid "No Title"
 msgstr ""
 
