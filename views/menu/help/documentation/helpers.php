@@ -50,15 +50,16 @@
 	<p>The <code>$args</code> variable is optional, but if included it must be an array.</p>
 	<p><strong>Default Usage:</strong></p>
 	<pre><code>glsr_get_reviews([
-	"category"     => '',
-	"count"        => 10,
-	"order"        => "DESC",
-	"orderby"      => "date",
-	"pagination"   => false,
-	"post__in"     => [],
-	"post__not_in" => [],
-	"rating"       => 1,
-	"type"         => '',
+	'assigned_to'  => '',
+	'category'     => '',
+	'count'        => 10,
+	'order'        => 'DESC',
+	'orderby'      => 'date',
+	'pagination'   => false,
+	'post__in'     => [],
+	'post__not_in' => [],
+	'rating'       => 1,
+	'type'         => '',
 ]);</code></pre>
 	<p><strong>Example:</strong></p>
 	<pre><code>$reviews = glsr_get_reviews([
