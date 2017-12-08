@@ -50,6 +50,34 @@ GLSR.clearFormMessages = function()
 	}
 };
 
+GLSR.createExceprts = function()
+{
+	var excerpts = document.querySelectorAll( '.glsr-hidden-text' );
+	for( var i = 0; i < excerpts.length; i++ ) {
+		var readmore = GLSR.insertAfter( excerpts[i], 'span', {
+			'class': 'glsr-read-more',
+		});
+		var readmoreLink = GLSR.appendTo( readmore, 'a', {
+			'href': '#',
+			'data-text': excerpts[i].getAttribute( 'data-show-less' ),
+		});
+		readmoreLink.innerHTML = excerpts[i].getAttribute( 'data-show-more' );
+	}
+	GLSR.on( 'click', '.glsr-read-more a', GLSR.onClickReadMore );
+};
+
+GLSR.createStarRatings = function()
+{
+	var ratings = document.querySelectorAll( 'select.glsr-star-rating' );
+	for( var i = 0; i < ratings.length; i++ ) {
+		new StarRating( ratings[i], {
+			clearable: false,
+			showText : false,
+			onClick  : GLSR.clearFieldError,
+		});
+	}
+};
+
 GLSR.enableSubmitButton = function()
 {
 	GLSR.activeForm.querySelector( '[type="submit"]' ).removeAttribute( 'disabled' );
@@ -84,6 +112,7 @@ GLSR.onClickPagination = function( ev )
 			GLSR.removeClass( parentEl, 'glsr-hide' );
 			GLSR.on( 'click', '.glsr-ajax-navigation a', GLSR.onClickPagination );
 			window.history.pushState( null, '', ev.target.href );
+			GLSR.createExceprts();
 			return;
 		}
 		window.location = ev.target.href;
@@ -327,28 +356,6 @@ GLSR.on( 'click', '.glsr-ajax-navigation a', GLSR.onClickPagination );
 
 GLSR.ready( function()
 {
-	var i, ratings, excerpts;
-
-	ratings = document.querySelectorAll( 'select.glsr-star-rating' );
-	for( i = 0; i < ratings.length; i++ ) {
-		new StarRating( ratings[i], {
-			clearable: false,
-			showText : false,
-			onClick  : GLSR.clearFieldError,
-		});
-	}
-
-	excerpts = document.querySelectorAll( '.glsr-hidden-text' );
-	for( i = 0; i < excerpts.length; i++ ) {
-		var readmore = GLSR.insertAfter( excerpts[i], 'span', {
-			'class': 'glsr-read-more',
-		});
-		var readmoreLink = GLSR.appendTo( readmore, 'a', {
-			'href': '#',
-			'data-text': excerpts[i].getAttribute( 'data-show-less' ),
-		});
-		readmoreLink.innerHTML = excerpts[i].getAttribute( 'data-show-more' );
-	}
-
-	GLSR.on( 'click', '.glsr-read-more a', GLSR.onClickReadMore );
+	GLSR.createExceprts();
+	GLSR.createStarRatings();
 });
