@@ -18,6 +18,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.9.2] = 2017-12-13
+
+### Fixed
+- Fix escaped unicode characters in JSON-LD
+- Fix PHP 7.2 compatibility
+- Fix white-space for `<br>` in reviews
+
 ## [2.9.1] = 2017-12-08
 
 ### Fixed
