@@ -73,7 +73,7 @@ coding_style:
                 true_false_null: lower
 build:
     environment:
-        php: '7.1.0'
+        php: '7.2.0'
         node: '8.6.0'
     project_setup:
         before:
