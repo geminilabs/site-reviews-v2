@@ -135,7 +135,8 @@ class Schema
 	{
 		if( is_null( $this->app->schemas ))return;
 		return sprintf( '<script type="application/ld+json">%s</script>', json_encode(
-			apply_filters( 'site-reviews/schema/all', $this->app->schemas )
+			apply_filters( 'site-reviews/schema/all', $this->app->schemas ),
+			JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
 		));
 	}
 
