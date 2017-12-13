@@ -24,7 +24,6 @@ class Select extends Base
 		$defaults = wp_parse_args( $defaults, [
 			'type' => 'select',
 		]);
-
 		return sprintf( '<select %s>%s</select>%s',
 			$this->implodeAttributes( $defaults ),
 			$this->implodeOptions( 'select_option' ),

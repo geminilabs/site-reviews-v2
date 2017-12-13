@@ -19,7 +19,7 @@ class Colorpicker extends Text
 	/**
 	 * @return string
 	 */
-	public function render()
+	public function render( array $defaults = [] )
 	{
 		$value = $this->args['value'];
 
@@ -34,7 +34,7 @@ class Colorpicker extends Text
 			$this->args['value'] = '';
 		}
 
-		return parent::render([
+		return parent::render( wp_parse_args( $defaults, [
 			'class'       => 'color-picker-hex',
 			'maxlength'   => 7,
 			'placeholder' => __( 'Hex Value', 'site-reviews' ),
@@ -53,6 +53,6 @@ class Colorpicker extends Text
 					],
 				]),
 			],
-		]);
+		]));
 	}
 }

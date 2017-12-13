@@ -20,10 +20,12 @@ class Radio extends Base
 	/**
 	 * @return string
 	 */
-	public function render( $default = null )
+	public function render( array $defaults = [] )
 	{
+		$default = isset( $defaults['default'] )
+			? $defaults['default']
+			: null;
 		$inline = $this->args['inline'] ? ' class="inline"' : '';
-
 		return sprintf( '<ul%s>%s</ul>%s',
 			$inline,
 			$this->implodeOptions( 'multi_input', $default ),

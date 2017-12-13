@@ -17,15 +17,14 @@ class Yesno extends Radio
 	/**
 	 * @return string
 	 */
-	public function render()
+	public function render( array $defaults = [] )
 	{
-		$defaultValue = 'no';
-
 		$this->args['options'] = [
 			'no'  => __( 'No', 'site-reviews' ),
 			'yes' => __( 'Yes', 'site-reviews' ),
 		];
-
-		return parent::render( $defaultValue );
+		return parent::render( wp_parse_args( $defaults, [
+			'default' => 'no',
+		]));
 	}
 }

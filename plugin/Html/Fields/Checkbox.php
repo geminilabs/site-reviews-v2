@@ -28,7 +28,7 @@ class Checkbox extends Base
 	/**
 	 * @return string
 	 */
-	public function render()
+	public function render( array $defaults = [] )
 	{
 		$inline = $this->args['inline'] ? ' class="inline"' : '';
 

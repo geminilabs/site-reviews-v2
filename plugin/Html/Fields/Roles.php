@@ -17,10 +17,10 @@ class Roles extends Select
 	/**
 	 * @return string
 	 */
-	public function render()
+	public function render( array $defaults = [] )
 	{
-		return parent::render([
+		return parent::render( wp_parse_args( $defaults, [
 			'options' => wp_roles()->get_names(),
-		]);
+		]));
 	}
 }

@@ -19,9 +19,6 @@ class Hidden extends Text
 	 */
 	public function render( array $defaults = [] )
 	{
-		$defaults = wp_parse_args( $defaults, [
-			'class' => '',
-		]);
 		if( isset( $this->args['label'] )) {
 			unset( $this->args['label'] );
 		}
@@ -31,6 +28,8 @@ class Hidden extends Text
 		if( isset( $this->args['id'] )) {
 			unset( $this->args['id'] );
 		}
-		return parent::render( $defaults );
+		return parent::render( wp_parse_args( $defaults, [
+			'class' => '',
+		]));
 	}
 }

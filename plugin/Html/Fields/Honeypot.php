@@ -17,7 +17,7 @@ class Honeypot extends Hidden
 	/**
 	 * @return string
 	 */
-	public function render()
+	public function render( array $defaults = [] )
 	{
 		$this->args['type'] = 'text';
 		$this->args['name'] = 'gotcha';
@@ -26,8 +26,8 @@ class Honeypot extends Hidden
 		$this->args['attributes']['tabindex'] = '-1';
 		$this->args['attributes']['autocomplete'] = 'off';
 
-		return parent::render([
+		return parent::render( wp_parse_args( $defaults, [
 			'class' => 'glsr-input',
-		]);
+		]));
 	}
 }

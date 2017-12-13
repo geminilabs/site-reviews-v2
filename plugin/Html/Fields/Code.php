@@ -17,10 +17,10 @@ class Code extends Textarea
 	/**
 	 * @return string
 	 */
-	public function render()
+	public function render( array $defaults = [] )
 	{
-		return parent::render([
+		return parent::render( wp_parse_args( $defaults, [
 			'class' => 'large-text code',
-		]);
+		]));
 	}
 }

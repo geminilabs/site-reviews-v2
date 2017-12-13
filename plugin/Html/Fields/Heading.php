@@ -19,7 +19,7 @@ class Heading extends Base
 	/**
 	 * @return string
 	 */
-	public function render()
+	public function render( array $defaults = [] )
 	{
 		isset( $this->args['desc'] ) ?: $this->args['desc'] = '';
 

@@ -109,7 +109,7 @@ abstract class Base
 	 *
 	 * @return string
 	 */
-	abstract public function render();
+	abstract public function render( array $defaults = [] );
 
 	/**
 	 * Convert a value to camel case.

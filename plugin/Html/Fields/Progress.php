@@ -31,7 +31,7 @@ class Progress extends Base
 	/**
 	 * @return string
 	 */
-	public function render()
+	public function render( array $defaults = [] )
 	{
 		$defaults = [
 			'data-active-text'   => __( 'Please wait...', 'site-reviews' ),

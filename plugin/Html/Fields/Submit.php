@@ -17,13 +17,13 @@ class Submit extends Text
 	/**
 	 * @return string
 	 */
-	public function render()
+	public function render( array $defaults = [] )
 	{
 		unset( $this->args['name'] );
-		return parent::render([
-			'class'  => 'button button-primary',
-			'type'   => 'submit',
-		]) . $this->recaptcha();
+		return parent::render( wp_parse_args( $defaults, [
+			'class' => 'button button-primary',
+			'type' => 'submit',
+		])) . $this->recaptcha();
 	}
 
 	/**
