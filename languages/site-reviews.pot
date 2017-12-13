@@ -417,11 +417,11 @@ msgstr ""
 msgid "Inactive"
 msgstr ""
 
-#: plugin/Html/Fields/Yesno.php:25, views/edit/pinned.php:13
+#: plugin/Html/Fields/Yesno.php:23, views/edit/pinned.php:13
 msgid "No"
 msgstr ""
 
-#: plugin/Html/Fields/Yesno.php:26, views/edit/pinned.php:14
+#: plugin/Html/Fields/Yesno.php:24, views/edit/pinned.php:14
 msgid "Yes"
 msgstr ""
 
