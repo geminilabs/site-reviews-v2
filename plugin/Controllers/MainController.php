@@ -680,7 +680,7 @@ class MainController extends BaseController
 
 		$options = array_replace_recursive( $this->db->getOptions(), $input );
 
-		if( isset( $options['settings']['reviews-form'] )) {
+		if( isset( $input['settings']['reviews-form'] )) {
 			$reviewsForm = &$options['settings']['reviews-form'];
 			$reviewsForm['required'] = isset( $input['settings']['reviews-form']['required'] )
 				? $input['settings']['reviews-form']['required']

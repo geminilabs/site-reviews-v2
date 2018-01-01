@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.9.3] = 2018-01-01
+
+### Fixed
+- Fix required fields setting
+
 ## [2.9.2] = 2017-12-13
 
 ### Fixed
