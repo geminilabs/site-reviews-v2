@@ -64,7 +64,10 @@ class SubmitReview
 
 		$this->sendNotification( $post_id, $command );
 
-		$message = __( 'Your review has been submitted!', 'site-reviews' );
+		$message = apply_filters( 'site-reviews/local/review/submitted/message',
+			__( 'Your review has been submitted!', 'site-reviews' ),
+			$command
+		);
 
 		do_action( 'site-reviews/local/review/submitted', $message, $command );
 
