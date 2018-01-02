@@ -37,6 +37,7 @@ class SubmitReview
 		$this->ipAddress   = glsr_resolve( 'Helper' )->getIpAddress();
 		$this->rating      = intval( $input['rating'] );
 		$this->referrer    = $input['_wp_http_referer'];
+		$this->request     = $input;
 		$this->terms       = isset( $input['terms'] ) ? true : false;
 		$this->title       = $input['title'];
 	}
