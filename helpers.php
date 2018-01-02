@@ -11,6 +11,7 @@
 defined( 'WPINC' ) || die;
 
 use GeminiLabs\SiteReviews\App;
+use GeminiLabs\SiteReviews\Log\LogLevel;
 
 /**
  * Global helper to return $app
@@ -28,6 +29,19 @@ function glsr_app() {
  */
 function glsr_debug() {
 	call_user_func_array([ App::load()->make( 'Log\Logger' ), 'display'], func_get_args());
+}
+
+/**
+ * Global helper to log variables
+ *
+ * @return void
+ */
+function glsr_log( $message, $level = 'debug' ) {
+	$levels = array_values((new ReflectionClass( LogLevel::class ))->getConstants());
+	if( !in_array( $level, $levels )) {
+		$level = LogLevel::DEBUG;
+	}
+	App::load()->make( 'Log\Logger' )->log( $level, $message );
 }
 
 /**
