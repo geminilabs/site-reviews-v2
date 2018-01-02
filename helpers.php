@@ -37,7 +37,7 @@ function glsr_debug() {
  * @return void
  */
 function glsr_log( $message, $level = 'debug' ) {
-	$levels = array_values((new ReflectionClass( LogLevel::class ))->getConstants());
+	$levels = array_values((new ReflectionClass( 'GeminiLabs\SiteReviews\Log\LogLevel' ))->getConstants());
 	if( !in_array( $level, $levels )) {
 		$level = LogLevel::DEBUG;
 	}
