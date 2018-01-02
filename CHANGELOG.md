@@ -18,6 +18,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.9.4] = 2018-01-02
+
+### Added
+- Added "site-reviews/local/review/submitted/message" filter hook to modify the successful submission message.
+- Added a new helper function for logging variables: `glsr_log()`
+
 ## [2.9.3] = 2018-01-01
 
 ### Fixed

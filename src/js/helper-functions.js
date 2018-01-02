@@ -25,7 +25,6 @@ GLSR.convertValue = function( value ) {
 	else if( value === '' || value === null ) {
 		return undefined;
 	}
-
 	return value;
 };
 
@@ -46,7 +45,6 @@ GLSR.hasClass = function( el, className ) {
 	if( el.classList ) {
 		return el.classList.contains( className );
 	}
-
 	return new RegExp( '\\b' + className + '\\b' ).test( el.className );
 };
 
@@ -57,7 +55,6 @@ GLSR.inArray = function( needle, haystack ) {
 			return true;
 		}
 	}
-
 	return false;
 };
 
@@ -92,29 +89,24 @@ GLSR.off = function( type, el, handler ) {
  */
 GLSR.parseFormData = function( form, convert ) {
 	convert = !!convert || false;
-
 	var keyBreaker = /[^\[\]]+/g; // used to parse bracket notation
 	var data = {};
 	var seen = {}; // used to uniquely track seen values
 	var nestData = function( field, data, parts, seenName )
 	{
 		var name = parts.shift();
-
 		// Keep track of the dot separated fullname
 		seenName = seenName ? seenName + '.' + name : name;
-
 		if( parts.length ) {
 			if( !data[ name ] ) {
 				data[ name ] = {};
 			}
-
 			// Recursive call
 			nestData( field, data[ name ], parts, seenName );
 		}
 		else {
 			// Convert the value
 			var value = convert ? GLSR.convertValue( field.value ) : field.value;
-
 			// Handle same name case, as well as "last checkbox checked" case
 			if( seenName in seen && field.type !== "radio" && !data[ name ].isArray()) {
 				if( name in data ) {
@@ -127,7 +119,6 @@ GLSR.parseFormData = function( form, convert ) {
 			else {
 				seen[ seenName ] = true;
 			}
-
 			// Finally, assign data
 			if( GLSR.inArray( field.type, ['radio','checkbox'] ) && !field.checked )return;
 
@@ -141,20 +132,14 @@ GLSR.parseFormData = function( form, convert ) {
 	};
 
 	for( var i = 0; i < form.length; i++ ) {
-
 		var field = form[i];
-
 		if( !field.name || field.disabled || GLSR.inArray( field.type, ['file','reset','submit','button'] ))continue;
-
 		var parts = field.name.match( keyBreaker );
-
 		if( !parts.length ) {
 			parts = [ field.name ];
 		}
-
 		nestData( field, data, parts );
 	}
-
 	return data;
 };
 
@@ -175,7 +160,6 @@ GLSR.postAjax = function( url, data, success ) {
 
 GLSR.ready = function( fn ) {
 	if( typeof fn !== "function" )return;
-
 	// in case the document is already rendered
 	if( document.readyState !== 'loading' ) {
 		fn();
@@ -208,16 +192,13 @@ GLSR.serialize = function( obj, prefix ) {
 
 	for( var property in obj ) {
 		if( !obj.hasOwnProperty( property ))continue;
-
 		var key = prefix ? prefix + "[" + property + "]" : property;
 		var value = obj[ property ];
-
 		str.push( typeof value === "object" ?
 			GLSR.serialize( value, key ) :
 			encodeURIComponent( key ) + "=" + encodeURIComponent( value )
 		);
 	}
-
 	return str.join( "&" );
 };
 

@@ -1,4 +1,4 @@
-# Copyright (C) 2017 site-reviews
+# Copyright (C) 2018 site-reviews
 # This file is distributed under the same license as the site-reviews package.
 msgid ""
 msgstr ""
@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Paul Ryley <paul@geminilabs.io>\n"
 "Language-Team: Gemini Labs <support@geminilabs.io>\n"
 "X-Poedit-Basepath: ..\n"
@@ -59,7 +59,7 @@ msgstr "Update WordPress"
 msgid "Title"
 msgstr "Title"
 
-#: plugin/Commands/RegisterPostType.php:23, plugin/Controllers/MainController.php:791, plugin/Shortcodes/Buttons/SiteReviews.php:124
+#: plugin/Commands/RegisterPostType.php:23, plugin/Controllers/MainController.php:801, plugin/Shortcodes/Buttons/SiteReviews.php:124
 msgid "Date"
 msgstr "Date"
 
@@ -71,7 +71,7 @@ msgstr "Log is empty"
 msgid "Okay"
 msgstr "Okay"
 
-#: plugin/Controllers/AjaxController.php:116
+#: plugin/Controllers/AjaxController.php:117
 msgid "Nothing found."
 msgstr "Nothing found."
 
@@ -129,11 +129,11 @@ msgstr "Site Reviews"
 msgid "Author"
 msgstr "Author"
 
-#: plugin/Controllers/MainController.php:225, plugin/Controllers/MainController.php:790
+#: plugin/Controllers/MainController.php:225, plugin/Controllers/MainController.php:800
 msgid "Type"
 msgstr "Type"
 
-#: plugin/Controllers/MainController.php:226, plugin/Controllers/MainController.php:789, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:134, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:63, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:109
+#: plugin/Controllers/MainController.php:226, plugin/Controllers/MainController.php:799, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:134, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:63, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:109
 msgid "Rating"
 msgstr "Rating"
 
@@ -145,7 +145,7 @@ msgstr "Pinned"
 msgid "Approve this review"
 msgstr "Approve this review"
 
-#: plugin/Controllers/MainController.php:252, plugin/Handlers/SubmitReview.php:98
+#: plugin/Controllers/MainController.php:252, plugin/Handlers/SubmitReview.php:101
 msgid "Approve"
 msgstr "Approve"
 
@@ -241,31 +241,31 @@ msgstr "Logging disabled."
 msgid "Settings updated."
 msgstr "Settings updated."
 
-#: plugin/Controllers/MainController.php:763
+#: plugin/Controllers/MainController.php:773
 msgid "Nothing to Revert"
 msgstr "Nothing to Revert"
 
-#: plugin/Controllers/MainController.php:764
+#: plugin/Controllers/MainController.php:774
 msgid "Revert Changes"
 msgstr "Revert Changes"
 
-#: plugin/Controllers/MainController.php:777
+#: plugin/Controllers/MainController.php:787
 msgid "Unknown"
 msgstr "Unknown"
 
-#: plugin/Controllers/MainController.php:780
+#: plugin/Controllers/MainController.php:790
 msgid "%s review"
 msgstr "%s review"
 
-#: plugin/Controllers/MainController.php:792
+#: plugin/Controllers/MainController.php:802
 msgid "Reviewer"
 msgstr "Reviewer"
 
-#: plugin/Controllers/MainController.php:793, plugin/Settings.php:469, plugin/Shortcodes/Buttons/SiteReviewsForm.php:75
+#: plugin/Controllers/MainController.php:803, plugin/Settings.php:469, plugin/Shortcodes/Buttons/SiteReviewsForm.php:75
 msgid "Email"
 msgstr "Email"
 
-#: plugin/Controllers/MainController.php:794
+#: plugin/Controllers/MainController.php:804
 msgid "Avatar"
 msgstr "Avatar"
 
@@ -307,23 +307,23 @@ msgid_plural "%s reviews restored from the Trash."
 msgstr[0] "%s review restored from the Trash."
 msgstr[1] "%s reviews restored from the Trash."
 
-#: plugin/Controllers/ReviewController.php:246
+#: plugin/Controllers/ReviewController.php:248
 msgid "Please fix the submission errors."
 msgstr "Please fix the submission errors."
 
-#: plugin/Controllers/ReviewController.php:252, plugin/Controllers/ReviewController.php:261
+#: plugin/Controllers/ReviewController.php:254, plugin/Controllers/ReviewController.php:263
 msgid "The review submission failed. Please notify the site administrator."
 msgstr "The review submission failed. Please notify the site administrator."
 
-#: plugin/Controllers/ReviewController.php:275
+#: plugin/Controllers/ReviewController.php:277
 msgid "The reCAPTCHA verification failed. Please notify the site administrator."
 msgstr "The reCAPTCHA verification failed. Please notify the site administrator."
 
-#: plugin/Controllers/ReviewController.php:647
+#: plugin/Controllers/ReviewController.php:649
 msgid "Anonymous"
 msgstr "Anonymous"
 
-#: plugin/Controllers/ReviewController.php:658, plugin/Html/Partials/Reviews.php:222
+#: plugin/Controllers/ReviewController.php:660, plugin/Html/Partials/Reviews.php:222
 msgid "No Title"
 msgstr "No Title"
 
@@ -403,19 +403,19 @@ msgstr "Filter by type"
 msgid "Filter by category"
 msgstr "Filter by category"
 
-#: plugin/Handlers/SubmitReview.php:67
+#: plugin/Handlers/SubmitReview.php:68
 msgid "Your review has been submitted!"
 msgstr "Your review has been submitted!"
 
-#: plugin/Handlers/SubmitReview.php:99
+#: plugin/Handlers/SubmitReview.php:102
 msgid "Discard"
 msgstr "Discard"
 
-#: plugin/Handlers/SubmitReview.php:147
+#: plugin/Handlers/SubmitReview.php:150
 msgid "New %s-Star Review"
 msgstr "New %s-Star Review"
 
-#: plugin/Handlers/SubmitReview.php:200, plugin/Strings.php:34
+#: plugin/Handlers/SubmitReview.php:203, plugin/Strings.php:34
 msgid "View Review"
 msgstr "View Review"
 

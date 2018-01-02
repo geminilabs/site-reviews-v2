@@ -25,9 +25,7 @@ GLSR.clearFieldError = function( el )
 	var fieldEl = el.closest( '.glsr-field' );
 	if( fieldEl === null )return;
 	var errorEl = fieldEl.querySelector( '.glsr-field-errors' );
-
 	GLSR.removeClass( fieldEl, 'glsr-has-error' );
-
 	if( errorEl !== null ) {
 		errorEl.parentNode.removeChild( errorEl );
 	}
@@ -250,15 +248,11 @@ GLSR.scrollToTopStep = function( context )
 GLSR.showFormErrors = function( errors )
 {
 	if( !errors )return;
-
 	var fieldEl, errorsEl;
-
 	for( var error in errors ) {
 		if( !errors.hasOwnProperty( error ))continue;
-
 		fieldEl = GLSR.activeForm.querySelector( '[name="' + error + '"]' ).closest( '.glsr-field' );
 		GLSR.addClass( fieldEl, 'glsr-has-error' );
-
 		errorsEl = fieldEl.querySelector( '.glsr-field-errors' );
 		if( errorsEl === null ) {
 			errorsEl = GLSR.appendTo( fieldEl, 'span', {
@@ -276,7 +270,6 @@ GLSR.showFormMessage = function( response )
 {
 	var formIdEl  = GLSR.activeForm.querySelector( 'input[name="form_id"]' );
 	var messageEl = GLSR.activeForm.querySelector( '.glsr-form-messages' );
-
 	if( messageEl === null ) {
 		messageEl = GLSR.insertAfter( formIdEl, 'div', {
 			'class': 'glsr-form-messages',
@@ -294,7 +287,6 @@ GLSR.showFormMessage = function( response )
 GLSR.submitForm = function( recaptchaToken )
 {
 	GLSR.activeForm.querySelector( '[type="submit"]' ).setAttribute( 'disabled', '' );
-
 	GLSR.postAjax( site_reviews.ajaxurl, GLSR.buildFormData( recaptchaToken ), function( response ) {
 		// console.log( response );
 		if( response.recaptcha === true ) {
