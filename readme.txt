@@ -5,7 +5,7 @@ Tags: best reviews, business ratings, business reviews, curated reviews, moderat
 Requires at least: 4.0.0
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.9.4
+Stable tag: 2.9.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -106,6 +106,9 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 14. Add-Ons are being built to extend the functionality on the Site Reviews plugin
 
 == Changelog ==
+
+= 2.9.5 (2018-01-02) =
+- Added "offset" option to [site_reviews] shortcode
 
 = 2.9.4 (2018-01-02) =
 - Added "site-reviews/local/review/submitted/message" filter hook to modify the successful submission message.

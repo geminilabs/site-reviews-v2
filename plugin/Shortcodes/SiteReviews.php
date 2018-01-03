@@ -27,6 +27,7 @@ class SiteReviews extends Shortcode
 		$args = $this->normalize( $atts, [
 			'count' => 10,
 			'display' => 'all',
+			'offset' => '',
 			'pagination' => false,
 			'schema' => false,
 		]);

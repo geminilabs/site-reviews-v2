@@ -279,6 +279,7 @@ class Database implements OptionsContract
 			'assigned_to'  => '',
 			'category'     => '',
 			'count'        => 10,
+			'offset'       => '',
 			'order'        => 'DESC',
 			'orderby'      => 'date',
 			'pagination'   => false,
@@ -312,6 +313,7 @@ class Database implements OptionsContract
 		$query = [
 			'meta_key'       => 'pinned',
 			'meta_query'     => $meta_query,
+			'offset'         => $offset ? $offset : '',
 			'order'          => $order,
 			'orderby'        => "meta_value $orderby",
 			'paged'          => $pagination ? $this->app->make( 'Query' )->getPaged() : 1,

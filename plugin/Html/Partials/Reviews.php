@@ -294,6 +294,7 @@ class Reviews extends Base
 			'count'       => '',
 			'hide'        => '',
 			'id'          => '',
+			'offset'      => '',
 			'orderby'     => 'date',
 			'pagination'  => false,
 			'rating'      => '1',

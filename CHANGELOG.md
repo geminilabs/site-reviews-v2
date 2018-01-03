@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.9.5] = 2018-01-02
+
+### Added
+- Added "offset" option to [site_reviews] shortcode
+
 ## [2.9.4] = 2018-01-02
 
 ### Added
