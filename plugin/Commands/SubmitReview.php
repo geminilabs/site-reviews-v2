@@ -22,6 +22,7 @@ class SubmitReview
 	public $ipAddress;
 	public $rating;
 	public $referrer;
+	public $request;
 	public $terms;
 	public $title;
 
