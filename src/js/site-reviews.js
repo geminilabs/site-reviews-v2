@@ -48,9 +48,10 @@ GLSR.clearFormMessages = function()
 	}
 };
 
-GLSR.createExceprts = function()
+GLSR.createExceprts = function( parentEl )
 {
-	var excerpts = document.querySelectorAll( '.glsr-hidden-text' );
+	parentEl = parentEl || document;
+	var excerpts = parentEl.querySelectorAll( '.glsr-hidden-text' );
 	for( var i = 0; i < excerpts.length; i++ ) {
 		var readmore = GLSR.insertAfter( excerpts[i], 'span', {
 			'class': 'glsr-read-more',
@@ -110,7 +111,7 @@ GLSR.onClickPagination = function( ev )
 			GLSR.removeClass( parentEl, 'glsr-hide' );
 			GLSR.on( 'click', '.glsr-ajax-navigation a', GLSR.onClickPagination );
 			window.history.pushState( null, '', ev.target.href );
-			GLSR.createExceprts();
+			GLSR.createExceprts( parentEl );
 			return;
 		}
 		window.location = ev.target.href;
