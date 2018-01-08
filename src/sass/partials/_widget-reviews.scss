@@ -1,5 +1,3 @@
-$glsr-font-size-small: 14px;
-
 [id^=geminilabs-site-reviews].widget {
 	ul.glsr-reviews {
 		list-style: none;
@@ -52,7 +50,6 @@ $glsr-font-size-small: 14px;
 
 	&-assigned {
 		display: block;
-		font-size: $glsr-font-size-small;
 		font-style: italic;
 	}
 	&-author {}
