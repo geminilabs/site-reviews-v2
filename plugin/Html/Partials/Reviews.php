@@ -61,7 +61,7 @@ class Reviews extends Base
 				return $carry . $part;
 			})
 		);
-		return apply_filters( 'site-reviews/rendered/review', $renderedReview, $rendered );
+		return apply_filters( 'site-reviews/rendered/review', $renderedReview, $rendered, $review );
 	}
 
 	/**
