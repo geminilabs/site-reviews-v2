@@ -5,7 +5,7 @@ Tags: best reviews, business ratings, business reviews, curated reviews, moderat
 Requires at least: 4.0.0
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.9.5
+Stable tag: 2.10.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -106,6 +106,14 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 14. Add-Ons are being built to extend the functionality on the Site Reviews plugin
 
 == Changelog ==
+
+= 2.10.0 (2018-01-08) =
+- [feature] Added option to show a link of the assigned post in reviews
+- Fixed bug when rendering links of invalid assigned post IDs
+- Fixed regeneration of "show more" links
+- Fixed review pagination for non-hierarchical post types
+- Tweaked styles for twentyfifteen theme
+- Tweaked the scroll-to-top functionality of ajax pagination
 
 = 2.9.5 (2018-01-02) =
 - Added "offset" option to [site_reviews] shortcode

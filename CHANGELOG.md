@@ -18,6 +18,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.10.0] = 2018-01-08
+
+### Added
+- [feature] Added option to show a link of the assigned post in reviews
+
+### Fixed
+- Fixed bug when rendering links of invalid assigned post IDs
+- Fixed regeneration of "show more" links
+- Fixed review pagination for non-hierarchical post types
+
+### Changed
+- Tweaked styles for twentyfifteen theme
+- Tweaked the scroll-to-top functionality of ajax pagination
+
 ## [2.9.5] = 2018-01-02
 
 ### Added

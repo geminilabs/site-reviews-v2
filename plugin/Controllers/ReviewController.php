@@ -39,7 +39,6 @@ class ReviewController extends BaseController
 	 * Remove the autosave functionality
 	 *
 	 * @return void
-	 *
 	 * @action admin_print_scripts
 	 */
 	public function modifyAutosave()
@@ -53,8 +52,7 @@ class ReviewController extends BaseController
 	 * Modifies the WP_Editor settings
 	 *
 	 * @return array
-	 *
-	 * @action wp_editor_settings
+	 * @filter wp_editor_settings
 	 */
 	public function modifyEditor( array $settings )
 	{
@@ -74,10 +72,8 @@ class ReviewController extends BaseController
 	 * Modify the WP_Editor html to allow autosizing without breaking the `editor-expand` script
 	 *
 	 * @param string $html
-	 *
 	 * @return string
-	 *
-	 * @action the_editor
+	 * @filter the_editor
 	 */
 	public function modifyEditorTextarea( $html )
 	{
@@ -105,9 +101,7 @@ class ReviewController extends BaseController
 	 * Remove post_type support for all non-local reviews
 	 *
 	 * @todo: Move this to addons
-	 *
 	 * @return void
-	 *
 	 * @action current_screen
 	 */
 	public function modifyFeatures( WP_Screen $screen )
@@ -128,9 +122,7 @@ class ReviewController extends BaseController
 	 * @param string $plural
 	 * @param int    $number
 	 * @param string $domain
-	 *
 	 * @return string
-	 *
 	 * @filter ngettext
 	 */
 	public function modifyStatusFilter( $translation, $single, $plural, $number, $domain )
@@ -165,7 +157,6 @@ class ReviewController extends BaseController
 	 * Customize the updated messages array for this post_type
 	 *
 	 * @return array
-	 *
 	 * @filter post_updated_messages
 	 */
 	public function modifyUpdateMessages( array $messages )
@@ -206,7 +197,6 @@ class ReviewController extends BaseController
 	 * Customize the bulk updated messages array for this post_type
 	 *
 	 * @return array
-	 *
 	 * @filter bulk_post_updated_messages
 	 */
 	public function modifyUpdateMessagesBulk( array $messages, array $counts )
@@ -308,7 +298,6 @@ class ReviewController extends BaseController
 
 	/**
 	 * @return void
-	 *
 	 * @action admin_menu
 	 */
 	public function removeMetaBoxes()
@@ -343,7 +332,6 @@ class ReviewController extends BaseController
 
 	/**
 	 * @param int $post_id
-	 *
 	 * @return mixed
 	 */
 	public function saveAssignedToMetabox( $post_id )
@@ -373,7 +361,6 @@ class ReviewController extends BaseController
 
 	/**
 	 * @param int $post_id
-	 *
 	 * @return mixed
 	 */
 	public function saveEditedReview( $post_id )
@@ -384,7 +371,6 @@ class ReviewController extends BaseController
 
 	/**
 	 * @param int $post_id
-	 *
 	 * @return mixed
 	 */
 	public function saveResponseMetabox( $post_id )
@@ -445,7 +431,6 @@ class ReviewController extends BaseController
 	 * Check if the translation string can be modified
 	 *
 	 * @param string $domain
-	 *
 	 * @return bool
 	 */
 	protected function canModifyTranslation( $domain = 'default' )
@@ -519,7 +504,6 @@ class ReviewController extends BaseController
 	/**
 	 * @param int $post_id
 	 * @param int $message_index
-	 *
 	 * @return void
 	 */
 	protected function redirect( $post_id, $message_index )
