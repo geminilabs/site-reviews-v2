@@ -287,6 +287,13 @@ class Settings
 
 		$this->addSetting( $formId, [
 			'type'  => 'yesno_inline',
+			'name'  => 'assigned_links.enabled',
+			'label' => __( 'Enable Assigned Links', 'site-reviews' ),
+			'desc'  => __( 'Display a link to the assigned post of a review.', 'site-reviews' ),
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'yesno_inline',
 			'name'  => 'avatars.enabled',
 			'label' => __( 'Enable Avatars', 'site-reviews' ),
 			'desc'  => sprintf( __( 'Display reviewer avatars. These are generated from the email address of the reviewer using %s.', 'site-reviews' ),

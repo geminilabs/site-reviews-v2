@@ -65,6 +65,22 @@ class Reviews extends Base
 	}
 
 	/**
+	 * @param int|string $assignedTo
+	 * @return null|string
+	 */
+	protected function buildAssignedLink( $assignedTo )
+	{
+		if( $this->db->getOption( 'settings.reviews.assigned_links.enabled' ) != 'yes' )return;
+		$permalink = $this->app->make( 'Html' )->renderPartial( 'link', [
+			'post_id' => $assignedTo,
+		]);
+		if( empty( $permalink ))return;
+		return sprintf( '<span class="glsr-review-assigned">%s</span>',
+			sprintf( __( 'Review of %s', 'site-reviews' ), $permalink )
+		);
+	}
+
+	/**
 	 * @param string $author
 	 * @return null|string
 	 */
@@ -114,9 +130,15 @@ class Reviews extends Base
 	protected function buildMeta( $review )
 	{
 		if( in_array( 'date', $this->args['hide'] ) && empty( $review->rating ))return;
-		return sprintf( '<p class="glsr-review-meta">%s%s</p>',
-			$this->buildRating( $review->rating ),
-			$this->buildDate( $review->date )
+		$rendered = apply_filters( 'site-reviews/rendered/review/meta/order', [
+			'rating' => $this->buildRating( $review->rating ),
+			'date' => $this->buildDate( $review->date ),
+			'assigned_link' => $this->buildAssignedLink( $review->assigned_to ),
+		]);
+		return sprintf( '<p class="glsr-review-meta">%s</p>',
+			array_reduce( $rendered, function( $carry, $part ) {
+				return $carry . $part;
+			})
 		);
 	}
 
