@@ -222,6 +222,7 @@ GLSR.scrollToTop = function( el, offset )
 	}
 	var clientBounds = el.getBoundingClientRect();
 	var offsetTop = clientBounds.top - offset;
+	if( offsetTop > 0 )return; // if top is in view, don't scroll!
 	if( 'requestAnimationFrame' in window === false ) {
 		window.scroll( 0, window.pageYOffset + offsetTop );
 		return;
