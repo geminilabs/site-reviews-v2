@@ -89,6 +89,19 @@ class ReviewController extends BaseController
 	}
 
 	/**
+	 * Add a variable to query_vars for custom pagination
+	 *
+	 * @param array $vars
+	 * @return array
+	 * @filter query_vars
+	 */
+	public function modifyQueryVars( $vars )
+	{
+		$vars[] = App::PAGED_QUERY_VAR;
+		return $vars;
+	}
+
+	/**
 	 * Remove post_type support for all non-local reviews
 	 *
 	 * @todo: Move this to addons

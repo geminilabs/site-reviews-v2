@@ -28,6 +28,7 @@ final class App extends Container
 	const CAPABILITY = 'edit_others_pages';
 	const POST_TYPE = 'site-review';
 	const TAXONOMY = 'site-review-category';
+	const PAGED_QUERY_VAR = 'reviews-page';
 
 	protected $defaults;
 	protected $file;
@@ -122,6 +123,7 @@ final class App extends Container
 		add_filter( 'wp_editor_settings',              [ $review, 'modifyEditor'] );
 		add_filter( 'the_editor',                      [ $review, 'modifyEditorTextarea'] );
 		add_filter( 'ngettext',                        [ $review, 'modifyStatusFilter'], 10, 5 );
+		add_filter( 'query_vars',                      [ $review, 'modifyQueryVars'] );
 		add_filter( 'post_updated_messages',           [ $review, 'modifyUpdateMessages'] );
 		add_filter( 'bulk_post_updated_messages',      [ $review, 'modifyUpdateMessagesBulk'], 10, 2 );
 		add_filter( 'gettext',                         [ $translator, 'translateGettext'], 10, 3 );

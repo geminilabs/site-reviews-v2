@@ -10,6 +10,7 @@
 
 namespace GeminiLabs\SiteReviews\Html\Partials;
 
+use GeminiLabs\SiteReviews\App;
 use GeminiLabs\SiteReviews\Html\Partials\Base;
 
 class Reviews extends Base
@@ -127,26 +128,12 @@ class Reviews extends Base
 	{
 		if( $maxPageNum < 2 )return;
 		$paged = $this->app->make( 'Query' )->getPaged();
-		$theme = wp_get_theme()->get( 'TextDomain' );
-		if( in_array( $theme, ['twentyten','twentyeleven','twentytwelve','twentythirteen'] )) {
-			$links = '';
-			if( $paged > 1 ) {
-				$links .= sprintf( '<div class="nav-previous"><a href="%s"><span class="meta-nav">&larr;</span> %s</a></div>',
-					get_pagenum_link( $paged - 1 ),
-					__( 'Previous', 'site-reviews' )
-				);
-			}
-			if( $paged < $maxPageNum ) {
-				$links .= sprintf( '<div class="nav-next"><a href="%s">%s <span class="meta-nav">&rarr;</span></a></div>',
-					get_pagenum_link( $paged + 1 ),
-					__( 'Next', 'site-reviews' )
-				);
-			}
-		}
-		else {
+		$links = $this->buildPaginationForDeprecatedThemes( $maxPageNum, $paged );
+		if( empty( $links )) {
 			$links = paginate_links([
 				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'site-reviews' ) . ' </span>',
 				'current' => $paged,
+				'format' => '?'.App::PAGED_QUERY_VAR.'=%#%',
 				'mid_size' => 1,
 				'next_text' => __( 'Next &rarr;', 'site-reviews' ),
 				'prev_text' => __( '&larr; Previous', 'site-reviews' ),
@@ -154,8 +141,33 @@ class Reviews extends Base
 			]);
 		}
 		$links = apply_filters( 'site-reviews/reviews/navigation_links', $links, $paged, $maxPageNum );
-		if( !$links )return;
+		if( empty( $links ))return;
 		return $this->getPaginationTemplate( $links );
+	}
+
+	/**
+	 * @param int $maxPageNum
+	 * @param int $paged
+	 * @return string|void
+	 */
+	protected function buildPaginationForDeprecatedThemes( $maxPageNum, $paged )
+	{
+		$theme = wp_get_theme()->get( 'TextDomain' );
+		if( !in_array( $theme, ['twentyten','twentyeleven','twentytwelve','twentythirteen'] ))return;
+		$links = '';
+		if( $paged > 1 ) {
+			$links .= sprintf( '<div class="nav-previous"><a href="%s"><span class="meta-nav">&larr;</span> %s</a></div>',
+				add_query_arg( App::PAGED_QUERY_VAR, $paged - 1, get_pagenum_link() ),
+				__( 'Previous', 'site-reviews' )
+			);
+		}
+		if( $paged < $maxPageNum ) {
+			$links .= sprintf( '<div class="nav-next"><a href="%s">%s <span class="meta-nav">&rarr;</span></a></div>',
+				add_query_arg( App::PAGED_QUERY_VAR, $paged + 1, get_pagenum_link() ),
+				__( 'Next', 'site-reviews' )
+			);
+		}
+		return $links;
 	}
 
 	/**

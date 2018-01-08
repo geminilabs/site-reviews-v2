@@ -102,8 +102,6 @@ class Query
 	 */
 	public function getPaged()
 	{
-		$paged = intval( get_query_var(( is_front_page() ? 'page' : 'paged' )));
-
-		return $paged ?: 1;
+		return max( 1, intval( get_query_var( App::PAGED_QUERY_VAR )));
 	}
 }
