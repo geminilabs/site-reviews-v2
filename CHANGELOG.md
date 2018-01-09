@@ -20,6 +20,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [2.10.1] = 2018-01-09
 
+### Added
+- Empty author name defaults to "Anonymous"
+
 ### Fixed
 - Fixed review pagination on static frontpage
 

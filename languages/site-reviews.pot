@@ -297,11 +297,11 @@ msgstr ""
 msgid "The reCAPTCHA verification failed. Please notify the site administrator."
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:644
+#: plugin/Controllers/ReviewController.php:644, plugin/Html/Partials/Reviews.php:94
 msgid "Anonymous"
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:655, plugin/Html/Partials/Reviews.php:276
+#: plugin/Controllers/ReviewController.php:655, plugin/Html/Partials/Reviews.php:279
 msgid "No Title"
 msgstr ""
 
@@ -445,39 +445,39 @@ msgstr ""
 msgid "Review of %s"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:159
+#: plugin/Html/Partials/Reviews.php:162
 msgid "Page"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:163
+#: plugin/Html/Partials/Reviews.php:166
 msgid "Next &rarr;"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:164
+#: plugin/Html/Partials/Reviews.php:167
 msgid "&larr; Previous"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:190
+#: plugin/Html/Partials/Reviews.php:193
 msgid "Previous"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:196
+#: plugin/Html/Partials/Reviews.php:199
 msgid "Next"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:235
+#: plugin/Html/Partials/Reviews.php:238
 msgid "Response from %s"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:304
+#: plugin/Html/Partials/Reviews.php:307
 msgid "Show more"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:305
+#: plugin/Html/Partials/Reviews.php:308
 msgid "Show less"
 msgstr ""
 
-#: plugin/Html/Partials/Reviews.php:335
+#: plugin/Html/Partials/Reviews.php:338
 msgid "Site Reviews navigation"
 msgstr ""
 

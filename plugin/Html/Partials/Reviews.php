@@ -90,6 +90,9 @@ class Reviews extends Base
 	protected function buildAuthor( $author )
 	{
 		if( in_array( 'author', $this->args['hide'] ))return;
+		if( empty( $author )) {
+			$author = __( 'Anonymous', 'site-reviews' );
+		}
 		$dash = $this->db->getOption( 'settings.reviews.avatars.enabled' ) != 'yes'
 			? '&mdash;'
 			: '';

@@ -108,6 +108,7 @@ All documentation and FAQ can be found in the "Get Help" page of the plugin.
 == Changelog ==
 
 = 2.10.1 (2018-01-09) =
+- Empty author name defaults to "Anonymous"
 - Fixed review pagination on static frontpage
 
 = 2.10.0 (2018-01-08) =
