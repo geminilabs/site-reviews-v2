@@ -79,7 +79,7 @@ build:
                 node: '9.3.0'
             dependencies:
                 before:
-                    - composer require --dev johnpbloch/wordpress
+                    # - composer require --dev johnpbloch/wordpress
             project_setup:
                 override: true
                 before:
@@ -88,7 +88,7 @@ build:
             tests:
                 override:
                     - jshint-run
-                    - php-scrutinizer-run
+                    # - php-scrutinizer-run
                     # - php-scrutinizer-run --enable-security-analysis
                     -
                         command: 'phpunit --coverage-clover=tests/clover.xml'
