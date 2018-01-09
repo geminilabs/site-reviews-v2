@@ -42,6 +42,8 @@ elixir(( mix ) => mix
 	.scripts([
 		paths.npm + 'star-rating.js/dist/star-rating.js',
 		'helper-functions.js',
+		'partials/partial-form.js',
+		'partials/partial-recaptcha.js',
 		'site-reviews.js',
 	], paths.dest + 'js/site-reviews.js' )
 	.sass( 'site-reviews-admin.scss' )
