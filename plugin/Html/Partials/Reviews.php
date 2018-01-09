@@ -155,7 +155,7 @@ class Reviews extends Base
 		$paged = $this->app->make( 'Query' )->getPaged();
 		$links = $this->buildPaginationForDeprecatedThemes( $maxPageNum, $paged );
 		if( empty( $links )) {
-			$links = paginate_links([
+			$paginateArgs = [
 				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'site-reviews' ) . ' </span>',
 				'current' => $paged,
 				'format' => '?'.App::PAGED_QUERY_VAR.'=%#%',
@@ -163,7 +163,11 @@ class Reviews extends Base
 				'next_text' => __( 'Next &rarr;', 'site-reviews' ),
 				'prev_text' => __( '&larr; Previous', 'site-reviews' ),
 				'total' => $maxPageNum,
-			]);
+			];
+			if( is_front_page() ) {
+				unset( $paginateArgs['format'] );
+			}
+			$links = paginate_links( $paginateArgs );
 		}
 		$links = apply_filters( 'site-reviews/reviews/navigation_links', $links, $paged, $maxPageNum );
 		if( empty( $links ))return;
@@ -182,17 +186,30 @@ class Reviews extends Base
 		$links = '';
 		if( $paged > 1 ) {
 			$links .= sprintf( '<div class="nav-previous"><a href="%s"><span class="meta-nav">&larr;</span> %s</a></div>',
-				add_query_arg( App::PAGED_QUERY_VAR, $paged - 1, get_pagenum_link() ),
+				$this->buildPaginationUrlForDeprecatedThemes( $paged, -1 ),
 				__( 'Previous', 'site-reviews' )
 			);
 		}
 		if( $paged < $maxPageNum ) {
 			$links .= sprintf( '<div class="nav-next"><a href="%s">%s <span class="meta-nav">&rarr;</span></a></div>',
-				add_query_arg( App::PAGED_QUERY_VAR, $paged + 1, get_pagenum_link() ),
+				$this->buildPaginationUrlForDeprecatedThemes( $paged, 1 ),
 				__( 'Next', 'site-reviews' )
 			);
 		}
 		return $links;
+	}
+
+	/**
+	 * @param int $paged
+	 * @param int $pageIncrement
+	 * @return string
+	 */
+	protected function buildPaginationUrlForDeprecatedThemes( $paged, $pageIncrement )
+	{
+		if( is_front_page() ) {
+			return get_pagenum_link( $paged + $pageIncrement );
+		}
+		return add_query_arg( App::PAGED_QUERY_VAR, $paged + $pageIncrement, get_pagenum_link() );
 	}
 
 	/**

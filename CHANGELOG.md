@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.10.1] = 2018-01-09
+
+### Fixed
+- Fixed review pagination on static frontpage
+
 ## [2.10.0] = 2018-01-08
 
 ### Added
