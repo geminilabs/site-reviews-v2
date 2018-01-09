@@ -27,10 +27,10 @@ Follow plugin development on github at: https://github.com/geminilabs/site-revie
 
 = Current Features =
 
-- [new] Bayesian ranking for posts with assigned reviews (can be used for WP_Query sorting)
 - Actively developed and supported
 - Ajax pagination of reviews
 - Assign reviews to a Post/Page ID
+- Bayesian ranking for posts with assigned reviews (can be used for WP_Query sorting)
 - Clean and easy-to-configure user interface
 - Configurable Widgets
 - Custom notifications (including Slack support)

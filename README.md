@@ -11,11 +11,12 @@ Minimum plugin requirements:
 * PHP 5.4
 * WordPress 4.0.0
 
-#### Features
+#### Current Features
 
-- [new] Ajax pagination of reviews
 - Actively developed and supported
+- Ajax pagination of reviews
 - Assign reviews to a Post/Page ID
+- Bayesian ranking for posts with assigned reviews (can be used for WP_Query sorting)
 - Clean and easy-to-configure user interface
 - Configurable Widgets
 - Custom notifications (including Slack support)
