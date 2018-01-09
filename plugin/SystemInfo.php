@@ -473,7 +473,7 @@ class SystemInfo
 	/**
 	 * Get the plugin settings
 	 *
-	 * @return string
+	 * @return null|string
 	 */
 	protected function getSettings( $title = 'Plugin Settings' )
 	{

@@ -18,6 +18,7 @@ use GeminiLabs\SiteReviews\Container;
  * @property string $name
  * @property string $path
  * @property string $prefix
+ * @property array $schemas
  * @property string $url
  * @property string $version
  * @property array $defaults

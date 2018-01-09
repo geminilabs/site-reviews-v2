@@ -46,6 +46,9 @@ class Reviews extends Base
 		);
 	}
 
+	/**
+	 * @return string
+	 */
 	protected function renderReview( $review )
 	{
 		$rendered = apply_filters( 'site-reviews/rendered/review/order', [
@@ -125,7 +128,7 @@ class Reviews extends Base
 
 	/**
 	 * @param object $review
-	 * @return string
+	 * @return null|string
 	 */
 	protected function buildMeta( $review )
 	{

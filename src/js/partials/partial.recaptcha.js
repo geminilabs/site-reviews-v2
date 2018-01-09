@@ -45,8 +45,8 @@ GLSR.recaptcha.overlay = function()
 {
 	return GLSR.recaptcha.search( function( value ) {
 		if( Object.prototype.toString.call( value ) !== '[object Object]' )return;
-		for( var obj in value) {
-			if( Object.prototype.toString.call( value[obj] ) !== '[object HTMLDivElement]' )continue;
+		for( var obj in value ) {
+			if( !value.hasOwnProperty( obj ) || Object.prototype.toString.call( value[obj] ) !== '[object HTMLDivElement]' )continue;
 			if( value[obj].className === '' ) {
 				return value[obj].firstChild;
 			}
