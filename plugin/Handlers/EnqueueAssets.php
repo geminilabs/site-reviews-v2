@@ -26,7 +26,7 @@ class EnqueueAssets
 	public function handle( Command $command )
 	{
 		$this->dependencies = glsr_resolve( 'Html' )->getDependencies();
-		$ajaxNonce = wp_create_nonce( glsr_app()->id . '-ajax-nonce' );
+		$ajaxNonce = wp_create_nonce( glsr_app()->id.'-ajax-nonce' );
 		$variables = [
 			'action'  => glsr_app()->prefix . '_action',
 			'ajaxurl' => add_query_arg( '_nonce', $ajaxNonce, admin_url( 'admin-ajax.php' )),

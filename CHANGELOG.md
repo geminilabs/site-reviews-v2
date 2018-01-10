@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.10.2] = 2018-01-10
+
+### Fixed
+- Fixed javascript error (oops!)
+
 ## [2.10.1] = 2018-01-09
 
 ### Added

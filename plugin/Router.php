@@ -42,7 +42,11 @@ class Router
 	public function routeAjaxRequests()
 	{
 		// Nonce url is localized in "GeminiLabs\SiteReviews\Handlers\EnqueueAssets"
-		check_ajax_referer( sprintf( '%s-ajax-nonce', $this->app->id ), '_nonce' );
+		$check = check_ajax_referer( glsr_app()->id.'-ajax-nonce', '_nonce', false );
+		if( !$check ) {
+			glsr_log( 'Nonce check failed for ajax request.', 'error' );
+			wp_die( -1, 403 );
+		}
 
 		$ajaxController = $this->app->make( 'Controllers\AjaxController' );
 		$request        = $this->normalizeAjaxRequest();
