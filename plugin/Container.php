@@ -52,7 +52,7 @@ abstract class Container
 	 */
 	public static function load()
 	{
-		if( is_null( static::$instance )) {
+		if( empty( static::$instance )) {
 			static::$instance = new static;
 		}
 		return static::$instance;
@@ -201,7 +201,7 @@ abstract class Container
 		if( !$reflector->isInstantiable() ) {
 			return $this->notInstantiable( $concrete );
 		}
-		if( is_null(( $constructor = $reflector->getConstructor() ))) {
+		if( empty(( $constructor = $reflector->getConstructor() ))) {
 			return new $concrete;
 		}
 		return $reflector->newInstanceArgs(

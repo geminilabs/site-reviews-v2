@@ -170,9 +170,9 @@ class ReviewController extends BaseController
 		$strings = glsr_resolve( 'Strings' )->post_updated_messages();
 
 		$restored = filter_input( INPUT_GET, 'revision' );
-		$restored = $restored
-			? sprintf( $strings['restored'], wp_post_revision_title( (int) $restored, false ))
-			: false;
+		if( $revisionTitle = wp_post_revision_title( (int) $restored, false )) {
+			$restored = sprintf( $strings['restored'], $revisionTitle );
+		}
 
 		$scheduled_date = date_i18n( 'M j, Y @ H:i', strtotime( $post->post_date ));
 

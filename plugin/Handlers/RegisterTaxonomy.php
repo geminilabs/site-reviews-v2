@@ -85,6 +85,11 @@ class RegisterTaxonomy
 			? $wp_query->query[ App::TAXONOMY ]
 			: '';
 
+		$taxonomy = get_taxonomy( App::TAXONOMY );
+		$showOptionAll = $taxonomy
+			? ucfirst( strtolower( $taxonomy->labels->all_items ))
+			: '';
+
 		wp_dropdown_categories([
 			'depth'           => 3,
 			'hide_empty'      => true,
@@ -94,7 +99,7 @@ class RegisterTaxonomy
 			'orderby'         => 'name',
 			'selected'        => $selected,
 			'show_count'      => false,
-			'show_option_all' => ucfirst( strtolower( get_taxonomy( App::TAXONOMY )->labels->all_items )),
+			'show_option_all' => $showOptionAll,
 			'taxonomy'        => App::TAXONOMY,
 			'value_field'     => 'slug',
 		]);

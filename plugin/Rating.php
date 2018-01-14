@@ -206,7 +206,7 @@ class Rating
 	}
 
 	/**
-	 * @param int $ratingCountsSum
+	 * @param int|double $ratingCountsSum
 	 * @param bool $powerOf2
 	 * @return float
 	 */

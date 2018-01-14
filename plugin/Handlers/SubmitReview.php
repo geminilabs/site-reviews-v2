@@ -23,7 +23,7 @@ class SubmitReview
 	protected $app;
 
 	/**
-	 * @var Database
+	 * @var \GeminiLabs\SiteReviews\Database
 	 */
 	protected $db;
 
@@ -108,7 +108,7 @@ class SubmitReview
 	}
 
 	/**
-	 * @return GeminiLabs\SiteReviews\Email
+	 * @return \GeminiLabs\SiteReviews\Email
 	 */
 	protected function createNotification( Command $command, array $args = [] )
 	{

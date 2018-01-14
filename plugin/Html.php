@@ -34,7 +34,7 @@ class Html
 	/**
 	 * Add a custom field to the form
 	 * @param string $formId
-	 * @return Form|false
+	 * @return \GeminiLabs\SiteReviews\Html\Form|false
 	 */
 	public function addCustomField( $formId, callable $callback )
 	{

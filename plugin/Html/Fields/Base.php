@@ -278,7 +278,7 @@ abstract class Base
 
 		$args = wp_parse_args( $args, $defaults );
 
-		if( !isset( $label ) || $args['name'] === '' )return;
+		if( empty( $label ) || $args['name'] === '' )return;
 
 		$args['id']   = $this->args['id'] . "-{$number}";
 		$args['name'] = $this->args['name'] . ( $type === 'checkbox' && $this->multi ? '[]' : '' );

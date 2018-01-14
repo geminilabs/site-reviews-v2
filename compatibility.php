@@ -24,10 +24,11 @@ if( !function_exists( 'get_avatar_url' )) {
 	function get_avatar_url( $id_or_email, $args = null ) {
 		isset( $args['size'] ) ?: $args['size'] = 96;
 		isset( $args['default'] ) ?: $args['default'] = 'mystery';
-		$avatar = get_avatar( $id_or_email, $args['size'], $args['default'] );
-		$dom = new \DOMDocument;
-		$dom->loadHTML( $avatar );
-		return $dom->getElementsByTagName( 'img' )->item(0)->getAttribute( 'src' );
+		if( $avatar = get_avatar( $id_or_email, $args['size'], $args['default'] )) {
+			$dom = new \DOMDocument;
+			$dom->loadHTML( $avatar );
+			return $dom->getElementsByTagName( 'img' )->item(0)->getAttribute( 'src' );
+		}
 	}
 }
 

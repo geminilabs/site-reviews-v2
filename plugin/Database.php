@@ -113,7 +113,7 @@ class Database implements OptionsContract
 	}
 
 	/**
-	 * @param WP_Post|null $post
+	 * @param \WP_Post|null $post
 	 *
 	 * @return null|object
 	 */
@@ -269,9 +269,9 @@ class Database implements OptionsContract
 	}
 
 	/**
-	 * Gets a array of saved review objects
+	 * Gets a object of saved review objects
 	 *
-	 * @return array
+	 * @return object
 	 */
 	public function getReviews( array $args = [] )
 	{

@@ -28,7 +28,7 @@ class RegisterPostType
 	protected $columns;
 
 	/**
-	 * @var Database
+	 * @var \GeminiLabs\SiteReviews\Database
 	 */
 	protected $db;
 

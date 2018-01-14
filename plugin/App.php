@@ -161,7 +161,7 @@ final class App extends Container
 		$events = ['site-reviews/schedule/session/purge'];
 
 		foreach( $events as $event ) {
-			wp_unschedule_event( wp_next_scheduled( $event ), $event );
+			wp_unschedule_event( (int) wp_next_scheduled( $event ), $event );
 		}
 	}
 
@@ -172,13 +172,10 @@ final class App extends Container
 	 */
 	public function getDefaultSettings()
 	{
-		if( !$this->defaults ) {
-
-			$this->defaults = $this->make( 'Settings' )->getSettings();
-
-			// Allow addons to modify the default settings
-			$this->defaults = apply_filters( 'site-reviews/addon/defaults', $this->defaults );
-
+		if( empty( $this->defaults )) {
+			$this->defaults = apply_filters( 'site-reviews/addon/defaults',
+				$this->make( 'Settings' )->getSettings()
+			);
 			$this->upgrade();
 		}
 
@@ -212,14 +209,13 @@ final class App extends Container
 	 */
 	public function registerLanguages()
 	{
-		load_plugin_textdomain( 'site-reviews', false, plugin_basename( $this->path ) . '/languages/' );
+		load_plugin_textdomain( 'site-reviews', false, plugin_basename( $this->path ).'/languages/' );
 	}
 
 	/**
 	 * Update the plugin versions in the database
 	 *
 	 * @param string $current
-	 *
 	 * @return void
 	 */
 	public function updateVersion( $current = '' )

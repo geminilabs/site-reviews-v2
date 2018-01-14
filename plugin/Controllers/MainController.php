@@ -563,10 +563,8 @@ class MainController extends BaseController
 		if( post_type_supports( App::POST_TYPE, 'title' ))return;
 
 		$reviewType = get_post_meta( $post->ID, 'review_type', true );
-
 		if( $reviewType == 'local' )return;
-
-		$this->notices->addWarning( sprintf( __( '%s reviews are read-only.', 'site-reviews' ), ucfirst( $reviewType )));
+		$this->notices->addWarning( __( 'This review is read-only.', 'site-reviews' ));
 		$this->render( 'edit/notice' );
 	}
 

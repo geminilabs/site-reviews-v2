@@ -23,22 +23,22 @@ abstract class BaseController
 	protected $app;
 
 	/**
-	 * @var Database
+	 * @var \GeminiLabs\SiteReviews\Database
 	 */
 	protected $db;
 
 	/**
-	 * @var Html
+	 * @var \GeminiLabs\SiteReviews\Html
 	 */
 	protected $html;
 
 	/**
-	 * @var Logger
+	 * @var \GeminiLabs\SiteReviews\Log\Logger
 	 */
 	protected $log;
 
 	/**
-	 * @var Notices
+	 * @var \GeminiLabs\SiteReviews\Notices
 	 */
 	protected $notices;
 

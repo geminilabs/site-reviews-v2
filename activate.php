@@ -36,7 +36,7 @@ if( !function_exists( 'glsr_deactivate_plugin' )) {
 			$status = filter_input( INPUT_GET, 'plugin_status' );
 
 			wp_safe_redirect( self_admin_url( sprintf( 'plugins.php?plugin_status=%s&paged=%s&s=%s', $status, $paged, $s )));
-			die;
+			exit;
 		}
 
 		deactivate_plugins( $plugin_name );
