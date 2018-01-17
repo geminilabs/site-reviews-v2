@@ -37,9 +37,6 @@ build:
           - jshint-run
           - php-scrutinizer-run --enable-security-analysis
           -
-            command: phpcs-run
-            use_website_config: true
-          -
             command: vendor/bin/phpunit --coverage-clover=tests/clover.xml
             coverage:
               file: tests/clover.xml

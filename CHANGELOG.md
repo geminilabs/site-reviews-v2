@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.10.3] = 2018-01-17
+
+### Changed
+- Changed the notification title/subject to show the title of the post a review is assigned to.
+
 ## [2.10.2] = 2018-01-10
 
 ### Fixed

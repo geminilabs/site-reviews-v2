@@ -29,7 +29,7 @@ class SubmitReview
 	public function __construct( $input )
 	{
 		$this->ajaxRequest = isset( $input['ajax_request'] ) ? true : false;
-		$this->assignedTo  = $input['assign_to'];
+		$this->assignedTo  = is_numeric( $input['assign_to'] ) ? $input['assign_to'] : '';
 		$this->author      = $input['name'];
 		$this->category    = $input['category'];
 		$this->content     = $input['content'];

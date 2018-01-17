@@ -116,15 +116,15 @@ class SubmitReview
 			'to' => $args['recipient'],
 			'subject'  => $args['notification_title'],
 			'template' => 'review-notification',
-			'template-tags' => [
-				'review_author'  => $command->author,
+			'template-tags' => apply_filters( 'site-reviews/notification/template-tags', [
+				'review_author' => $command->author,
 				'review_content' => $command->content,
-				'review_email'   => $command->email,
-				'review_ip'      => $command->ipAddress,
-				'review_link'    => sprintf( '<a href="%1$s">%1$s</a>', $args['notification_link'] ),
-				'review_rating'  => $command->rating,
-				'review_title'   => $command->title,
-			],
+				'review_email' => $command->email,
+				'review_ip' => $command->ipAddress,
+				'review_link' => sprintf( '<a href="%1$s">%1$s</a>', $args['notification_link'] ),
+				'review_rating' => $command->rating,
+				'review_title' => $command->title,
+			], $command ),
 		];
 
 		// $email = $this->addNotificationLinks( $post_id, $email );
@@ -144,10 +144,19 @@ class SubmitReview
 		if( !in_array( $notificationType, ['default', 'custom', 'webhook'] ))return;
 
 		$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+		$assignedToTitle = get_the_title( (int) $command->assignedTo );
+
+		$notificationSubject = _nx(
+			'New %s-star review',
+			'New %s-star review of: %s',
+			(int) empty( $assignedToTitle ),
+			'The text is different depending on whether or not the review has been assigned to a post.',
+			'site-reviews'
+		);
 
 		$notificationTitle = sprintf( '[%s] %s',
 			$blogname,
-			sprintf( __( 'New %s-Star Review', 'site-reviews' ), $command->rating )
+			sprintf( $notificationSubject, $command->rating, $assignedToTitle )
 		);
 
 		$args = [
