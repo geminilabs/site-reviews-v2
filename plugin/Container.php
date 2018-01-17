@@ -201,7 +201,8 @@ abstract class Container
 		if( !$reflector->isInstantiable() ) {
 			return $this->notInstantiable( $concrete );
 		}
-		if( empty(( $constructor = $reflector->getConstructor() ))) {
+		$constructor = $reflector->getConstructor();
+		if( empty( $constructor )) {
 			return new $concrete;
 		}
 		return $reflector->newInstanceArgs(
