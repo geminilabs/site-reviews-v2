@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.10.4] = 2018-01-26
+
+### Fixed
+- Fixed the Invisible reCaptcha plugin integration when multiple HTML forms exist on the same page
+
 ## [2.10.3] = 2018-01-17
 
 ### Changed

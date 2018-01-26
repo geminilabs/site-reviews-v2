@@ -342,7 +342,9 @@ GLSR.on( 'click', '.glsr-field [type="submit"]', function()
 		if( null === token || null === this.querySelector( '.glsr-field' )) {
 			this._submit();
 		}
-		GLSR.submitForm( token.value );
+		else {
+			GLSR.submitForm( token.value );
+		}
 	};
 });
 
