@@ -13,7 +13,8 @@ $glsr-color-error: #D32F2F !default;
 	color: $glsr-color-success;
 }
 
-.glsr-has-error {
+.glsr-has-error,
+.glsr-has-errors {
 	color: $glsr-color-error;
 }
 

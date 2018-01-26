@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## [2.10.4] = 2018-01-26
 
 ### Fixed
+- Fixed the form error message CSS
 - Fixed the Invisible reCaptcha plugin integration when multiple HTML forms exist on the same page
 
 ## [2.10.3] = 2018-01-17
