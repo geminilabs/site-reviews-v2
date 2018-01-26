@@ -5,7 +5,7 @@ Tags: best reviews, business ratings, business reviews, curated reviews, moderat
 Requires at least: 4.0.0
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.10.3
+Stable tag: 2.10.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,7 +73,36 @@ Download the Site Reviews plugin and uploading it to your server via your favori
 
 == Frequently Asked Questions ==
 
-All documentation and FAQ can be found in the "Get Help" page of the plugin.
+= How do I use Site Reviews? =
+Please watch the [Getting Started with Site Reviews Screencast](https://github.com/geminilabs/site-reviews/wiki/Getting-Started-with-Site-Reviews) for a quick step-by-step visual on how to get started with Site Reviews.
+
+= How do I send you a translation of Site Reviews in my language? =
+It’s super easy to contribute a translation in your language.
+
+1. https://translate.wordpress.org/projects/wp-plugins/site-reviews/dev
+2. Select your language
+3. Suggest translations!
+
+= How do I change the order of the Submission Form fields? =
+https://github.com/geminilabs/site-reviews/wiki/Custom-Submission-Form-Field-Order
+
+= How do I change the order of the review content? =
+https://github.com/geminilabs/site-reviews/wiki/How-to-change-the-order-of-the-parts-of-a-rendered-review
+
+= How do I customise the JSON–LD schema of Site Reviews? =
+https://github.com/geminilabs/site-reviews/wiki/How-to-add-additional-values-to-Site-Reviews's-JSON%E2%80%93LD-schema
+
+= How do I disable the star rating on the submission form? =
+https://github.com/geminilabs/site-reviews/wiki/How-to-disable-the-star-rating-on-the-submission-form
+
+= How do I limit review submissions to one review per email? =
+https://github.com/geminilabs/site-reviews/wiki/How-to-limit-review-submissions-to-one-review-per-email
+
+= How to query and sort pages with assigned reviews by their overall score? =
+https://github.com/geminilabs/site-reviews/wiki/How-to-query-and-sort-posts-pages-that-have-assigned-reviews-by-their-ranking
+
+= I need help with something else =
+All documentation can be found in the "Get Help" page of the plugin. You can also visit the [Site Reviews Wiki](https://github.com/geminilabs/site-reviews/wiki) for tips on advanced usage.
 
 == Screenshots ==
 
