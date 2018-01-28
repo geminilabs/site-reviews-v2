@@ -56,7 +56,7 @@ class Html
 	/**
 	 * Create a new form
 	 * @param string $formId
-	 * @return Form
+	 * @return \GeminiLabs\SiteReviews\Html\Form
 	 */
 	public function createForm( $formId, array $args = [] )
 	{
@@ -187,7 +187,7 @@ class Html
 
 	/**
 	 * Return a stored form
-	 * @return Form|false
+	 * @return \GeminiLabs\SiteReviews\Html\Form|false
 	 */
 	public function switchForm( $formId )
 	{

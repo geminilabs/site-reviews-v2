@@ -128,7 +128,7 @@ abstract class Base
 	/**
 	 * Implode the field attributes
 	 *
-	 * @return array
+	 * @return string
 	 */
 	protected function implodeAttributes( $defaults = [] )
 	{
@@ -182,7 +182,7 @@ abstract class Base
 		$normalize = new Normalize;
 		return ( $this->element && method_exists( $normalize, $this->element ))
 			? $normalize->{$this->element}( $args, $implode )
-			: ( !!$implode ? '' : [] );
+			: ( $implode === false ? [] : '' );
 	}
 
 	/**

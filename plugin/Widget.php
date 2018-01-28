@@ -79,7 +79,7 @@ abstract class Widget extends WP_Widget
 		$atts['prefix'] = false;
 		$atts['name'] = $this->get_field_name( (string) $atts['name'] );
 		if( isset( $atts['depends'] )) {
-			$atts['depends'] = $this->get_field_name( $atts['depends'] );
+			$atts['depends'] = $this->get_field_name( (string) $atts['depends'] );
 		}
 		if( !isset( $atts['type'] ) || $atts['type'] == 'text' ) {
 			$atts['class'] = isset( $atts['class'] )
