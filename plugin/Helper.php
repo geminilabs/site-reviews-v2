@@ -82,9 +82,8 @@ class Helper
 	 */
 	public function getIpAddress()
 	{
-		$cloudflareIPv4 = array_filter( explode( PHP_EOL, wp_remote_retrieve_body( 'https://www.cloudflare.com/ips-v4' )));
-		$cloudflareIPv6 = array_filter( explode( PHP_EOL, wp_remote_retrieve_body( 'https://www.cloudflare.com/ips-v6' )));
-
+		$cloudflareIPv4 = array_filter( explode( PHP_EOL, wp_remote_retrieve_body( wp_remote_get( 'https://www.cloudflare.com/ips-v4' ))));
+		$cloudflareIPv6 = array_filter( explode( PHP_EOL, wp_remote_retrieve_body( wp_remote_get( 'https://www.cloudflare.com/ips-v6' ))));
 		$ipAddress = ( new Whip( Whip::CLOUDFLARE_HEADERS | Whip::REMOTE_ADDR, [
 			Whip::CLOUDFLARE_HEADERS => [
 				Whip::IPV4 => $cloudflareIPv4,

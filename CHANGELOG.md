@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.10.5] = 2018-
+
+### Fixed
+- Fixed internal IP detection
+
 ## [2.10.4] = 2018-01-26
 
 ### Fixed

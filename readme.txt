@@ -136,6 +136,9 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 
 == Changelog ==
 
+= 2.10.5 (2018-) =
+- Fixed internal IP detection
+
 = 2.10.4 (2018-01-26) =
 - Fixed the form error message CSS
 - Fixed the Invisible reCaptcha plugin integration when multiple HTML forms exist on the same page
