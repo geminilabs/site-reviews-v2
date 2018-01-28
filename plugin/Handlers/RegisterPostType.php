@@ -98,12 +98,10 @@ class RegisterPostType
 				$value = $columns[ $key ];
 			}
 			else if( $key === 'sticky' ) {
-				global $wp_version;
-
 				// wrap in <span> so we can replace with a dashicon in CSS @media
 				$value = "<span class=\"pinned-icon\">{$value}</span>";
-
 				// WP < 4.4 support
+				global $wp_version;
 				if( version_compare( $wp_version, '4.4', '<' )) {
 					$value .= file_get_contents( "{$this->app->path}assets/img/pinned.svg" );
 				}
@@ -194,9 +192,7 @@ class RegisterPostType
 	public function printColumnValues( $column )
 	{
 		global $post, $wp_version;
-
 		$method = $this->app->make( 'Helper' )->buildMethodName( $column, 'buildColumn' );
-
 		echo !method_exists( $this, $method )
 			? apply_filters( "site-reviews/columns/{$column}", '', $post->ID )
 			: call_user_func([ $this, $method ]);
@@ -226,9 +222,8 @@ class RegisterPostType
 	 */
 	protected function buildColumnAssignedTo()
 	{
-		global $post;
 		$value = $this->app->make( 'Html' )->renderPartial( 'link', [
-			'post_id' => $this->db->getReviewMeta( $post->ID )->assigned_to,
+			'post_id' => $this->db->getReviewMeta( get_post()->ID )->assigned_to,
 		]);
 		return $value ? $value : '&mdash;';
 	}
@@ -238,9 +233,7 @@ class RegisterPostType
 	 */
 	protected function buildColumnReviewer()
 	{
-		global $post;
-
-		return $this->db->getReviewMeta( $post->ID )->author;
+		return $this->db->getReviewMeta( get_post()->ID )->author;
 	}
 
 	/**
@@ -248,9 +241,8 @@ class RegisterPostType
 	 */
 	protected function buildColumnStars()
 	{
-		global $post;
 		return $this->app->make( 'Html' )->renderPartial( 'star-rating', [
-			'rating' => $this->db->getReviewMeta( $post->ID )->rating,
+			'rating' => $this->db->getReviewMeta( get_post()->ID )->rating,
 		]);
 	}
 
@@ -259,8 +251,9 @@ class RegisterPostType
 	 */
 	protected function buildColumnSticky()
 	{
-		global $post, $wp_version;
+		global $wp_version;
 
+		$post = get_post();
 		$pinned = $this->db->getReviewMeta( $post->ID )->pinned
 			? ' pinned'
 			: '';
@@ -282,11 +275,8 @@ class RegisterPostType
 	 */
 	protected function buildColumnType()
 	{
-		global $post;
-
-		$meta  = $this->db->getReviewMeta( $post->ID );
+		$meta  = $this->db->getReviewMeta( get_post()->ID );
 		$types = $this->app->make( 'Strings' )->review_types();
-
 		return isset( $types[ $meta->review_type ] )
 			? $types[ $meta->review_type ]
 			: $meta->review_type;
@@ -298,7 +288,6 @@ class RegisterPostType
 	protected function hasPermission( WP_Query $query )
 	{
 		global $pagenow;
-
 		return !( !is_admin()
 			|| !$query->is_main_query()
 			|| $query->query['post_type'] != App::POST_TYPE

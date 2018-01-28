@@ -161,11 +161,8 @@ class ReviewController extends BaseController
 	 */
 	public function modifyUpdateMessages( array $messages )
 	{
-		global $post;
-
-		if( !isset( $post->ID ) || !$post->ID ) {
-			return $messages;
-		}
+		$post = get_post();
+		if( !( $post instanceof WP_Post ) || !$post->ID )return;
 
 		$strings = glsr_resolve( 'Strings' )->post_updated_messages();
 

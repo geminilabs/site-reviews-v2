@@ -506,17 +506,13 @@ class MainController extends BaseController
 
 	/**
 	 * @return void
-	 *
 	 * @action post_submitbox_misc_actions
 	 */
 	public function renderMetaBoxPinned()
 	{
-		global $post;
-
-		if( $post->post_type != App::POST_TYPE )return;
-
+		$post = get_post();
+		if( !( $post instanceof WP_Post ) || $post->post_type != App::POST_TYPE )return;
 		$pinned = get_post_meta( $post->ID, 'pinned', true );
-
 		$this->render( 'edit/pinned', ['pinned' => $pinned ] );
 	}
 

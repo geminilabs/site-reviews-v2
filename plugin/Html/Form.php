@@ -52,20 +52,19 @@ class Form
 
 	/**
 	 * @param string $property
-	 *
 	 * @return mixed
 	 * @throws Exception
 	 */
 	public function __get( $property )
 	{
-		switch( $property ) {
-			case 'args';
-			case 'customFields':
-			case 'dependencies';
-			case 'fields';
+		if( in_array( $property, [
+			'args',
+			'customFields',
+			'dependencies',
+			'fields',
+		])) {
 			return $this->$property;
 		}
-
 		throw new Exception( 'Invalid ' . __CLASS__ . ' property: ' . $property );
 	}
 

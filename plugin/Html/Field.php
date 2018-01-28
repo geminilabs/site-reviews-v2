@@ -40,18 +40,14 @@ class Field
 
 	/**
 	 * @param string $property
-	 *
 	 * @return mixed
 	 * @throws Exception
 	 */
 	public function __get( $property )
 	{
-		switch( $property ) {
-			case 'args';
-			case 'dependencies';
+		if( in_array( $property, ['args', 'dependencies'] )) {
 			return $this->$property;
 		}
-
 		throw new Exception( 'Invalid ' . __CLASS__ . ' property: ' . $property );
 	}
 

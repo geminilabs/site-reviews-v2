@@ -45,7 +45,7 @@ class Html
 	/**
 	 * Add a field to an existing form
 	 * @param string $formId
-	 * @return Form|false
+	 * @return \GeminiLabs\SiteReviews\Html\Form|false
 	 */
 	public function addField( $formId, array $args = [] )
 	{

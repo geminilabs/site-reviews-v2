@@ -59,15 +59,15 @@ abstract class Base
 	 */
 	public function __get( $property )
 	{
-		switch( $property ) {
-			case 'args';
-			case 'dependencies';
-			case 'element';
-			case 'multi';
-			case 'outside';
+		if( in_array( $property, [
+			'args',
+			'dependencies',
+			'element',
+			'multi',
+			'outside',
+		])) {
 			return $this->$property;
 		}
-
 		throw new Exception( 'Invalid ' . __CLASS__ . ' property: ' . $property );
 	}
 
@@ -174,15 +174,12 @@ abstract class Base
 	 * Normalize attributes for this specific field type
 	 *
 	 * @param bool|string $implode
-	 *
-	 * @return array
+	 * @return array|string
 	 */
 	protected function normalize( array $defaults = [], $implode = false )
 	{
 		$args = $this->mergeAttributesWith( $defaults );
-
 		$normalize = new Normalize;
-
 		return ( $this->element && method_exists( $normalize, $this->element ))
 			? $normalize->{$this->element}( $args, $implode )
 			: ( !!$implode ? '' : [] );

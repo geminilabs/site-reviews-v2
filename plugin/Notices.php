@@ -28,7 +28,7 @@ class Notices
 	 * Add a notice
 	 *
 	 * @param string       $type
-	 * @param string|array $message
+	 * @param string|array|\WP_Error $message
 	 */
 	public function add( $type, $message, array $args = [] )
 	{
@@ -57,7 +57,7 @@ class Notices
 	/**
 	 * Add an error notice
 	 *
-	 * @param string|array $message
+	 * @param string|array|\WP_Error $message
 	 */
 	public function addError( $message, array $args = [] )
 	{

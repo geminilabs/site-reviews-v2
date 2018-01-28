@@ -35,14 +35,12 @@ class Helper
 	/**
 	 * @param string $name
 	 * @param string $path
-	 *
 	 * @return string
 	 */
 	public function buildClassName( $name, $path = '' )
 	{
-		$className = array_map( 'ucfirst', array_map( 'strtolower', preg_split( '/[-_]/', $name )));
+		$className = array_map( 'ucfirst', array_map( 'strtolower', (array) preg_split( '/[-_]/', $name )));
 		$className = implode( '', $className );
-
 		return !empty( $path )
 			? str_replace( '\\\\', '\\', sprintf( '%s\%s', $path, $className ))
 			: $className;
@@ -51,7 +49,6 @@ class Helper
 	/**
 	 * @param string $name
 	 * @param string $prefix
-	 *
 	 * @return string
 	 */
 	public function buildMethodName( $name, $prefix = 'get' )
@@ -71,15 +68,12 @@ class Helper
 
 	/**
 	 * @param string $name
-	 *
 	 * @return mixed
 	 */
 	public function get( $name )
 	{
 		$method = $this->buildMethodName( $name );
-
 		if( !method_exists( $this, $method ))return;
-
 		return call_user_func_array([ $this, $method ], array_slice( func_get_args(), 1 ));
 	}
 
@@ -97,14 +91,12 @@ class Helper
 				Whip::IPV6 => $cloudflareIPv6,
 			],
 		]))->getValidIpAddress();
-
 		return $ipAddress ? $ipAddress : null;
 	}
 
 	/**
 	 * @param string $optionPath
 	 * @param mixed  $fallback
-	 *
 	 * @return mixed
 	 */
 	protected function getOption( $optionPath, $fallback )
@@ -124,7 +116,6 @@ class Helper
 
 	/**
 	 * @param int $postId
-	 *
 	 * @return null|object
 	 */
 	protected function getReview( $postId )
