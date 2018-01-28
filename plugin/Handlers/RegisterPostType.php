@@ -191,10 +191,10 @@ class RegisterPostType
 	 */
 	public function printColumnValues( $column )
 	{
-		global $post, $wp_version;
+		global $wp_version;
 		$method = $this->app->make( 'Helper' )->buildMethodName( $column, 'buildColumn' );
 		echo !method_exists( $this, $method )
-			? apply_filters( "site-reviews/columns/{$column}", '', $post->ID )
+			? apply_filters( 'site-reviews/columns/'.$column, '' )
 			: call_user_func([ $this, $method ]);
 	}
 
