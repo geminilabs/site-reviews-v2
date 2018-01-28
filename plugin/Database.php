@@ -33,18 +33,15 @@ class Database implements OptionsContract
 	 * Save a review to the database
 	 *
 	 * @param string $metaReviewId
-	 * @param bool   $update
-	 *
+	 * @param bool $update
 	 * @return int|bool
 	 */
 	public function createReview( $metaReviewId, array $meta, $update = false )
 	{
 		$post_id = $this->getReviewId( $metaReviewId );
-
 		if( !empty( $post_id ) && !$update ) {
 			return $post_id;
 		}
-
 		// make sure we set post_meta fallback defaults
 		$meta = wp_parse_args( $meta, [
 			'author'      => '',
@@ -61,7 +58,6 @@ class Database implements OptionsContract
 			'title'       => '',
 			'url'         => '',
 		]);
-
 		$post_data = [
 			'comment_status' => 'closed',
 			'ID'             => $post_id ? $post_id : 0,
@@ -73,26 +69,19 @@ class Database implements OptionsContract
 			'post_title'     => wp_strip_all_tags( $meta['title'] ),
 			'post_type'      => App::POST_TYPE,
 		];
-
 		if( $this->getOption( 'settings.general.require.approval' ) == 'yes' && $meta['review_type'] == 'local' ) {
 			$post_data['post_status'] = 'pending';
 		}
-
 		$post_id = wp_insert_post( $post_data, true );
-
 		if( is_wp_error( $post_id )) {
 			glsr_resolve( 'Log\Logger' )->error( sprintf( '%s (%s)', $post_id->get_error_message(), $metaReviewId ));
-
 			return false;
 		}
-
 		// add post_meta
 		foreach( $meta as $field => $value ) {
 			update_post_meta( $post_id, $field, $value );
 		}
-
 		do_action( 'site-reviews/local/review/create', $post_data, $meta, $post_id );
-
 		return $post_id;
 	}
 
@@ -100,13 +89,11 @@ class Database implements OptionsContract
 	 * Delete review based on a review_id meta value
 	 *
 	 * @param string $metaReviewId
-	 *
 	 * @return void
 	 */
 	public function deleteReview( $metaReviewId )
 	{
 		$postId = $this->getReviewId( $metaReviewId );
-
 		if( !empty( $postId )) {
 			wp_delete_post( $postId, true );
 		}
@@ -114,7 +101,6 @@ class Database implements OptionsContract
 
 	/**
 	 * @param \WP_Post|null $post
-	 *
 	 * @return null|object
 	 */
 	public function getReview( $post )
@@ -122,13 +108,10 @@ class Database implements OptionsContract
 		if( !isset( $post->ID )
 			|| $post->post_type != App::POST_TYPE
 		)return;
-
 		$meta = $this->getReviewMeta( $post->ID );
-
 		$modified = $post->post_title != $meta->title
 			|| $post->post_content != $meta->content
 			|| $post->post_date != $meta->date;
-
 		$review = (object) [
 			'assigned_to' => $meta->assigned_to,
 			'author'      => $meta->author,
@@ -150,29 +133,23 @@ class Database implements OptionsContract
 			'url'         => $meta->url,
 			'user_id'     => $post->post_author,
 		];
-
 		return apply_filters( 'site-reviews/get/review', $review, $post );
 	}
 
 	/**
 	 * @param string $metaKey
 	 * @param string $metaValue
-	 *
 	 * @return int|array
 	 */
 	public function getReviewCount( $metaKey = '', $metaValue = '' )
 	{
 		$metaKey = $this->normalizeMetaKey( $metaKey );
-
 		if( !$metaKey ) {
 			return (array) wp_count_posts( App::POST_TYPE );
 		}
-
 		$counts = wp_cache_get( $this->app->id, $metaKey . '_count' );
-
 		if( $counts === false ) {
 			global $wpdb;
-
 			$results = (array) $wpdb->get_results( $wpdb->prepare(
 				"SELECT m.meta_value AS name, COUNT( * ) num_posts " .
 				"FROM {$wpdb->posts} AS p " .
@@ -183,34 +160,27 @@ class Database implements OptionsContract
 				App::POST_TYPE,
 				$metaKey
 			));
-
 			$counts = [];
-
 			foreach( $results as $result ) {
-				$counts[ $result->name ] = $result->num_posts;
+				$counts[$result->name] = $result->num_posts;
 			}
-
 			wp_cache_set( $this->app->id, $counts, $metaKey . '_count' );
 		}
-
 		if( !$metaValue ) {
 			return $counts;
 		}
-
-		return isset( $counts[ $metaValue ] ) ? $counts[ $metaValue ] : 0;
+		return isset( $counts[$metaValue] ) ? $counts[$metaValue] : 0;
 	}
 
 	/**
 	 * Get the review post ID from the review_id meta value
 	 *
 	 * @param string $metaReviewId
-	 *
 	 * @return int
 	 */
 	public function getReviewId( $metaReviewId )
 	{
 		global $wpdb;
-
 		$query = $wpdb->prepare(
 			"SELECT p.ID " .
 			"FROM {$wpdb->posts} AS p " .
@@ -221,7 +191,6 @@ class Database implements OptionsContract
 			App::POST_TYPE,
 			$metaReviewId
 		);
-
 		return intval( $wpdb->get_var( $query ));
 	}
 
@@ -229,13 +198,11 @@ class Database implements OptionsContract
 	 * Gets an array of all saved review IDs by review type
 	 *
 	 * @param string $reviewType
-	 *
 	 * @return array
 	 */
 	public function getReviewIds( $reviewType )
 	{
 		global $wpdb;
-
 		$query = $wpdb->prepare(
 			"SELECT m1.meta_value AS review_id " .
 			"FROM {$wpdb->posts} AS p " .
@@ -248,7 +215,6 @@ class Database implements OptionsContract
 			App::POST_TYPE,
 			$reviewType
 		);
-
 		return array_keys( array_flip( $wpdb->get_col( $query )));
 	}
 
@@ -256,7 +222,6 @@ class Database implements OptionsContract
 	 * Get an object of meta values for a review
 	 *
 	 * @param int $postId
-	 *
 	 * @return object
 	 */
 	public function getReviewMeta( $postId )
@@ -264,7 +229,6 @@ class Database implements OptionsContract
 		$meta = get_post_type( $postId ) == App::POST_TYPE
 			? array_map( 'array_shift', (array) get_post_meta( $postId ))
 			: [];
-
 		return (object) $this->normalizeMeta( $meta );
 	}
 
@@ -288,28 +252,24 @@ class Database implements OptionsContract
 			'rating'       => '',
 			'type'         => '',
 		];
-
 		$args = shortcode_atts( $defaults, $args );
-
 		extract( $args );
-
 		$meta_query = $this->app->make( 'Query' )->buildMeta([
 			'assigned_to' => [
-				'key'   => 'assigned_to',
+				'key' => 'assigned_to',
 				'value' => array_filter( array_map( 'trim', explode( ',', $assigned_to )), 'is_numeric' ),
 				'compare' => 'IN',
 			],
 			'type' => [
-				'key'   => 'review_type',
+				'key' => 'review_type',
 				'value' => $type,
 			],
 			'rating' => [
-				'key'     => 'rating',
-				'value'   => $rating,
+				'key' => 'rating',
+				'value' => $rating,
 				'compare' => '>=',
 			],
 		]);
-
 		$query = [
 			'meta_key'       => 'pinned',
 			'meta_query'     => $meta_query,
@@ -324,11 +284,9 @@ class Database implements OptionsContract
 			'posts_per_page' => $count ? $count : -1,
 			'tax_query'      => $this->app->make( 'Query' )->buildTerms( $this->normalizeTerms( $category )),
 		];
-
 		$reviews = new WP_Query( $query );
-
 		return (object) [
-			'reviews' => array_map([ $this, 'getReview'], $reviews->posts ),
+			'reviews' => array_map( [$this, 'getReview'], $reviews->posts ),
 			'max_num_pages' => $reviews->max_num_pages,
 		];
 	}
@@ -337,25 +295,19 @@ class Database implements OptionsContract
 	 * Get array of meta values for all of a post_type
 	 *
 	 * @param string|array $keys
-	 * @param string       $status
-	 *
+	 * @param string $status
 	 * @return array
 	 */
 	public function getReviewsMeta( $keys, $status = 'publish' )
 	{
 		global $wpdb;
-
 		$query = $this->app->make( 'Query' );
-
-		$keys = array_map([ $this, 'normalizeMetaKey'], (array) $keys );
-
+		$keys = array_map( [$this, 'normalizeMetaKey'], (array) $keys );
 		if( $status == 'all' || empty( $status )) {
 			$status = get_post_stati( ['exclude_from_search' => false ] );
 		}
-
-		$keys   = $query->buildSqlOr( $keys, "pm.meta_key = '%s'" );
+		$keys = $query->buildSqlOr( $keys, "pm.meta_key = '%s'" );
 		$status = $query->buildSqlOr( $status, "p.post_status = '%s'" );
-
 		$query = $wpdb->prepare(
 			"SELECT DISTINCT pm.meta_value FROM {$wpdb->postmeta} pm " .
 			"LEFT JOIN {$wpdb->posts} p ON p.ID = pm.post_id " .
@@ -365,7 +317,6 @@ class Database implements OptionsContract
 			"ORDER BY pm.meta_value",
 			App::POST_TYPE
 		);
-
 		return $wpdb->get_col( $query );
 	}
 
@@ -377,26 +328,21 @@ class Database implements OptionsContract
 	public function getReviewTypes()
 	{
 		global $wpdb;
-
 		$types = $wpdb->get_col(
 			"SELECT DISTINCT(meta_value) " .
 			"FROM {$wpdb->postmeta} " .
 			"WHERE meta_key = 'review_type' " .
 			"ORDER BY meta_value ASC"
 		);
-
 		$types = array_flip( $types );
-
 		$labels = $this->app->make( 'Strings' )->review_types();
-
 		array_walk( $types, function( &$value, $key ) use( $labels ) {
 			$type = array_key_exists( $key, $labels )
-				? $labels[ $key ]
+				? $labels[$key]
 				: ucfirst( $key );
 
 			$value = sprintf( __( '%s reviews', 'site-reviews' ), $type );
 		});
-
 		return $types;
 	}
 
@@ -404,18 +350,15 @@ class Database implements OptionsContract
 	 * Get an array of taxonomy terms
 	 *
 	 * @param string $taxonomy
-	 *
 	 * @return array
 	 */
 	public function getTerms( $taxonomy = '', array $args = [] )
 	{
 		!empty( $taxonomy ) ?: $taxonomy = App::TAXONOMY;
-
 		$terms = get_terms( $taxonomy, wp_parse_args( $args, [
 			'fields'     => 'id=>name',
 			'hide_empty' => false,
 		]));
-
 		return is_array( $terms )
 			? $terms
 			: [];
@@ -445,7 +388,6 @@ class Database implements OptionsContract
 			'title'       => '',
 			'url'         => '',
 		];
-
 		return !empty( $meta )
 			? shortcode_atts( $defaults, $meta )
 			: [];
@@ -459,11 +401,9 @@ class Database implements OptionsContract
 	public function normalizeMetaKey( $metaKey )
 	{
 		$metaKey = strtolower( $metaKey );
-
 		if( in_array( $metaKey, ['id', 'type'] )) {
 			$metaKey = 'review_' . $metaKey;
 		}
-
 		return $metaKey;
 	}
 
@@ -472,26 +412,19 @@ class Database implements OptionsContract
 	 *
 	 * @param string $terms
 	 * @param string $taxonomy
-	 *
 	 * @return array
 	 */
 	public function normalizeTerms( $terms, $taxonomy = '' )
 	{
 		!empty( $taxonomy ) ?: $taxonomy = App::TAXONOMY;
-
 		$terms = array_map( 'trim', explode( ',', $terms ));
 		$terms = array_map( function( $term ) use( $taxonomy ) {
-
 			!is_numeric( $term ) ?: $term = intval( $term );
-
 			$term = term_exists( $term, $taxonomy );
-
 			if( isset( $term['term_id'] )) {
 				return intval( $term['term_id'] );
 			}
-
 		}, $terms );
-
 		return array_filter( $terms );
 	}
 
@@ -499,19 +432,15 @@ class Database implements OptionsContract
 	 * Reverts a review title, date, and content to the originally submitted values
 	 *
 	 * @param string $postId
-	 *
 	 * @return int
 	 */
 	public function revertReview( $postId )
 	{
 		$post = get_post( $postId );
-
 		if( !isset( $post->post_type ) || $post->post_type != App::POST_TYPE ) {
 			return 0;
 		}
-
 		delete_post_meta( $post->ID, '_edit_last' );
-
 		return wp_update_post([
 			'ID'           => $post->ID,
 			'post_content' => get_post_meta( $post->ID, 'content', true ),
@@ -527,57 +456,47 @@ class Database implements OptionsContract
 	 */
 	public function setDefaults( array $args = [] )
 	{
+		$defaultSettings = $currentSettings = [];
 		$defaults = [
 			'data'   => null, // provide custom data instead of using defaults
 			'merge'  => true, // merge defaults with existing saved settings
 			'update' => true, // save generated defaults to database
 		];
-
 		$args = shortcode_atts( $defaults, $args );
-
-		is_array( $args['data'] ) ?: $args['data'] = $this->app->getDefaultSettings();
-
-		$defaultSettings = [];
-		$currentSettings = $args['merge']
-			? $this->removeEmptyValuesFrom( $this->getOptions() )
-			: [];
-
+		if( !is_array( $args['data'] )) {
+			$args['data'] = $this->app->getDefaultSettings();
+		}
+		if( $args['merge'] ) {
+			$currentSettings = $this->removeEmptyValuesFrom( $this->getOptions() );
+		}
 		foreach( $args['data'] as $path => $value ) {
 			// Don't save the default selector values as they are used anyway by default.
 			if( !!$args['update'] && strpos( $path, '.selectors.' ) !== false ) {
 				$value = '';
 			}
-
 			$defaultSettings = $this->setValueToPath( $value, $path, $defaultSettings );
 		}
-
 		$settings = array_replace_recursive( $defaultSettings, $currentSettings );
-
 		if( $args['update'] ) {
 			$option = get_option( $this->getOptionName(), [] );
 			$option = array_replace_recursive( $option, $settings );
-
 			update_option( $this->getOptionName(), $option );
 		}
-
 		return $settings;
 	}
 
 	/**
 	 * Set one or more taxonomy terms to a post
 	 *
-	 * @param int    $post_id
+	 * @param int $post_id
 	 * @param string $terms
 	 * @param string $taxonomy
-	 *
 	 * @return void
 	 */
 	public function setTerms( $post_id, $terms, $taxonomy = '' )
 	{
 		!empty( $taxonomy ) ?: $taxonomy = App::TAXONOMY;
-
 		$terms = $this->normalizeTerms( $terms, $taxonomy );
-
 		if( !empty( $terms )) {
 			$result = wp_set_object_terms( $post_id, $terms, $taxonomy );
 			if( is_wp_error( $result )) {

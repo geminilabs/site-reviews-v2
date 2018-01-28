@@ -658,9 +658,7 @@ class MainController extends BaseController
 		$message = '';
 
 		if( $key == 'logging' ) {
-			$message = $input[ $key ]
-				? __( 'Logging enabled.', 'site-reviews' )
-				: __( 'Logging disabled.', 'site-reviews' );
+			$message = _n( 'Logging disabled.', 'Logging enabled.', (int) empty( $input[$key] ), 'site-reviews' );
 		}
 		else if( $key == 'settings' ) {
 			$message = __( 'Settings updated.', 'site-reviews' );
