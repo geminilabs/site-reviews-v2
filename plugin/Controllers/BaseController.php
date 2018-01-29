@@ -82,19 +82,36 @@ abstract class BaseController
 	 * Render a view and pass any provided data to the view
 	 *
 	 * @param string $view
-	 *
 	 * @return void
 	 */
 	public function render( $view, array $data = [] )
 	{
-		$data['db']      = $this->db;
-		$data['html']    = $this->html; // singleton
-		$data['log']     = $this->log;
+		$data['db'] = $this->db;
+		$data['html'] = $this->html; // singleton
+		$data['log'] = $this->log;
 		$data['notices'] = $this->notices;
-
 		extract( $data );
+		return include $this->app->path.'views/base.php';
+	}
 
-		return include $this->app->path . 'views/base.php';
+	/**
+	 * Render a template and pass any provided data to the view
+	 *
+	 * @param string $view
+	 * @return void
+	 */
+	public function renderTemplate( $view, array $data )
+	{
+		$path = $this->app->path.'views/'.$view.'.php';
+		if( !file_exists( $path ))return;
+		ob_start();
+		include $path;
+		$template = ob_get_clean();
+		foreach( $data as $key => $value ) {
+			if( is_array( $value ))continue;
+			$template = str_replace( sprintf( '{{ data.%s }}', $key ), esc_attr( $value ), $template );
+		}
+		echo $template;
 	}
 
 	/**

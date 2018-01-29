@@ -112,13 +112,8 @@ class Translator
 	public function render( $template, array $entry )
 	{
 		ob_start();
-		include sprintf( '%sviews/strings/%s.php', $this->app->path, $template );
-		$template = ob_get_clean();
-		foreach( $entry as $key => $value ) {
-			if( is_array( $value ))continue;
-			$template = str_replace( sprintf( '{{ data.%s }}', $key ), esc_attr( $value ), $template );
-		}
-		return $template;
+		$this->app->make( 'Controllers\MainController' )->renderTemplate( 'strings/'.$template, $entry );
+		return ob_get_clean();
 	}
 
 	/**
