@@ -1,4 +1,4 @@
-/** global: GLSR, site_reviews_pointers, x */
+/** global: GLSR, site_reviews_pointers, wp, x */
 
 x( function()
 {
@@ -45,5 +45,25 @@ x( function()
 		x( this ).closest( 'tr' ).toggleClass( 'is-expanded' );
 	});
 
-	GLSR.translation.init();
+	new GLSR.search( '#glsr-search-translations', {
+		action: 'search-translations',
+		onInit: function() {
+			this.makeSortable();
+		},
+		onResultClick: function( ev ) {
+			var result = x( ev.target );
+			var entry = result.data( 'entry' );
+			var template = wp.template( 'glsr-string-' + ( entry.p1 ? 'plural' : 'single' ));
+			entry.index = this.options.entriesEl.children().length;
+			entry.prefix = this.options.resultsEl.data( 'prefix' );
+			if( template ) {
+				this.options.entriesEl.append( template( entry ));
+				this.options.exclude.push({ id: entry.id });
+				this.options.results = this.options.results.filter( function( i, el ) {
+					return el !== result.get(0);
+				});
+			}
+			this.setVisibility();
+		},
+	});
 });

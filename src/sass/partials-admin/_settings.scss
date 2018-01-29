@@ -182,7 +182,7 @@ body.branch-4-1 {
 	display: none;
 }
 
-.glsr-strings-searchbox,
+.glsr-search-box,
 .glsr-strings-form {
 	position: relative;
 	max-width: 800px;
@@ -191,7 +191,7 @@ body.branch-4-1 {
 	}
 }
 
-.glsr-strings-searchbox {
+.glsr-search-box {
 	position: relative;
 	margin: 1em 0;
 }
@@ -213,7 +213,7 @@ body.branch-4-1 {
 	}
 }
 
-.glsr-strings-search {
+.glsr-search-input {
 	position: relative;
 	height: 32px;
 	width: 100%;
@@ -225,7 +225,7 @@ body.branch-4-1 {
 	z-index: 2;
 }
 
-.glsr-strings-results {
+.glsr-search-results {
 	position: absolute;
 	width: 100%;
 	max-height: 310px;
@@ -334,7 +334,7 @@ body.branch-4-1 {
 }
 
 @media screen and (max-width: 782px) {
-	.glsr-strings-results > span {
+	.glsr-search-results > span {
 		padding: 0 10px;
 	}
 	.glsr-string-td1 {

@@ -35,8 +35,8 @@ elixir(( mix ) => mix
 		'admin/init.js',
 		'admin/functions.js',
 		'admin/pinned.js',
+		'admin/search.js',
 		'admin/shortcode.js',
-		'admin/translation.js',
 		'admin/ready.js',
 	], paths.dest + 'js/site-reviews-admin.js' )
 	.scripts([

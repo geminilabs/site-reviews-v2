@@ -101,7 +101,7 @@ class AjaxController extends BaseController
 	/**
 	 * Search available language strings
 	 */
-	public function ajaxsearchTranslations( $request )
+	public function ajaxSearchTranslations( $request )
 	{
 		if( empty( $request['exclude'] )) {
 			$request['exclude'] = [];
@@ -111,7 +111,6 @@ class AjaxController extends BaseController
 			->exclude()
 			->exclude( $request['exclude'] )
 			->renderResults();
-
 		wp_send_json_success([
 			'empty' => sprintf( '<div>%s</div>', __( 'Nothing found.', 'site-reviews' )),
 			'items' => $results,

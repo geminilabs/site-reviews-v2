@@ -1,10 +1,10 @@
 <?php defined( 'WPINC' ) || die; ?>
 
-<div class="glsr-strings-searchbox">
+<div class="glsr-search-box">
 	<span class="screen-reader-text"><?= __( 'Search for translatable text', 'site-reviews' ); ?></span>
 	<div class="glsr-spinner"><span class="spinner"></span></div>
-	<input type="search" class="glsr-strings-search" autocomplete="off" placeholder="<?= __( 'Search for translatable text...', 'site-reviews' ); ?>">
-	<div class="glsr-strings-results" data-prefix="<?= $db->getOptionName(); ?>"></div>
+	<input type="search" id="glsr-search-translations" class="glsr-search-input" autocomplete="off" placeholder="<?= __( 'Search for translatable text...', 'site-reviews' ); ?>">
+	<div class="glsr-search-results" data-prefix="<?= $db->getOptionName(); ?>"></div>
 </div>
 
 <?= $html->renderForm( "{$tabView}/{$tabViewSection}" ); ?>
