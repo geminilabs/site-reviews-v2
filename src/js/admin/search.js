@@ -2,8 +2,9 @@
 
 GLSR.search = function( el, options )
 {
+	this.el = Object.prototype.toString.call( el ) === "[object String]" ? x( el ) : el;
 	this.options = options;
-	this.searchEl = Object.prototype.toString.call( el ) === "[object String]" ? x( el ) : el;
+	this.searchTerm = null;
 	this.init();
 };
 
@@ -11,24 +12,29 @@ GLSR.search.prototype =
 {
 	defaults: {
 		action: null,
-		entriesEl: x( '.glsr-strings-table tbody' ),
 		exclude: [],
-		noResults: '',
-		results: {},
-		resultsEl: x( '.glsr-search-results' ),
-		searchBoxClass: 'glsr-search-box',
-		selected: -1,
-		selectedClass: 'glsr-selected-result',
 		onInit: null,
 		onResultClick: null,
+		results: {},
+		selected: -1,
+		selectedClass: 'glsr-selected-result',
+		selectorEntries: '.glsr-strings-table tbody',
+		selectorResults: '.glsr-search-results',
+		selectorSearch: '.glsr-search-input',
+		// entriesEl
+		// resultsEl
+		// searchEl
 	},
 
 	/** @return void */
 	init: function()
 	{
 		this.options = x.extend( {}, this.defaults, this.options );
-		if( !this.searchEl.length )return;
-		this.searchEl.attr( 'aria-describedby', 'live-search-desc' );
+		if( !this.el.length )return;
+		this.options.entriesEl = this.el.parent().find( this.options.selectorEntries );
+		this.options.resultsEl = this.el.find( this.options.selectorResults );
+		this.options.searchEl = this.el.find( this.options.selectorSearch );
+		this.options.searchEl.attr( 'aria-describedby', 'live-search-desc' );
 		if( typeof this.options.onInit === 'function' ) {
 			this.options.onInit.call( this );
 		}
@@ -38,8 +44,8 @@ GLSR.search.prototype =
 	/** @return void */
 	initEvents: function()
 	{
-		this.searchEl.on( 'input', _.debounce( this.onSearchInput.bind( this ), 500 ));
-		this.searchEl.on( 'keyup', this.onSearchKeyup.bind( this ));
+		this.options.searchEl.on( 'input', _.debounce( this.onSearchInput.bind( this ), 500 ));
+		this.options.searchEl.on( 'keyup', this.onSearchKeyup.bind( this ));
 		x( document ).on( 'click', this.onDocumentClick.bind( this ));
 		x( document ).on( 'keydown', this.onDocumentKeydown.bind( this ));
 	},
@@ -56,7 +62,8 @@ GLSR.search.prototype =
 	{
 		this.abort();
 		this.options.resultsEl.empty();
-		x( 'body' ).removeClass( 'glsr-focus loading-content' );
+		this.el.removeClass( 'is-active' );
+		x( 'body' ).removeClass( 'glsr-focus' );
 	},
 
 	/** @return void */
@@ -75,7 +82,7 @@ GLSR.search.prototype =
 		if( this.options.selected < 0 ) {
 			// reached the start (should now allow keydown scroll)
 			this.options.selected = -1;
-			this.searchEl.focus();
+			this.options.searchEl.focus();
 		}
 		if( this.options.selected >= this.options.results.length ) {
 			// reached the end (should now allow keydown scroll)
@@ -91,8 +98,7 @@ GLSR.search.prototype =
 	/** @return void */
 	onDocumentClick: function( ev )
 	{
-		var searchbox = ev.target.closest( '.' + this.options.searchBoxClass );
-		if( !searchbox && x( 'body' ).hasClass( 'glsr-focus' )) {
+		if( !this.el && x( 'body' ).hasClass( 'glsr-focus' )) {
 			this.clearResults();
 		}
 	},
@@ -111,12 +117,12 @@ GLSR.search.prototype =
 			}
 		}
 		if( GLSR.keys.UP === ev.which ) {
-			this.navigateResults(-1);
 			ev.preventDefault();
+			this.navigateResults(-1);
 		}
 		if( GLSR.keys.DOWN === ev.which ) {
-			this.navigateResults(1);
 			ev.preventDefault();
+			this.navigateResults(1);
 		}
 	},
 
@@ -143,16 +149,16 @@ GLSR.search.prototype =
 		if( this.searchTerm === '' ) {
 			return this.reset();
 		}
-		x( 'body' ).addClass( 'loading-content' );
+		this.el.addClass( 'is-active' );
 		this.searchRequest = wp.ajax.post( site_reviews.action, {
 			_nonce: site_reviews.ajaxnonce,
 			request: {
 				action: this.options.action,
 				exclude: this.options.exclude,
-				search: ev.target.value,
+				search: this.searchTerm,
 			},
 		}).done( function( response ) {
-			x( 'body' ).removeClass( 'loading-content' );
+			this.el.removeClass( 'is-active' );
 			this.displayResults( response.items ? response.items : response.empty );
 			this.options.results = this.options.resultsEl.children();
 			delete this.searchRequest;
@@ -175,7 +181,7 @@ GLSR.search.prototype =
 	{
 		this.clearResults();
 		this.options.results = {};
-		this.searchEl.val( '' );
+		this.options.searchEl.val( '' );
 	},
 };
 
@@ -216,6 +222,17 @@ GLSR.search.prototype.onEntryDelete = function( ev )
 {
 	ev.preventDefault();
 	this.deleteEntry( x( ev.target ).closest( 'tr' ).index() );
+};
+
+GLSR.search.prototype.onUnassign = function( ev )
+{
+	ev.preventDefault();
+	var assigned = this.el.find( '.description' );
+	this.el.find( 'input#assigned_to' ).val( '' );
+	assigned.find( 'a' ).css({ color:'#c00' });
+	assigned.fadeOut( 'fast', function() {
+		x( this ).html( '' ).show();
+	});
 };
 
 GLSR.search.prototype.reindexRows = function()

@@ -10,9 +10,11 @@
 
 namespace GeminiLabs\SiteReviews\Controllers;
 
+use GeminiLabs\SiteReviews\App;
 use GeminiLabs\SiteReviews\Controllers\BaseController;
 use GeminiLabs\SiteReviews\Commands\ChangeStatus;
 use GeminiLabs\SiteReviews\Commands\TogglePinned;
+use WP_Query;
 
 class AjaxController extends BaseController
 {
@@ -95,6 +97,17 @@ class AjaxController extends BaseController
 			'errors' => $session->get( "{$request['form_id']}-errors", false, true ),
 			'message' => $response,
 			'recaptcha' => $session->get( "{$request['form_id']}-recaptcha", false, true ),
+		]);
+	}
+
+	/**
+	 * Search available language strings
+	 */
+	public function ajaxSearchPosts( $request )
+	{
+		wp_send_json_success([
+			'empty' => sprintf( '<div>%s</div>', __( 'Nothing found.', 'site-reviews' )),
+			'items' => $this->db->searchPosts( $request['search'] ),
 		]);
 	}
 

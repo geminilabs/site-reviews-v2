@@ -70,24 +70,6 @@ GLSR.normalizeValues = function( array )
 	return array.map( GLSR.normalizeValue );
 };
 
-GLSR.onChangeAssignedTo = function( ev )
-{
-	if( !this.value ) {
-		ev.target.nextElementSibling.innerHTML = '';
-		return;
-	}
-	var spinner = x( ev.target.previousElementSibling );
-	var request = {
-		action: 'change-assigned-to',
-		ID: this.value,
-	};
-	spinner.addClass( 'is-active' );
-	GLSR.postAjax( ev, request, function( response ) {
-		ev.target.nextElementSibling.innerHTML = response;
-		spinner.removeClass( 'is-active' );
-	});
-};
-
 GLSR.onChangeStatus = function( ev )
 {
 	var post_id = this.href.match(/post=([0-9]+)/)[1];
@@ -156,14 +138,6 @@ GLSR.onFieldChange = function()
 		catch( e ) {
 			console.error( 'JSON Error: ' + depends[i] );
 		}
-	}
-};
-
-GLSR.onKeypressAssignedTo = function( ev )
-{
-	if( ev.keyCode === 13 ) {
-		ev.preventDefault();
-		ev.target.blur();
 	}
 };
 

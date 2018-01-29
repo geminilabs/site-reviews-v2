@@ -34,8 +34,6 @@ x( function()
 		}
 	});
 
-	x( document ).on( 'change', 'input#assigned_to', GLSR.onChangeAssignedTo );
-	x( document ).on( 'keypress', 'input#assigned_to', GLSR.onKeypressAssignedTo );
 	x( document ).on( 'click', '.glsr-mce-button', GLSR.shortcode.toggle );
 	x( document ).on( 'click', '.glsr-mce-menu-item', GLSR.shortcode.trigger );
 	x( document ).on( 'click', 'a.change-site-review-status', GLSR.onChangeStatus );
@@ -64,6 +62,27 @@ x( function()
 				});
 			}
 			this.setVisibility();
+		},
+	});
+
+	new GLSR.search( '#glsr-search-posts', {
+		action: 'search-posts',
+		onInit: function() {
+			this.el.on( 'click', '.glsr-remove-button', this.onUnassign.bind( this ));
+		},
+		onResultClick: function( ev ) {
+			var result = x( ev.target );
+			var template = wp.template( 'glsr-assigned-post' );
+			var entry = {
+				url: result.data( 'url' ),
+				title: result.text(),
+			};
+			if( template ) {
+				this.el.find( 'input#assigned_to' ).val( result.data( 'id' ));
+				this.el.find( '.description' ).html( template( entry ));
+				this.el.on( 'click', '.glsr-remove-button', this.onUnassign.bind( this ));
+				this.reset();
+			}
 		},
 	});
 });

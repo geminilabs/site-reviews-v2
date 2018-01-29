@@ -5,7 +5,7 @@ Tags: best reviews, business ratings, business reviews, curated reviews, moderat
 Requires at least: 4.0.0
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.10.4
+Stable tag: 2.11.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -136,7 +136,8 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 
 == Changelog ==
 
-= 2.10.5 (2018-) =
+= 2.11.0 (2018-) =
+- [feature] Added an autocomplete searchbox in the Assigned To metabox.
 - Fixed internal IP detection
 
 = 2.10.4 (2018-01-26) =

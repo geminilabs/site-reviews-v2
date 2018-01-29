@@ -194,6 +194,12 @@ body.branch-4-1 {
 .glsr-search-box {
 	position: relative;
 	margin: 1em 0;
+	&.is-active .spinner {
+		visibility: visible;
+	}
+	&.is-active input[type="search"]::-webkit-search-cancel-button {
+		display: none;
+	}
 }
 
 .glsr-spinner {
@@ -215,14 +221,16 @@ body.branch-4-1 {
 
 .glsr-search-input {
 	position: relative;
-	height: 32px;
 	width: 100%;
-	font-size: 16px;
 	font-weight: 300;
 	line-height: 1.5;
 	padding: 3px 5px;
 	margin: 0;
 	z-index: 2;
+	.site-review_page_settings & {
+		height: 32px;
+		font-size: 16px;
+	}
 }
 
 .glsr-search-results {

@@ -450,6 +450,45 @@ class Database implements OptionsContract
 	}
 
 	/**
+	 * @param string $searchTerm
+	 * @return string
+	 */
+	public function searchPosts( $searchTerm )
+	{
+		$args = [
+			'post_type' => 'any',
+			'post_status' => 'publish',
+		];
+		if( is_numeric( $searchTerm )) {
+			$args['post__in'] = [$searchTerm];
+		}
+		else {
+			$args['s'] = $searchTerm;
+			$args['posts_per_page'] = 10;
+			$args['orderby'] = 'relevance';
+		}
+		$results = '';
+		$query = $this->app->make( 'Query' );
+		add_filter( 'posts_search', [$query, 'filterSearchByTitle'], 500, 2 );
+		$search = new WP_Query( $args );
+		remove_filter( 'posts_search', [$query, 'filterSearchByTitle'], 500 );
+		if( $search->have_posts() ) {
+			while( $search->have_posts() ) {
+				$search->the_post();
+				ob_start();
+				$this->app->make( 'Controllers\MainController' )->render( 'edit/search-result', [
+					'ID' => get_the_ID(),
+					'permalink' => esc_url( get_permalink() ),
+					'title' => esc_attr( get_the_title() ),
+				]);
+				$results .= ob_get_clean();
+			}
+			wp_reset_postdata();
+		}
+		return $results;
+	}
+
+	/**
 	 * Set the default settings
 	 *
 	 * @return array

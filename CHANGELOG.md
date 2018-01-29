@@ -18,7 +18,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
-## [2.10.5] = 2018-
+## [2.11.0] = 2018-
+
+### Added
+- [feature] Added an autocomplete searchbox in the Assigned To metabox.
 
 ### Fixed
 - Fixed internal IP detection

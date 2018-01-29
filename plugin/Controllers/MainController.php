@@ -426,17 +426,20 @@ class MainController extends BaseController
 	public function renderAssignedToMetabox( $post )
 	{
 		if( $post->post_type != App::POST_TYPE )return;
-
 		$assignedTo = get_post_meta( $post->ID, 'assigned_to', true );
-		$permalink = $this->html->renderPartial( 'link', [
-			'post_id' => $assignedTo,
-		]);
-
+		$template = '';
+		if( $assignedTo && $assignedPost = get_post( $assignedTo )) {
+			ob_start();
+			$this->renderTemplate( 'edit/assigned-post', [
+				'url' => get_permalink( $assignedPost ),
+				'title' => get_the_title( $assignedPost ),
+			]);
+			$template = ob_get_clean();
+		}
 		wp_nonce_field( 'assigned_to', '_nonce-assigned-to', false );
-
 		$this->render( 'edit/metabox-assigned-to', [
-			'ID' => $assignedTo,
-			'permalink' => $permalink,
+			'id' => $assignedTo,
+			'template' => $template,
 		]);
 	}
 
