@@ -763,7 +763,6 @@ class MainController extends BaseController
 	 * Gets the metabox details
 	 *
 	 * @param object $review
-	 *
 	 * @return array
 	 */
 	protected function getMetaboxDetails( $review )
@@ -771,24 +770,23 @@ class MainController extends BaseController
 		$reviewTypeFallback = empty( $review->review_type )
 			? __( 'Unknown', 'site-reviews' )
 			: ucfirst( $review->review_type );
-
 		$reviewType = sprintf( __( '%s review', 'site-reviews' ),
 			glsr_resolve( 'Strings' )->review_types( $review->review_type, $reviewTypeFallback )
 		);
-
 		if( $review->url ) {
 			$reviewType = sprintf( '<a href="%s" target="_blank">%s</a>', $review->url, $reviewType );
 		}
-
+		$email = $review->email
+			? sprintf( '<a href="mailto:%1$s?subject=%3$s %2$s">%1$s</a>', $review->email, esc_attr( $review->title ), __( 'RE:', 'site-reviews' ))
+			: '&mdash;';
 		$metabox = [
 			__( 'Rating', 'site-reviews' )   => $this->html->renderPartial( 'star-rating', ['rating' => $review->rating] ),
 			__( 'Type', 'site-reviews' )     => $reviewType,
 			__( 'Date', 'site-reviews' )     => get_date_from_gmt( $review->date, 'F j, Y' ),
 			__( 'Reviewer', 'site-reviews' ) => $review->author,
-			__( 'Email', 'site-reviews' )    => $review->email ? sprintf( '<a href="mailto:%1$s">%1$s</a>', $review->email ) : '&mdash;',
-			__( 'Avatar', 'site-reviews' )   => sprintf( '<img src="%s" width="96">', $review->avatar ),
+			__( 'Email', 'site-reviews' ) => $email,
+			__( 'Avatar', 'site-reviews' ) => sprintf( '<img src="%s" width="96">', $review->avatar ),
 		];
-
 		return apply_filters( 'site-reviews/metabox/details', $metabox, $review );
 	}
 
