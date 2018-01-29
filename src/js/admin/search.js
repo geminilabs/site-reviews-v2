@@ -98,7 +98,7 @@ GLSR.search.prototype =
 	/** @return void */
 	onDocumentClick: function( ev )
 	{
-		if( !this.el && x( 'body' ).hasClass( 'glsr-focus' )) {
+		if( x( ev.target ).find( this.el ).length && x( 'body' ).hasClass( 'glsr-focus' )) {
 			this.clearResults();
 		}
 	},
