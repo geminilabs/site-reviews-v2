@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Added
 - [feature] Added an autocomplete searchbox in the Assigned To metabox.
 - Added a default subject to the mailto link in the details metabox
+- Added a link to the WordPress user who submitted the review in the details metabox
 
 ### Changed
 - Changed author name default to "Anonymous"

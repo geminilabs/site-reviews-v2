@@ -776,14 +776,18 @@ class MainController extends BaseController
 		if( $review->url ) {
 			$reviewType = sprintf( '<a href="%s" target="_blank">%s</a>', $review->url, $reviewType );
 		}
+		$reviewer = $review->user_id
+			? sprintf( '<a href="%s">%s</a>', get_author_posts_url(  ), get_the_author_meta( 'display_name', $review->user_id ))
+			: __( 'Unregistered user', 'site-reviews' );
 		$email = $review->email
 			? sprintf( '<a href="mailto:%1$s?subject=%3$s %2$s">%1$s</a>', $review->email, esc_attr( $review->title ), __( 'RE:', 'site-reviews' ))
 			: '&mdash;';
 		$metabox = [
-			__( 'Rating', 'site-reviews' )   => $this->html->renderPartial( 'star-rating', ['rating' => $review->rating] ),
-			__( 'Type', 'site-reviews' )     => $reviewType,
-			__( 'Date', 'site-reviews' )     => get_date_from_gmt( $review->date, 'F j, Y' ),
-			__( 'Reviewer', 'site-reviews' ) => $review->author,
+			__( 'Rating', 'site-reviews' ) => $this->html->renderPartial( 'star-rating', ['rating' => $review->rating] ),
+			__( 'Type', 'site-reviews' ) => $reviewType,
+			__( 'Date', 'site-reviews' ) => get_date_from_gmt( $review->date, 'F j, Y' ),
+			__( 'Reviewer', 'site-reviews' ) => $reviewer,
+			__( 'Name', 'site-reviews' ) => $review->author,
 			__( 'Email', 'site-reviews' ) => $email,
 			__( 'Avatar', 'site-reviews' ) => sprintf( '<img src="%s" width="96">', $review->avatar ),
 		];
