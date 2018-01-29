@@ -638,7 +638,7 @@ class ReviewController extends BaseController
 			'content'   => '',
 			'email'     => ( $user->exists() ? $user->user_email : '' ),
 			'form_id'   => '',
-			'name'      => ( $user->exists() ? $user->display_name : __( 'Anonymous', 'site-reviews' )),
+			'name'      => ( $user->exists() ? $user->display_name : '' ),
 			'rating'    => '0',
 			'terms'     => '',
 			'title'     => '',

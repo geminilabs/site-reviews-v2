@@ -23,6 +23,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Added
 - [feature] Added an autocomplete searchbox in the Assigned To metabox.
 
+### Changed
+- Changed author name default to "Anonymous"
+
 ### Fixed
 - Fixed internal IP detection
 

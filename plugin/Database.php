@@ -229,7 +229,7 @@ class Database implements OptionsContract
 		$meta = get_post_type( $postId ) == App::POST_TYPE
 			? array_map( 'array_shift', (array) get_post_meta( $postId ))
 			: [];
-		return (object) $this->normalizeMeta( $meta );
+		return (object) $this->normalizeMeta( array_filter( $meta, 'strlen' ));
 	}
 
 	/**
@@ -372,7 +372,7 @@ class Database implements OptionsContract
 	public function normalizeMeta( array $meta )
 	{
 		$defaults = [
-			'author'      => '',
+			'author'      => __( 'Anonymous', 'site-reviews' ),
 			'assigned_to' => '',
 			'avatar'      => '',
 			'content'     => '',

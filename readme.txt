@@ -138,6 +138,7 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 
 = 2.11.0 (2018-) =
 - [feature] Added an autocomplete searchbox in the Assigned To metabox.
+- Changed author name default to "Anonymous"
 - Fixed internal IP detection
 
 = 2.10.4 (2018-01-26) =
