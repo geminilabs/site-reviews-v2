@@ -241,17 +241,12 @@ class ReviewController extends BaseController
 	{
 		$session = $this->app->make( 'Session' );
 
+		// Validation
 		$validatedRequest = $this->validateSubmittedReview( $request );
 		if( !is_array( $validatedRequest )) {
 			return __( 'Please fix the submission errors.', 'site-reviews' );
 		}
-
-		if( !empty( $request['gotcha'] )) {
-			glsr_resolve( 'Log\Logger' )->warning( 'The Honeypot caught a bad submission:' );
-			glsr_resolve( 'Log\Logger' )->warning( $request );
-			return __( 'The review submission failed. Please notify the site administrator.', 'site-reviews' );
-		}
-
+		// Custom validation
 		$customValidation = apply_filters( 'site-reviews/validate/review/submission', true, $validatedRequest );
 		if( $customValidation !== true ) {
 			$session->set( "{$validatedRequest['form_id']}-errors", [] );
@@ -260,22 +255,37 @@ class ReviewController extends BaseController
 				? $customValidation
 				: __( 'The review submission failed. Please notify the site administrator.', 'site-reviews' );
 		}
-
+		// Honeypot validation
+		if( !empty( $validatedRequest['gotcha'] )) {
+			$session->set( "{$validatedRequest['form_id']}-errors", [] );
+			glsr_resolve( 'Log\Logger' )->warning( 'The Honeypot caught a bad submission:' );
+			glsr_resolve( 'Log\Logger' )->warning( $validatedRequest );
+			return __( 'The review submission failed. Please notify the site administrator.', 'site-reviews' );
+		}
+		// reCAPTCHA validation
 		$validateRecaptcha = $this->validateRecaptcha();
-
-		// recaptcha response was empty so it hasn't been set yet
 		if( is_null( $validateRecaptcha )) {
-			$session->set( "{$request['form_id']}-recaptcha", true );
+			// recaptcha response was empty so it hasn't been set yet
+			$session->set( "{$validatedRequest['form_id']}-recaptcha", true );
 			return;
 		}
-
 		if( !$validateRecaptcha ) {
-			$session->set( "{$request['form_id']}-errors", [] );
-			$session->set( "{$request['form_id']}-recaptcha", 'reset' );
+			$session->set( "{$validatedRequest['form_id']}-errors", [] );
+			$session->set( "{$validatedRequest['form_id']}-recaptcha", 'reset' );
 			return __( 'The reCAPTCHA verification failed. Please notify the site administrator.', 'site-reviews' );
 		}
 
-		return $this->execute( new SubmitReview( $validatedRequest ));
+		$submitReview = new SubmitReview( $validatedRequest );
+
+		// Akismet validation
+		if( $this->app->make( 'GeminiLabs\SiteReviews\Akismet' )->isSpam( $submitReview )) {
+			$session->set( "{$validatedRequest['form_id']}-errors", [] );
+			glsr_resolve( 'Log\Logger' )->warning( 'Akismet caught a spam submission:' );
+			glsr_resolve( 'Log\Logger' )->warning( $validatedRequest );
+			return __( 'Your review cannot be submitted at this time. Please try again later.', 'site-reviews' );
+		}
+
+		return $this->execute( $submitReview );
 	}
 
 	/**

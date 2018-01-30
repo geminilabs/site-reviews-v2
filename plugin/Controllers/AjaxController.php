@@ -36,7 +36,6 @@ class AjaxController extends BaseController
 	public function ajaxChangeReviewStatus( $request )
 	{
 		$response = $this->execute( new ChangeStatus( $request ));
-
 		wp_send_json( $response );
 	}
 
@@ -46,9 +45,8 @@ class AjaxController extends BaseController
 	public function ajaxClearLog()
 	{
 		$this->app->make( 'Controllers\MainController' )->postClearLog();
-
 		wp_send_json([
-			'log'     => __( 'Log is empty', 'site-reviews' ),
+			'log' => __( 'Log is empty', 'site-reviews' ),
 			'notices' => $this->notices->show( false ),
 		]);
 	}
@@ -61,15 +59,12 @@ class AjaxController extends BaseController
 	public function ajaxMceShortcode( $request )
 	{
 		$shortcode = $request['shortcode'];
-
+		$response = false;
 		if( array_key_exists( $shortcode, glsr_app()->mceShortcodes )) {
-
 			$data = glsr_app()->mceShortcodes[ $shortcode ];
-
 			if( !empty( $data['errors'] )) {
 				$data['btn_okay'] = [ esc_html__( 'Okay', 'site-reviews' ) ];
 			}
-
 			$response = [
 				'body'      => $data['fields'],
 				'close'     => $data['btn_close'],
@@ -78,10 +73,6 @@ class AjaxController extends BaseController
 				'title'     => $data['title'],
 			];
 		}
-		else {
-			$response = false;
-		}
-
 		wp_send_json( $response );
 	}
 
@@ -91,8 +82,7 @@ class AjaxController extends BaseController
 	public function ajaxPostReview( $request )
 	{
 		$response = $this->app->make( 'Controllers\ReviewController' )->postSubmitReview( $request );
-		$session  = $this->app->make( 'Session' );
-
+		$session = $this->app->make( 'Session' );
 		wp_send_json([
 			'errors' => $session->get( "{$request['form_id']}-errors", false, true ),
 			'message' => $response,
@@ -139,7 +129,7 @@ class AjaxController extends BaseController
 
 		wp_send_json([
 			'notices' => $this->notices->show( false ),
-			'pinned'  => (bool) $response,
+			'pinned' => (bool) $response,
 		]);
 	}
 }

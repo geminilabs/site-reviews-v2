@@ -478,6 +478,16 @@ class Settings
 		]);
 
 		$this->addSetting( $formId, [
+			'type' => 'yesno_inline',
+			'name' => 'akismet',
+			'label' => __( 'Enable Akismet Integration', 'site-reviews' ),
+			'default' => 'no',
+			'desc' => sprintf( __( 'the %s integration provides spam-filtering for your reviews. In order for this setting to have any affect, you will need to first install and activate the Akismet plugin and set up a WordPress.com API key.', 'site-reviews' ),
+				sprintf( '<a href="https://akismet.com" target="_blank">%s</a>', __( 'Akismet plugin', 'site-reviews' ))
+			),
+		]);
+
+		$this->addSetting( $formId, [
 			'type'  => 'select',
 			'name'  => 'recaptcha.integration',
 			'label' => __( 'Invisible reCAPTCHA', 'site-reviews' ),
@@ -487,7 +497,7 @@ class Settings
 				'invisible-recaptcha' => _x( 'Use 3rd-party plugin: Invisible reCaptcha', 'plugin name', 'site-reviews' ),
 			],
 			'desc'  => sprintf( __( 'Invisible reCAPTCHA is a free anti-spam service from Google. To use it, you will need to %s for an API key pair for your site. If you are already using a reCAPTCHA plugin listed here, please select it; otherwise choose "Use reCAPTCHA".', 'site-reviews' ),
-				sprintf( '<a href="http://www.google.com/recaptcha/admin" target="_blank">%s</a>', __( 'sign up', 'site-reviews' ))
+				sprintf( '<a href="https://www.google.com/recaptcha/admin" target="_blank">%s</a>', __( 'sign up', 'site-reviews' ))
 			),
 		]);
 

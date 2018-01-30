@@ -14,7 +14,7 @@ All proposed features are subject to change and sorted alphabetically rather tha
 - [ ] Customization of stars, fonts, colors, etc. @v3
 - [ ] Drag-drop order of review fields @v3
 - [ ] Drag-drop order of submission form fields @v3
-- [ ] Integrate with Akismet to catch spam submissions
+- [x] Integrate with Akismet to provide spam-validation
 - [ ] Integrate with WooCommerce reviews @addon
 - [ ] Integrate with WordPress comment system @v3
 - [ ] Multiple star-ratings in a review (for rating individual services of a business) @v3

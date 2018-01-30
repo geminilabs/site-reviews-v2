@@ -59,19 +59,19 @@ msgstr "Update WordPress"
 msgid "Title"
 msgstr "Title"
 
-#: plugin/Commands/RegisterPostType.php:23, plugin/Controllers/MainController.php:786, plugin/Shortcodes/Buttons/SiteReviews.php:124
+#: plugin/Commands/RegisterPostType.php:23, plugin/Controllers/MainController.php:788, plugin/Shortcodes/Buttons/SiteReviews.php:124
 msgid "Date"
 msgstr "Date"
 
-#: plugin/Controllers/AjaxController.php:51
+#: plugin/Controllers/AjaxController.php:49
 msgid "Log is empty"
 msgstr "Log is empty"
 
-#: plugin/Controllers/AjaxController.php:70
+#: plugin/Controllers/AjaxController.php:66
 msgid "Okay"
 msgstr "Okay"
 
-#: plugin/Controllers/AjaxController.php:109, plugin/Controllers/AjaxController.php:128
+#: plugin/Controllers/AjaxController.php:99, plugin/Controllers/AjaxController.php:118
 msgid "Nothing found."
 msgstr "Nothing found."
 
@@ -129,11 +129,11 @@ msgstr "Site Reviews"
 msgid "Author"
 msgstr "Author"
 
-#: plugin/Controllers/MainController.php:225, plugin/Controllers/MainController.php:785
+#: plugin/Controllers/MainController.php:225, plugin/Controllers/MainController.php:787
 msgid "Type"
 msgstr "Type"
 
-#: plugin/Controllers/MainController.php:226, plugin/Controllers/MainController.php:784, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:134, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:63, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:109
+#: plugin/Controllers/MainController.php:226, plugin/Controllers/MainController.php:786, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:134, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:63, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:109
 msgid "Rating"
 msgstr "Rating"
 
@@ -247,23 +247,35 @@ msgstr "Nothing to Revert"
 msgid "Revert Changes"
 msgstr "Revert Changes"
 
-#: plugin/Controllers/MainController.php:772
+#: plugin/Controllers/MainController.php:771
 msgid "Unknown"
 msgstr "Unknown"
 
-#: plugin/Controllers/MainController.php:775
+#: plugin/Controllers/MainController.php:773
 msgid "%s review"
 msgstr "%s review"
 
-#: plugin/Controllers/MainController.php:787
+#: plugin/Controllers/MainController.php:781
+msgid "Unregistered user"
+msgstr "Unregistered user"
+
+#: plugin/Controllers/MainController.php:783
+msgid "RE:"
+msgstr "RE:"
+
+#: plugin/Controllers/MainController.php:789
 msgid "Reviewer"
 msgstr "Reviewer"
 
-#: plugin/Controllers/MainController.php:788, plugin/Settings.php:476, plugin/Shortcodes/Buttons/SiteReviewsForm.php:75
+#: plugin/Controllers/MainController.php:790, plugin/Settings.php:475, plugin/Shortcodes/Buttons/SiteReviewsForm.php:80
+msgid "Name"
+msgstr "Name"
+
+#: plugin/Controllers/MainController.php:791, plugin/Settings.php:476, plugin/Shortcodes/Buttons/SiteReviewsForm.php:75
 msgid "Email"
 msgstr "Email"
 
-#: plugin/Controllers/MainController.php:789
+#: plugin/Controllers/MainController.php:792
 msgid "Avatar"
 msgstr "Avatar"
 
@@ -305,11 +317,11 @@ msgid_plural "%s reviews restored from the Trash."
 msgstr[0] "%s review restored from the Trash."
 msgstr[1] "%s reviews restored from the Trash."
 
-#: plugin/Controllers/ReviewController.php:246
+#: plugin/Controllers/ReviewController.php:247
 msgid "Please fix the submission errors."
 msgstr "Please fix the submission errors."
 
-#: plugin/Controllers/ReviewController.php:252, plugin/Controllers/ReviewController.php:261
+#: plugin/Controllers/ReviewController.php:256, plugin/Controllers/ReviewController.php:263
 msgid "The review submission failed. Please notify the site administrator."
 msgstr "The review submission failed. Please notify the site administrator."
 
@@ -317,17 +329,21 @@ msgstr "The review submission failed. Please notify the site administrator."
 msgid "The reCAPTCHA verification failed. Please notify the site administrator."
 msgstr "The reCAPTCHA verification failed. Please notify the site administrator."
 
-#: plugin/Controllers/ReviewController.php:641, plugin/Database.php:375, plugin/Html/Partials/Reviews.php:94
-msgid "Anonymous"
-msgstr "Anonymous"
+#: plugin/Controllers/ReviewController.php:285
+msgid "Your review cannot be submitted at this time. Please try again later."
+msgstr "Your review cannot be submitted at this time. Please try again later."
 
-#: plugin/Controllers/ReviewController.php:652, plugin/Html/Partials/Reviews.php:279
+#: plugin/Controllers/ReviewController.php:662, plugin/Html/Partials/Reviews.php:276
 msgid "No Title"
 msgstr "No Title"
 
 #: plugin/Database.php:344
 msgid "%s reviews"
 msgstr "%s reviews"
+
+#: plugin/Database.php:375
+msgid "Anonymous"
+msgstr "Anonymous"
 
 #: plugin/Date.php:44
 msgid "%s second ago"
@@ -461,43 +477,43 @@ msgstr "No reviews were found."
 msgid "Review of %s"
 msgstr "Review of %s"
 
-#: plugin/Html/Partials/Reviews.php:162
+#: plugin/Html/Partials/Reviews.php:159
 msgid "Page"
 msgstr "Page"
 
-#: plugin/Html/Partials/Reviews.php:166
+#: plugin/Html/Partials/Reviews.php:163
 msgid "Next &rarr;"
 msgstr "Next &rarr;"
 
-#: plugin/Html/Partials/Reviews.php:167
+#: plugin/Html/Partials/Reviews.php:164
 msgid "&larr; Previous"
 msgstr "&larr; Previous"
 
-#: plugin/Html/Partials/Reviews.php:193
+#: plugin/Html/Partials/Reviews.php:190
 msgid "Previous"
 msgstr "Previous"
 
-#: plugin/Html/Partials/Reviews.php:199
+#: plugin/Html/Partials/Reviews.php:196
 msgid "Next"
 msgstr "Next"
 
-#: plugin/Html/Partials/Reviews.php:238
+#: plugin/Html/Partials/Reviews.php:235
 msgid "Response from %s"
 msgstr "Response from %s"
 
-#: plugin/Html/Partials/Reviews.php:307
+#: plugin/Html/Partials/Reviews.php:304
 msgid "Show more"
 msgstr "Show more"
 
-#: plugin/Html/Partials/Reviews.php:308
+#: plugin/Html/Partials/Reviews.php:305
 msgid "Show less"
 msgstr "Show less"
 
-#: plugin/Html/Partials/Reviews.php:338
+#: plugin/Html/Partials/Reviews.php:335
 msgid "Site Reviews navigation"
 msgstr "Site Reviews navigation"
 
-#: plugin/Settings.php:161, plugin/Settings.php:258, plugin/Settings.php:464, plugin/Settings.php:538
+#: plugin/Settings.php:161, plugin/Settings.php:258, plugin/Settings.php:464, plugin/Settings.php:548
 msgid "Save Settings"
 msgstr "Save Settings"
 
@@ -817,23 +833,37 @@ msgstr "Custom Image URL"
 msgid "Required Fields"
 msgstr "Required Fields"
 
-#: plugin/Settings.php:475, plugin/Shortcodes/Buttons/SiteReviewsForm.php:80
-msgid "Name"
-msgstr "Name"
-
 #: plugin/Settings.php:483
+msgid "Enable Akismet Integration"
+msgstr "Enable Akismet Integration"
+
+#: plugin/Settings.php:485
+msgid ""
+"the %s integration provides spam-filtering for your reviews. In order for "
+"this setting to have any affect, you will need to first install and "
+"activate the Akismet plugin and set up a WordPress.com API key."
+msgstr ""
+"the %s integration provides spam-filtering for your reviews. In order for "
+"this setting to have any affect, you will need to first install and "
+"activate the Akismet plugin and set up a WordPress.com API key."
+
+#: plugin/Settings.php:486
+msgid "Akismet plugin"
+msgstr "Akismet plugin"
+
+#: plugin/Settings.php:493
 msgid "Invisible reCAPTCHA"
 msgstr "Invisible reCAPTCHA"
 
-#: plugin/Settings.php:485
+#: plugin/Settings.php:495
 msgid "Do not use reCAPTCHA"
 msgstr "Do not use reCAPTCHA"
 
-#: plugin/Settings.php:486
+#: plugin/Settings.php:496
 msgid "Use reCAPTCHA"
 msgstr "Use reCAPTCHA"
 
-#: plugin/Settings.php:489
+#: plugin/Settings.php:499
 msgid ""
 "Invisible reCAPTCHA is a free anti-spam service from Google. To use it, you "
 "will need to %s for an API key pair for your site. If you are already using "
@@ -845,19 +875,19 @@ msgstr ""
 "a reCAPTCHA plugin listed here, please select it; otherwise choose \"Use "
 "reCAPTCHA\"."
 
-#: plugin/Settings.php:490
+#: plugin/Settings.php:500
 msgid "sign up"
 msgstr "sign up"
 
-#: plugin/Settings.php:497
+#: plugin/Settings.php:507
 msgid "Site Key"
 msgstr "Site Key"
 
-#: plugin/Settings.php:506
+#: plugin/Settings.php:516
 msgid "Site Secret"
 msgstr "Site Secret"
 
-#: plugin/Settings.php:515
+#: plugin/Settings.php:525
 msgid "Badge Position"
 msgstr "Badge Position"
 
@@ -1558,7 +1588,7 @@ msgid_plural "New %s-star review of: %s"
 msgstr[0] "New %s-star review"
 msgstr[1] "New %s-star review of: %s"
 
-#: plugin/Settings.php:487
+#: plugin/Settings.php:497
 msgctxt "plugin name"
 msgid "Use 3rd-party plugin: Invisible reCaptcha"
 msgstr "Use 3rd-party plugin: Invisible reCaptcha"
