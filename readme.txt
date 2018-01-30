@@ -5,7 +5,7 @@ Tags: best reviews, business ratings, business reviews, curated reviews, moderat
 Requires at least: 4.0.0
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.11.0
+Stable tag: 2.11.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -138,7 +138,7 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 
 == Changelog ==
 
-= 2.11.0 (2018-01-30) =
+= 2.11.1 (2018-01-30) =
 - [feature] Added an autocomplete searchbox in the Assigned To metabox
 - [feature] Added Akismet integration to provide spam-validation
 - Added a default subject to the mailto link in the details metabox

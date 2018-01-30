@@ -18,7 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
-## [2.11.0] = 2018-01-30
+## [2.11.1] = 2018-01-30
 
 ### Added
 - [feature] Added an autocomplete searchbox in the Assigned To metabox
