@@ -777,7 +777,7 @@ class MainController extends BaseController
 			$reviewType = sprintf( '<a href="%s" target="_blank">%s</a>', $review->url, $reviewType );
 		}
 		$reviewer = $review->user_id
-			? sprintf( '<a href="%s">%s</a>', get_author_posts_url(  ), get_the_author_meta( 'display_name', $review->user_id ))
+			? sprintf( '<a href="%s">%s</a>', get_author_posts_url( $review->user_id ), get_the_author_meta( 'display_name', $review->user_id ))
 			: __( 'Unregistered user', 'site-reviews' );
 		$email = $review->email
 			? sprintf( '<a href="mailto:%1$s?subject=%3$s %2$s">%1$s</a>', $review->email, esc_attr( $review->title ), __( 'RE:', 'site-reviews' ))
