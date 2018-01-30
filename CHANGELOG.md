@@ -18,7 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
-## [2.11.1] = 2018-01-30
+## [2.11.2] = 2018-01-30
 
 ### Added
 - [feature] Added an autocomplete searchbox in the Assigned To metabox
@@ -30,6 +30,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Changed author name default to "Anonymous"
 
 ### Fixed
+- Fixed a possible error from occuring when the user has manually edited the database
 - Fixed internal IP detection
 
 ## [2.10.4] = 2018-01-26

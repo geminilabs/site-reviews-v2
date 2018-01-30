@@ -76,19 +76,20 @@ trait Options
 	 * Get the plugin options array
 	 *
 	 * @param bool|string $isPluginSetting
-	 *
 	 * @return array
 	 */
 	public function getOptions( $isPluginSetting = false )
 	{
 		$options = get_option( $this->getOptionName(), [] );
-
+		if( !is_array( $options )) {
+			delete_option( $this->getOptionName() );
+			$options = [];
+		}
 		if( $isPluginSetting == 'settings' ) {
-			$options = isset( $options['settings'] )
+			$options = isset( $options['settings'] ) && is_array( $options['settings'] )
 				? $options['settings']
 				: [];
 		}
-
 		return $options;
 	}
 
