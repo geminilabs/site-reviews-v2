@@ -13,6 +13,8 @@ Minimum plugin requirements:
 
 #### Current Features
 
+- [new] Akismet integration to provide spam-validation
+- [new] Autocomplete AssignedTo metabox
 - Actively developed and supported
 - Ajax pagination of reviews
 - Assign reviews to a Post/Page ID

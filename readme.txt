@@ -27,6 +27,8 @@ Follow plugin development on github at: https://github.com/geminilabs/site-revie
 
 = Current Features =
 
+- [new] Akismet integration to provide spam-validation
+- [new] Autocomplete AssignedTo metabox
 - Actively developed and supported
 - Ajax pagination of reviews
 - Assign reviews to a Post/Page ID
@@ -136,8 +138,8 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 
 == Changelog ==
 
-= 2.11.0 (2018-) =
-- [feature] Added an autocomplete searchbox in the Assigned To metabox.
+= 2.11.0 (2018-01-30) =
+- [feature] Added an autocomplete searchbox in the Assigned To metabox
 - [feature] Added Akismet integration to provide spam-validation
 - Added a default subject to the mailto link in the details metabox
 - Added a link to the WordPress user who submitted the review in the details metabox
