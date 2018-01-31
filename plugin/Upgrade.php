@@ -337,6 +337,19 @@ class Upgrade
 	}
 
 	/**
+	 * Purge all old sessions from database
+	 *
+	 * @return void
+	 */
+	public function sessions_2113()
+	{
+		global $wpdb;
+		$wpdb->query(
+			"DELETE FROM {$wpdb->options} WHERE option_name LIKE '_geminilabs_site_reviews_session_%'"
+		);
+	}
+
+	/**
 	 * @param string $search
 	 * @param string $replace
 	 *

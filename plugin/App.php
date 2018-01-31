@@ -244,7 +244,6 @@ final class App extends Container
 	{
 		$version = $this->make( 'Database' )->getOption( 'version' );
 		$upgrade = $this->make( 'Upgrade' );
-
 		if( version_compare( $version, '2.0.0', '<' )) {
 			$upgrade->options_200();
 			$upgrade->reviewSlug_200();
@@ -267,7 +266,9 @@ final class App extends Container
 		if( version_compare( $version, '2.9.0', '<' )) {
 			$upgrade->reviewAssignedTo_290();
 		}
-
+		if( version_compare( $version, '2.11.3', '<' )) {
+			$upgrade->sessions_2113();
+		}
 		$this->updateVersion( $version );
 	}
 

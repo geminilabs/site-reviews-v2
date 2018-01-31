@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.11.3] = 2018-01-31
+
+### Fixed
+- Fixed plugin session management
+
 ## [2.11.2] = 2018-01-30
 
 ### Added

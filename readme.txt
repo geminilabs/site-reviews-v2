@@ -138,6 +138,9 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 
 == Changelog ==
 
+= 2.11.3 (2018-01-31) =
+- Fixed plugin session management
+
 = 2.11.2 (2018-01-30) =
 - [feature] Added an autocomplete searchbox in the Assigned To metabox
 - [feature] Added Akismet integration to provide spam-validation

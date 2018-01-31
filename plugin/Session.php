@@ -6,8 +6,7 @@
  * @license   GPLv3
  * @since     1.0.0
  *
- * Much of the code in this class is derived from WP Session Manager (1.2.0)
- * Copyright (c) <Eric Mann>
+ * This class is derived from WP Session Manager (1.2.0)
  * -------------------------------------------------------------------------------------------------
  */
 
@@ -18,152 +17,130 @@ use PasswordHash;
 
 class Session
 {
+	const SESSION_COOKIE = '_glsr_session';
+
 	/**
-	 * Unix timestamp when session expires.
-	 *
 	 * @var int
 	 */
-	protected $expiry;
+	protected $expiryTimestamp;
 
 	/**
-	 * Unix timestamp indicating when the expiration time needs to be reset.
-	 *
 	 * @var int
 	 */
-	protected $expiryReset;
+	protected $expiryTimestampReset;
 
 	/**
-	 * @var string
-	 */
-	protected $prefix;
-
-	/**
-	 * @var App
-	 */
-	protected $app;
-
-	/**
-	 * The current session data.
-	 *
 	 * @var array
 	 */
-	protected $session;
+	protected $sessionData;
 
 	/**
-	 * ID of the current session.
-	 *
 	 * @var string
 	 */
 	protected $sessionId;
 
-	public function __construct( App $app )
+	public function __construct()
 	{
-		$this->app = $app;
-
-		$this->prefix = "_{$this->app->prefix}_session";
-
-		$cookieId = filter_input( INPUT_COOKIE, $this->app->id );
-
-		if( $cookieId ) {
-
+		if( $cookieId = filter_input( INPUT_COOKIE, static::SESSION_COOKIE )) {
 			$cookie = explode( '||', stripslashes( $cookieId ));
-
-			$this->sessionId   = $cookie[0];
-			$this->expiry      = $cookie[1];
-			$this->expiryReset = $cookie[2];
-
-			// Update the session expiration if we're past the reset time
-			if( time() > $this->expiryReset ) {
-				$this->resetCookieExpiration();
-				$this->resetSessionExpiration();
+			$this->sessionId = preg_replace( '/[^A-Za-z0-9_]/', '', $cookie[0] );
+			$this->expiryTimestamp = absint( $cookie[1] );
+			$this->expiryTimestampReset = absint( $cookie[2] );
+			if( time() > $this->expiryTimestampReset ) {
+				$this->setCookieExpiration();
 			}
 		}
 		else {
 			$this->sessionId = $this->generateSessionId();
-			$this->resetCookieExpiration();
+			$this->setCookieExpiration();
 		}
-
-		$this->getSession();
+		$this->getSessionData();
 		$this->setCookie();
-
-		add_action( 'site-reviews/schedule/session/purge', [ $this, 'purgeSessions'] );
+		add_action( 'site-reviews/schedule/session/purge', [$this, 'deleteExpiredSessions'] );
 	}
 
 	/**
-	 * Alias for delete()
-	 *
 	 * @return void
 	 */
 	public function clear()
 	{
-		$this->delete();
-	}
-
-	/**
-	 * Delete the current session
-	 *
-	 * @return void
-	 */
-	public function delete()
-	{
-		$this->resetCookieExpiration();
+		$this->setCookieExpiration();
 		$this->regenerateSessionId( 'and delete session!' );
 	}
 
 	/**
-	 * Get a variable from the current session
-	 *
-	 * @param string       $key
+	 * @return int|false
+	 */
+	public function deleteAllSessions()
+	{
+		global $wpdb;
+		return $wpdb->query(
+			"DELETE FROM {$wpdb->options} WHERE option_name LIKE '".static::SESSION_COOKIE."_%'"
+		);
+	}
+
+	/**
+	 * @param int $limit
+	 * @return void
+	 */
+	public function deleteExpiredSessions( $limit = 1000 )
+	{
+		global $wpdb;
+		if( $expiredSessions = implode( "','", $this->getExpiredSessions( $limit ))) {
+			$wpdb->query(
+				"DELETE FROM {$wpdb->options} WHERE option_name IN ('{$expiredSessions}')"
+			);
+		}
+	}
+
+	/**
+	 * @param string $key
 	 * @param string|array $fallback
-	 * @param mixed        $unset
-	 *
+	 * @param bool|string $unset
 	 * @return string
 	 */
 	public function get( $key, $fallback = '', $unset = false )
 	{
 		$key = sanitize_key( $key );
-
-		$value = isset( $this->session[ $key ] )
-			? maybe_unserialize( $this->session[ $key ] )
+		$value = isset( $this->sessionData[$key] )
+			? maybe_unserialize( $this->sessionData[$key] )
 			: $fallback;
-
-		if( !!$unset ) {
-			unset( $this->session[ $key ] );
+		if( isset( $this->sessionData[$key] ) && $unset ) {
+			unset( $this->sessionData[$key] );
 			$this->updateSession();
 		}
-
 		return $value;
 	}
 
 	/**
-	 * Reset the current session to an empty array, does not touch the database
-	 *
-	 * @return self
-	 */
-	public function reset()
-	{
-		$this->session = [];
-
-		return $this;
-	}
-
-	/**
-	 * Set a variable to the current session
-	 *
 	 * @param string $key
-	 * @param mixed  $value
-	 *
-	 * @return string
+	 * @param mixed $value
+	 * @return mixed
 	 */
 	public function set( $key, $value )
 	{
 		$key = sanitize_key( $key );
-
-		$this->session[ $key ] = maybe_serialize( $value );
-
+		$this->sessionData[$key] = maybe_serialize( $value );
 		$this->updateSession();
+		return $this->sessionData[$key];
+	}
 
-		return $this->session[ $key ];
+	/**
+	 * @return void
+	 */
+	protected function createSession()
+	{
+		add_option( $this->getSessionId(), $this->sessionData, '', false );
+		add_option( $this->getSessionId( 'expires' ), $this->expiryTimestamp, '', false );
+	}
+
+	/**
+	 * @return void
+	 */
+	protected function deleteSession()
+	{
+		delete_option( $this->getSessionId() );
+		delete_option( $this->getSessionId( 'expires' ));
 	}
 
 	/**
@@ -171,31 +148,65 @@ class Session
 	 */
 	protected function generateSessionId()
 	{
-		return md5((new PasswordHash( 8, false ))->get_random_bytes( 32 ));
+		return md5(( new PasswordHash( 8, false ))->get_random_bytes( 32 ));
 	}
 
 	/**
-	 * @param mixed $purge
-	 *
+	 * @param int $limit
+	 * @return array
+	 */
+	protected function getExpiredSessions( $limit )
+	{
+		global $wpdb;
+		$expiredSessions = [];
+		$sessions = $wpdb->get_results( $wpdb->prepare(
+			"SELECT option_name AS name, option_value AS expiry " .
+			"FROM {$wpdb->options} " .
+			"WHERE option_name LIKE '%s_expires_%' " .
+			"ORDER BY option_value ASC " .
+			"LIMIT 0, %d",
+			static::SESSION_COOKIE,
+			absint( $limit )
+		));
+		if( !empty( $sessions )) {
+			$now = time();
+			foreach( $sessions as $session ) {
+				if( $now <= $session->expiry )continue;
+				$expiredSessions[] = $session->name;
+				$expiredSessions[] = str_replace( '_expiry_', '_', $session->name );
+			}
+		}
+		return $expiredSessions;
+	}
+
+	/**
+	 * @param string $separator
+	 * @return string
+	 */
+	protected function getSessionId( $separator = '' )
+	{
+		return implode( '_', array_filter( [static::SESSION_COOKIE, $separator, $this->sessionId] ));
+	}
+
+	/**
+	 * @return array
+	 */
+	protected function getSessionData()
+	{
+		return $this->sessionData = (array) get_option( $this->getSessionId(), [] );
+	}
+
+	/**
+	 * @param bool|string $deleteOld
 	 * @return void
 	 */
-	protected function regenerateSessionId( $purge = false )
+	protected function regenerateSessionId( $deleteOld = false )
 	{
-		$this->sessionId = $this->generateSessionId();
-		$this->setCookie();
-
-		if( !!$purge ) {
+		if( $deleteOld ) {
 			$this->deleteSession();
 		}
-	}
-
-	/**
-	 * @return void
-	 */
-	protected function resetCookieExpiration()
-	{
-		$this->expiry      = time() + (30 * 60); // 30 minutes
-		$this->expiryReset = time() + (24 * 60); // 24 minutes
+		$this->sessionId = $this->generateSessionId();
+		$this->setCookie();
 	}
 
 	/**
@@ -203,134 +214,31 @@ class Session
 	 */
 	protected function setCookie()
 	{
-		$cookie = "{$this->sessionId}||{$this->expiry}||{$this->expiryReset}";
-
-		$secure   = apply_filters( 'site-reviews/session/cookie/secure', false );
-		$httponly = apply_filters( 'site-reviews/session/cookie/httponly', false );
-
-		if( !defined( 'COOKIEPATH' )) {
-			define( 'COOKIEPATH', preg_replace( '|https?://[^/]+|i', '', get_option( 'home' ) . '/' ));
-		}
-
-		if( !defined( 'COOKIE_DOMAIN' )) {
-			define( 'COOKIE_DOMAIN', false );
-		}
-
-		if( !headers_sent() ) {
-			setcookie( $this->app->id, $cookie, $this->expiry, COOKIEPATH, COOKIE_DOMAIN, $secure, $httponly );
-		}
+		if( headers_sent() )return;
+		$cookie = $this->sessionId.'||'.$this->expiryTimestamp.'||'.$this->expiryTimestampReset;
+		$cookiePath = preg_replace( '|https?://[^/]+|i', '', trailingslashit( get_option( 'home' )));
+		setcookie( static::SESSION_COOKIE, $cookie, $this->expiryTimestamp, $cookiePath );
 	}
 
-	// DATABASE
-	// ---------------------------------------------------------------------------------------------
-
 	/**
-	 * Delete ALL sessions from the database.
-	 *
-	 * @return int
+	 * @return void
 	 */
-	public function deleteSessions()
+	protected function setCookieExpiration()
 	{
-		global $wpdb;
-
-		$count = $wpdb->query(
-			"DELETE FROM {$wpdb->options} WHERE option_name LIKE '{$this->prefix}_%'"
-		);
-
-		return (int) ( $count / 2 );
+		$this->expiryTimestampReset = time() + (24 * 60); // 24 minutes
+		$this->expiryTimestamp = time() + (30 * 60); // 30 minutes
 	}
 
 	/**
-	 * Delete old sessions from the database.
-	 *
-	 * @param int $limit
-	 *
-	 * @return int
-	 */
-	public function purgeSessions( $limit = 1000 )
-	{
-		global $wpdb;
-
-		$sessions = $wpdb->get_results( $wpdb->prepare(
-			"SELECT option_name AS name, option_value AS expiry " .
-			"FROM {$wpdb->options} " .
-			"WHERE option_name LIKE '{$this->prefix}_expires_%' " .
-			"ORDER BY option_value ASC " .
-			"LIMIT 0, %d", absint( $limit )
-		));
-
-		if( empty( $sessions )) {
-			return 0;
-		}
-
-		$now = time();
-		$expired = [];
-		$count = 0;
-
-		foreach( $sessions as $session ) {
-			if( $now <= $session->expiry )continue;
-
-			$session_id = addslashes( substr( $session->name, 20 ));
-
-			$expired[] = $session->name;
-			$expired[] = "{$this->prefix}_{$session_id}";
-
-			$count++;
-		}
-
-		// Delete expired sessions
-		if( !empty( $expired )) {
-			$session_names = implode( "','", $expired );
-
-			$wpdb->query(
-				"DELETE FROM {$wpdb->options} WHERE option_name IN ('{$session_names}')"
-			);
-		}
-
-		return $count;
-	}
-
-	/**
-	 * @return bool
-	 */
-	protected function createSession()
-	{
-		return add_option( "{$this->prefix}_{$this->sessionId}", $this->session, '', false );
-	}
-
-	/**
-	 * @return bool
-	 */
-	protected function deleteSession()
-	{
-		return delete_option( "{$this->prefix}_{$this->sessionId}" );
-	}
-
-	/**
-	 * @return array
-	 */
-	protected function getSession()
-	{
-		return $this->session = get_option( "{$this->prefix}_{$this->sessionId}", [] );
-	}
-
-	/**
-	 * @return bool
-	 */
-	protected function resetSessionExpiration()
-	{
-		return update_option( "{$this->prefix}_expires_{$this->sessionId}", $this->expiry, false );
-	}
-
-	/**
-	 * @return bool
+	 * @return void
 	 */
 	protected function updateSession()
 	{
-		if( false === get_option( "{$this->prefix}_{$this->sessionId}" )) {
-			$this->resetSessionExpiration();
+		if( false === get_option( $this->getSessionId() )) {
+			$this->createSession();
 		}
-
-		return update_option( "{$this->prefix}_{$this->sessionId}", $this->session, false );
+		else {
+			update_option( $this->getSessionId(), $this->sessionData, false );
+		}
 	}
 }

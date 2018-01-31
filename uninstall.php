@@ -27,4 +27,4 @@ foreach( $options as $option ) {
 	delete_option( $option );
 }
 
-glsr_resolve( 'Session' )->deleteSessions();
+glsr_resolve( 'Session' )->deleteAllSessions();
