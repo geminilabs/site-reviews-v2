@@ -26,16 +26,6 @@ abstract class Shortcode
 	 */
 	protected $db;
 
-	/**
-	 * @var Html
-	 */
-	protected $html;
-
-	/**
-	 * @var Session
-	 */
-	protected $session;
-
 	public function __construct( App $app )
 	{
 		$this->app = $app;
