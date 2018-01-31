@@ -159,21 +159,19 @@ class Session
 	{
 		global $wpdb;
 		$expiredSessions = [];
-		$sessions = $wpdb->get_results( $wpdb->prepare(
-			"SELECT option_name AS name, option_value AS expiry " .
+		$sessions = $wpdb->get_results(
+			"SELECT option_name AS name, option_value AS expiration " .
 			"FROM {$wpdb->options} " .
-			"WHERE option_name LIKE '%s_expires_%' " .
+			"WHERE option_name LIKE '".static::SESSION_COOKIE."_expires_%' " .
 			"ORDER BY option_value ASC " .
-			"LIMIT 0, %d",
-			static::SESSION_COOKIE,
-			absint( $limit )
-		));
+			"LIMIT 0, ".absint( $limit )
+		);
 		if( !empty( $sessions )) {
 			$now = time();
 			foreach( $sessions as $session ) {
-				if( $now <= $session->expiry )continue;
+				if( $now <= $session->expiration )continue;
 				$expiredSessions[] = $session->name;
-				$expiredSessions[] = str_replace( '_expiry_', '_', $session->name );
+				$expiredSessions[] = str_replace( '_expires_', '_', $session->name );
 			}
 		}
 		return $expiredSessions;
