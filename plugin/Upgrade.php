@@ -345,7 +345,7 @@ class Upgrade
 	{
 		global $wpdb;
 		$wpdb->query(
-			"DELETE FROM {$wpdb->options} WHERE option_name LIKE '_geminilabs_site_reviews_session_%'"
+			"DELETE FROM {$wpdb->options} WHERE option_name LIKE '_{$this->app->prefix}_session_%'"
 		);
 	}
 
