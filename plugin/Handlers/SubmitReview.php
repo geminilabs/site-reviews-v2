@@ -116,7 +116,7 @@ class SubmitReview
 			'to' => $args['recipient'],
 			'subject'  => $args['notification_title'],
 			'template' => 'review-notification',
-			'template-tags' => apply_filters( 'site-reviews/notification/template-tags', [
+			'template-tags' => [
 				'review_author' => $command->author,
 				'review_content' => $command->content,
 				'review_email' => $command->email,
@@ -124,7 +124,7 @@ class SubmitReview
 				'review_link' => sprintf( '<a href="%1$s">%1$s</a>', $args['notification_link'] ),
 				'review_rating' => $command->rating,
 				'review_title' => $command->title,
-			], $command ),
+			],
 		];
 
 		// $email = $this->addNotificationLinks( $post_id, $email );

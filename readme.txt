@@ -138,6 +138,9 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 
 == Changelog ==
 
+= 2.12.0 (2018-02-??) =
+- Removed "site-reviews/notification/template-tags" filter hook (use "site-reviews/email/compose" instead)
+
 = 2.11.3 (2018-01-31) =
 - Fixed plugin session management
 

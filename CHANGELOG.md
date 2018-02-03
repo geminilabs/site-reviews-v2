@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.12.0] = 2018-02-??
+
+### Removed
+- Removed "site-reviews/notification/template-tags" filter hook (use "site-reviews/email/compose" instead)
+
 ## [2.11.3] = 2018-01-31
 
 ### Fixed
