@@ -13,11 +13,11 @@ Minimum plugin requirements:
 
 #### Current Features
 
-- [new] Akismet integration to provide spam-validation
-- [new] Autocomplete AssignedTo metabox
 - Actively developed and supported
 - Ajax pagination of reviews
+- Akismet integration to provide spam-validation
 - Assign reviews to a Post/Page ID
+- Autocomplete AssignedTo metabox
 - Bayesian ranking for posts with assigned reviews (can be used for WP_Query sorting)
 - Clean and easy-to-configure user interface
 - Configurable Widgets
@@ -32,6 +32,7 @@ Minimum plugin requirements:
 - Publicly respond to a review
 - Relative dates option
 - Review avatars (gravatar.com)
+- Review blacklist
 - Review categories
 - Review pagination
 - Reviews Summary shortcode: [site_reviews_summary]

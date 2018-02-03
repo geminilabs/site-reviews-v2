@@ -15,6 +15,7 @@ class SubmitReview
 	public $ajaxRequest;
 	public $assignedTo;
 	public $author;
+	public $blacklisted;
 	public $category;
 	public $content;
 	public $email;
@@ -31,6 +32,7 @@ class SubmitReview
 		$this->ajaxRequest = isset( $input['ajax_request'] );
 		$this->assignedTo  = is_numeric( $input['assign_to'] ) ? $input['assign_to'] : '';
 		$this->author      = $input['name'];
+		$this->blacklisted = false;
 		$this->category    = $input['category'];
 		$this->content     = $input['content'];
 		$this->email       = $input['email'];

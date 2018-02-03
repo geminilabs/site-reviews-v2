@@ -5,7 +5,7 @@ Tags: best reviews, business ratings, business reviews, curated reviews, moderat
 Requires at least: 4.0.0
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.11.3
+Stable tag: 2.12.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,11 +27,12 @@ Follow plugin development on github at: https://github.com/geminilabs/site-revie
 
 = Current Features =
 
-- [new] Akismet integration to provide spam-validation
-- [new] Autocomplete AssignedTo metabox
+- [new] Review blacklist
 - Actively developed and supported
 - Ajax pagination of reviews
+- Akismet integration to provide spam-validation
 - Assign reviews to a Post/Page ID
+- Autocomplete AssignedTo metabox
 - Bayesian ranking for posts with assigned reviews (can be used for WP_Query sorting)
 - Clean and easy-to-configure user interface
 - Configurable Widgets
@@ -138,7 +139,8 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 
 == Changelog ==
 
-= 2.12.0 (2018-02-??) =
+= 2.12.0 (2018-02-03) =
+- [feature] Review blacklist
 - Notification errors are now logged
 - Removed "site-reviews/notification/template-tags" filter hook (use "site-reviews/email/compose" instead)
 

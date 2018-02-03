@@ -18,9 +18,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
-## [2.12.0] = 2018-02-??
+## [2.12.0] = 2018-02-03
 
 ### Added
+- [feature] Review blacklist
 - Notification errors are now logged
 
 ### Removed

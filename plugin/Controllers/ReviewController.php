@@ -277,6 +277,20 @@ class ReviewController extends BaseController
 
 		$submitReview = new SubmitReview( $validatedRequest );
 
+		// Blacklist validation
+		if( $this->app->make( 'GeminiLabs\SiteReviews\Blacklist' )->isBlacklisted( $submitReview )) {
+			$blacklistAction = glsr_get_option( 'reviews-form.blacklist.action' );
+			if( $blacklistAction == 'unapprove' ) {
+				$submitReview->blacklisted = true;
+			}
+			if( $blacklistAction == 'reject' ) {
+				$session->set( "{$validatedRequest['form_id']}-errors", [] );
+				glsr_resolve( 'Log\Logger' )->warning( 'Blacklisted submission detected:' );
+				glsr_resolve( 'Log\Logger' )->warning( $validatedRequest );
+				return __( 'Your review cannot be submitted at this time.', 'site-reviews' );
+			}
+		}
+
 		// Akismet validation
 		if( $this->app->make( 'GeminiLabs\SiteReviews\Akismet' )->isSpam( $submitReview )) {
 			$session->set( "{$validatedRequest['form_id']}-errors", [] );

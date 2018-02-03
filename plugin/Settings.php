@@ -227,7 +227,7 @@ class Settings
 			'type'    => 'code',
 			'name'    => 'notification_message',
 			'label'   => __( 'Notification template', 'site-reviews' ),
-			'rows'    => 9,
+			'rows'    => 10,
 			'depends' => [
 				'notification' => ['custom', 'default', 'webhook'],
 			],
@@ -531,6 +531,26 @@ class Settings
 			'depends' => [
 				'recaptcha.integration' => 'custom',
 			],
+		]);
+
+		$this->addSetting( $formId, [
+			'type' => 'textarea',
+			'name' => 'blacklist.entries',
+			'label' => __( 'Review Blacklist', 'site-reviews' ),
+			'desc' => __( 'When a review contains any of these words in its title, content, name, email, or IP address, it will be rejected. One word or IP address per line. It will match inside words, so "press" will match "WordPress".', 'site-reviews' ),
+			'class' => 'large-text code',
+			'rows' => 10,
+		]);
+
+		$this->addSetting( $formId, [
+			'type' => 'select',
+			'name' => 'blacklist.action',
+			'label' => __( 'Blacklist Action', 'site-reviews' ),
+			'options' => [
+				'unapprove' => __( 'Require approval', 'site-reviews' ),
+				'reject' => __( 'Reject submission', 'site-reviews' ),
+			],
+			'desc' => __( 'Choose the action that should be taken when a review is blacklisted.', 'site-reviews' ),
 		]);
 	}
 

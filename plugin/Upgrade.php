@@ -350,6 +350,17 @@ class Upgrade
 	}
 
 	/**
+	 * Add the default blacklist options
+	 *
+	 * @return void
+	 */
+	public function blacklist_2120()
+	{
+		$this->db->setOption( 'reviews-form.blacklist.entries', '', true );
+		$this->db->setOption( 'reviews-form.blacklist.action', 'unapprove', true );
+	}
+
+	/**
 	 * @param string $search
 	 * @param string $replace
 	 *

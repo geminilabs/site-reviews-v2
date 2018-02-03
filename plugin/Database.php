@@ -13,6 +13,7 @@ namespace GeminiLabs\SiteReviews;
 use GeminiLabs\SiteReviews\App;
 use GeminiLabs\SiteReviews\Database\Options;
 use GeminiLabs\SiteReviews\Database\OptionsContract;
+use GeminiLabs\SiteReviews\Commands\SubmitReview;
 use WP_Query;
 
 class Database implements OptionsContract
@@ -35,7 +36,7 @@ class Database implements OptionsContract
 	 * @param bool $update
 	 * @return int|bool
 	 */
-	public function createReview( array $meta, $update = false )
+	public function createReview( array $meta, SubmitReview $command )
 	{
 		// make sure we set post_meta fallback defaults
 		$meta = wp_parse_args( $meta, [
@@ -53,13 +54,12 @@ class Database implements OptionsContract
 			'title'       => '',
 			'url'         => '',
 		]);
-		$post_id = $this->getReviewId( $meta['review_id'] );
-		if( !empty( $post_id ) && !$update ) {
+		if( $post_id = $this->getReviewId( $meta['review_id'] )) {
 			return $post_id;
 		}
 		$post_data = [
 			'comment_status' => 'closed',
-			'ID'             => $post_id ? $post_id : 0,
+			'ID'             => $post_id,
 			'ping_status'    => 'closed',
 			'post_content'   => $meta['content'],
 			'post_date'      => $meta['date'],
@@ -68,8 +68,10 @@ class Database implements OptionsContract
 			'post_title'     => wp_strip_all_tags( $meta['title'] ),
 			'post_type'      => App::POST_TYPE,
 		];
-		if( $this->getOption( 'settings.general.require.approval' ) == 'yes' && $meta['review_type'] == 'local' ) {
-			$post_data['post_status'] = 'pending';
+		if( $meta['review_type'] == 'local' ) {
+			if( $this->getOption( 'settings.general.require.approval' ) == 'yes' || $command->blacklisted ) {
+				$post_data['post_status'] = 'pending';
+			}
 		}
 		$post_id = wp_insert_post( $post_data, true );
 		if( is_wp_error( $post_id )) {

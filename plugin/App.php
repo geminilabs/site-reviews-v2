@@ -269,6 +269,9 @@ final class App extends Container
 		if( version_compare( $version, '2.11.3', '<' )) {
 			$upgrade->sessions_2113();
 		}
+		if( version_compare( $version, '2.12.0', '<' )) {
+			$upgrade->blacklist_2120();
+		}
 		$this->updateVersion( $version );
 	}
 
