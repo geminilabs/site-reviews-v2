@@ -123,7 +123,7 @@ msgstr ""
 msgid "Approve this review"
 msgstr ""
 
-#: plugin/Controllers/MainController.php:252, plugin/Handlers/SubmitReview.php:101
+#: plugin/Controllers/MainController.php:252
 msgid "Approve"
 msgstr ""
 
@@ -254,6 +254,10 @@ msgid "Email"
 msgstr ""
 
 #: plugin/Controllers/MainController.php:792
+msgid "IP Address"
+msgstr ""
+
+#: plugin/Controllers/MainController.php:793
 msgid "Avatar"
 msgstr ""
 
@@ -307,19 +311,23 @@ msgstr ""
 msgid "The reCAPTCHA verification failed. Please notify the site administrator."
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:285
+#: plugin/Controllers/ReviewController.php:290
+msgid "Your review cannot be submitted at this time."
+msgstr ""
+
+#: plugin/Controllers/ReviewController.php:299
 msgid "Your review cannot be submitted at this time. Please try again later."
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:662, plugin/Html/Partials/Reviews.php:276
+#: plugin/Controllers/ReviewController.php:676, plugin/Html/Partials/Reviews.php:276
 msgid "No Title"
 msgstr ""
 
-#: plugin/Database.php:344
+#: plugin/Database.php:345
 msgid "%s reviews"
 msgstr ""
 
-#: plugin/Database.php:375
+#: plugin/Database.php:376
 msgid "Anonymous"
 msgstr ""
 
@@ -395,23 +403,27 @@ msgstr ""
 msgid "Filter by category"
 msgstr ""
 
-#: plugin/Handlers/SubmitReview.php:68
+#: plugin/Handlers/SubmitReview.php:39
 msgid "Your review has been submitted!"
 msgstr ""
 
-#: plugin/Handlers/SubmitReview.php:102
-msgid "Discard"
+#: plugin/Handlers/SubmitReview.php:93, plugin/Strings.php:34
+msgid "View Review"
 msgstr ""
 
-#: plugin/Handlers/SubmitReview.php:149
+#: plugin/Handlers/SubmitReview.php:115
 msgctxt "The text is different depending on whether or not the review has been assigned to a post."
 msgid "New %s-star review"
 msgid_plural "New %s-star review of: %s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Handlers/SubmitReview.php:212, plugin/Strings.php:34
-msgid "View Review"
+#: plugin/Handlers/SubmitReview.php:148
+msgid "Email notification was not sent: missing email, subject, or message."
+msgstr ""
+
+#: plugin/Handlers/SubmitReview.php:151
+msgid "Email notification was not sent: wp_mail() failed."
 msgstr ""
 
 #: plugin/Handlers/TogglePinned.php:43
@@ -498,11 +510,11 @@ msgstr ""
 msgid "Site Reviews navigation"
 msgstr ""
 
-#: plugin/Settings.php:161, plugin/Settings.php:258, plugin/Settings.php:464, plugin/Settings.php:548
+#: plugin/Settings.php:161, plugin/Settings.php:258, plugin/Settings.php:464, plugin/Settings.php:568
 msgid "Save Settings"
 msgstr ""
 
-#: plugin/Settings.php:167
+#: plugin/Settings.php:167, plugin/Settings.php:550
 msgid "Require approval"
 msgstr ""
 
@@ -821,6 +833,26 @@ msgstr ""
 
 #: plugin/Settings.php:525
 msgid "Badge Position"
+msgstr ""
+
+#: plugin/Settings.php:539
+msgid "Review Blacklist"
+msgstr ""
+
+#: plugin/Settings.php:540
+msgid "When a review contains any of these words in its title, content, name, email, or IP address, it will be rejected. One word or IP address per line. It will match inside words, so \"press\" will match \"WordPress\"."
+msgstr ""
+
+#: plugin/Settings.php:548
+msgid "Blacklist Action"
+msgstr ""
+
+#: plugin/Settings.php:551
+msgid "Reject submission"
+msgstr ""
+
+#: plugin/Settings.php:553
+msgid "Choose the action that should be taken when a review is blacklisted."
 msgstr ""
 
 #: plugin/Shortcodes/Buttons/Generator.php:55

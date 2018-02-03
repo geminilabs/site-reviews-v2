@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Added
 - [feature] Review blacklist
 - Notification errors are now logged
+- Show the reviewer's IP address in the details metabox
 
 ### Removed
 - Removed "site-reviews/notification/template-tags" filter hook (use "site-reviews/email/compose" instead)

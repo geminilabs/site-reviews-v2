@@ -789,6 +789,7 @@ class MainController extends BaseController
 			__( 'Reviewer', 'site-reviews' ) => $reviewer,
 			__( 'Name', 'site-reviews' ) => $review->author,
 			__( 'Email', 'site-reviews' ) => $email,
+			__( 'IP Address', 'site-reviews' ) => $review->ip_address,
 			__( 'Avatar', 'site-reviews' ) => sprintf( '<img src="%s" width="96">', $review->avatar ),
 		];
 		return apply_filters( 'site-reviews/metabox/details', $metabox, $review );
