@@ -82,12 +82,11 @@ class Email
 	}
 
 	/**
-	 * @return bool|null
+	 * @return void|bool
 	 */
 	public function send()
 	{
 		if( !$this->message || !$this->subject || !$this->to )return;
-
 		$sent = wp_mail(
 			$this->to,
 			$this->subject,
@@ -95,9 +94,7 @@ class Email
 			$this->headers,
 			$this->attachments
 		);
-
 		$this->reset();
-
 		return $sent;
 	}
 

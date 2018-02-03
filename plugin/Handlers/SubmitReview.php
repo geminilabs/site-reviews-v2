@@ -11,110 +11,52 @@
 namespace GeminiLabs\SiteReviews\Handlers;
 
 use Exception;
-use GeminiLabs\SiteReviews\App;
 use GeminiLabs\SiteReviews\Commands\SubmitReview as Command;
 use ReflectionException;
 
 class SubmitReview
 {
 	/**
-	 * @var App
-	 */
-	protected $app;
-
-	/**
-	 * @var \GeminiLabs\SiteReviews\Database
-	 */
-	protected $db;
-
-	public function __construct( App $app )
-	{
-		$this->app = $app;
-		$this->db  = $app->make( 'Database' );
-	}
-
-	/**
-	 * @todo log any negative result of the sent notification
-	 *
-	 * @return string|void
+	 * @return void|string
 	 */
 	public function handle( Command $command )
 	{
-		$reviewId = md5( time() . serialize( $command ));
-
-		$review = [
-			'author'      => $command->author,
+		$review = apply_filters( 'site-reviews/local/review', [
+			'author' => $command->author,
 			'assigned_to' => $command->assignedTo,
-			'avatar'      => get_avatar_url( $command->email ),
-			'content'     => $command->content,
-			'email'       => $command->email,
-			'ip_address'  => $command->ipAddress,
-			'rating'      => $command->rating,
-			'review_id'   => $reviewId,
+			'avatar' => get_avatar_url( $command->email ),
+			'content' => $command->content,
+			'email' => $command->email,
+			'ip_address' => $command->ipAddress,
+			'rating' => $command->rating,
 			'review_type' => 'local',
-			'title'       => $command->title,
-		];
-
-		$post_id = $this->db->createReview(
-			$reviewId,
-			apply_filters( 'site-reviews/local/review', $review, $command )
-		);
-
-		$this->db->setTerms( $post_id, $command->category );
-
+			'title' => $command->title,
+		], $command );
+		$post_id = glsr_resolve( 'Database' )->createReview( $review, $command );
+		glsr_resolve( 'Database' )->setReviewMeta( $post_id, $command->category );
 		$this->sendNotification( $post_id, $command );
-
-		$message = apply_filters( 'site-reviews/local/review/submitted/message',
+		$successMessage = apply_filters( 'site-reviews/local/review/submitted/message',
 			__( 'Your review has been submitted!', 'site-reviews' ),
 			$command
 		);
-
-		do_action( 'site-reviews/local/review/submitted', $message, $command );
-
+		do_action( 'site-reviews/local/review/submitted', $successMessage, $command );
 		if( $command->ajaxRequest ) {
-			$this->app->make( 'Session' )->clear();
-			return $message;
+			glsr_resolve( 'Session' )->clear();
+			return $successMessage;
 		}
-		else {
-			// set message
-			$this->app->make( 'Session' )->set( "{$command->formId}-message", $message );
-			wp_safe_redirect( $command->referrer );
-			exit;
-		}
-	}
-
-	/**
-	 * @param int $post_id
-	 *
-	 * @return array
-	 */
-	protected function addNotificationLinks( $post_id, array $args )
-	{
-		if( $this->db->getOption( 'settings.general.require.approval' ) == 'yes' ) {
-
-			$review_approve_link = wp_nonce_url( admin_url( sprintf( 'post.php?post=%s&action=approve', $post_id )), 'approve-review_' . $post_id );
-			$review_discard_link = wp_nonce_url( admin_url( sprintf( 'post.php?post=%s&action=trash', $post_id )), 'trash-post_' . $post_id );
-			// $review_discard_link = esc_url( get_delete_post_link( $post_id, false ));
-
-			$after = [];
-
-			$after[] = sprintf( '%1$s: <a href="%2$s">%2$s</a>', __( 'Approve', 'site-reviews' ), $review_approve_link );
-			$after[] = sprintf( '%1$s: <a href="%2$s">%2$s</a>', __( 'Discard', 'site-reviews' ), $review_discard_link );
-
-			$args['after'] = "\r\n\r\n" . implode( "\r\n\r\n", $after ); // makes each line a paragraph
-		}
-
-		return $args;
+		glsr_resolve( 'Session' )->set( $command->formId.'-message', $successMessage );
+		wp_safe_redirect( $command->referrer );
+		exit;
 	}
 
 	/**
 	 * @return \GeminiLabs\SiteReviews\Email
 	 */
-	protected function createNotification( Command $command, array $args = [] )
+	protected function createEmailNotification( Command $command, array $args = [] )
 	{
 		$email = [
 			'to' => $args['recipient'],
-			'subject'  => $args['notification_title'],
+			'subject' => $args['notification_title'],
 			'template' => 'review-notification',
 			'template-tags' => [
 				'review_author' => $command->author,
@@ -126,26 +68,50 @@ class SubmitReview
 				'review_title' => $command->title,
 			],
 		];
+		return glsr_resolve( 'Email' )->compose( $email );
+	}
 
-		// $email = $this->addNotificationLinks( $post_id, $email );
-
-		return $this->app->make( 'Email' )->compose( $email );
+	/**
+	 * @return string
+	 */
+	protected function createWebhookNotification( Command $command, array $args )
+	{
+		$fields = [];
+		$fields[] = ['title' => str_repeat( ':star:', (int) $command->rating )];
+		if( $command->title ) {
+			$fields[] = ['title' => $command->title];
+		}
+		if( $command->content ) {
+			$fields[] = ['value' => $command->content];
+		}
+		if( $command->email ) {
+			$command->email = ' <'.$command->email.'>';
+		}
+		if( $command->author ) {
+			$fields[] = ['value' => trim( $command->author.$command->email.' - '.$command->ipAddress )];
+		}
+		$fields[] = ['value' => sprintf( '<%s|%s>', $args['notification_link'], __( 'View Review', 'site-reviews' ))];
+		return json_encode([
+			'icon_url' => $glsr_app()->url.'assets/img/icon.png',
+			'username' => $glsr_app()->name,
+			'attachments' => [[
+				'pretext' => $args['notification_title'],
+				'color' => '#665068',
+				'fallback' => $this->createEmailNotification( $command, $args )->read( 'plaintext' ),
+				'fields' => $fields,
+			]],
+		]);
 	}
 
 	/**
 	 * @param int $post_id
-	 *
-	 * @return null|bool|array|WP_Error
+	 * @return void|bool|array|WP_Error
 	 */
 	protected function sendNotification( $post_id, Command $command )
 	{
-		$notificationType = $this->db->getOption( 'settings.general.notification', 'none' );
-
-		if( !in_array( $notificationType, ['default', 'custom', 'webhook'] ))return;
-
-		$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+		$notificationType = glsr_get_option( 'general.notification' );
+		if( !in_array( $notificationType, ['default','custom','webhook'] ))return;
 		$assignedToTitle = get_the_title( (int) $command->assignedTo );
-
 		$notificationSubject = _nx(
 			'New %s-star review',
 			'New %s-star review of: %s',
@@ -153,86 +119,59 @@ class SubmitReview
 			'The text is different depending on whether or not the review has been assigned to a post.',
 			'site-reviews'
 		);
-
 		$notificationTitle = sprintf( '[%s] %s',
-			$blogname,
+			wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES ),
 			sprintf( $notificationSubject, $command->rating, $assignedToTitle )
 		);
-
 		$args = [
-			'notification_link'  => esc_url( admin_url( sprintf( 'post.php?post=%s&action=edit', $post_id )) ),
+			'notification_link' => esc_url( admin_url( sprintf( 'post.php?post=%s&action=edit', $post_id ))),
 			'notification_title' => $notificationTitle,
-			'notification_type'  => $notificationType,
+			'notification_type' => $notificationType,
 		];
-
 		return $args['notification_type'] == 'webhook'
-			? $this->sendNotificationWebhook( $command, $args )
-			: $this->sendNotificationEmail( $command, $args );
+			? $this->sendWebhookNotification( $command, $args )
+			: $this->sendEmailNotification( $command, $args );
 	}
 
 	/**
-	 * @return bool|null
+	 * @return bool
 	 */
-	protected function sendNotificationEmail( Command $command, array $args )
+	protected function sendEmailNotification( Command $command, array $args )
 	{
-		$args['recipient'] = 'default' === $args['notification_type']
+		$args['recipient'] = $args['notification_type'] === 'default'
 			? get_option( 'admin_email' )
-			: $this->db->getOption( 'settings.general.notification_email' );
-
-		// no email address has been set
-		if( empty( $args['recipient'] ))return;
-
-		return $this->createNotification( $command, $args )->send();
+			: glsr_get_option( 'general.notification_email' );
+		$result = !empty( $args['recipient'] )
+			? $this->createEmailNotification( $command, $args )->send()
+			: false;
+		if( $result === null ) {
+			glsr_log( __( 'Email notification was not sent: missing email, subject, or message.', 'site-reviews' ), 'error' );
+		}
+		if( $result === false ) {
+			glsr_log( __( 'Email notification was not sent: wp_mail() failed.', 'site-reviews' ), 'error' );
+		}
+		return (bool) $result;
 	}
 
 	/**
-	 * @return null|array|WP_Error
+	 * @return array|WP_Error
 	 */
-	protected function sendNotificationWebhook( Command $command, array $args )
+	protected function sendWebhookNotification( Command $command, array $args )
 	{
-		if( !( $endpoint = $this->db->getOption( 'settings.general.webhook_url' )))return;
-
-		$fields = [];
-
-		$fields[] = ['title' => str_repeat( ':star:', $command->rating ) ];
-
-		if( $command->title ) {
-			$fields[] = ['title' => $command->title ];
-		}
-
-		if( $command->content ) {
-			$fields[] = ['value' => $command->content ];
-		}
-
-		if( $command->author ) {
-			!$command->email ?: $command->email = sprintf( ' <%s>', $command->email );
-			$fields[] = ['value' => trim( sprintf( '%s%s - %s', $command->author, $command->email, $command->ipAddress )) ];
-		}
-
-		$fields[] = ['value' => sprintf( '<%s|%s>', $args['notification_link'], __( 'View Review', 'site-reviews' )) ];
-
-		$notification = json_encode([
-			'icon_url'    => $this->app->url . 'assets/img/icon.png',
-			'username'    => $this->app->name,
-			'attachments' => [
-				[
-					'pretext'  => $args['notification_title'],
-					'color'    => '#665068',
-					'fallback' => $this->createNotification( $command, $args )->read( 'plaintext' ),
-					'fields'   => $fields,
-				],
-			],
-		]);
-
-		return wp_remote_post( $endpoint, [
-			'method'      => 'POST',
-			'timeout'     => 45,
+		$notification = $this->createWebhookNotification( $command, $args );
+		$result = wp_remote_post( $endpoint, [
+			'method' => 'POST',
+			'timeout' => 45,
 			'redirection' => 5,
 			'httpversion' => '1.0',
-			'blocking'    => false,
-			'sslverify'   => false,
-			'headers'     => ['Content-Type' => 'application/json'],
-			'body'        => apply_filters( 'site-reviews/webhook/notification', $notification, $command ),
+			'blocking' => false,
+			'sslverify' => false,
+			'headers' => ['Content-Type' => 'application/json'],
+			'body' => apply_filters( 'site-reviews/webhook/notification', $notification, $command ),
 		]);
+		if( is_wp_error( $result )) {
+			glsr_log( $result->get_error_message(), 'error' );
+		}
+		return $result;
 	}
 }

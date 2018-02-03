@@ -28,7 +28,7 @@ class SubmitReview
 
 	public function __construct( $input )
 	{
-		$this->ajaxRequest = isset( $input['ajax_request'] ) ? true : false;
+		$this->ajaxRequest = isset( $input['ajax_request'] );
 		$this->assignedTo  = is_numeric( $input['assign_to'] ) ? $input['assign_to'] : '';
 		$this->author      = $input['name'];
 		$this->category    = $input['category'];
@@ -39,7 +39,7 @@ class SubmitReview
 		$this->rating      = intval( $input['rating'] );
 		$this->referrer    = $input['_wp_http_referer'];
 		$this->request     = $input;
-		$this->terms       = isset( $input['terms'] ) ? true : false;
+		$this->terms       = isset( $input['terms'] );
 		$this->title       = $input['title'];
 	}
 }

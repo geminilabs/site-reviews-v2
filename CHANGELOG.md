@@ -20,6 +20,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [2.12.0] = 2018-02-??
 
+### Added
+- Notification errors are now logged
+
 ### Removed
 - Removed "site-reviews/notification/template-tags" filter hook (use "site-reviews/email/compose" instead)
 

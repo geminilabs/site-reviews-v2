@@ -32,16 +32,11 @@ class Database implements OptionsContract
 	/**
 	 * Save a review to the database
 	 *
-	 * @param string $metaReviewId
 	 * @param bool $update
 	 * @return int|bool
 	 */
-	public function createReview( $metaReviewId, array $meta, $update = false )
+	public function createReview( array $meta, $update = false )
 	{
-		$post_id = $this->getReviewId( $metaReviewId );
-		if( !empty( $post_id ) && !$update ) {
-			return $post_id;
-		}
 		// make sure we set post_meta fallback defaults
 		$meta = wp_parse_args( $meta, [
 			'author'      => '',
@@ -53,18 +48,22 @@ class Database implements OptionsContract
 			'ip_address'  => '',
 			'pinned'      => false,
 			'rating'      => '',
-			'review_id'   => '',
+			'review_id'   => md5( time().serialize( $meta )),
 			'review_type' => 'local',
 			'title'       => '',
 			'url'         => '',
 		]);
+		$post_id = $this->getReviewId( $meta['review_id'] );
+		if( !empty( $post_id ) && !$update ) {
+			return $post_id;
+		}
 		$post_data = [
 			'comment_status' => 'closed',
 			'ID'             => $post_id ? $post_id : 0,
 			'ping_status'    => 'closed',
 			'post_content'   => $meta['content'],
 			'post_date'      => $meta['date'],
-			'post_name'      => sprintf( '%s-%s', $meta['review_type'], $metaReviewId ),
+			'post_name'      => sprintf( '%s-%s', $meta['review_type'], $meta['review_id'] ),
 			'post_status'    => 'publish',
 			'post_title'     => wp_strip_all_tags( $meta['title'] ),
 			'post_type'      => App::POST_TYPE,
@@ -74,7 +73,7 @@ class Database implements OptionsContract
 		}
 		$post_id = wp_insert_post( $post_data, true );
 		if( is_wp_error( $post_id )) {
-			glsr_resolve( 'Log\Logger' )->error( sprintf( '%s (%s)', $post_id->get_error_message(), $metaReviewId ));
+			glsr_resolve( 'Log\Logger' )->error( sprintf( '%s (%s)', $post_id->get_error_message(), $meta['review_id'] ));
 			return false;
 		}
 		// add post_meta
@@ -532,7 +531,7 @@ class Database implements OptionsContract
 	 * @param string $taxonomy
 	 * @return void
 	 */
-	public function setTerms( $post_id, $terms, $taxonomy = '' )
+	public function setReviewMeta( $post_id, $terms, $taxonomy = '' )
 	{
 		!empty( $taxonomy ) ?: $taxonomy = App::TAXONOMY;
 		$terms = $this->normalizeTerms( $terms, $taxonomy );
