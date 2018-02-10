@@ -210,6 +210,19 @@ class ReviewController extends BaseController
 	}
 
 	/**
+	 * @param array $post_data
+	 * @param array $meta
+	 * @param int $post_id
+	 * @return void
+	 */
+	public function onCreateReview( $post_data, $meta, $post_id )
+	{
+		$review = get_post( $post_id );
+		if( !$review || $review->post_type !== App::POST_TYPE )return;
+		$this->updateAssignedToPost( $review );
+	}
+
+	/**
 	 * @param int $post_id
 	 * @return void
 	 */

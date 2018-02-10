@@ -101,6 +101,7 @@ final class App extends Container
 		add_action( 'admin_action_approve',                  [ $review, 'approve'] );
 		add_action( 'admin_print_scripts',                   [ $review, 'modifyAutosave'], 999 );
 		add_action( 'current_screen',                        [ $review, 'modifyFeatures'] );
+		add_action( 'site-reviews/local/review/create',      [ $review, 'onCreateReview'], 10, 3 );
 		add_action( 'save_post_' . static::POST_TYPE,        [ $review, 'onSaveReview'], 20, 2 );
 		add_action( 'before_delete_post',                    [ $review, 'onDeleteReview'] );
 		add_action( 'admin_menu',                            [ $review, 'removeMetaBoxes'] );
@@ -271,6 +272,9 @@ final class App extends Container
 		}
 		if( version_compare( $version, '2.12.0', '<' )) {
 			$upgrade->blacklist_2120();
+		}
+		if( version_compare( $version, '2.12.1', '<' )) {
+			$upgrade->reviewAssignedTo_2121();
 		}
 		$this->updateVersion( $version );
 	}

@@ -139,6 +139,9 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 
 == Changelog ==
 
+= 2.12.1 (2018-02-09) =
+- Fixed the post ranking calculation on new review submissions
+
 = 2.12.0 (2018-02-03) =
 - [feature] Review blacklist
 - Notification errors are now logged

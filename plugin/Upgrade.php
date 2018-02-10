@@ -361,6 +361,16 @@ class Upgrade
 	}
 
 	/**
+	 * Alias for $this->reviewAssignedTo_290()
+	 *
+	 * @return void
+	 */
+	public function reviewAssignedTo_2121()
+	{
+		$this->reviewAssignedTo_290();
+	}
+
+	/**
 	 * @param string $search
 	 * @param string $replace
 	 *
