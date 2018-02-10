@@ -13,6 +13,7 @@ Minimum plugin requirements:
 
 #### Current Features
 
+- [new] Review blacklist
 - Actively developed and supported
 - Ajax pagination of reviews
 - Akismet integration to provide spam-validation
@@ -32,7 +33,6 @@ Minimum plugin requirements:
 - Publicly respond to a review
 - Relative dates option
 - Review avatars (gravatar.com)
-- Review blacklist
 - Review categories
 - Review pagination
 - Reviews Summary shortcode: [site_reviews_summary]

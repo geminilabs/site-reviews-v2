@@ -5,7 +5,7 @@ Tags: best reviews, business ratings, business reviews, curated reviews, moderat
 Requires at least: 4.0.0
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.12.1
+Stable tag: 2.12.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -139,15 +139,13 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 
 == Changelog ==
 
-= 2.12.1 (2018-02-09) =
-- Fixed review rendering to check for an assigned_to value
-- Fixed the post ranking calculation on new review submissions
-
-= 2.12.0 (2018-02-03) =
+= 2.12.0 (2018-02-09) =
 - [feature] Review blacklist
 - Notification errors are now logged
 - Removed "site-reviews/notification/template-tags" filter hook (use "site-reviews/email/compose" instead)
 - Show the reviewer's IP address in the details metabox
+- Fixed review rendering to check for an assigned_to value
+- Fixed the post ranking calculation on new review submissions
 
 = 2.11.3 (2018-01-31) =
 - Fixed plugin session management

@@ -18,13 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
-## [2.12.1] = 2018-02-09
-
-### Fixed
-- Fixed review rendering to check for an assigned_to value
-- Fixed the post ranking calculation on new review submissions
-
-## [2.12.0] = 2018-02-03
+## [2.12.0] = 2018-02-09
 
 ### Added
 - [feature] Review blacklist
@@ -33,6 +27,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Removed
 - Removed "site-reviews/notification/template-tags" filter hook (use "site-reviews/email/compose" instead)
+
+### Fixed
+- Fixed review rendering to check for an assigned_to value
+- Fixed the post ranking calculation on new review submissions
 
 ## [2.11.3] = 2018-01-31
 
