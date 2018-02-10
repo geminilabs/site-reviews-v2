@@ -132,7 +132,10 @@ class Reviews extends Base
 	 */
 	protected function buildMeta( $review )
 	{
-		if( in_array( 'date', $this->args['hide'] ) && empty( $review->rating ))return;
+		if( in_array( 'date', $this->args['hide'] )
+			&& empty( $review->rating )
+			&& empty( $review->assigned_to )
+		)return;
 		$rendered = apply_filters( 'site-reviews/rendered/review/meta/order', [
 			'rating' => $this->buildRating( $review->rating ),
 			'date' => $this->buildDate( $review->date ),

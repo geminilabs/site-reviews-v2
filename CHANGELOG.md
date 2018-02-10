@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## [2.12.1] = 2018-02-09
 
 ### Fixed
+- Fixed review rendering to check for an assigned_to value
 - Fixed the post ranking calculation on new review submissions
 
 ## [2.12.0] = 2018-02-03
