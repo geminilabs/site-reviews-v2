@@ -13,6 +13,7 @@ All proposed features are subject to change and sorted alphabetically rather tha
 - [x] Store the bayesian ranking to posts/pages with assigned reviews (can be used for query sorting)
 
 ## Proposed v3 features
+- [ ] Clickable summary bars for filtering
 - [ ] Custom importer to correctly map assigned post_ids @addon
 - [ ] Custom review fields
 - [ ] Customization of stars, fonts, colors, etc.
