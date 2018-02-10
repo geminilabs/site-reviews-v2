@@ -158,6 +158,7 @@ class SubmitReview
 	 */
 	protected function sendWebhookNotification( Command $command, array $args )
 	{
+		if( !( $endpoint = glsr_get_option( 'general.webhook_url' )))return;
 		$notification = $this->createWebhookNotification( $command, $args );
 		$result = wp_remote_post( $endpoint, [
 			'method' => 'POST',

@@ -18,7 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
-## [2.12.0] = 2018-02-09
+## [2.12.2] = 2018-02-10
 
 ### Added
 - [feature] Review blacklist
@@ -30,6 +30,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 - Fixed review rendering to check for an assigned_to value
+- Fixed Slack notifications
 - Fixed the post ranking calculation on new review submissions
 
 ## [2.11.3] = 2018-01-31
