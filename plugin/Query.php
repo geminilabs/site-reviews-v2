@@ -65,14 +65,13 @@ class Query
 	 */
 	public function buildSqlOr( $values, $sprintfString )
 	{
-		is_array( $values ) ?: $values = explode( ',', $values );
-
-		$values = array_filter( array_map( 'trim', $values ));
-
+		if( !is_array( $values )) {
+			$values = explode( ',', $values );
+		}
+		$values = array_filter( array_map( 'trim', (array) $values ));
 		$values = array_map( function( $value ) use( $sprintfString ) {
 			return sprintf( $sprintfString, $value );
 		}, $values );
-
 		return implode( ' OR ', $values );
 	}
 

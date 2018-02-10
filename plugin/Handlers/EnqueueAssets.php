@@ -88,7 +88,7 @@ class EnqueueAssets
 	 */
 	public function enqueuePublic( Command $command )
 	{
-		$currentTheme = sanitize_title( wp_get_theme()->get( 'Name' ));
+		$currentTheme = sanitize_title( (string) wp_get_theme()->get( 'Name' ));
 
 		$stylesheet = file_exists( $command->path . "css/{$currentTheme}.css" )
 			? $command->url . "css/{$currentTheme}.css"

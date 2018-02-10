@@ -426,7 +426,7 @@ class MainController extends BaseController
 	public function renderAssignedToMetabox( $post )
 	{
 		if( $post->post_type != App::POST_TYPE )return;
-		$assignedTo = get_post_meta( $post->ID, 'assigned_to', true );
+		$assignedTo = (int) get_post_meta( $post->ID, 'assigned_to', true );
 		$template = '';
 		if( $assignedTo && $assignedPost = get_post( $assignedTo )) {
 			ob_start();

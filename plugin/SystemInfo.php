@@ -133,10 +133,11 @@ class SystemInfo
 		$theme = wp_get_theme();
 
 		$wp_prefix_status = strlen( $wpdb->prefix ) > 16 ? 'ERROR: Too long' : 'Acceptable';
+		$language = get_option( 'WPLANG' );
 
 		$this->sysinfo[ $title ]['Active Theme'] = sprintf( '%s v%s', $theme->Name, $theme->Version );
 		$this->sysinfo[ $title ]['Home URL'] = home_url();
-		$this->sysinfo[ $title ]['Language'] = defined( 'WPLANG' ) ? WPLANG : 'en_US';
+		$this->sysinfo[ $title ]['Language'] = $language ? $language : 'en_US';
 		$this->sysinfo[ $title ]['Memory Limit'] = WP_MEMORY_LIMIT;
 		$this->sysinfo[ $title ]['Multisite'] = is_multisite() ? 'Yes' : 'No';
 		$this->sysinfo[ $title ]['Page For Posts ID'] = get_option( 'page_for_posts' );
@@ -167,7 +168,7 @@ class SystemInfo
 	{
 		if( !is_multisite() )return;
 
-		$active = get_site_option( 'active_sitewide_plugins', [] );
+		$active = (array) get_site_option( 'active_sitewide_plugins', [] );
 
 		if( !$this->title( $title ) || !count( $active ))return;
 
@@ -216,7 +217,7 @@ class SystemInfo
 
 		if( !count( $plugins ))return;
 
-		$active_plugins = get_option( 'active_plugins', [] );
+		$active_plugins = (array) get_option( 'active_plugins', [] );
 
 		$inactive = $this->formatPlugins( array_diff_key( $plugins, array_flip( $active_plugins )));
 		$active   = $this->formatPlugins( array_diff_key( $plugins, $inactive ));

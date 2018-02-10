@@ -82,13 +82,17 @@ class Helper
 	 */
 	public function getIpAddress()
 	{
-		$cloudflareIPv4 = array_filter( explode( PHP_EOL, wp_remote_retrieve_body( wp_remote_get( 'https://www.cloudflare.com/ips-v4' ))));
-		$cloudflareIPv6 = array_filter( explode( PHP_EOL, wp_remote_retrieve_body( wp_remote_get( 'https://www.cloudflare.com/ips-v6' ))));
-		$ipAddress = ( new Whip( Whip::CLOUDFLARE_HEADERS | Whip::REMOTE_ADDR, [
-			Whip::CLOUDFLARE_HEADERS => [
-				Whip::IPV4 => $cloudflareIPv4,
-				Whip::IPV6 => $cloudflareIPv6,
-			],
+		$cloudflareHeaders = [];
+		$cloudflareIPv4 = wp_remote_get( 'https://www.cloudflare.com/ips-v4' );
+		$cloudflareIPv6 = wp_remote_get( 'https://www.cloudflare.com/ips-v6' );
+		if( !is_wp_error( $cloudflareIPv4 )) {
+			$cloudflareHeaders[Whip::IPV4] = array_filter( explode( PHP_EOL, wp_remote_retrieve_body( $cloudflareIPv4 )));
+		}
+		if( !is_wp_error( $cloudflareIPv6 )) {
+			$cloudflareHeaders[Whip::IPV6] = array_filter( explode( PHP_EOL, wp_remote_retrieve_body( $cloudflareIPv6 )));
+		}
+		$ipAddress = (new Whip( Whip::CLOUDFLARE_HEADERS | Whip::REMOTE_ADDR, [
+			Whip::CLOUDFLARE_HEADERS => $cloudflareHeaders,
 		]))->getValidIpAddress();
 		return $ipAddress ? $ipAddress : null;
 	}

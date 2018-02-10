@@ -92,8 +92,8 @@ class SubmitReview
 		}
 		$fields[] = ['value' => sprintf( '<%s|%s>', $args['notification_link'], __( 'View Review', 'site-reviews' ))];
 		return json_encode([
-			'icon_url' => $glsr_app()->url.'assets/img/icon.png',
-			'username' => $glsr_app()->name,
+			'icon_url' => glsr_app()->url.'assets/img/icon.png',
+			'username' => glsr_app()->name,
 			'attachments' => [[
 				'pretext' => $args['notification_title'],
 				'color' => '#665068',
@@ -105,7 +105,7 @@ class SubmitReview
 
 	/**
 	 * @param int $post_id
-	 * @return void|bool|array|WP_Error
+	 * @return void|bool|array|\WP_Error
 	 */
 	protected function sendNotification( $post_id, Command $command )
 	{
@@ -120,7 +120,7 @@ class SubmitReview
 			'site-reviews'
 		);
 		$notificationTitle = sprintf( '[%s] %s',
-			wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES ),
+			wp_specialchars_decode( (string) get_option( 'blogname' ), ENT_QUOTES ),
 			sprintf( $notificationSubject, $command->rating, $assignedToTitle )
 		);
 		$args = [
@@ -144,7 +144,7 @@ class SubmitReview
 		$result = !empty( $args['recipient'] )
 			? $this->createEmailNotification( $command, $args )->send()
 			: false;
-		if( $result === null ) {
+		if( !is_bool( $result )) {
 			glsr_log( __( 'Email notification was not sent: missing email, subject, or message.', 'site-reviews' ), 'error' );
 		}
 		if( $result === false ) {
@@ -154,7 +154,7 @@ class SubmitReview
 	}
 
 	/**
-	 * @return array|WP_Error
+	 * @return array|\WP_Error
 	 */
 	protected function sendWebhookNotification( Command $command, array $args )
 	{

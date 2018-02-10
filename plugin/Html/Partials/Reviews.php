@@ -119,8 +119,8 @@ class Reviews extends Base
 		}
 		else {
 			$format = $dateFormat == 'custom'
-				? $this->db->getOption( 'settings.reviews.date.custom', 'M j, Y' )
-				: get_option( 'date_format' );
+				? glsr_get_option( 'reviews.date.custom', 'M j, Y' )
+				: (string) get_option( 'date_format' );
 			$date = date_i18n( $format, strtotime( $date ));
 		}
 		return sprintf( '<span class="glsr-review-date">%s</span>', $date );

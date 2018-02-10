@@ -97,7 +97,7 @@ class Session
 	 * @param string $key
 	 * @param string|array $fallback
 	 * @param bool|string $unset
-	 * @return string
+	 * @return string|array
 	 */
 	public function get( $key, $fallback = '', $unset = false )
 	{
@@ -214,7 +214,7 @@ class Session
 	{
 		if( headers_sent() )return;
 		$cookie = $this->sessionId.'||'.$this->expiryTimestamp.'||'.$this->expiryTimestampReset;
-		$cookiePath = preg_replace( '|https?://[^/]+|i', '', trailingslashit( get_option( 'home' )));
+		$cookiePath = preg_replace( '|https?://[^/]+|i', '', trailingslashit( (string) get_option( 'home' )));
 		setcookie( static::SESSION_COOKIE, $cookie, $this->expiryTimestamp, $cookiePath );
 	}
 

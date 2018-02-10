@@ -86,7 +86,7 @@ class RegisterTaxonomy
 			: '';
 
 		$taxonomy = get_taxonomy( App::TAXONOMY );
-		$showOptionAll = $taxonomy
+		$showOptionAll = !empty( $taxonomy )
 			? ucfirst( strtolower( $taxonomy->labels->all_items ))
 			: '';
 

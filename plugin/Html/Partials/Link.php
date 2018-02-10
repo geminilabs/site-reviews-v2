@@ -24,7 +24,7 @@ class Link extends Base
 		$args = shortcode_atts( ['post_id' => ''], $this->args );
 		$post = get_post( $args['post_id'] );
 		return isset( $post->ID ) && $post->ID == $args['post_id'] && $post->post_status == 'publish'
-			? sprintf( '<a href="%s">%s</a>', get_the_permalink( $post->ID ), get_the_title( $post->ID ))
+			? sprintf( '<a href="%s">%s</a>', (string) get_the_permalink( $post->ID ), get_the_title( $post->ID ))
 			: '';
 	}
 }

@@ -32,7 +32,7 @@ trait SiteReviews
 			'title' => '',
 			'type' => '',
 		]);
-		$args = shortcode_atts( $defaults, $args );
+		$args = shortcode_atts( $defaults, wp_parse_args( $args ));
 		$args = $this->makeCompatible( $args );
 		$args = $this->normalizeHiddenFields( $args );
 		// "type" takes precedence over "display"

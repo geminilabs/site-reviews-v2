@@ -42,7 +42,7 @@ trait SiteReviewsForm
 			'hide' => [],
 			'title' => '',
 		]);
-		$atts = shortcode_atts( $defaults, $args );
+		$atts = shortcode_atts( $defaults, wp_parse_args( $args ));
 		$atts = $this->makeCompatible( $atts );
 		$atts['hide'] = $this->normalizeHiddenFields( $atts['hide'] );
 		return $atts;
@@ -94,14 +94,14 @@ trait SiteReviewsForm
 	 */
 	public function renderRequireLogin()
 	{
-		$requireUser = glsr_resolve( 'Database' )->getOption( 'settings.general.require.login' );
+		$requireUser = glsr_get_option( 'general.require.login' );
 		if( $requireUser != 'yes' || is_user_logged_in() ) {
 			return false;
 		}
 		$login = sprintf( __( 'You must be %s to submit a review.', 'site-reviews' ),
-			sprintf( '<a href="%s">%s</a>', wp_login_url( get_permalink() ), __( 'logged in', 'site-reviews' ))
+			sprintf( '<a href="%s">%s</a>', wp_login_url( (string) get_permalink() ), __( 'logged in', 'site-reviews' ))
 		);
-		if( get_option( 'users_can_register' ) && glsr_resolve( 'Database' )->getOption( 'settings.general.require.login_register' ) == 'yes' ) {
+		if( get_option( 'users_can_register' ) && glsr_get_option( 'general.require.login_register' ) == 'yes' ) {
 			$login .= ' '.sprintf( __( 'You may also %s for an account.', 'site-reviews' ),
 				sprintf( '<a href="%s">%s</a>', wp_registration_url(), __( 'register', 'site-reviews' ))
 			);

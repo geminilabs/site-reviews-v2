@@ -479,7 +479,7 @@ class Database implements OptionsContract
 				ob_start();
 				$this->app->make( 'Controllers\MainController' )->render( 'edit/search-result', [
 					'ID' => get_the_ID(),
-					'permalink' => esc_url( get_permalink() ),
+					'permalink' => esc_url( (string) get_permalink() ),
 					'title' => esc_attr( get_the_title() ),
 				]);
 				$results .= ob_get_clean();
@@ -519,7 +519,7 @@ class Database implements OptionsContract
 		$settings = array_replace_recursive( $defaultSettings, $currentSettings );
 		if( $args['update'] ) {
 			$option = get_option( $this->getOptionName(), [] );
-			$option = array_replace_recursive( $option, $settings );
+			$option = array_replace_recursive( (array) $option, $settings );
 			update_option( $this->getOptionName(), $option );
 		}
 		return $settings;

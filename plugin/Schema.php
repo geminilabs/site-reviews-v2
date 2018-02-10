@@ -85,7 +85,7 @@ class Schema
 			->doIf( !in_array( 'excerpt', $this->args['hide'] ), function( ReviewSchema $schema ) use( $review ) {
 				$schema->reviewBody( $review->content );
 			})
-			->datePublished(( new DateTime( $review->date ))->format( DateTime::ISO8601 ))
+			->datePublished( new DateTime( $review->date ))
 			->author( SchemaOrg::Person()
 				->name( $review->author )
 			)
@@ -185,7 +185,7 @@ class Schema
 	 */
 	protected function getSchemaOption( $option, $fallback )
 	{
-		if( $schemaOption = trim( get_post_meta( get_the_ID(), sprintf( 'schema_%s', $option ), true ))) {
+		if( $schemaOption = trim( (string) get_post_meta( (int) get_the_ID(), sprintf( 'schema_%s', $option ), true ))) {
 			return $schemaOption;
 		}
 		$path = 'settings.reviews.schema.%s.%s';
@@ -207,15 +207,16 @@ class Schema
 			return $value;
 		}
 		if( !is_single() && !is_page() )return;
+		$postId = (int) get_the_ID();
 		switch( $option ) {
 			case 'description':
-				return get_the_excerpt( get_the_ID() );
+				return get_the_excerpt( $postId );
 			case 'image':
-				return get_the_post_thumbnail_url( get_the_ID(), 'large' ) . '';
+				return (string) get_the_post_thumbnail_url( $postId, 'large' );
 			case 'name':
-				return get_the_title( get_the_ID() );
+				return get_the_title( $postId );
 			case 'url':
-				return get_the_permalink( get_the_ID() );
+				return (string) get_the_permalink( $postId );
 		}
 	}
 

@@ -66,7 +66,7 @@ class Upgrade
 			$yesno = empty( $yesno ) ? 'no' : 'yes';
 		}
 
-		$newOptions = get_option( $this->db->getOptionName(), [] );
+		$newOptions = (array) get_option( $this->db->getOptionName(), [] );
 		$newOptions = array_replace_recursive( $oldOptions, $newOptions );
 
 		// save migrated plugin options
@@ -112,7 +112,7 @@ class Upgrade
 	 */
 	public function sidebarWidgets_200()
 	{
-		$sidebarWidgets = get_option( 'sidebars_widgets' );
+		$sidebarWidgets = (array) get_option( 'sidebars_widgets' );
 		$sidebarWidgets = $this->replaceWidgetNames_200( $sidebarWidgets );
 		update_option( 'sidebars_widgets', $sidebarWidgets );
 	}
@@ -324,7 +324,7 @@ class Upgrade
 		}
 		foreach( $assignedPostIds as $postId => $reviewIds ) {
 			if( !get_post( $postId ))continue;
-			$existingReviewIds = get_post_meta( $postId, '_glsr_review_id' );
+			$existingReviewIds = (array) get_post_meta( $postId, '_glsr_review_id' );
 			array_walk( $reviewIds, function( $id ) use( $postId, $existingReviewIds ) {
 				if( !in_array( $id, $existingReviewIds )) {
 					add_post_meta( $postId, '_glsr_review_id', $id );

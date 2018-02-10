@@ -497,7 +497,7 @@ class ReviewController extends BaseController
 	protected function getAssignedToPost( $post_id )
 	{
 		if( $assignedTo = get_post_meta( $post_id, 'assigned_to', true )) {
-			$assignedToPost = get_post( $assignedTo );
+			$assignedToPost = get_post( (int) $assignedTo );
 		}
 		return !empty( $assignedToPost )
 			? $assignedToPost
@@ -550,7 +550,7 @@ class ReviewController extends BaseController
 
 
 		$redirect = !$hasReferer
-			? add_query_arg( ['message' => $message_index ], get_edit_post_link( $post_id, false ))
+			? add_query_arg( ['message' => $message_index ], get_edit_post_link( $post_id, '' ))
 			: add_query_arg( ['message' => $message_index ], remove_query_arg( ['trashed', 'untrashed', 'deleted', 'ids'], $referer ));
 
 		wp_safe_redirect( $redirect );
@@ -564,8 +564,9 @@ class ReviewController extends BaseController
 	{
 		if( !( $post = $this->getAssignedToPost( $review->ID )))return;
 		$reviewIds = get_post_meta( $post->ID, '_glsr_review_id' );
+		if( !is_array( $reviewIds ))return;
 		$this->updateReviewIdOfPost( $post, $review, $reviewIds );
-		$updatedReviewIds = array_filter( get_post_meta( $post->ID, '_glsr_review_id' ));
+		$updatedReviewIds = array_filter( (array) get_post_meta( $post->ID, '_glsr_review_id' ));
 		if( empty( $updatedReviewIds )) {
 			delete_post_meta( $post->ID, '_glsr_ranking' );
 			delete_post_meta( $post->ID, '_glsr_review_id' );
@@ -593,24 +594,28 @@ class ReviewController extends BaseController
 	 */
 	protected function validateCustomRecaptcha( $recaptchaResponse )
 	{
-		$response = json_decode( wp_remote_retrieve_body( wp_remote_get( add_query_arg([
+		$response = wp_remote_get( add_query_arg([
 			'remoteip' => $this->app->make( 'Helper' )->getIpAddress(),
 			'response' => $recaptchaResponse,
 			'secret' => glsr_get_option( 'reviews-form.recaptcha.secret' ),
-		], 'https://www.google.com/recaptcha/api/siteverify' ))));
-
-		if( !empty( $response->success )) {
-			return $response->success;
+		], 'https://www.google.com/recaptcha/api/siteverify' ));
+		if( is_wp_error( $response )) {
+			glsr_resolve( 'Log\Logger' )->error( 'reCAPTCHA: '.$response->get_error_message() );
+			return false;
+		}
+		$result = json_decode( wp_remote_retrieve_body( $response ));
+		if( !empty( $result->success )) {
+			return $result->success;
 		}
 		$errorCodes = [
-			'missing-input-secret'   => 'The secret parameter is missing.',
-			'invalid-input-secret'   => 'The secret parameter is invalid or malformed.',
+			'missing-input-secret' => 'The secret parameter is missing.',
+			'invalid-input-secret' => 'The secret parameter is invalid or malformed.',
 			'missing-input-response' => 'The response parameter is missing.',
 			'invalid-input-response' => 'The response parameter is invalid or malformed.',
-			'bad-request'            => 'The request is invalid or malformed.',
+			'bad-request' => 'The request is invalid or malformed.',
 		];
-		foreach( $response->{'error-codes'} as $error ) {
-			glsr_resolve( 'Log\Logger' )->error( sprintf( 'reCAPTCHA: %s', $errorCodes[$error] ));
+		foreach( $result->{'error-codes'} as $error ) {
+			glsr_resolve( 'Log\Logger' )->error( 'reCAPTCHA: '.$errorCodes[$error] );
 		}
 		return false;
 	}

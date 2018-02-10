@@ -15,7 +15,7 @@ namespace GeminiLabs\SiteReviews\Shortcodes\Buttons;
 abstract class Generator
 {
 	/**
-	 * @var string
+	 * @var array
 	 */
 	public $properties;
 
@@ -239,14 +239,14 @@ abstract class Generator
 		$args  = wp_parse_args( $field['query_args'], $defaults );
 		$posts = get_posts( $args );
 
-		if( $posts ) {
+		if( is_array( $posts )) {
 			$options = [];
 
 			foreach( $posts as $post ) {
 				$options[ absint( $post->ID ) ] = esc_html( $post->post_title );
 			}
 
-			$field['type']    = 'listbox';
+			$field['type'] = 'listbox';
 			$field['options'] = $options;
 
 			return $this->generateListbox( $field );
