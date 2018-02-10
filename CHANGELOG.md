@@ -29,6 +29,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Removed "site-reviews/notification/template-tags" filter hook (use "site-reviews/email/compose" instead)
 
 ### Fixed
+- Fixed plugin notices
 - Fixed review rendering to check for an assigned_to value
 - Fixed Slack notifications
 - Fixed the post ranking calculation on new review submissions

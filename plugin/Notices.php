@@ -10,20 +10,8 @@
 
 namespace GeminiLabs\SiteReviews;
 
-use GeminiLabs\SiteReviews\App;
-
 class Notices
 {
-	/**
-	 * @var App
-	 */
-	protected $app;
-
-	public function __construct( App $app )
-	{
-		$this->app = $app;
-	}
-
 	/**
 	 * Add a notice
 	 *
@@ -33,25 +21,26 @@ class Notices
 	public function add( $type, $message, array $args = [] )
 	{
 		if( empty( $type ) || empty( $message ))return;
-
+		global $wp_settings_errors;
 		$defaults = [
 			'dismissible' => true,
-			'inline'      => true,
-			'messages'    => [],
-			'type'        => '',
+			'inline' => true,
+			'messages' => [],
+			'type' => '',
 		];
-
 		$args = (object) shortcode_atts( $defaults, $args );
-
 		$args->messages = is_wp_error( $message )
 			? (array) $message->get_error_message()
 			: (array) $message;
-
 		$args->type = in_array( $type, ['error','warning','success'] )
 			? $type
 			: 'success';
-
-		add_settings_error( $this->app->id, '', $args );
+		$wp_settings_errors[] = [
+			'setting' => glsr_app()->id,
+			'code' => '',
+			'message' => $args,
+			'type' => ($args->type == 'error' ? 'error' : 'updated'),
+		];
 	}
 
 	/**
@@ -98,7 +87,7 @@ class Notices
 
 		if( $hide_on_update && !empty( $settings_updated ))return;
 
-		$settings_errors = get_settings_errors( $this->app->id, $sanitize );
+		$settings_errors = get_settings_errors( glsr_app()->id, $sanitize );
 
 		// make sure each notice is unique
 		$unique_notices = array_map( 'unserialize', array_unique( array_map( 'serialize', $settings_errors )));

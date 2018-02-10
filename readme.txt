@@ -144,6 +144,7 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 - Notification errors are now logged
 - Removed "site-reviews/notification/template-tags" filter hook (use "site-reviews/email/compose" instead)
 - Show the reviewer's IP address in the details metabox
+- Fixed plugin notices
 - Fixed review rendering to check for an assigned_to value
 - Fixed Slack notifications
 - Fixed the post ranking calculation on new review submissions
