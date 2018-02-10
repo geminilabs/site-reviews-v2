@@ -46,6 +46,7 @@ read -p " - Verified compatibility with Wordpress v${MIN_WORDPRESS_VERSION} -> l
 read -p " - Updated the POT file?"
 read -p " - Updated the screenshots?"
 read -p " - Committed all changes to the master branch on GITHUB?"
+read -p " - Scrutinizer has passed inspections"
 echo ""
 read -p "PRESS [ENTER] TO BEGIN RELEASING "${PLUGIN_VERSION}
 clear
