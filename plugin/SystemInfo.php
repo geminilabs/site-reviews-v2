@@ -18,7 +18,7 @@ class SystemInfo
 	/**
 	 * @var int
 	 */
-	public $pad = 30;
+	const PAD = 40;
 
 	/**
 	 * @var App
@@ -359,7 +359,7 @@ class SystemInfo
 	 */
 	protected function pad( $string, $pad = null, $char = '.' )
 	{
-		$pad = $pad ?: $this->pad;
+		$pad = $pad ?: static::PAD;
 
 		if( strlen( $string ) === $pad ) {
 			return $string;
@@ -482,10 +482,16 @@ class SystemInfo
 		$settings = glsr_get_options();
 		foreach( ['key','secret'] as $key ) {
 			if( isset( $settings['reviews-form']['recaptcha'][$key] )) {
-				$settings['reviews-form']['recaptcha'][$key] = '[removed]';
+				$settings['reviews-form']['recaptcha'][$key] = str_repeat( '*', 10 );
 			}
 		}
-		$this->sysinfo[ $title ][] = $this->app->make( 'Log\Logger' )->print_array( $settings );
+		$helper = glsr_resolve( 'Helper' );
+		$settings = $helper->flattenArray( $settings );
+		foreach( $settings as $key => $value ) {
+			if( $helper->startsWith( 'strings', $key ) && $helper->endsWith( 'id', $key ))continue;
+			$value = htmlspecialchars( trim( preg_replace('/\s\s+/', '\\n', $value )), ENT_QUOTES, 'UTF-8' );
+			$this->sysinfo[$title][$key] = $value;
+		}
 		return $this->implode( $title );
 	}
 }

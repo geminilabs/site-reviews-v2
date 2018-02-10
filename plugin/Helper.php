@@ -67,6 +67,41 @@ class Helper
 	}
 
 	/**
+	 * @param string $needle
+	 * @param string $haystack
+	 * @return bool
+	 */
+	public function endsWith( $needle, $haystack )
+	{
+		$length = strlen( $needle );
+		return $length != 0
+			? substr( $haystack, -$length ) === $needle
+			: true;
+	}
+
+	/**
+	 * @param string $prefix
+	 * @return array
+	 */
+	public function flattenArray( array $array, $prefix = '' )
+	{
+		$result = [];
+		foreach( $array as $key => $value ) {
+			$newKey = $prefix.( empty( $prefix ) ? '' : '.' ).$key;
+			if( $this->isSimpleArray( $value )) {
+				$value = '['.implode( ', ', $value ).']';
+			}
+			if( is_array( $value )) {
+				$result = array_merge( $result, $this->flattenArray( $value, $newKey ));
+			}
+			else {
+				$result[$newKey] = $value;
+			}
+		}
+		return $result;
+	}
+
+	/**
 	 * @param string $name
 	 * @return mixed
 	 */
@@ -95,6 +130,16 @@ class Helper
 			Whip::CLOUDFLARE_HEADERS => $cloudflareHeaders,
 		]))->getValidIpAddress();
 		return $ipAddress ? $ipAddress : null;
+	}
+
+	/**
+	 * @param string $needle
+	 * @param string $haystack
+	 * @return bool
+	 */
+	public function startsWith( $needle, $haystack )
+	{
+		return substr( $haystack, 0, strlen( $needle )) === $needle;
 	}
 
 	/**
@@ -132,5 +177,24 @@ class Helper
 	protected function getReviews( array $args = [] )
 	{
 		return $this->db->getReviews( $args )->reviews;
+	}
+
+	/**
+	 * @param mixed $array
+	 * @return bool
+	 */
+	protected function isSimpleArray( $array )
+	{
+		if( !is_array( $array ) || array_filter( $array, 'is_array' )) {
+			return false;
+		}
+		$current = 0;
+		foreach( array_keys( $array ) as $key ) {
+			if( $key !== $current ) {
+				return false;
+			}
+			$current++;
+		}
+		return true;
 	}
 }
