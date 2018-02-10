@@ -319,7 +319,7 @@ msgstr ""
 msgid "Your review cannot be submitted at this time. Please try again later."
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:689, plugin/Html/Partials/Reviews.php:279
+#: plugin/Controllers/ReviewController.php:694, plugin/Html/Partials/Reviews.php:279
 msgid "No Title"
 msgstr ""
 
