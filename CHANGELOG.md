@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.12.4] = 2018-02-11
+
+### Added
+- Added a [site_reviews_summary] "text" attribute (see shortcode documentation for details)
+
 ## [2.12.3] = 2018-02-11
 
 ### Fixed

@@ -145,15 +145,17 @@ class SiteReviewsSummary extends Shortcode
 	protected function buildSummaryText( $rating, $count )
 	{
 		if( in_array( 'summary', $this->args['hide'] ))return;
-		$summary = _nx(
-			'{rating} out of {max} stars (based on %d review)',
-			'{rating} out of {max} stars (based on %d reviews)',
-			$count,
-			'Do not translate {rating} and {max}, they are template tags.',
-			'site-reviews'
-		);
-		$summary = str_replace( ['{rating}','{max}'], [$rating, Rating::MAX_RATING], $summary );
-		$summary = sprintf( $summary, $count );
+		if( empty( $this->args['text'] )) {
+			 $this->args['text'] = _nx(
+				'{rating} out of {max} stars (based on %d review)',
+				'{rating} out of {max} stars (based on %d reviews)',
+				$count,
+				'Do not translate {rating} and {max}, they are template tags.',
+				'site-reviews'
+			);
+		}
+		$summary = str_replace( ['{rating}','{max}'], [$rating, Rating::MAX_RATING], $this->args['text'] );
+		$summary = str_replace( ['%s','%d'], $count, $summary );
 		return sprintf( '<span class="glsr-summary-text">%s</span>', $summary );
 	}
 
@@ -182,6 +184,7 @@ class SiteReviewsSummary extends Shortcode
 			'labels'      => '',
 			'rating'      => 1,
 			'schema'      => false,
+			'text'        => '',
 			'title'       => '',
 			'type'        => '',
 		];
@@ -239,5 +242,14 @@ class SiteReviewsSummary extends Shortcode
 	protected function normalizeSchema( $schema )
 	{
 		return wp_validate_boolean( $schema );
+	}
+
+	/**
+	 * @param string $text
+	 * @return string
+	 */
+	protected function normalizeText( $text )
+	{
+		return trim( $text );
 	}
 }

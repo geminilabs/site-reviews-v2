@@ -139,6 +139,9 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 
 == Changelog ==
 
+= 2.12.4 (2018-02-11) =
+- Added a [site_reviews_summary] "text" attribute (see shortcode documentation for details)
+
 = 2.12.3 (2018-02-11) =
 - Fixed schema DateTime error
 - Fixed system info plugin settings formatting

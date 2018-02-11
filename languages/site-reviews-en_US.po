@@ -1197,23 +1197,23 @@ msgstr "Summary"
 msgid "Hide the summary text?"
 msgstr "Hide the summary text?"
 
-#: plugin/Shortcodes/SiteReviewsSummary.php:222, views/submit/index.php:20
+#: plugin/Shortcodes/SiteReviewsSummary.php:225, views/submit/index.php:20
 msgid "Excellent"
 msgstr "Excellent"
 
-#: plugin/Shortcodes/SiteReviewsSummary.php:223, views/submit/index.php:21
+#: plugin/Shortcodes/SiteReviewsSummary.php:226, views/submit/index.php:21
 msgid "Very good"
 msgstr "Very good"
 
-#: plugin/Shortcodes/SiteReviewsSummary.php:224, views/submit/index.php:22
+#: plugin/Shortcodes/SiteReviewsSummary.php:227, views/submit/index.php:22
 msgid "Average"
 msgstr "Average"
 
-#: plugin/Shortcodes/SiteReviewsSummary.php:225, views/submit/index.php:23
+#: plugin/Shortcodes/SiteReviewsSummary.php:228, views/submit/index.php:23
 msgid "Poor"
 msgstr "Poor"
 
-#: plugin/Shortcodes/SiteReviewsSummary.php:226, views/submit/index.php:24
+#: plugin/Shortcodes/SiteReviewsSummary.php:229, views/submit/index.php:24
 msgid "Terrible"
 msgstr "Terrible"
 
@@ -1636,7 +1636,7 @@ msgctxt "the option label"
 msgid "The \"%s\" option is required."
 msgstr "The \"%s\" option is required."
 
-#: plugin/Shortcodes/SiteReviewsSummary.php:148
+#: plugin/Shortcodes/SiteReviewsSummary.php:149
 msgctxt "Do not translate {rating} and {max}, they are template tags."
 msgid "{rating} out of {max} stars (based on %d review)"
 msgid_plural "{rating} out of {max} stars (based on %d reviews)"
