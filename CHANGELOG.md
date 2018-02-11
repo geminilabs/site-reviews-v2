@@ -18,6 +18,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.12.3] = 2018-02-11
+
+### Fixed
+- Fixed schema DateTime error
+- Fixed system info plugin settings formatting
+
 ## [2.12.2] = 2018-02-10
 
 ### Added
