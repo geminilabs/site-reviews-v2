@@ -85,7 +85,7 @@ class Schema
 			->doIf( !in_array( 'excerpt', $this->args['hide'] ), function( ReviewSchema $schema ) use( $review ) {
 				$schema->reviewBody( $review->content );
 			})
-			->datePublished( new DateTime( $review->date ))
+			->datePublished(( new DateTime( $review->date ))->format( DateTime::ISO8601 ))
 			->author( SchemaOrg::Person()
 				->name( $review->author )
 			)
