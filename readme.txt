@@ -5,7 +5,7 @@ Tags: best reviews, business ratings, business reviews, curated reviews, moderat
 Requires at least: 4.0.0
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.12.3
+Stable tag: 2.12.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -93,7 +93,7 @@ https://github.com/geminilabs/site-reviews/wiki/Custom-Submission-Form-Field-Ord
 https://github.com/geminilabs/site-reviews/wiki/How-to-change-the-order-of-the-parts-of-a-rendered-review
 
 = How do I customise the JSON–LD schema of Site Reviews? =
-https://github.com/geminilabs/site-reviews/wiki/How-to-add-additional-values-to-Site-Reviews's-JSON%E2%80%93LD-schema
+https://github.com/geminilabs/site-reviews/wiki/How-to-add-additional-values-to-Site-Reviews-JSON%E2%80%93LD-schema
 
 = How do I disable the star rating on the submission form? =
 https://github.com/geminilabs/site-reviews/wiki/How-to-disable-the-star-rating-on-the-submission-form
@@ -139,8 +139,9 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 
 == Changelog ==
 
-= 2.12.4 (2018-02-11) =
+= 2.12.5 (2018-02-16) =
 - Added a [site_reviews_summary] "text" attribute (see shortcode documentation for details)
+- Fixed star-ratings not rendering correctly from an ajax request
 
 = 2.12.3 (2018-02-11) =
 - Fixed schema DateTime error

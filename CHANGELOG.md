@@ -18,10 +18,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
-## [2.12.4] = 2018-02-11
+## [2.12.5] = 2018-02-16
 
 ### Added
 - Added a [site_reviews_summary] "text" attribute (see shortcode documentation for details)
+
+### Fixed
+- Fixed star-ratings not rendering correctly from an ajax request
 
 ## [2.12.3] = 2018-02-11
 
