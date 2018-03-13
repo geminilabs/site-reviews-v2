@@ -126,40 +126,62 @@ class ReviewController extends BaseController
 	/**
 	 * Customize the post_type status text
 	 *
-	 * @param string $translation
-	 * @param string $single
-	 * @param string $plural
-	 * @param int    $number
-	 * @param string $domain
-	 * @return string
-	 * @filter ngettext
+	 * @action admin_enqueue_scripts
 	 */
-	public function modifyStatusFilter( $translation, $single, $plural, $number, $domain )
+	public function modifyLocalizedStatusText()
 	{
-		if( $this->canModifyTranslation( $domain )) {
-
-			$search = [
-				'Published',
-				'Pending',
-			];
-
-			$replace = [
-				__( 'Approved', 'site-reviews' ),
-				__( 'Unapproved', 'site-reviews' ),
-			];
-
-			foreach( $search as $string ) {
-				if( strpos( $single, $string ) === false )continue;
-
-				$translation = $this->getTranslation([
-					'number' => $number,
-					'plural' => str_replace( $search, $replace, $plural ),
-					'single' => str_replace( $search, $replace, $single ),
-				]);
+		global $wp_scripts;
+		$strings = [
+			'savePending' => __( 'Save as Unapproved', 'site-reviews' ),
+			'published' => __( 'Approved', 'site-reviews' ),
+		];
+		if( $this->canModifyTranslation() && isset( $wp_scripts->registered['post']->extra['data'] )) {
+			$l10n = &$wp_scripts->registered['post']->extra['data'];
+			foreach( $strings as $search => $replace ) {
+				$l10n = preg_replace( '/("'.$search.'":")([^"]+)/', "$1".$replace, $l10n );
 			}
 		}
+	}
 
+	/**
+	 * Customize the post_type status text
+	 *
+	 * @param string $translation
+	 * @param string $test
+	 * @param string $domain
+	 * @return string
+	 * @filter gettext
+	 */
+	public function modifyStatusText( $translation, $text, $domain )
+	{
+		if( $this->canModifyTranslation( $domain )) {
+			$replacements = [
+				'Save as Pending' => __( 'Save as Unapproved', 'site-reviews' ),
+				'Privately Published' => __( 'Privately Approved', 'site-reviews' ),
+				'Published' => __( 'Approved', 'site-reviews' ),
+				'Pending' => __( 'Unapproved', 'site-reviews' ),
+				'Pending Review' => __( 'Unapproved', 'site-reviews' ),
+			];
+			foreach( $replacements as $search => $replacement ) {
+				if( $translation != $search )continue;
+				$translation = $replacement;
+			}
+		}
 		return $translation;
+	}
+
+	/**
+	 * Customize the post_type status text
+	 *
+	 * @param string $translation
+	 * @param string $test
+	 * @param string $domain
+	 * @return string
+	 * @filter gettext_with_context
+	 */
+	public function modifyStatusTextWithContext( $translation, $text, $context, $domain )
+	{
+		return $this->modifyStatusText( $translation, $text, $domain );
 	}
 
 	/**
@@ -485,11 +507,9 @@ class ReviewController extends BaseController
 	 */
 	protected function canModifyTranslation( $domain = 'default' )
 	{
-		global $current_screen;
-
-		return isset( $current_screen )
-			&& $current_screen->base == 'edit'
-			&& $current_screen->post_type == App::POST_TYPE
+		return glsr_current_screen()
+			&& glsr_current_screen()->post_type == App::POST_TYPE
+			&& in_array( glsr_current_screen()->base, ['edit', 'post'] )
 			&& $domain == 'default';
 	}
 
@@ -498,12 +518,10 @@ class ReviewController extends BaseController
 	 */
 	protected function isEditReview()
 	{
-		$screen = glsr_current_screen();
-
-		return $screen
-			&& $screen->base == 'post'
-			&& $screen->id == App::POST_TYPE
-			&& $screen->post_type == App::POST_TYPE;
+		return glsr_current_screen()
+			&& glsr_current_screen()->post_type == App::POST_TYPE
+			&& glsr_current_screen()->id == App::POST_TYPE
+			&& glsr_current_screen()->base == 'post';
 	}
 
 	/**

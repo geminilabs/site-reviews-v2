@@ -101,6 +101,7 @@ final class App extends Container
 		add_action( 'admin_action_approve',                  [ $review, 'approve'] );
 		add_action( 'admin_print_scripts',                   [ $review, 'modifyAutosave'], 999 );
 		add_action( 'current_screen',                        [ $review, 'modifyFeatures'] );
+		add_action( 'admin_enqueue_scripts',                 [ $review, 'modifyLocalizedStatusText'] );
 		add_action( 'site-reviews/local/review/create',      [ $review, 'onCreateReview'], 10, 3 );
 		add_action( 'save_post_' . static::POST_TYPE,        [ $review, 'onSaveReview'], 20, 2 );
 		add_action( 'before_delete_post',                    [ $review, 'onDeleteReview'] );
@@ -124,7 +125,8 @@ final class App extends Container
 		add_filter( 'post_row_actions',                [ $main, 'registerRowActions'], 10, 2 );
 		add_filter( 'wp_editor_settings',              [ $review, 'modifyEditor'] );
 		add_filter( 'the_editor',                      [ $review, 'modifyEditorTextarea'] );
-		add_filter( 'ngettext',                        [ $review, 'modifyStatusFilter'], 10, 5 );
+		add_filter( 'gettext',                         [ $review, 'modifyStatusText'], 10, 3 );
+		add_filter( 'gettext_with_context',            [ $review, 'modifyStatusTextWithContext'], 10, 4 );
 		add_filter( 'query_vars',                      [ $review, 'modifyQueryVars'] );
 		add_filter( 'post_updated_messages',           [ $review, 'modifyUpdateMessages'] );
 		add_filter( 'bulk_post_updated_messages',      [ $review, 'modifyUpdateMessagesBulk'], 10, 2 );

@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.13.3] = 2018-03-14
+
+### Fixed
+- Fixed custom post_status labels
+
 ## [2.13.2] = 2018-03-13
 
 ### Added
