@@ -9,7 +9,7 @@
  * Description: Receive and display site reviews
  * Version:     2.12.5
  * Author:      Paul Ryley
- * Author URI:  http://geminilabs.io
+ * Author URI:  https://profiles.wordpress.org/pryley#content-plugins
  * License:     GPL2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: site-reviews
