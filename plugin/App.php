@@ -274,6 +274,9 @@ final class App extends Container
 			$upgrade->blacklist_2120();
 			$upgrade->reviewAssignedTo_2120();
 		}
+		if( version_compare( $version, '2.13.1', '<' )) {
+			$upgrade->reviewAssignedTo_2131();
+		}
 		$this->updateVersion( $version );
 	}
 

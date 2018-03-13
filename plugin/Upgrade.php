@@ -309,6 +309,7 @@ class Upgrade
 	{
 		global $wpdb;
 		$assignedPostIds = [];
+		$reviewController = $this->app->make( 'Controllers\ReviewController' );
 		$reviews = (array) $wpdb->get_results(
 			"SELECT p.ID, m.meta_value AS post " .
 			"FROM {$wpdb->posts} AS p " .
@@ -330,8 +331,15 @@ class Upgrade
 					add_post_meta( $postId, '_glsr_review_id', $id );
 				}
 			});
+			$assigned = $this->db->getReviews([
+				'count' => -1,
+				'post__in' => $reviewIds,
+			]);
+			update_post_meta( $postId, '_glsr_average',
+				$reviewController->recalculatePostAverage( $assigned->reviews )
+			);
 			update_post_meta( $postId, '_glsr_ranking',
-				$this->app->make( 'Controllers\ReviewController' )->recalculatePostRanking( $reviewIds )
+				$reviewController->recalculatePostRanking( $assigned->reviews )
 			);
 		}
 	}
@@ -366,6 +374,16 @@ class Upgrade
 	 * @return void
 	 */
 	public function reviewAssignedTo_2120()
+	{
+		$this->reviewAssignedTo_290();
+	}
+
+	/**
+	 * Alias for $this->reviewAssignedTo_290()
+	 *
+	 * @return void
+	 */
+	public function reviewAssignedTo_2131()
 	{
 		$this->reviewAssignedTo_290();
 	}

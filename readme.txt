@@ -5,7 +5,7 @@ Tags: best reviews, business ratings, business reviews, curated reviews, moderat
 Requires at least: 4.0.0
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.13.0
+Stable tag: 2.13.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -139,7 +139,7 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 
 == Changelog ==
 
-= 2.13.0 (2018-03-13) =
+= 2.13.1 (2018-03-13) =
 - [feature] Average rating values are stored in posts that have assigned reviews (can be used for query sorting)
 - Fixed non-ajax form submissions
 
