@@ -33,10 +33,10 @@ class Database implements OptionsContract
 	/**
 	 * Save a review to the database
 	 *
-	 * @param bool $update
+	 * @param SubmitReview $command
 	 * @return int|bool
 	 */
-	public function createReview( array $meta, SubmitReview $command )
+	public function createReview( array $meta, $command )
 	{
 		// make sure we set post_meta fallback defaults
 		$meta = wp_parse_args( $meta, [
