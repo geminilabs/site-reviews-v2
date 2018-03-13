@@ -24,7 +24,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - [feature] Average rating values are stored in posts that have assigned reviews (can be used for query sorting)
 
 ### Fixed
--
+- Fixed non-ajax form submissions
 
 ## [2.12.5] = 2018-02-16
 

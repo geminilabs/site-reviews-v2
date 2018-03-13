@@ -119,7 +119,7 @@ final class App extends Container
 
 		// Filter Hooks
 		add_filter( 'script_loader_tag',               [ $main, 'filterEnqueuedScripts'], 10, 2 );
-		add_filter( "plugin_action_links_{$basename}", [ $main, 'registerActionLinks'] );
+		add_filter( 'plugin_action_links_'.$basename,  [ $main, 'registerActionLinks'] );
 		add_filter( 'dashboard_glance_items',          [ $main, 'registerDashboardGlanceItems'] );
 		add_filter( 'post_row_actions',                [ $main, 'registerRowActions'], 10, 2 );
 		add_filter( 'wp_editor_settings',              [ $review, 'modifyEditor'] );

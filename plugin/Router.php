@@ -100,6 +100,7 @@ class Router
 
 	public function routePublicPostRequests()
 	{
+		if( is_admin() )return;
 		switch( filter_input( INPUT_POST, 'action' )) {
 			case 'post-review':
 				$this->app->make( 'Controllers\ReviewController' )->postSubmitReview( $this->normalize( $_POST ));
