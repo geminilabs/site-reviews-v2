@@ -331,15 +331,21 @@ class Upgrade
 					add_post_meta( $postId, '_glsr_review_id', $id );
 				}
 			});
-			$assigned = $this->db->getReviews([
-				'count' => -1,
-				'post__in' => $reviewIds,
-			]);
+			$assignedIds = implode( ',', $reviewIds );
+			$assignedReviews = $wpdb->get_results(
+				"SELECT pm.post_id AS ID, pm.meta_value AS rating " .
+				"FROM {$wpdb->postmeta} AS pm " .
+				"INNER JOIN {$wpdb->posts} AS p ON p.ID = pm.post_id " .
+				"WHERE pm.meta_key = 'rating' " .
+				"AND p.post_type = 'site-review' " .
+				"AND p.post_status = 'publish' " .
+				"AND p.ID IN (".$assignedIds.")"
+			);
 			update_post_meta( $postId, '_glsr_average',
-				$reviewController->recalculatePostAverage( $assigned->reviews )
+				$reviewController->recalculatePostAverage( $assignedReviews )
 			);
 			update_post_meta( $postId, '_glsr_ranking',
-				$reviewController->recalculatePostRanking( $assigned->reviews )
+				$reviewController->recalculatePostRanking( $assignedReviews )
 			);
 		}
 	}
