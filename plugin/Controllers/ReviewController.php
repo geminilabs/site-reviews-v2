@@ -318,15 +318,22 @@ class ReviewController extends BaseController
 	/**
 	 * @return int|float
 	 */
-	public function recalculatePostRanking( array $reviewIds )
+	public function recalculatePostAverage( array $reviews )
 	{
-		$reviews = $this->db->getReviews([
-			'count' => -1,
-			'post__in' => $reviewIds,
-		]);
+		return apply_filters( 'site-reviews/average/rating',
+			$this->app->make( 'Rating' )->getAverage( $reviews ),
+			$reviews
+		);
+	}
+
+	/**
+	 * @return int|float
+	 */
+	public function recalculatePostRanking( array $reviews )
+	{
 		return apply_filters( 'site-reviews/bayesian/ranking',
-			$this->app->make( 'Rating' )->getRankingImdb( $reviews->reviews ),
-			$reviews->reviews
+			$this->app->make( 'Rating' )->getRankingImdb( $reviews ),
+			$reviews
 		);
 	}
 
@@ -572,7 +579,12 @@ class ReviewController extends BaseController
 			delete_post_meta( $post->ID, '_glsr_review_id' );
 		}
 		else if( !$this->app->make( 'Helper' )->compareArrays( $reviewIds, $updatedReviewIds )) {
-			update_post_meta( $post->ID, '_glsr_ranking', $this->recalculatePostRanking( $updatedReviewIds ));
+			$reviews = $this->db->getReviews([
+				'count' => -1,
+				'post__in' => $updatedReviewIds,
+			]);
+			update_post_meta( $post->ID, '_glsr_average', $this->recalculatePostAverage( $reviews->reviews ));
+			update_post_meta( $post->ID, '_glsr_ranking', $this->recalculatePostRanking( $reviews->reviews ));
 		}
 	}
 
