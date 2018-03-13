@@ -1,0 +1,2 @@
+- [ ] Make reviews custom sortable
+- [ ] Make reviews publicly queryable

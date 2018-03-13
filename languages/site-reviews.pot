@@ -261,65 +261,65 @@ msgstr ""
 msgid "Avatar"
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:138
+#: plugin/Controllers/ReviewController.php:147
 msgid "Approved"
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:139
+#: plugin/Controllers/ReviewController.php:148
 msgid "Unapproved"
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:202
+#: plugin/Controllers/ReviewController.php:211
 msgid "%s review updated."
 msgid_plural "%s reviews updated."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Controllers/ReviewController.php:203
+#: plugin/Controllers/ReviewController.php:212
 msgid "%s review not updated, somebody is editing it."
 msgid_plural "%s reviews not updated, somebody is editing them."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Controllers/ReviewController.php:204
+#: plugin/Controllers/ReviewController.php:213
 msgid "%s review permanently deleted."
 msgid_plural "%s reviews permanently deleted."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Controllers/ReviewController.php:205
+#: plugin/Controllers/ReviewController.php:214
 msgid "%s review moved to the Trash."
 msgid_plural "%s reviews moved to the Trash."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Controllers/ReviewController.php:206
+#: plugin/Controllers/ReviewController.php:215
 msgid "%s review restored from the Trash."
 msgid_plural "%s reviews restored from the Trash."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Controllers/ReviewController.php:260
+#: plugin/Controllers/ReviewController.php:269
 msgid "Please fix the submission errors."
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:269, plugin/Controllers/ReviewController.php:276
+#: plugin/Controllers/ReviewController.php:278, plugin/Controllers/ReviewController.php:285
 msgid "The review submission failed. Please notify the site administrator."
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:288
+#: plugin/Controllers/ReviewController.php:297
 msgid "The reCAPTCHA verification failed. Please notify the site administrator."
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:303
+#: plugin/Controllers/ReviewController.php:312
 msgid "Your review cannot be submitted at this time."
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:312
+#: plugin/Controllers/ReviewController.php:321
 msgid "Your review cannot be submitted at this time. Please try again later."
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:694, plugin/Html/Partials/Reviews.php:279
+#: plugin/Controllers/ReviewController.php:715, plugin/Html/Partials/Reviews.php:279
 msgid "No Title"
 msgstr ""
 

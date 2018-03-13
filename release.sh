@@ -58,7 +58,9 @@ rm -Rf $ROOT_PATH$TEMP_GITHUB_REPO
 if [[ ! -d $SVN_REPO_DIR ]]; then
 	echo "Checking out WordPress.org plugin repository"
 	mkdir -p $ROOT_PATH$SVN_REPO_DIR
-	svn checkout $SVN_REPO $SVN_REPO_DIR || { echo "Unable to checkout repo."; exit 1; }
+	cd $ROOT_PATH$SVN_REPO_DIR
+	svn checkout $SVN_REPO . || { echo "Unable to checkout repo."; exit 1; }
+	cd $ROOT_PATH
 fi
 
 # LIST BRANCHES

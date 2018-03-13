@@ -18,7 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
-## [2.13.0] = 2018-03-12
+## [2.13.0] = 2018-03-13
 
 ### Added
 - [feature] Average rating values are stored in posts that have assigned reviews (can be used for query sorting)

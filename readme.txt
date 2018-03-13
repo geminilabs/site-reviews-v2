@@ -5,7 +5,7 @@ Tags: best reviews, business ratings, business reviews, curated reviews, moderat
 Requires at least: 4.0.0
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.12.5
+Stable tag: 2.13.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -138,6 +138,10 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 14. Add-Ons are being built to extend the functionality on the Site Reviews plugin
 
 == Changelog ==
+
+= 2.13.0 (2018-03-13) =
+- [feature] Average rating values are stored in posts that have assigned reviews (can be used for query sorting)
+- Fixed non-ajax form submissions
 
 = 2.12.5 (2018-02-16) =
 - Added a [site_reviews_summary] "text" attribute (see shortcode documentation for details)
