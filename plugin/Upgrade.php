@@ -389,7 +389,7 @@ class Upgrade
 	 *
 	 * @return void
 	 */
-	public function reviewAssignedTo_2131()
+	public function reviewAssignedTo_2132()
 	{
 		$this->reviewAssignedTo_290();
 	}
