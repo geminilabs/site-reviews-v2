@@ -261,65 +261,73 @@ msgstr ""
 msgid "Avatar"
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:147
+#: plugin/Controllers/ReviewController.php:135, plugin/Controllers/ReviewController.php:159
+msgid "Save as Unapproved"
+msgstr ""
+
+#: plugin/Controllers/ReviewController.php:136, plugin/Controllers/ReviewController.php:161
 msgid "Approved"
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:148
+#: plugin/Controllers/ReviewController.php:160
+msgid "Privately Approved"
+msgstr ""
+
+#: plugin/Controllers/ReviewController.php:162, plugin/Controllers/ReviewController.php:163
 msgid "Unapproved"
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:211
+#: plugin/Controllers/ReviewController.php:233
 msgid "%s review updated."
 msgid_plural "%s reviews updated."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Controllers/ReviewController.php:212
+#: plugin/Controllers/ReviewController.php:234
 msgid "%s review not updated, somebody is editing it."
 msgid_plural "%s reviews not updated, somebody is editing them."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Controllers/ReviewController.php:213
+#: plugin/Controllers/ReviewController.php:235
 msgid "%s review permanently deleted."
 msgid_plural "%s reviews permanently deleted."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Controllers/ReviewController.php:214
+#: plugin/Controllers/ReviewController.php:236
 msgid "%s review moved to the Trash."
 msgid_plural "%s reviews moved to the Trash."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Controllers/ReviewController.php:215
+#: plugin/Controllers/ReviewController.php:237
 msgid "%s review restored from the Trash."
 msgid_plural "%s reviews restored from the Trash."
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Controllers/ReviewController.php:269
+#: plugin/Controllers/ReviewController.php:291
 msgid "Please fix the submission errors."
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:278, plugin/Controllers/ReviewController.php:285
+#: plugin/Controllers/ReviewController.php:300, plugin/Controllers/ReviewController.php:307
 msgid "The review submission failed. Please notify the site administrator."
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:297
+#: plugin/Controllers/ReviewController.php:319
 msgid "The reCAPTCHA verification failed. Please notify the site administrator."
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:312
+#: plugin/Controllers/ReviewController.php:334
 msgid "Your review cannot be submitted at this time."
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:321
+#: plugin/Controllers/ReviewController.php:343
 msgid "Your review cannot be submitted at this time. Please try again later."
 msgstr ""
 
-#: plugin/Controllers/ReviewController.php:715, plugin/Html/Partials/Reviews.php:279
+#: plugin/Controllers/ReviewController.php:733, plugin/Html/Partials/Reviews.php:279
 msgid "No Title"
 msgstr ""
 

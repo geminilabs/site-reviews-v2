@@ -142,8 +142,6 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 = 2.14.0 (2018-03-25) =
 - Added a loading indicator on the submit button
 - Added a ".glsr-loading" class to the form when submitting
-
-= 2.13.3 (2018-03-14) =
 - Fixed custom post_status labels
 
 = 2.13.2 (2018-03-13) =
