@@ -289,6 +289,7 @@ GLSR.showFormMessage = function( response )
 GLSR.submitForm = function( recaptchaToken )
 {
 	GLSR.activeForm.querySelector( '[type="submit"]' ).setAttribute( 'disabled', '' );
+	GLSR.addClass( GLSR.activeForm, 'glsr-loading' );
 	GLSR.postAjax( site_reviews.ajaxurl, GLSR.buildFormData( recaptchaToken ), function( response ) {
 		// console.log( response );
 		if( response.recaptcha === true ) {
@@ -308,6 +309,7 @@ GLSR.submitForm = function( recaptchaToken )
 		GLSR.showFormErrors( response.errors );
 		GLSR.showFormMessage( response );
 		GLSR.enableSubmitButton();
+		GLSR.removeClass( GLSR.activeForm, 'glsr-loading' );
 		response.form = GLSR.activeForm;
 		document.dispatchEvent( new CustomEvent( 'site-reviews/after/submission', { detail: response }));
 		GLSR.activeForm = null;

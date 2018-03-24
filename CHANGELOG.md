@@ -18,6 +18,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.14.0] = 2018-03-25
+
+### Added
+- Added a loading indicator on the submit button
+- Added a ".glsr-loading" class to the form when submitting
+
 ## [2.13.3] = 2018-03-14
 
 ### Fixed

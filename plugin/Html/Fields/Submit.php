@@ -19,11 +19,17 @@ class Submit extends Text
 	 */
 	public function render( array $defaults = [] )
 	{
-		unset( $this->args['name'] );
-		return parent::render( wp_parse_args( $defaults, [
+		$defaults = wp_parse_args( $defaults, [
 			'class' => 'button button-primary',
 			'type' => 'submit',
-		])) . $this->recaptcha();
+		]);
+		$value = $this->args['value'];
+		unset( $this->args['name'], $this->args['value'] );
+		return sprintf( '<button %s><span></span>%s</button>%s',
+			$this->implodeAttributes( $defaults ),
+			$value,
+			(string) $this->recaptcha()
+		);
 	}
 
 	/**

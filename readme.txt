@@ -5,7 +5,7 @@ Tags: best reviews, business ratings, business reviews, curated reviews, moderat
 Requires at least: 4.0.0
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.13.2
+Stable tag: 2.14.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -138,6 +138,10 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 14. Add-Ons are being built to extend the functionality on the Site Reviews plugin
 
 == Changelog ==
+
+= 2.14.0 (2018-03-25) =
+- Added a loading indicator on the submit button
+- Added a ".glsr-loading" class to the form when submitting
 
 = 2.13.3 (2018-03-14) =
 - Fixed custom post_status labels
