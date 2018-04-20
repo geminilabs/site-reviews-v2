@@ -5,7 +5,7 @@ Tags: best reviews, business ratings, business reviews, curated reviews, moderat
 Requires at least: 4.0.0
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.14.0
+Stable tag: 2.14.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,13 +27,13 @@ Follow plugin development on [GitHub](https://github.com/geminilabs/site-reviews
 
 = Current Features =
 
-- [new] Review blacklist
 - Actively developed and supported
 - Ajax pagination of reviews
 - Akismet integration to provide spam-validation
 - Assign reviews to a Post/Page ID
 - Autocomplete AssignedTo metabox
 - Bayesian ranking for posts with assigned reviews (can be used for WP_Query sorting)
+- Blacklist reviewers
 - Clean and easy-to-configure user interface
 - Configurable Widgets
 - Custom notifications (including Slack support)
@@ -138,6 +138,9 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 14. Add-Ons are being built to extend the functionality on the Site Reviews plugin
 
 == Changelog ==
+
+= 2.14.1 (2018-04-20) =
+- Fixed the shortcode dropdown button when the visual editor is disabled
 
 = 2.14.0 (2018-03-25) =
 - Added a loading indicator on the submit button

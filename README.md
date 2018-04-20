@@ -13,13 +13,13 @@ Minimum plugin requirements:
 
 #### Current Features
 
-- [new] Review blacklist
 - Actively developed and supported
 - Ajax pagination of reviews
 - Akismet integration to provide spam-validation
 - Assign reviews to a Post/Page ID
 - Autocomplete AssignedTo metabox
 - Bayesian ranking for posts with assigned reviews (can be used for WP_Query sorting)
+- Blacklist reviewers
 - Clean and easy-to-configure user interface
 - Configurable Widgets
 - Custom notifications (including Slack support)

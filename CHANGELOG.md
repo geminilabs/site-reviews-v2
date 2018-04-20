@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.14.1] = 2018-04-20
+
+### Fixed
+- Fixed the shortcode dropdown button when the visual editor is disabled
+
 ## [2.14.0] = 2018-03-25
 
 ### Added
