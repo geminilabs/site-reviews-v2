@@ -140,6 +140,7 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 == Changelog ==
 
 = 2.14.1 (2018-04-20) =
+- Added a [site_reviews_summary] "show_if_empty" attribute (see shortcode documentation for details)
 - Fixed the shortcode dropdown button when the visual editor is disabled
 
 = 2.14.0 (2018-03-25) =

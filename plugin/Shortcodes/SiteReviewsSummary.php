@@ -35,11 +35,12 @@ class SiteReviewsSummary extends Shortcode
 	public function printShortcode( $atts = [] )
 	{
 		$this->normalize( $atts );
-		$this->buildSchema();
 		if( $this->isHidden() )return;
 		$this->rating = $this->app->make( 'Rating' );
 		$reviews = $this->db->getReviews( $this->args );
 		$ratingAverage = $this->rating->getAverage( $reviews->reviews );
+		if( !$this->canShowIfEmpty( $ratingAverage ))return;
+		$this->buildSchema();
 		ob_start();
 		printf( '<div class="shortcode-site-reviews-summary %s">', $this->args['class'] );
 		if( !empty( $this->args['title'] )) {
@@ -160,6 +161,17 @@ class SiteReviewsSummary extends Shortcode
 	}
 
 	/**
+	 * @param int $averageRating
+	 * @return bool
+	 */
+	protected function canShowIfEmpty( $averageRating )
+	{
+		return empty( $averageRating )
+			? $this->args['show_if_empty']
+			: true;
+	}
+
+	/**
 	 * @return bool
 	 */
 	protected function isHidden( array $values = [] )
@@ -177,16 +189,17 @@ class SiteReviewsSummary extends Shortcode
 	{
 		$defaults = [
 			'assigned_to' => '',
-			'category'    => '',
-			'class'       => '',
-			'count'       => -1,
-			'hide'        => '',
-			'labels'      => '',
-			'rating'      => 1,
-			'schema'      => false,
-			'text'        => '',
-			'title'       => '',
-			'type'        => '',
+			'category' => '',
+			'class' => '',
+			'count' => -1,
+			'hide' => '',
+			'labels' => '',
+			'rating' => 1,
+			'schema' => false,
+			'show_if_empty' => true,
+			'text' => '',
+			'title' => '',
+			'type' => '',
 		];
 		$this->args = shortcode_atts( $defaults, $atts );
 		array_walk( $this->args, function( &$value, $key ) {
@@ -242,6 +255,14 @@ class SiteReviewsSummary extends Shortcode
 	protected function normalizeSchema( $schema )
 	{
 		return wp_validate_boolean( $schema );
+	}
+
+	/**
+	 * @return bool
+	 */
+	protected function normalizeShowIfEmpty( $showIfEmpty )
+	{
+		return wp_validate_boolean( $showIfEmpty );
 	}
 
 	/**

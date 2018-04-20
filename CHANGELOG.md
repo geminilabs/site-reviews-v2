@@ -20,6 +20,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [2.14.1] = 2018-04-20
 
+### Added
+- Added a [site_reviews_summary] "show_if_empty" attribute (see shortcode documentation for details)
+
 ### Fixed
 - Fixed the shortcode dropdown button when the visual editor is disabled
 
