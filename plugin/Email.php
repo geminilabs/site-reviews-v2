@@ -55,6 +55,7 @@ class Email
 	public function compose( array $email )
 	{
 		$email = $this->normalize( $email );
+		glsr_log( 'Email to send: '.wp_json_encode( $email ));
 
 		$this->attachments = $email['attachments'];
 		$this->headers     = $this->buildHeaders( $email );
@@ -87,6 +88,7 @@ class Email
 	public function send()
 	{
 		if( !$this->message || !$this->subject || !$this->to )return;
+		glsr_log( 'Sending email now...' );
 		$sent = wp_mail(
 			$this->to,
 			$this->subject,
@@ -94,6 +96,7 @@ class Email
 			$this->headers,
 			$this->attachments
 		);
+		glsr_log( 'Result of wp_mail(): '.var_export( $sent, true ));
 		$this->reset();
 		return $sent;
 	}
