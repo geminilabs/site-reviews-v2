@@ -5,7 +5,7 @@ Tags: best reviews, business ratings, business reviews, curated reviews, moderat
 Requires at least: 4.0.0
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.14.2
+Stable tag: 2.14.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -138,6 +138,9 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 14. Add-Ons are being built to extend the functionality on the Site Reviews plugin
 
 == Changelog ==
+
+= 2.14.3 (2018-04-29) =
+- Fixed submission date for newly-submitted unapproved reviews
 
 = 2.14.2 (2018-04-28) =
 - Fixed the [site_reviews_form] "id" option

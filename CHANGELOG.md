@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.14.3] = 2018-04-29
+
+### Fixed
+- Fixed submission date for newly-submitted unapproved reviews
+
 ## [2.14.2] = 2018-04-28
 
 ### Fixed

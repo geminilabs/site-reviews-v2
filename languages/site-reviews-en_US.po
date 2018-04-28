@@ -353,11 +353,11 @@ msgstr "Your review cannot be submitted at this time. Please try again later."
 msgid "No Title"
 msgstr "No Title"
 
-#: plugin/Database.php:345
+#: plugin/Database.php:346
 msgid "%s reviews"
 msgstr "%s reviews"
 
-#: plugin/Database.php:376
+#: plugin/Database.php:377
 msgid "Anonymous"
 msgstr "Anonymous"
 
