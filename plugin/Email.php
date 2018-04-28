@@ -55,7 +55,7 @@ class Email
 	public function compose( array $email )
 	{
 		$email = $this->normalize( $email );
-		glsr_log( 'Email to send: '.wp_json_encode( $email ));
+		glsr_log( 'Email to send: '.(string)wp_json_encode( $email ));
 
 		$this->attachments = $email['attachments'];
 		$this->headers     = $this->buildHeaders( $email );
