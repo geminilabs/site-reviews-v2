@@ -18,6 +18,11 @@ namespace GeminiLabs\SiteReviews\Traits;
 trait SiteReviewsForm
 {
 	/**
+	 * @var bool|string
+	 */
+	public $id = false;
+
+	/**
 	 * Generate a unique ID string
 	 *
 	 * @param mixed $from
@@ -25,7 +30,9 @@ trait SiteReviewsForm
 	 */
 	public function generateId( $from = [] )
 	{
-		return substr( md5( serialize( $this->id ? $this->id : $from )), 0, 8 );
+		return !empty( $this->id )
+			? (string)$this->id
+			: substr( md5( serialize( $from )), 0, 8 );
 	}
 
 	/**
@@ -40,6 +47,7 @@ trait SiteReviewsForm
 			'class' => '',
 			'description' => '',
 			'hide' => [],
+			'id' => '',
 			'title' => '',
 		]);
 		$atts = shortcode_atts( $defaults, wp_parse_args( $args ));

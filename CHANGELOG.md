@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.14.2] = 2018-04-28
+
+### Fixed
+- Fixed the [site_reviews_form] "id" option
+
 ## [2.14.1] = 2018-04-20
 
 ### Added

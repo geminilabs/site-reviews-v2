@@ -15,14 +15,12 @@ namespace GeminiLabs\SiteReviews\Shortcodes;
 use GeminiLabs\SiteReviews\Shortcode;
 use GeminiLabs\SiteReviews\Traits\SiteReviewsForm as Common;
 
+/**
+ * @property public string|bool $id;
+ */
 class SiteReviewsForm extends Shortcode
 {
 	use Common;
-
-	/**
-	 * @var bool|string
-	 */
-	public $id = false;
 
 	/**
 	 * @return null|string
@@ -32,6 +30,9 @@ class SiteReviewsForm extends Shortcode
 		$args = $this->normalize( $atts );
 		if( $args['assign_to'] == 'post_id' ) {
 			$args['assign_to'] = intval( get_the_ID() );
+		}
+		if( isset( $args['id'] )) {
+			$this->id = $args['id'];
 		}
 		ob_start();
 		echo '<div class="shortcode-reviews-form">';

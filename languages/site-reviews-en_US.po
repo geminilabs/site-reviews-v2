@@ -1317,19 +1317,19 @@ msgstr "View review"
 msgid "Local"
 msgstr "Local"
 
-#: plugin/Traits/SiteReviewsForm.php:101
+#: plugin/Traits/SiteReviewsForm.php:109
 msgid "You must be %s to submit a review."
 msgstr "You must be %s to submit a review."
 
-#: plugin/Traits/SiteReviewsForm.php:102
+#: plugin/Traits/SiteReviewsForm.php:110
 msgid "logged in"
 msgstr "logged in"
 
-#: plugin/Traits/SiteReviewsForm.php:105
+#: plugin/Traits/SiteReviewsForm.php:113
 msgid "You may also %s for an account."
 msgstr "You may also %s for an account."
 
-#: plugin/Traits/SiteReviewsForm.php:106
+#: plugin/Traits/SiteReviewsForm.php:114
 msgid "register"
 msgstr "register"
 

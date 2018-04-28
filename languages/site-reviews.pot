@@ -1281,19 +1281,19 @@ msgctxt ":attribute is a placeholder and should not be translated."
 msgid "The :attribute field is required."
 msgstr ""
 
-#: plugin/Traits/SiteReviewsForm.php:101
+#: plugin/Traits/SiteReviewsForm.php:109
 msgid "You must be %s to submit a review."
 msgstr ""
 
-#: plugin/Traits/SiteReviewsForm.php:102
+#: plugin/Traits/SiteReviewsForm.php:110
 msgid "logged in"
 msgstr ""
 
-#: plugin/Traits/SiteReviewsForm.php:105
+#: plugin/Traits/SiteReviewsForm.php:113
 msgid "You may also %s for an account."
 msgstr ""
 
-#: plugin/Traits/SiteReviewsForm.php:106
+#: plugin/Traits/SiteReviewsForm.php:114
 msgid "register"
 msgstr ""
 
