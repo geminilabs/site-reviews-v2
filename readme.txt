@@ -139,6 +139,9 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 
 == Changelog ==
 
+= 2.15.0 (2018-05-05) =
+- Added RTL (right-to-left) support
+
 = 2.14.3 (2018-04-29) =
 - Fixed submission date for newly-submitted unapproved reviews
 

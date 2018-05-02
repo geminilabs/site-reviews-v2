@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.15.0] = 2018-05-05
+
+### Added
+- Added RTL (right-to-left) support
+
 ## [2.14.3] = 2018-04-29
 
 ### Fixed

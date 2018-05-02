@@ -35,7 +35,7 @@ class SiteReviewsForm extends Shortcode
 			$this->id = $args['id'];
 		}
 		ob_start();
-		echo '<div class="shortcode-reviews-form">';
+		echo '<div class="glsr-shortcode shortcode-reviews-form">';
 		if( !empty( $args['title'] )) {
 			printf( '<h3 class="glsr-shortcode-title">%s</h3>', $args['title'] );
 		}

@@ -35,7 +35,7 @@ class SiteReviews extends Shortcode
 			$args['assigned_to'] = intval( get_the_ID() );
 		}
 		ob_start();
-		echo '<div class="shortcode-site-reviews">';
+		echo '<div class="glsr-shortcode shortcode-site-reviews">';
 		if( !empty( $args['title'] )) {
 			printf( '<h3 class="glsr-shortcode-title">%s</h3>', $args['title'] );
 		}

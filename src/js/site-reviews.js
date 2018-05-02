@@ -205,6 +205,15 @@ GLSR.recaptcha.search = function( callback )
 	return result;
 };
 
+GLSR.setDirection = function()
+{
+	var widgets = document.querySelectorAll( '.glsr-widget, .glsr-shortcode' );
+	for( var i = 0; i < widgets.length; i++ ) {
+		var direction = window.getComputedStyle( widgets[i], null ).getPropertyValue( 'direction' );
+		widgets[i].classList.add( 'glsr-' + direction );
+	}
+};
+
 GLSR.scrollToTop = function( el, offset )
 {
 	offset = offset || 16; // 1rem
@@ -349,6 +358,7 @@ GLSR.on( 'click', '.glsr-ajax-navigation a', GLSR.onClickPagination );
 
 GLSR.ready( function()
 {
+	GLSR.setDirection();
 	GLSR.createExceprts();
 	GLSR.createStarRatings();
 });

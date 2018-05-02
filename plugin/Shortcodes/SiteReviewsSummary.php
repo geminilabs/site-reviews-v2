@@ -42,7 +42,7 @@ class SiteReviewsSummary extends Shortcode
 		if( !$this->canShowIfEmpty( $ratingAverage ))return;
 		$this->buildSchema();
 		ob_start();
-		printf( '<div class="shortcode-site-reviews-summary %s">', $this->args['class'] );
+		printf( '<div class="glsr-shortcode shortcode-site-reviews-summary %s">', $this->args['class'] );
 		if( !empty( $this->args['title'] )) {
 			printf( '<h3 class="glsr-shortcode-title">%s</h3>', $this->args['title'] );
 		}
