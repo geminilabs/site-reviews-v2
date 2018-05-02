@@ -1,4 +1,3 @@
-/** global: XMLHttpRequest, ActiveXObject */
 "use strict";
 
 var GLSR = {};

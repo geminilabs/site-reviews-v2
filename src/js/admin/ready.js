@@ -1,4 +1,5 @@
-/** global: GLSR, site_reviews_pointers, wp, x */
+/* globals GLSR, x */
+/* jshint strict:false */
 
 x( function()
 {

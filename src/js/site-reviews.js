@@ -1,7 +1,5 @@
-/* jshint browser:true, globalstrict:true, esversion:6 */
-/* global console, CustomEvent, GLSR, grecaptcha, HTMLFormElement, site_reviews, StarRating */
-
-"use strict";
+/* globals GLSR */
+/* jshint strict:false */
 
 GLSR.SCROLL_TIME = 468;
 GLSR.activeForm = null;
@@ -67,14 +65,11 @@ GLSR.createExceprts = function( parentEl )
 
 GLSR.createStarRatings = function()
 {
-	var ratings = document.querySelectorAll( 'select.glsr-star-rating' );
-	for( var i = 0; i < ratings.length; i++ ) {
-		new StarRating( ratings[i], {
-			clearable: false,
-			showText : false,
-			onClick  : GLSR.clearFieldError,
-		});
-	}
+	var starratings = new StarRating( 'select.glsr-star-rating', {
+		clearable: false,
+		showText: false,
+		onClick: GLSR.clearFieldError,
+	});
 };
 
 GLSR.enableSubmitButton = function()
@@ -357,3 +352,4 @@ GLSR.ready( function()
 	GLSR.createExceprts();
 	GLSR.createStarRatings();
 });
+

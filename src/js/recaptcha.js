@@ -1,5 +1,7 @@
-/* jshint globalstrict:false */
-/* global grecaptcha, GLSR */
+/* globals GLSR */
+
+"use strict";
+
 var glsr_render_recaptcha = function() {
 	var id;
 	var recaptchaEl;

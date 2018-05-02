@@ -1,4 +1,5 @@
-/** global: ajaxurl, GLSR, site_reviews, x */
+/* globals GLSR, x */
+/* jshint strict:false */
 
 GLSR.colorControls = function()
 {
@@ -48,8 +49,7 @@ GLSR.insertNotices = function( notices )
 
 GLSR.isUndefined = function( value )
 {
-	var undefined = void(0);
-	return value === undefined;
+	return value === void(0);
 };
 
 GLSR.normalizeValue = function( value )
@@ -185,7 +185,7 @@ GLSR.postAjax = function( event, request, callback )
 		el.prop( 'disabled', false );
 
 	}, 'json' );
-}
+};
 
 GLSR.textareaResize = function( el )
 {

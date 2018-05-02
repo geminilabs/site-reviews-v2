@@ -1,129 +1,144 @@
-"use strict";
+var args            = require('yargs').argv;
+var autoprefixer    = require('gulp-autoprefixer');
+var bump            = require('gulp-bump');
+var checktextdomain = require('gulp-checktextdomain');
+var concat          = require('gulp-concat');
+var cssnano         = require('gulp-cssnano');
+var gulp            = require('gulp');
+var gulpif          = require('gulp-if');
+var jshint          = require('gulp-jshint');
+var mergeStream     = require('merge-stream');
+var potomo          = require('gulp-potomo');
+var pseudo          = require('gulp-pseudo-i18n');
+var pump            = require('pump');
+var rename          = require('gulp-rename');
+var runSequence     = require('run-sequence');
+var sass            = require('gulp-sass');
+var sort            = require('gulp-sort');
+var uglify          = require('gulp-uglify');
+var wpPot           = require('gulp-wp-pot');
+var yaml            = require('yamljs');
 
-var args            = require( 'yargs' ).argv;
-var gulp            = require( 'gulp' );
-var bump            = require( 'gulp-bump' );
-var checktextdomain = require( 'gulp-checktextdomain' );
-var potomo          = require( 'gulp-potomo' );
-var pseudo          = require( 'gulp-pseudo-i18n' );
-var rename          = require( 'gulp-rename' );
-var sort            = require( 'gulp-sort' );
-var wpPot           = require( 'gulp-wp-pot' );
-var elixir          = require( 'laravel-elixir' );
-var runSequence     = require( 'run-sequence' );
+var config = yaml.load('src/config.yml');
 
-require( 'elixir-jshint' );
+gulp.task('build', function() {
+	gulp.start('scss', 'jshint', 'js', 'languages')
+});
 
-var paths  = {
-	src : 'src/',
-	dest: 'assets/',
-	npm : '../../node_modules/',
-	bump: {
-		'stable tag': 'readme.txt',
-		'version': 'site-reviews.php',
-	},
-};
-
-elixir.config.assetsPath = paths.src;
-elixir.config.publicPath = paths.dest;
-
-elixir(( mix ) => mix
-	.jshint( paths.src + 'js/*.js' )
-	.scripts( 'mce-plugin.js' )
-	.scripts( 'recaptcha.js' )
-	.scripts([
-		'admin/init.js',
-		'admin/functions.js',
-		'admin/pinned.js',
-		'admin/search.js',
-		'admin/shortcode.js',
-		'admin/ready.js',
-	], paths.dest + 'js/site-reviews-admin.js' )
-	.scripts([
-		paths.npm + 'star-rating.js/dist/star-rating.js',
-		'helper-functions.js',
-		// 'partials/partial.recaptcha.js',
-		// 'partials/partial.form.js',
-		'site-reviews.js',
-	], paths.dest + 'js/site-reviews.js' )
-	.sass( 'site-reviews-admin.scss' )
-	.sass( 'site-reviews.scss' )
-	.sass( 'twenty-ten.scss' )
-	.sass( 'twenty-eleven.scss' )
-	.sass( 'twenty-twelve.scss' )
-	.sass( 'twenty-thirteen.scss' )
-	.sass( 'twenty-fourteen.scss' )
-	.sass( 'twenty-fifteen.scss' )
-	.sass( 'twenty-sixteen.scss' )
-	.sass( 'twenty-seventeen.scss' )
-);
-
-/* Language Tasks
- -------------------------------------------------- */
-
-gulp.task( 'checktextdomain', () => gulp
-	.src(['plugin/**/*.php','views/**/*.php'])
-	.pipe( checktextdomain({
-		text_domain: 'site-reviews',
-		keywords: [
-			'__:1,2d',
-			'_e:1,2d',
-			'_x:1,2c,3d',
-			'esc_html__:1,2d',
-			'esc_html_e:1,2d',
-			'esc_html_x:1,2c,3d',
-			'esc_attr__:1,2d',
-			'esc_attr_e:1,2d',
-			'esc_attr_x:1,2c,3d',
-			'_ex:1,2c,3d',
-			'_n:1,2,4d',
-			'_nx:1,2,4c,5d',
-			'_n_noop:1,2,3d',
-			'_nx_noop:1,2,3c,4d',
-		],
-	}))
-);
-
-gulp.task( 'pot', () => gulp
-	.src(['*.php', 'plugin/**/*.php', 'views/**/*.php'])
-	.pipe( sort())
-	.pipe( wpPot({
-		domain        : 'site-reviews',
-		destFile      : 'site-reviews.pot',
-		package       : 'site-reviews',
-		bugReport     : 'https://github.com/geminilabs/site-reviews/issues/new',
-		lastTranslator: 'Paul Ryley <paul@geminilabs.io>',
-		team          : 'Gemini Labs <support@geminilabs.io>',
-	}))
-	.pipe( gulp.dest( 'languages' ))
-);
-
-gulp.task( 'pseudo', () => gulp
-	.src( 'languages/**/*.pot' )
-	.pipe( pseudo({
-		charMap: {},
-	}))
-	.pipe( rename( 'site-reviews-en_US.po' ))
-	.pipe( gulp.dest( 'languages' ))
-);
-
-gulp.task( 'potomo', () => gulp
-	.src( 'languages/**/*.po' )
-	.pipe( potomo())
-	.pipe( gulp.dest( 'languages' ))
-);
-
-gulp.task( 'languages', () => runSequence( 'checktextdomain', 'pot', 'pseudo', 'potomo' ));
-
-/* Version Bump Tasks
- -------------------------------------------------- */
-
-gulp.task( 'bump', function() {
-	['patch', 'minor', 'major'].some( function( arg ) {
-		if( !args[arg] )return;
-		for( var key in paths.bump ) {
-			gulp.src( paths.bump[key] ).pipe( bump({ type: arg, key: key })).pipe( gulp.dest('.'));
+gulp.task('bump', function() {
+	['patch', 'minor', 'major'].some(function(arg) {
+		if(!args[arg])return;
+		for(var key in config.bump) {
+			if(!config.bump.hasOwnProperty(key))continue;
+			pump([
+				gulp.src(config.bump[key]),
+				bump({type:arg,key:key}),
+				gulp.dest('.'),
+			]);
 		}
-		return true;
 	});
+});
+
+gulp.task('default', function() {
+	gulp.start('scss', 'jshint', 'js')
+});
+
+gulp.task('js', function() {
+	var streams = mergeStream();
+	for(var key in config.scripts) {
+		streams.add(gulp.src(config.scripts[key]).pipe(concat(key)));
+	}
+	return pump([
+		streams,
+		gulpif(args.production, uglify({
+			output: {comments: 'some'},
+		})),
+		gulp.dest(config.dest.js),
+	]);
+});
+
+gulp.task('jshint', function() {
+	return pump([
+		gulp.src(config.watch.js),
+		jshint(),
+		jshint.reporter('jshint-stylish'),
+		jshint.reporter('fail'),
+	]);
+});
+
+gulp.task('languages', function() {
+	return runSequence('pot', 'pot-to-po', 'po-to-mo');
+});
+
+gulp.task('po-to-mo', function() {
+	return pump([
+		gulp.src(config.dest.lang + '*.po'),
+		potomo(),
+		gulp.dest(config.dest.lang),
+	]);
+});
+
+gulp.task('pot', function() {
+	return pump([
+		gulp.src(config.watch.php),
+		checktextdomain({
+			text_domain: config.language.domain,
+			keywords: [
+				'__:1,2d',
+				'_e:1,2d',
+				'_x:1,2c,3d',
+				'esc_html__:1,2d',
+				'esc_html_e:1,2d',
+				'esc_html_x:1,2c,3d',
+				'esc_attr__:1,2d',
+				'esc_attr_e:1,2d',
+				'esc_attr_x:1,2c,3d',
+				'_ex:1,2c,3d',
+				'_n:1,2,4d',
+				'_nx:1,2,4c,5d',
+				'_n_noop:1,2,3d',
+				'_nx_noop:1,2,3c,4d',
+			],
+		}),
+		sort(),
+		wpPot({
+			domain: config.language.domain,
+			lastTranslator: config.language.translator,
+			team: config.language.team,
+		}),
+		rename(config.language.domain + '.pot'),
+		gulp.dest(config.dest.lang),
+	]);
+});
+
+gulp.task('pot-to-po', function() {
+	return pump([
+		gulp.src(config.dest.lang + '*.pot'),
+		pseudo({
+			charMap: {},
+		}),
+		rename(config.language.domain + '-en_US.po'),
+		gulp.dest(config.dest.lang),
+	]);
+});
+
+gulp.task('scss', function() {
+	return pump([
+		gulp.src(config.watch.scss),
+		sass({
+			outputStyle: 'expanded',
+		}).on('error', sass.logError),
+		autoprefixer('last 2 versions'),
+		gulpif(args.production, cssnano({
+			minifyFontValues: false,
+			discardComments: {removeAll: true},
+			zindex: false,
+		})),
+		gulp.dest(config.dest.css),
+	]);
+});
+
+gulp.task('watch', function() {
+	gulp.watch(config.watch.js, ['jshint', 'js']);
+	gulp.watch(config.watch.scss, ['scss']);
 });

@@ -1,4 +1,5 @@
-/** global: GLSR */
+/* globals GLSR, x */
+
 (function( tinymce ) {
 
 	"use strict";

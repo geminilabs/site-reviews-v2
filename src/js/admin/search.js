@@ -1,4 +1,5 @@
-/** global: _, GLSR, site_reviews, wp, x */
+/* globals GLSR, x */
+/* jshint strict:false */
 
 GLSR.search = function( el, options )
 {
@@ -245,7 +246,7 @@ GLSR.search.prototype.reindexRows = function()
 			var name = input.attr( 'name' ).replace( /\[\d+\]/i, '[' + index + ']' );
 			input.attr( 'name', name );
 			if( input.is( '[data-id]' )) {
-				search.options.exclude.push({ id: input.val() })
+				search.options.exclude.push({ id: input.val() });
 			}
 		});
 	});
