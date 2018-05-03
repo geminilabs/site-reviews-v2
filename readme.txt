@@ -5,7 +5,7 @@ Tags: best reviews, business ratings, business reviews, curated reviews, moderat
 Requires at least: 4.0.0
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.14.3
+Stable tag: 2.15.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -51,6 +51,7 @@ Follow plugin development on [GitHub](https://github.com/geminilabs/site-reviews
 - Review pagination
 - Reviews Summary shortcode: [site_reviews_summary]
 - Rich snippets for reviews (schema.org)
+- RTL support
 - Shortcodes: Display reviews in your post content and templates
 - Translate any plugin text
 - Use Google's Invisible reCAPTCHA on submission forms
@@ -139,7 +140,7 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 
 == Changelog ==
 
-= 2.15.0 (2018-05-05) =
+= 2.15.0 (2018-05-03) =
 - Added RTL (right-to-left) support
 
 = 2.14.3 (2018-04-29) =

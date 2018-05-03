@@ -18,7 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
-## [2.15.0] = 2018-05-05
+## [2.15.0] = 2018-05-03
 
 ### Added
 - Added RTL (right-to-left) support

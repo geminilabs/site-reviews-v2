@@ -37,6 +37,7 @@ Minimum plugin requirements:
 - Review pagination
 - Reviews Summary shortcode: [site_reviews_summary]
 - Rich snippets for reviews (schema.org)
+- RTL support
 - Shortcodes: Display reviews in your post content and templates
 - Translate any plugin text
 - Use Google's Invisible reCAPTCHA on submission forms
