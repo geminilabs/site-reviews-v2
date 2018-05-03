@@ -70,7 +70,6 @@ $twenty-sixteen-serif: Merriweather, Georgia, serif;
 	&.glsr-required label:after {
 		font-family: $twenty-sixteen-serif;
 		color: $twenty-sixteen-color;
-		margin-left: 5px;
 	}
 
 	::-webkit-input-placeholder {
@@ -108,3 +107,16 @@ $twenty-sixteen-serif: Merriweather, Georgia, serif;
 	}
 }
 
+.glsr-ltr {
+	.glsr-field label[for^="rating"]:after,
+	.glsr-field.glsr-required label:after {
+		margin-left: 5px;
+	}
+}
+
+.glsr-rtl {
+	.glsr-field label[for^="rating"]:after,
+	.glsr-field.glsr-required label:after {
+		margin-right: 5px;
+	}
+}

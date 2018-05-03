@@ -1,7 +1,6 @@
 [id^=geminilabs-site-reviews].widget {
 	ul.glsr-reviews {
 		list-style: none;
-		margin-left: 0;
 	}
 
 	.glsr-review-title {
@@ -47,31 +46,19 @@
 		white-space: pre-line;
 		margin: 0 0 1em;
 	}
-
 	&-assigned {
 		display: block;
 		font-style: italic;
 	}
-	&-author {}
 	&-date {
 		font-style: italic;
 		white-space: nowrap;
 	}
-	&-excerpt {}
-	&-meta {
-		> span:not(:last-child) {
-			margin-right: 0.5em;
-		}
-	}
 	&-link {
 		white-space: nowrap;
 	}
-	&-rating {}
-	&-title {}
-
 	&-avatar {
-		float: left;
-		margin: -8px 12px 0 0;
+		margin: -8px 0 0;
 		width: 36px;
 		height: 36px;
 
@@ -154,12 +141,10 @@
 		display: block;
 		position: absolute;
 		top: -18px;
-		left: 50px;
 		height: 0;
 		width: 0;
 		border-style: solid;
 		border-color: rgba(0,0,0,0.075) transparent;
-		border-width: 0 24px 18px 0;
 	}
 }
 
@@ -211,4 +196,45 @@
 	word-wrap: normal !important;
 	padding: 0;
 	margin: -1px;
+}
+
+.glsr-ltr {
+	[id^=geminilabs-site-reviews].widget ul.glsr-reviews {
+		margin-left: 0;
+	}
+	.glsr-review-excerpt,
+	.glsr-review-meta {
+		> span:not(:last-child) {
+			margin-right: 0.5em;
+		}
+	}
+	.glsr-review-avatar {
+		float: left;
+		margin-right: 12px;
+	}
+	.glsr-review-response::before {
+		left: 50px;
+		border-width: 0 24px 18px 0;
+	}
+}
+
+
+.glsr-rtl {
+	[id^=geminilabs-site-reviews].widget ul.glsr-reviews {
+		margin-right: 0;
+	}
+	.glsr-review-excerpt,
+	.glsr-review-meta {
+		> span:not(:last-child) {
+			margin-left: 0.5em;
+		}
+	}
+	.glsr-review-avatar {
+		float: right;
+		margin-left: 12px;
+	}
+	.glsr-review-response::before {
+		right: 50px;
+		border-width: 0 0 18px 24px;
+	}
 }

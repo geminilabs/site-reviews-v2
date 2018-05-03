@@ -55,10 +55,12 @@ h3.glsr-form-title {
 		width: 21px;
 		height: 21px;
 		background-size: 21px;
-
-		&:last-child {
-			margin-right: 0;
-		}
+	}
+	#secondary .gl-star-rating-ltr[data-star-rating] .gl-star-rating-stars > span:last-child {
+		margin-right: 0;
+	}
+	#secondary .gl-star-rating-rtl[data-star-rating] .gl-star-rating-stars > span:last-child {
+		margin-left: 0;
 	}
 }
 

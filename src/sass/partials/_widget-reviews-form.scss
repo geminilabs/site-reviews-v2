@@ -43,11 +43,6 @@ $glsr-color-error: #D32F2F !default;
 	&.glsr-required label:after {
 		content: "*";
 		color: $glsr-color-error;
-		margin-left: 0.33em;
-	}
-
-	input[type="checkbox"] {
-		margin-right: 0.25em;
 	}
 
 	select[name="rating"] {
@@ -72,7 +67,6 @@ $glsr-color-error: #D32F2F !default;
 .glsr-field button[type="submit"][disabled] span {
 	display: inline;
 	position: relative;
-	margin-right: 1.65em;
 }
 
 .glsr-field button[type="submit"] span::before,
@@ -80,7 +74,6 @@ $glsr-color-error: #D32F2F !default;
 	display: inline-block;
 	position: absolute;
 	top: 50%;
-	left: 0;
 	height: 1em;
 	width: 1em;
 	content: '';
@@ -107,5 +100,40 @@ $glsr-color-error: #D32F2F !default;
 	}
 	to {
 		transform: rotate(359deg);
+	}
+}
+
+
+.glsr-ltr {
+	.glsr-field label[for^="rating"]:after,
+	.glsr-field.glsr-required label:after {
+		margin-left: 0.33em;
+	}
+	.glsr-field input[type="checkbox"] {
+		margin-right: 0.25em;
+	}
+	.glsr-field button[type="submit"][disabled] span {
+		margin-right: 1.65em;
+	}
+	.glsr-field button[type="submit"] span::before,
+	.glsr-field button[type="submit"] span::after {
+		left: 0;
+	}
+}
+
+.glsr-rtl {
+	.glsr-field label[for^="rating"]:after,
+	.glsr-field.glsr-required label:after {
+		margin-right: 0.33em;
+	}
+	.glsr-field input[type="checkbox"] {
+		margin-left: 0.25em;
+	}
+	.glsr-field button[type="submit"][disabled] span {
+		margin-left: 1.65em;
+	}
+	.glsr-field button[type="submit"] span::before,
+	.glsr-field button[type="submit"] span::after {
+		right: 0;
 	}
 }
