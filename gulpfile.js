@@ -46,6 +46,7 @@ gulp.task('default', function() {
 gulp.task('js', function() {
 	var streams = mergeStream();
 	for(var key in config.scripts) {
+		if(!config.scripts.hasOwnProperty(key))continue;
 		streams.add(gulp.src(config.scripts[key]).pipe(concat(key)));
 	}
 	return pump([

@@ -1,4 +1,4 @@
-/* globals GLSR, x */
+/* globals ajaxurl, GLSR, site_reviews, x */
 /* jshint strict:false */
 
 GLSR.colorControls = function()

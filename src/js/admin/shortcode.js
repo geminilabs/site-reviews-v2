@@ -1,4 +1,4 @@
-/* globals GLSR, x */
+/* globals GLSR, site_reviews, tinymce, x */
 /* jshint strict:false */
 
 GLSR.shortcode.close = function( el )

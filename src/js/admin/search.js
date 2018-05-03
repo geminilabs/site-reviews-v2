@@ -1,4 +1,4 @@
-/* globals GLSR, x */
+/* globals _, GLSR, site_reviews, wp, x */
 /* jshint strict:false */
 
 GLSR.search = function( el, options )

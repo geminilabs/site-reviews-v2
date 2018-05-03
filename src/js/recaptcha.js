@@ -1,4 +1,4 @@
-/* globals GLSR */
+/* globals GLSR, grecaptcha */
 
 "use strict";
 

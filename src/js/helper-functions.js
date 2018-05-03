@@ -1,3 +1,5 @@
+/* globals ActiveXObject, XMLHttpRequest */
+
 "use strict";
 
 var GLSR = {};

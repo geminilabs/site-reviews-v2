@@ -1,4 +1,4 @@
-/* globals GLSR */
+/* globals CustomEvent, GLSR, grecaptcha, HTMLFormElement, site_reviews, StarRating */
 /* jshint strict:false */
 
 GLSR.SCROLL_TIME = 468;
