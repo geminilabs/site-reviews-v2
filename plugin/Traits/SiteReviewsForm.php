@@ -18,11 +18,6 @@ namespace GeminiLabs\SiteReviews\Traits;
 trait SiteReviewsForm
 {
 	/**
-	 * @var bool|string
-	 */
-	public $id = false;
-
-	/**
 	 * Generate a unique ID string
 	 *
 	 * @param mixed $from
@@ -31,7 +26,7 @@ trait SiteReviewsForm
 	public function generateId( $from = [] )
 	{
 		return !empty( $this->id )
-			? (string)$this->id
+			? sanitize_title( (string)$this->id )
 			: substr( md5( serialize( $from )), 0, 8 );
 	}
 

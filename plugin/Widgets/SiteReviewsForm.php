@@ -15,6 +15,9 @@ namespace GeminiLabs\SiteReviews\Widgets;
 use GeminiLabs\SiteReviews\Traits\SiteReviewsForm as Common;
 use GeminiLabs\SiteReviews\Widget;
 
+/**
+ * @property bool|string $id
+ */
 class SiteReviewsForm extends Widget
 {
 	use Common;

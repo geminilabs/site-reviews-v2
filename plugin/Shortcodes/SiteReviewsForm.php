@@ -23,6 +23,11 @@ class SiteReviewsForm extends Shortcode
 	use Common;
 
 	/**
+	 * @var bool|string
+	 */
+	public $id = false;
+
+	/**
 	 * @return null|string
 	 */
 	public function printShortcode( $atts = [] )

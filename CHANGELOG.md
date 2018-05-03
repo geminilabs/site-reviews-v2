@@ -23,6 +23,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Added
 - Added RTL (right-to-left) support
 
+### Fixed
+- Fixed submission form id
+
 ## [2.14.3] = 2018-04-29
 
 ### Fixed

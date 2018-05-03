@@ -142,6 +142,7 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 
 = 2.15.0 (2018-05-03) =
 - Added RTL (right-to-left) support
+- Fixed submission form id
 
 = 2.14.3 (2018-04-29) =
 - Fixed submission date for newly-submitted unapproved reviews

@@ -422,7 +422,7 @@ msgstr "Custom Image URL"
 msgid "Required Fields"
 msgstr "Required Fields"
 
-#: plugin/Settings.php:473, plugin/Commands/RegisterPostType.php:22, plugin/Widgets/SiteReviews.php:37, plugin/Widgets/SiteReviewsForm.php:38, plugin/Shortcodes/Buttons/SiteReviews.php:55, plugin/Shortcodes/Buttons/SiteReviews.php:144, plugin/Shortcodes/Buttons/SiteReviewsForm.php:43, plugin/Shortcodes/Buttons/SiteReviewsForm.php:90, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:53
+#: plugin/Settings.php:473, plugin/Commands/RegisterPostType.php:22, plugin/Widgets/SiteReviews.php:37, plugin/Widgets/SiteReviewsForm.php:41, plugin/Shortcodes/Buttons/SiteReviews.php:55, plugin/Shortcodes/Buttons/SiteReviews.php:144, plugin/Shortcodes/Buttons/SiteReviewsForm.php:43, plugin/Shortcodes/Buttons/SiteReviewsForm.php:90, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:53
 msgid "Title"
 msgstr "Title"
 
@@ -978,19 +978,19 @@ msgstr "Poor"
 msgid "Terrible"
 msgstr "Terrible"
 
-#: plugin/Traits/SiteReviewsForm.php:109
+#: plugin/Traits/SiteReviewsForm.php:104
 msgid "You must be %s to submit a review."
 msgstr "You must be %s to submit a review."
 
-#: plugin/Traits/SiteReviewsForm.php:110
+#: plugin/Traits/SiteReviewsForm.php:105
 msgid "logged in"
 msgstr "logged in"
 
-#: plugin/Traits/SiteReviewsForm.php:113
+#: plugin/Traits/SiteReviewsForm.php:108
 msgid "You may also %s for an account."
 msgstr "You may also %s for an account."
 
-#: plugin/Traits/SiteReviewsForm.php:114
+#: plugin/Traits/SiteReviewsForm.php:109
 msgid "register"
 msgstr "register"
 
@@ -1026,7 +1026,7 @@ msgstr "Separate multiple ID's with a comma"
 msgid "You may also enter %s to limit assigned reviews to the current page."
 msgstr "You may also enter %s to limit assigned reviews to the current page."
 
-#: plugin/Widgets/SiteReviews.php:99, plugin/Widgets/SiteReviewsForm.php:71
+#: plugin/Widgets/SiteReviews.php:99, plugin/Widgets/SiteReviewsForm.php:74
 msgid "Enter any custom CSS classes here"
 msgstr "Enter any custom CSS classes here"
 
@@ -1054,43 +1054,43 @@ msgstr "Hide the review response?"
 msgid "Hide the review title?"
 msgstr "Hide the review title?"
 
-#: plugin/Widgets/SiteReviewsForm.php:32
+#: plugin/Widgets/SiteReviewsForm.php:35
 msgid "Your email address will not be published. Required fields are marked %s*%s"
 msgstr "Your email address will not be published. Required fields are marked %s*%s"
 
-#: plugin/Widgets/SiteReviewsForm.php:46, plugin/Shortcodes/Buttons/SiteReviewsForm.php:48
+#: plugin/Widgets/SiteReviewsForm.php:49, plugin/Shortcodes/Buttons/SiteReviewsForm.php:48
 msgid "Description"
 msgstr "Description"
 
-#: plugin/Widgets/SiteReviewsForm.php:53
+#: plugin/Widgets/SiteReviewsForm.php:56
 msgid "Automatically assign a category"
 msgstr "Automatically assign a category"
 
-#: plugin/Widgets/SiteReviewsForm.php:55
+#: plugin/Widgets/SiteReviewsForm.php:58
 msgid "Do not assign a category"
 msgstr "Do not assign a category"
 
-#: plugin/Widgets/SiteReviewsForm.php:62
+#: plugin/Widgets/SiteReviewsForm.php:65
 msgid "Assign reviews to a custom page/post ID"
 msgstr "Assign reviews to a custom page/post ID"
 
-#: plugin/Widgets/SiteReviewsForm.php:65
+#: plugin/Widgets/SiteReviewsForm.php:68
 msgid "You may also enter %s to assign to the current post."
 msgstr "You may also enter %s to assign to the current post."
 
-#: plugin/Widgets/SiteReviewsForm.php:80
+#: plugin/Widgets/SiteReviewsForm.php:83
 msgid "Hide the email field"
 msgstr "Hide the email field"
 
-#: plugin/Widgets/SiteReviewsForm.php:81
+#: plugin/Widgets/SiteReviewsForm.php:84
 msgid "Hide the name field"
 msgstr "Hide the name field"
 
-#: plugin/Widgets/SiteReviewsForm.php:82
+#: plugin/Widgets/SiteReviewsForm.php:85
 msgid "Hide the terms field"
 msgstr "Hide the terms field"
 
-#: plugin/Widgets/SiteReviewsForm.php:83
+#: plugin/Widgets/SiteReviewsForm.php:86
 msgid "Hide the title field"
 msgstr "Hide the title field"
 
