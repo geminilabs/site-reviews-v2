@@ -21,17 +21,17 @@ var yaml            = require('yamljs');
 var config = yaml.load('src/config.yml');
 
 gulp.task('bump', function() {
-	['patch', 'minor', 'major'].some(function(arg) {
-		if(!args[arg])return;
-		for(var key in config.bump) {
-			if(!config.bump.hasOwnProperty(key))continue;
-			pump([
-				gulp.src(config.bump[key]),
-				bump({type:arg,key:key}),
-				gulp.dest('.'),
-			]);
-		}
+	var type = 'patch';
+	['prerelease','patch','minor','major'].some(function(arg) {
+		if( !args[arg] )return;
+		type = arg;
+		return true;
 	});
+	return pump([
+		gulp.src(config.bump),
+		bump({type:type,keys:['stable tag','version']}),
+		gulp.dest('.'),
+	]);
 });
 
 gulp.task('js', function() {

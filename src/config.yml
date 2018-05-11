@@ -1,6 +1,6 @@
 bump:
-  stable tag: readme.txt
-  version: site-reviews.php
+  - readme.txt
+  - site-reviews.php
 dest:
   css: assets/css/
   js: assets/js/
