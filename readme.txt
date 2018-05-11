@@ -5,7 +5,7 @@ Tags: best reviews, business ratings, business reviews, curated reviews, moderat
 Requires at least: 4.0.0
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.15.0
+Stable tag: 2.15.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -139,6 +139,9 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 14. Add-Ons are being built to extend the functionality on the Site Reviews plugin
 
 == Changelog ==
+
+= 2.15.1 (2018-05-11) =
+- Fixed accessibility for the star-rating widget. You can now TAB to the rating field and use the arrow keys to set the rating.
 
 = 2.15.0 (2018-05-03) =
 - Added RTL (right-to-left) support
