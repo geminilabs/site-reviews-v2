@@ -12,7 +12,6 @@ var potomo          = require('gulp-potomo');
 var pseudo          = require('gulp-pseudo-i18n');
 var pump            = require('pump');
 var rename          = require('gulp-rename');
-var runSequence     = require('run-sequence');
 var sass            = require('gulp-sass');
 var sort            = require('gulp-sort');
 var uglify          = require('gulp-uglify');
@@ -20,10 +19,6 @@ var wpPot           = require('gulp-wp-pot');
 var yaml            = require('yamljs');
 
 var config = yaml.load('src/config.yml');
-
-gulp.task('build', function() {
-	gulp.start('scss', 'jshint', 'js', 'languages')
-});
 
 gulp.task('bump', function() {
 	['patch', 'minor', 'major'].some(function(arg) {
@@ -37,10 +32,6 @@ gulp.task('bump', function() {
 			]);
 		}
 	});
-});
-
-gulp.task('default', function() {
-	gulp.start('scss', 'jshint', 'js')
 });
 
 gulp.task('js', function() {
@@ -65,10 +56,6 @@ gulp.task('jshint', function() {
 		jshint.reporter('jshint-stylish'),
 		jshint.reporter('fail'),
 	]);
-});
-
-gulp.task('languages', function() {
-	return runSequence('pot', 'pot-to-po', 'po-to-mo');
 });
 
 gulp.task('po-to-mo', function() {
@@ -143,3 +130,7 @@ gulp.task('watch', function() {
 	gulp.watch(config.watch.js, ['jshint', 'js']);
 	gulp.watch(config.watch.scss, ['scss']);
 });
+
+gulp.task('languages', gulp.series('pot', 'pot-to-po', 'po-to-mo'));
+gulp.task('default', gulp.parallel('scss', 'jshint', 'js'));
+gulp.task('build', gulp.parallel('default', 'languages'));
