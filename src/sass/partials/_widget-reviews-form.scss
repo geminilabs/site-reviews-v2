@@ -3,10 +3,6 @@ $glsr-color-error: #D32F2F !default;
 
 .gl-star-rating[data-star-rating] {
 	line-height: 1;
-
-	> select {
-		visibility: visible;
-	}
 }
 
 .glsr-field-messages {
@@ -48,12 +44,34 @@ $glsr-color-error: #D32F2F !default;
 	select[name="rating"] {
 		display: block;
 		height: 26px;
-		visibility: hidden !important;
 		&::before,
 		&::after {
 			display: none !important;
 		}
 	}
+}
+
+.gl-star-rating > select[name=rating] {
+	visibility: hidden !important;
+}
+.gl-star-rating[data-star-rating] > select[name=rating] {
+	visibility: visible !important;
+}
+.gl-star-rating-stars {
+	position: relative;
+}
+select[name=rating] + .gl-star-rating-stars > span:last-of-type {
+	margin-right: 0;
+}
+select[name=rating]:focus + .gl-star-rating-stars::before {
+	opacity: 0.5;
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	content: '';
+	outline: dotted 1px currentColor;
+	pointer-events: none;
 }
 
 .glsr-recaptcha-holder {
