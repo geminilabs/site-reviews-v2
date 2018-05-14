@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.15.2] = 2018-05-14
+
+### Fixed
+- Fixed the schema to link to Woocommerce product schema
+
 ## [2.15.1] = 2018-05-11
 
 ### Fixed

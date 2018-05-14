@@ -86,11 +86,11 @@ class Schema
 				$schema->reviewBody( $review->content );
 			})
 			->datePublished(( new DateTime( $review->date ))->format( DateTime::ISO8601 ))
-			->author( SchemaOrg::Person()
-				->name( $review->author )
-			)
 			->itemReviewed( $this->getSchemaType()
 				->name( $this->getThingName() )
+			)
+			->author( SchemaOrg::Person()
+				->name( $review->author )
 			);
 		if( !empty( $review->rating )) {
 			$schema->reviewRating( SchemaOrg::Rating()
@@ -112,6 +112,9 @@ class Schema
 			$this->args = $args;
 		}
 		$schema = $this->getSchemaType()
+			->doIf( $this->getSchemaOption( 'type' ) == 'Product', function( $schema ) {
+				$schema->setProperty( '@id', $this->getThingUrl() );
+			})
 			->name( $this->getThingName() )
 			->description( $this->getThingDescription() )
 			->image( $this->getThingImage() )
@@ -121,6 +124,8 @@ class Schema
 			$schema->aggregateRating( SchemaOrg::AggregateRating()
 				->ratingValue( $this->getRatingValue() )
 				->reviewCount( $count )
+				->bestRating( Rating::MAX_RATING )
+				->worstRating( Rating::MIN_RATING )
 			);
 		}
 		$schema = $schema->toArray();
@@ -183,7 +188,7 @@ class Schema
 	 * @param string $fallback
 	 * @return string
 	 */
-	protected function getSchemaOption( $option, $fallback )
+	protected function getSchemaOption( $option, $fallback = '' )
 	{
 		if( $schemaOption = trim( (string) get_post_meta( (int) get_the_ID(), sprintf( 'schema_%s', $option ), true ))) {
 			return $schemaOption;
@@ -207,16 +212,15 @@ class Schema
 			return $value;
 		}
 		if( !is_single() && !is_page() )return;
-		$postId = (int) get_the_ID();
 		switch( $option ) {
 			case 'description':
-				return get_the_excerpt( $postId );
+				return get_the_excerpt();
 			case 'image':
-				return (string) get_the_post_thumbnail_url( $postId, 'large' );
+				return (string)get_the_post_thumbnail_url( null, 'large' );
 			case 'name':
-				return get_the_title( $postId );
+				return get_the_title();
 			case 'url':
-				return (string) get_the_permalink( $postId );
+				return (string)get_the_permalink();
 		}
 	}
 
