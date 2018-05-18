@@ -127,8 +127,8 @@ gulp.task('scss', function() {
 });
 
 gulp.task('watch', function() {
-	gulp.watch(config.watch.js, ['jshint', 'js']);
-	gulp.watch(config.watch.scss, ['scss']);
+	gulp.watch(config.watch.js, gulp.parallel('jshint', 'js'));
+	gulp.watch(config.watch.scss, gulp.series('scss'));
 });
 
 gulp.task('languages', gulp.series('pot', 'pot-to-po', 'po-to-mo'));
