@@ -521,7 +521,7 @@ class Validator
 	 */
 	protected function validateEmail( $attribute, $value )
 	{
-		return is_email( $value );
+		return filter_var( $value, FILTER_VALIDATE_EMAIL ) !== false;
 	}
 
 	/**
