@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.15.3] = 2018-05-18
+
+### Security
+- Fixed a possible cross-site scripting vulnerability
+
 ## [2.15.2] = 2018-05-14
 
 ### Fixed

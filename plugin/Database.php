@@ -66,7 +66,7 @@ class Database implements OptionsContract
 			'post_date_gmt'  => get_gmt_from_date( $meta['date'] ),
 			'post_name'      => sprintf( '%s-%s', $meta['review_type'], $meta['review_id'] ),
 			'post_status'    => 'publish',
-			'post_title'     => wp_strip_all_tags( $meta['title'] ),
+			'post_title'     => $meta['title'],
 			'post_type'      => App::POST_TYPE,
 		];
 		if( $meta['review_type'] == 'local' ) {
