@@ -214,7 +214,7 @@ class Schema
 		if( !is_single() && !is_page() )return;
 		switch( $option ) {
 			case 'description':
-				return get_the_excerpt();
+				return strip_shortcodes( wp_strip_all_tags( get_the_excerpt() ));
 			case 'image':
 				return (string)get_the_post_thumbnail_url( null, 'large' );
 			case 'name':

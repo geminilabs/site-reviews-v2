@@ -102,11 +102,11 @@ msgid_plural "%s years ago"
 msgstr[0] "%s year ago"
 msgstr[1] "%s years ago"
 
-#: plugin/Settings.php:161, plugin/Settings.php:258, plugin/Settings.php:464, plugin/Settings.php:568
+#: plugin/Settings.php:161, plugin/Settings.php:258, plugin/Settings.php:468, plugin/Settings.php:572
 msgid "Save Settings"
 msgstr "Save Settings"
 
-#: plugin/Settings.php:167, plugin/Settings.php:550
+#: plugin/Settings.php:167, plugin/Settings.php:554
 msgid "Require approval"
 msgstr "Require approval"
 
@@ -300,7 +300,7 @@ msgstr ""
 "override this option on a per-post/page basis by adding a %s metadata value "
 "using %s."
 
-#: plugin/Settings.php:340, plugin/Settings.php:368, plugin/Settings.php:392, plugin/Settings.php:416, plugin/Settings.php:440
+#: plugin/Settings.php:340, plugin/Settings.php:369, plugin/Settings.php:394, plugin/Settings.php:419, plugin/Settings.php:444
 msgid "Custom Fields"
 msgstr "Custom Fields"
 
@@ -329,10 +329,14 @@ msgid "Use the assigned or current page title"
 msgstr "Use the assigned or current page title"
 
 #: plugin/Settings.php:364
-msgid "Enter a custom title"
-msgstr "Enter a custom title"
+msgid "Enter a custom name"
+msgstr "Enter a custom name"
 
-#: plugin/Settings.php:366
+#: plugin/Settings.php:365
+msgid "Do not set a default name"
+msgstr "Do not set a default name"
+
+#: plugin/Settings.php:367
 msgid ""
 "This is the default name of the item being reviewed. You can override this "
 "option on a per-post/page basis by adding a %s metadata value using %s."
@@ -340,23 +344,27 @@ msgstr ""
 "This is the default name of the item being reviewed. You can override this "
 "option on a per-post/page basis by adding a %s metadata value using %s."
 
-#: plugin/Settings.php:375
+#: plugin/Settings.php:376
 msgid "Custom Name"
 msgstr "Custom Name"
 
-#: plugin/Settings.php:384
+#: plugin/Settings.php:385
 msgid "Default Description"
 msgstr "Default Description"
 
-#: plugin/Settings.php:387
+#: plugin/Settings.php:388
 msgid "Use the assigned or current page excerpt"
 msgstr "Use the assigned or current page excerpt"
 
-#: plugin/Settings.php:388
+#: plugin/Settings.php:389
 msgid "Enter a custom description"
 msgstr "Enter a custom description"
 
 #: plugin/Settings.php:390
+msgid "Do not set a default description"
+msgstr "Do not set a default description"
+
+#: plugin/Settings.php:392
 msgid ""
 "This is the default description for the item being reviewed. You can "
 "override this option on a per-post/page basis by adding a %s metadata value "
@@ -366,23 +374,27 @@ msgstr ""
 "override this option on a per-post/page basis by adding a %s metadata value "
 "using %s."
 
-#: plugin/Settings.php:399
+#: plugin/Settings.php:401
 msgid "Custom Description"
 msgstr "Custom Description"
 
-#: plugin/Settings.php:408
+#: plugin/Settings.php:410
 msgid "Default URL"
 msgstr "Default URL"
 
-#: plugin/Settings.php:411
+#: plugin/Settings.php:413
 msgid "Use the assigned or current page URL"
 msgstr "Use the assigned or current page URL"
 
-#: plugin/Settings.php:412
+#: plugin/Settings.php:414
 msgid "Enter a custom URL"
 msgstr "Enter a custom URL"
 
-#: plugin/Settings.php:414
+#: plugin/Settings.php:415
+msgid "Do not set a default URL"
+msgstr "Do not set a default URL"
+
+#: plugin/Settings.php:417
 msgid ""
 "This is the default URL for the item being reviewed. You can override this "
 "option on a per-post/page basis by adding a %s metadata value using %s."
@@ -390,23 +402,27 @@ msgstr ""
 "This is the default URL for the item being reviewed. You can override this "
 "option on a per-post/page basis by adding a %s metadata value using %s."
 
-#: plugin/Settings.php:423
+#: plugin/Settings.php:426
 msgid "Custom URL"
 msgstr "Custom URL"
 
-#: plugin/Settings.php:432
+#: plugin/Settings.php:435
 msgid "Default Image"
 msgstr "Default Image"
 
-#: plugin/Settings.php:435
+#: plugin/Settings.php:438
 msgid "Use the featured image of the assigned or current page"
 msgstr "Use the featured image of the assigned or current page"
 
-#: plugin/Settings.php:436
+#: plugin/Settings.php:439
 msgid "Enter a custom image URL"
 msgstr "Enter a custom image URL"
 
-#: plugin/Settings.php:438
+#: plugin/Settings.php:440
+msgid "Do not set a default image"
+msgstr "Do not set a default image"
+
+#: plugin/Settings.php:442
 msgid ""
 "This is the default image for the item being reviewed. You can override "
 "this option on a per-post/page basis by adding a %s metadata value using %s."
@@ -414,35 +430,35 @@ msgstr ""
 "This is the default image for the item being reviewed. You can override "
 "this option on a per-post/page basis by adding a %s metadata value using %s."
 
-#: plugin/Settings.php:447
+#: plugin/Settings.php:451
 msgid "Custom Image URL"
 msgstr "Custom Image URL"
 
-#: plugin/Settings.php:470
+#: plugin/Settings.php:474
 msgid "Required Fields"
 msgstr "Required Fields"
 
-#: plugin/Settings.php:473, plugin/Commands/RegisterPostType.php:22, plugin/Widgets/SiteReviews.php:37, plugin/Widgets/SiteReviewsForm.php:41, plugin/Shortcodes/Buttons/SiteReviews.php:55, plugin/Shortcodes/Buttons/SiteReviews.php:144, plugin/Shortcodes/Buttons/SiteReviewsForm.php:43, plugin/Shortcodes/Buttons/SiteReviewsForm.php:90, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:53
+#: plugin/Settings.php:477, plugin/Commands/RegisterPostType.php:22, plugin/Widgets/SiteReviews.php:37, plugin/Widgets/SiteReviewsForm.php:41, plugin/Shortcodes/Buttons/SiteReviews.php:55, plugin/Shortcodes/Buttons/SiteReviews.php:144, plugin/Shortcodes/Buttons/SiteReviewsForm.php:43, plugin/Shortcodes/Buttons/SiteReviewsForm.php:90, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:53
 msgid "Title"
 msgstr "Title"
 
-#: plugin/Settings.php:474, plugin/Controllers/MainController.php:212
+#: plugin/Settings.php:478, plugin/Controllers/MainController.php:212
 msgid "Review"
 msgstr "Review"
 
-#: plugin/Settings.php:475, plugin/Controllers/MainController.php:790, plugin/Shortcodes/Buttons/SiteReviewsForm.php:80
+#: plugin/Settings.php:479, plugin/Controllers/MainController.php:790, plugin/Shortcodes/Buttons/SiteReviewsForm.php:80
 msgid "Name"
 msgstr "Name"
 
-#: plugin/Settings.php:476, plugin/Controllers/MainController.php:791, plugin/Shortcodes/Buttons/SiteReviewsForm.php:75
+#: plugin/Settings.php:480, plugin/Controllers/MainController.php:791, plugin/Shortcodes/Buttons/SiteReviewsForm.php:75
 msgid "Email"
 msgstr "Email"
 
-#: plugin/Settings.php:483
+#: plugin/Settings.php:487
 msgid "Enable Akismet Integration"
 msgstr "Enable Akismet Integration"
 
-#: plugin/Settings.php:485
+#: plugin/Settings.php:489
 msgid ""
 "the %s integration provides spam-filtering for your reviews. In order for "
 "this setting to have any affect, you will need to first install and "
@@ -452,23 +468,23 @@ msgstr ""
 "this setting to have any affect, you will need to first install and "
 "activate the Akismet plugin and set up a WordPress.com API key."
 
-#: plugin/Settings.php:486
+#: plugin/Settings.php:490
 msgid "Akismet plugin"
 msgstr "Akismet plugin"
 
-#: plugin/Settings.php:493
+#: plugin/Settings.php:497
 msgid "Invisible reCAPTCHA"
 msgstr "Invisible reCAPTCHA"
 
-#: plugin/Settings.php:495
+#: plugin/Settings.php:499
 msgid "Do not use reCAPTCHA"
 msgstr "Do not use reCAPTCHA"
 
-#: plugin/Settings.php:496
+#: plugin/Settings.php:500
 msgid "Use reCAPTCHA"
 msgstr "Use reCAPTCHA"
 
-#: plugin/Settings.php:499
+#: plugin/Settings.php:503
 msgid ""
 "Invisible reCAPTCHA is a free anti-spam service from Google. To use it, you "
 "will need to %s for an API key pair for your site. If you are already using "
@@ -480,27 +496,27 @@ msgstr ""
 "a reCAPTCHA plugin listed here, please select it; otherwise choose \"Use "
 "reCAPTCHA\"."
 
-#: plugin/Settings.php:500
+#: plugin/Settings.php:504
 msgid "sign up"
 msgstr "sign up"
 
-#: plugin/Settings.php:507
+#: plugin/Settings.php:511
 msgid "Site Key"
 msgstr "Site Key"
 
-#: plugin/Settings.php:516
+#: plugin/Settings.php:520
 msgid "Site Secret"
 msgstr "Site Secret"
 
-#: plugin/Settings.php:525
+#: plugin/Settings.php:529
 msgid "Badge Position"
 msgstr "Badge Position"
 
-#: plugin/Settings.php:539
+#: plugin/Settings.php:543
 msgid "Review Blacklist"
 msgstr "Review Blacklist"
 
-#: plugin/Settings.php:540
+#: plugin/Settings.php:544
 msgid ""
 "When a review contains any of these words in its title, content, name, "
 "email, or IP address, it will be rejected. One word or IP address per line. "
@@ -510,15 +526,15 @@ msgstr ""
 "email, or IP address, it will be rejected. One word or IP address per line. "
 "It will match inside words, so \"press\" will match \"WordPress\"."
 
-#: plugin/Settings.php:548
+#: plugin/Settings.php:552
 msgid "Blacklist Action"
 msgstr "Blacklist Action"
 
-#: plugin/Settings.php:551
+#: plugin/Settings.php:555
 msgid "Reject submission"
 msgstr "Reject submission"
 
-#: plugin/Settings.php:553
+#: plugin/Settings.php:557
 msgid "Choose the action that should be taken when a review is blacklisted."
 msgstr "Choose the action that should be taken when a review is blacklisted."
 
@@ -1622,7 +1638,7 @@ msgstr "Search for translatable text"
 msgid "Search for translatable text..."
 msgstr "Search for translatable text..."
 
-#: plugin/Settings.php:497
+#: plugin/Settings.php:501
 msgctxt "plugin name"
 msgid "Use 3rd-party plugin: Invisible reCaptcha"
 msgstr "Use 3rd-party plugin: Invisible reCaptcha"

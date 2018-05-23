@@ -18,6 +18,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.15.4] = 2018-05-23
+
+### Added
+- Added schema options to not set a default value
+
+### Fixed
+- Strip tags and shortcodes from the schema description when a theme has incorrectly disabled the WordPress "the_excerpt" filters
+
 ## [2.15.3] = 2018-05-18
 
 ### Security

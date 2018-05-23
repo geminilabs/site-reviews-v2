@@ -361,7 +361,8 @@ class Settings
 			'default' => 'post',
 			'options' => [
 				'post' => __( 'Use the assigned or current page title', 'site-reviews' ),
-				'custom' => __( 'Enter a custom title', 'site-reviews' ),
+				'custom' => __( 'Enter a custom name', 'site-reviews' ),
+				'' => __( 'Do not set a default name', 'site-reviews' ),
 			],
 			'desc' => sprintf( __( 'This is the default name of the item being reviewed. You can override this option on a per-post/page basis by adding a %s metadata value using %s.', 'site-reviews' ),
 				'<code>schema_name</code>',
@@ -386,6 +387,7 @@ class Settings
 			'options' => [
 				'post' => __( 'Use the assigned or current page excerpt', 'site-reviews' ),
 				'custom' => __( 'Enter a custom description', 'site-reviews' ),
+				'' => __( 'Do not set a default description', 'site-reviews' ),
 			],
 			'desc' => sprintf( __( 'This is the default description for the item being reviewed. You can override this option on a per-post/page basis by adding a %s metadata value using %s.', 'site-reviews' ),
 				'<code>schema_description</code>',
@@ -410,6 +412,7 @@ class Settings
 			'options' => [
 				'post' => __( 'Use the assigned or current page URL', 'site-reviews' ),
 				'custom' => __( 'Enter a custom URL', 'site-reviews' ),
+				'' => __( 'Do not set a default URL', 'site-reviews' ),
 			],
 			'desc' => sprintf( __( 'This is the default URL for the item being reviewed. You can override this option on a per-post/page basis by adding a %s metadata value using %s.', 'site-reviews' ),
 				'<code>schema_url</code>',
@@ -434,6 +437,7 @@ class Settings
 			'options' => [
 				'post' => __( 'Use the featured image of the assigned or current page', 'site-reviews' ),
 				'custom' => __( 'Enter a custom image URL', 'site-reviews' ),
+				'' => __( 'Do not set a default image', 'site-reviews' ),
 			],
 			'desc' => sprintf( __( 'This is the default image for the item being reviewed. You can override this option on a per-post/page basis by adding a %s metadata value using %s.', 'site-reviews' ),
 				'<code>schema_image</code>',
