@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Fixed
 - Fixed compatibility with [Elementor](https://wordpress.org/plugins/elementor/)
+- Fixed en_US language header
 
 ## [2.15.4] = 2018-05-23
 

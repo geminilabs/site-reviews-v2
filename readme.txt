@@ -5,7 +5,7 @@ Tags: best reviews, business ratings, business reviews, curated reviews, moderat
 Requires at least: 4.0.0
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.15.4
+Stable tag: 2.15.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -139,6 +139,10 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 14. Add-Ons are being built to extend the functionality on the Site Reviews plugin
 
 == Changelog ==
+
+= 2.15.5 (2018-05-28) =
+- Fixed compatibility with [Elementor](https://wordpress.org/plugins/elementor/)
+- Fixed en_US language header
 
 = 2.15.4 (2018-05-23) =
 - Added schema options to not set a default value
