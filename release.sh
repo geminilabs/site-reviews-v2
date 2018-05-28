@@ -1,9 +1,11 @@
 #!/bin/sh
 # By Paul Ryley, based on work by Mike Jolley
 # License: GPLv3
+# Version: 1.0.1
 
 # ----- START EDITING HERE -----
 
+ASSETS_DIR="src/assets"
 DEFAULT_GIT_BRANCH="master"
 MIN_PHP_VERSION="5.4"
 MIN_WORDPRESS_VERSION="4.0"
@@ -84,7 +86,7 @@ read -p "PRESS [ENTER] TO DEPLOY BRANCH "${BRANCH:-$DEFAULT_GIT_BRANCH}
 cd $ROOT_PATH$SVN_REPO_DIR
 
 # COPY ASSETS to SVN DIR
-cp $ROOT_PATH/src/assets/* $ROOT_PATH$SVN_REPO_DIR/assets/
+cp $ROOT_PATH/$ASSETS_DIR/* $ROOT_PATH$SVN_REPO_DIR/assets/
 
 # UPDATE SVN
 echo "Updating SVN"
