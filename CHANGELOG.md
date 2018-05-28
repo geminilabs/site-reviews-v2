@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.15.5] = 2018-05-28
+
+### Fixed
+- Fixed compatibility with [Elementor](https://wordpress.org/plugins/elementor/)
+
 ## [2.15.4] = 2018-05-23
 
 ### Added

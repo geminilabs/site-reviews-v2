@@ -16,7 +16,7 @@ msgstr ""
 "X-Poedit-Searchpathexcluded-0: *.js\n"
 "X-Poedit-Sourcecharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: qps-ploc\n"
+"Language: en_US\n"
 
 #: activate.php:44
 msgid "The Site Reviews plugin was deactivated."
@@ -446,11 +446,11 @@ msgstr "Title"
 msgid "Review"
 msgstr "Review"
 
-#: plugin/Settings.php:479, plugin/Controllers/MainController.php:790, plugin/Shortcodes/Buttons/SiteReviewsForm.php:80
+#: plugin/Settings.php:479, plugin/Controllers/MainController.php:793, plugin/Shortcodes/Buttons/SiteReviewsForm.php:80
 msgid "Name"
 msgstr "Name"
 
-#: plugin/Settings.php:480, plugin/Controllers/MainController.php:791, plugin/Shortcodes/Buttons/SiteReviewsForm.php:75
+#: plugin/Settings.php:480, plugin/Controllers/MainController.php:794, plugin/Shortcodes/Buttons/SiteReviewsForm.php:75
 msgid "Email"
 msgstr "Email"
 
@@ -634,7 +634,7 @@ msgstr "View review"
 msgid "Local"
 msgstr "Local"
 
-#: plugin/Commands/RegisterPostType.php:23, plugin/Controllers/MainController.php:788, plugin/Shortcodes/Buttons/SiteReviews.php:124
+#: plugin/Commands/RegisterPostType.php:23, plugin/Controllers/MainController.php:791, plugin/Shortcodes/Buttons/SiteReviews.php:124
 msgid "Date"
 msgstr "Date"
 
@@ -700,11 +700,11 @@ msgstr "Site Reviews"
 msgid "Author"
 msgstr "Author"
 
-#: plugin/Controllers/MainController.php:225, plugin/Controllers/MainController.php:787
+#: plugin/Controllers/MainController.php:225, plugin/Controllers/MainController.php:790
 msgid "Type"
 msgstr "Type"
 
-#: plugin/Controllers/MainController.php:226, plugin/Controllers/MainController.php:786, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:134, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:63, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:109
+#: plugin/Controllers/MainController.php:226, plugin/Controllers/MainController.php:789, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:134, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:63, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:109
 msgid "Rating"
 msgstr "Rating"
 
@@ -800,49 +800,49 @@ msgstr "Translations"
 msgid "Licenses"
 msgstr "Licenses"
 
-#: plugin/Controllers/MainController.php:664
+#: plugin/Controllers/MainController.php:667
 msgid "Logging disabled."
 msgid_plural "Logging enabled."
 msgstr[0] "Logging disabled."
 msgstr[1] "Logging enabled."
 
-#: plugin/Controllers/MainController.php:667
+#: plugin/Controllers/MainController.php:670
 msgid "Settings updated."
 msgstr "Settings updated."
 
-#: plugin/Controllers/MainController.php:758
+#: plugin/Controllers/MainController.php:761
 msgid "Nothing to Revert"
 msgstr "Nothing to Revert"
 
-#: plugin/Controllers/MainController.php:759
+#: plugin/Controllers/MainController.php:762
 msgid "Revert Changes"
 msgstr "Revert Changes"
 
-#: plugin/Controllers/MainController.php:771
+#: plugin/Controllers/MainController.php:774
 msgid "Unknown"
 msgstr "Unknown"
 
-#: plugin/Controllers/MainController.php:773
+#: plugin/Controllers/MainController.php:776
 msgid "%s review"
 msgstr "%s review"
 
-#: plugin/Controllers/MainController.php:781
+#: plugin/Controllers/MainController.php:784
 msgid "Unregistered user"
 msgstr "Unregistered user"
 
-#: plugin/Controllers/MainController.php:783
+#: plugin/Controllers/MainController.php:786
 msgid "RE:"
 msgstr "RE:"
 
-#: plugin/Controllers/MainController.php:789
+#: plugin/Controllers/MainController.php:792
 msgid "Reviewer"
 msgstr "Reviewer"
 
-#: plugin/Controllers/MainController.php:792
+#: plugin/Controllers/MainController.php:795
 msgid "IP Address"
 msgstr "IP Address"
 
-#: plugin/Controllers/MainController.php:793
+#: plugin/Controllers/MainController.php:796
 msgid "Avatar"
 msgstr "Avatar"
 
