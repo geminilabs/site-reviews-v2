@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.15.6] = 2018-05-31
+
+### Added
+- Allow to hide the avatar if it is enabled
+
 ## [2.15.5] = 2018-05-28
 
 ### Fixed

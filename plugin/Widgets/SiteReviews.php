@@ -106,6 +106,7 @@ class SiteReviews extends Widget
 			'value' => $args['hide'],
 			'options' => [
 				'author' => __( 'Hide the review author?', 'site-reviews' ),
+				'avatar' => __( 'Hide the reviewer avatar if shown?', 'site-reviews' ),
 				'date' => __( 'Hide the review date?', 'site-reviews' ),
 				'excerpt' => __( 'Hide the review excerpt?', 'site-reviews' ),
 				'rating' => __( 'Hide the review rating?', 'site-reviews' ),

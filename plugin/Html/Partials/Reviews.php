@@ -15,7 +15,7 @@ use GeminiLabs\SiteReviews\Html\Partials\Base;
 
 class Reviews extends Base
 {
-	protected static $HIDDEN_KEYS = ['author', 'date', 'excerpt', 'rating', 'title'];
+	protected static $HIDDEN_KEYS = ['author', 'avatar', 'date', 'excerpt', 'rating', 'title'];
 
 	/**
 	 * @return null|string
@@ -102,7 +102,9 @@ class Reviews extends Base
 	 */
 	protected function buildAvatar( $avatar )
 	{
-		if( $this->db->getOption( 'settings.reviews.avatars.enabled' ) != 'yes' )return;
+		if( in_array( 'avatar', $this->args['hide'] )
+			|| $this->db->getOption( 'settings.reviews.avatars.enabled' ) != 'yes'
+		)return;
 		return sprintf( '<div class="glsr-review-avatar"><img src="%s" width="36"></div>', $avatar );
 	}
 

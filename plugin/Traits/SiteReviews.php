@@ -60,7 +60,7 @@ trait SiteReviews
 	 */
 	protected function makeCompatible( array $args )
 	{
-		$hide = ['author','date','excerpt','rating','response','title'];
+		$hide = ['author','avatar','date','excerpt','rating','response','title'];
 		$display = array_map( 'trim', explode( ',', $args['display'] ));
 
 		if( count( array_intersect( $hide, $display )) > 0 ) {

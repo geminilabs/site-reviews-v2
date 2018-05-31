@@ -438,7 +438,7 @@ msgstr "Custom Image URL"
 msgid "Required Fields"
 msgstr "Required Fields"
 
-#: plugin/Settings.php:477, plugin/Commands/RegisterPostType.php:22, plugin/Widgets/SiteReviews.php:37, plugin/Widgets/SiteReviewsForm.php:41, plugin/Shortcodes/Buttons/SiteReviews.php:55, plugin/Shortcodes/Buttons/SiteReviews.php:144, plugin/Shortcodes/Buttons/SiteReviewsForm.php:43, plugin/Shortcodes/Buttons/SiteReviewsForm.php:90, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:53
+#: plugin/Settings.php:477, plugin/Commands/RegisterPostType.php:22, plugin/Widgets/SiteReviews.php:37, plugin/Widgets/SiteReviewsForm.php:41, plugin/Shortcodes/Buttons/SiteReviews.php:55, plugin/Shortcodes/Buttons/SiteReviews.php:149, plugin/Shortcodes/Buttons/SiteReviewsForm.php:43, plugin/Shortcodes/Buttons/SiteReviewsForm.php:90, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:53
 msgid "Title"
 msgstr "Title"
 
@@ -634,7 +634,7 @@ msgstr "View review"
 msgid "Local"
 msgstr "Local"
 
-#: plugin/Commands/RegisterPostType.php:23, plugin/Controllers/MainController.php:791, plugin/Shortcodes/Buttons/SiteReviews.php:124
+#: plugin/Commands/RegisterPostType.php:23, plugin/Controllers/MainController.php:791, plugin/Shortcodes/Buttons/SiteReviews.php:129
 msgid "Date"
 msgstr "Date"
 
@@ -704,7 +704,7 @@ msgstr "Author"
 msgid "Type"
 msgstr "Type"
 
-#: plugin/Controllers/MainController.php:226, plugin/Controllers/MainController.php:789, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:134, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:63, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:109
+#: plugin/Controllers/MainController.php:226, plugin/Controllers/MainController.php:789, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:139, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:63, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:109
 msgid "Rating"
 msgstr "Rating"
 
@@ -842,7 +842,7 @@ msgstr "Reviewer"
 msgid "IP Address"
 msgstr "IP Address"
 
-#: plugin/Controllers/MainController.php:796
+#: plugin/Controllers/MainController.php:796, plugin/Shortcodes/Buttons/SiteReviews.php:124
 msgid "Avatar"
 msgstr "Avatar"
 
@@ -912,7 +912,7 @@ msgstr "Your review cannot be submitted at this time."
 msgid "Your review cannot be submitted at this time. Please try again later."
 msgstr "Your review cannot be submitted at this time. Please try again later."
 
-#: plugin/Controllers/ReviewController.php:733, plugin/Html/Partials/Reviews.php:279
+#: plugin/Controllers/ReviewController.php:733, plugin/Html/Partials/Reviews.php:281
 msgid "No Title"
 msgstr "No Title"
 
@@ -1051,22 +1051,26 @@ msgid "Hide the review author?"
 msgstr "Hide the review author?"
 
 #: plugin/Widgets/SiteReviews.php:109, plugin/Shortcodes/Buttons/SiteReviews.php:125
+msgid "Hide the reviewer avatar if shown?"
+msgstr "Hide the reviewer avatar if shown?"
+
+#: plugin/Widgets/SiteReviews.php:110, plugin/Shortcodes/Buttons/SiteReviews.php:130
 msgid "Hide the review date?"
 msgstr "Hide the review date?"
 
-#: plugin/Widgets/SiteReviews.php:110, plugin/Shortcodes/Buttons/SiteReviews.php:130
+#: plugin/Widgets/SiteReviews.php:111, plugin/Shortcodes/Buttons/SiteReviews.php:135
 msgid "Hide the review excerpt?"
 msgstr "Hide the review excerpt?"
 
-#: plugin/Widgets/SiteReviews.php:111, plugin/Shortcodes/Buttons/SiteReviews.php:135
+#: plugin/Widgets/SiteReviews.php:112, plugin/Shortcodes/Buttons/SiteReviews.php:140
 msgid "Hide the review rating?"
 msgstr "Hide the review rating?"
 
-#: plugin/Widgets/SiteReviews.php:112, plugin/Shortcodes/Buttons/SiteReviews.php:140
+#: plugin/Widgets/SiteReviews.php:113, plugin/Shortcodes/Buttons/SiteReviews.php:145
 msgid "Hide the review response?"
 msgstr "Hide the review response?"
 
-#: plugin/Widgets/SiteReviews.php:113, plugin/Shortcodes/Buttons/SiteReviews.php:145
+#: plugin/Widgets/SiteReviews.php:114, plugin/Shortcodes/Buttons/SiteReviews.php:150
 msgid "Hide the review title?"
 msgstr "Hide the review title?"
 
@@ -1302,39 +1306,39 @@ msgstr "No reviews were found."
 msgid "Review of %s"
 msgstr "Review of %s"
 
-#: plugin/Html/Partials/Reviews.php:162
+#: plugin/Html/Partials/Reviews.php:164
 msgid "Page"
 msgstr "Page"
 
-#: plugin/Html/Partials/Reviews.php:166
+#: plugin/Html/Partials/Reviews.php:168
 msgid "Next &rarr;"
 msgstr "Next &rarr;"
 
-#: plugin/Html/Partials/Reviews.php:167
+#: plugin/Html/Partials/Reviews.php:169
 msgid "&larr; Previous"
 msgstr "&larr; Previous"
 
-#: plugin/Html/Partials/Reviews.php:193
+#: plugin/Html/Partials/Reviews.php:195
 msgid "Previous"
 msgstr "Previous"
 
-#: plugin/Html/Partials/Reviews.php:199
+#: plugin/Html/Partials/Reviews.php:201
 msgid "Next"
 msgstr "Next"
 
-#: plugin/Html/Partials/Reviews.php:238
+#: plugin/Html/Partials/Reviews.php:240
 msgid "Response from %s"
 msgstr "Response from %s"
 
-#: plugin/Html/Partials/Reviews.php:307
+#: plugin/Html/Partials/Reviews.php:309
 msgid "Show more"
 msgstr "Show more"
 
-#: plugin/Html/Partials/Reviews.php:308
+#: plugin/Html/Partials/Reviews.php:310
 msgid "Show less"
 msgstr "Show less"
 
-#: plugin/Html/Partials/Reviews.php:338
+#: plugin/Html/Partials/Reviews.php:340
 msgid "Site Reviews navigation"
 msgstr "Site Reviews navigation"
 
@@ -1478,11 +1482,11 @@ msgstr "Add custom CSS classes to the shortcode."
 msgid "Hide"
 msgstr "Hide"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:129
+#: plugin/Shortcodes/Buttons/SiteReviews.php:134
 msgid "Excerpt"
 msgstr "Excerpt"
 
-#: plugin/Shortcodes/Buttons/SiteReviews.php:139
+#: plugin/Shortcodes/Buttons/SiteReviews.php:144
 msgid "Response"
 msgstr "Response"
 

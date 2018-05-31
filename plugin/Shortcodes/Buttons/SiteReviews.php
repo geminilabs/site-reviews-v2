@@ -120,6 +120,11 @@ class SiteReviews extends Generator
 						'tooltip' => __( 'Hide the review author?', 'site-reviews' ),
 					],[
 						'type' => 'checkbox',
+						'name' => 'hide_avatar',
+						'text' => esc_html__( 'Avatar', 'site-reviews' ),
+						'tooltip' => __( 'Hide the reviewer avatar if shown?', 'site-reviews' ),
+					],[
+						'type' => 'checkbox',
 						'name' => 'hide_date',
 						'text' => esc_html__( 'Date', 'site-reviews' ),
 						'tooltip' => __( 'Hide the review date?', 'site-reviews' ),

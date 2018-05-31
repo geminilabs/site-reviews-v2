@@ -157,7 +157,7 @@ GLSR.shortcode.create = function( editor_id )
 GLSR.shortcode.normalize = function( data )
 {
 	var shortcodeHiddenFields = {
-		'site_reviews' : ['author','date','excerpt','rating','response','title'],
+		'site_reviews' : ['author','avatar','date','excerpt','rating','response','title'],
 		'site_reviews_form': ['email','name','terms','title'],
 		'site_reviews_summary': ['bars','rating','stars','summary'],
 	};
