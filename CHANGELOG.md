@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.15.7] = 2018-06-08
+
+### Fixed
+- Fixed a compatibility issue with [Page Builder by SiteOrigin](https://wordpress.org/plugins/siteorigin-panels/)
+
 ## [2.15.6] = 2018-05-31
 
 ### Added
