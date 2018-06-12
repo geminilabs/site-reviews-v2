@@ -559,53 +559,49 @@ msgid "Local"
 msgstr ""
 
 #: plugin/Strings.php:86
-msgctxt ":attribute is a placeholder and should not be translated."
-msgid "The :attribute must be accepted."
+msgid "This field must be accepted."
 msgstr ""
 
 #: plugin/Strings.php:87
-msgctxt ":attribute, :min, and :max are placeholders and should not be translated."
-msgid "The :attribute must be between :min and :max."
+msgctxt ":min, and :max are placeholders and should not be translated."
+msgid "This field must be between :min and :max."
 msgstr ""
 
 #: plugin/Strings.php:88
-msgctxt ":attribute, :min, and :max are placeholders and should not be translated."
-msgid "The :attribute must be between :min and :max characters."
+msgctxt ":min, and :max are placeholders and should not be translated."
+msgid "This field must be between :min and :max characters."
 msgstr ""
 
 #: plugin/Strings.php:89
-msgctxt ":attribute is a placeholder and should not be translated."
-msgid "The :attribute must be a valid email address."
+msgid "This must be a valid email address."
 msgstr ""
 
 #: plugin/Strings.php:90
-msgctxt ":attribute and :max are placeholders and should not be translated."
-msgid "The :attribute may not be greater than :max."
+msgctxt ":max is a placeholder and should not be translated."
+msgid "This field may not be greater than :max."
 msgstr ""
 
 #: plugin/Strings.php:91
-msgctxt ":attribute and :max are placeholders and should not be translated."
-msgid "The :attribute may not be greater than :max characters."
+msgctxt ":max is a placeholder and should not be translated."
+msgid "This field may not be greater than :max characters."
 msgstr ""
 
 #: plugin/Strings.php:92
-msgctxt ":attribute and :min are placeholders and should not be translated."
-msgid "The :attribute must be at least :min."
+msgctxt ":min is a placeholder and should not be translated."
+msgid "This field must be at least :min."
 msgstr ""
 
 #: plugin/Strings.php:93
-msgctxt ":attribute and :min are placeholders and should not be translated."
-msgid "The :attribute must be at least :min characters."
+msgctxt ":min is a placeholder and should not be translated."
+msgid "This field must be at least :min characters."
 msgstr ""
 
 #: plugin/Strings.php:94
-msgctxt ":attribute is a placeholder and should not be translated."
-msgid "The :attribute format is invalid."
+msgid "The format is invalid."
 msgstr ""
 
 #: plugin/Strings.php:95
-msgctxt ":attribute is a placeholder and should not be translated."
-msgid "The :attribute field is required."
+msgid "This field is required."
 msgstr ""
 
 #: plugin/Commands/RegisterPostType.php:23, plugin/Controllers/MainController.php:791, plugin/Shortcodes/Buttons/SiteReviews.php:129

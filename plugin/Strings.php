@@ -83,16 +83,16 @@ class Strings
 	public function validation( $key = null, $fallback = '' )
 	{
 		return $this->result( $key, $fallback, [
-			'accepted'        => _x( 'The :attribute must be accepted.', ':attribute is a placeholder and should not be translated.', 'site-reviews' ),
-			'between.numeric' => _x( 'The :attribute must be between :min and :max.', ':attribute, :min, and :max are placeholders and should not be translated.', 'site-reviews' ),
-			'between.string'  => _x( 'The :attribute must be between :min and :max characters.', ':attribute, :min, and :max are placeholders and should not be translated.', 'site-reviews' ),
-			'email'           => _x( 'The :attribute must be a valid email address.', ':attribute is a placeholder and should not be translated.', 'site-reviews' ),
-			'max.numeric'     => _x( 'The :attribute may not be greater than :max.', ':attribute and :max are placeholders and should not be translated.', 'site-reviews' ),
-			'max.string'      => _x( 'The :attribute may not be greater than :max characters.', ':attribute and :max are placeholders and should not be translated.', 'site-reviews' ),
-			'min.numeric'     => _x( 'The :attribute must be at least :min.', ':attribute and :min are placeholders and should not be translated.', 'site-reviews' ),
-			'min.string'      => _x( 'The :attribute must be at least :min characters.', ':attribute and :min are placeholders and should not be translated.', 'site-reviews' ),
-			'regex'           => _x( 'The :attribute format is invalid.', ':attribute is a placeholder and should not be translated.', 'site-reviews' ),
-			'required'        => _x( 'The :attribute field is required.', ':attribute is a placeholder and should not be translated.', 'site-reviews' ),
+			'accepted' => __( 'This field must be accepted.', 'site-reviews' ),
+			'between.numeric' => _x( 'This field must be between :min and :max.', ':min, and :max are placeholders and should not be translated.', 'site-reviews' ),
+			'between.string' => _x( 'This field must be between :min and :max characters.', ':min, and :max are placeholders and should not be translated.', 'site-reviews' ),
+			'email' => __( 'This must be a valid email address.', 'site-reviews' ),
+			'max.numeric' => _x( 'This field may not be greater than :max.', ':max is a placeholder and should not be translated.', 'site-reviews' ),
+			'max.string' => _x( 'This field may not be greater than :max characters.', ':max is a placeholder and should not be translated.', 'site-reviews' ),
+			'min.numeric' => _x( 'This field must be at least :min.', ':min is a placeholder and should not be translated.', 'site-reviews' ),
+			'min.string' => _x( 'This field must be at least :min characters.', ':min is a placeholder and should not be translated.', 'site-reviews' ),
+			'regex' => __( 'The format is invalid.', 'site-reviews' ),
+			'required' => __( 'This field is required.', 'site-reviews' ),
 		]);
 	}
 

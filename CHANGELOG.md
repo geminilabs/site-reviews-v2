@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.15.8] = 2018-06-12
+
+### Changed
+- Adjusted validation strings
+
 ## [2.15.7] = 2018-06-08
 
 ### Fixed

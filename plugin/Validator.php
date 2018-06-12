@@ -159,7 +159,7 @@ class Validator
 
 		$lowerRule = $this->snakeCase( $rule );
 
-		return $this->translator( $lowerRule, $rule, $attribute, $parameters );
+		return $this->translator( $lowerRule, $rule, $parameters );
 	}
 
 	/**
@@ -219,10 +219,7 @@ class Validator
 	{
 		$lowerRule = $this->snakeCase( $rule );
 		$type = $this->getAttributeType( $attribute );
-
-		$lowerRule .= ".{$type}";
-
-		return $this->translator( $lowerRule, $rule, $attribute, $parameters );
+		return $this->translator( $lowerRule.'.'.$type, $rule, $parameters );
 	}
 
 	/**
@@ -419,11 +416,10 @@ class Validator
 	 *
 	 * @param string $key
 	 * @param string $rule
-	 * @param string $attribute
 	 *
 	 * @return string|null
 	 */
-	protected function translator( $key, $rule, $attribute, array $parameters )
+	protected function translator( $key, $rule, array $parameters )
 	{
 		$strings = glsr_resolve( 'Strings' )->validation();
 
@@ -432,8 +428,6 @@ class Validator
 			: false;
 
 		if( !$message )return;
-
-		$message = str_replace( ':attribute', $attribute, $message );
 
 		if( method_exists( $this, $replacer = "replace{$rule}" )) {
 			$message = $this->$replacer( $message, $parameters );
