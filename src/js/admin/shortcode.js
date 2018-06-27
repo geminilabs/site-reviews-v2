@@ -1,9 +1,9 @@
-/* globals GLSR, site_reviews, tinymce, x */
+/* globals GLSR, jQuery, site_reviews, tinymce */
 /* jshint strict:false */
 
 GLSR.shortcode.close = function( el )
 {
-	var button = x(( el = el || '.glsr-mce-button' ));
+	var button = jQuery(( el = el || '.glsr-mce-button' ));
 
 	if( button.length ) {
 		button.removeClass( 'active' ).parent().find( '.glsr-mce-menu' ).hide();
@@ -12,14 +12,14 @@ GLSR.shortcode.close = function( el )
 
 GLSR.shortcode.open = function( el )
 {
-	x( el ).addClass( 'active' ).parent().find( '.glsr-mce-menu' ).show();
+	jQuery( el ).addClass( 'active' ).parent().find( '.glsr-mce-menu' ).show();
 };
 
 GLSR.shortcode.toggle = function( ev )
 {
 	ev.preventDefault();
 
-	if( x( this ).hasClass( 'active' ) ) {
+	if( jQuery( this ).hasClass( 'active' ) ) {
 		GLSR.shortcode.close( this );
 	}
 	else {
@@ -32,15 +32,15 @@ GLSR.shortcode.trigger = function( ev )
 	ev.preventDefault();
 
 	// GLSR.shortcode.current is used by scForm to trigger the correct popup
-	GLSR.shortcode.current = x( this ).attr( 'data-shortcode' );
+	GLSR.shortcode.current = jQuery( this ).attr( 'data-shortcode' );
 
 	if( !GLSR.shortcode.current )return;
 
 	if( !tinymce.get( window.wpActiveEditor ) ) {
 		// Quicktags Editor
-		if( !x( '#scTemp' ).length ) {
+		if( !jQuery( '#scTemp' ).length ) {
 
-			x( 'body' ).append( '<textarea id="scTemp" style="display: none;" />' );
+			jQuery( 'body' ).append( '<textarea id="scTemp" style="display: none;" />' );
 
 			tinymce.init({
 				mode     : "exact",
@@ -77,7 +77,7 @@ GLSR.shortcode.create = function( editor_id )
 		},
 	};
 
-	x.post( site_reviews.ajaxurl, data, function( response )
+	jQuery.post( site_reviews.ajaxurl, data, function( response )
 	{
 		if( !response.body )return;
 
@@ -184,7 +184,7 @@ GLSR.shortcode.normalize = function( data )
 			}
 		}
 
-		if( key === 'count' && !x.isNumeric( data[ key ] ) ) {
+		if( key === 'count' && !jQuery.isNumeric( data[ key ] ) ) {
 			data[ key ] = '';
 		}
 
@@ -200,7 +200,7 @@ GLSR.shortcode.normalize = function( data )
 
 GLSR.shortcode.destroy = function()
 {
-	var tmp = x( '#scTemp' );
+	var tmp = jQuery( '#scTemp' );
 
 	if( tmp.length ) {
 		tinymce.get( 'scTemp' ).remove();

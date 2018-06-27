@@ -1,12 +1,12 @@
-/* globals ajaxurl, GLSR, site_reviews, x */
+/* globals ajaxurl, GLSR, jQuery, site_reviews */
 /* jshint strict:false */
 
 GLSR.colorControls = function()
 {
-	if( typeof x.wp !== 'object' || typeof x.wp.wpColorPicker !== 'function' )return;
+	if( typeof jQuery.wp !== 'object' || typeof jQuery.wp.wpColorPicker !== 'function' )return;
 
-	x( document ).find( 'input[type="text"].color-picker-hex' ).each( function() {
-		var t = x( this );
+	jQuery( document ).find( 'input[type="text"].color-picker-hex' ).each( function() {
+		var t = jQuery( this );
 		var options = t.data( 'colorpicker' ) || {};
 		t.wpColorPicker( options );
 	});
@@ -14,8 +14,8 @@ GLSR.colorControls = function()
 
 GLSR.dismissNotices = function()
 {
-	x( '.notice.is-dismissible' ).each( function() {
-		var notice = x( this );
+	jQuery( '.notice.is-dismissible' ).each( function() {
+		var notice = jQuery( this );
 		notice.fadeTo( 100, 0, function() {
 			notice.slideUp( 100, function() {
 				notice.remove();
@@ -37,14 +37,14 @@ GLSR.insertNotices = function( notices )
 
 	if( !notices )return;
 
-	if( !x( '#glsr-notices' ).length ) {
-		x( '#message.notice' ).remove();
-		x( 'form#post' ).before( '<div id="glsr-notices" />' );
+	if( !jQuery( '#glsr-notices' ).length ) {
+		jQuery( '#message.notice' ).remove();
+		jQuery( 'form#post' ).before( '<div id="glsr-notices" />' );
 	}
 
-	x( '#glsr-notices' ).html( notices );
+	jQuery( '#glsr-notices' ).html( notices );
 
-	x( document ).trigger( 'wp-updates-notice-added' );
+	jQuery( document ).trigger( 'wp-updates-notice-added' );
 };
 
 GLSR.isUndefined = function( value )
@@ -85,7 +85,7 @@ GLSR.onChangeStatus = function( ev )
 
 	GLSR.postAjax( ev, request, function( response )
 	{
-		var el = x( ev.target );
+		var el = jQuery( ev.target );
 
 		el.closest( 'tr' ).removeClass( 'status-pending status-publish' ).addClass( response.class );
 		el.closest( 'td.column-title' ).find( 'strong' ).html( response.link );
@@ -102,13 +102,13 @@ GLSR.onClearLog = function( ev )
 	{
 		GLSR.insertNotices( response.notices );
 
-		x( '#log-file' ).val( response.log );
+		jQuery( '#log-file' ).val( response.log );
 	});
 };
 
 GLSR.onFieldChange = function()
 {
-	var depends = x( this ).closest( 'form' ).find( '[data-depends]' );
+	var depends = jQuery( this ).closest( 'form' ).find( '[data-depends]' );
 
 	if( !depends.length )return;
 
@@ -126,8 +126,8 @@ GLSR.onFieldChange = function()
 			if( 'checkbox' === type ) {
 				bool = !!this.checked;
 			}
-			else if( x.isArray( data.value ) ) {
-				bool = x.inArray( GLSR.normalizeValue( this.value ), GLSR.normalizeValues( data.value ) ) !== -1;
+			else if( jQuery.isArray( data.value ) ) {
+				bool = jQuery.inArray( GLSR.normalizeValue( this.value ), GLSR.normalizeValues( data.value ) ) !== -1;
 			}
 			else {
 				bool = GLSR.normalizeValue( data.value ) === GLSR.normalizeValue( this.value );
@@ -143,11 +143,11 @@ GLSR.onFieldChange = function()
 
 GLSR.pointers = function( pointer )
 {
-	x( pointer.target ).pointer({
+	jQuery( pointer.target ).pointer({
 		content: pointer.options.content,
 		position: pointer.options.position,
 		close: function() {
-			x.post( ajaxurl, {
+			jQuery.post( ajaxurl, {
 				pointer: pointer.id,
 				action: 'dismiss-wp-pointer',
 			});
@@ -156,8 +156,8 @@ GLSR.pointers = function( pointer )
 	.pointer( 'open' )
 	.pointer( 'sendToTop' );
 
-	x( document ).on( 'wp-window-resized', function() {
-		x( pointer.target ).pointer( 'reposition' );
+	jQuery( document ).on( 'wp-window-resized', function() {
+		jQuery( pointer.target ).pointer( 'reposition' );
 	});
 };
 
@@ -165,7 +165,7 @@ GLSR.postAjax = function( event, request, callback )
 {
 	event.preventDefault();
 
-	var el = x( event.target );
+	var el = jQuery( event.target );
 
 	if( el.is( ':disabled' ))return;
 
@@ -176,7 +176,7 @@ GLSR.postAjax = function( event, request, callback )
 
 	el.prop( 'disabled', true );
 
-	x.post( site_reviews.ajaxurl, data, function( response ) {
+	jQuery.post( site_reviews.ajaxurl, data, function( response ) {
 
 		if( typeof callback === 'function' ) {
 			callback( response );
@@ -201,7 +201,7 @@ GLSR.textareaResize = function( el )
 
 GLSR.toggleHiddenField = function( el, bool )
 {
-	var row = x( el ).closest( '.glsr-field' );
+	var row = jQuery( el ).closest( '.glsr-field' );
 
 	if( !row.length )return;
 

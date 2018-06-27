@@ -1,38 +1,38 @@
-/* globals GLSR, site_reviews, x */
+/* globals GLSR, jQuery, site_reviews */
 /* jshint strict:false */
 
 GLSR.pinned.events = function()
 {
-	var pinnedSelect = x( '#pinned-status-select' );
+	var pinnedSelect = jQuery( '#pinned-status-select' );
 
-	x( 'a.cancel-pinned-status' ).on( 'click', function( e ) {
+	jQuery( 'a.cancel-pinned-status' ).on( 'click', function( e ) {
 		e.preventDefault();
 		pinnedSelect.slideUp( 'fast' ).siblings( 'a.edit-pinned-status' ).show().focus();
-		pinnedSelect.find( 'select' ).val( x( '#hidden-pinned-status' ).val() === '0' ? 1 : 0 );
+		pinnedSelect.find( 'select' ).val( jQuery( '#hidden-pinned-status' ).val() === '0' ? 1 : 0 );
 	});
 
-	x( 'a.edit-pinned-status' ).on( 'click', function( e ) {
+	jQuery( 'a.edit-pinned-status' ).on( 'click', function( e ) {
 		e.preventDefault();
 		if( pinnedSelect.is( ':hidden' ) ) {
 			pinnedSelect.slideDown( 'fast', function() {
 				pinnedSelect.find( 'select' ).focus();
 			});
-			x( this ).hide();
+			jQuery( this ).hide();
 		}
 	});
 
-	x( 'a.save-pinned-status' ).on( 'click', function( e ) {
+	jQuery( 'a.save-pinned-status' ).on( 'click', function( e ) {
 		e.preventDefault();
 		pinnedSelect.slideUp( 'fast' ).siblings( 'a.edit-pinned-status' ).show().focus();
-		GLSR.pinned.save( x( this ) );
+		GLSR.pinned.save( jQuery( this ) );
 	});
 
-	x( 'table' ).on( 'click', 'td.sticky i', GLSR.pinned.onToggle );
+	jQuery( 'table' ).on( 'click', 'td.sticky i', GLSR.pinned.onToggle );
 };
 
 GLSR.pinned.onToggle = function()
 {
-	var el = x( this );
+	var el = jQuery( this );
 
 	var data = {
 		action: site_reviews.action,
@@ -42,7 +42,7 @@ GLSR.pinned.onToggle = function()
 		},
 	};
 
-	x.post( site_reviews.ajaxurl, data, function( response ) {
+	jQuery.post( site_reviews.ajaxurl, data, function( response ) {
 		if( response.pinned ) {
 			el.addClass( 'pinned' );
 		}
@@ -58,15 +58,15 @@ GLSR.pinned.save = function( el )
 		action: site_reviews.action,
 		request: {
 			action: 'toggle-pinned',
-			id:     x( '#post_ID' ).val(),
-			pinned: x( '#pinned-status' ).val(),
+			id:     jQuery( '#post_ID' ).val(),
+			pinned: jQuery( '#pinned-status' ).val(),
 		},
 	};
 
-	x.post( site_reviews.ajaxurl, data, function( response ) {
-		x( '#pinned-status' ).val( !response.pinned|0 );
-		x( '#hidden-pinned-status' ).val( response.pinned|0 );
-		x( '#pinned-status-text' ).text( response.pinned ? el.data( 'yes' ) : el.data( 'no' ) );
+	jQuery.post( site_reviews.ajaxurl, data, function( response ) {
+		jQuery( '#pinned-status' ).val( !response.pinned|0 );
+		jQuery( '#hidden-pinned-status' ).val( response.pinned|0 );
+		jQuery( '#pinned-status-text' ).text( response.pinned ? el.data( 'yes' ) : el.data( 'no' ) );
 
 		GLSR.insertNotices( response.notices );
 	});

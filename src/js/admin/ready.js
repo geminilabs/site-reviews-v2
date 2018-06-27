@@ -1,7 +1,7 @@
-/* globals GLSR, site_reviews_pointers, wp, x */
+/* globals GLSR, jQuery, site_reviews_pointers, wp */
 /* jshint strict:false */
 
-x( function()
+jQuery( function( x )
 {
 	var GLSR_fix = GLSR.getURLParameter( 'fix' );
 	var GLSR_textarea = x( '#contentdiv > textarea' );

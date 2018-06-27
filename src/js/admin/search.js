@@ -1,9 +1,9 @@
-/* globals _, GLSR, site_reviews, wp, x */
+/* globals _, GLSR, jQuery, site_reviews, wp */
 /* jshint strict:false */
 
 GLSR.search = function( el, options )
 {
-	this.el = Object.prototype.toString.call( el ) === "[object String]" ? x( el ) : el;
+	this.el = Object.prototype.toString.call( el ) === "[object String]" ? jQuery( el ) : el;
 	this.options = options;
 	this.searchTerm = null;
 	this.init();
@@ -30,7 +30,7 @@ GLSR.search.prototype =
 	/** @return void */
 	init: function()
 	{
-		this.options = x.extend( {}, this.defaults, this.options );
+		this.options = jQuery.extend( {}, this.defaults, this.options );
 		if( !this.el.length )return;
 		this.options.entriesEl = this.el.parent().find( this.options.selectorEntries );
 		this.options.resultsEl = this.el.find( this.options.selectorResults );
@@ -47,8 +47,8 @@ GLSR.search.prototype =
 	{
 		this.options.searchEl.on( 'input', _.debounce( this.onSearchInput.bind( this ), 500 ));
 		this.options.searchEl.on( 'keyup', this.onSearchKeyup.bind( this ));
-		x( document ).on( 'click', this.onDocumentClick.bind( this ));
-		x( document ).on( 'keydown', this.onDocumentKeydown.bind( this ));
+		jQuery( document ).on( 'click', this.onDocumentClick.bind( this ));
+		jQuery( document ).on( 'keydown', this.onDocumentKeydown.bind( this ));
 	},
 
 	/** @return void */
@@ -64,13 +64,13 @@ GLSR.search.prototype =
 		this.abort();
 		this.options.resultsEl.empty();
 		this.el.removeClass( 'is-active' );
-		x( 'body' ).removeClass( 'glsr-focus' );
+		jQuery( 'body' ).removeClass( 'glsr-focus' );
 	},
 
 	/** @return void */
 	displayResults: function( items )
 	{
-		x( 'body' ).addClass( 'glsr-focus' );
+		jQuery( 'body' ).addClass( 'glsr-focus' );
 		this.options.resultsEl.append( items );
 		this.options.resultsEl.children( 'span' ).on( 'click', this.onResultClick.bind( this ));
 	},
@@ -99,7 +99,7 @@ GLSR.search.prototype =
 	/** @return void */
 	onDocumentClick: function( ev )
 	{
-		if( x( ev.target ).find( this.el ).length && x( 'body' ).hasClass( 'glsr-focus' )) {
+		if( jQuery( ev.target ).find( this.el ).length && jQuery( 'body' ).hasClass( 'glsr-focus' )) {
 			this.clearResults();
 		}
 	},
@@ -194,7 +194,7 @@ GLSR.search.prototype.deleteEntry = function( index )
 	var search = this;
 	row.find( 'td' ).css({ backgroundColor:'#faafaa' });
 	row.fadeOut( 350, function() {
-		x( this ).remove();
+		jQuery( this ).remove();
 		search.options.results = {};
 		search.reindexRows();
 		search.setVisibility();
@@ -211,7 +211,7 @@ GLSR.search.prototype.makeSortable = function()
 			ui.placeholder.height( ui.helper[0].scrollHeight );
 		},
 		sort: function( ev, ui ) {
-			var top = ev.pageY - x( this ).offsetParent().offset().top - ( ui.helper.outerHeight( true ) / 2 );
+			var top = ev.pageY - jQuery( this ).offsetParent().offset().top - ( ui.helper.outerHeight( true ) / 2 );
 			ui.helper.css({
 				top: top + 'px',
 			});
@@ -222,7 +222,7 @@ GLSR.search.prototype.makeSortable = function()
 GLSR.search.prototype.onEntryDelete = function( ev )
 {
 	ev.preventDefault();
-	this.deleteEntry( x( ev.target ).closest( 'tr' ).index() );
+	this.deleteEntry( jQuery( ev.target ).closest( 'tr' ).index() );
 };
 
 GLSR.search.prototype.onUnassign = function( ev )
@@ -232,7 +232,7 @@ GLSR.search.prototype.onUnassign = function( ev )
 	this.el.find( 'input#assigned_to' ).val( '' );
 	assigned.find( 'a' ).css({ color:'#c00' });
 	assigned.fadeOut( 'fast', function() {
-		x( this ).html( '' ).show();
+		jQuery( this ).html( '' ).show();
 	});
 };
 
@@ -241,8 +241,8 @@ GLSR.search.prototype.reindexRows = function()
 	var search = this;
 	this.options.exclude = [];
 	this.options.entriesEl.children( 'tr' ).each( function( index ) {
-		x( this ).find( '.glsr-string-td2' ).children().filter( ':input' ).each( function() {
-			var input = x( this );
+		jQuery( this ).find( '.glsr-string-td2' ).children().filter( ':input' ).each( function() {
+			var input = jQuery( this );
 			var name = input.attr( 'name' ).replace( /\[\d+\]/i, '[' + index + ']' );
 			input.attr( 'name', name );
 			if( input.is( '[data-id]' )) {

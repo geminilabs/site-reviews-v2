@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.15.9] = 2018-06-27
+
+### Fixed
+- Fixed a possible jQuery conflict with other plugins
+
 ## [2.15.8] = 2018-06-12
 
 ### Changed
