@@ -15,24 +15,32 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: activate.php:44
-msgid "The Site Reviews plugin was deactivated."
+#: activate.php:96
+msgid "The %s plugin was deactivated."
 msgstr ""
 
-#: activate.php:49
-msgid "Sorry, this plugin requires PHP version 5.4 or greater in order to work properly."
+#: activate.php:97
+msgid "This plugin requires %s or greater in order to work properly."
 msgstr ""
 
-#: activate.php:50
+#: activate.php:98
 msgid "Please contact your hosting provider or server administrator to upgrade the version of PHP on your server (your server is running PHP version %s), or try to find an alternative plugin."
 msgstr ""
 
-#: activate.php:56
-msgid "Sorry, this plugin requires WordPress version 4.0.0 or greater in order to work properly."
+#: activate.php:99
+msgid "PHP version"
 msgstr ""
 
-#: activate.php:57
+#: activate.php:100
+msgid "WordPress version"
+msgstr ""
+
+#: activate.php:101
 msgid "Update WordPress"
+msgstr ""
+
+#: activate.php:102
+msgid "You can use the %s plugin to restore %s to the previous version."
 msgstr ""
 
 #: plugin/Database.php:346

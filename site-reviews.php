@@ -7,7 +7,7 @@
  * Plugin Name: Site Reviews
  * Plugin URI:  https://wordpress.org/plugins/site-reviews
  * Description: Receive and display site reviews
- * Version:     2.15.9
+ * Version:     2.15.10
  * Author:      Paul Ryley
  * Author URI:  https://profiles.wordpress.org/pryley#content-plugins
  * License:     GPL2
@@ -18,13 +18,17 @@
 
 defined( 'WPINC' ) || die;
 
-require_once __DIR__ . '/activate.php';
+if( !class_exists( 'GL_Plugin_Check_v3' )) {
+	require_once __DIR__.'/activate.php';
+}
+if( !(new GL_Plugin_Check_v3(
+	__FILE__,
+	array( 'php' => '5.4.0', 'wordpress' => '4.0' )
+))->canProceed() )return;
 
-if( !glsr_version_check() )return;
-
-require_once __DIR__ . '/autoload.php';
-require_once __DIR__ . '/compatibility.php';
-require_once __DIR__ . '/helpers.php';
+require_once __DIR__.'/autoload.php';
+require_once __DIR__.'/compatibility.php';
+require_once __DIR__.'/helpers.php';
 
 use GeminiLabs\SiteReviews\App;
 use GeminiLabs\SiteReviews\Providers\MainProvider;

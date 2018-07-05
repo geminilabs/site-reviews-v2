@@ -1,72 +1,143 @@
 <?php
 
-/**
- * @package   GeminiLabs\SiteReviews
- * @copyright Copyright (c) 2016, Paul Ryley
- * @license   GPLv3
- * @since     1.0.0
- * -------------------------------------------------------------------------------------------------
- */
-
 defined( 'WPINC' ) || die;
 
-if( !function_exists( 'glsr_version_check' )) {
-	function glsr_version_check( $returnArray = false ) {
-		global $wp_version;
-		$php = version_compare( PHP_VERSION, '5.4.0', '<' );
-		$wordpress = version_compare( $wp_version, '4.0', '<' );
-		return !$returnArray
-			? !( $php || $wordpress )
-			: array( 'php' => $php, 'wordpress' => $wordpress );
-	}
-}
+/**
+ * Check for minimum system requirments on plugin activation
+ * @version 3.0.0
+ */
+class GL_Plugin_Check_v3
+{
+	const MIN_PHP_VERSION = '5.6.0';
+	const MIN_WORDPRESS_VERSION = '4.7.0';
 
-if( !function_exists( 'glsr_deactivate_plugin' )) {
-	function glsr_deactivate_plugin( $plugin )
+	/**
+	 * @var string
+	 */
+	protected $file;
+
+	/**
+	 * @var array
+	 */
+	protected $versions;
+
+	/**
+	 * @param string $file
+	 */
+	public function __construct( $file, array $versions = array() )
 	{
-		$check = glsr_version_check( true );
+		$this->file = realpath( $file );
+		$this->versions = wp_parse_args( $versions, array(
+			'php' => static::MIN_PHP_VERSION,
+			'wordpress' => static::MIN_WORDPRESS_VERSION,
+		));
+	}
 
-		if( !$check['php'] && !$check['wordpress'] )return;
-
-		$plugin_name = plugin_basename( dirname( __FILE__ ) . '/site-reviews.php' );
-
-		if( $plugin == $plugin_name ) {
-			$paged  = filter_input( INPUT_GET, 'paged' );
-			$s      = filter_input( INPUT_GET, 's' );
-			$status = filter_input( INPUT_GET, 'plugin_status' );
-
-			wp_safe_redirect( self_admin_url( sprintf( 'plugins.php?plugin_status=%s&paged=%s&s=%s', $status, $paged, $s )));
-			exit;
+	/**
+	 * @return bool
+	 */
+	public function canProceed()
+	{
+		if( $this->isValid() ) {
+			return true;
 		}
+		add_action( 'activated_plugin', array( $this, 'deactivate' ));
+		add_action( 'admin_notices', array( $this, 'deactivate' ));
+		return false;
+	}
 
-		deactivate_plugins( $plugin_name );
+	/**
+	 * @return bool
+	 */
+	public function isPhpValid()
+	{
+		return !version_compare( PHP_VERSION, $this->versions['php'], '<' );
+	}
 
-		$title = __( 'The Site Reviews plugin was deactivated.', 'site-reviews' );
-		$msg_1 = '';
-		$msg_2 = '';
+	/**
+	 * @return bool
+	 */
+	public function isValid()
+	{
+		return $this->isPhpValid() && $this->isWpValid();
+	}
 
-		if( $check['php'] ) {
-			$msg_1 = __( 'Sorry, this plugin requires PHP version 5.4 or greater in order to work properly.', 'site-reviews' );
-			$msg_2 = __( 'Please contact your hosting provider or server administrator to upgrade the version of PHP on your server (your server is running PHP version %s), or try to find an alternative plugin.', 'site-reviews' );
-			$msg_2 = sprintf( $msg_2, PHP_VERSION );
+	/**
+	 * @return bool
+	 */
+	public function isWpValid()
+	{
+		global $wp_version;
+		return !version_compare( $wp_version, $this->versions['wordpress'], '<' );
+	}
+
+	/**
+	 * @param string $plugin
+	 * @return void
+	 */
+	public function deactivate( $plugin )
+	{
+		if( $this->isValid() )return;
+		$pluginSlug = plugin_basename( $this->file );
+		if( $plugin == $pluginSlug ) {
+			$this->redirect(); //exit
 		}
+		$pluginData = get_file_data( $this->file, array( 'name' => 'Plugin Name' ), 'plugin' );
+		deactivate_plugins( $pluginSlug );
+		$this->printNotice( $pluginData['name'] );
+	}
 
-		// WordPress check overrides the PHP check
-		if( $check['wordpress'] ) {
-			$msg_1 = __( 'Sorry, this plugin requires WordPress version 4.0.0 or greater in order to work properly.', 'site-reviews' );
-			$msg_2 = sprintf( '<a href="%s">%s</a>', admin_url( 'update-core.php' ), __( 'Update WordPress', 'site-reviews' ));
-		}
-
-		printf( '<div id="message" class="notice notice-error error is-dismissible"><p><strong>%s</strong></p><p>%s</p><p>%s</p></div>',
-			$title,
-			$msg_1,
-			$msg_2
+	/**
+	 * @return array
+	 */
+	protected function getMessages()
+	{
+		return array(
+			__( 'The %s plugin was deactivated.', 'site-reviews' ),
+			__( 'This plugin requires %s or greater in order to work properly.', 'site-reviews' ),
+			__( 'Please contact your hosting provider or server administrator to upgrade the version of PHP on your server (your server is running PHP version %s), or try to find an alternative plugin.', 'site-reviews' ),
+			__( 'PHP version', 'site-reviews' ),
+			__( 'WordPress version', 'site-reviews' ),
+			__( 'Update WordPress', 'site-reviews' ),
+			__( 'You can use the %s plugin to restore %s to the previous version.', 'site-reviews' ),
 		);
 	}
-}
 
-// PHP >= 5.4.0 and WordPress version >= 4.0.0 check
-if( !glsr_version_check() ) {
-	add_action( 'activated_plugin', 'glsr_deactivate_plugin' );
-	add_action( 'admin_notices', 'glsr_deactivate_plugin' );
+	/**
+	 * @param string $pluginName
+	 * @return void
+	 */
+	protected function printNotice( $pluginName )
+	{
+		$noticeTemplate = '<div id="message" class="notice notice-error error is-dismissible"><p><strong>%s</strong></p><p>%s</p><p>%s</p></div>';
+		$messages = $this->getMessages();
+		$rollbackMessage = sprintf( '<strong>'.$messages[6].'</strong>', '<a href="https://wordpress.org/plugins/wp-rollback/">WP Rollback</a>', $pluginName );
+		if( !$this->isPhpValid() ) {
+			printf( $noticeTemplate,
+				sprintf( $messages[0], $pluginName ),
+				sprintf( $messages[1], $messages[3].' '.$this->versions['php'] ),
+				sprintf( $messages[2], PHP_VERSION ).'</p><p>'.$rollbackMessage
+			);
+		}
+		else if( !$this->isWpValid() ) {
+			printf( $noticeTemplate,
+				sprintf( $messages[0], $pluginName ),
+				sprintf( $messages[1], $messages[4].' '.$this->versions['wordpress'] ),
+				$rollbackMessage.'</p><p>'.sprintf( '<a href="%s">%s</a>', admin_url( 'update-core.php' ), $messages[5] )
+			);
+		}
+	}
+
+	/**
+	 * @return void
+	 */
+	protected function redirect()
+	{
+		wp_safe_redirect( self_admin_url( sprintf( 'plugins.php?plugin_status=%s&paged=%s&s=%s',
+			filter_input( INPUT_GET, 'plugin_status' ),
+			filter_input( INPUT_GET, 'paged' ),
+			filter_input( INPUT_GET, 's' )
+		)));
+		exit;
+	}
 }

@@ -2,16 +2,6 @@
 
 All proposed features are subject to change and sorted alphabetically rather than in odrer of development.
 
-## Proposed v2 features
-- [x] Add a Honeypot to the submission form
-- [x] Ajax pagination
-- [x] Autocomplete "assign to ID" field for reviews
-- [x] Bayesian calculation for page ranking based on assigned reviews
-- [x] Blacklist
-- [x] Bulk assign post_id to reviews
-- [x] Integrate with Akismet to provide spam-validation
-- [x] Store the bayesian ranking to posts/pages with assigned reviews (can be used for query sorting)
-
 ## Proposed v3 features
 - [ ] Clickable summary bars for filtering
 - [ ] Custom importer to correctly map assigned post_ids @addon

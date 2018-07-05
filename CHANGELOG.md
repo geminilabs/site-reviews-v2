@@ -18,6 +18,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.15.10] = 2018-07-05
+
+### Changed
+- Disabaled the nonce ajax check from the submission form if the user is not logged in. This should solve some conflicts with other plugins and themes which perform custom caching or speed optimizations
+- Updated the activation check in Site Reviews which checks for minimum system requirements
+
 ## [2.15.9] = 2018-06-27
 
 ### Fixed
