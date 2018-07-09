@@ -97,7 +97,7 @@ class EnqueueAssets
 			wp_enqueue_script(
 				$command->handle,
 				$command->url.'js/site-reviews.js',
-				['jquery'],
+				[],
 				$command->version,
 				true
 			);
