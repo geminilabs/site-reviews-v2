@@ -5,7 +5,7 @@ Tags: best reviews, business ratings, business reviews, curated reviews, moderat
 Requires at least: 4.0.0
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.15.10
+Stable tag: 2.15.11
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,8 +140,11 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 
 == Changelog ==
 
+= 2.15.11 (2018-07-09) =
+- Fixed a compatibility issue with [Speed Booster Pack](https://wordpress.org/plugins/speed-booster-pack/)
+
 = 2.15.10 (2018-07-05) =
-- Disabaled the nonce ajax check from the submission form if the user is not logged in. This should solve some conflicts with other plugins and themes which perform custom caching or speed optimizations
+- Disabled the nonce ajax check from the submission form if the user is not logged in. This should solve some conflicts with other plugins and themes which perform custom caching or speed optimizations
 - Updated the activation check in Site Reviews which checks for minimum system requirements
 
 = 2.15.9 (2018-06-27) =
