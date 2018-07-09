@@ -356,10 +356,21 @@ GLSR.on( 'click', '.glsr-field [type="submit"]', function()
 
 GLSR.on( 'click', '.glsr-ajax-navigation a', GLSR.onClickPagination );
 
-GLSR.ready( function()
-{
+GLSR.init = function() {
 	GLSR.setDirection();
 	GLSR.createExceprts();
 	GLSR.createStarRatings();
-});
+};
 
+GLSR.onLoaded = function() {
+	document.removeEventListener( 'DOMContentLoaded', GLSR.onLoaded );
+	window.removeEventListener( 'load', GLSR.onLoaded );
+	GLSR.init();
+};
+
+if( document.readyState === "complete" || ( document.readyState !== "loading" && !document.documentElement.doScroll )) {
+	window.setTimeout( GLSR.init );
+} else {
+	document.addEventListener( 'DOMContentLoaded', GLSR.onLoaded );
+	window.addEventListener( 'load', GLSR.onLoaded );
+}

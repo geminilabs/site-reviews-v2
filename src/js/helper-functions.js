@@ -159,26 +159,6 @@ GLSR.postAjax = function( url, data, success ) {
 	return xhr;
 };
 
-GLSR.ready = function( fn ) {
-	if( typeof fn !== "function" )return;
-	// in case the document is already rendered
-	if( document.readyState !== 'loading' ) {
-		fn();
-	}
-	// modern browsers
-	else if( document.addEventListener ) {
-		document.addEventListener( 'DOMContentLoaded', fn );
-	}
-	// IE <= 8
-	else {
-		document.attachEvent( 'onreadystatechange', function() {
-			if( document.readyState === 'complete' ) {
-				fn();
-			}
-		});
-	}
-};
-
 GLSR.removeClass = function( el, className ) {
 	if( el.classList ) {
 		el.classList.remove( className );
