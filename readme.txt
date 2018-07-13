@@ -5,7 +5,7 @@ Tags: best reviews, business ratings, business reviews, curated reviews, moderat
 Requires at least: 4.0.0
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.16.0
+Stable tag: 2.16.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,8 +140,9 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 
 == Changelog ==
 
-= 2.16.0 (2018-07-12) =
+= 2.16.1 (2018-07-14) =
 - Added additional schema settings for LocalBusiness and Product
+- Fixed star rating control on some mobile devices
 
 = 2.15.11 (2018-07-09) =
 - Fixed a compatibility issue with [Speed Booster Pack](https://wordpress.org/plugins/speed-booster-pack/)
