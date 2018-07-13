@@ -1,6 +1,6 @@
 <?php
 
-namespace GeminiLabs\SchemaOrg\Exceptions;
+namespace GeminiLabs\SiteReviews\Schema\Exceptions;
 
 use Exception;
 

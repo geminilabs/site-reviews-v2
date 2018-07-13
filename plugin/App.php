@@ -31,6 +31,8 @@ final class App extends Container
 	const TAXONOMY = 'site-review-category';
 	const PAGED_QUERY_VAR = 'reviews-page';
 
+	public $schemas = [];
+
 	protected $defaults;
 	protected $file;
 	protected $id;

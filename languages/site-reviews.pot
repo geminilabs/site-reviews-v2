@@ -93,11 +93,11 @@ msgid_plural "%s years ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugin/Settings.php:161, plugin/Settings.php:258, plugin/Settings.php:468, plugin/Settings.php:572
+#: plugin/Settings.php:161, plugin/Settings.php:258, plugin/Settings.php:516, plugin/Settings.php:620
 msgid "Save Settings"
 msgstr ""
 
-#: plugin/Settings.php:167, plugin/Settings.php:554
+#: plugin/Settings.php:167, plugin/Settings.php:602
 msgid "Require approval"
 msgstr ""
 
@@ -246,7 +246,7 @@ msgid "Rich Snippets (schema.org)"
 msgstr ""
 
 #: plugin/Settings.php:325
-msgid "Review snippets appear in Google Search results and include the star rating and other summary info from your reviews."
+msgid "The JSON-LD schema appears in Google's search results and shows the star rating and other information about your reviews. If the schema has been enabled in your shortcodes, you can use Google's <a href=\"https://search.google.com/structured-data/testing-tool\">Structured Data Testing Tool</a> to test your pages for valid schema data. You may override any of these options on a per-post/page basis by using its Custom Field name and adding a custom value using the <a href=\"https://codex.wordpress.org/Using_Custom_Fields#Usage\">Custom Fields</a> metabox."
 msgstr ""
 
 #: plugin/Settings.php:331
@@ -266,207 +266,247 @@ msgid "Custom"
 msgstr ""
 
 #: plugin/Settings.php:338
-msgid "This is the default schema type for the item being reviewed. You can override this option on a per-post/page basis by adding a %s metadata value using %s."
+msgid "Custom Field name: <code>schema_type</code>"
 msgstr ""
 
-#: plugin/Settings.php:340, plugin/Settings.php:369, plugin/Settings.php:394, plugin/Settings.php:419, plugin/Settings.php:444
-msgid "Custom Fields"
-msgstr ""
-
-#: plugin/Settings.php:347
+#: plugin/Settings.php:344
 msgid "Custom Schema Type"
 msgstr ""
 
-#: plugin/Settings.php:352
-msgid "Google supports review ratings for the following schema content types: Local businesses, Movies, Books, Music, and Products. %s"
-msgstr ""
-
-#: plugin/Settings.php:353
+#: plugin/Settings.php:348
 msgid "View more information on schema types here."
 msgstr ""
 
-#: plugin/Settings.php:360
+#: plugin/Settings.php:354
 msgid "Default Name"
 msgstr ""
 
-#: plugin/Settings.php:363
+#: plugin/Settings.php:357
 msgid "Use the assigned or current page title"
 msgstr ""
 
-#: plugin/Settings.php:364
+#: plugin/Settings.php:358
 msgid "Enter a custom name"
 msgstr ""
 
-#: plugin/Settings.php:365
+#: plugin/Settings.php:359
 msgid "Do not set a default name"
 msgstr ""
 
-#: plugin/Settings.php:367
-msgid "This is the default name of the item being reviewed. You can override this option on a per-post/page basis by adding a %s metadata value using %s."
+#: plugin/Settings.php:361
+msgid "Custom Field name: <code>schema_name</code>"
 msgstr ""
 
-#: plugin/Settings.php:376
+#: plugin/Settings.php:367
 msgid "Custom Name"
 msgstr ""
 
-#: plugin/Settings.php:385
+#: plugin/Settings.php:376
 msgid "Default Description"
 msgstr ""
 
-#: plugin/Settings.php:388
+#: plugin/Settings.php:379
 msgid "Use the assigned or current page excerpt"
 msgstr ""
 
-#: plugin/Settings.php:389
+#: plugin/Settings.php:380
 msgid "Enter a custom description"
 msgstr ""
 
-#: plugin/Settings.php:390
+#: plugin/Settings.php:381
 msgid "Do not set a default description"
 msgstr ""
 
-#: plugin/Settings.php:392
-msgid "This is the default description for the item being reviewed. You can override this option on a per-post/page basis by adding a %s metadata value using %s."
+#: plugin/Settings.php:383
+msgid "Custom Field name: <code>schema_description</code>"
 msgstr ""
 
-#: plugin/Settings.php:401
+#: plugin/Settings.php:389
 msgid "Custom Description"
 msgstr ""
 
-#: plugin/Settings.php:410
+#: plugin/Settings.php:398
 msgid "Default URL"
 msgstr ""
 
-#: plugin/Settings.php:413
+#: plugin/Settings.php:401
 msgid "Use the assigned or current page URL"
 msgstr ""
 
-#: plugin/Settings.php:414
+#: plugin/Settings.php:402
 msgid "Enter a custom URL"
 msgstr ""
 
-#: plugin/Settings.php:415
+#: plugin/Settings.php:403
 msgid "Do not set a default URL"
 msgstr ""
 
-#: plugin/Settings.php:417
-msgid "This is the default URL for the item being reviewed. You can override this option on a per-post/page basis by adding a %s metadata value using %s."
+#: plugin/Settings.php:405
+msgid "Custom Field name: <code>schema_url</code>"
 msgstr ""
 
-#: plugin/Settings.php:426
+#: plugin/Settings.php:411
 msgid "Custom URL"
 msgstr ""
 
-#: plugin/Settings.php:435
+#: plugin/Settings.php:420
 msgid "Default Image"
 msgstr ""
 
-#: plugin/Settings.php:438
+#: plugin/Settings.php:423
 msgid "Use the featured image of the assigned or current page"
 msgstr ""
 
-#: plugin/Settings.php:439
+#: plugin/Settings.php:424
 msgid "Enter a custom image URL"
 msgstr ""
 
-#: plugin/Settings.php:440
+#: plugin/Settings.php:425
 msgid "Do not set a default image"
 msgstr ""
 
-#: plugin/Settings.php:442
-msgid "This is the default image for the item being reviewed. You can override this option on a per-post/page basis by adding a %s metadata value using %s."
+#: plugin/Settings.php:427
+msgid "Custom Field name: <code>schema_image</code>"
 msgstr ""
 
-#: plugin/Settings.php:451
+#: plugin/Settings.php:433
 msgid "Custom Image URL"
 msgstr ""
 
-#: plugin/Settings.php:474
-msgid "Required Fields"
+#: plugin/Settings.php:442
+msgid "Address"
 msgstr ""
 
-#: plugin/Settings.php:477, plugin/Commands/RegisterPostType.php:22, plugin/Widgets/SiteReviews.php:37, plugin/Widgets/SiteReviewsForm.php:41, plugin/Shortcodes/Buttons/SiteReviews.php:55, plugin/Shortcodes/Buttons/SiteReviews.php:149, plugin/Shortcodes/Buttons/SiteReviewsForm.php:43, plugin/Shortcodes/Buttons/SiteReviewsForm.php:90, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:53
-msgid "Title"
+#: plugin/Settings.php:447
+msgid "Custom Field name: <code>schema_address</code>"
 msgstr ""
 
-#: plugin/Settings.php:478, plugin/Controllers/MainController.php:212
-msgid "Review"
+#: plugin/Settings.php:453
+msgid "Telephone Number"
 msgstr ""
 
-#: plugin/Settings.php:479, plugin/Controllers/MainController.php:793, plugin/Shortcodes/Buttons/SiteReviewsForm.php:80
-msgid "Name"
+#: plugin/Settings.php:458
+msgid "Custom Field name: <code>schema_telephone</code>"
 msgstr ""
 
-#: plugin/Settings.php:480, plugin/Controllers/MainController.php:794, plugin/Shortcodes/Buttons/SiteReviewsForm.php:75
-msgid "Email"
+#: plugin/Settings.php:464
+msgid "Price Range"
 msgstr ""
 
-#: plugin/Settings.php:487
-msgid "Enable Akismet Integration"
+#: plugin/Settings.php:469
+msgid "Custom Field name: <code>schema_pricerange</code>"
 msgstr ""
 
-#: plugin/Settings.php:489
-msgid "the %s integration provides spam-filtering for your reviews. In order for this setting to have any affect, you will need to first install and activate the Akismet plugin and set up a WordPress.com API key."
+#: plugin/Settings.php:475
+msgid "Low Price"
 msgstr ""
 
-#: plugin/Settings.php:490
-msgid "Akismet plugin"
+#: plugin/Settings.php:480
+msgid "Custom Field name: <code>schema_lowprice</code>"
+msgstr ""
+
+#: plugin/Settings.php:486
+msgid "High Price"
+msgstr ""
+
+#: plugin/Settings.php:491
+msgid "Custom Field name: <code>schema_highprice</code>"
 msgstr ""
 
 #: plugin/Settings.php:497
+msgid "Price Currency"
+msgstr ""
+
+#: plugin/Settings.php:502
+msgid "Custom Field name: <code>schema_pricecurrency</code>"
+msgstr ""
+
+#: plugin/Settings.php:522
+msgid "Required Fields"
+msgstr ""
+
+#: plugin/Settings.php:525, plugin/Commands/RegisterPostType.php:22, plugin/Widgets/SiteReviews.php:37, plugin/Widgets/SiteReviewsForm.php:41, plugin/Shortcodes/Buttons/SiteReviews.php:55, plugin/Shortcodes/Buttons/SiteReviews.php:149, plugin/Shortcodes/Buttons/SiteReviewsForm.php:43, plugin/Shortcodes/Buttons/SiteReviewsForm.php:90, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:53
+msgid "Title"
+msgstr ""
+
+#: plugin/Settings.php:526, plugin/Controllers/MainController.php:212
+msgid "Review"
+msgstr ""
+
+#: plugin/Settings.php:527, plugin/Controllers/MainController.php:793, plugin/Shortcodes/Buttons/SiteReviewsForm.php:80
+msgid "Name"
+msgstr ""
+
+#: plugin/Settings.php:528, plugin/Controllers/MainController.php:794, plugin/Shortcodes/Buttons/SiteReviewsForm.php:75
+msgid "Email"
+msgstr ""
+
+#: plugin/Settings.php:535
+msgid "Enable Akismet Integration"
+msgstr ""
+
+#: plugin/Settings.php:537
+msgid "the %s integration provides spam-filtering for your reviews. In order for this setting to have any affect, you will need to first install and activate the Akismet plugin and set up a WordPress.com API key."
+msgstr ""
+
+#: plugin/Settings.php:538
+msgid "Akismet plugin"
+msgstr ""
+
+#: plugin/Settings.php:545
 msgid "Invisible reCAPTCHA"
 msgstr ""
 
-#: plugin/Settings.php:499
+#: plugin/Settings.php:547
 msgid "Do not use reCAPTCHA"
 msgstr ""
 
-#: plugin/Settings.php:500
+#: plugin/Settings.php:548
 msgid "Use reCAPTCHA"
 msgstr ""
 
-#: plugin/Settings.php:501
+#: plugin/Settings.php:549
 msgctxt "plugin name"
 msgid "Use 3rd-party plugin: Invisible reCaptcha"
 msgstr ""
 
-#: plugin/Settings.php:503
+#: plugin/Settings.php:551
 msgid "Invisible reCAPTCHA is a free anti-spam service from Google. To use it, you will need to %s for an API key pair for your site. If you are already using a reCAPTCHA plugin listed here, please select it; otherwise choose \"Use reCAPTCHA\"."
 msgstr ""
 
-#: plugin/Settings.php:504
+#: plugin/Settings.php:552
 msgid "sign up"
 msgstr ""
 
-#: plugin/Settings.php:511
+#: plugin/Settings.php:559
 msgid "Site Key"
 msgstr ""
 
-#: plugin/Settings.php:520
+#: plugin/Settings.php:568
 msgid "Site Secret"
 msgstr ""
 
-#: plugin/Settings.php:529
+#: plugin/Settings.php:577
 msgid "Badge Position"
 msgstr ""
 
-#: plugin/Settings.php:543
+#: plugin/Settings.php:591
 msgid "Review Blacklist"
 msgstr ""
 
-#: plugin/Settings.php:544
+#: plugin/Settings.php:592
 msgid "When a review contains any of these words in its title, content, name, email, or IP address, it will be rejected. One word or IP address per line. It will match inside words, so \"press\" will match \"WordPress\"."
 msgstr ""
 
-#: plugin/Settings.php:552
+#: plugin/Settings.php:600
 msgid "Blacklist Action"
 msgstr ""
 
-#: plugin/Settings.php:555
+#: plugin/Settings.php:603
 msgid "Reject submission"
 msgstr ""
 
-#: plugin/Settings.php:557
+#: plugin/Settings.php:605
 msgid "Choose the action that should be taken when a review is blacklisted."
 msgstr ""
 

@@ -574,7 +574,7 @@ class MainController extends BaseController
 	 */
 	public function renderSchema()
 	{
-		echo $this->app->make( 'Schema' )->render();
+		$this->app->make( 'Schema' )->render();
 	}
 
 	/**

@@ -322,7 +322,7 @@ class Settings
 		$this->html->addfield( $formId, [
 			'type'  => 'heading',
 			'value' => __( 'Rich Snippets (schema.org)', 'site-reviews' ),
-			'desc'  => __( 'Review snippets appear in Google Search results and include the star rating and other summary info from your reviews.', 'site-reviews' ),
+			'desc'  => __( 'The JSON-LD schema appears in Google\'s search results and shows the star rating and other information about your reviews. If the schema has been enabled in your shortcodes, you can use Google\'s <a href="https://search.google.com/structured-data/testing-tool">Structured Data Testing Tool</a> to test your pages for valid schema data. You may override any of these options on a per-post/page basis by using its Custom Field name and adding a custom value using the <a href="https://codex.wordpress.org/Using_Custom_Fields#Usage">Custom Fields</a> metabox.', 'site-reviews' ),
 		]);
 
 		$this->addSetting( $formId, [
@@ -335,10 +335,7 @@ class Settings
 				'Product' => __( 'Product', 'site-reviews' ),
 				'custom' => __( 'Custom', 'site-reviews' ),
 			],
-			'desc' => sprintf( __( 'This is the default schema type for the item being reviewed. You can override this option on a per-post/page basis by adding a %s metadata value using %s.', 'site-reviews' ),
-				'<code>schema_type</code>',
-				sprintf( '<a href="https://codex.wordpress.org/Using_Custom_Fields#Usage">%s</a>', __( 'Custom Fields', 'site-reviews' ))
-			),
+			'desc' => __( 'Custom Field name: <code>schema_type</code>', 'site-reviews' ),
 		]);
 
 		$this->addSetting( $formId, [
@@ -348,10 +345,7 @@ class Settings
 			'depends' => [
 				'schema.type.default' => 'custom',
 			],
-			'desc' => sprintf(
-				__( 'Google supports review ratings for the following schema content types: Local businesses, Movies, Books, Music, and Products. %s', 'site-reviews' ),
-				sprintf( '<a href="https://schema.org/docs/schemas.html">%s</a>', __( 'View more information on schema types here.', 'site-reviews' ))
-			),
+			'desc' => sprintf( '<a href="https://schema.org/docs/schemas.html">%s</a>', __( 'View more information on schema types here.', 'site-reviews' )),
 		]);
 
 		$this->addSetting( $formId, [
@@ -364,10 +358,7 @@ class Settings
 				'custom' => __( 'Enter a custom name', 'site-reviews' ),
 				'' => __( 'Do not set a default name', 'site-reviews' ),
 			],
-			'desc' => sprintf( __( 'This is the default name of the item being reviewed. You can override this option on a per-post/page basis by adding a %s metadata value using %s.', 'site-reviews' ),
-				'<code>schema_name</code>',
-				sprintf( '<a href="https://codex.wordpress.org/Using_Custom_Fields#Usage">%s</a>', __( 'Custom Fields', 'site-reviews' ))
-			),
+			'desc' => __( 'Custom Field name: <code>schema_name</code>', 'site-reviews' ),
 		]);
 
 		$this->addSetting( $formId, [
@@ -389,10 +380,7 @@ class Settings
 				'custom' => __( 'Enter a custom description', 'site-reviews' ),
 				'' => __( 'Do not set a default description', 'site-reviews' ),
 			],
-			'desc' => sprintf( __( 'This is the default description for the item being reviewed. You can override this option on a per-post/page basis by adding a %s metadata value using %s.', 'site-reviews' ),
-				'<code>schema_description</code>',
-				sprintf( '<a href="https://codex.wordpress.org/Using_Custom_Fields#Usage">%s</a>', __( 'Custom Fields', 'site-reviews' ))
-			),
+			'desc' => __( 'Custom Field name: <code>schema_description</code>', 'site-reviews' ),
 		]);
 
 		$this->addSetting( $formId, [
@@ -414,10 +402,7 @@ class Settings
 				'custom' => __( 'Enter a custom URL', 'site-reviews' ),
 				'' => __( 'Do not set a default URL', 'site-reviews' ),
 			],
-			'desc' => sprintf( __( 'This is the default URL for the item being reviewed. You can override this option on a per-post/page basis by adding a %s metadata value using %s.', 'site-reviews' ),
-				'<code>schema_url</code>',
-				sprintf( '<a href="https://codex.wordpress.org/Using_Custom_Fields#Usage">%s</a>', __( 'Custom Fields', 'site-reviews' ))
-			),
+			'desc' => __( 'Custom Field name: <code>schema_url</code>', 'site-reviews' ),
 		]);
 
 		$this->addSetting( $formId, [
@@ -439,10 +424,7 @@ class Settings
 				'custom' => __( 'Enter a custom image URL', 'site-reviews' ),
 				'' => __( 'Do not set a default image', 'site-reviews' ),
 			],
-			'desc' => sprintf( __( 'This is the default image for the item being reviewed. You can override this option on a per-post/page basis by adding a %s metadata value using %s.', 'site-reviews' ),
-				'<code>schema_image</code>',
-				sprintf( '<a href="https://codex.wordpress.org/Using_Custom_Fields#Usage">%s</a>', __( 'Custom Fields', 'site-reviews' ))
-			),
+			'desc' => __( 'Custom Field name: <code>schema_image</code>', 'site-reviews' ),
 		]);
 
 		$this->addSetting( $formId, [
@@ -452,6 +434,72 @@ class Settings
 			'depends' => [
 				'schema.image.default' => 'custom',
 			],
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'text',
+			'name'  => 'schema.address',
+			'label' => __( 'Address', 'site-reviews' ),
+			'placeholder' => '60 29th Street #343, San Francisco, CA 94110, US',
+			'depends' => [
+				'schema.type.default' => 'LocalBusiness',
+			],
+			'desc' => __( 'Custom Field name: <code>schema_address</code>', 'site-reviews' ),
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'text',
+			'name'  => 'schema.telephone',
+			'label' => __( 'Telephone Number', 'site-reviews' ),
+			'placeholder' => '+1 (877) 273-3049',
+			'depends' => [
+				'schema.type.default' => 'LocalBusiness',
+			],
+			'desc' => __( 'Custom Field name: <code>schema_telephone</code>', 'site-reviews' ),
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'text',
+			'name'  => 'schema.pricerange',
+			'label' => __( 'Price Range', 'site-reviews' ),
+			'placeholder' => '$$-$$$',
+			'depends' => [
+				'schema.type.default' => 'LocalBusiness',
+			],
+			'desc' => __( 'Custom Field name: <code>schema_pricerange</code>', 'site-reviews' ),
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'text',
+			'name'  => 'schema.lowprice',
+			'label' => __( 'Low Price', 'site-reviews' ),
+			'placeholder' => '10.00',
+			'depends' => [
+				'schema.type.default' => 'Product',
+			],
+			'desc' => __( 'Custom Field name: <code>schema_lowprice</code>', 'site-reviews' ),
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'text',
+			'name'  => 'schema.highprice',
+			'label' => __( 'High Price', 'site-reviews' ),
+			'placeholder' => '1000.00',
+			'depends' => [
+				'schema.type.default' => 'Product',
+			],
+			'desc' => __( 'Custom Field name: <code>schema_highprice</code>', 'site-reviews' ),
+		]);
+
+		$this->addSetting( $formId, [
+			'type'  => 'text',
+			'name'  => 'schema.pricecurrency',
+			'label' => __( 'Price Currency', 'site-reviews' ),
+			'placeholder' => 'USD',
+			'depends' => [
+				'schema.type.default' => 'Product',
+			],
+			'desc' => __( 'Custom Field name: <code>schema_pricecurrency</code>', 'site-reviews' ),
 		]);
 	}
 

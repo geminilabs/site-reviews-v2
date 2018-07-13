@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.16.0] = 2018-07-12
+
+### Added
+- Added additional schema settings for LocalBusiness and Product
+
 ## [2.15.11] = 2018-07-09
 
 ### Fixed
