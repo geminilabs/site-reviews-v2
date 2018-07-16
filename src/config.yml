@@ -24,7 +24,9 @@ scripts:
     - src/js/helper-functions.js
     - src/js/site-reviews.js
 watch:
-  js: src/js/**/*.js
+  js:
+    - src/js/**/*.js
+    - '!src/js/polyfills.js'
   php:
     - plugin/**/*.php
     - views/**/*.php

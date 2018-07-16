@@ -41,6 +41,7 @@ class EnqueueAssets
 			]);
 		}
 		else {
+			$this->enqueuePolyfillService( $command );
 			$this->enqueuePublic( $command );
 		}
 		wp_localize_script( $command->handle, 'site_reviews', apply_filters( 'site-reviews/enqueue/localize', $variables ));
@@ -94,14 +95,30 @@ class EnqueueAssets
 			$this->enqueueRecaptchaScript( $command );
 		}
 		if( apply_filters( 'site-reviews/assets/js', true )) {
+			$dependencies = apply_filters( 'site-reviews/assets/polyfill', true )
+				? [$command->handle.'/polyfill']
+				: [];
+			$dependencies = apply_filters( 'site-reviews/enqueue/public/dependencies', $dependencies );
 			wp_enqueue_script(
 				$command->handle,
 				$command->url.'js/site-reviews.js',
-				[],
+				$dependencies,
 				$command->version,
 				true
 			);
 		}
+	}
+
+	/**
+	 * @return void
+	 */
+	public function enqueuePolyfillService( Command $command )
+	{
+		if( !apply_filters( 'site-reviews/assets/polyfill', true ))return;
+		wp_enqueue_script( $command->handle.'/polyfill', add_query_arg([
+			'features' => 'CustomEvent,Element.prototype.closest,Element.prototype.dataset,Event',
+			'flags' => 'gated',
+		], 'https://cdn.polyfill.io/v2/polyfill.js' ));
 	}
 
 	/**

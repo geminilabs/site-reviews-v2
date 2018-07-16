@@ -5,7 +5,7 @@ Tags: best reviews, business ratings, business reviews, curated reviews, moderat
 Requires at least: 4.0.0
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.16.2
+Stable tag: 2.16.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,8 +140,8 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 
 == Changelog ==
 
-= 2.16.2 (2018-07-16) =
-- Fixed IE 11 compatibility for the star rating control
+= 2.16.3 (2018-07-23) =
+- Fixed general compatibility with IE 11
 
 = 2.16.1 (2018-07-14) =
 - Added additional schema settings for LocalBusiness and Product
