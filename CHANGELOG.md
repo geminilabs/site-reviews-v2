@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.16.2] = 2018-07-16
+
+### Fixed
+- Fixed IE 11 compatibility for the star rating control
+
 ## [2.16.1] = 2018-07-14
 
 ### Added
