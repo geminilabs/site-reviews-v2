@@ -140,8 +140,9 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 
 == Changelog ==
 
-= 2.16.3 (2018-07-23) =
+= 2.16.3 (2018-08-06) =
 - Fixed general compatibility with IE 11
+- Fixed Slack notification links
 
 = 2.16.1 (2018-07-14) =
 - Added additional schema settings for LocalBusiness and Product

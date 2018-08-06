@@ -18,10 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
-## [2.16.3] = 2018-07-23
+## [2.16.3] = 2018-08-06
 
 ### Fixed
 - Fixed general compatibility with IE 11
+- Fixed Slack notification links
 
 ## [2.16.1] = 2018-07-14
 

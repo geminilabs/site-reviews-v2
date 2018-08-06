@@ -124,7 +124,7 @@ class SubmitReview
 			sprintf( $notificationSubject, $command->rating, $assignedToTitle )
 		);
 		$args = [
-			'notification_link' => esc_url( admin_url( sprintf( 'post.php?post=%s&action=edit', $post_id ))),
+			'notification_link' => admin_url( sprintf( 'post.php?post=%s&action=edit', $post_id )),
 			'notification_title' => $notificationTitle,
 			'notification_type' => $notificationType,
 		];
