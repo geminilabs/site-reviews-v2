@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## [2.16.3] = 2018-08-06
 
 ### Fixed
+- Fixed compatibility for WordPress 4.0-4.6
 - Fixed general compatibility with IE 11
 - Fixed Slack notification links
 

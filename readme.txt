@@ -141,6 +141,7 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 == Changelog ==
 
 = 2.16.3 (2018-08-06) =
+- Fixed compatibility for WordPress 4.0-4.6
 - Fixed general compatibility with IE 11
 - Fixed Slack notification links
 

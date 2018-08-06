@@ -69,3 +69,61 @@ if( !function_exists( 'wp_doing_ajax' )) {
 		return apply_filters( 'wp_doing_ajax', defined( 'DOING_AJAX' ) && DOING_AJAX );
 	}
 }
+
+// Wordpress 4.0-4.4 support
+if( !function_exists( 'wp_add_inline_script' )) {
+	function wp_add_inline_script( $handle, $data, $position = 'after' ) {
+		if( $handle != glsr_app()->id.'/google-recaptcha' )return;
+		echo '<script>'.$data.'</script>';
+	}
+}
+
+// Wordpress 4.0-4.6 support
+if( !function_exists( 'sanitize_textarea_field' )) {
+	function sanitize_textarea_field( $str ) {
+		$filtered = wp_check_invalid_utf8( $str );
+		if( strpos($filtered, '<') !== false ) {
+			$filtered = wp_pre_kses_less_than( $filtered );
+			$filtered = wp_strip_all_tags( $filtered, false );
+			$filtered = str_replace("<\n", "&lt;\n", $filtered);
+		}
+		$filtered = trim( $filtered );
+		$found = false;
+		while ( preg_match('/%[a-f0-9]{2}/i', $filtered, $match) ) {
+			$filtered = str_replace($match[0], '', $filtered);
+			$found = true;
+		}
+		if( $found ) {
+			$filtered = trim( preg_replace('/ +/', ' ', $filtered) );
+		}
+		return $filtered;
+	}
+}
+
+// Wordpress 4.0-4.3 support
+if( !function_exists( 'get_the_post_thumbnail_url' )) {
+	function get_the_post_thumbnail_url( $post = null, $size = 'post-thumbnail' ) {
+		$post_thumbnail_id = get_post_thumbnail_id( $post );
+		if( !$post_thumbnail_id ) {
+			return false;
+		}
+		return wp_get_attachment_image_url( $post_thumbnail_id, $size );
+	}
+}
+
+// Wordpress 4.0-4.3 support
+if( !function_exists( 'wp_get_attachment_image_url' )) {
+	function wp_get_attachment_image_url( $attachment_id, $size = 'thumbnail', $icon = false ) {
+		$image = wp_get_attachment_image_src( $attachment_id, $size, $icon );
+		return isset( $image['0'] )
+			? $image['0']
+			: false;
+	}
+}
+
+// Wordpress 4.0-4.3 support
+if( !function_exists( 'wp_json_encode' )) {
+	function wp_json_encode( $data ) {
+		return json_encode( $data );
+	}
+}
