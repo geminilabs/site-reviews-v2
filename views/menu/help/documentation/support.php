@@ -3,6 +3,11 @@
 <div class="glsr-card card">
 	<h3>F.A.Q.</h3>
 	<dl>
+		<dt>What is the polyfill.io script and how can I disable it?</dt>
+		<dd>
+			The polyfill.io script provides polyfills (or "fallbacks") that allow applications written in modern javascript, HTML, and CSS standards to work properly in older web browsers. If you do not need the polyfill script on your website (i.e. you do not wish to support Internet Explorer v9-10), it can easily be disabled. Please see the <code><a href="<?= admin_url( 'edit.php?post_type=site-review&page=help&tab=documentation&section=hooks' ); ?>">Get Help -> Documentation -> Hooks</a></code> page for instructions.
+		</dd>
+
 		<dt>How do I change the placeholder/label text?</dt>
 		<dd>All text strings in the plugin can be customized in the <code><a href="<?= admin_url( 'edit.php?post_type=site-review&page=settings&tab=settings&section=strings' ); ?>">Settings -> Translations</a></code> page.</dd>
 

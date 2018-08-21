@@ -3,6 +3,12 @@
 <p>Hooks (also known as Filters &amp; Actions) are used to make changes to the plugin without modifying the core files of the plugin directly. In order to use the following hooks, you must add them to your theme's <code>functions.php</code> file.</p>
 
 <div class="glsr-card card">
+	<h3>Disable the polyfill.io script</h3>
+	<pre><code>add_filter( 'site-reviews/assets/polyfill', '__return_false' );</code></pre>
+	<p>Use this hook if you want to disable the polyfill.io script from loading on your website. Please note: this script provides support for Internet Explorer versions 9-10. If you disable it, Site Reviews will no longer work in the IE9 and IE10 browsers.</p>
+</div>
+
+<div class="glsr-card card">
 	<h3>Disable the plugin CSS</h3>
 	<pre><code>add_filter( 'site-reviews/assets/css', '__return_false' );</code></pre>
 	<p>Use this hook if you want to disable the plugin stylesheet from loading on your website.</p>

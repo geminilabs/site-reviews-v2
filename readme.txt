@@ -41,6 +41,7 @@ Follow plugin development on [GitHub](https://github.com/geminilabs/site-reviews
 - Filter reviews by rating
 - Helper functions to easily access review meta
 - Honeypot (spam trap) implemented in the submission form
+- jQuery is NOT required!
 - Logging
 - MCE shortcode button dropdown
 - Minimal widget styling (tested with all official WP themes)
@@ -53,6 +54,7 @@ Follow plugin development on [GitHub](https://github.com/geminilabs/site-reviews
 - Rich snippets for reviews (schema.org)
 - RTL support
 - Shortcodes: Display reviews in your post content and templates
+- Supports Internet Explorer 9 and 10 by using polyfill.io
 - Translate any plugin text
 - Use Google's Invisible reCAPTCHA on submission forms
 - WordPress.org support
@@ -139,6 +141,10 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 14. Add-Ons are being built to extend the functionality on the Site Reviews plugin
 
 == Changelog ==
+
+= 2.16.4 (2018-08-21) =
+- Added defer/async attributes the the polyfill.io script (the polyfill.io script is used to add browser support for Internet Explorer 9 and 10).
+- Added documentation on how to disable the polyfill.io script if it is not needed.
 
 = 2.16.3 (2018-08-06) =
 - Fixed compatibility for WordPress 4.0-4.6

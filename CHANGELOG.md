@@ -18,6 +18,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.16.4] = 2018-08-21
+
+### Added
+- Added defer/async attributes the the polyfill.io script (the polyfill.io script is used to add browser support for Internet Explorer 9 and 10).
+- Added documentation on how to disable the polyfill.io script if it is not needed.
+
 ## [2.16.3] = 2018-08-06
 
 ### Fixed
