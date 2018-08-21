@@ -5,7 +5,7 @@ Tags: best reviews, business ratings, business reviews, curated reviews, moderat
 Requires at least: 4.0.0
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 2.16.3
+Stable tag: 2.16.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 

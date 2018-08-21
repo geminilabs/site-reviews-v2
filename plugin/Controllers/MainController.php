@@ -49,10 +49,17 @@ class MainController extends BaseController
 	 */
 	public function filterEnqueuedScripts( $tag, $handle )
 	{
-		return $handle == $this->app->id . '/google-recaptcha'
-			&& glsr_get_option( 'reviews-form.recaptcha.integration' ) == 'custom'
-			? str_replace( ' src=', ' async defer src=', $tag )
-			: $tag;
+		$scripts = [
+			$this->app->id.'/google-recaptcha',
+			$this->app->id.'/polyfill',
+		];
+		if( in_array( $handle, apply_filters( 'site-reviews/async-scripts', $scripts ))) {
+			$tag = str_replace( ' src=', ' async src=', $tag );
+		}
+		if( in_array( $handle, apply_filters( 'site-reviews/defer-scripts', $scripts ))) {
+			$tag = str_replace( ' src=', ' defer src=', $tag );
+		}
+		return $tag;
 	}
 
 	/**
