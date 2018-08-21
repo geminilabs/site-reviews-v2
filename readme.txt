@@ -143,8 +143,8 @@ All documentation can be found in the "Get Help" page of the plugin. You can als
 == Changelog ==
 
 = 2.16.4 (2018-08-21) =
-- Added defer/async attributes the the polyfill.io script (the polyfill.io script is used to add browser support for Internet Explorer 9 and 10).
-- Added documentation on how to disable the polyfill.io script if it is not needed.
+- Added "site-reviews/async-scripts" and "site-reviews/defer-scripts" filter hooks
+- Added documentation on how to disable the polyfill.io script if it is not needed (the polyfill.io script is used to add browser support for Internet Explorer 9 and 10).
 
 = 2.16.3 (2018-08-06) =
 - Fixed compatibility for WordPress 4.0-4.6
