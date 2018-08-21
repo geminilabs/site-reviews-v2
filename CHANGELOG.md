@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.16.5] = 2018-08-21
+
+### Changed
+- Allow links in custom translations
+
 ## [2.16.4] = 2018-08-21
 
 ### Added

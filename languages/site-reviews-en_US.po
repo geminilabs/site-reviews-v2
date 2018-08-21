@@ -472,11 +472,11 @@ msgstr "Title"
 msgid "Review"
 msgstr "Review"
 
-#: plugin/Settings.php:527, plugin/Controllers/MainController.php:800, plugin/Shortcodes/Buttons/SiteReviewsForm.php:80
+#: plugin/Settings.php:527, plugin/Controllers/MainController.php:801, plugin/Shortcodes/Buttons/SiteReviewsForm.php:80
 msgid "Name"
 msgstr "Name"
 
-#: plugin/Settings.php:528, plugin/Controllers/MainController.php:801, plugin/Shortcodes/Buttons/SiteReviewsForm.php:75
+#: plugin/Settings.php:528, plugin/Controllers/MainController.php:802, plugin/Shortcodes/Buttons/SiteReviewsForm.php:75
 msgid "Email"
 msgstr "Email"
 
@@ -676,7 +676,7 @@ msgstr "The format is invalid."
 msgid "This field is required."
 msgstr "This field is required."
 
-#: plugin/Commands/RegisterPostType.php:23, plugin/Controllers/MainController.php:798, plugin/Shortcodes/Buttons/SiteReviews.php:129
+#: plugin/Commands/RegisterPostType.php:23, plugin/Controllers/MainController.php:799, plugin/Shortcodes/Buttons/SiteReviews.php:129
 msgid "Date"
 msgstr "Date"
 
@@ -742,11 +742,11 @@ msgstr "Site Reviews"
 msgid "Author"
 msgstr "Author"
 
-#: plugin/Controllers/MainController.php:232, plugin/Controllers/MainController.php:797
+#: plugin/Controllers/MainController.php:232, plugin/Controllers/MainController.php:798
 msgid "Type"
 msgstr "Type"
 
-#: plugin/Controllers/MainController.php:233, plugin/Controllers/MainController.php:796, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:139, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:63, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:109
+#: plugin/Controllers/MainController.php:233, plugin/Controllers/MainController.php:797, plugin/Shortcodes/Buttons/SiteReviews.php:68, plugin/Shortcodes/Buttons/SiteReviews.php:139, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:63, plugin/Shortcodes/Buttons/SiteReviewsSummary.php:109
 msgid "Rating"
 msgstr "Rating"
 
@@ -852,39 +852,39 @@ msgstr[1] "Logging enabled."
 msgid "Settings updated."
 msgstr "Settings updated."
 
-#: plugin/Controllers/MainController.php:768
+#: plugin/Controllers/MainController.php:769
 msgid "Nothing to Revert"
 msgstr "Nothing to Revert"
 
-#: plugin/Controllers/MainController.php:769
+#: plugin/Controllers/MainController.php:770
 msgid "Revert Changes"
 msgstr "Revert Changes"
 
-#: plugin/Controllers/MainController.php:781
+#: plugin/Controllers/MainController.php:782
 msgid "Unknown"
 msgstr "Unknown"
 
-#: plugin/Controllers/MainController.php:783
+#: plugin/Controllers/MainController.php:784
 msgid "%s review"
 msgstr "%s review"
 
-#: plugin/Controllers/MainController.php:791
+#: plugin/Controllers/MainController.php:792
 msgid "Unregistered user"
 msgstr "Unregistered user"
 
-#: plugin/Controllers/MainController.php:793
+#: plugin/Controllers/MainController.php:794
 msgid "RE:"
 msgstr "RE:"
 
-#: plugin/Controllers/MainController.php:799
+#: plugin/Controllers/MainController.php:800
 msgid "Reviewer"
 msgstr "Reviewer"
 
-#: plugin/Controllers/MainController.php:802
+#: plugin/Controllers/MainController.php:803
 msgid "IP Address"
 msgstr "IP Address"
 
-#: plugin/Controllers/MainController.php:803, plugin/Shortcodes/Buttons/SiteReviews.php:124
+#: plugin/Controllers/MainController.php:804, plugin/Shortcodes/Buttons/SiteReviews.php:124
 msgid "Avatar"
 msgstr "Avatar"
 
