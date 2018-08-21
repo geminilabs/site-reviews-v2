@@ -51,7 +51,7 @@ class MainController extends BaseController
 	{
 		$scripts = [
 			$this->app->id.'/google-recaptcha',
-			$this->app->id.'/polyfill',
+			// $this->app->id.'/polyfill',
 		];
 		if( in_array( $handle, apply_filters( 'site-reviews/async-scripts', $scripts ))) {
 			$tag = str_replace( ' src=', ' async src=', $tag );
