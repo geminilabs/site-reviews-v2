@@ -167,7 +167,7 @@ abstract class Container
 	 */
 	protected function addNamespace( $abstract )
 	{
-		if( strpos( $abstract, __NAMESPACE__ ) === false && !class_exists( $abstract )) {
+		if( strpos( $abstract, __NAMESPACE__ ) === false ) {
 			$abstract = __NAMESPACE__ . "\\$abstract";
 		}
 		return $abstract;

@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.16.6] = 2018-08-25
+
+### Fixed
+- Fixed bug that allowed possible namespace collisions with other plugin/themes
+
 ## [2.16.5] = 2018-08-21
 
 ### Changed
