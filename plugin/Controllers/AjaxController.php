@@ -52,6 +52,15 @@ class AjaxController extends BaseController
 	}
 
 	/**
+	 * Dismisses the outdated notice
+	 */
+	public function ajaxDismissOutdatedNotice()
+	{
+		$this->db->setOption( 'upgrade_notice_dismissed', true );
+		wp_send_json_success();
+	}
+
+	/**
 	 * Load the shortcode dialog fields
 	 *
 	 * @param array $request

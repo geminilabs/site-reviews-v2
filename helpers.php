@@ -110,6 +110,10 @@ function glsr_categories_meta_box( $post, $box ) {
  * @return WP_Screen|null
  */
 function glsr_current_screen() {
-	global $current_screen;
-	return isset( $current_screen ) ? $current_screen : null;
+	if( function_exists( 'get_current_screen' )) {
+		$screen = get_current_screen();
+	}
+	return empty( $screen )
+		? (object)array_fill_keys( ['base', 'id', 'post_type', 'parent_base'], null )
+		: $screen;
 }

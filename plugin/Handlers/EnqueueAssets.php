@@ -68,7 +68,7 @@ class EnqueueAssets
 			[],
 			$command->version
 		);
-		if( !$screen || !( $screen->post_type == App::POST_TYPE
+		if( !( $screen->post_type == App::POST_TYPE
 			|| $screen->base == 'post'
 			|| $screen->id == 'dashboard'
 			|| $screen->id == 'widgets'

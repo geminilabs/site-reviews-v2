@@ -507,8 +507,7 @@ class ReviewController extends BaseController
 	 */
 	protected function canModifyTranslation( $domain = 'default' )
 	{
-		return glsr_current_screen()
-			&& glsr_current_screen()->post_type == App::POST_TYPE
+		return glsr_current_screen()->post_type == App::POST_TYPE
 			&& in_array( glsr_current_screen()->base, ['edit', 'post'] )
 			&& $domain == 'default';
 	}
@@ -518,8 +517,7 @@ class ReviewController extends BaseController
 	 */
 	protected function isEditReview()
 	{
-		return glsr_current_screen()
-			&& glsr_current_screen()->post_type == App::POST_TYPE
+		return glsr_current_screen()->post_type == App::POST_TYPE
 			&& glsr_current_screen()->id == App::POST_TYPE
 			&& glsr_current_screen()->base == 'post';
 	}

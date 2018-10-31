@@ -29,8 +29,6 @@ class RegisterPointers
 	 */
 	public function handle( Command $command )
 	{
-		$screen = glsr_current_screen();
-
 		// Get dismissed pointers
 		$dismissed = get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true );
 		$dismissed = explode( ',', (string) $dismissed );
@@ -39,7 +37,7 @@ class RegisterPointers
 
 		foreach( $command->pointers as $pointer ) {
 
-			if( !$screen || $pointer['screen'] != $screen->id || in_array( $pointer['id'], $dismissed ))continue;
+			if( $pointer['screen'] != glsr_current_screen()->id || in_array( $pointer['id'], $dismissed ))continue;
 
 			$pointers[] = [
 				'id'      => $pointer['id'],

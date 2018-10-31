@@ -639,10 +639,7 @@ class MainController extends BaseController
 	 */
 	public function renderTinymceButton()
 	{
-		if( !glsr_current_screen()
-			|| glsr_current_screen()->base != 'post'
-			|| glsr_current_screen()->parent_base != 'edit'
-		)return;
+		if( glsr_current_screen()->base != 'post' || glsr_current_screen()->parent_base != 'edit' )return;
 
 		$shortcodes = [];
 
@@ -705,6 +702,28 @@ class MainController extends BaseController
 			});
 		}
 		return $options;
+	}
+
+	/**
+	 * @return void
+	 * @action admin_notices
+	 */
+	public function upgradeNotice() {
+		$dismissed = $this->db->getOption( 'upgrade_notice_dismissed', false );
+		$screen = glsr_current_screen();
+		$hideNotice = $dismissed && in_array( $screen->id, ['dashboard', 'plugins'] );
+		if( $hideNotice
+			|| !version_compare( PHP_VERSION, 5.6, '<' )
+			|| !in_array( $screen->id, [
+				'dashboard',
+				'plugins',
+				'edit-site-review',
+				'edit-site-review-category',
+				'site-review_page_settings',
+				'site-review_page_help',
+			])
+		)return;
+		$this->render( 'menu/notice' );
 	}
 
 	/**

@@ -86,4 +86,10 @@ jQuery( function( x )
 			}
 		},
 	});
+
+	x( '#glsr-outdated-notice .notice-dismiss' ).on( 'click', function(ev) {
+		GLSR.postAjax( ev, {
+			action: 'dismiss-outdated-notice',
+		});
+	});
 });

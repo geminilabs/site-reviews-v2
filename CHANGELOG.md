@@ -18,10 +18,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
-## [2.16.7] = 2018-11-01
+## [2.17.0] = 2018-10-31
 
 ### Added
-- Added a v3.0 notice to inform of upcoming changes
+- Added a v3.0 notice to PHP 5.4 users to inform of upcoming changes
 
 ### Changed
 - Changed polyfill.io to use the minimfied version of the script

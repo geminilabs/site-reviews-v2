@@ -137,9 +137,12 @@ final class App extends Container
 		add_filter( 'ngettext',                        [ $translator, 'translateNgettext'], 10, 5 );
 		add_filter( 'ngettext_with_context',           [ $translator, 'translateNgettextWithContext'], 10, 6 );
 
+		// Update notification for v3.0
+        add_action( 'admin_notices', [ $main, 'upgradeNotice'] );
+
 		// Disable automatic-updates in preparation for v3.0
 		add_filter( 'auto_update_plugin', function( $update, $item ) {
-			return $item->plugin == plugin_basename( $this->path() )
+			return $item->plugin == plugin_basename( $this->path )
 				? false
 				: $update;
 		}, 999, 2 );
