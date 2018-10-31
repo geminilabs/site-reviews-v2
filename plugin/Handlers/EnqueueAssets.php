@@ -38,6 +38,9 @@ class EnqueueAssets
 			$this->enqueueTinymce( $command );
 			$variables = array_merge( $variables, [
 				'shortcodes' => $this->localizeShortcodes(),
+				'tinymce' => [
+					'glsr_shortcode' => glsr_app()->url.'assets/js/mce-plugin.js',
+				],
 			]);
 		}
 		else {

@@ -45,6 +45,7 @@ GLSR.shortcode.trigger = function( ev )
 			tinymce.init({
 				mode     : "exact",
 				elements : "scTemp",
+				external_plugins: site_reviews.tinymce,
 				plugins  : ['glsr_shortcode', 'wplink']
 			});
 		}
