@@ -18,6 +18,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.16.7] = 2018-11-01
+
+### Added
+- Added a v3.0 notice to inform of upcoming changes
+
+### Changed
+- Changed polyfill.io to use the minimfied version of the script
+
+### Fixed
+- Fixed tinymce button
+
 ## [2.16.6] = 2018-08-25
 
 ### Fixed
