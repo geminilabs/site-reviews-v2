@@ -121,7 +121,7 @@ class EnqueueAssets
 		wp_enqueue_script( $command->handle.'/polyfill', add_query_arg([
 			'features' => 'CustomEvent,Element.prototype.closest,Element.prototype.dataset,Event',
 			'flags' => 'gated',
-		], 'https://cdn.polyfill.io/v2/polyfill.js' ));
+		], 'https://cdn.polyfill.io/v2/polyfill.min.js' ));
 	}
 
 	/**
