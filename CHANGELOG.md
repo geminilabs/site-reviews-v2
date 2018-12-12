@@ -18,6 +18,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Security
 
+## [2.17.1] = 2018-12-12
+
+### Fixed
+- Fixed WordPress 5.0 compatibility
+
 ## [2.17.0] = 2018-10-31
 
 ### Added

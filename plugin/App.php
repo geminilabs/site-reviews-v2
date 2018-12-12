@@ -96,8 +96,7 @@ final class App extends Container
 		add_action( 'init',                                  [ $main, 'registerTaxonomy'] );
 		add_action( 'widgets_init',                          [ $main, 'registerWidgets'] );
 		add_action( 'post_submitbox_misc_actions',           [ $main, 'renderMetaBoxPinned'] );
-		add_action( 'edit_form_after_title',                 [ $main, 'renderReview'] );
-		add_action( 'edit_form_top',                         [ $main, 'renderReviewNotice'] );
+		add_action( 'admin_head',                            [ $main, 'renderReviewFields'] );
 		add_action( 'media_buttons',                         [ $main, 'renderTinymceButton'], 11 );
 		add_action( 'wp_footer',                             [ $main, 'renderSchema'] );
 		add_action( 'admin_action_approve',                  [ $review, 'approve'] );
@@ -121,21 +120,23 @@ final class App extends Container
 		add_action( 'admin_init',                            [ $router, 'routeWebhookRequests'] );
 
 		// Filter Hooks
-		add_filter( 'script_loader_tag',               [ $main, 'filterEnqueuedScripts'], 10, 2 );
-		add_filter( 'plugin_action_links_'.$basename,  [ $main, 'registerActionLinks'] );
-		add_filter( 'dashboard_glance_items',          [ $main, 'registerDashboardGlanceItems'] );
-		add_filter( 'post_row_actions',                [ $main, 'registerRowActions'], 10, 2 );
-		add_filter( 'wp_editor_settings',              [ $review, 'modifyEditor'] );
-		add_filter( 'the_editor',                      [ $review, 'modifyEditorTextarea'] );
-		add_filter( 'gettext',                         [ $review, 'modifyStatusText'], 10, 3 );
-		add_filter( 'gettext_with_context',            [ $review, 'modifyStatusTextWithContext'], 10, 4 );
-		add_filter( 'query_vars',                      [ $review, 'modifyQueryVars'] );
-		add_filter( 'post_updated_messages',           [ $review, 'modifyUpdateMessages'] );
-		add_filter( 'bulk_post_updated_messages',      [ $review, 'modifyUpdateMessagesBulk'], 10, 2 );
-		add_filter( 'gettext',                         [ $translator, 'translateGettext'], 10, 3 );
-		add_filter( 'gettext_with_context',            [ $translator, 'translateGettextWithContext'], 10, 4 );
-		add_filter( 'ngettext',                        [ $translator, 'translateNgettext'], 10, 5 );
-		add_filter( 'ngettext_with_context',           [ $translator, 'translateNgettextWithContext'], 10, 6 );
+		add_filter( 'classic_editor_enabled_editors_for_post_type', [ $main, 'filterEnabledEditors'], 10, 2 );
+		add_filter( 'script_loader_tag',                            [ $main, 'filterEnqueuedScripts'], 10, 2 );
+		add_filter( 'use_block_editor_for_post_type',               [ $main, 'filterUseBlockEditor'], 10, 2 );
+		add_filter( 'plugin_action_links_'.$basename,               [ $main, 'registerActionLinks'] );
+		add_filter( 'dashboard_glance_items',                       [ $main, 'registerDashboardGlanceItems'] );
+		add_filter( 'post_row_actions',                             [ $main, 'registerRowActions'], 10, 2 );
+		add_filter( 'wp_editor_settings',                           [ $review, 'modifyEditor'] );
+		add_filter( 'the_editor',                                   [ $review, 'modifyEditorTextarea'] );
+		add_filter( 'gettext',                                      [ $review, 'modifyStatusText'], 10, 3 );
+		add_filter( 'gettext_with_context',                         [ $review, 'modifyStatusTextWithContext'], 10, 4 );
+		add_filter( 'query_vars',                                   [ $review, 'modifyQueryVars'] );
+		add_filter( 'post_updated_messages',                        [ $review, 'modifyUpdateMessages'] );
+		add_filter( 'bulk_post_updated_messages',                   [ $review, 'modifyUpdateMessagesBulk'], 10, 2 );
+		add_filter( 'gettext',                                      [ $translator, 'translateGettext'], 10, 3 );
+		add_filter( 'gettext_with_context',                         [ $translator, 'translateGettextWithContext'], 10, 4 );
+		add_filter( 'ngettext',                                     [ $translator, 'translateNgettext'], 10, 5 );
+		add_filter( 'ngettext_with_context',                        [ $translator, 'translateNgettextWithContext'], 10, 6 );
 
 		// Update notification for v3.0
         add_action( 'admin_notices', [ $main, 'upgradeNotice'] );

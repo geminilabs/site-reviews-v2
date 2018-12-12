@@ -43,6 +43,19 @@ class MainController extends BaseController
 	}
 
 	/**
+	 * @param string $postType
+	 * @return array
+	 * @filter classic_editor_enabled_editors_for_post_type
+	 * @plugin classic-editor/classic-editor.php
+	 */
+	public function filterEnabledEditors( array $editors, $postType )
+	{
+		return $postType == App::POST_TYPE
+			? ['block_editor' => false, 'classic_editor' => false]
+			: $editors;
+	}
+
+	/**
 	 * @return string
 	 *
 	 * @filter script_loader_tag
@@ -60,6 +73,19 @@ class MainController extends BaseController
 			$tag = str_replace( ' src=', ' defer src=', $tag );
 		}
 		return $tag;
+	}
+
+	/**
+	 * @param bool $bool
+	 * @param string $postType
+	 * @return bool
+	 * @filter use_block_editor_for_post_type
+	 */
+	public function filterUseBlockEditor( $bool, $postType )
+	{
+		return $postType == App::POST_TYPE
+			? false
+			: $bool;
 	}
 
 	/**
@@ -546,28 +572,36 @@ class MainController extends BaseController
 
 	/**
 	 * @return void
-	 *
+	 * @action admin_head
+	 */
+	public function renderReviewFields()
+	{
+		$screen = glsr_current_screen();
+		if( $screen->base != 'post' || $screen->post_type != App::POST_TYPE )return;
+		add_action( 'edit_form_after_title', [ $this, 'renderReviewEditor'] );
+		add_action( 'edit_form_top',         [ $this, 'renderReviewNotice'] );
+	}
+
+	/**
+	 * @return void
 	 * @action edit_form_after_title
 	 */
-	public function renderReview( WP_Post $post )
+	public function renderReviewEditor( WP_Post $post )
 	{
 		if( $post->post_type != App::POST_TYPE )return;
 		if( post_type_supports( App::POST_TYPE, 'title' ))return;
 		if( get_post_meta( $post->ID, 'review_type', true ) == 'local' )return;
-
 		$this->render( 'edit/review', ['post' => $post ] );
 	}
 
 	/**
 	 * @return void
-	 *
 	 * @action edit_form_top
 	 */
 	public function renderReviewNotice( WP_Post $post )
 	{
 		if( $post->post_type != App::POST_TYPE )return;
 		if( post_type_supports( App::POST_TYPE, 'title' ))return;
-
 		$reviewType = get_post_meta( $post->ID, 'review_type', true );
 		if( $reviewType == 'local' )return;
 		$this->notices->addWarning( __( 'This review is read-only.', 'site-reviews' ));
