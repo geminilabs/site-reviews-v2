@@ -1,6 +1,6 @@
-# Site Reviews
-
 >v2 is no longer supported or developed. Please go here instead: https://github.com/pryley/site-reviews/
+
+# Site Reviews
 
 ![Site Reviews banner](src/assets/banner-1544x500.png)
 
